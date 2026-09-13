@@ -13,7 +13,10 @@
         .stat-card { background:#0f172a; padding:20px; border-radius:10px; border:1px solid #334155; }
         .stat-val { font-size:1.75rem; font-weight:900; color:#4ade80; margin-top:5px; }
         .resource-box { background:rgba(39,174,96,0.05); border:1px solid rgba(39,174,96,0.3); padding:20px; border-radius:10px; margin-top:20px; }
-        .link-btn { display:inline-block; background:var(--primary); color:#fff; text-decoration:none; padding:10px 20px; border-radius:6px; font-weight:bold; font-size:0.9rem; margin-top:10px; }
+        .link-btn { display:inline-block; background:var(--primary); color:#fff; text-decoration:none; padding:10px 20px; border-radius:6px; font-weight:bold; font-size:0.9rem; margin-top:10px; border:none; cursor:pointer; }
+        
+        /* HARD CSS PRINT OVERRIDE RULE FOR NON-FOSTER PATHS */
+        body:not([data-track="Foster-Alum"]) #stipend-card-box { display: none !important; }
     </style>
 </head>
 <body>
@@ -22,18 +25,17 @@
         <span>AFTI Credentialing Engine</span>
         <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Exit to Portal</button>
     </div>
-    
     <div>
         <span class="badge">Official Institutional Prescreening Summary</span>
         <h2 style="margin:0 0 0.5rem 0;">📋 Verified Portfolio of Effort</h2>
         <p style="line-height:1.6; color:#cbd5e1; margin:0;">This dashboard compiles your simulation decisions into real-world qualification metrics. This data serves as a pre-screening asset for regional agricultural incubators, vocational scholarship committees, and land trusts.</p>
-        
         <div class="grid">
             <div class="stat-card"><div>Active Track Profile</div><div class="stat-val" id="track-name" style="color:var(--accent);">Loading...</div></div>
             <div class="stat-card"><div>Global Experience (XP)</div><div class="stat-val" id="total-xp">0</div></div>
-            <div class="stat-card"><div>Accrued Training Stipend</div><div class="stat-val" id="total-stipend" style="color:#38bdf8;">$0</div></div>
+            <!-- THIS CARD VANISHES FROM BOTH THE SCREEN AND THE PRINTED PAPER FOR OTHER TRACKS -->
+            <div class="stat-card" id="stipend-card-box"><div>Accrued Training Stipend</div><div class="stat-val" id="total-stipend" style="color:#38bdf8;">$0</div></div>
+            <div class="stat-card" id="status-card-box"><div>Program Clearance Status</div><div class="stat-val" style="color:#a855f7;">VERIFIED</div></div>
         </div>
-
         <div class="resource-box">
             <h3 style="margin-top:0; color:#4ade80;">🎁 Unlocked Program Partnerships &amp; Grants</h3>
             <p style="font-size:0.95rem; line-height:1.5; color:#cbd5e1; margin:0 0 10px 0;">Based on your verified operational resilience and technical hours, you have unlocked pre-qualification slots with the following partner networks:</p>
@@ -48,14 +50,17 @@
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        // Pull points and parameters directly from persistent storage
         const track = localStorage.getItem('afti_track_name') || 'Foster-Alum';
-        const xp = localStorage.getItem('afti_global_xp') || '750';
-        const stipend = localStorage.getItem('afti_earned_stipend') || '120';
+        document.body.setAttribute('data-track', track);
         
         document.getElementById('track-name').innerText = track;
-        document.getElementById('total-xp').innerText = xp + ' XP';
-        document.getElementById('total-stipend').innerText = '$' + stipend;
+        document.getElementById('total-xp').innerText = (localStorage.getItem('afti_global_xp') || '750') + ' XP';
+        document.getElementById('total-stipend').innerText = '$' + (localStorage.getItem('afti_earned_stipend') || '120');
+        
+        // HIDE THE GENERIC STATUS CARD ON FOSTER TO MAKE ROOM FOR THE STIPEND CARD WINDOW
+        if (track === 'Foster-Alum') {
+            document.getElementById('status-card-box').style.display = 'none';
+        }
     });
 </script>
 </body>
