@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFTI Wildfire Safety Module</title>
+<style>
+body { font-family:system-ui, sans-serif; background:#0f172a; color:#fff; padding:15px; margin:0; }
+.card { background:#1e293b; padding:18px; border-radius:12px; max-width:550px; margin:auto; border:1px solid #ef4444; }
+h2 { color:#f87171; font-size:1.25rem; margin:0 0 12px 0; }
+.info-box { background:#0f172a; padding:12px; border-radius:6px; font-size:0.85rem; margin-bottom:12px; line-height:1.4; border-left:4px solid #ef4444; }
+.item { display:flex; align-items:flex-start; margin-bottom:12px; font-size:0.85rem; }
+input[type="checkbox"] { margin-right:10px; margin-top:2px; accent-color:#ef4444; }
+.btn { width:100%; padding:12px; background:#ef4444; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:0.9rem; }
+.btn-back { display:block; text-align:center; color:#94a3b8; font-size:0.85rem; text-decoration:none; padding-top:12px; }
+</style>
+</head>
+<body>
+<div class="card">
+<h2>🔥 Wildfire Mitigation &amp; Suppression Safety</h2>
+<div class="info-box">
+<b>💼 Income &amp; Forestry Career Alignment:</b><br>
+Prepares crews for commercial fuels reduction and active suppression contracts earning $24.50/hr.
+</div>
+<form id="fireForm">
+<div class="item"><input type="checkbox" required><span><b>Suppression PPE Check:</b> Fire-resistant Nomex shirt/pants, 8-inch logging boots, and hardhat with shroud.</span></div>
+<div class="item"><input type="checkbox" required><span><b>Weather Intelligence:</b> Review local relative humidity bounds, wind velocity vectors, and fuels moisture logs.</span></div>
+<div class="item"><input type="checkbox" required><span><b>LACES Activation:</b> Establish Lookouts, Awareness, Communications, Escape routes, and Safety zones.</span></div>
+<div class="item"><input type="checkbox" required><span><b>Tools &amp; Fireline:</b> Inspect sharp pulaskis, mcleods, and ensure clean chainsaw fuel mix supplies.</span></div>
+<button type="submit" class="btn">Log Suppression Safety Metrics</button>
+</form>
+<a href="technical-tutorials.html?v=18" class="btn-back">← Return to Technical Modules Bank</a>
+</div>
+<script>
+document.getElementById('fireForm').addEventListener('submit', function(e) {
+e.preventDefault();
+let xp = parseInt(localStorage.getItem('globalXP')) || 0;
+localStorage.setItem('globalXP', xp + 20);
+alert('Wildfire Suppression Competency Logged! +20 Global XP Awarded.');
+window.location.href = 'technical-tutorials.html?v=18';
+});
+</script>
+</body>
+</html>
