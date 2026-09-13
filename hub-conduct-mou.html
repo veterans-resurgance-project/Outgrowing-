@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFTI Conduct & MOU Framework</title>
+<style>
+body { font-family: system-ui, sans-serif; background: #0f172a; color: #f8fafc; padding: 15px; margin: 0; }
+.card { background: #1e293b; padding: 18px; border-radius: 12px; max-width: 550px; margin: auto; border: 1px solid #334155; }
+h2 { color: #f43f5e; font-size: 1.2rem; margin: 0 0 12px 0; }
+.rule-list { background: #0f172a; padding: 12px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 12px; }
+.mou-text { background: #334155; padding: 10px; font-size: 0.8rem; border-radius: 4px; max-height: 120px; overflow-y: scroll; white-space: pre-wrap; margin-bottom: 12px; border-left: 3px solid #38bdf8; }
+.btn { width: 100%; padding: 10px; background: #10b981; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-bottom: 8px; font-size: 0.85rem; }
+.btn-back { display: block; text-align: center; color: #94a3b8; font-size: 0.85rem; text-decoration: none; padding-top: 5px; }
+</style>
+</head>
+<body>
+<div class="card">
+<h2>📇 Apprentice Conduct Pledge & MOU Framework</h2>
+<div class="rule-list">
+<b>🚜 Operational Ground Rules:</b>
+<div style="margin:6px 0;">• No machinery before 8:00 AM or after 7:00 PM.</div>
+<div>• 100% daily clean-up: All pallets, crates, and plastic row covers stacked neatly.</div>
+<div style="margin-top:6px;">• Restrict travel entirely to designated access lanes.</div>
+</div>
+<div class="mou-text">MEMORANDUM OF UNDERSTANDING (MOU)
+Land Lease Clause: Trainee crew maintains full liability protection.
+Crop Split Ratio: 70% Trainee Retained / 30% Landowner Payout.
+Grounds for Termination: Unresolved trash accumulation or boundary breaches after 48-hour written warning notice.</div>
+<form id="conductForm">
+<label style="display:block; font-size:0.8rem; margin-bottom:12px; color:#cbd5e1;">
+<input type="checkbox" required style="accent-color:#10b981;"> I certify that the cohort has signed the pledge.
+</label>
+<button type="submit" class="btn">Lock Legal Framework</button>
+</form>
+<a href="shared-harvest-hub.html?v=3" class="btn-back">← Back to Mitigation Hub</a>
+</div>
+<script>
+document.getElementById('conductForm').addEventListener('submit', function(e) {
+e.preventDefault();
+let xp = parseInt(localStorage.getItem('globalXP')) || 0;
+localStorage.setItem('globalXP', xp + 10);
+alert('Legal Framework Saved! +10 XP Awarded.');
+window.location.href = 'shared-harvest-hub.html?v=3';
+});
+</script>
+</body>
+</html>
