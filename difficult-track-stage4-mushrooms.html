@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Stage 4: Mushroom Foraging</title>
+    <script src="afti-core.js?v=2"></script>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:800px; background:var(--card); border-radius:14px; padding:35px; box-sizing:border-box; border:1px solid rgba(255,255,255,0.1); }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
+        .choices-container { display:flex; flex-direction:column; gap:12px; margin-top:20px; }
+        .choice-btn { background:#0f172a; border:1px solid #334155; color:#f8fafc; padding:16px 20px; border-radius:8px; cursor:pointer; width:100%; text-align:left; display:flex; flex-direction:column; gap:5px; }
+        .choice-btn:hover { border-color:var(--accent); background:rgba(56,189,248,0.05); }
+        .feedback-box { margin-top:25px; padding:20px; border-radius:8px; display:none; line-height:1.6; border:1px solid rgba(255,255,255,0.2); }
+        .nav-bridge { display:inline-block; margin-top:15px; background:var(--primary); color:#fff; padding:12px 24px; border:none; border-radius:6px; font-weight:bold; cursor:pointer; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hud-bar">
+        <span>Path: <span style="color:var(--accent);">Wild Foraging Side Track</span></span>
+        <div style="display:flex; gap:20px; align-items:center;">
+            <div>XP: <span id="global-points" style="color:#4ade80;">400</span></div>
+            <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Exit</button>
+        </div>
+    </div>
+    <div>
+        <h2 style="margin:0 0 1rem 0;">🍄 Stage 4 Specialty: Wild Mushroom Identification &amp; Sale</h2>
+        <p style="line-height:1.7; color:#cbd5e1;">Instead of traditional field rows, you head into the damp Linn County timber stands to harvest wild forest assets. A certified local buyer is purchasing fresh lots, but you must pass a strict Wild Food Safety Identification Test before they can accept your basket. How do you process your haul?</p>
+        <div class="choices-container" id="choices-wrapper">
+            <button class="choice-btn" onclick="handleMushroomClick('A', 100, 150)"><span style="font-weight:bold; color:#4ade80;">Choice A: Correctly sort and verify three distinct forest species.</span><span style="font-size:0.85rem; color:#94a3b8;">Present perfectly identified Chanterelles, Morels, and Hedgehog mushrooms to the buyer. (+100 XP / +$150 Forage Stipend)</span></button>
+            <button class="choice-btn" onclick="handleMushroomClick('B', 0, 0)"><span style="font-weight:bold; color:#ef4444;">Choice B: Mix wild look-alike species into your delivery basket to increase overall weight.</span><span style="font-size:0.85rem; color:#94a3b8;">Attempt to pass unverified gilled variants past the buyer's check station. (0 XP / Safety Infraction)</span></button>
+        </div>
+        <div id="feedback-viewport" class="feedback-box">
+            <h3 id="feedback-title" style="margin-top:0;"></h3>
+            <p id="feedback-text"></p>
+            <div id="feedback-action-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => { document.getElementById('global-points').innerText = localStorage.getItem('afti_global_xp') || '400'; });
+    function handleMushroomClick(choiceType, points, stipend) {
+        if (window.selectOption) { window.selectOption(choiceType, points); if(stipend > 0 && window.adjustStipend) window.adjustStipend(stipend); }
+        document.getElementById('choices-wrapper').style.display = 'none';
+        const vp = document.getElementById('feedback-viewport'); const title = document.getElementById('feedback-title');
+        const text = document.getElementById('feedback-text'); const ac = document.getElementById('feedback-action-container'); vp.style.display = 'block';
+        if (choiceType === 'A') {
+            localStorage.setItem('afti_mushroom_badge', 'EARNED');
+            vp.style.backgroundColor = 'rgba(39,174,96,0.1)'; title.innerText = "✓ Test Passed: Mushroom Forager Badge Earned! (+100 XP)"; title.style.color = "#4ade80";
+            text.innerText = "You pass the inspection with 100% accuracy! The buyer praises your safety standards, weighs your three distinct species, and buys the whole lot. You have established serious credibility in the local wild food loop.";
+            ac.innerHTML = '<button onclick="window.location.href=\'difficult-track-stage5-fungi-buyer.html\'" class="nav-bridge" style="border:none; cursor:pointer;">Proceed to Stage 5: Grower SOPs &rarr;</button>';
+        } else {
+            vp.style.backgroundColor = 'rgba(239,68,68,0.1)'; title.innerText = "Safety Rejection (0 XP)"; title.style.color = '#ef4444';
+            text.innerText = "The buyer instantly flags toxic look-alikes in your basket. Bypassing identification laws creates major public safety liabilities. Your foraging privileges are frozen until you complete safety remediation.";
+            ac.innerHTML = '<button onclick="window.location.href=\'difficult-track-stage4-vocational.html\'" class="nav-bridge" style="background:#334155; border:none; cursor:pointer;">Return to Base Training Track &rarr;</button>';
+        }
+    }
+</script>
+</body>
+</html>
