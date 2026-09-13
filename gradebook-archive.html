@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFTI Cohort History Archive</title>
+<style>
+body { font-family:system-ui, sans-serif; background:#0f172a; color:#fff; padding:15px; margin:0; }
+.card { background:#1e293b; padding:18px; border-radius:12px; max-width:550px; margin:auto; border:1px solid #475569; }
+h2 { color:#94a3b8; font-size:1.25rem; margin:0 0 12px 0; }
+.log-box { background:#0f172a; padding:12px; border-radius:6px; font-size:0.85rem; margin-bottom:12px; border-left:4px solid #a855f7; max-height:150px; overflow-y:auto; }
+.btn { width:100%; padding:10px; background:#475569; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:0.85rem; margin-bottom:8px; }
+.btn-back { display:block; text-align:center; color:#cbd5e1; font-size:0.85rem; text-decoration:none; padding-top:10px; }
+</style>
+</head>
+<body>
+<div class="card">
+<h2>🗄️ Historical Cohort Archives</h2>
+<p style="font-size:0.85rem; color:#cbd5e1; margin-bottom:15px;">Securely saving past graduation records into localized history files.</p>
+
+<div class="log-box" id="archiveContainer">No archived cohorts found. Archive active logs below to save your records.</div>
+
+<button id="archiveBtn" class="btn" style="background:#10b981;">Archive Current Active Logs</button>
+<button id="clearBtn" class="btn" style="background:#ef4444;">Clear Active Tracker Slots Only</button>
+
+<a href="cohort-gradebook.html?v=12" class="btn-back">← Back to Gradebook Ledger</a>
+</div>
+<script>
+function renderArchive() {
+let list = JSON.parse(localStorage.getItem('cohortArchives')) || [];
+let container = document.getElementById('archiveContainer');
+if(list.length > 0) {
+container.innerHTML = list.map((c, idx) => `<div><b>[Run #${idx+1}]</b> ${c.xp} XP | ${c.water} Gal | Balance: ${c.bal}</div>`).join('<hr style="border-color:#334155; margin:6px 0;">');
+}
+}
+document.getElementById('archiveBtn').addEventListener('click', function() {
+let xp = localStorage.getItem('globalXP') || "0";
+let water = localStorage.getItem('lastWaterBudget') || "0";
+let bal = localStorage.getItem('lastIncubatorBalance') || "$0";
+let list = JSON.parse(localStorage.getItem('cohortArchives')) || [];
+list.push({xp: xp, water: water, bal: bal});
+localStorage.setItem('cohortArchives', JSON.stringify(list));
+alert('Active records successfully cloned to history archive!');
+renderArchive();
+});
+document.getElementById('clearBtn').addEventListener('click', function() {
+if(confirm('Reset active track scores to zero for the next cohort? (Archived history will remain safe)')) {
+localStorage.removeItem('globalXP');
+localStorage.removeItem('lastWaterBudget');
+localStorage.removeItem('lastIncubatorBalance');
+localStorage.removeItem('lastActiveLeaseAsset');
+alert('Active tracker flushed! Ready for next cohort setup.');
+window.location.href = 'cohort-gradebook.html?v=12';
+}
+});
+renderArchive();
+</script>
+</body>
+</html>
