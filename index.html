@@ -2,58 +2,44 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AFTI - Agricultural Initiative Portal</title>
+<title>AFTI - Agricultural Future &amp; Training Initiative</title>
 <style>
-:root { --bg:#0f172a; --card:#1e293b; --primary:#27ae60; --accent:#38bdf8; --nav-bg:#144d29; }
-body { font-family:system-ui, sans-serif; background:var(--bg); color:#fff; margin:0; padding:0; }
-nav { background:var(--nav-bg); padding:0.8rem 1rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); flex-wrap:wrap; gap:0.5rem; }
-nav a { color:#cbd5e1; text-decoration:none; font-weight:500; font-size:0.85rem; padding:2px 4px; }
-nav a.active { font-weight:700; color:#fff; border-bottom:2px solid var(--primary); }
-.hero { max-width:600px; margin:0 auto; padding:1.5rem 1rem; box-sizing:border-box; }
-.block { background:linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding:1.5rem; border-radius:14px; border:1px solid rgba(255,255,255,0.1); margin-bottom:1.2rem; }
-.btn { display:block; text-align:center; color:#fff; text-decoration:none; padding:12px; border-radius:8px; font-weight:bold; font-size:1rem; margin-top:1rem; }
+:root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --accent:#38bdf8; --nav-bg:#144d29; }
+body { font-family:system-ui,-apple-system,sans-serif; background:var(--bg); color:#fff; margin:0; padding:0; }
+nav { background:var(--nav-bg); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); flex-wrap:wrap; gap:1rem; }
+nav a { color:#cbd5e1; text-decoration:none; font-weight:500; font-size:0.95rem; }
+nav a.active { color:#fff; font-weight:700; border-bottom:2px solid var(--primary); padding-bottom:2px; }
+main { max-width:900px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box; }
+.block { background:var(--card); padding:2.5rem; border-radius:16px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 10px 30px rgba(0,0,0,0.4); margin-bottom:2.5rem; }
+.img-box { width:100%; background:#0f172a; border-radius:12px; border:1px solid rgba(255,255,255,0.15); margin:1.5rem 0; overflow:hidden; position:relative; }
+.btn { display:block; text-align:center; color:#fff; text-decoration:none; padding:15px; border-radius:8px; font-weight:bold; font-size:1.1rem; margin-top:1.2rem; box-shadow:0 4px 15px rgba(0,0,0,0.3); }
 </style>
 </head>
 <body>
 <nav>
-<div style="font-weight:900; font-size:1.1rem; color:#ffffff;">AFTI Portal</div>
-<div style="display:flex; gap:0.8rem; align-items:center; flex-wrap:wrap;">
-<a href="index.html" class="active">Home</a>
-<a href="training-modules-and-mutual-growth.html">Training and Certification</a>
-<a href="partners.html">For Farmers</a>
-<a href="shared-harvest.html">Shared Harvest</a>
-<a href="incubator.html">Incubator</a>
-<a href="newsletter.html">Newsletter</a>
-<a href="gallery.html">Gallery</a>
-<a href="how-to-help.html">How to Help</a>
+<div style="font-weight:900; font-size:1.25rem; color:#fff;">AFTI Portal</div>
+<div style="display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap;">
+<a href="index.html" class="active">Home</a><a href="training-modules-and-mutual-growth.html">Training &amp; Certification</a><a href="partners.html">For Farmers</a><a href="shared-harvest.html">Shared Harvest</a><a href="incubator.html">Incubator</a><a href="newsletter.html">Newsletter</a><a href="gallery.html">Gallery</a><a href="how-to-help.html">How to Help</a>
 </div>
 </nav>
-<div class="hero">
+<main>
 <div class="block">
-<h1 style="font-size:1.5rem; margin:0 0 8px 0; line-height:1.2;">Cultivating the Future of Agriculture</h1>
-<p style="font-size:0.85rem; line-height:1.5; color:#cbd5e1; margin:0;">AFTI bridges the divide between under-utilized rural land and the next generation of professional growers. Through rigorous training and custom advisory SOP alignment, our teams deliver mutual economic revitalization across Linn County.</p>
-<a href="farmer-apprentice-story.html" class="btn" style="background:var(--primary); box-shadow:0 4px 15px rgba(39,174,96,0.2);">🚀 Launch Immersive Qualification Path &rarr;</a>
-</div>
-<div class="block" style="border-color: var(--accent);">
-<h2 style="font-size:1.1rem; margin:0 0 8px 0; color:var(--accent);">🌾 Shared Harvest Mitigation Hub</h2>
-<p style="font-size:0.85rem; line-height:1.5; color:#cbd5e1; margin:0;">Securing agricultural land requires professional systems. We proactively transform common landowner complaints—like noise, messes, water misuse, and split disputes—into bulletproof, extension-backed legal and technical solutions before tools ever hit the dirt.</p>
-<a href="shared-harvest-hub.html?v=11" class="btn" style="background:var(--accent); color:#0f172a; box-shadow:0 4px 15px rgba(56,189,248,0.2);">🤝 Open Landowner Mitigation Hub &rarr;</a>
-</div>
-<div class="block" style="border-color: #a855f7;">
-<h2 style="font-size:1.1rem; margin:0 0 8px 0; color:#c084fc;">📊 Technical Mastery Database</h2>
-<p style="font-size:0.85rem; line-height:1.5; color:#cbd5e1; margin:0;">Our apprentices study a deep library of standalone checklist field modules to ensure compliance with strict agricultural standards. From utility tractor pre-starts to soil chemistry math, explore our technical operations bank.</p>
-<a href="technical-tutorials.html" class="btn" style="background:#a855f7; box-shadow:0 4px 15px rgba(168,85,247,0.2);">🔨 Open Technical Modules Bank &rarr;</a>
-</div>
-<div class="block" style="border-color: #e2e8f0;">
-<h2 style="font-size:1.1rem; margin:0 0 8px 0; color:#f8fafc;">🚀 Micro-Farm Incubator Launchpad</h2>
-<p style="font-size:0.85rem; line-height:1.5; color:#cbd5e1; margin:0;">Equip independent farm businesses with financial tools and tool-pool assets. Track fixed infrastructure setups, seed overhead expenditures, and coordinate equipment checkout reservations.</p>
-<a href="incubator-hub.html?v=11" class="btn" style="background:#475569; box-shadow:0 4px 15px rgba(71,85,105,0.2);">🌱 Open Business Incubator Launchpad &rarr;</a>
-</div>
-<div class="block" style="border-color: #f59e0b;">
-<h2 style="font-size:1.1rem; margin:0 0 8px 0; color:#f59e0b;">🎓 Centralized Cohort Ledger</h2>
-<p style="font-size:0.85rem; line-height:1.5; color:#cbd5e1; margin:0;">Administrative control tower monitoring live technical screening metrics. Review experience point milestones, active field water budgets, and award official elite verification badges.</p>
-<a href="cohort-gradebook.html?v=11" class="btn" style="background:#f59e0b; color:#0f172a; box-shadow:0 4px 15px rgba(245,158,11,0.2);">📈 Open Administrative Gradebook &rarr;</a>
+<span style="background:rgba(39,174,96,0.15); color:#27ae60; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; display:inline-block; margin-bottom:1rem;">Willamette Valley Initiative</span>
+<h1 style="font-size:2.3rem; font-weight:900; margin:0 0 1rem 0; letter-spacing:-0.5px;">Cultivating Agricultural Futures</h1>
+<p style="font-size:1.05rem; line-height:1.7; color:#cbd5e1; margin:0;">The Agricultural Future &amp; Training Initiative (AFTI) bridges the gap between under-utilized rural land and next-generation growers. We combine rigorous vocational pathways, custom advisory SOP alignment, and cooperative land-linking frameworks to deploy elite field teams that ensure mutual economic revitalization and regional food security across Linn County.</p>
+<div class="img-box">
+<img src="images/barn-sunset.jpg" alt="Field Operations" style="width:100%; height:300px; object-fit:cover; display:block;">
+<div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,23,42,0.95)); padding:1.2rem;">
+<span style="color:#2ecc71; font-weight:700; font-size:0.85rem; text-transform:uppercase;">Linn County Field Operations</span>
+<p style="color:#cbd5e1; margin:0.2rem 0 0 0; font-size:0.9rem;">Restoring under-productive land assets into high-yield community infrastructure.</p>
 </div>
 </div>
+<a href="farmer-apprentice-story.html" class="btn" style="background:var(--primary);">🚀 Launch Immersive Qualification Path &rarr;</a>
+<a href="shared-harvest-hub.html?v=17" class="btn" style="background:var(--accent); color:#0f172a;">🌾 Open Landowner Mitigation Hub &rarr;</a>
+<a href="technical-tutorials.html" class="btn" style="background:#a855f7;">🔨 Open Technical Modules Bank &rarr;</a>
+<a href="incubator-hub.html?v=17" class="btn" style="background:#475569;">🌱 Open Business Incubator Launchpad &rarr;</a>
+<a href="cohort-ledger-main.html?v=17" class="btn" style="background:#f59e0b; color:#0f172a;">📈 Open Administrative Gradebook &rarr;</a>
+</div>
+</main>
 </body>
 </html>
