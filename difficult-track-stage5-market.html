@@ -45,30 +45,6 @@
         </div>
     </div>
 </div>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const track = localStorage.getItem('afti_track_name') || 'Not Selected';
-        document.body.setAttribute('data-track', track);
-    });
-    function selectMarketOption(choiceType, points) {
-        if (window.selectOption) { window.selectOption(choiceType, points); }
-        document.getElementById('choices-wrapper').style.display = 'none';
-        const vp = document.getElementById('feedback-viewport'); const title = document.getElementById('feedback-title');
-        const text = document.getElementById('feedback-text'); const ac = document.getElementById('feedback-action-container'); vp.style.display = 'block';
-        if (choiceType === 'A') {
-            vp.style.backgroundColor = 'rgba(39,174,96,0.1)'; title.innerText = "Success (+100 XP)"; title.style.color = "#4ade80";
-            text.innerText = "Your harvest checks clear beautifully! By tracking safety wash standard operating procedures, you avoid food waste, support community food access, and successfully close out your active learning contract.";
-            ac.innerHTML = '<button onclick="window.location.href=\'simulation-portfolio-summary.html\'" class="nav-bridge">Compile Your Final Verified Portfolio &rarr;</button>';
-        } else if (choiceType === 'B') {
-            vp.style.backgroundColor = 'rgba(245,158,11,0.1)'; title.innerText = "Misinformed Pivot (+25 XP)"; title.style.color = 'var(--warn)';
-            text.innerText = "Bypassing food sorting standards results in rapid leaf bruising and mud contamination during transit. Half of your harvest is rejected at arrival due to local safety codes.";
-            ac.innerHTML = '<button onclick="window.location.href=\'difficult-track-stage5-recovery-b.html\'" class="nav-bridge" style="background:var(--warn);">Enter Packaging Recovery Loop &rarr;</button>';
-        } else {
-            vp.style.backgroundColor = 'rgba(239,68,68,0.1)'; title.innerText = "Logistics Failure (+0 XP)"; title.style.color = 'var(--danger)';
-            text.innerText = "Trapping heat and moisture inside a tight, hot room accelerates post-harvest mold. Your entire commercial batch rots overnight. This failure locks out your delivery performance score.";
-            ac.innerHTML = '<button onclick="window.location.href=\'difficult-track-stage5-recovery-c.html\'" class="nav-bridge" style="background:var(--danger);">Enter Crop Safety Remediation Loop &rarr;</button>';
-        }
-    }
-</script>
+i
 </body>
 </html>
