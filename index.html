@@ -1,110 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AFTI - Agricultural Future &amp; Training Initiative</title>
-  <style>
-    body { background-color: #0f172a; color: #ffffff; font-family: system-ui, sans-serif; margin: 0; padding: 0; }
-    .hud-bar { background: #144d29; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px 15px; margin: 20px auto; max-width: 860px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
-    nav { background: #144d29; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); sticky; top: 0; z-index: 1000; }
-    nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem; margin-left: 1.25rem; }
-    .hero { background: linear-gradient(rgba(15, 23, 42, 0.3), rgba(15, 23, 42, 0.65)), url('images/barn-sunset.jpg') center/cover; padding: 4rem 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 2.5rem; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-top: 2rem; }
-    .card { background: rgba(15, 23, 42, 0.85); padding: 1.5rem; border-radius: 12px; border: 1px solid #334155; }
-    .box { background: #1e293b; padding: 2rem; border-radius: 16px; border: 1px solid #334155; margin-bottom: 2.5rem; }
-    .sim-card { background: #1e293b; padding: 2.5rem; border-radius: 16px; border: 1px solid rgba(39, 174, 96, 0.4); display: flex; flex-direction: column; gap: 1.5rem; }
-    .btn { background: #27ae60; color: #ffffff; text-decoration: none; font-weight: bold; padding: 14px 28px; border-radius: 8px; display: inline-block; }
-  </style>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Qualification &amp; Training Portal</title>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --accent:#38bdf8; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:900px; background:var(--card); border-radius:14px; padding:35px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); }
+        .main-btn { display:block; width:100%; text-align:center; background:var(--primary); color:#fff; text-decoration:none; padding:18px; border-radius:8px; font-weight:bold; font-size:1.2rem; box-shadow:0 6px 20px rgba(39,174,96,0.3); margin:25px 0; }
+        .section-title { font-size:1.1rem; color:var(--accent); text-transform:uppercase; letter-spacing:1px; margin-top:30px; border-bottom:1px solid #334155; padding-bottom:8px; font-weight:bold; }
+        .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:15px; margin-top:15px; }
+        .sub-card { background:#0f172a; padding:18px; border-radius:10px; border:1px solid #334155; cursor:pointer; transition:border 0.2s; display:flex; flex-direction:column; gap:4px; }
+        .sub-card:hover { border-color:var(--accent); background:rgba(56,189,248,0.03); }
+        .card-title { font-weight:bold; color:#fff; font-size:1rem; }
+        .card-desc { font-size:0.85rem; color:#cbd5e1; line-height:1.4; }
+    </style>
 </head>
 <body>
+<div class="container">
+    <div style="text-align:center;">
+        <h1 style="margin:0 0 10px 0; font-size:2rem; font-weight:900;">🌾 The Agrarian Gateway</h1>
+        <p style="color:#94a3b8; margin:0; line-height:1.6;">Agricultural Future &amp; Training Initiative Pre-Screening Network</p>
+    </div>
 
-<div class="hud-bar">
-    <span>AFTI Global XP: <span id="global-points">400</span></span>
-    <div>
-        <span id="test-mode-status" style="font-size: 0.8rem; color: #cbd5e1; font-weight: normal; margin-right: 10px;">Live Mode</span>
-        <button onclick="toggleTestBypass()" id="test-mode-btn" style="background: #334155; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 5px; font-size: 0.75rem; cursor: pointer;">Enable Test Bypass</button>
+    <!-- MAIN INTERACTIVE IMMERSIVE STORY LAUNCHER -->
+    <a href="farmer-apprentice-story.html" class="main-btn">🚀 Launch Immersive Qualification Path &rarr;</a>
+
+    <!-- TECHNICAL MASTER DATA LAB SECTION -->
+    <div class="section-title">📊 Technical Mastery Tutorials &amp; Checklists</div>
+    
+    <div class="grid">
+        <!-- CATEGORY: SALES & DISTRIBUTION -->
+        <div class="sub-card" onclick="window.location.href='sales-tutorial-farmstand.html'">
+            <span class="card-title">🔨 Roadside Farm Stand Deployment</span>
+            <span class="card-desc">Review structural building tiers, EFU zoning guidelines, and warning signage setup rules.</span>
+        </div>
+        <div class="sub-card" onclick="window.location.href='sales-tutorial-merchandising.html'">
+            <span class="card-title">🛒 Farmers Market Merchandising</span>
+            <span class="card-desc">Master vertical display layering, abundance masking, and color contrast mapping styles.</span>
+        </div>
+        <div class="sub-card" onclick="window.location.href='sales-tutorial-scripts.html'">
+            <span class="card-title">🗣️ Customer Interaction &amp; Scripts</span>
+            <span class="card-desc">Utilize open-ended curiosity prompts and learn how to handle pricing resistance natively.</span>
+        </div>
+        <div class="sub-card" onclick="window.location.href='sales-tutorial-restaurants.html'">
+            <span class="card-title">🤝 Commercial Kitchen Accounts</span>
+            <span class="card-desc">Learn chef pitch etiquette windows, triple-wash packing rules, and carbon invoice logs.</span>
+        </div>
+
+        <!-- CATEGORY: PRODUCTION, SAFETY & OPERATIONS -->
+        <div class="sub-card" onclick="window.location.href='ops-tutorial-tractor.html'">
+            <span class="card-title">🚜 Utility Tractor Pre-Start Operation</span>
+            <span class="card-desc">Execute fluid leak walks, check vertical ROPS cages, and review PTO gear shielding code rules.</span>
+        </div>
+        <div class="sub-card" onclick="window.location.href='ops-tutorial-chainsaw.html'">
+            <span class="card-title">🪚 Chainsaw Armor &amp; Log Tension</span>
+            <span class="card-desc">Deploy safety ballistic chaps, ground-start cords, and calculate fiber over-buck stresses.</span>
+        </div>
+        <div class="sub-card" onclick="window.location.href='prod-tutorial-propagation.html'">
+            <span class="card-title">🌱 Greenhouse Propagation Cells</span>
+            <span class="card-desc">Select cell geometry, mix sponge moisture test templates, and prevent damping-off molds.</span>
+        </div>
+        <div class="sub-card" onclick="window.location.href='prod-tutorial-compost.html'">
+            <span class="card-title">🪱 Organic Compost Pile Heating</span>
+            <span class="card-desc">Balance 3:1 carbon recipes, execute 3x3x3 insulation frames, and log 131°F probe milestones.</span>
+        </div>
+        <div class="sub-card" onclick="window.location.href='prod-tutorial-amendments.html'">
+            <span class="card-title">🧪 Soil Chemistry Weight Math</span>
+            <span class="card-desc">Interpret lab reports, calculate N-P-K fertilizer weights, and apply dolomitic lime.</span>
+        </div>
+        <div class="sub-card" onclick="window.location.href='prod-tutorial-beekeeping.html'">
+            <span class="card-title">🐝 Apiary Essentials &amp; Hive Security</span>
+            <span class="card-desc">Assemble Langstroth super box grids, log mite rolling test data, and check honey water caps.</span>
+        </div>
+        <div class="sub-card" onclick="window.location.href='eco-tutorial-restoration.html'">
+            <span class="card-title">🌲 Post-Wildfire Watershed Restoration</span>
+            <span class="card-desc">Install contour straw wattles, scarify burned hydrophobic clay, and hammer live willow stakes.</span>
+        </div>
+        <div class="sub-card" onclick="window.location.href='admin-tutorial-grants.html'">
+            <span class="card-title">📋 Land Lease Audits &amp; Grant Requests</span>
+            <span class="card-desc">Review rolling 3-year term safety, map line water allocations, and itemize capital cost claims.</span>
+        </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        updateBypassUI();
-        document.getElementById('global-points').innerText = localStorage.getItem('afti_global_xp') || 400;
-    });
-    function toggleTestBypass() {
-        const currentBypass = sessionStorage.getItem('afti_test_bypass') === 'true';
-        sessionStorage.setItem('afti_test_bypass', !currentBypass);
-        updateBypassUI();
-    }
-    function updateBypassUI() {
-        const isBypassed = sessionStorage.getItem('afti_test_bypass') === 'true';
-        const btn = document.getElementById('test-mode-btn');
-        const statusText = document.getElementById('test-mode-status');
-        if (isBypassed) {
-            btn.style.background = '#f59e0b'; btn.style.color = '#0f172a'; btn.innerText = 'Bypass Active';
-            statusText.innerText = 'Test Mode (XP Frozen)'; statusText.style.color = '#f59e0b';
-        } else {
-            btn.style.background = '#334155'; btn.style.color = '#cbd5e1'; btn.innerText = 'Enable Test Bypass';
-            statusText.innerText = 'Live Mode'; statusText.style.color = '#4ade80';
-        }
-    }
-</script>
-
-  <nav>
-    <div style="font-weight: 900; font-size: 1.25rem; color: #ffffff;">AFTI Portal</div>
-    <div>
-      <a href="index.html" style="color: #ffffff; border-bottom: 2px solid #27ae60; padding-bottom: 2px;">Home</a>
-      <a href="training-modules-and-mutual-growth.html">Training and Certification</a>
-      <a href="partners.html">For Farmers</a>
-      <a href="shared-harvest.html">Shared Harvest</a>
-      <a href="incubator.html">Incubator</a>
-    </div>
-  </nav>
-
-  <main style="max-width: 900px; margin: 0 auto; padding: 2rem;">
-    
-    <div class="hero">
-      <span style="background: rgba(39, 174, 96, 0.3); color: #2ecc71; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 20px; display: inline-block; margin-bottom: 1.25rem; border: 1px solid rgba(46, 204, 113, 0.4);">Willamette Valley Agricultural Initiative</span>
-      <h1 style="font-size: 2.5rem; font-weight: 900; margin: 0 0 1.25rem 0; line-height: 1.2;">Cultivating the Future of Agriculture Through Specialized Teams &amp; Land Access</h1>
-      <p style="font-size: 1.1rem; line-height: 1.7; color: #f1f5f9;">
-        The Agricultural Future &amp; Training Initiative (AFTI) bridges the critical divide between under-utilized rural land and the next generation of agricultural professionals. By combining rigorous vocational training, custom advisory SOP alignment, and cooperative land-linking across Linn County, we create private trained teams that deliver mutual economic revitalization and food security.
-      </p>
-
-      <div class="grid">
-        <div class="card">
-          <h3 style="color: #27ae60; margin: 0 0 0.5rem 0;">🌱 For Aspiring Growers</h3>
-          <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.4; margin: 0;">Step into active cohorts, build elite vocational skills, and access land without ownership barriers.</p>
-        </div>
-        <div class="card">
-          <h3 style="color: #27ae60; margin: 0 0 0.5rem 0;">🚜 For Landowners</h3>
-          <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.4; margin: 0;">Deploy trained teams in your exact SOPs, unlock secondary income, and keep idle acreage productive.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="box">
-      <h3 style="color: #38bdf8; margin: 0 0 0.75rem 0; font-size: 1.25rem;">📈 Regional Economic Stimulus &amp; Land Stewardship</h3>
-      <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.6; margin: 0;">
-        Beyond individual farm training, AFTI acts as a catalyst for local economic vitality. By revitalizing under-utilized acreage and matching dedicated apprentices with retiring landowners, we keep agricultural investments local, preserve active open space, and build generational financial literacy.
-      </p>
-    </div>
-
-   
-    <!-- THE INTEGRATION CARD TO LAUNCH THE SCENARIO SIMULATOR -->
-    <div class="sim-card">
-      <div>
-        <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; padding: 0.3rem 0.75rem; border-radius: 4px; display: inline-block; margin-bottom: 0.75rem;">Interactive Simulation Module</span>
-        <h2 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; color: #ffffff;">🌾 Roots &amp; Resilience: The Agrarian Gateway</h2>
-        <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.7; margin: 0;">
-          Have you dreamed of becoming a farmer but you don't know how something like that is even possible from where you are now? Please take a look at all of our training modules and our farmer apprentice simulator. We will continue to build it out and your effort scores will be saved in your profile for matching with grants or educational credits you may qualify for.
-        </p>
-      </div>
-      <div>
-        <a href="farmer-apprentice-story.html" class="btn">Enter Simulation Gateway &rarr;</a>
-      </div>
-    </div>
-    
-  </main>
 </body>
 </html>
