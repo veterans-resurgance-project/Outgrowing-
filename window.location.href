@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFTI Shared Harvest Action Hub</title>
+<style>
+body { font-family: system-ui, sans-serif; background: #0f172a; color: #f8fafc; padding: 15px; margin: 0; }
+.card { background: #1e293b; padding: 18px; border-radius: 12px; max-width: 550px; margin: auto; border: 1px solid #334155; }
+h2 { color: #38bdf8; font-size: 1.25rem; margin: 0 0 10px 0; }
+.section-title { font-size: 0.9rem; font-weight: bold; color: #94a3b8; text-transform: uppercase; margin: 15px 0 8px 0; }
+.complaint-box { background: #0f172a; padding: 10px; border-radius: 6px; margin-bottom: 12px; border-left: 4px solid #ef4444; font-size: 0.85rem; }
+.action-link { display: inline-block; margin-top: 6px; color: #38bdf8; text-decoration: none; font-weight: bold; }
+.action-link:hover { text-decoration: underline; }
+.btn-exit { display: block; text-align: center; background: #475569; color: white; padding: 10px; margin-top: 15px; border-radius: 6px; text-decoration: none; font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<div class="card">
+<h2>🌾 Shared Harvest Mitigation Hub</h2>
+<p style="font-size:0.85rem; color:#cbd5e1; margin:0 0 15px 0;">Transforming landowner friction points into structured legal and technical solutions.</p>
+
+<div class="section-title">🚨 Friction & Strategic Solutions</div>
+
+<div class="complaint-box">
+<b>⚠️ The "Junkyard" Effect & Noise Chaos</b><br>
+Landowners cancel leases when sites look messy or machinery runs too early.<br>
+<a class="action-link" href="hub-conduct-mou.html">→ Deploy Code of Conduct & MOU Lease Template</a>
+</div>
+
+<div class="complaint-box">
+<b>⚠️ Water Over-Use & Mapping Disputes</b><br>
+Unmonitored irrigation valves or boundary creeping causes massive legal fights.<br>
+<a class="action-link" href="hub-mapping-water.html">→ Deploy Precision Map & Water Infrastructure Log</a>
+</div>
+
+<div class="complaint-box">
+<b>⚠️ Bookkeeping Flaws & Trust Deficits</b><br>
+Failing to clearly prove harvest weight metrics breaks the 30/70 crop-share agreement.<br>
+<a class="action-link" href="hub-intake-references.html">→ Deploy Yield Forms & Partner Reference Pack</a>
+</div>
+
+<a href="index.html?v=2" class="btn-exit">Return to Master Dashboard</a>
+</div>
+</body>
+</html>
