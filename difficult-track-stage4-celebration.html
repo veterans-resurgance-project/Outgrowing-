@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFTI Crew Celebration Checkpoint</title>
+<style>
+body { font-family:system-ui, sans-serif; background:#0f172a; color:#fff; padding:15px; margin:0; text-align:center; }
+.card { background:#1e293b; padding:20px; border-radius:12px; max-width:500px; margin:auto; border:2px solid #27ae60; text-align:left; box-shadow:0 0 20px rgba(39,174,96,0.2); }
+h2 { color:#2ecc71; font-size:1.4rem; margin:0 0 10px 0; text-align:center; }
+.glow-banner { background:#144d29; border:1px solid #27ae60; padding:12px; border-radius:8px; text-align:center; margin:15px 0; font-weight:bold; animation:pulse 2s infinite; }
+@keyframes pulse { 0%{opacity:0.8;} 50%{opacity:1;} 100%{opacity:0.8;} }
+.score-box { background:#0f172a; padding:10px; border-radius:6px; font-size:0.85rem; margin-bottom:15px; display:flex; justify-content:space-between; }
+.btn { display:block; text-align:center; background:#27ae60; color:white; padding:12px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.95rem; }
+</style>
+</head>
+<body>
+<div class="card">
+<h2>🎉 Technical Mastery Level Cleared!</h2>
+<p style="font-size:0.85rem; color:#cbd5e1; margin-bottom:12px; line-height:1.5;">Outstanding progress! No matter which path your crew started from, your separate skills have officially successfully merged at the Level 4 vocational hub milestone.</p>
+<div class="glow-banner">✨ COHORT STATUS: ELITE FIELD CREW UNLOCKED ✨</div>
+<div class="score-box"><span>Current Technical Score:</span><b id="celebXP" style="color:#f59e0b;">0 XP</b></div>
+<p style="font-size:0.85rem; color:#cbd5e1; margin-bottom:15px;">Your four-season labor blocks and active training cash stipends are verified. It is time to step into Stage 5 and manage your final wholesale market wash station parameters.</p>
+<a href="difficult-track-stage5-market.html?v=19" class="btn">Proceed to Stage 5 Marketplace &rarr;</a>
+</div>
+<script>
+let xp = parseInt(localStorage.getItem('globalXP')) || 0;
+localStorage.setItem('globalXP', xp + 20);
+document.getElementById('celebXP').innerText = (xp + 20) + ' XP (+20 Bonus!)';
+</script>
+</body>
+</html>
