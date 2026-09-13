@@ -5,11 +5,12 @@
 <title>Stage 4: Universal Cohort Merge</title>
 <style>
 body { font-family:system-ui, sans-serif; background:#0f172a; color:#fff; padding:15px; margin:0; }
-.card { background:#1e293b; padding:18px; border-radius:12px; max-width:500px; margin:auto; border:1px solid #334155; }
+.card { background:#1e293b; padding:18px; border-radius:12px; max-width:500px; margin:auto; border:1px solid #334155; margin-bottom:15px; }
 h2 { color:#fff; font-size:1.3rem; margin:0 0 10px 0; }
-.merge-glow { border:2px solid #27ae60; box-shadow:0 0 15px rgba(39,174,96,0.3); padding:12px; border-radius:8px; background:#144d29; font-weight:bold; text-align:center; margin-bottom:15px; }
-.track-info { background:#0f172a; padding:12px; border-radius:6px; font-size:0.85rem; margin-bottom:15px; line-height:1.4; color:#cbd5e1; }
-.btn { display:block; text-align:center; background:#27ae60; color:white; padding:12px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.9rem; }
+.merge-glow { border:2px solid #27ae60; box-shadow:0 0 15px rgba(39,174,96,0.3); padding:10px; border-radius:8px; background:#144d29; font-weight:bold; text-align:center; margin-bottom:12px; font-size:0.85rem; }
+.track-info { background:#0f172a; padding:12px; border-radius:6px; font-size:0.85rem; margin-bottom:12px; line-height:1.4; color:#cbd5e1; }
+.btn { display:block; text-align:center; background:#27ae60; color:white; padding:12px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.9rem; border:none; width:100%; cursor:pointer; }
+.info-card { background:#1e293b; padding:15px; border-radius:12px; max-width:500px; margin:auto; border:1px solid #475569; text-align:left; font-size:0.85rem; line-height:1.4; color:#cbd5e1; }
 </style>
 </head>
 <body>
@@ -18,18 +19,19 @@ h2 { color:#fff; font-size:1.3rem; margin:0 0 10px 0; }
 <div class="merge-glow">⚡ LEVEL 4 UNIVERSAL MERGE PULSE ACTIVE ⚡</div>
 <div class="track-info">
 <b>Active Crew Metrics Verified:</b><br>
-• Four-Season Labor Blocks Aligned<br>
-• Active Field Training Stipends Synchronized<br>
-• Cohort Infrastructure Logs Initialized
+• Four-Season Labor Blocks Aligned | • Training Stipends Synchronized
 </div>
-<p style="font-size:0.85rem; color:#cbd5e1; margin-bottom:15px;">Your independent tracks have successfully come together into a single, cohesive team footprint. Review your collective field parameters to log total metrics.</p>
 <button onclick="handleVocationalClick()" class="btn">Log Core Metrics &amp; Complete Stage 4</button>
+</div>
+<div class="info-card">
+<b style="color:#a855f7; display:block; margin-bottom:4px;">🎓 Extension Advisory Advisory:</b>
+This merge node synchronizes localized urban production parameters with Oregon State University Extension standard guidelines for specialty vegetable distribution.
 </div>
 <script>
 function handleVocationalClick() {
 let xp = parseInt(localStorage.getItem('globalXP')) || 0;
 localStorage.setItem('globalXP', xp + 15);
-alert('Milestone verified! +15 XP Awarded. Routing to crew celebration hub.');
+alert('Milestone verified! +15 XP Awarded.');
 window.location.href = 'difficult-track-stage4-celebration.html?v=19';
 }
 </script>
