@@ -36,7 +36,11 @@
         <p style="line-height:1.7; color:#cbd5e1;">It's time to build your physical farming hours across a full cycle: planting, tending, harvesting, and overwintering. Local growers need help clearing fields. Waiting-list participants earn a stipend while logging validation points. What is your plan?</p>
         <div class="choices-container" id="choices-wrapper">
             <button class="choice-btn" onclick="handleVocationalClick('A', 100, 120)"><span style="font-weight:bold; color:#4ade80;">Choice A: Register for a seasonal harvesting crew on a commercial partner farm.</span><span style="font-size:0.85rem; color:#94a3b8;">Carpool to a commercial field to assist local growers with peak clearance. (+100 XP / +$120 Stipend)</span></button>
-            <button class="choice-btn" onclick="handleVocationalClick('B', 25, 30)"><span style="font-weight:bold; color:var(--warn);">Choice B: Pivot to a local community garden overwintering project down the street.</span><span style="font-size:0.85rem; color:#94a3b8;">Stay local to work on winter cover cropping within an urban neighborhood plot. (+25 XP / +$30 Stipend)</span></button>
+            <!-- Update Choice B in your main Stage 4 file to look like this: -->
+<button class="choice-btn" onclick="window.location.href='difficult-track-stage4-mushrooms.html'">
+    <span style="font-weight:bold; color:var(--warn);">Choice B: Pivot to a local wild foraging and mycological development tract.</span>
+    <span style="font-size:0.85rem; color:#94a3b8;">Head into regional timber stands to master identification laws and supply fresh forest assets. (+100 XP)</span>
+</button>
             <button class="choice-btn" onclick="handleVocationalClick('C', 0, 0)"><span style="font-weight:bold; color:var(--danger);">Choice C: Attempt to clear an unmapped overgrown lot by yourself using unverified tools.</span><span style="font-size:0.85rem; color:#94a3b8;">Bypass safety protocols and supervisor sign-offs to clear local thickets solo. (+0 XP / +$0 Stipend)</span></button>
         </div>
         <div id="feedback-viewport" class="feedback-box">
