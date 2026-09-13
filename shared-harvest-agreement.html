@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shared Harvest Cooperative Agreement</title>
+<style>
+body { font-family:system-ui, sans-serif; background:#0f172a; color:#fff; padding:15px; margin:0; }
+.card { background:#1e293b; padding:18px; border-radius:12px; max-width:550px; margin:auto; border:1px solid #27ae60; }
+h2 { color:#27ae60; font-size:1.3rem; margin:0 0 10px 0; }
+.doc-box { background:#0f172a; padding:12px; border-radius:6px; font-size:0.8rem; line-height:1.5; max-height:160px; overflow-y:scroll; color:#cbd5e1; margin-bottom:12px; border-left:3px solid #27ae60; }
+.input-group { margin-bottom:10px; }
+label { display:block; font-size:0.75rem; color:#94a3b8; margin-bottom:4px; }
+input[type="text"] { width:100%; padding:8px; background:#334155; border:1px solid #475569; color:#fff; border-radius:4px; box-sizing:border-box; }
+.btn { width:100%; padding:12px; background:#27ae60; color:#fff; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:0.9rem; }
+.btn-back { display:block; text-align:center; color:#94a3b8; font-size:0.85rem; text-decoration:none; padding-top:10px; }
+</style>
+</head>
+<body>
+<div class="card">
+<h2>📄 Land-Share Cooperative Agreement</h2>
+<div class="doc-box">
+COOPERATIVE COHORT LEASE AGREEMENT
+1. TERM: This agreement establishes a temporary agricultural lease structure across designated Linn County acreage.
+2. CROPS: Operations are limited to high-value specialty crops and culinary fungi.
+3. WATER SECURITY: Trainees must log irrigation flow metrics daily.
+4. INDEMNIFICATION: Landowner is held free from liability regarding cohort field activities.
+5. DISPUTES: Unresolved aesthetic or noise friction triggers standard 48-hour cure notices before mediation.
+</div>
+<form id="agreeForm">
+<div class="input-group">
+<label>Landowner Electronic Signature</label>
+<input type="text" id="ownerSign" placeholder="Type full legal name" required>
+</div>
+<div class="input-group" style="margin-bottom:15px;">
+<label>Cohort Representative Signature</label>
+<input type="text" id="cohortSign" placeholder="Type representative name" required>
+</div>
+<button type="submit" class="btn">Execute Formal Land Link</button>
+</form>
+<a href="shared-harvest-hub.html?v=7" class="btn-back">← Return to Shared Harvest Hub</a>
+</div>
+<script>
+document.getElementById('agreeForm').addEventListener('submit', function(e) {
+e.preventDefault();
+let xp = parseInt(localStorage.getItem('globalXP')) || 0;
+localStorage.setItem('globalXP', xp + 25);
+alert('Agreement Executed! Both signatures locked. +25 Global XP Awarded.');
+window.location.href = 'shared-harvest-hub.html?v=7';
+});
+</script>
+</body>
+</html>
