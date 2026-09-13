@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Microscopic Spore Triage Verification</title>
+<style>
+body { font-family:system-ui, sans-serif; background:#0f172a; color:#fff; padding:15px; margin:0; }
+.card { background:#1e293b; padding:18px; border-radius:12px; max-width:500px; margin:auto; border:1px solid #3b82f6; }
+h2 { color:#60a5fa; font-size:1.2rem; margin:0 0 12px 0; }
+.item { display:flex; align-items:flex-start; margin-bottom:12px; font-size:0.85rem; }
+input[type="checkbox"] { margin-right:10px; margin-top:2px; accent-color:#10b981; }
+.btn { width:100%; padding:12px; background:#10b981; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:0.9rem; }
+</style>
+</head>
+<body>
+<div class="card">
+<h2>🔬 Emergency Spore-Print Triage</h2>
+<form id="triageForm">
+<div class="item"><input type="checkbox" required><span><b>Spore Color Proof:</b> Confirming a pinkish-buff deposit print over dark paper, proving zero rusty-brown Galerina contamination footprints.</span></div>
+<div class="item"><input type="checkbox" required><span><b>Anatomy Metrics:</b> Inspected gill alignment patterns via 10x field loop lenses to verify true sinuate attachment points.</span></div>
+<div class="item"><input type="checkbox" required><span><b>Sanitization Flush:</b> Disinfected all wood sorting tables using a clean 10% commercial bleach solution loop.</span></div>
+<button type="submit" class="btn">Authorize Lot Release &amp; Return</button>
+</form>
+</div>
+<script>
+document.getElementById('triageForm').addEventListener('submit', function(e) {
+e.preventDefault();
+let xp = parseInt(localStorage.getItem('globalXP')) || 0;
+localStorage.setItem('globalXP', xp + 15);
+alert('Triage Successful! Batch cleared for transport. +15 XP Awarded.');
+window.location.href = 'difficult-track-stage5-fungi-buyer.html?v=1';
+});
+</script>
+</body>
+</html>
