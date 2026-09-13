@@ -1,80 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Community Newsletter &amp; Dispatches - AFTI</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community Newsletter &amp; Dispatches - AFTI</title>
+<style>
+:root { --bg:#0f172a; --card:#1e293b; --primary:#27ae60; --nav-bg:#144d29; }
+body { font-family:system-ui,-apple-system,sans-serif; background:var(--bg); color:#fff; margin:0; padding:0; }
+nav { background:var(--nav-bg); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); flex-wrap:wrap; gap:1rem; }
+nav a { color:#cbd5e1; text-decoration:none; font-weight:500; font-size:0.95rem; }
+nav a.active { color:#fff; font-weight:700; border-bottom:2px solid var(--primary); padding-bottom:2px; }
+main { max-width:900px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box; }
+.block { background:var(--card); padding:2.5rem; border-radius:16px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 10px 30px rgba(0,0,0,0.4); margin-bottom:2rem; }
+.feed-card { background:#0f172a; padding:1.5rem; border-radius:12px; border:1px solid #334155; margin-top:1.5rem; }
+</style>
 </head>
-<body style="background-color: #0f172a; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
-
-  <!-- Universal Navigation Bar -->
-  <nav style="background: #144d29; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; gap: 1rem; position: sticky; top: 0; z-index: 1000;">
-    <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
-    <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
-      <a href="index.html" style="color: #ffffff; text-decoration: none; font-weight: 700; border-bottom: 2px solid #27ae60; padding-bottom: 2px; font-size: 0.95rem;">Home</a>
-      <a href="training-modules-and-mutual-growth.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Training &amp; Certification</a>
-      <a href="partners.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">For Farmers</a>
-      <a href="shared-harvest.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Shared Harvest</a>
-      <a href="incubator.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Incubator</a>
-      <a href="newsletter.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Newsletter</a>
-      <a href="gallery.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Gallery</a>
-      <a href="how-to-help.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">How to Help</a>
-    </div>
-  </nav>
-  
-<div class="quest-box" style="background: #e8f8f5; border: 1px solid #1abc9c; border-radius: 8px; padding: 20px; text-align: center; margin: 20px 0;">
-    <h3 style="color: #0e6251; margin-top: 0;">Farmer X: The Watershed Apprenticeship</h3>
-    <p style="margin-bottom: 15px; color: #2c3e50;">Step into the boots of an Oregon homesteader or navigate the high-difficulty Street-to-Soil resilience track. Test your resource literacy, solve operational diagnostics, and unlock advanced training modules.</p>
-    <a href="farmer-x.html" class="btn" style="text-decoration: none; display: inline-block;">Launch Simulation & Choose Path</a>
+<body>
+<nav>
+<div style="font-weight:900; font-size:1.25rem; color:#fff;">AFTI Portal</div>
+<div style="display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap;">
+<a href="index.html">Home</a><a href="training-modules-and-mutual-growth.html">Training &amp; Certification</a><a href="partners.html">For Farmers</a><a href="shared-harvest.html">Shared Harvest</a><a href="incubator.html">Incubator</a><a href="newsletter.html" class="active">Newsletter</a><a href="gallery.html">Gallery</a><a href="how-to-help.html">How to Help</a>
 </div>
-  <main style="max-width: 900px; margin: 0 auto; padding: 4rem 2rem;">
-    <div style="border-bottom: 2px solid #334155; padding-bottom: 2rem; margin-bottom: 3rem;">
-      <span style="background: #a3e635; color: #0f172a; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.4rem 1rem; border-radius: 20px; display: inline-block; margin-bottom: 1rem;">Official Updates</span>
-      <h1 style="font-size: 2.5rem; font-weight: 900; color: #ffffff; margin: 0 0 1rem 0; letter-spacing: -0.5px;">Community Dispatches &amp; Newsletters</h1>
-      <p style="color: #94a3b8; font-size: 1.15rem; line-height: 1.6; margin: 0;">
-        Stay up to date with real-time operational milestones, grower roundtables, and seasonal harvest progress reports across our Linn County network.
-      </p>
-    </div>
-
-    <div id="fullNewsletterFeed" style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 3rem;">
-      </div>
-
-    <div>
-      <a href="index.html" style="color: #a3e635; text-decoration: none; font-weight: 700;">&larr; Return to Home Hub</a>
-    </div>
-  </main>
-
-  <script>
-    function renderNewsletterFeed() {
-      const container = document.getElementById("fullNewsletterFeed");
-      let stored = localStorage.getItem("afti_updates");
-      let updates = stored ? JSON.parse(stored) : [
-        { date: "Sept 2026", title: "Initiative Launch & Framework Setup", desc: "Establishing administrative frameworks, connecting with regional agricultural extension services, and welcoming initial grower partners in Linn County." }
-      ];
-
-      container.innerHTML = "";
-      updates.forEach(item => {
-        let card = document.createElement("div");
-        card.style.cssText = "background: #1e293b; padding: 2rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 15px rgba(0,0,0,0.2);";
-        card.innerHTML = `
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-            <span style="background: rgba(163,230,53,0.15); color: #a3e635; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.2rem 0.6rem; border-radius: 12px;">${item.date}</span>
-          </div>
-          <h2 style="color: #ffffff; font-size: 1.4rem; margin: 0 0 0.75rem 0;">${item.title}</h2>
-          <p style="color: #cbd5e1; font-size: 1rem; margin: 0; line-height: 1.6;">${item.desc}</p>
-        `;
-        container.appendChild(card);
-      });
-    }
-    window.addEventListener('load', renderNewsletterFeed);
-  </script
-  <!-- Track Switcher Buttons -->
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
-        <a href="farmer-x.html" style="background-color: #27ae60; color: #ffffff; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.95rem; display: inline-block; transition: background 0.2s; box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);">Launch Farmer X Simulation</a>
-        
-        <a href="academic-track.html" style="background-color: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.25); padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; display: inline-block; transition: background 0.2s;">Academic &amp; Training Track</a>
-     
-        <a href="farmer-x-quests" style="background-color: #27ae60; color: #ffffff; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.95rem; display: inline-block; transition: background 0.2s; box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);">Farmer and Apprentise</a>
-      </div>
+</nav>
+<main>
+<div class="block">
+<span style="background:rgba(39,174,96,0.15); color:#27ae60; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; display:inline-block; margin-bottom:1rem;">Official Dispatches</span>
+<h1 style="font-size:2.3rem; font-weight:900; margin:0 0 1rem 0; letter-spacing:-0.5px;">Community Newsletters</h1>
+<p style="color:#94a3b8; font-size:1.05rem; line-height:1.6; margin:0;">Stay informed with real-time operational dispatches, regional cohort milestones, and seasonal crop reports across the Linn County agricultural network.</p>
+<div id="fullNewsletterFeed"></div>
+<div style="margin-top:2rem;"><a href="index.html" style="color:#2ecc71; text-decoration:none; font-weight:700;">&larr; Return to Home Hub</a></div>
+</div>
+</main>
+<script>
+function renderFeed() {
+let stored = localStorage.getItem("afti_updates");
+let updates = stored ? JSON.parse(stored) : [
+{ date: "Sept 2026", title: "Initiative Launch & Framework Setup", desc: "Establishing regional administrative frameworks, mounting custom landowners mitigation loops, and initiating screening pipelines for next-generation growers in Lebanon, Oregon." }
+];
+document.getElementById("fullNewsletterFeed").innerHTML = updates.map(item => `
+<div class="feed-card">
+<span style="background:rgba(39,174,96,0.15); color:#2ecc71; font-size:0.75rem; font-weight:700; padding:3px 8px; border-radius:10px;">${item.date}</span>
+<h2 style="color:#fff; font-size:1.3rem; margin:10px 0 6px 0;">${item.title}</h2>
+<p style="color:#cbd5e1; font-size:0.95rem; margin:0; line-height:1.5;">${item.desc}</p>
+</div>`).join('');
+}
+window.addEventListener('load', renderFeed);
+</script>
 </body>
 </html>
