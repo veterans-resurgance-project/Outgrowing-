@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sensor Recalibration Lab</title>
+<style>
+body { font-family:system-ui, sans-serif; background:#0f172a; color:#fff; padding:15px; margin:0; }
+.card { background:#1e293b; padding:18px; border-radius:12px; max-width:500px; margin:auto; border:1px solid #a855f7; }
+h2 { color:#c084fc; font-size:1.2rem; margin:0 0 12px 0; }
+.item { display:flex; align-items:flex-start; margin-bottom:12px; font-size:0.85rem; }
+input[type="checkbox"] { margin-right:10px; margin-top:2px; accent-color:#a855f7; }
+.btn { width:100%; padding:12px; background:#a855f7; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:0.9rem; }
+</style>
+</head>
+<body>
+<div class="card">
+<h2>⚡ Greenhouse Sensor Recalibration Check</h2>
+<form id="triageForm">
+<div class="item"><input type="checkbox" required><span><b>Reset Relays:</b> Manually override automated mist lines and drop side curtains to restore proper airflow velocity.</span></div>
+<div class="item"><input type="checkbox" required><span><b>VPD Verification:</b> Recalibrate the Vapor Pressure Deficit (VPD) sensor targeting an optimal 0.85 kPa boundary box.</span></div>
+<div class="item"><input type="checkbox" required><span><b>Fungicidal Sweep:</b> Apply organic bio-fungicide treatment logs to protect at-risk plug trays from damping-off.</span></div>
+<button type="submit" class="btn">Deploy Logs & Return to Master Track</button>
+</form>
+</div>
+<script>
+document.getElementById('triageForm').addEventListener('submit', function(e) {
+e.preventDefault();
+let xp = parseInt(localStorage.getItem('globalXP')) || 0;
+localStorage.setItem('globalXP', xp + 15);
+alert('Sensors Recalibrated! Climate stable. +15 XP Awarded.');
+window.location.href = 'difficult-track-stage5-nursery-sop.html?v=1';
+});
+</script>
+</body>
+</html>
