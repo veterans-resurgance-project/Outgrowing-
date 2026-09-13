@@ -1,87 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFTI - Qualification &amp; Training Portal</title>
-    <style>
-        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --accent:#38bdf8; }
-        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; }
-        .container { width:100%; max-width:900px; background:var(--card); border-radius:14px; padding:35px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); }
-        .main-btn { display:block; width:100%; text-align:center; background:var(--primary); color:#fff; text-decoration:none; padding:18px; border-radius:8px; font-weight:bold; font-size:1.2rem; box-shadow:0 6px 20px rgba(39,174,96,0.3); margin:25px 0; }
-        .section-title { font-size:1.1rem; color:var(--accent); text-transform:uppercase; letter-spacing:1px; margin-top:30px; border-bottom:1px solid #334155; padding-bottom:8px; font-weight:bold; }
-        .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:15px; margin-top:15px; }
-        .sub-card { background:#0f172a; padding:18px; border-radius:10px; border:1px solid #334155; cursor:pointer; transition:border 0.2s; display:flex; flex-direction:column; gap:4px; }
-        .sub-card:hover { border-color:var(--accent); background:rgba(56,189,248,0.03); }
-        .card-title { font-weight:bold; color:#fff; font-size:1rem; }
-        .card-desc { font-size:0.85rem; color:#cbd5e1; line-height:1.4; }
-    </style>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFTI - Agricultural Future &amp; Training Initiative</title>
+  <style>
+    :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --accent:#38bdf8; --nav-bg:#144d29; }
+    body { font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background:var(--bg); color:#ffffff; margin:0; padding:0; }
+    nav { background:var(--nav-bg); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); flex-wrap:wrap; gap:1rem; position:sticky; top:0; z-index:1000; }
+    nav a { color:#cbd5e1; text-decoration:none; font-weight:500; font-size:0.95rem; }
+    nav a:hover, nav a.active { color:#ffffff; }
+    .hero { max-width:900px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box; }
+    .narrative-block { background:linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding:3rem 2.5rem; border-radius:20px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 15px 35px rgba(0,0,0,0.5); margin-bottom:3rem; }
+    .main-btn { display:block; text-align:center; background:var(--primary); color:#fff; text-decoration:none; padding:18px; border-radius:8px; font-weight:bold; font-size:1.2rem; box-shadow:0 6px 20px rgba(39,174,96,0.3); margin:2rem 0; }
+    .section-title { font-size:1.4rem; font-weight:800; color:#ffffff; margin-top:3rem; margin-bottom:1.25rem; border-bottom:1px solid #334155; padding-bottom:8px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; }
+    .sub-card { background:#0f172a; padding:1.25rem; border-radius:10px; border:1px solid #334155; text-decoration:none; display:block; cursor:pointer; }
+    .sub-card:hover { border-color:var(--accent); background:rgba(56,189,248,0.02); }
+    .card-title { font-weight:bold; color:#fff; font-size:1.05rem; margin-bottom:0.25rem; }
+    .card-desc { font-size:0.85rem; color:#cbd5e1; line-height:1.4; }
+  </style>
 </head>
 <body>
-<div class="container">
-    <div style="text-align:center;">
-        <h1 style="margin:0 0 10px 0; font-size:2rem; font-weight:900;">🌾 The Agrarian Gateway</h1>
-        <p style="color:#94a3b8; margin:0; line-height:1.6;">Agricultural Future &amp; Training Initiative Pre-Screening Network</p>
+
+  <!-- UNIVERSAL NAVIGATION BAR RESTORED EXACTLY -->
+  <nav>
+    <div style="font-weight:900; font-size:1.25rem; letter-spacing:-0.5px; color:#ffffff;">AFTI Portal</div>
+    <div style="display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap;">
+      <a href="index.html" class="active" style="font-weight:700; border-bottom:2px solid #27ae60; padding-bottom:2px;">Home</a>
+      <a href="training-modules-and-mutual-growth.html">Training and Certification</a>
+      <a href="partners.html">For Farmers</a>
+      <a href="shared-harvest.html">Shared Harvest</a>
+      <a href="incubator.html">Incubator</a>
+      <a href="newsletter.html">Newsletter</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="how-to-help.html">How to Help</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <!-- HERO NARRATIVE SECTION INTEGRATED -->
+    <div class="narrative-block">
+      <span style="background:rgba(39,174,96,0.15); color:#27ae60; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; display:inline-block; margin-bottom:1.25rem;">Willamette Valley Agricultural Initiative</span>
+      <h1 style="font-size:2.5rem; font-weight:900; color:#ffffff; margin:0 0 1.25rem 0; letter-spacing:-0.5px; line-height:1.15;">Cultivating the Future of Agriculture Through Specialized Teams &amp; Land Access</h1>
+      <p style="font-size:1.1rem; line-height:1.8; color:#cbd5e1; margin:0 0 1.5rem 0;">
+        The Agricultural Future &amp; Training Initiative (AFTI) bridges the critical divide between under-utilized rural land and the next generation of agricultural professionals. By combining rigorous vocational training, custom advisory SOP alignment, and cooperative land-linking across Linn County, we create private trained teams that deliver mutual economic revitalization and long-term food security.
+      </p>
+
+      <!-- ACTIVE SIMULATION LAUNCH CORE -->
+      <a href="farmer-apprentice-story.html" class="main-btn">🚀 Launch Immersive Qualification Path &rarr;</a>
     </div>
 
-    <!-- MAIN INTERACTIVE IMMERSIVE STORY LAUNCHER -->
-    <a href="farmer-apprentice-story.html" class="main-btn">🚀 Launch Immersive Qualification Path &rarr;</a>
+    <!-- ORIGINAL QUICK NAVIGATION HUB RESTORED WITH CORRECT TARGET FILES -->
+    <div class="section-title">Explore the AFTI Portal</div>
+    <div class="grid" style="margin-bottom:3rem;">
+      <a href="programs.html" class="sub-card"><div class="card-title">Training &amp; Certification &rarr;</div><div class="card-desc">Active cohorts, waitlist prep, and screening pipelines.</div></a>
+      <a href="partners.html" class="sub-card"><div class="card-title">For Farmers &amp; Advisory &rarr;</div><div class="card-desc">SOP co-design and specialized teams.</div></a>
+      <a href="shared-harvest.html" class="sub-card"><div class="card-title">Shared Harvest Program &rarr;</div><div class="card-desc">Cooperative land-linking and acreage revitalization.</div></a>
+      <a href="incubator.html" class="sub-card"><div class="card-title">Agricultural Incubator &rarr;</div><div class="card-desc">Micro-farm enterprise launchpad and resources.</div></a>
+    </div>
 
-    <!-- TECHNICAL MASTER DATA LAB SECTION -->
+    <!-- NEW MODULAR REWARD TUTORIAL INTEGRATION HUB -->
     <div class="section-title">📊 Technical Mastery Tutorials &amp; Checklists</div>
-    
     <div class="grid">
-        <!-- CATEGORY: SALES & DISTRIBUTION -->
-        <div class="sub-card" onclick="window.location.href='sales-tutorial-farmstand.html'">
-            <span class="card-title">🔨 Roadside Farm Stand Deployment</span>
-            <span class="card-desc">Review structural building tiers, EFU zoning guidelines, and warning signage setup rules.</span>
-        </div>
-        <div class="sub-card" onclick="window.location.href='sales-tutorial-merchandising.html'">
-            <span class="card-title">🛒 Farmers Market Merchandising</span>
-            <span class="card-desc">Master vertical display layering, abundance masking, and color contrast mapping styles.</span>
-        </div>
-        <div class="sub-card" onclick="window.location.href='sales-tutorial-scripts.html'">
-            <span class="card-title">🗣️ Customer Interaction &amp; Scripts</span>
-            <span class="card-desc">Utilize open-ended curiosity prompts and learn how to handle pricing resistance natively.</span>
-        </div>
-        <div class="sub-card" onclick="window.location.href='sales-tutorial-restaurants.html'">
-            <span class="card-title">🤝 Commercial Kitchen Accounts</span>
-            <span class="card-desc">Learn chef pitch etiquette windows, triple-wash packing rules, and carbon invoice logs.</span>
-        </div>
-
-        <!-- CATEGORY: PRODUCTION, SAFETY & OPERATIONS -->
-        <div class="sub-card" onclick="window.location.href='ops-tutorial-tractor.html'">
-            <span class="card-title">🚜 Utility Tractor Pre-Start Operation</span>
-            <span class="card-desc">Execute fluid leak walks, check vertical ROPS cages, and review PTO gear shielding code rules.</span>
-        </div>
-        <div class="sub-card" onclick="window.location.href='ops-tutorial-chainsaw.html'">
-            <span class="card-title">🪚 Chainsaw Armor &amp; Log Tension</span>
-            <span class="card-desc">Deploy safety ballistic chaps, ground-start cords, and calculate fiber over-buck stresses.</span>
-        </div>
-        <div class="sub-card" onclick="window.location.href='prod-tutorial-propagation.html'">
-            <span class="card-title">🌱 Greenhouse Propagation Cells</span>
-            <span class="card-desc">Select cell geometry, mix sponge moisture test templates, and prevent damping-off molds.</span>
-        </div>
-        <div class="sub-card" onclick="window.location.href='prod-tutorial-compost.html'">
-            <span class="card-title">🪱 Organic Compost Pile Heating</span>
-            <span class="card-desc">Balance 3:1 carbon recipes, execute 3x3x3 insulation frames, and log 131°F probe milestones.</span>
-        </div>
-        <div class="sub-card" onclick="window.location.href='prod-tutorial-amendments.html'">
-            <span class="card-title">🧪 Soil Chemistry Weight Math</span>
-            <span class="card-desc">Interpret lab reports, calculate N-P-K fertilizer weights, and apply dolomitic lime.</span>
-        </div>
-        <div class="sub-card" onclick="window.location.href='prod-tutorial-beekeeping.html'">
-            <span class="card-title">🐝 Apiary Essentials &amp; Hive Security</span>
-            <span class="card-desc">Assemble Langstroth super box grids, log mite rolling test data, and check honey water caps.</span>
-        </div>
-        <div class="sub-card" onclick="window.location.href='eco-tutorial-restoration.html'">
-            <span class="card-title">🌲 Post-Wildfire Watershed Restoration</span>
-            <span class="card-desc">Install contour straw wattles, scarify burned hydrophobic clay, and hammer live willow stakes.</span>
-        </div>
-        <div class="sub-card" onclick="window.location.href='admin-tutorial-grants.html'">
-            <span class="card-title">📋 Land Lease Audits &amp; Grant Requests</span>
-            <span class="card-desc">Review rolling 3-year term safety, map line water allocations, and itemize capital cost claims.</span>
-        </div>
+      <div class="sub-card" onclick="window.location.href='sales-tutorial-farmstand.html'"><div class="card-title">🔨 Roadside Farm Stand Deployment</div><div class="card-desc">Review building costs, EFU land rules, safety setbacks, and warning signage sequences.</div></div>
+      <div class="sub-card" onclick="window.location.href='sales-tutorial-merchandising.html'"><div class="card-title">🛒 Farmers Market Merchandising</div><div class="card-desc">Master vertical display layering, abundance masking, and color contrast mapping styles.</div></div>
+      <div class="sub-card" onclick="window.location.href='sales-tutorial-scripts.html'"><div class="card-title">🗣️ Customer Interaction &amp; Scripts</div><div class="card-desc">Utilize open-ended curiosity prompts and learn how to handle pricing resistance natively.</div></div>
+      <div class="sub-card" onclick="window.location.href='sales-tutorial-restaurants.html'"><div class="card-title">🤝 Commercial Kitchen Accounts</div><div class="card-desc">Learn chef pitch etiquette windows, triple-wash packing rules, and carbon invoice logs.</div></div>
+      <div class="sub-card" onclick="window.location.href='ops-tutorial-tractor.html'"><div class="card-title">🚜 Utility Tractor Pre-Start Operation</div><div class="card-desc">Execute fluid leak walks, check vertical ROPS cages, and review PTO gear shielding code rules.</div></div>
+      <div class="sub-card" onclick="window.location.href='ops-tutorial-chainsaw.html'"><div class="card-title">🪚 Chainsaw Armor &amp; Log Tension</div><div class="card-desc">Deploy safety ballistic chaps, ground-start cords, and calculate fiber over-buck stresses.</div></div>
+      <div class="sub-card" onclick="window.location.href='prod-tutorial-propagation.html'"><div class="card-title">🌱 Greenhouse Propagation Cells</div><div class="card-desc">Select cell geometry, mix sponge moisture test templates, and prevent damping-off molds.</div></div>
+      <div class="sub-card" onclick="window.location.href='prod-tutorial-compost.html'"><div class="card-title">🪱 Organic Compost Pile Heating</div><div class="card-desc">Balance 3:1 carbon recipes, execute 3x3x3 insulation frames, and log 131°F probe milestones.</div></div>
+      <div class="sub-card" onclick="window.location.href='prod-tutorial-amendments.html'"><div class="card-title">🧪 Soil Chemistry Weight Math</div><div class="card-desc">Interpret lab reports, calculate N-P-K fertilizer weights, and apply dolomitic lime.</div></div>
+      <div class="sub-card" onclick="window.location.href='prod-tutorial-beekeeping.html'"><div class="card-title">🐝 Apiary Essentials &amp; Hive Security</div><div class="card-desc">Assemble Langstroth super box grids, log mite rolling test data, and check honey water caps.</div></div>
+      <div class="sub-card" onclick="window.location.href='eco-tutorial-restoration.html'"><div class="card-title">🌲 Post-Wildfire Watershed Restoration</div><div class="card-desc">Install contour straw wattles, scarify burned hydrophobic clay, and hammer live willow stakes.</div></div>
+      <div class="sub-card" onclick="window.location.href='admin-tutorial-grants.html'"><div class="card-title">📋 Land Lease Audits &amp; Grant Requests</div><div class="card-desc">Review rolling 3-year term safety, map line water allocations, and itemize capital cost claims.</div></div>
     </div>
-</div>
+  </div>
 </body>
 </html>
