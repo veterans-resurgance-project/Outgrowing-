@@ -16,35 +16,49 @@
         .feedback-box { margin-top:25px; padding:20px; border-radius:8px; display:none; line-height:1.6; border:1px solid rgba(255,255,255,0.2); }
         .nav-bridge { display:inline-block; margin-top:15px; background:var(--primary); color:#fff; padding:12px 24px; border:none; border-radius:6px; font-weight:bold; cursor:pointer; }
         
-        /* THE STIPEND AUTO-HIDE OVERRIDE FOR ALTERNATIVE TRACKS */
-        body:not([data-track="Foster-Alum"]) #foster-stipend-box { display: none !important; }
-    </style>
-</head>
-<body>
-<div class="container">
-    <div class="hud-bar">
-        <span>Path: <span id="hud-track" style="color:var(--accent);">Loading...</span></span>
-        <div style="display:flex; gap:20px; align-items:center;">
-            <span id="foster-stipend-box">Stipend: <span id="stipend-amount" style="color:#38bdf8;">$0</span></span>
-            <div>XP: <span id="global-points" style="color:#4ade80;">500</span></div>
-            <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Exit</button>
-        </div>
-    </div>
-    <div>
-        <h2 style="margin:0 0 1rem 0;">📦 Stage 5: Market Delivery &amp; Distribution</h2>
-        <p style="line-height:1.7; color:#cbd5e1;">Your four-seasons field work is complete and the crops are high-quality. Now comes the final test: washing, packing, and moving this fresh harvest into the regional food system. Distributing food requires high logistics care. What is your delivery plan?</p>
-        <div class="choices-container" id="choices-wrapper">
-            <button class="choice-btn" onclick="selectMarketOption('A', 100)"><span style="font-weight:bold; color:#4ade80;">Choice A: Follow commercial safety wash SOPs and transport crates to a local food hub.</span><span style="font-size:0.85rem; color:#94a3b8;">Use certified food handling boxes to unload fresh crops straight to community distribution. (+100 XP)</span></button>
-            <button class="choice-btn" onclick="selectMarketOption('B', 25)"><span style="font-weight:bold; color:var(--warn);">Choice B: Skip the washing station sorting step to transport unboxed loose crops in your trunk.</span><span style="font-size:0.85rem; color:#94a3b8;">Drive raw fields straight to an open pop-up corner market to bypass packaging labor. (+25 XP)</span></button>
-            <button class="choice-btn" onclick="selectMarketOption('C', 0)"><span style="font-weight:bold; color:var(--danger);">Choice C: Deliver the wet harvest items directly into an unventilated hot storage locker overnight.</span><span style="font-size:0.85rem; color:#94a3b8;">Leave items sealed inside a tight room without cold-chain management to deliver tomorrow. (+0 XP)</span></button>
-        </div>
-        <div id="feedback-viewport" class="feedback-box">
-            <h3 id="feedback-title" style="margin-top:0;"></h3>
-            <p id="feedback-text"></p>
-            <div id="feedback-action-container"></div>
-        </div>
-    </div>
-</div>
+ 
+      <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const track = localStorage.getItem('afti_track_name') || 'Not Selected';
+        document.body.setAttribute('data-track', track);
+    });
+
+    function selectMarketOption(choiceType, points) {
+        if (window.selectOption) { window.selectOption(choiceType, points); }
+        document.getElementById('choices-wrapper').style.display = 'none';
+        
+        const vp = document.getElementById('feedback-viewport'); 
+        const title = document.getElementById('feedback-title');
+        const text = document.getElementById('feedback-text'); 
+        const ac = document.getElementById('feedback-action-container'); 
+        vp.style.display = 'block';
+        
+        // SAFE State Check: Determine if the player is specifically a Foster Alum
+        const track = localStorage.getItem('afti_track_name') || 'Not Selected';
+        const isFoster = (track === 'Foster-Alum');
+
+        if (choiceType === 'A') {
+            // Unveils the correct title block based on track validation
+            vp.style.backgroundColor = 'rgba(39,174,96,0.1)'; 
+            title.innerText = isFoster ? "Success (+100 XP / +$120 Stipend)" : "Success (+100 XP)"; 
+            title.style.color = "#4ade80";
+            
+            text.innerText = "Your harvest checks clear beautifully! By tracking safety wash standard operating procedures, you avoid food waste, support community food access, and successfully close out your active learning contract.";
+            
+            // THE UNBROKEN BRIDGE: Pushes all tracks straight to the summary page natively
+            ac.innerHTML = '<button onclick="window.location.href=\'simulation-portfolio-summary.html\'" class="nav-bridge" style="border:none; cursor:pointer;">Compile Your Final Verified Portfolio &rarr;</button>';
+        } else if (choiceType === 'B') {
+            vp.style.backgroundColor = 'rgba(245,158,11,0.1)'; title.innerText = "Misinformed Pivot (+25 XP)"; title.style.color = 'var(--warn)';
+            text.innerText = "Bypassing food sorting standards results in rapid leaf bruising and mud contamination during transit. Half of your harvest is rejected at arrival due to local safety codes.";
+            ac.innerHTML = '<button onclick="window.location.href=\'difficult-track-stage5-recovery-b.html\'" class="nav-bridge" style="background:var(--warn); border:none; cursor:pointer;">Enter Packaging Recovery Loop &rarr;</button>';
+        } else {
+            vp.style.backgroundColor = 'rgba(239,68,68,0.1)'; title.innerText = "Logistics Failure (+0 XP)"; title.style.color = 'var(--danger)';
+            text.innerText = "Trapping heat and moisture inside a tight, hot room accelerates post-harvest mold. Your entire commercial batch rots overnight. This failure locks out your delivery performance score.";
+            ac.innerHTML = '<button onclick="window.location.href=\'difficult-track-stage5-recovery-c.html\'" class="nav-bridge" style="background:var(--danger); border:none; cursor:pointer;">Enter Crop Safety Remediation Loop &rarr;</button>';
+        }
+    }
+</script>
+        
 i
 </body>
 </html>
