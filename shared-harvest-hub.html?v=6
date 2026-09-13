@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFTI - Landowner Inquiry Form</title>
+<style>
+body { font-family:system-ui, sans-serif; background:#0f172a; color:#fff; padding:15px; margin:0; }
+.card { background:#1e293b; padding:18px; border-radius:12px; max-width:550px; margin:auto; border:1px solid #334155; }
+h2 { color:#27ae60; font-size:1.3rem; margin:0 0 12px 0; }
+.form-group { margin-bottom:12px; }
+label { display:block; font-size:0.75rem; color:#94a3b8; margin-bottom:4px; font-weight:bold; }
+input[type="text"], select { width:100%; padding:8px; background:#0f172a; border:1px solid #475569; color:#fff; border-radius:4px; box-sizing:border-box; }
+.btn { width:100%; padding:12px; background:#27ae60; color:#fff; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:0.9rem; margin-top:10px; }
+.btn-back { display:block; text-align:center; color:#94a3b8; font-size:0.85rem; text-decoration:none; padding-top:12px; }
+</style>
+</head>
+<body>
+<div class="card">
+<h2>📝 Shared Harvest Partner Inquiry</h2>
+<p style="font-size:0.85rem; color:#cbd5e1; margin-bottom:15px;">Connect your property with next-generation growers and establish clear extension-backed resource baselines.</p>
+<form id="inquiryForm">
+<div class="form-group">
+<label>Full Name / Agricultural Entity</label>
+<input type="text" placeholder="e.g. Linn County Farm Trust" required>
+</div>
+<div class="form-group">
+<label>Available Idle Acreage Footprint</label>
+<select id="acreage" required>
+<option value="1/8 Acre Plot">1/8 Acre Municipal Plot</option>
+<option value="1/4 to 1 Acre">1/4 to 1 Acre Field Block</option>
+<option value="1+ Acres Sub-divided">1+ Acres Fragmented Sub-divisions</option>
+</select>
+</div>
+<div class="form-group">
+<label>Primary Utility &amp; Water Access</label>
+<select id="waterSource" required>
+<option value="Municipal City Hookup">Municipal City Line Tap</option>
+<option value="Agricultural Well Loop">Agricultural Shared Well Loop</option>
+<option value="Surface Water/Creek Right">Surface Irrigation Ditch Access</option>
+</select>
+</div>
+<button type="submit" class="btn">Submit Secure Partnership Request</button>
+</form>
+<a href="shared-harvest-hub.html?v=6" class="btn-back">← Return to Shared Harvest Hub</a>
+</div>
+<script>
+document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+e.preventDefault();
+let acreage = document.getElementById('acreage').value;
+let water = document.getElementById('waterSource').value;
+let xp = parseInt(localStorage.getItem('globalXP')) || 0;
+localStorage.setItem('globalXP', xp + 20);
+alert('Inquiry Successfully Logged!\nPlot Size Secured: ' + acreage + '\nIrrigation Plan Registered: ' + water + '\n+20 Global XP Awarded.');
+window.location.href = 'shared-harvest-hub.html?v=6';
+});
+</script>
+</body>
+</html>
