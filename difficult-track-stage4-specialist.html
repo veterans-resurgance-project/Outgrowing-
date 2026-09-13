@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Stage 4: Precision Pivot</title>
+    <script src="afti-core.js?v=2"></script>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:800px; background:var(--card); border-radius:14px; padding:35px; box-sizing:border-box; border:1px solid rgba(255,255,255,0.1); }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
+        .choices-container { display:flex; flex-direction:column; gap:12px; margin-top:20px; }
+        .choice-btn { background:#0f172a; border:1px solid #334155; color:#f8fafc; padding:16px 20px; border-radius:8px; cursor:pointer; width:100%; text-align:left; display:flex; flex-direction:column; gap:5px; }
+        .choice-btn:hover { border-color:var(--accent); background:rgba(56,189,248,0.05); }
+        .feedback-box { margin-top:25px; padding:20px; border-radius:8px; display:none; line-height:1.6; border:1px solid rgba(255,255,255,0.2); }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hud-bar">
+        <span>Path: <span style="color:var(--accent);">Precision Pivot Track</span></span>
+        <div style="display:flex; align-items:center; gap:20px;"><div>XP: <span id="global-points" style="color:#4ade80;">400</span></div><button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Exit</button></div>
+    </div>
+    <div>
+        <h2 style="margin:0 0 1rem 0;">🔬 Stage 4: The Strategic Realization</h2>
+        <p style="line-height:1.7; color:#cbd5e1;">The heavy field labor is different than you expected. Your physical limitations, exhaustion, and intense stress make you feel deeply depressed. You worry that all the effort you put in is being wasted, just like every other dream you've had.</p>
+        <p style="line-height:1.7; color:#cbd5e1;">Sitting defeated in the packing shed, an AFTI coordinator sits down beside you. They look at your highly itemized personal observation notebooks and smile. <em>"The field rows demand brute strength,"</em> they say, <em>"but our controlled nurseries and data systems are failing because people lack your exact traits. Your keen pattern recognition and your absolute compulsion to do things perfectly aren't quirks—they are the exact superpowers we need."</em></p>
+        <div class="choices-container" id="choices-wrapper">
+            <button class="choice-btn" onclick="handlePivotClick('A', 100)"><span style="font-weight:bold; color:#4ade80;">Accept the Pivot: Step into the Plant Propagation &amp; Inventory Track.</span><span style="font-size:0.85rem; color:#94a3b8;">Redirect your meticulous cataloging skills toward a climate-controlled commercial seedling nursery. (+100 XP)</span></button>
+        </div>
+        <div id="feedback-viewport" class="feedback-box">
+            <h3 id="feedback-title" style="margin-top:0; color:#4ade80;">✓ Perspective Unlocked: Talent Re-Alignment</h3>
+            <p style="color:#cbd5e1; margin-bottom:15px;">Your background efforts are completely preserved. You transition seamlessly from raw field logistics to precision agricultural support, stepping right into specialized workspace profiles where an eye for perfection is a requirement.</p>
+            <button onclick="window.location.href='difficult-track-stage5-nursery-sop.html'" style="display:inline-block; background:var(--primary); color:#fff; text-decoration:none; padding:12px 24px; border:none; border-radius:6px; font-weight:bold; cursor:pointer;">Proceed to Stage 5: Precision Tracking &rarr;</button>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => { document.getElementById('global-points').innerText = localStorage.getItem('afti_global_xp') || '400'; });
+    function handlePivotClick(choiceType, points) {
+        if (window.selectOption) { window.selectOption(choiceType, points); }
+        document.getElementById('choices-wrapper').style.display = 'none';
+        document.getElementById('feedback-viewport').style.display = 'block';
+    }
+</script>
+</body>
+</html>
