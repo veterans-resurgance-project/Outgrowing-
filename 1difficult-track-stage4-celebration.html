@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Stage 4: Celebration & Next Steps</title>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; box-sizing:border-box; }
+        .container { width:100%; max-width:800px; background:var(--card); border-radius:14px; padding:35px; box-sizing:border-box; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
+        .prose { line-height:1.8; color:#cbd5e1; margin-bottom:30px; }
+        .prose p { margin-bottom:18px; }
+        .nav-bridge { display:inline-block; background:var(--primary); color:#fff; padding:14px 28px; border-radius:8px; font-weight:bold; text-decoration:none; box-shadow:0 4px 12px rgba(39, 174, 96, 0.3); }
+        .nav-bridge:hover { background:#219653; }
+    </style>
+    <script src="afti-tracker.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="hud-bar">
+        <span>Path: <span style="color:var(--accent);">Foster-Alum Track</span></span>
+        <div>Global XP: <span id="global-points" style="color:#4ade80;">725</span></div>
+    </div>
+
+    <h2 style="margin-top:0; color:#fff;">🎉 Stage 4 Milestone: Grounding & Growth</h2>
+
+    <div class="prose">
+        <p>You’ve navigated the delicate balance of setting personal boundaries, maintaining your sanctuary, and facing the realities of community support. With your housing secure and your focus sharp, you are ready for the next phase of your journey.</p>
+        <p>Take a breath. You built this foundation from the ground up.</p>
+    </div>
+
+    <div style="text-align:center; background:rgba(39,174,96,0.08); border:1px solid rgba(39,174,96,0.3); padding:25px; border-radius:12px;">
+        <p style="color:#cbd5e1; margin-top:0; margin-bottom:15px;">Step forward into the team convergence and specialized tracks.</p>
+        <!-- Bridges directly to your convergence file -->
+        <a href="difficult-track-stage4-convergence.html" class="nav-bridge">Proceed to The Watershed Convergence &rarr;</a>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '725', 10);
+        document.getElementById('global-points').innerText = currentXP;
+
+        if (typeof AFTITracker !== 'undefined') {
+            document.getElementById('global-points').innerText = AFTITracker.getXP();
+        }
+    });
+</script>
+
+</body>
+</html>
