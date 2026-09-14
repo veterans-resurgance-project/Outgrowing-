@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Soil Fertility, Cover Cropping &amp; Amendments</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --primary: #27ae60;
+            --primary-hover: #219653;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --hud-bg: #144d29;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* GLOBAL NAV BAR STYLES */
+        nav {
+            background: #144d29;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .page-wrapper {
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 950px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            padding: 30px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hud-bar {
+            background: var(--hud-bg);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #ffffff;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        h1 {
+            color: #2ecc71;
+            margin-top: 0;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        h2 {
+            color: #38bdf8;
+            font-size: 1.3rem;
+            margin-top: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 8px;
+        }
+
+        p, li {
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        /* SOIL DATA GRID */
+        .soil-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .soil-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .soil-card h3 {
+            color: var(--accent);
+            margin-top: 0;
+            font-size: 1.1rem;
+        }
+
+        /* TEST SECTION */
+        .test-section {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .test-section h3 {
+            color: var(--accent);
+            margin-top: 0;
+        }
+
+        .question-item {
+            margin-bottom: 15px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-hover);
+        }
+
+        .section-divider {
+            border: 0;
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 25px 0;
+        }
+    </style>
+</head>
+<body>
+
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
+    <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
+    <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+      <a href="index.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Home</a>
+      <a href="training-modules-and-mutual-growth.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Training & Certification</a>
+      <a href="partners.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">For Farmers</a>
+      <a href="shared-harvest.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Shared Harvest</a>
+      <a href="incubator.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Incubator</a>
+      <a href="newsletter.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Newsletter</a>
+      <a href="gallery.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Gallery</a>
+      <a href="how-to-help.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">How to Help</a>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="container">
+      
+      <!-- HUD BAR -->
+      <div class="hud-bar">
+          <span>AFTI Global XP: <span id="global-points">400</span></span>
+          <span>Clearance: Agronomy &amp; Soil Science Track</span>
+      </div>
+
+      <h1>Soil Fertility, Cover Cropping &amp; Amendments</h1>
+      <p style="text-align: center; margin-bottom: 25px;">Operational agronomy guidelines tailored for Willamette Valley valley-floor and terrace soils.</p>
+
+      <h2>1. Willamette Valley Soil Dynamics</h2>
+      <p>Valley soils (such as Willamette, Woodburn, and Amity series) range from rich alluvial loams to heavy clay-loams with seasonal saturation phases. Effective management centers on balancing biological activity, managing soil compaction, and buffering seasonal rainfall leaching.</p>
+      <ul>
+          <li><strong>pH Optimization:</strong> Valley soils naturally drift acidic (pH 5.2–6.0). Agricultural lime applications are regularly required to stabilize target ranges (pH 6.2–6.8) for optimal nutrient availability.</li>
+          <li><strong>Organic Matter Integration:</strong> Maintaining active carbon pools improves aggregate stability and prevents surface crusting during heavy winter downpours.</li>
+      </ul>
+
+      <h2>2. Cover Cropping Protocols</h2>
+      <div class="soil-grid">
+          <div class="soil-card">
+              <h3>Winter Cereal Rye &amp; Vetch</h3>
+              <p><strong>Purpose:</strong> Nitrogen fixation and heavy biomass production.</p>
+              <p><strong>Seeding Window:</strong> September to mid-October.</p>
+              <p><strong>Management:</strong> Terminate or roller-crimped at early bloom stage to prevent lignification and lock-up of soil nitrogen.</p>
+          </div>
+          <div class="soil-card">
+              <h3>Crimson Clover &amp; Annual Ryegrass</h3>
+              <p><strong>Purpose:</strong> Erosion control and rapid spring green manure.</p>
+              <p><strong>Seeding Window:</strong> Late August through October.</p>
+              <p><strong>Management:</strong> Excellent for traffic tolerance and quick microbial stimulation in upper soil horizons.</p>
+          </div>
+      </div>
+
+      <h2>3. Organic Mineral Amendments</h2>
+      <ul>
+          <li><strong>Agricultural Limestone:</strong> Buffers soil acidity and supplies essential calcium and magnesium.</li>
+          <li><strong>Gypsum (Calcium Sulfate):</strong> Relieves subsoil compaction and improves water infiltration in heavy Willamette clay soils without altering pH.</li>
+          <li><strong>Kelp Meal &amp; Rock Phosphate:</strong> Provides long-term trace minerals, potassium, and slow-release phosphorus to drive mycorrhizal development.</li>
+      </ul>
+
+      <hr class="section-divider">
+
+      <!-- INTERACTIVE CHECKBOX KNOWLEDGE CHECK -->
+      <div class="test-section">
+          <h3>Agronomy Field Verification (Earn +50 XP)</h3>
+          <p>Check the correct soil management and cover cropping practices below.</p>
+          
+          <div id="quiz-questions-container">
+              <div class="question-item"><label class="checkbox-label"><input type="checkbox" id="q1" value="correct"> Applying agricultural lime to buffer naturally acidic Willamette Valley soils.</label></div>
+              <div class="question-item"><label class="checkbox-label"><input type="checkbox" id="q2" value="incorrect"> Tilling winter cover crops exclusively during the wettest weeks of January.</label></div>
+              <div class="question-item"><label class="checkbox-label"><input type="checkbox" id="q3" value="correct"> Using gypsum (calcium sulfate) to improve water infiltration in heavy clay soils without raising pH.</label></div>
+              <div class="question-item"><label class="checkbox-label"><input type="checkbox" id="q4" value="correct"> Terminating cereal rye cover crops at early bloom stage to maximize nitrogen availability.</label></div>
+          </div>
+
+          <button class="btn-submit" onclick="evaluateQuiz()">Submit Soil Verification &amp; Claim XP</button>
+          <p id="quiz-feedback" style="margin-top: 15px; font-weight: bold; text-align: center;"></p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", () => {
+          const savedXP = localStorage.getItem('afti_global_xp') || 400;
+          document.getElementById('global-points').innerText = savedXP;
+      });
+
+      function evaluateQuiz() {
+          const q1 = document.getElementById('q1').checked;
+          const q2 = document.getElementById('q2').checked;
+          const q3 = document.getElementById('q3').checked;
+          const q4 = document.getElementById('q4').checked;
+          const feedback = document.getElementById('quiz-feedback');
+
+          // Correct answers: q1, q3, q4 checked; q2 unchecked
+          const passed = (q1 && !q2 && q3 && q4);
+
+          if (passed) {
+              feedback.style.color = "#4ade80";
+              feedback.innerText = "Soil Verification Successful! +50 XP Awarded.";
+              
+              let currentXP = parseInt(localStorage.getItem('afti_global_xp')) || 400;
+              currentXP += 50;
+              localStorage.setItem('afti_global_xp', currentXP);
+              document.getElementById('global-points').innerText = currentXP;
+          } else {
+              feedback.style.color = "#f87171";
+              feedback.innerText = "Incorrect selections. Review the agronomy guidelines and try again.";
+          }
+      }
+  </script>
+</body>
+</html>
