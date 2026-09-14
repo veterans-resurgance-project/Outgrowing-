@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Field Checklist: Emergency Action & Library Printables</title>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --warn:#f59e0b; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:850px; background:var(--card); border-radius:14px; padding:35px; box-sizing:border-box; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
+        .story-lore-box { background:#141c2b; border-left:4px solid #38bdf8; border:1px solid #334155; padding:16px; border-radius:8px; margin-bottom:20px; font-size:0.9rem; color:#cbd5e1; line-height:1.6; }
+        .story-lore-box b { color:#38bdf8; display:block; margin-bottom:6px; }
+        .checklist-grid { display:flex; flex-direction:column; gap:12px; margin-top:20px; }
+        .check-item { background:#0f172a; border:1px solid #334155; padding:14px 18px; border-radius:8px; display:flex; gap:14px; align-items:flex-start; cursor:pointer; }
+        .check-item:hover { border-color:var(--primary); background:rgba(39,174,96,0.05); }
+        .check-item input[type="checkbox"] { width:20px; height:20px; accent-var:var(--primary); margin-top:2px; cursor:pointer; }
+        .nav-bridge { display:inline-block; margin-top:20px; background:var(--primary); color:#fff; padding:12px 24px; border:none; border-radius:6px; font-weight:bold; cursor:pointer; }
+        @media print {
+            body { background: white; color: black; padding: 0; }
+            .container { box-shadow: none; border: none; width: 100%; max-width: 100%; padding: 0; background: white; }
+            .hud-bar, .nav-bridge, button { display: none !important; }
+            .check-item { background: white; border: 1px solid #ccc; color: black; break-inside: avoid; }
+            .story-lore-box { background: #f8fafc; border-left: 4px solid #000; color: black; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hud-bar">
+        <span>Operational Protocol: <span style="color:#38bdf8;">Street-to-Stability Checklist</span></span>
+        <button onclick="window.print()" style="background:#38bdf8; color:#0f172a; border:none; padding:6px 14px; border-radius:6px; font-weight:bold; cursor:pointer;">🖨️ Print Checklist at Library</button>
+    </div>
+    
+    <h2 style="margin:0 0 1rem 0; color:#4ade80;">📋 Tactical Field Checklist: Immediate Re-Entry Protocol</h2>
+    
+    <div class="story-lore-box">
+        <b>📖 Operational Briefing & Library Utility:</b>
+        When an aged-out youth hits the asphalt with zero capital or comms equipment, survival depends on a linear triage protocol. This document is formatted for immediate thermal or laser printing at a public library computer terminal. Check off items as your simulation or real-world execution progresses to unlock institutional lifelines.
+    </div>
+
+    <div class="checklist-grid">
+        <label class="check-item">
+            <input type="checkbox">
+            <div><strong>Step 1: Secure Safe Shelter & Day Access</strong><br><span style="font-size:0.85rem; color:#94a3b8;">Locate a transition-age youth (TAY) shelter or secure a daytime public library card for climate and internet stability.</span></div>
+        </label>
+        <label class="check-item">
+            <input type="checkbox">
+            <div><strong>Step 2: Establish Free Digital Comms</strong><br><span style="font-size:0.85rem; color:#94a3b8;">Create a secure Google email account and submit an online application for a free Federal Lifeline smartphone / data plan.</span></div>
+        </label>
+        <label class="check-item">
+            <input type="checkbox">
+            <div><strong>Step 3: Request Foster Care Verification Letter</strong><br><span style="font-size:0.85rem; color:#94a3b8;">Contact state child welfare to obtain proof of foster status, unlocking priority housing vouchers and fee waivers.</span></div>
+        </label>
+        <label class="check-item">
+            <input type="checkbox">
+            <div><strong>Step 4: Execute Fee-Waived Vital ID Paperwork</strong><br><span style="font-size:0.85rem; color:#94a3b8;">File for homeless youth state ID and birth certificate fee waivers through local DHS or community action partners.</span></div>
+        </label>
+        <label class="check-item">
+            <input type="checkbox">
+            <div><strong>Step 5: Apply for Expedited SNAP & Medicaid</strong><br><span style="font-size:0.85rem; color:#94a3b8;">Secure emergency food benefits (3-7 day turnaround) and activate extended foster medical coverage up to age 26.</span></div>
+        </label>
+        <label class="check-item">
+            <input type="checkbox">
+            <div><strong>Step 6: Connect with Peer Advocate & Chafee Services</strong><br><span style="font-size:0.85rem; color:#94a3b8;">Engage a local independent living coordinator and counselor to map emotional support and emergency housing funds.</span></div>
+        </label>
+    </div>
+
+    <button onclick="window.location.href='difficult-track-stage4-vocational.html'" class="nav-bridge">Acknowledge Checklist & Proceed to Stage 4 &rarr;</button>
+</div>
+</body>
+</html>
