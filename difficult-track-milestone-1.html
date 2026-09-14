@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Milestone: Reflection & Advisory Board</title>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --warn:#f59e0b; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:800px; background:var(--card); border-radius:14px; padding:35px; box-sizing:border-box; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
+        .story-lore-box { background:#141c2b; border-left:4px solid #38bdf8; border:1px solid #334155; padding:16px; border-radius:8px; margin-bottom:20px; font-size:0.9rem; color:#cbd5e1; line-height:1.6; }
+        .story-lore-box b { color:#38bdf8; display:block; margin-bottom:6px; }
+        .form-group { margin-top:20px; display:flex; flex-direction:column; gap:10px; }
+        textarea { background:#0f172a; border:1px solid #334155; color:#f8fafc; padding:12px; border-radius:8px; resize:vertical; min-height:100px; font-family:inherit; }
+        textarea:focus { outline:none; border-color:var(--primary); }
+        .nav-bridge { display:inline-block; margin-top:20px; background:var(--primary); color:#fff; padding:12px 24px; border:none; border-radius:6px; font-weight:bold; cursor:pointer; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hud-bar">
+        <span>Milestone Review</span>
+        <div>Global XP: <span id="global-points" style="color:#4ade80;">400</span></div>
+    </div>
+    <div>
+        <h2 style="margin:0 0 1rem 0; color:#4ade80;">🌟 Milestone Achieved: Groundwork Established</h2>
+        
+        <div class="story-lore-box">
+            <b>📖 Reflection & Progress Narrative:</b>
+            Take a moment to look back. Navigating the day center intake, facing down the exhaustion of the document trail, and accepting peer support wasn't easy. You proved that resilience isn't about avoiding hard hits—it's about building a structured safety net. Because of your persistence, your vital paperwork is processing, your communication loop is open, and your housing application is active in the municipal queue. You have laid the groundwork necessary to transition from mere survival to actual agricultural vocational training.
+        </div>
+
+        <div class="form-group">
+            <label for="board-input" style="font-weight:bold; color:#cbd5e1; font-size:0.9rem;">💬 Advisory Board Message & Personal Log:</label>
+            <span style="font-size:0.8rem; color:#94a3b8;">Write down your current thoughts, challenges, or what this step means to you. This logs to your personal record and simulates sharing with the advisory board.</span>
+            <textarea id="board-input" placeholder="Type your thoughts, reflections, or specific challenges here..."></textarea>
+            <button onclick="saveMessage()" class="nav-bridge" style="align-self:flex-start;">Submit to Advisory Board & Continue &rarr;</button>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('global-points').innerText = localStorage.getItem('afti_global_xp') || '400';
+    function saveMessage() {
+        const msg = document.getElementById('board-input').value;
+        if(msg.trim() !== "") {
+            localStorage.setItem('afti_last_advisory_note', msg);
+            alert('Your message has been securely recorded for the advisory review board.');
+        }
+        window.location.href = 'difficult-track-stage4-vocational.html';
+    }
+</script>
+</body>
+</html>
