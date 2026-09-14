@@ -42,7 +42,7 @@ h2{color:#fff;font-size:1.6rem;margin:0 0 16px 0;}
         Synchronizing daily roster data with agricultural co-op labor distribution parameters across Linn and Benton counties. All active crew metrics are locked to regional standards, preparing your profile for the next major transitional milestone.
     </div>
 
-    <button onclick="handleVocationalClick()" class="btn">Log Core Metrics &amp; Complete Stage 4 (+15 XP)</button>
+    <button onclick="handleVocationalClick()" class="btn">Log Core Metrics &amp; Proceed to Convergence (+15 XP)</button>
 </div>
 
 <div class="info-card">
@@ -72,7 +72,9 @@ h2{color:#fff;font-size:1.6rem;margin:0 0 16px 0;}
             currentXP = AFTITracker.addXP(15);
         }
         document.getElementById('hud-xp').innerText = currentXP;
-        window.location.href = 'difficult-track-stage4-celebration.html?v=19';
+        
+        // Updated redirection to hit your new convergence story page first
+        window.location.href = 'difficult-track-stage4-convergence.html?v=19';
     }
 </script>
 </body>
