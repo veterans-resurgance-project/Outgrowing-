@@ -6,36 +6,49 @@
 <!-- CACHE-BUSTED UTILITY LINK -->
 <script src="afti-tracker.js"></script>
 <style>
-body{font-family:system-ui,sans-serif;background:#0f172a;color:#fff;padding:15px;margin:0;box-sizing:border-box;}
-.card{background:#1e293b;padding:25px;border-radius:12px;max-width:600px;margin:auto;border:1px solid #334155;margin-bottom:15px;box-shadow:0 12px 32px rgba(0,0,0,0.5);}
-.hud-bar { background:#144d29; border-radius:8px; padding:12px 18px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; flex-wrap:wrap; gap:10px; }
-h2{color:#fff;font-size:1.4rem;margin:0 0 12px 0;}
-.merge-glow{border:2px solid #27ae60;box-shadow:0 0 15px rgba(39,174,96,0.3);padding:12px;border-radius:8px;background:#144d29;font-weight:bold;text-align:center;margin-bottom:15px;font-size:0.9rem;}
-.track-info{background:#0f172a;padding:14px;border-radius:6px;font-size:0.9rem;margin-bottom:15px;line-height:1.5;color:#cbd5e1;border:1px solid rgba(255,255,255,0.05);}
-.dyn-box{background:#0f172a;padding:14px;margin-bottom:15px;border:2px dashed #475569;border-radius:6px;font-size:0.9rem;color:#cbd5e1;line-height:1.5;}
-.dyn-box img{max-width:100%;height:auto;border-radius:4px;margin-top:8px;display:block;}
-.btn{display:block;text-align:center;background:#27ae60;color:white;padding:14px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.95rem;border:none;width:100%;cursor:pointer;transition:background 0.2s, transform 0.1s;}
-.btn:hover{background:#219653;transform:translateY(-1px);}
-.info-card{background:#1e293b;padding:18px;border-radius:12px;max-width:600px;margin:auto;border:1px solid #475569;text-align:left;font-size:0.9rem;line-height:1.5;color:#cbd5e1;box-shadow:0 8px 24px rgba(0,0,0,0.4);}
+body{font-family:system-ui,sans-serif;background:#0f172a;color:#fff;padding:20px 15px;margin:0;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;min-height:100vh;}
+.card{background:#1e293b;padding:35px;border-radius:16px;max-width:800px;width:100%;margin:0 auto 20px auto;border:1px solid #334155;box-shadow:0 16px 40px rgba(0,0,0,0.6);box-sizing:border-box;}
+.hud-bar { background:#144d29; border-radius:10px; padding:14px 22px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.95rem; flex-wrap:wrap; gap:12px; border:1px solid rgba(255,255,255,0.15); }
+h2{color:#fff;font-size:1.6rem;margin:0 0 16px 0;}
+.merge-glow{border:2px solid #27ae60;box-shadow:0 0 20px rgba(39,174,96,0.35);padding:16px;border-radius:10px;background:#144d29;font-weight:bold;text-align:center;margin-bottom:20px;font-size:1rem;letter-spacing:0.5px;}
+.track-info{background:#0f172a;padding:20px;border-radius:8px;font-size:0.95rem;margin-bottom:20px;line-height:1.6;color:#cbd5e1;border:1px solid rgba(255,255,255,0.08);}
+.dyn-box{background:#0f172a;padding:22px;margin-bottom:25px;border:2px dashed #475569;border-radius:8px;font-size:0.95rem;color:#cbd5e1;line-height:1.7;}
+.dyn-box img{max-width:100%;height:auto;border-radius:6px;margin-top:12px;display:block;}
+.btn{display:block;text-align:center;background:#27ae60;color:white;padding:16px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:1.05rem;border:none;width:100%;cursor:pointer;transition:background 0.2s, transform 0.1s;box-shadow:0 4px 12px rgba(39,174,96,0.3);}
+.btn:hover{background:#219653;transform:translateY(-2px);box-shadow:0 6px 16px rgba(39,174,96,0.4);}
+.info-card{background:#1e293b;padding:22px 35px;border-radius:16px;max-width:800px;width:100%;margin:0 auto;border:1px solid #475569;text-align:left;font-size:0.95rem;line-height:1.6;color:#cbd5e1;box-shadow:0 12px 32px rgba(0,0,0,0.5);box-sizing:border-box;}
 </style>
 </head>
 <body>
 <div class="card">
     <div class="hud-bar">
         <span>Path: <span style="color:#38bdf8;">Foster-Alum</span></span>
-        <div style="display:flex; align-items:center; gap:15px;">
+        <div style="display:flex; align-items:center; gap:20px;">
             <div>XP: <span id="hud-xp" style="color:#4ade80;">400</span></div>
-            <div id="hud-tier" style="font-size:0.8rem; padding:3px 8px; background:rgba(255,255,255,0.1); border-radius:4px;">Tier 1</div>
+            <div id="hud-tier" style="font-size:0.85rem; padding:4px 10px; background:rgba(255,255,255,0.1); border-radius:6px;">Tier 1</div>
         </div>
     </div>
 
     <h2>🌾 Stage 4: Vocational Labor Blending</h2>
     <div class="merge-glow">⚡ LEVEL 4 UNIVERSAL MERGE PULSE ACTIVE ⚡</div>
-    <div class="track-info"><b>Active Crew Metrics Verified:</b><br>• Four-Season Labor Blocks Aligned | • Training Stipends Synchronized</div>
-    <div class="dyn-box"><b>Field Media / Notes Box:</b><br>Synchronizing daily roster data with agricultural co-op labor distribution parameters. All active crew metrics are locked to regional standards.</div>
-    <button onclick="handleVocationalClick()" class="btn">Log Core Metrics &amp; Complete Stage 4</button>
+    
+    <div class="track-info">
+        <b style="color:#38bdf8; display:block; margin-bottom:6px; font-size:1rem;">Active Crew Metrics Verified:</b>
+        • Four-Season Labor Blocks Aligned &nbsp;|&nbsp; • Training Stipends Synchronized &nbsp;|&nbsp; • Regional Co-Op Pipelines Secured
+    </div>
+
+    <div class="dyn-box">
+        <b style="color:#4ade80; display:block; margin-bottom:6px; font-size:1rem;">Field Media &amp; Operational Directives:</b>
+        Synchronizing daily roster data with agricultural co-op labor distribution parameters across Linn and Benton counties. All active crew metrics are locked to regional standards, preparing your profile for the next major transitional milestone.
+    </div>
+
+    <button onclick="handleVocationalClick()" class="btn">Log Core Metrics &amp; Complete Stage 4 (+15 XP)</button>
 </div>
-<div class="info-card"><b style="color:#a855f7;display:block;margin-bottom:6px;">🎓 Extension Advisory:</b>This merge node synchronizes localized urban production parameters with Oregon State University Extension standard guidelines.</div>
+
+<div class="info-card">
+    <b style="color:#a855f7; display:block; margin-bottom:8px; font-size:1rem;">🎓 Extension Advisory:</b>
+    This merge node synchronizes localized urban production parameters with Oregon State University Extension standard guidelines, ensuring full compliance for regional agricultural assignments.
+</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
