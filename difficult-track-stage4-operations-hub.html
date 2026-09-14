@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Stage 4: Specialized Operations Hub</title>
+    <script src="afti-core.js"></script>
+    <style>
+        :root { 
+            --bg-color: #0f172a; 
+            --card-bg: #1e293b; 
+            --text-color: #f8fafc; 
+            --primary: #27ae60; 
+            --hud-bg: #144d29; 
+            --accent: #38bdf8;
+        }
+        body { 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: var(--bg-color); 
+            color: var(--text-color); 
+            padding: 40px 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            box-sizing: border-box;
+        }
+        .container { 
+            width: 100%; 
+            max-width: 840px; 
+            background: var(--card-bg); 
+            border-radius: 16px; 
+            padding: 40px; 
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+        .hud-bar { 
+            background: var(--hud-bg); 
+            border-radius: 8px; 
+            padding: 12px 20px; 
+            margin-bottom: 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            font-weight: bold; 
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95rem;
+        }
+        .story-image-slot { 
+            width: 100%; 
+            height: 200px; 
+            background: #0f172a; 
+            border-radius: 10px; 
+            border: 1px solid rgba(56,189,248,0.3); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin-bottom: 25px; 
+            color: #38bdf8;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .prose-block {
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+        .prose-block p {
+            margin-bottom: 18px;
+        }
+        .footer-action {
+            text-align: center;
+            background: rgba(39, 174, 96, 0.08);
+            border: 1px solid rgba(39, 174, 96, 0.3);
+            padding: 25px;
+            border-radius: 12px;
+        }
+        .btn { 
+            display: inline-block; 
+            background: var(--primary); 
+            color: white; 
+            padding: 14px 28px; 
+            border-radius: 8px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 1.05rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+        }
+        .btn:hover {
+            background: #219653;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(39, 174, 96, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- GLOBAL HUD BAR -->
+    <div class="hud-bar">
+        <span>Path: <span id="hud-track" style="color: var(--accent);">Foster-Alum Track</span></span>
+        <div>
+            <span>Global XP: <span id="global-points" style="color: #4ade80;">400</span></span>
+            <button onclick="window.location.href='index.html'" style="margin-left: 15px; background: #334155; color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; cursor: pointer;">🏠 Exit</button>
+        </div>
+    </div>
+
+    <!-- STORY IMAGE SLOT -->
+    <div class="story-image-slot">
+        ⚙️ [Illustration: The operations center active with incoming field telemetry, soil test readouts, and community micro-garden plans awaiting deployment]
+    </div>
+
+    <h2 style="color: #fff; margin-top: 0; font-size: 1.6rem; margin-bottom: 15px;">Operational Deployment: The Field Hub</h2>
+
+    <div class="prose-block">
+        <p>With the screening desk actively sorting incoming community solutions and the weekly bat-signal dispatched across Linn and Benton counties, the team moves into position. Field reports from the widow's heritage orchard are coming in, and the first wave of anonymous micro-garden strategies from waitlist growers has cleared administrative review.</p>
+        <p>You are now stationed at the core operational command. From here, your specialized track choices dictate how you tackle soil amendments, irrigation assembly, and nursery propagation to bring the mission to life.</p>
+    </div>
+
+    <div class="footer-action">
+        <p style="color: #cbd5e1; margin-top: 0; margin-bottom: 15px; font-size: 0.95rem;">Ready to review the live challenges and begin hands-on field deployment?</p>
+        <a href="difficult-track-stage5-nursery-sop.html" class="btn">Enter Stage 5: Nursery &amp; Field Operations &rarr;</a>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const activeTrackName = localStorage.getItem('afti_track_name') || 'Foster-Alum Track';
+        document.getElementById('hud-track').innerText = activeTrackName;
+        
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '400', 10);
+        document.getElementById('global-points').innerText = currentXP;
+    });
+</script>
+
+</body>
+</html>
