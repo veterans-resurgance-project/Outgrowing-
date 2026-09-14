@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Stage 4: The Heritage Orchard Rescue</title>
+    <script src="afti-core.js"></script>
+    <style>
+        :root { 
+            --bg-color: #0f172a; 
+            --card-bg: #1e293b; 
+            --text-color: #f8fafc; 
+            --primary: #27ae60; 
+            --hud-bg: #144d29; 
+            --accent: #38bdf8;
+        }
+        body { 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: var(--bg-color); 
+            color: var(--text-color); 
+            padding: 40px 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            box-sizing: border-box;
+        }
+        .container { 
+            width: 100%; 
+            max-width: 840px; 
+            background: var(--card-bg); 
+            border-radius: 16px; 
+            padding: 40px; 
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+        .hud-bar { 
+            background: var(--hud-bg); 
+            border-radius: 8px; 
+            padding: 12px 20px; 
+            margin-bottom: 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            font-weight: bold; 
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95rem;
+        }
+        .story-image-slot { 
+            width: 100%; 
+            height: 200px; 
+            background: #0f172a; 
+            border-radius: 10px; 
+            border: 1px solid rgba(56,189,248,0.3); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin-bottom: 25px; 
+            color: #38bdf8;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .prose-block {
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+        .prose-block p {
+            margin-bottom: 18px;
+        }
+        .dossier-box {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 35px;
+        }
+        .dossier-title {
+            color: #4ade80;
+            font-size: 1.15rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dossier-desc {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+        .footer-action {
+            text-align: center;
+            background: rgba(39, 174, 96, 0.08);
+            border: 1px solid rgba(39, 174, 96, 0.3);
+            padding: 25px;
+            border-radius: 12px;
+        }
+        .btn { 
+            display: inline-block; 
+            background: var(--primary); 
+            color: white; 
+            padding: 14px 28px; 
+            border-radius: 8px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 1.05rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+        }
+        .btn:hover {
+            background: #219653;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(39, 174, 96, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- GLOBAL HUD BAR -->
+    <div class="hud-bar">
+        <span>Path: <span id="hud-track" style="color: var(--accent);">Foster-Alum Track</span></span>
+        <div>
+            <span>Global XP: <span id="global-points" style="color: #4ade80;">400</span></span>
+            <button onclick="window.location.href='index.html'" style="margin-left: 15px; background: #334155; color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; cursor: pointer;">🏠 Exit</button>
+        </div>
+    </div>
+
+    <!-- STORY IMAGE SLOT -->
+    <div class="story-image-slot">
+        🍎 [Illustration: A gnarled, moss-covered heritage apple orchard nestled against a hillside in the foothills, bathed in the golden light of late afternoon]
+    </div>
+
+    <h2 style="color: #fff; margin-top: 0; font-size: 1.6rem; margin-bottom: 15px;">The Heritage Orchard Rescue: Unlocking the Mission</h2>
+
+    <div class="prose-block">
+        <p>With the Greenhouse Council unanimously aligned, the target file for the aging widow's hillside property is pulled to the front of the workbench. This isn't just an agricultural restoration job; it is a race against time to preserve living history before winter weather and neglect seal its fate.</p>
+        <p>The team reviews the initial telemetry: heavily compacted clay soil, choked irrigation lines running from an uphill spring, and century-old apple trees desperate for expert pruning and disease management. Your specialized training track is now primed to tackle these precise hurdles.</p>
+    </div>
+
+    <div class="dossier-box">
+        <div class="dossier-title">📜 Operational Directive #04: Preservation Protocol</div>
+        <div class="dossier-desc">
+            Your objective is to stabilize the root zones, map out scion wood for grafting nurseries, and establish a reliable low-pressure drip matrix. Succeeding here secures the team's first major victory and proves to the valley that community-driven mutual aid can rescue what bureaucratic systems abandon.
+        </div>
+    </div>
+
+    <div class="footer-action">
+        <p style="color: #cbd5e1; margin-top: 0; margin-bottom: 15px; font-size: 0.95rem;">The orchard rescue is underway. Proceed to broadcast the weekly dispatch and open the communication lines.</p>
+        <a href="difficult-track-stage4-newsletter-bat-signal.html" class="btn">Proceed to Newsletter &amp; Bat-Signal Dispatch &rarr;</a>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const activeTrackName = localStorage.getItem('afti_track_name') || 'Foster-Alum Track';
+        document.getElementById('hud-track').innerText = activeTrackName;
+        
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '400', 10);
+        document.getElementById('global-points').innerText = currentXP;
+    });
+</script>
+
+</body>
+</html>
