@@ -25,9 +25,9 @@
 
     <!-- HUD BAR -->
     <div class="hud-bar">
-        <span>Path: <span style="color:#38bdf8;">Foster-Alum</span></span>
+        <span>Path: <span style="color:#38bdf8;">Foster-Alum Track</span></span>
         <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
-            <div>Global XP: <span id="global-points" style="color:#4ade80;">400</span></div>
+            <div>Global XP: <span id="global-points" style="color:#4ade80;">500</span></div>
             <div id="hud-tier" style="font-size:0.8rem; padding:3px 8px; background:rgba(255,255,255,0.1); border-radius:4px; color:#38bdf8;">Tier 1</div>
             <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Exit</button>
         </div>
@@ -37,10 +37,10 @@
     
     <div class="story-lore-box">
         <b>📖 Scene Context &amp; Lore:</b>
-        Sitting across from the caseworker, you trace the edge of your canvas bag. Stacks of municipal guidelines and state assistance forms cover the desk like a physical barrier between uncertainty and stability. Every line of history you have to recount brings back memories of shifting from room to room, carrying everything you owned in trash bags or worn duffels. Getting this voucher isn't just about securing four walls for yourself—it's about building the physical cornerstone of that bridge you promised to come back across for the little ones watching behind you.
+        Before you even reach the intake office doors, a figure huddled against the concrete catches your eye. As you look closer, your chest tightens. It’s Marcus—someone who got out of the foster system straight to the streets just six months before you, someone you once looked up to as a protector. Now, he is barely recognizable, hollowed out and completely swallowed by addiction, broken down by the meager safety net that failed him. A cold wave of panic washes over you: *If someone stronger than me couldn't make it out, how can I?* For a terrifying second, the weight feels too heavy to carry. But looking down at your canvas bag, the promise echoes back. You swallow the lump in your throat, keep going, and push through the office doors determined to secure your footing—knowing you have to make it back to pull them out, too.
     </div>
 
-    <p style="line-height:1.7; color:#cbd5e1;">The caseworker slides the primary tier-1 housing application across the table, warning that incomplete income verification blocks or missing history will throw your file to the bottom of the queue. How do you approach the paperwork?</p>
+    <p style="line-height:1.7; color:#cbd5e1;">Inside the warmth of the regional office, you sit across from an intake caseworker. Stacks of municipal guidelines cover the desk. The housing voucher is your lifeline off the streets, but filing it accurately requires parsing strict bureaucratic parameters.</p>
     
     <div class="choices-container" id="choices-wrapper">
         <button class="choice-btn" onclick="selectOption('A', 75)">
@@ -62,9 +62,8 @@
 </div>
 
 <script>
-    // Initialize Global XP and Tier Info from tracker or local storage fallback
     document.addEventListener("DOMContentLoaded", () => {
-        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '400', 10);
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '500', 10);
         document.getElementById('global-points').innerText = currentXP;
 
         if (typeof AFTITracker !== 'undefined') {
@@ -77,7 +76,7 @@
     });
 
     function selectOption(choiceType, points) {
-        let currentXP = (parseInt(localStorage.getItem('afti_global_xp') || '400', 10)) + points;
+        let currentXP = (parseInt(localStorage.getItem('afti_global_xp') || '500', 10)) + points;
         localStorage.setItem('afti_global_xp', currentXP); 
         document.getElementById('global-points').innerText = currentXP;
         
@@ -92,13 +91,13 @@
             vp.style.backgroundColor = 'rgba(39,174,96,0.1)'; 
             title.innerText = "Application Accepted (+75 XP)"; 
             title.style.color = "#4ade80";
-            text.innerText = "Your diligence pays off. The application passes audit smoothly, placing you directly into the active municipal housing queue with your foundational records locked in.";
+            text.innerText = "Driven by the reality outside, your focus is razor-sharp. The application passes audit smoothly, placing you directly into the active municipal housing queue.";
             ac.innerHTML = '<button onclick="window.location.href=\'difficult-track-stage3.5-shelter.html\'" class="nav-bridge">Proceed to Stage 3.5 (Interim Shelter Queue) &rarr;</button>';
         } else {
             vp.style.backgroundColor = 'rgba(245,158,11,0.1)'; 
             title.innerText = "Clerical Flag (+20 XP)"; 
             title.style.color = 'var(--warn)';
-            text.innerText = "A missing middle initial flags the system. You clear it up after a brief delay, but your file is pushed down the queue, forcing a longer interim wait.";
+            text.innerText = "Your shaken nerves lead to a missing middle initial that flags the system. You clear it up after a brief delay, pushing your file down the queue.";
             ac.innerHTML = '<button onclick="window.location.href=\'difficult-track-stage3.5-shelter.html\'" class="nav-bridge" style="background:var(--warn);">Proceed to Stage 3.5 (Interim Shelter Queue) &rarr;</button>';
         }
     }
