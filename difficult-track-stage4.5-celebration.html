@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Milestone: Vocational Triumph & Market Clearance</title>
+    <script src="afti-tracker.js"></script>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --warn:#f59e0b; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:800px; background:var(--card); border-radius:14px; padding:35px; box-sizing:border-box; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
+        .story-lore-box { background:#141c2b; border-left:4px solid var(--accent); border:1px solid #334155; padding:16px; border-radius:8px; margin-bottom:20px; font-size:0.9rem; color:#cbd5e1; line-height:1.6; }
+        .story-lore-box b { color:var(--accent); display:block; margin-bottom:6px; }
+        .celebration-badge { text-align:center; padding:20px; background:rgba(39,174,96,0.1); border:1px solid rgba(39,174,96,0.3); border-radius:10px; margin-bottom:20px; }
+        .nav-bridge { display:inline-block; margin-top:20px; background:var(--primary); color:#fff; padding:12px 24px; border:none; border-radius:6px; font-weight:bold; cursor:pointer; text-decoration:none; text-align:center; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hud-bar">
+        <span>Path: <span style="color:#38bdf8;">Foster-Alum</span></span>
+        <div style="display:flex; align-items:center; gap:15px;">
+            <div>XP: <span id="hud-xp" style="color:#4ade80;">400</span></div>
+            <div id="hud-tier" style="font-size:0.8rem; padding:3px 8px; background:rgba(255,255,255,0.1); border-radius:4px;">Tier 1</div>
+        </div>
+    </div>
+    
+    <div class="celebration-badge">
+        <h2 style="margin:0 0 5px 0; color:#4ade80;">🎉 Milestone Unlocked: Vocational Competency Certified</h2>
+        <p style="margin:0; font-size:0.95rem; color:#cbd5e1;">You have successfully graduated from initial survival triage into active agricultural labor operations.</p>
+    </div>
+
+    <div class="story-lore-box">
+        <b>📖 Transition Narrative:</b>
+        The transition from street-level stabilization to structured agricultural co-op labor is one of the steepest hurdles in the simulation. By maintaining precise sorting standards and adhering to operational protocols, you've proven that resilience combined with tactical execution opens doors to genuine financial independence. Ahead lies final market delivery and the compilation of your verified impact portfolio.
+    </div>
+
+    <div style="text-align:center;">
+        <button onclick="proceedToMarket()" class="nav-bridge">Proceed to Stage 5: Market Delivery &rarr;</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        if (typeof AFTITracker !== 'undefined') {
+            document.getElementById('hud-xp').innerText = AFTITracker.getXP();
+            let tierInfo = AFTITracker.getReadinessTier();
+            let tierEl = document.getElementById('hud-tier');
+            tierEl.innerText = tierInfo.title;
+            tierEl.style.color = tierInfo.color;
+        }
+    });
+
+    function proceedToMarket() {
+        window.location.href = 'difficult-track-stage5-market.html';
+    }
+</script>
+</body>
+</html>
