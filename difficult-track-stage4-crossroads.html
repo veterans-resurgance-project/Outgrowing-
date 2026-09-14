@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Stage 4 Bridge: The Crossroads of Experience</title>
+    <script src="afti-core.js"></script>
+    <style>
+        :root { 
+            --bg-color: #0f172a; 
+            --card-bg: #1e293b; 
+            --text-color: #f8fafc; 
+            --primary: #27ae60; 
+            --hud-bg: #144d29; 
+            --accent: #38bdf8;
+        }
+        body { 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: var(--bg-color); 
+            color: var(--text-color); 
+            padding: 40px 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            box-sizing: border-box;
+        }
+        .container { 
+            width: 100%; 
+            max-width: 800px; 
+            background: var(--card-bg); 
+            border-radius: 16px; 
+            padding: 40px; 
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+        .hud-bar { 
+            background: var(--hud-bg); 
+            border-radius: 8px; 
+            padding: 12px 20px; 
+            margin-bottom: 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            font-weight: bold; 
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95rem;
+        }
+        .story-image-slot { 
+            width: 100%; 
+            height: 220px; 
+            background: #0f172a; 
+            border-radius: 10px; 
+            border: 1px solid rgba(56,189,248,0.3); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin-bottom: 25px; 
+            color: #38bdf8;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .prose-block {
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+        .prose-block p {
+            margin-bottom: 18px;
+        }
+        .pathways-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .pathway-card {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.2s ease;
+        }
+        .pathway-card:hover {
+            border-color: var(--accent);
+            background: rgba(56, 189, 248, 0.05);
+        }
+        .pathway-title {
+            font-weight: bold;
+            color: #4ade80;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .pathway-desc {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+        .action-box {
+            text-align: center;
+            background: rgba(39, 174, 96, 0.08);
+            border: 1px solid rgba(39, 174, 96, 0.3);
+            padding: 25px;
+            border-radius: 12px;
+        }
+        .btn { 
+            display: inline-block; 
+            background: var(--primary); 
+            color: white; 
+            padding: 14px 28px; 
+            border-radius: 8px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 1.05rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+        }
+        .btn:hover {
+            background: #219653;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(39, 174, 96, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- GLOBAL HUD BAR -->
+    <div class="hud-bar">
+        <span>Path: <span id="hud-track" style="color: var(--accent);">Active Track</span></span>
+        <div>
+            <span>Global XP: <span id="global-points" style="color: #4ade80;">400</span></span>
+            <button onclick="toggleTestBypass()" id="test-mode-btn" style="margin-left: 15px; background: #334155; color: #cbd5e1; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.75rem;">Enable Test Bypass</button>
+        </div>
+    </div>
+
+    <!-- NARRATIVE ILLUSTRATION SLOT -->
+    <div class="story-image-slot">
+        🌄 [Illustration: Looking out over a diverse Willamette Valley landscape at noon, where field rows meet high-tech hoop houses and community distribution centers]
+    </div>
+
+    <h2 style="color: #fff; margin-top: 0; font-size: 1.6rem; margin-bottom: 15px;">The View from the Ridge: Recognizing Your Options</h2>
+
+    <div class="prose-block">
+        <p>You’ve put in the miles, navigated the early bureaucratic hurdles, secured your footing, and logged real hours with your hands in the valley soil. Up until now, survival demanded a single-minded focus: solving the immediate emergency right in front of you.</p>
+        <p>But standing here today, looking across the operational network you’ve helped build in Linn County, something fundamental has shifted. Because you’ve come this far and proven your capability, the narrow path has opened up into a broad plateau. You aren't just reacting to constraints anymore—you have genuine autonomy and distinct vocational choices ahead.</p>
+        <p>Your meticulous notes, your hard-earned endurance, and your familiarity with local infrastructure mean the system now adapts to <em>your</em> strengths, rather than the other way around.</p>
+    </div>
+
+    <h3 style="color: #38bdf8; font-size: 1.2rem; margin-bottom: 15px;">Explore Your Emerging Horizons:</h3>
+
+    <div class="pathways-grid">
+        <div class="pathway-card">
+            <div class="pathway-title">🌱 The Precision Nursery &amp; Propagation Track</div>
+            <div class="pathway-desc">Leverage your meticulous eye for detail, pattern recognition, and data tracking inside climate-controlled seedling facilities and regional agricultural laboratories.</div>
+        </div>
+        <div class="pathway-card">
+            <div class="pathway-title">🚜 The Heavy Field Operations &amp; Infrastructure Track</div>
+            <div class="pathway-desc">Lean into your physical resilience and mechanical aptitude, mastering large-scale irrigation mapping, heavy machinery operation, and regional land restoration crews.</div>
+        </div>
+        <div class="pathway-card">
+            <div class="pathway-title">📦 The Community Logistics &amp; Distribution Track</div>
+            <div class="pathway-desc">Apply your coordination and administrative skills to manage cooperative supply chains, farmers market distribution hubs, and food security networks across Lebanon and Albany.</div>
+        </div>
+    </div>
+
+    <div class="action-box">
+        <p style="color: #cbd5e1; margin-top: 0; margin-bottom: 15px; font-size: 0.95rem;">With these doors open, step forward to make your strategic transition into specialized operations.</p>
+        <a href="difficult-track-stage4-precision-pivot.html" class="btn">Step Into Your Specialized Path &rarr;</a>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Sync active track name and live XP pool
+        const activeTrackName = localStorage.getItem('afti_track_name') || 'Foster-Alum / Standard Track';
+        document.getElementById('hud-track').innerText = activeTrackName;
+        
+        loadXP();
+    });
+</script>
+
+</body>
+</html>
