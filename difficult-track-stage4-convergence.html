@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - The Watershed Convergence: Finding Strength in Teamwork</title>
+    <script src="afti-core.js"></script>
+    <style>
+        :root { 
+            --bg-color: #0f172a; 
+            --card-bg: #1e293b; 
+            --text-color: #f8fafc; 
+            --primary: #27ae60; 
+            --hud-bg: #144d29; 
+            --accent: #38bdf8;
+            --danger-muted: #f43f5e;
+        }
+        body { 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: var(--bg-color); 
+            color: var(--text-color); 
+            padding: 40px 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            box-sizing: border-box;
+        }
+        .container { 
+            width: 100%; 
+            max-width: 800px; 
+            background: var(--card-bg); 
+            border-radius: 16px; 
+            padding: 40px; 
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+        .hud-bar { 
+            background: var(--hud-bg); 
+            border-radius: 8px; 
+            padding: 12px 20px; 
+            margin-bottom: 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            font-weight: bold; 
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95rem;
+        }
+        .story-image-slot { 
+            width: 100%; 
+            height: 200px; 
+            background: #0f172a; 
+            border-radius: 10px; 
+            border: 1px solid rgba(39,174,96,0.3); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin-bottom: 25px; 
+            color: #4ade80;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .prose-block {
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+        .prose-block p {
+            margin-bottom: 18px;
+        }
+        .paths-array {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+        .path-option-card {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .path-option-card:hover {
+            border-color: var(--accent);
+            background: rgba(56, 189, 248, 0.05);
+            transform: translateY(-2px);
+        }
+        .path-info h4 {
+            margin: 0 0 5px 0;
+            color: #4ade80;
+            font-size: 1.1rem;
+        }
+        .path-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+        .path-badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        /* Modal Popup Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .modal-content {
+            background: #1e293b;
+            border: 1px solid #38bdf8;
+            border-radius: 14px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            position: relative;
+        }
+        .modal-title {
+            color: #4ade80;
+            margin-top: 0;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        .modal-body {
+            color: #cbd5e1;
+            line-height: 1.7;
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+        .close-modal-btn {
+            background: #334155;
+            color: #f8fafc;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .close-modal-btn:hover {
+            background: #475569;
+        }
+        .footer-action {
+            text-align: center;
+            background: rgba(39, 174, 96, 0.08);
+            border: 1px solid rgba(39, 174, 96, 0.3);
+            padding: 25px;
+            border-radius: 12px;
+        }
+        .btn { 
+            display: inline-block; 
+            background: var(--primary); 
+            color: white; 
+            padding: 14px 28px; 
+            border-radius: 8px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 1.05rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+        }
+        .btn:hover {
+            background: #219653;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(39, 174, 96, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- GLOBAL HUD BAR -->
+    <div class="hud-bar">
+        <span>Path: <span id="hud-track" style="color: var(--accent);">Merged Cohort Track</span></span>
+        <div>
+            <span>Global XP: <span id="global-points" style="color: #4ade80;">400</span></span>
+            <button onclick="toggleTestBypass()" id="test-mode-btn" style="margin-left: 15px; background: #334155; color: #cbd5e1; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.75rem;">Enable Test Bypass</button>
+        </div>
+    </div>
+
+    <!-- STORY IMAGE SLOT -->
+    <div class="story-image-slot">
+        🤝 [Illustration: Team members gathered around a communal workbench at dusk, reviewing maps and encouraging one another after a hard day in the field]
+    </div>
+
+    <h2 style="color: #fff; margin-top: 0; font-size: 1.6rem; margin-bottom: 15px;">The Convergence: Finding Strength Together</h2>
+
+    <div class="prose-block">
+        <p>Sitting alone in the corner of the packing shed, a heavy wave of depression washes over you. Despite all the miles covered, the library sessions completed, and the sweat poured into the valley earth, your physical limitations and unrelenting stress make you feel like you're falling short. The old, familiar fear creeps in—that after all this struggle, your physical limits might keep you from reaching your dream, proving once again that you're a disappointment.</p>
+        <p>Just then, a coordinator sits down beside you, laying a weathered field notebook down on the table. <em>"You're carrying the weight of the entire world on your shoulders alone,"</em> they say gently. <em>"That's why we're doing this as a team, not as solitary survivors. Your specific traits—your intense attention to detail, your deep analytical eye, and your refusal to overlook flaws—aren't weaknesses. They are missing pieces that this entire project depends on. Nobody is expected to do everything; we combine our strengths so everyone can find where they truly thrive."</em></p>
+        <p>The realization settles in. Your path doesn't end in the heavy field rows. Explore the specialized career directions below to see how your unique skills plug into the collective mission:</p>
+    </div>
+
+    <h3 style="color: #38bdf8; font-size: 1.2rem; margin-bottom: 15px;">Select a Path to Inspect:</h3>
+
+    <!-- ARRAY OF CAREER PATHS -->
+    <div class="paths-array">
+        <div class="path-option-card" onclick="openModal('nursery')">
+            <div class="path-info">
+                <h4>🌱 Plant Propagation &amp; Controlled Nursery Operations</h4>
+                <p>Focus on climate-controlled seedling growth, cultivar tracking, and precise humidity scheduling.</p>
+            </div>
+            <div class="path-badge">Inspect Track &rarr;</div>
+        </div>
+
+        <div class="path-option-card" onclick="openModal('logistics')">
+            <div class="path-info">
+                <h4>📦 Regional Supply Chain &amp; Food Distribution</h4>
+                <p>Manage inventory records, cooperative farmer's market allotments, and community food box schedules.</p>
+            </div>
+            <div class="path-badge">Inspect Track &rarr;</div>
+        </div>
+
+        <div class="path-option-card" onclick="openModal('restoration')">
+            <div class="path-info">
+                <h4>💧 Watershed Mapping &amp; Environmental Compliance</h4>
+                <p>Utilize meticulous record-keeping for drip-line installation logs, soil sampling data, and state reporting.</p>
+            </div>
+            <div class="path-badge">Inspect Track &rarr;</div>
+        </div>
+    </div>
+
+    <div class="footer-action">
+        <p style="color: #cbd5e1; margin-top: 0; margin-bottom: 15px; font-size: 0.95rem;">With your team standing beside you and your true strengths identified, take the next step forward.</p>
+        <a href="difficult-track-stage4-precision-pivot.html" class="btn">Proceed to Specialized Operations &rarr;</a>
+    </div>
+</div>
+
+<!-- INFO MODAL -->
+<div id="pathModal" class="modal-overlay">
+    <div class="modal-content">
+        <h3 id="modalTitle" class="modal-title">Path Details</h3>
+        <div id="modalBody" class="modal-body">
+            <!-- Dynamically populated description -->
+        </div>
+        <button class="close-modal-btn" onclick="closeModal()">Back to Options</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const activeTrackName = localStorage.getItem('afti_track_name') || 'Merged Cohort Track';
+        document.getElementById('hud-track').innerText = activeTrackName;
+        loadXP();
+    });
+
+    const pathDetails = {
+        nursery: {
+            title: "🌱 Plant Propagation & Controlled Nursery Operations",
+            text: "This track suits individuals with high sensitivity to chaotic physical environments who thrive in structured, quiet, climate-controlled spaces. Instead of brute-force field labor, you manage germination rates, soil pH balances, and meticulous seedling tracking sheets. Your exactness ensures the high survival rate of thousands of native plants destined for valley restoration."
+        },
+        logistics: {
+            title: "📦 Regional Supply Chain & Food Distribution",
+            text: "Perfect for those with strong organizational skills and a passion for community equity. You coordinate between Lebanon and Albany distribution nodes, tracking inventory manifests, managing pickup schedules for the 10% community food box allocation, and ensuring that no harvested yield goes to waste."
+        },
+        restoration: {
+            title: "💧 Watershed Mapping & Environmental Compliance",
+            text: "Designed for detail-oriented observers who love mapping out patterns. You work closely with regional conservation groups to log active linear feet of drip lines, monitor post-wildfire watershed recovery data in Linn County, and maintain compliance paperwork required by state forestry departments."
+        }
+    };
+
+    function openModal(pathKey) {
+        const data = pathDetails[pathKey];
+        if (data) {
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalBody').innerText = data.text;
+            document.getElementById('pathModal').style.display = 'flex';
+        }
+    }
+
+    function closeModal() {
+        document.getElementById('pathModal').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
