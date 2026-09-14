@@ -37,10 +37,10 @@
     
     <div class="story-lore-box">
         <b>📖 Scene Context &amp; Lore:</b>
-        With your communications link secured, you sit across from a housing intake caseworker inside the regional office. Stacks of municipal guidelines and state assistance forms cover the desk. The housing voucher is your ticket off the streets, but filing it accurately requires parsing strict bureaucratic parameters.
+        Sitting across from the caseworker, you trace the edge of your canvas bag. Stacks of municipal guidelines and state assistance forms cover the desk like a physical barrier between uncertainty and stability. Every line of history you have to recount brings back memories of shifting from room to room, carrying everything you owned in trash bags or worn duffels. Getting this voucher isn't just about securing four walls for yourself—it's about building the physical cornerstone of that bridge you promised to come back across for the little ones watching behind you.
     </div>
 
-    <p style="line-height:1.7; color:#cbd5e1;">The caseworker slides the primary tier-1 housing application across the table, warning that incomplete income verification blocks will throw your file to the bottom of the queue. How do you approach the paperwork?</p>
+    <p style="line-height:1.7; color:#cbd5e1;">The caseworker slides the primary tier-1 housing application across the table, warning that incomplete income verification blocks or missing history will throw your file to the bottom of the queue. How do you approach the paperwork?</p>
     
     <div class="choices-container" id="choices-wrapper">
         <button class="choice-btn" onclick="selectOption('A', 75)">
@@ -92,7 +92,7 @@
             vp.style.backgroundColor = 'rgba(39,174,96,0.1)'; 
             title.innerText = "Application Accepted (+75 XP)"; 
             title.style.color = "#4ade80";
-            text.innerText = "Your diligence pays off. The application passes audit smoothly, placing you directly into the active municipal housing queue.";
+            text.innerText = "Your diligence pays off. The application passes audit smoothly, placing you directly into the active municipal housing queue with your foundational records locked in.";
             ac.innerHTML = '<button onclick="window.location.href=\'difficult-track-stage3.5-shelter.html\'" class="nav-bridge">Proceed to Stage 3.5 (Interim Shelter Queue) &rarr;</button>';
         } else {
             vp.style.backgroundColor = 'rgba(245,158,11,0.1)'; 
