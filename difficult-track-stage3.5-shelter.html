@@ -27,7 +27,7 @@
         </div>
     </div>
     <div>
-        <h2 style="margin:0 0 1-rem 0;">🏢 Stage 3.5: Interim Shelter & Queue Management</h2>
+        <h2 style="margin:0 0 1rem 0;">🏢 Stage 3.5: Interim Shelter & Queue Management</h2>
         
         <div class="story-lore-box">
             <b>📖 Scene Context & Lore:</b>
@@ -58,12 +58,11 @@
         if (choiceType === 'A') {
             vp.style.backgroundColor = 'rgba(39,174,96,0.1)'; title.innerText = "Queue Maintained (+50 XP)"; title.style.color = "#4ade80";
             text.innerText = "By utilizing secure storage, you get proper rest and protect your essential papers. The two-week interim passes, and your housing voucher is finally cleared for transition.";
-            ac.innerHTML = '<button onclick="window.location.href=\'difficult-track-stage4-vocational.html\'" class="nav-bridge">Proceed to Stage 4: Vocational Labor Blending &rarr;</button>';
+            ac.innerHTML = '<button onclick="window.location.href=\'difficult-track-milestone-1.html\'" class="nav-bridge">Proceed to Milestone Review &rarr;</button>';
         } else {
             vp.style.backgroundColor = 'rgba(245,158,11,0.1)'; title.innerText = "High Fatigue State (+15 XP)"; title.style.color = 'var(--warn)';
             text.innerText = "Constant hyper-vigilance leaves you sleep-deprived. You make the housing queue, but your physical burnout requires extra recovery time before entering the agricultural work blocks.";
-            ac.innerHTML = '<button onclick="window.location.href=\'difficult-track-milestone-1.html'\'" class="nav-bridge" style="background:var(--warn); border:none;">Proceed to Stage 4: Vocational Labor Blending &rarr;</button>';
-        
+            ac.innerHTML = '<button onclick="window.location.href=\'difficult-track-milestone-1.html\'" class="nav-bridge" style="background:var(--warn); border:none;">Proceed to Milestone Review &rarr;</button>';
         }
     }
 </script>
