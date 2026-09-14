@@ -1,37 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFTI - Day Zero Narrative</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Stage 1: The Entry Point &amp; The Promise</title>
+    <script src="afti-core.js"></script>
     <style>
-        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; }
-        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; }
-        .container { width:100%; max-width:800px; background:var(--card); border-radius:14px; padding:35px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); }
-        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
-        .img-slot { width:100%; height:200px; background:#0f172a; border-radius:10px; border:1px solid rgba(56,189,248,0.3); display:flex; align-items:center; justify-content:center; margin-bottom:25px; color:#94a3b8; font-style:italic; text-align:center; padding:15px; box-sizing:border-box; }
-        .btn { display:inline-block; background:var(--primary); color:#fff; text-decoration:none; font-weight:bold; padding:14px 28px; border:none; border-radius:8px; cursor:pointer; }
+        :root { 
+            --bg-color: #0f172a; 
+            --card-bg: #1e293b; 
+            --text-color: #f8fafc; 
+            --primary: #27ae60; 
+            --hud-bg: #144d29; 
+            --accent: #38bdf8;
+        }
+        body { 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: var(--bg-color); 
+            color: var(--text-color); 
+            padding: 40px 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            box-sizing: border-box;
+        }
+        .container { 
+            width: 100%; 
+            max-width: 840px; 
+            background: var(--card-bg); 
+            border-radius: 16px; 
+            padding: 40px; 
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+        .hud-bar { 
+            background: var(--hud-bg); 
+            border-radius: 8px; 
+            padding: 12px 20px; 
+            margin-bottom: 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            font-weight: bold; 
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95rem;
+        }
+        .story-image-slot { 
+            width: 100%; 
+            height: 200px; 
+            background: #0f172a; 
+            border-radius: 10px; 
+            border: 1px solid rgba(56,189,248,0.3); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin-bottom: 25px; 
+            color: #38bdf8;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .prose-block {
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+        .prose-block p {
+            margin-bottom: 18px;
+        }
+        .memory-box {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 35px;
+        }
+        .memory-title {
+            color: #4ade80;
+            font-size: 1.15rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .memory-desc {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+        .footer-action {
+            text-align: center;
+            background: rgba(39, 174, 96, 0.08);
+            border: 1px solid rgba(39, 174, 96, 0.3);
+            padding: 25px;
+            border-radius: 12px;
+        }
+        .btn { 
+            display: inline-block; 
+            background: var(--primary); 
+            color: white; 
+            padding: 14px 28px; 
+            border-radius: 8px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 1.05rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+        }
+        .btn:hover {
+            background: #219653;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(39, 174, 96, 0.4);
+        }
     </style>
 </head>
 <body>
+
 <div class="container">
+    <!-- GLOBAL HUD BAR -->
     <div class="hud-bar">
-        <span>Path: <span style="color:var(--accent);">Foster-Alum (Day Zero)</span></span>
-        <div style="display:flex; align-items:center; gap:20px;"><div>Global XP: <span id="global-points" style="color:#4ade80;">400</span></div><button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Exit</button></div>
+        <span>Path: <span id="hud-track" style="color: var(--accent);">Foster-Alum Track</span></span>
+        <div>
+            <span>Global XP: <span id="global-points" style="color: #4ade80;">100</span></span>
+            <button onclick="window.location.href='index.html'" style="margin-left: 15px; background: #334155; color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; cursor: pointer;">🏠 Exit</button>
+        </div>
     </div>
-    <div>
-        <div class="img-slot">🌆 [Visual: A lonely canvas bag sitting on wet, cold concrete. Distant city lights bleed through a dark, damp Pacific Northwest evening mist.]</div>
-        <h2 style="margin-top:0;">The Reality of the Street</h2>
-        <p style="line-height:1.7; color:#cbd5e1; margin-bottom:25px;">
-            The heavy doors of the youth center click shut behind you. You are 18, standing on the cold sidewalk with nothing but a single bag. The sky is turning a dark charcoal purple, the temperature is plumetting, and the city feels vast and expensive. You have no safety net, no family couch to crash on, and your phone has no active service. 
-        </p>
-        <p style="line-height:1.7; color:#cbd5e1; margin-bottom:25px;">
-            It is hard to dream of growing a field of crops when your fingers are numb right now. But inside your bag is a single matching code blueprint for an agricultural land trust. To reach that soil, you have to survive tonight. Your first test is navigating your way to local advocates.
-        </p>
-        <button onclick="window.location.href='difficult-track-stage2-daycenter.html'" class="btn">Advance to the Day Center Intake &rarr;</button>
+
+    <!-- STORY IMAGE SLOT -->
+    <div class="story-image-slot">
+        🏠 [Illustration: A quiet, rain-streaked window looking out over the valley at dawn, reflecting a single packed duffel bag sitting by the door]
+    </div>
+
+    <h2 style="color: #fff; margin-top: 0; font-size: 1.6rem; margin-bottom: 15px;">The Threshold: Remembering the Promise</h2>
+
+    <div class="prose-block">
+        <p>Six different foster placements. Six different rooms where you tried to figure out the unwritten rules before the ground shifted under your feet again. Without a high school diploma and with doors constantly closing before they even opened, survival meant learning how to look after the little ones who came right behind you—shielding them from the worst of the cold, keeping them safe, and trying to be the anchor you never had.</p>
+        <p>Before you walked out that final door, you made a silent, unbreakable promise: you were going to make it out, build a real bridge, and come back for them someday. You are their hero, and you can feel the quiet weight of their eyes rooting for you across the miles. This isn't just about carving out a future for yourself; it's about making sure they never have to face the grinding struggle you endured.</p>
+    </div>
+
+    <div class="memory-box">
+        <div class="memory-title">🛡️ The Weight of the Bridge</div>
+        <div class="memory-desc">
+            Every step forward carries the echoes of that promise. The systems are rigid and the path ahead is steep, but the alternative—leaving the door closed behind you—was never an option. The journey begins right here at the threshold.
+        </div>
+    </div>
+
+    <div class="footer-action">
+        <p style="color: #cbd5e1; margin-top: 0; margin-bottom: 15px; font-size: 0.95rem;">The duffel bag is packed, the valley is waking up, and the first step awaits.</p>
+        <a href="difficult-track-stage2.html" class="btn">Take the First Step &rarr;</a>
     </div>
 </div>
+
 <script>
-    document.addEventListener("DOMContentLoaded", () => { document.getElementById('global-points').innerText = localStorage.getItem('afti_global_xp') || '400'; });
+    document.addEventListener("DOMContentLoaded", () => {
+        const activeTrackName = localStorage.getItem('afti_track_name') || 'Foster-Alum Track';
+        document.getElementById('hud-track').innerText = activeTrackName;
+        
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '100', 10);
+        document.getElementById('global-points').innerText = currentXP;
+    });
 </script>
+
 </body>
 </html>
