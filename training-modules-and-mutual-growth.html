@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AFTI - Training Landing Command Center</title>
@@ -22,11 +21,30 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* GLOBAL NAV BAR STYLES */
+        nav {
+            background: #144d29;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* PAGE CONTENT WRAPPER */
+        .page-wrapper {
+            padding: 30px 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
         }
 
         .container {
@@ -195,205 +213,208 @@
 </head>
 <body>
 
-<div class="container">
-<!-- GLOBAL HUD BAR WITH TEST BYPASS TOGGLE -->
-<div class="hud-bar" style="background: #144d29; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #ffffff; flex-wrap: wrap; gap: 10px;">
-    <span>AFTI Global XP: <span id="global-points">400</span></span>
-    
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <span id="test-mode-status" style="font-size: 0.8rem; color: #cbd5e1; font-weight: normal;">Live Mode</span>
-        <button onclick="toggleTestBypass()" id="test-mode-btn" style="background: #334155; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; cursor: pointer; transition: all 0.2s;">
-            Enable Test Bypass
-        </button>
-    </div>
-</div>
-
-<script>
-    // Initialize state on page load based on session storage
-    document.addEventListener("DOMContentLoaded", () => {
-        updateBypassUI();
-    });
-
-    function toggleTestBypass() {
-        const currentBypass = sessionStorage.getItem('afti_test_bypass') === 'true';
-        const newBypassState = !currentBypass;
-        sessionStorage.setItem('afti_test_bypass', newBypassState);
-        updateBypassUI();
-    }
-
-    function updateBypassUI() {
-        const isBypassed = sessionStorage.getItem('afti_test_bypass') === 'true';
-        const btn = document.getElementById('test-mode-btn');
-        const statusText = document.getElementById('test-mode-status');
-        
-        if (isBypassed) {
-            btn.style.background = '#f59e0b';
-            btn.style.color = '#0f172a';
-            btn.innerText = 'Bypass Active';
-            statusText.innerText = 'Test Mode (XP Frozen)';
-            statusText.style.color = '#f59e0b';
-        } else {
-            btn.style.background = '#334155';
-            btn.style.color = '#cbd5e1';
-            btn.innerText = 'Enable Test Bypass';
-            statusText.innerText = 'Live Mode';
-            statusText.style.color = '#4ade80';
-        }
-    }
-
-    // Updated XP function to respect the bypass flag
-    function awardXP(amount = 50) {
-        const bypassActive = sessionStorage.getItem('afti_test_bypass') === 'true';
-        if (bypassActive) {
-            console.log("Audit Bypass Active: XP reward ignored.");
-            return; // Stops points from being added
-        }
-        
-        let currentXP = parseInt(localStorage.getItem('afti_global_xp')) || 400;
-        currentXP += amount;
-        localStorage.setItem('afti_global_xp', currentXP);
-        
-        // Update display if element exists on page
-        const pointsDisplay = document.getElementById('global-points');
-        if (pointsDisplay) {
-            pointsDisplay.innerText = currentXP;
-        }
-    }
-</script>
-    <!-- GLOBAL HUD BAR -->
-    <div class="hud-bar">
-        <span>AFTI Training Command Center</span>
-        <span>Clearance: Level 2 Portal</span>
-    </div>
-
-    <h1>Operational Training Landing Hub</h1>
-    <p style="text-align: center; margin-bottom: 25px;">Select your designated operational or academic pathway below.</p>
-
-    <!-- DYNAMIC IMAGE VIEWPORT -->
-    <div class="preview-viewport">
-        <img id="track-preview-img" src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=900&q=80" alt="Simulation Preview">
-        <div id="track-caption" class="image-caption">Active View: Central Operations Hub &amp; Field Command</div>
-    </div>
-
-    <!-- PRIMARY ACTION BUTTONS -->
-    <div class="primary-actions">
-        
-        <!-- Farmer Track -->
-        <a href="hub-2.html" class="portal-btn" 
-           onmouseover="updatePreview('https://images.unsplash.com/photo-1592417817098-8f3d692a465b?auto=format&fit=crop&w=900&q=80', 'Active Track: Farmer X Operational Toolshed &amp; Fleet Mechanics')"
-           onmouseout="resetPreview()">
-            Farmer Track
-            <span><span>Advanced Fleet, Soil Systems &amp; Field Ops</span></span>
-        </a>
-
-        <!-- Apprentice Track -->
-        <a href="agronomy-track.html" class="portal-btn"
-           onmouseover="updatePreview('https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=900&q=80', 'Active Track: Apprentice Soil Science &amp; Diagnostics')"
-           onmouseout="resetPreview()">
-            Apprentice Track
-            <span><span>Soil Fertility, Cover Cropping &amp; Diagnostics</span></span>
-        </a>
-
-        <!-- Screening Deck -->
-        <a href="The-Mycological-Botanical-Screening-Deck.html" class="portal-btn"
-           onmouseover="updatePreview('https://images.unsplash.com/photo-1542385151-efd9000785a0?auto=format&fit=crop&w=900&q=80', 'Active Track: Mycological &amp; Botanical Screening Deck (Mushroom &amp; Plant Detective Game)')"
-           onmouseout="resetPreview()">
-            Screening Deck
-            <span><span>(The Mushroom &amp; Plant Detective Game)</span></span>
-        </a>
-
-        <!-- Plant & Pest ID -->
-        <a href="plant-pest-id.html" class="portal-btn"
-           onmouseover="updatePreview('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=900&q=80', 'Active Track: Plant &amp; Pest Identification Field Diagnostics')"
-           onmouseout="resetPreview()">
-            Plant &amp; Pest ID
-            <span><span>Foliar Spotting, Blights &amp; Crop Stress Diagnostics</span></span>
-        </a>
-
-    </div>
-
-    <hr class="section-divider">
-
-    <!-- SECONDARY TRACKS & SOPs -->
-    <div class="secondary-section">
-        <h3>Specialized Academic, SOPs &amp; Career Tracks</h3>
-        <p>Review core certifications, specialized biological management, and workforce transition standards below.</p>
-
-        <div class="secondary-grid">
-            <!-- Academic Track Card -->
-            <div class="secondary-card">
-                <h4>Academic &amp; Legal</h4>
-                <p>EFU zoning, water rights compliance, and regional watershed management standards.</p>
-                <a href="legal-track.html" class="btn-small">Launch Module</a>
-            </div>
-
-            <!-- Farmer SOPs Card -->
-            <div class="secondary-card">
-                <h4>Farmer SOPs</h4>
-                <p>Pre-trip inspections, PTO safety, and equipment lockouts.</p>
-                <a href="equipment-track.html" class="btn-small">View SOPs</a>
-            </div>
-
-            <!-- Apiary & Pollinator Card -->
-            <div class="secondary-card">
-                <h4>Apiary &amp; Pollinators</h4>
-                <p>Hive health protocols, seasonal varroa management, and floral buffers.</p>
-                <a href="video-lesson.html" class="btn-small">Explore Apiary</a>
-            </div>
-
-            <!-- Career & Transition Card -->
-            <div class="secondary-card">
-                <h4>Career &amp; Resurgence</h4>
-                <p>CDL test prep, public land restoration, and workforce placement.</p>
-                <a href="video-lesson.html" class="btn-small">View Career Paths</a>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<script>
-    const defaultImg = "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=900&q=80";
-    const defaultCaption = "Active View: Central Operations Hub &amp; Field Command";
-
-    function updatePreview(imgUrl, captionText) {
-        const img = document.getElementById('track-preview-img');
-        const caption = document.getElementById('track-caption');
-        if(img && caption) {
-            img.style.opacity = '0.3';
-            setTimeout(() => {
-                img.src = imgUrl;
-                caption.innerHTML = captionText;
-                img.style.opacity = '1';
-            }, 150);
-        }
-    }
-
-    function resetPreview() {
-        const img = document.getElementById('track-preview-img');
-        const caption = document.getElementById('track-caption');
-        if(img && caption) {
-            img.style.opacity = '0.3';
-            setTimeout(() => {
-                img.src = defaultImg;
-                caption.innerHTML = defaultCaption;
-                img.style.opacity = '1';
-            }, 150);
-        }
-    }
-</script>
-  <nav style="background: #144d29; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; gap: 1rem;">
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
     <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
     <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
       <a href="index.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Home</a>
       <a href="training-modules-and-mutual-growth.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Training & Certification</a>
       <a href="partners.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">For Farmers</a>
-      <a href="shared-harvest.html" style="color: #ffffff; text-decoration: none; font-weight: 700; border-bottom: 2px solid #27ae60; padding-bottom: 2px; font-size: 0.95rem;">Shared Harvest</a>
+      <a href="shared-harvest.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Shared Harvest</a>
       <a href="incubator.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Incubator</a>
       <a href="newsletter.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Newsletter</a>
       <a href="gallery.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Gallery</a>
       <a href="how-to-help.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">How to Help</a>
     </div>
   </nav>
+
+  <div class="page-wrapper">
+    <div class="container">
+      
+      <!-- GLOBAL HUD BAR WITH TEST BYPASS TOGGLE -->
+      <div class="hud-bar" style="background: #144d29; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #ffffff; flex-wrap: wrap; gap: 10px;">
+          <span>AFTI Global XP: <span id="global-points">400</span></span>
+          
+          <div style="display: flex; align-items: center; gap: 10px;">
+              <span id="test-mode-status" style="font-size: 0.8rem; color: #cbd5e1; font-weight: normal;">Live Mode</span>
+              <button onclick="toggleTestBypass()" id="test-mode-btn" style="background: #334155; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; cursor: pointer; transition: all 0.2s;">
+                  Enable Test Bypass
+              </button>
+          </div>
+      </div>
+
+      <script>
+          document.addEventListener("DOMContentLoaded", () => {
+              updateBypassUI();
+          });
+
+          function toggleTestBypass() {
+              const currentBypass = sessionStorage.getItem('afti_test_bypass') === 'true';
+              const newBypassState = !currentBypass;
+              sessionStorage.setItem('afti_test_bypass', newBypassState);
+              updateBypassUI();
+          }
+
+          function updateBypassUI() {
+              const isBypassed = sessionStorage.getItem('afti_test_bypass') === 'true';
+              const btn = document.getElementById('test-mode-btn');
+              const statusText = document.getElementById('test-mode-status');
+              
+              if (isBypassed) {
+                  btn.style.background = '#f59e0b';
+                  btn.style.color = '#0f172a';
+                  btn.innerText = 'Bypass Active';
+                  statusText.innerText = 'Test Mode (XP Frozen)';
+                  statusText.style.color = '#f59e0b';
+              } else {
+                  btn.style.background = '#334155';
+                  btn.style.color = '#cbd5e1';
+                  btn.innerText = 'Enable Test Bypass';
+                  statusText.innerText = 'Live Mode';
+                  statusText.style.color = '#4ade80';
+              }
+          }
+
+          function awardXP(amount = 50) {
+              const bypassActive = sessionStorage.getItem('afti_test_bypass') === 'true';
+              if (bypassActive) {
+                  console.log("Audit Bypass Active: XP reward ignored.");
+                  return;
+              }
+              
+              let currentXP = parseInt(localStorage.getItem('afti_global_xp')) || 400;
+              currentXP += amount;
+              localStorage.setItem('afti_global_xp', currentXP);
+              
+              const pointsDisplay = document.getElementById('global-points');
+              if (pointsDisplay) {
+                  pointsDisplay.innerText = currentXP;
+              }
+          }
+      </script>
+
+      <!-- GLOBAL HUD BAR -->
+      <div class="hud-bar">
+          <span>AFTI Training Command Center</span>
+          <span>Clearance: Level 2 Portal</span>
+      </div>
+
+      <h1>Operational Training Landing Hub</h1>
+      <p style="text-align: center; margin-bottom: 25px;">Select your designated operational or academic pathway below.</p>
+
+      <!-- DYNAMIC IMAGE VIEWPORT -->
+      <div class="preview-viewport">
+          <img id="track-preview-img" src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=900&q=80" alt="Simulation Preview">
+          <div id="track-caption" class="image-caption">Active View: Central Operations Hub &amp; Field Command</div>
+      </div>
+
+      <!-- PRIMARY ACTION BUTTONS -->
+      <div class="primary-actions">
+          
+          <!-- Farmer Track -->
+          <a href="hub-2.html" class="portal-btn" 
+             onmouseover="updatePreview('https://images.unsplash.com/photo-1592417817098-8f3d692a465b?auto=format&fit=crop&w=900&q=80', 'Active Track: Farmer X Operational Toolshed &amp; Fleet Mechanics')"
+             onmouseout="resetPreview()">
+              Farmer Track
+              <span><span>Advanced Fleet, Soil Systems &amp; Field Ops</span></span>
+          </a>
+
+          <!-- Apprentice Track -->
+          <a href="agronomy-track.html" class="portal-btn"
+             onmouseover="updatePreview('https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=900&q=80', 'Active Track: Apprentice Soil Science &amp; Diagnostics')"
+             onmouseout="resetPreview()">
+              Apprentice Track
+              <span><span>Soil Fertility, Cover Cropping &amp; Diagnostics</span></span>
+          </a>
+
+          <!-- Screening Deck -->
+          <a href="The-Mycological-Botanical-Screening-Deck.html" class="portal-btn"
+             onmouseover="updatePreview('https://images.unsplash.com/photo-1542385151-efd9000785a0?auto=format&fit=crop&w=900&q=80', 'Active Track: Mycological &amp; Botanical Screening Deck (Mushroom &amp; Plant Detective Game)')"
+             onmouseout="resetPreview()">
+              Screening Deck
+              <span><span>(The Mushroom &amp; Plant Detective Game)</span></span>
+          </a>
+
+          <!-- Plant & Pest ID -->
+          <a href="plant-pest-id.html" class="portal-btn"
+             onmouseover="updatePreview('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=900&q=80', 'Active Track: Plant &amp; Pest Identification Field Diagnostics')"
+             onmouseout="resetPreview()">
+              Plant &amp; Pest ID
+              <span><span>Foliar Spotting, Blights &amp; Crop Stress Diagnostics</span></span>
+          </a>
+
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- SECONDARY TRACKS & SOPs -->
+      <div class="secondary-section">
+          <h3>Specialized Academic, SOPs &amp; Career Tracks</h3>
+          <p>Review core certifications, specialized biological management, and workforce transition standards below.</p>
+
+          <div class="secondary-grid">
+              <!-- Academic Track Card -->
+              <div class="secondary-card">
+                  <h4>Academic &amp; Legal</h4>
+                  <p>EFU zoning, water rights compliance, and regional watershed management standards.</p>
+                  <a href="legal-track.html" class="btn-small">Launch Module</a>
+              </div>
+
+              <!-- Farmer SOPs Card -->
+              <div class="secondary-card">
+                  <h4>Farmer SOPs</h4>
+                  <p>Pre-trip inspections, PTO safety, and equipment lockouts.</p>
+                  <a href="equipment-track.html" class="btn-small">View SOPs</a>
+              </div>
+
+              <!-- Apiary & Pollinator Card -->
+              <div class="secondary-card">
+                  <h4>Apiary &amp; Pollinators</h4>
+                  <p>Hive health protocols, seasonal varroa management, and floral buffers.</p>
+                  <a href="video-lesson.html" class="btn-small">Explore Apiary</a>
+              </div>
+
+              <!-- Career & Transition Card -->
+              <div class="secondary-card">
+                  <h4>Career &amp; Resurgence</h4>
+                  <p>CDL test prep, public land restoration, and workforce placement.</p>
+                  <a href="video-lesson.html" class="btn-small">View Career Paths</a>
+              </div>
+          </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+      const defaultImg = "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=900&q=80";
+      const defaultCaption = "Active View: Central Operations Hub &amp; Field Command";
+
+      function updatePreview(imgUrl, captionText) {
+          const img = document.getElementById('track-preview-img');
+          const caption = document.getElementById('track-caption');
+          if(img && caption) {
+              img.style.opacity = '0.3';
+              setTimeout(() => {
+                  img.src = imgUrl;
+                  caption.innerHTML = captionText;
+                  img.style.opacity = '1';
+              }, 150);
+          }
+      }
+
+      function resetPreview() {
+          const img = document.getElementById('track-preview-img');
+          const caption = document.getElementById('track-caption');
+          if(img && caption) {
+              img.style.opacity = '0.3';
+              setTimeout(() => {
+                  img.src = defaultImg;
+                  caption.innerHTML = defaultCaption;
+                  img.style.opacity = '1';
+              }, 150);
+          }
+      }
+  </script>
 </body>
 </html>
