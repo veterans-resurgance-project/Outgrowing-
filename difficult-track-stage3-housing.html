@@ -17,12 +17,7 @@
         .nav-bridge { display:inline-block; margin-top:15px; background:var(--primary); color:#fff; padding:12px 24px; border:none; border-radius:6px; font-weight:bold; cursor:pointer; }
     </style>
 </head>
-<div class="hud-bar">
-    <span>Milestone Review</span>
-    <div style="display:flex; align-items:center; gap:15px;">
-        <div>XP: <span id="hud-xp" style="color:#4ade80;">400</span></div>
-        <div id="hud-tier" style="font-size:0.8rem; padding:3px 8px; background:rgba(255,255,255,0.1); border-radius:4px;">Tier 1</div>
-    </div>
+
 </div>
 
 <script src="afti-tracker.js"></script>
@@ -34,6 +29,12 @@
     tierEl.innerText = tierInfo.title;
     tierEl.style.color = tierInfo.color;
     <div class="hud-bar">
+     <div class="hud-bar">
+    <span>Milestone Review</span>
+    <div style="display:flex; align-items:center; gap:15px;">
+        <div>XP: <span id="hud-xp" style="color:#4ade80;">400</span></div>
+        <div id="hud-tier" style="font-size:0.8rem; padding:3px 8px; background:rgba(255,255,255,0.1); border-radius:4px;">Tier 1</div>
+    </div>
         <span>Path: <span style="color:#38bdf8;">Foster-Alum</span></span>
         <div style="display:flex; align-items:center; gap:20px;">
             <div>Global XP: <span id="global-points" style="color:#4ade80;">400</span></div>
