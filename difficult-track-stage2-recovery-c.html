@@ -17,14 +17,23 @@
 <div class="container">
     <div class="hud-bar">
         <span>Path: <span style="color:var(--danger);">Foster-Alum (Asset Loss)</span></span>
-        <div style="display:flex; align-items:center; gap:20px;"><div>Global XP: <span id="global-points" style="color:#4ade80;">400</span></div><button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Exit</button></div>
+        <div style="display:flex; align-items:center; gap:20px;">
+            <div>Global XP: <span id="global-points" style="color:#4ade80;">400</span></div>
+            <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Exit</button>
+        </div>
     </div>
     <div>
         <h2 style="margin:0 0 1.5rem 0; color:var(--danger);">🎒 Asset Loss Recovery: Documentation Reset</h2>
         <p style="line-height:1.6; color:#cbd5e1; margin-bottom:25px;">Without verifiable state records, you cannot log training milestones or pass matching background steps. Check both boxes to reset your papers and advance.</p>
         <div style="margin-bottom:25px;">
-            <label class="task-label"><input type="checkbox" class="task-cb" onchange="checkProg(this, 40)"><div><strong>File Online Property Loss Report (+40 XP)</strong><div style="color:#cbd5e1; font-size:0.9rem;">File a digital theft report to justify replacement cards.</div></div></label>
-            <label class="task-label"><input type="checkbox" class="task-cb" onchange="checkProg(this, 40)"><div><strong>Execute Document Reset Protocol (+40 XP)</strong><div style="color:#cbd5e1; font-size:0.9rem;">Log into cloud accounts to reprint confirmations and verification papers.</div></div></label>
+            <label class="task-label">
+                <input type="checkbox" class="task-cb" data-xp="40" onchange="checkProg()">
+                <div><strong>File Online Property Loss Report (+40 XP)</strong><div style="color:#cbd5e1; font-size:0.9rem;">File a digital theft report to justify replacement cards.</div></div>
+            </label>
+            <label class="task-label">
+                <input type="checkbox" class="task-cb" data-xp="40" onchange="checkProg()">
+                <div><strong>Execute Document Reset Protocol (+40 XP)</strong><div style="color:#cbd5e1; font-size:0.9rem;">Log into cloud accounts to reprint confirmations and verification papers.</div></div>
+            </label>
         </div>
         <div id="bridge-panel" class="bridge-box">
             <h3 style="color:#4ade80; margin-top:0;">Standing Restored</h3>
@@ -32,13 +41,61 @@
         </div>
     </div>
 </div>
+
 <script>
-    document.addEventListener("DOMContentLoaded", () => { document.getElementById('global-points').innerText = localStorage.getItem('afti_global_xp') || '400'; });
-    function checkProg(cb, points) {
-        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '400', 10) + (cb.checked ? points : -points);
-        localStorage.setItem('afti_global_xp', currentXP); document.getElementById('global-points').innerText = currentXP;
-        const cbs = document.querySelectorAll('.task-cb'); const all = Array.from(cbs).every(c => c.checked);
-        document.getElementById('bridge-panel').style.display = all ? 'block' : 'none';
+    document.addEventListener("DOMContentLoaded", () => {
+        loadState();
+        document.getElementById('global-points').innerText = localStorage.getItem('afti_global_xp') || '400';
+    });
+
+    function checkProg() {
+        const cbs = document.querySelectorAll('.task-cb');
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '400', 10);
+        
+        // Recalculate XP based strictly on current checkbox states to prevent double-counting bugs
+        let baseXP = 400; // or whatever your baseline is
+        let earnedXP = 0;
+        const state = {};
+
+        cbs.forEach((cb, index) => {
+            state[index] = cb.checked;
+            if (cb.checked) {
+                earnedXP += parseInt(cb.getAttribute('data-xp'), 10);
+            }
+        });
+
+        // Save state to localStorage
+        localStorage.setItem('afti_stage2_assetloss_state', JSON.stringify(state));
+        
+        // Re-sync global XP total cleanly
+        // (Assuming base starting XP for this step or building incrementally)
+        let totalXP = parseInt(localStorage.getItem('afti_base_xp') || '400', 10) + earnedXP;
+        localStorage.setItem('afti_global_xp', totalXP);
+        document.getElementById('global-points').innerText = totalXP;
+
+        // Check if all are complete to reveal bridge
+        const allChecked = Array.from(cbs).every(c => c.checked);
+        document.getElementById('bridge-panel').style.display = allChecked ? 'block' : 'none';
+    }
+
+    function loadState() {
+        const saved = localStorage.getItem('afti_stage2_assetloss_state');
+        if (saved) {
+            try {
+                const state = JSON.parse(saved);
+                const cbs = document.querySelectorAll('.task-cb');
+                cbs.forEach((cb, index) => {
+                    if (state[index] !== undefined) {
+                        cb.checked = state[index];
+                    }
+                });
+                // Check completion on load
+                const allChecked = Array.from(cbs).every(c => c.checked);
+                document.getElementById('bridge-panel').style.display = allChecked ? 'block' : 'none';
+            } catch(e) {
+                console.error("Error loading checklist state:", e);
+            }
+        }
     }
 </script>
 </body>
