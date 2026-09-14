@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Command Staff Portal | AFTI</title>
+</head>
+<body style="background: #0f172a; color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 0;">
+
+  <!-- Passcode Gateway Modal Overlay -->
+  <div id="authModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.95); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+    <div style="background: #1e293b; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+      <span style="background: rgba(239, 68, 68, 0.15); color: #ef4444; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; padding: 0.3rem 0.8rem; border-radius: 20px; display: inline-block; margin-bottom: 1rem;">Restricted Access</span>
+      <h2 style="color: #ffffff; font-size: 1.5rem; margin-top: 0; margin-bottom: 0.5rem;">Enter Staff Passcode</h2>
+      <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem;">Enter your 4-digit security code to access incoming intakes and management queues.</p>
+      
+      <form onsubmit="verifyStaffPasscode(event)">
+        <input type="password" id="passcodeInput" maxlength="4" placeholder="••••" autocomplete="current-password" required style="width: 100%; padding: 0.75rem; text-align: center; font-size: 1.5rem; letter-spacing: 0.5em; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: white; box-sizing: border-box; margin-bottom: 1.25rem;">
+        <button type="submit" style="width: 100%; background: #2563eb; color: white; padding: 0.75rem; border-radius: 8px; border: none; font-weight: 700; font-size: 1rem; cursor: pointer;">Authenticate &rarr;</button>
+      </form>
+      
+      <div id="authError" style="color: #ef4444; font-size: 0.85rem; margin-top: 1rem; display: none;">Incorrect passcode. Access denied.</div>
+      
+      <div style="margin-top: 2rem; border-top: 1px solid #334155; padding-top: 1rem;">
+        <a href="index.html" style="color: #94a3b8; text-decoration: none; font-size: 0.85rem;">&larr; Return to Public Home</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Staff Dashboard (Hidden until unlocked) -->
+  <div id="staffDashboard" style="display: none; max-width: 900px; margin: 3rem auto; padding: 0 2rem;">
+    
+    <!-- Administrative & Fiduciary Vault Card -->
+    <div style="background: #1e293b; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); padding: 1.5rem; margin-bottom: 2rem;">
+      <span style="background: rgba(34, 197, 94, 0.15); color: #22c55e; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; padding: 0.3rem 0.8rem; border-radius: 20px; display: inline-block; margin-bottom: 0.5rem;">Governance &amp; Compliance</span>
+      <h3 style="color: #ffffff; font-size: 1.2rem; margin: 0 0 0.5rem 0;">Administrative &amp; Fiduciary Documents</h3>
+      <p style="color: #94a3b8; font-size: 0.9rem; margin: 0 0 1rem 0;">Access formal governance charters, restricted fund protocols, and board fiduciary memorandums for audit readiness.</p>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="ag_program_charter.html" target="_blank" style="background: #27ae60; color: white; padding: 0.6rem 1.25rem; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.85rem; display: inline-block;">
+          View Program Charter &amp; Separation
+        </a>
+        <a href="board_fiduciary_memorandum.html" target="_blank" style="background: #2563eb; color: white; padding: 0.6rem 1.25rem; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.85rem; display: inline-block;">
+          View Board Fiduciary Memorandum
+        </a>
+      </div>
+    </div>
+
+    <header style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 1.5rem; margin-bottom: 2rem;">
+      <div>
+        <span style="background: rgba(34, 197, 94, 0.15); color: #22c55e; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; padding: 0.3rem 0.8rem; border-radius: 20px; display: inline-block; margin-bottom: 0.5rem;">Command Verified</span>
+        <h1 style="font-size: 2rem; margin: 0; color: #ffffff;">Staff Intake &amp; Content Queue</h1>
+      </div>
+      <div>
+        <button onclick="clearIntakeQueue()" style="background: #ef4444; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer; margin-right: 0.75rem;">Clear Intakes</button>
+        <a href="index.html" style="background: #334155; color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 700; font-size: 0.85rem;">Exit Portal</a>
+      </div>
+    </header>
+
+    <!-- Staff Newsletter Dispatch Entry Form -->
+    <div style="background: #1e293b; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); padding: 1.5rem; margin-bottom: 2rem;">
+      <h3 style="color: #ffffff; font-size: 1.2rem; margin-top: 0; margin-bottom: 1rem;">Publish New Newsletter Dispatch</h3>
+      <form onsubmit="handleNewDispatch(event)">
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; color: #cbd5e1; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem;">Timeline Tag</label>
+          <input type="text" id="dispatchDate" required placeholder="e.g., Sept 2026" style="width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: white; box-sizing: border-box;">
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; color: #cbd5e1; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem;">Dispatch Title</label>
+          <input type="text" id="dispatchTitle" required placeholder="e.g., Fall Harvest Success" style="width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: white; box-sizing: border-box;">
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; color: #cbd5e1; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem;">Summary / Description</label>
+          <textarea id="dispatchDesc" required rows="3" placeholder="Enter newsletter update text..." style="width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: white; box-sizing: border-box; resize: vertical;"></textarea>
+        </div>
+        <button type="submit" style="background: #27ae60; color: white; border: none; padding: 0.6rem 1.25rem; border-radius: 6px; font-weight: 700; cursor: pointer;">Publish to Newsletter</button>
+      </form>
+    </div>
+
+    <!-- Gallery Photo Upload Form -->
+    <div style="background: #1e293b; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); padding: 1.5rem; margin-bottom: 2rem;">
+      <h3 style="color: #ffffff; font-size: 1.2rem; margin-top: 0; margin-bottom: 1rem;">Add Photo to Public Gallery</h3>
+      <form onsubmit="handleNewPhoto(event)">
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; color: #cbd5e1; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem;">Image URL</label>
+          <input type="url" id="photoUrl" required placeholder="https://example.com/image.jpg" style="width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: white; box-sizing: border-box;">
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; color: #cbd5e1; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem;">Photo Title</label>
+          <input type="text" id="photoTitle" required placeholder="e.g., Greenhouse Propagation" style="width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: white; box-sizing: border-box;">
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; color: #cbd5e1; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem;">Caption / Details</label>
+          <input type="text" id="photoCaption" required placeholder="Brief description of the activity..." style="width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: white; box-sizing: border-box;">
+        </div>
+        <button type="submit" style="background: #2563eb; color: white; border: none; padding: 0.6rem 1.25rem; border-radius: 6px; font-weight: 700; cursor: pointer;">Upload to Gallery</button>
+      </form>
+    </div>
+
+    <!-- Executive & Financial Vault Gateway -->
+    <div style="background: #1e293b; border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.3); padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+      <span style="background: rgba(239, 68, 68, 0.15); color: #ef4444; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; padding: 0.3rem 0.8rem; border-radius: 20px; display: inline-block; margin-bottom: 0.5rem;">Restricted Executive Tier</span>
+      <h3 style="color: #ffffff; font-size: 1.2rem; margin: 0 0 0.5rem 0;">Financial Ledgers &amp; Division Archives</h3>
+      <p style="color: #94a3b8; font-size: 0.9rem; margin: 0 0 1rem 0;">Access high-level paperwork, medical tracking protocols, and fiscal logs. Requires secondary executive authorization.</p>
+      <button onclick="verifyExecutiveAccess()" style="background: #ef4444; color: white; border: none; padding: 0.6rem 1.25rem; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer;">
+        Access Executive Vault &rarr;
+      </button>
+    </div>
+
+    <!-- Queue List Container -->
+    <main>
+      <div id="queueContainer">
+        <!-- Dynamically injected intake submissions appear here -->
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Staff Portal Logic -->
+  <script>
+    function verifyStaffPasscode(event) {
+      event.preventDefault();
+      const code = document.getElementById("passcodeInput").value.trim();
+      
+      if (code === "6060") {
+        document.getElementById("authModal").style.display = "none";
+        document.getElementById("staffDashboard").style.display = "block";
+        loadIntakeQueue();
+      } else {
+        document.getElementById("authError").style.display = "block";
+        document.getElementById("passcodeInput").value = "";
+      }
+    }
+
+    function handleNewDispatch(event) {
+      event.preventDefault();
+      const newUpdate = {
+        date: document.getElementById("dispatchDate").value.trim(),
+        title: document.getElementById("dispatchTitle").value.trim(),
+        desc: document.getElementById("dispatchDesc").value.trim()
+      };
+      let updates = JSON.parse(localStorage.getItem("afti_updates") || "[]");
+      updates.unshift(newUpdate);
+      localStorage.setItem("afti_updates", JSON.stringify(updates));
+      alert("Dispatch successfully published to the Community Newsletter!");
+      event.target.reset();
+    }
+
+    function handleNewPhoto(event) {
+      event.preventDefault();
+      const newPhoto = {
+        url: document.getElementById("photoUrl").value.trim(),
+        title: document.getElementById("photoTitle").value.trim(),
+        caption: document.getElementById("photoCaption").value.trim()
+      };
+      let photos = JSON.parse(localStorage.getItem("afti_gallery") || "[]");
+      photos.unshift(newPhoto);
+      localStorage.setItem("afti_gallery", JSON.stringify(photos));
+      alert("Photo successfully added to the public gallery!");
+      event.target.reset();
+    }
+
+    function verifyExecutiveAccess() {
+      let execCode = prompt("Enter Executive Security Code:");
+      if (execCode === "8080") {
+        window.location.href = "executive-vault.html";
+      } else if (execCode !== null) {
+        alert("Unauthorized. Executive clearance required.");
+      }
+    }
+
+    function loadIntakeQueue() {
+      const container = document.getElementById("queueContainer");
+      const queue = JSON.parse(localStorage.getItem("afti_intake_queue") || localStorage.getItem("vrp_intake_queue") || "[]");
+      
+      if (queue.length === 0) {
+        container.innerHTML = `
+          <div style="background: #1e293b; border-radius: 12px; padding: 3rem; text-align: center; border: 1px solid rgba(255,255,255,0.05);">
+            <p style="color: #94a3b8; font-size: 1.1rem; margin: 0;">No active submissions in the intake queue right now.</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      queue.forEach((item) => {
+        html += `
+          <div style="background: #1e293b; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <span style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 12px;">${escapeHtml(item.track || 'General Intake')}</span>
+              <span style="color: #64748b; font-size: 0.85rem;">${escapeHtml(item.timestamp || 'Recent')}</span>
+            </div>
+            <h3 style="color: #ffffff; font-size: 1.2rem; margin: 0 0 0.5rem 0;">${escapeHtml(item.name || 'Unnamed Submission')}</h3>
+            <p style="color: #cbd5e1; font-size: 0.95rem; margin: 0 0 0.5rem 0;"><strong>Contact:</strong> ${escapeHtml(item.contact || 'N/A')}</p>
+            ${item.notes ? `<p style="color: #94a3b8; font-size: 0.9rem; margin: 0;"><strong>Notes:</strong> ${escapeHtml(item.notes)}</p>` : ''}
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function clearIntakeQueue() {
+      if (confirm("Are you sure you want to clear all stored intake records?")) {
+        localStorage.removeItem("afti_intake_queue");
+        localStorage.removeItem("vrp_intake_queue");
+        loadIntakeQueue();
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+  </script>
+
+</body>
+</html>
