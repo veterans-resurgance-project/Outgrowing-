@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Water Rights &amp; EFU Zoning Compliance</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --primary: #27ae60;
+            --primary-hover: #219653;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --hud-bg: #144d29;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* GLOBAL NAV BAR STYLES */
+        nav {
+            background: #144d29;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .page-wrapper {
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 950px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            padding: 30px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hud-bar {
+            background: var(--hud-bg);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #ffffff;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        h1 {
+            color: #2ecc71;
+            margin-top: 0;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        h2 {
+            color: #38bdf8;
+            font-size: 1.3rem;
+            margin-top: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 8px;
+        }
+
+        p, li {
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        /* WARNING CALLOUT BOX */
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid var(--accent);
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .warning-box h4 {
+            margin: 0 0 8px 0;
+            color: var(--accent);
+        }
+
+        /* TEST SECTION */
+        .test-section {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .test-section h3 {
+            color: var(--accent);
+            margin-top: 0;
+        }
+
+        .question-item {
+            margin-bottom: 15px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-hover);
+        }
+
+        .section-divider {
+            border: 0;
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 25px 0;
+        }
+    </style>
+</head>
+<body>
+
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
+    <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
+    <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+      <a href="index.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Home</a>
+      <a href="training-modules-and-mutual-growth.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Training & Certification</a>
+      <a href="partners.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">For Farmers</a>
+      <a href="shared-harvest.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Shared Harvest</a>
+      <a href="incubator.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Incubator</a>
+      <a href="newsletter.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Newsletter</a>
+      <a href="gallery.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">How to Help</a>
+      <a href="how-to-help.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">How to Help</a>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="container">
+      
+      <!-- HUD BAR -->
+      <div class="hud-bar">
+          <span>AFTI Global XP: <span id="global-points">400</span></span>
+          <span>Clearance: Academic &amp; Legal Compliance Module</span>
+      </div>
+
+      <h1>Oregon Water Rights &amp; EFU Zoning Command</h1>
+      <p style="text-align: center; margin-bottom: 25px;">Comprehensive operational framework for Willamette Valley water allocation law and statutory enforcement.</p>
+
+      <h2>1. Core Principles of Oregon Water Law</h2>
+      <ul>
+          <li><strong>Prior Appropriation ("First in Time, First in Right"):</strong> Water rights are strictly chronological. During seasonal low flows or droughts, the local Watermaster shuts off users sequentially starting with the newest (junior) rights and preserving water for the oldest (senior) rights. There is no proportional sharing.</li>
+          <li><strong>Beneficial Use is the Limit:</strong> Every water right specifies an exact volume, flow rate, and designated purpose (e.g., commercial irrigation, frost protection, livestock). Water must be put to an active, productive use without waste.</li>
+          <li><strong>Appurtenance:</strong> Validated water rights are tied directly ("appurtenant") to a specific parcel of land. You cannot freely move water to a different property without a formal transfer approval through the <a href="https://oregon.gov/owrd" target="_blank" style="color: #38bdf8;">Oregon Water Resources Department (OWRD)</a>.</li>
+          <li><strong>Groundwater Limited Areas:</strong> Much of the Willamette Valley is designated as a groundwater-limited zone where new large-scale appropriations are heavily restricted or frozen.</li>
+      </ul>
+
+      <h2>2. Permitted Exemptions (Without a Full Water Right)</h2>
+      <p>Oregon law allows specific narrow exemptions where a formal water right permit is not required:</p>
+      <ul>
+          <li><strong>Domestic Groundwater Use:</strong> Up to <strong>15,000 gallons per day</strong> from a well for standard household use, general farm/shop outbuilding cleanup, and domestic needs.</li>
+          <li><strong>Lawn &amp; Garden Exception:</strong> Up to <strong>½ acre</strong> of non-commercial lawn or garden irrigation via exempt groundwater.</li>
+          <li><strong>Stock Watering:</strong> Unrestricted drinking water for livestock animals.</li>
+          <li><strong>Commercial / Industrial Cap:</strong> A single commercial or industrial purpose not exceeding <strong>5,000 gallons per day</strong>.</li>
+      </ul>
+      <div class="warning-box">
+          <h4>Operational Caveat</h4>
+          <p>Field crop irrigation for commercial sale generally requires a fully certificated water right; operating commercial agriculture off domestic-exempt wells outside legal thresholds triggers strict state scrutiny.</p>
+      </div>
+
+      <h2>3. Violations and Legal Consequences</h2>
+      <p>The OWRD and local Watermasters actively investigate unauthorized water usage, illegal diversions, and water waste. Non-compliance carries severe penalties:</p>
+      <ul>
+          <li><strong>Forfeiture and Cancellation:</strong> If a water right goes unused for <strong>5 consecutive years</strong> (within any 15-year window), the right is legally subject to forfeiture and permanent cancellation, reverting water back to the public stream.</li>
+          <li><strong>Criminal Misdemeanor Charges:</strong> Unlawfully diverting or using surface or groundwater without a permit (violating ORS 537.130) is classified as a <strong>Class B Misdemeanor</strong>.</li>
+          <li><strong>Heavy Civil Penalties:</strong> The state levies civil penalties of up to <strong>$1,000 to $2,000+ per day</strong> for unauthorized water use, ignoring Watermaster regulation orders, or failing to install mandatory totalizing water meters.</li>
+          <li><strong>Cease-and-Desist Orders:</strong> Watermasters have the authority to immediately lock, seal, or shut down unauthorized pumps, valves, and diversion works.</li>
+      </ul>
+
+      <hr class="section-divider">
+
+      <!-- INTERACTIVE CHECKBOX KNOWLEDGE CHECK -->
+      <div class="test-section">
+          <h3>Legal Compliance Verification (Earn +50 XP)</h3>
+          <p>Check the correct statutory principles governing Oregon water rights and exemptions below.</p>
+          
+          <div id="quiz-questions-container">
+              <div class="question-item"><label class="checkbox-label"><input type="checkbox" id="q1" value="correct"> Water rights follow the doctrine of Prior Appropriation ("First in Time, First in Right").</label></div>
+              <div class="question-item"><label class="checkbox-label"><input type="checkbox" id="q2" value="incorrect"> Water rights are fully portable and can be moved freely between any two counties without OWRD transfer approval.</label></div>
+              <div class="question-item"><label class="checkbox-label"><input type="checkbox" id="q3" value="correct"> Unused water rights are subject to forfeiture and cancellation after 5 consecutive years of non-use.</label></div>
+              <div class="question-item"><label class="checkbox-label"><input type="checkbox" id="q4" value="correct"> Exempt domestic groundwater use is capped at 15,000 gallons per day.</label></div>
+          </div>
+
+          <button class="btn-submit" onclick="evaluateQuiz()">Submit Legal Verification &amp; Claim XP</button>
+          <p id="quiz-feedback" style="margin-top: 15px; font-weight: bold; text-align: center;"></p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", () => {
+          const savedXP = localStorage.getItem('afti_global_xp') || 400;
+          document.getElementById('global-points').innerText = savedXP;
+      });
+
+      function evaluateQuiz() {
+          const q1 = document.getElementById('q1').checked;
+          const q2 = document.getElementById('q2').checked;
+          const q3 = document.getElementById('q3').checked;
+          const q4 = document.getElementById('q4').checked;
+          const feedback = document.getElementById('quiz-feedback');
+
+          // Correct answers: q1, q3, q4 checked; q2 unchecked
+          const passed = (q1 && !q2 && q3 && q4);
+
+          if (passed) {
+              feedback.style.color = "#4ade80";
+              feedback.innerText = "Compliance Verified! +50 XP Awarded.";
+              
+              let currentXP = parseInt(localStorage.getItem('afti_global_xp')) || 400;
+              currentXP += 50;
+              localStorage.setItem('afti_global_xp', currentXP);
+              document.getElementById('global-points').innerText = currentXP;
+          } else {
+              feedback.style.color = "#f87171";
+              feedback.innerText = "Incorrect selections. Review the statutory guidelines and try again.";
+          }
+      }
+  </script>
+</body>
+</html>
