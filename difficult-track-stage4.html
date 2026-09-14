@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFTI - Stage 3.5: Interim Shelter Chaos</title>
+    <title>AFTI - Stage 4: Securing Housing & New Responsibilities</title>
     <style>
         :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --warn:#f59e0b; --danger:#ef4444; }
         body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; }
         .container { width:100%; max-width:800px; background:var(--card); border-radius:14px; padding:35px; box-sizing:border-box; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); }
         .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; flex-wrap:wrap; gap:10px; }
-        .story-lore-box { background:#141c2b; border-left:4px solid var(--danger); border:1px solid #334155; padding:16px; border-radius:8px; margin-bottom:20px; font-size:0.9rem; color:#cbd5e1; line-height:1.6; }
-        .story-lore-box b { color:var(--danger); display:block; margin-bottom:6px; }
+        .story-lore-box { background:#141c2b; border-left:4px solid var(--primary); border:1px solid #334155; padding:16px; border-radius:8px; margin-bottom:20px; font-size:0.9rem; color:#cbd5e1; line-height:1.6; }
+        .story-lore-box b { color:var(--primary); display:block; margin-bottom:6px; }
         .choices-container { display:flex; flex-direction:column; gap:12px; margin-top:20px; }
         .choice-btn { background:#0f172a; border:1px solid #334155; color:#f8fafc; padding:16px 20px; border-radius:8px; cursor:pointer; width:100%; text-align:left; display:flex; flex-direction:column; gap:5px; transition:border-color 0.2s, background 0.2s; }
         .choice-btn:hover { border-color:var(--primary); background:rgba(39,174,96,0.1); }
@@ -27,29 +27,33 @@
     <div class="hud-bar">
         <span>Path: <span style="color:#38bdf8;">Foster-Alum Track</span></span>
         <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
-            <div>Global XP: <span id="global-points" style="color:#4ade80;">575</span></div>
-            <div id="hud-tier" style="font-size:0.8rem; padding:3px 8px; background:rgba(255,255,255,0.1); border-radius:4px; color:#38bdf8;">Tier 1</div>
+            <div>Global XP: <span id="global-points" style="color:#4ade80;">4785</span></div>
+            <div id="hud-tier" style="font-size:0.8rem; padding:3px 8px; background:rgba(255,255,255,0.1); border-radius:4px; color:#38bdf8;">Tier 3</div>
             <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Exit</button>
         </div>
     </div>
 
-    <h2 style="margin:0 0 1rem 0;">⚠️ Stage 3.5: Interim Shelter Chaos</h2>
+    <h2 style="margin:0 0 1rem 0;">🏡 Stage 4: Crossing the Threshold Into Housing</h2>
     
     <div class="story-lore-box">
         <b>📖 Scene Context &amp; Lore:</b>
-        While waiting out the interim period for your housing voucher to process, the overcrowded temporary shelter reaches a breaking point. A terrifying flash of acute mental health crisis, drug withdrawal, and crushing anxiety explodes into a violent physical altercation right in the middle of the dorm. Panic tears through the room as shouting matches escalate and fists fly, forcing local police to barge in with flashing lights to break it up. In the chaotic scramble, the small coin pouch containing the five dollars in change you had carefully saved for a hot meal is gone—along with a few personal items. When you try to report the theft, the officers dismiss you with a cold wave, telling you that you should have paid closer attention to your things. You feel the loss acutely, because when you have next to nothing, every single item is a lifeline. It becomes painfully clear: even when you make the best, most disciplined choices, the system can still deal you a brutal blow.
+        The keys turn in the deadbolt with a clean, metallic click, and the heavy wooden door swings open to reveal a small, empty room that smells of fresh paint and possibility. You have finally made it out of the cold and off the concrete. Praise the progress—look at what you have unlocked: a locking door, a functional kitchenette, a hot shower, and a permanent address that allows you to lock down stability, apply for stable work, and maintain a consistent communication loop. But having four walls also brings new temptations and tests. An old acquaintance from the streets knocks on your door, desperate for a warm place to sleep off the cold. Remembering your promise to help those left behind, you face a critical dilemma.
     </div>
 
-    <p style="line-height:1.7; color:#cbd5e1;">Shaken, hungry, and stripped of your emergency cash buffer, you stand outside the precinct into the cold night air. How do you recover your footing and press forward toward stage four?</p>
+    <p style="line-height:1.7; color:#cbd5e1;">Your friend asks to crash on your floor for "just a couple of nights," but property lease rules strictly prohibit unauthorized guests, and their deep-seated struggles with substance volatility threaten your hard-won sanctuary. How do you respond?</p>
     
     <div class="choices-container" id="choices-wrapper">
-        <button class="choice-btn" onclick="selectOption('A', 50)">
-            <span style="font-weight:bold; color:#4ade80;">Choice A: Dig deep into your resilience, lean on your case worker's emergency meal voucher, and refocus on the goal.</span>
-            <span style="font-size:0.85rem; color:#94a3b8;">Absorb the heavy loss without letting it derail your housing application timeline. (+50 XP)</span>
+        <button class="choice-btn" onclick="selectOption('A', 100)">
+            <span style="font-weight:bold; color:#4ade80;">Choice A: Protect your lease boundaries while offering to meet them at a daytime community meal center to connect them with formal resources.</span>
+            <span style="font-size:0.85rem; color:#94a3b8;">Maintain your stability while honoring your commitment to help from a safe distance. (+100 XP)</span>
         </button>
-        <button class="choice-btn" onclick="selectOption('B', 15)">
-            <span style="font-weight:bold; color:var(--warn);">Choice B: Spend the morning walking miles to alternate resource hubs trying to replace the lost items.</span>
-            <span style="font-size:0.85rem; color:#94a3b8;">Exhaust yourself chasing material recovery at the expense of rest. (+15 XP)</span>
+        <button class="choice-btn" onclick="selectOption('B', 30)">
+            <span style="font-weight:bold; color:var(--warn);">Choice B: Let them slip inside out of loyalty, trying to hide them from the building manager.</span>
+            <span style="font-size:0.85rem; color:#94a3b8;">Risk lease violations, management write-ups, and losing a few of your new belongings when things go sideways. (+30 XP)</span>
+        </button>
+        <button class="choice-btn" onclick="selectOption('C', 10)">
+            <span style="font-weight:bold; color:var(--danger);">Choice C: Fully invite them in for an extended stay, ignoring the warning signs entirely.</span>
+            <span style="font-size:0.85rem; color:#94a3b8;">Trigger a severe housing violation, property damage, and the theft of your new essentials. (+10 XP)</span>
         </button>
     </div>
 
@@ -63,7 +67,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '575', 10);
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '4735', 10);
         document.getElementById('global-points').innerText = currentXP;
 
         if (typeof AFTITracker !== 'undefined') {
@@ -76,7 +80,7 @@
     });
 
     function selectOption(choiceType, points) {
-        let currentXP = (parseInt(localStorage.getItem('afti_global_xp') || '575', 10)) + points;
+        let currentXP = (parseInt(localStorage.getItem('afti_global_xp') || '4735', 10)) + points;
         localStorage.setItem('afti_global_xp', currentXP); 
         document.getElementById('global-points').innerText = currentXP;
         
@@ -89,16 +93,22 @@
 
         if (choiceType === 'A') {
             vp.style.backgroundColor = 'rgba(39,174,96,0.1)'; 
-            title.innerText = "Steeled Resolve (+50 XP)"; 
+            title.innerText = "Boundaries Preserved (+100 XP)"; 
             title.style.color = "#4ade80";
-            text.innerText = "The sting of the loss stays with you, but you refuse to let it break your momentum. You secure a replacement meal slip and keep your sights locked on getting out.";
-            ac.innerHTML = '<button onclick="window.location.href=\'difficult-track-stage4.html\'" class="nav-bridge">Proceed to Stage 4 &rarr;</button>';
-        } else {
+            text.innerText = "It breaks your heart to shut the door, but you know you cannot help anyone if you lose your own footing first. You meet them the next day at the resource center, proving you can build a bridge without burning your own house down.";
+            ac.innerHTML = '<a href="difficult-track-stage4-celebration.html" class="nav-bridge">Proceed to Celebration &rarr;</a>';
+        } else if (choiceType === 'B') {
             vp.style.backgroundColor = 'rgba(245,158,11,0.1)'; 
-            title.innerText = "Drained Reserves (+15 XP)"; 
+            title.innerText = "Warning Issued (+30 XP)"; 
             title.style.color = 'var(--warn)';
-            text.innerText = "Chasing down replacement items leaves your feet blistered and your energy depleted, setting you back physically for the next phase of your journey.";
-            ac.innerHTML = '<button onclick="window.location.href=\'difficult-track-stage4.html\'" class="nav-bridge" style="background:var(--warn);">Proceed to Stage 4 &rarr;</button>';
+            text.innerText = "The landlord catches wind of the unauthorized guest within 48 hours. You receive a formal lease warning, and during the chaos, a couple of your new kitchen utensils and your spare jacket disappear.";
+            ac.innerHTML = '<a href="difficult-track-stage4-celebration.html" class="nav-bridge" style="background:var(--warn); text-decoration:none;">Proceed to Celebration &rarr;</a>';
+        } else {
+            vp.style.backgroundColor = 'rgba(239,68,68,0.1)'; 
+            title.innerText = "Lease Violation & Loss (+10 XP)"; 
+            title.style.color = 'var(--danger)';
+            text.innerText = "Good intentions backfire disastrously. An unmanaged crisis inside your apartment leads to building security intervention, a formal lease strike, and the theft of several vital items you just acquired.";
+            ac.innerHTML = '<a href="difficult-track-stage4-celebration.html" class="nav-bridge" style="background:var(--danger); text-decoration:none;">Proceed to Celebration &rarr;</a>';
         }
     }
 </script>
