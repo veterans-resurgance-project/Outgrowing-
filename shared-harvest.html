@@ -7,6 +7,7 @@
 </head>
 <body style="background-color: #0f172a; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
 
+  <!-- GLOBAL PORTAL NAVIGATION BAR -->
   <nav style="background: #144d29; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; gap: 1rem;">
     <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
     <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
@@ -21,14 +22,16 @@
     </div>
   </nav>
 
+  <!-- MAIN CONTENT CONTAINER -->
   <main style="max-width: 900px; margin: 0 auto; padding: 4rem 2rem;">
     
+    <!-- PROGRAM OVERVIEW SECTION -->
     <div style="background: #1e293b; padding: 2.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin-bottom: 2.5rem;">
       <span style="background: rgba(39, 174, 96, 0.15); color: #27ae60; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.4rem 1rem; border-radius: 20px; display: inline-block; margin-bottom: 1rem;">Cooperative Land-Linking</span>
       
       <h1 style="font-size: 2.5rem; font-weight: 900; color: #ffffff; margin: 0 0 1.5rem 0; letter-spacing: -0.5px;">Shared Harvest Program</h1>
       
-      <!-- Cleaned & Restructured Barn Sunset Photo Box -->
+      <!-- HERO OPERATIONS IMAGE PANEL -->
       <div style="width: 100%; background: #0f172a; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 10px 25px rgba(0,0,0,0.5); margin-bottom: 2rem; overflow: hidden; position: relative;">
         <img src="images/barn-sunset.jpg" alt="Willamette Valley Field Operations" style="width: 100%; height: 360px; object-fit: cover; display: block;">
         <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(15,23,42,0.95)); padding: 1.5rem;">
@@ -37,6 +40,7 @@
         </div>
       </div>
 
+      <!-- TEXT PROSE -->
       <div style="font-size: 1.05rem; line-height: 1.8; color: #cbd5e1;">
         <p style="margin-top: 0;">
           The Agricultural Future &amp; Training Initiative (AFTI) <strong>Shared Harvest Program</strong> bridges the critical gap between Willamette Valley landowners—such as aging farmers or widows with under-utilized, idle acreage—and our motivated <strong>Next-Generation Growers</strong>. 
@@ -50,6 +54,7 @@
       </div>
     </div>
 
+    <!-- BENEFIT MATRIX DISPLAY GRID -->
     <div style="background: #1e293b; padding: 2.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin-bottom: 2.5rem;">
       <h2 style="font-size: 1.75rem; font-weight: 800; color: #ffffff; margin-top: 0; margin-bottom: 1.5rem;">How the Shared Harvest Model Benefits Everyone</h2>
       
@@ -71,6 +76,7 @@
       </div>
     </div>
 
+    <!-- FORM CARD INNER BLOCK -->
     <div style="background: #1e293b; padding: 2.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
       <span style="background: rgba(39, 174, 96, 0.15); color: #27ae60; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.4rem 1rem; border-radius: 20px; display: inline-block; margin-bottom: 1rem;">Partner With Us</span>
       
@@ -79,53 +85,23 @@
         Are you a landowner with under-utilized acreage in Linn County or the Willamette Valley? Fill out the form below to connect with our team, review our cooperative MOU framework, and explore partnering with our Next-Generation Growers.
       </p>
 
-      <form action="#" method="POST" style="display: grid; gap: 1.25rem;">
+      <!-- DATA SUBMISSION FORM CONTAINER -->
+      <form id="shared-harvest-form" onsubmit="handleFormSubmit(event)" style="display: grid; gap: 1.25rem;">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
           <div>
             <label style="display: block; font-size: 0.9rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.5rem;">Full Name *</label>
-            <input type="text" name="name" required placeholder="e.g., Jane Doe" style="width: 100%; padding: 0.875rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #ffffff; font-size: 1rem;">
+            <input type="text" id="landowner-name" required placeholder="e.g., Jane Doe" style="width: 100%; padding: 0.875rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #ffffff; font-size: 1rem; box-sizing: border-box;">
           </div>
           <div>
             <label style="display: block; font-size: 0.9rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.5rem;">Phone Number *</label>
-            <input type="tel" name="phone" required placeholder="(541) 555-0199" style="width: 100%; padding: 0.875rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #ffffff; font-size: 1rem;">
+            <input type="tel" id="landowner-phone" required placeholder="(541) 555-0199" style="width: 100%; padding: 0.875rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #ffffff; font-size: 1rem; box-sizing: border-box;">
           </div>
         </div>
 
         <div>
           <label style="display: block; font-size: 0.9rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.5rem;">Email Address *</label>
-          <input type="email" name="email" required placeholder="janedoe@example.com" style="width: 100%; padding: 0.875rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #ffffff; font-size: 1rem;">
+          <input type="email" id="landowner-email" required placeholder="janedoe@example.com" style="width: 100%; padding: 0.875rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #ffffff; font-size: 1rem; box-sizing: border-box;">
         </div>
 
         <div>
           <label style="display: block; font-size: 0.9rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.5rem;">Property Location / Address in Linn County *</label>
-          <input type="text" name="property_location" required placeholder="e.g., Rural Lebanon, OR acreage" style="width: 100%; padding: 0.875rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #ffffff; font-size: 1rem;">
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
-          <div>
-            <label style="display: block; font-size: 0.9rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.5rem;">Approximate Available Acreage</label>
-            <input type="text" name="acreage" placeholder="e.g., 2 to 5 acres" style="width: 100%; padding: 0.875rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #ffffff; font-size: 1rem;">
-          </div>
-          <div>
-            <label style="display: block; font-size: 0.9rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.5rem;">Existing Water / Irrigation Access</label>
-            <select name="water_access" style="width: 100%; padding: 0.875rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #ffffff; font-size: 1rem;">
-              <option value="well">Active Well / Irrigation System</option>
-              <option value="surface">Surface Water Rights</option>
-              <option value="limited">Limited / Needs Development</option>
-              <option value="unsure">Unsure</option>
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <label style="display: block; font-size: 0.9rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.5rem;">Tell Us About Your Property &amp; Goals</label>
-          <textarea name="message" rows="4" placeholder="Describe the land, previous use, and what you hope to achieve through the Shared Harvest partnership..." style="width: 100%; padding: 0.875rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #ffffff; font-size: 1rem; font-family: inherit; resize: vertical;"></textarea>
-        </div>
-
-        <button type="submit" style="background: #27ae60; color: #ffffff; font-weight: 700; font-size: 1.05rem; padding: 1rem 2rem; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; margin-top: 0.5rem;">Submit Land Inquiry &amp; Request MOU</button>
-      </form>
-    </div>
-
-  </main>
-</body>
-</html>
