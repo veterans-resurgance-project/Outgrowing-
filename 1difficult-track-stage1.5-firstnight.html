@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Stage 1.75: Library Document Checklist</title>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --warn:#f59e0b; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:820px; background:var(--card); border-radius:14px; padding:35px; box-sizing:border-box; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
+        .story-lore-box { background:#141c2b; border-left:4px solid var(--accent); border:1px solid #334155; padding:16px; border-radius:8px; margin-bottom:20px; font-size:0.9rem; color:#cbd5e1; line-height:1.6; }
+        .story-lore-box b { color:var(--accent); display:block; margin-bottom:6px; }
+        .checklist-container { display:flex; flex-direction:column; gap:12px; margin-top:20px; margin-bottom:25px; }
+        .check-row { background:#0f172a; border:1px solid #334155; padding:16px 20px; border-radius:8px; display:flex; gap:16px; align-items:flex-start; cursor:pointer; transition: border-color 0.2s; }
+        .check-row:hover { border-color:var(--accent); background:rgba(56,189,248,0.02); }
+        .check-row input[type="checkbox"] { width:22px; height:22px; accent-color:var(--primary); margin-top:2px; cursor:pointer; }
+        .item-title { font-weight:bold; color:#f8fafc; font-size:1.05rem; display:flex; justify-content:space-between; align-items:center; }
+        .item-desc { font-size:0.85rem; color:#94a3b8; margin-top:4px; line-height:1.5; }
+        .xp-tag { background:rgba(39,174,96,0.15); color:#4ade80; font-size:0.75rem; font-weight:bold; padding:2px 8px; border-radius:4px; margin-left:10px; }
+        .nav-bridge { display:inline-block; background:var(--primary); color:#fff; padding:14px 28px; border:none; border-radius:6px; font-weight:bold; cursor:pointer; text-decoration:none; text-align:center; transition: background 0.2s; }
+        .nav-bridge:hover { background:#219653; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- GLOBAL SCOREBOARD HUD -->
+    <div class="hud-bar">
+        <span>Path: <span style="color:var(--accent);">Foster-Alum Track</span></span>
+        <div style="display:flex; align-items:center; gap:20px;">
+            <div>Global XP: <span id="global-points" style="color:#4ade80;">200</span></div>
+            <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Exit</button>
+        </div>
+    </div>
+    
+    <div>
+        <h2 style="margin:0 0 1rem 0; color:#fff;">📋 Stage 1.75: Morning Document Preparation Hub</h2>
+        
+        <div class="story-lore-box">
+            <b>📖 Public Library Warmth & Baseline Strategy:</b>
+            The heavy doors of the Lebanon Public Library swing open at 10:00 AM. You step inside out of the morning frost, instantly feeling the warm air thaw your fingers. Before you head down the street to the official case management queue, you can utilize the free public computers, printers, and scanners here to organize your foundational credentials. 
+        </div>
+
+        <p style="line-height:1.6; color:#cbd5e1;">Check off the items below as you assemble your portfolio. <em>Note: Some identity papers take weeks to arrive from state records—you do NOT need to complete all of them to advance, but your check marks stay locked into local memory permanently.</em></p>
+        
+        <!-- CHECKLIST ELEMENT CONTAINER -->
+        <div class="checklist-container">
+            <!-- ITEM 1 -->
+            <label class="check-row">
+                <input type="checkbox" class="portfolio-cb" data-xp="30" onchange="processChecklistState()">
+                <div style="flex-grow:1;">
+                    <div class="item-title">1. Public Library Card Entry <span class="xp-tag">+30 XP</span></div>
+                    <div class="item-desc">Unlocks free daily computer reservation lines, hardware scanners, high-speed Wi-Fi, and a secure environment to check emails.</div>
+                </div>
+            </label>
+
+            <!-- ITEM 2 -->
+            <label class="check-row">
+                <input type="checkbox" class="portfolio-cb" data-xp="50" onchange="processChecklistState()">
+                <div style="flex-grow:1;">
+                    <div class="item-title">2. State Issued Photo ID / Drivers License <span class="xp-tag">+50 XP</span></div>
+                    <div class="item-desc">Critical core document required by local authorities, regional medical clinics, and housing background operators.</div>
+                </div>
+            </label>
+
+            <!-- ITEM 3 -->
+            <label class="check-row">
+                <input type="checkbox" class="portfolio-cb" data-xp="40" onchange="processChecklistState()">
+                <div style="flex-grow:1;">
+                    <div class="item-title">3. Certified Birth Certificate Copy <span class="xp-tag">+40 XP</span></div>
+                    <div class="item-desc">Primary validation document requested by municipal voucher managers to activate long-term agricultural slots.</div>
+                </div>
+            </label>
+
+            <!-- ITEM 4 -->
+            <label class="check-row">
+                <input type="checkbox" class="portfolio-cb" data-xp="60" onchange="processChecklistState()">
+                <div style="flex-grow:1;">
+                    <div class="item-title">4. Signed DHS Independent Living / Foster Care Verification Letter <span class="xp-tag">+60 XP</span></div>
+                    <div class="item-desc">The specific document proving you aged out of state care, unlocking critical fee-waivers and priority housing entry.</div>
+                </div>
+            </label>
+        </div>
+
+        <!-- PROGRESSION BAR FOOTER ACTION PANEL -->
+        <div style="background:rgba(255,255,255,0.02); border:1px solid #334155; padding:20px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
+            <div style="font-size:0.9rem; color:#94a3b8;">
+                ⚠️ Unfinished document checks stay saved for your next visit.
+            </div>
+            <a href="difficult-track-stage2-daycenter.html" class="nav-bridge">Proceed to Day Center Intake &rarr;</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Initialize dynamic points based on systemic milestones
+        let runningTotal = parseInt(localStorage.getItem('afti_global_xp') || '200', 10);
+        localStorage.setItem('afti_base_library_xp', runningTotal); // Lock page baseline score
+        
+        loadSavedChecklistState();
+    });
+
+    function processChecklistState() {
+        const checkBoxes = document.querySelectorAll('.portfolio-cb');
+        let baselineScore = parseInt(localStorage.getItem('afti_base_library_xp') || '200', 10);
+        let accumulatedChecklistXP = 0;
+        const memoryCacheMap = {};
+
+        // Loop checks dynamically to structure total values cleanly
+        checkBoxes.forEach((box, itemIndex) => {
+            memoryCacheMap[itemIndex] = box.checked;
+            if (box.checked) {
+                accumulatedChecklistXP += parseInt(box.getAttribute('data-xp'), 10);
+            }
+        });
+
+        // Commit checkboxes states map to browser cache space
+        localStorage.setItem('afti_stage1_75_checklist_cache', JSON.stringify(memoryCacheMap));
+
+        // Sync and execute dynamic portfolio values back to structural main registry
+        let adjustedGlobalTotal = baselineScore + accumulatedChecklistXP;
+        localStorage.setItem('afti_global_xp', adjustedGlobalTotal);
+        document.getElementById('global-points').innerText = adjustedGlobalTotal;
+    }
+
+    function loadSavedChecklistState() {
+        const savedCacheString = localStorage.getItem('afti_stage1_75_checklist_cache');
+        const checkBoxes = document.querySelectorAll('.portfolio-cb');
+        
+        if (savedCacheString) {
+            try {
+                const parseMap = JSON.parse(savedCacheString);
+                checkBoxes.forEach((box, itemIndex) => {
+                    if (parseMap[itemIndex] !== undefined) {
+                        box.checked = parseMap[itemIndex];
+                    }
+                });
+            } catch (err) {
+                console.error("Error loading checklist state configuration metrics:", err);
+            }
+        }
+        
+        // Execute dynamic calculation loops to mount correct output figures to HUD container
+        let baselineScore = parseInt(localStorage.getItem('afti_base_library_xp') || '200', 10);
+        let accumulatedChecklistXP = 0;
+        
+        checkBoxes.forEach((box) => {
+            if (box.checked) {
+                accumulatedChecklistXP += parseInt(box.getAttribute('data-xp'), 10);
+            }
+        });
+        
+        let adjustedGlobalTotal = baselineScore + accumulatedChecklistXP;
+        localStorage.setItem('afti_global_xp', adjustedGlobalTotal);
+        document.getElementById('global-points').innerText = adjustedGlobalTotal;
+    }
+</script>
+</body>
+</html>
