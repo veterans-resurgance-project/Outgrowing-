@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFTI Portal - For Farmers &amp; Landowners</title>
+  <style>
+    :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --border:rgba(255,255,255,0.1); }
+    body { font-family:system-ui, -apple-system, sans-serif; background:var(--bg); color:var(--txt); margin:0; padding:0; }
+    
+    /* Sticky Top Portal Nav */
+    nav { background:var(--hud); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:1000; }
+    nav .logo { font-weight:900; font-size:1.25rem; color:#fff; }
+    nav .links { display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap; }
+    nav a { color:#cbd5e1; text-decoration:none; font-weight:500; font-size:0.95rem; }
+    nav a.active { color:#fff; font-weight:700; border-bottom:2px solid var(--primary); padding-bottom:2px; }
+    
+    main { max-width:950px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box; }
+    .panel { background:var(--card); border-radius:14px; border:1px solid var(--border); padding:35px; box-shadow:0 10px 25px rgba(0,0,0,0.4); margin-bottom:2.5rem; }
+    
+    h1 { font-size:2.4rem; font-weight:900; margin-top:0; margin-bottom:1rem; color:#ffffff; letter-spacing:-0.5px; }
+    h2 { font-size:1.5rem; color:#ffffff; margin-top:0; margin-bottom:1.25rem; font-weight:800; }
+    p, li { line-height:1.7; color:#cbd5e1; font-size:1.02rem; }
+    
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1.5rem; margin-top:1.5rem; }
+    .card { background:#0f172a; border:1px solid #334155; border-radius:10px; padding:20px; }
+    .card h3 { margin-top:0; margin-bottom:8px; color:var(--accent); font-size:1.15rem; }
+    .card p { font-size:0.9rem; margin:0; }
+    
+    .action-box { text-align:center; background:rgba(39,174,96,0.08); border:1px solid rgba(39,174,96,0.3); padding:30px; border-radius:12px; margin-top:2rem; }
+    .btn { display:inline-block; background:var(--primary); color:#fff; padding:12px 24px; border:none; border-radius:6px; font-weight:bold; cursor:pointer; text-decoration:none; transition:background 0.2s; }
+    .btn:hover { background:#219653; }
+  </style>
+</head>
+<body>
+
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
+    <div class="logo">AFTI Portal</div>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="training-modules-and-mutual-growth.html">Training &amp; Certification</a>
+      <a href="partners.html" class="active">For Farmers</a>
+      <a href="shared-harvest.html">Shared Harvest</a>
+      <a href="incubator.html">Incubator</a>
+      <a href="newsletter.html">Newsletter</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="how-to-help.html">How to Help</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- PROGRAM OVERVIEW PANEL -->
+    <div class="panel">
+      <span style="background:rgba(56,189,248,0.15); color:var(--accent); font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; display:inline-block; margin-bottom:1rem;">Land Partnership Portal</span>
+      <h1>Partnering with Next-Generation Growers</h1>
+      <p style="margin:0;">
+        Managing a farm demands unrelenting time and physical labor. Across the Willamette Valley, valuable agricultural acreage sits under-utilized because daily operations have become overwhelming. Outgrowing-Ag solves this by deploying structured, fully supervised training crews to manage, restore, and cultivate your idle land—bringing crops to harvest with zero administrative burden on you.
+      </p>
+    </div>
+
+    <!-- VALUE PROPOSITION GRID -->
+    <div class="panel">
+      <h2>🛡️ How We Protect Your Time &amp; Legacy</h2>
+      <p style="margin-top:0; color:#94a3b8;">Our dual-track workforce framework operates under direct supervision so you can stay in full control without doing the heavy lifting.</p>
+      
+      <div class="grid">
+        <div class="card">
+          <h3>📋 Zero-Burden Management</h3>
+          <p>We supply an experienced core team that handles initial site layout, irrigation setup, planting, and seasonal tasks. Our staff coordinates day-to-day operations so you don't have to field labor issues.</p>
+        </div>
+        <div class="card">
+          <h3>🌾 Tax &amp; Use Compliance</h3>
+          <p>Our soil remediation and active cropping cycles support active agricultural land use. This hands-on management helps ensure your property maintains its intended agricultural tax deferral eligibility.</p>
+        </div>
+        <div class="card">
+          <h3>📐 Defined MOU Protection</h3>
+          <p>Everything we do is bound by clear, custom Memorandums of Understanding (MOUs). We establish clear site perimeters, strict safety compliance rules, and rigid boundaries to completely respect your private space.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CALL TO ACTION PANEL -->
+    <div class="panel">
+      <h2>🤝 Build a Sustainable Partnership</h2>
+      <p style="margin-top:0;">
+        Through partnership with regional Extension Research, we transition idle fields into thriving hubs. Landowners keep an equitable share-crop revenue percentage (30%–40%) to offset maintenance bills, while our trainees build production track records to kick-start their independent futures.
+      </p>
+      
+      <div class="action-box">
+        <p style="margin-top:0; margin-bottom:15px; font-weight:600; color:#fff;">Ready to look at a test plot or connect with our outreach coordinators?</p>
+        <a href="shared-harvest.html" class="btn">Explore the Shared Harvest Program &rarr;</a>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
