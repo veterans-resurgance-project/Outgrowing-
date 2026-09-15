@@ -213,3 +213,111 @@
 
 </body>
 </html>
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; color: #cbd5e1; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem;">Caption / Region Context</label>
+          <input type="text" id="photoCaption" required placeholder="e.g., Trainees grading roots in Linn County" style="width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: white; box-sizing: border-box;">
+        </div>
+        <button type="submit" style="background: #2563eb; color: white; border: none; padding: 0.6rem 1.25rem; border-radius: 6px; font-weight: 700; cursor: pointer;">Upload to Gallery</button>
+      </form>
+    </div>
+
+    <!-- Live Landowner Intakes Panel -->
+    <div style="background: #1e293b; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); padding: 1.5rem;">
+      <h3 style="color: #ffffff; font-size: 1.2rem; margin-top: 0; margin-bottom: 1rem;">Incoming Landowner Inquiries (Live Registry Cache)</h3>
+      <div id="intakeContainer" style="display: grid; gap: 1rem;">
+        <!-- Dynamically populated from shared-harvest.html inputs -->
+        <p style="color: #94a3b8; margin: 0; font-size: 0.95rem;">No active landowner inquiries currently cached in this local terminal.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // SECURE STAFF PASSCODE VALIDATION BLOCK
+    function verifyStaffPasscode(event) {
+      event.preventDefault();
+      const input = document.getElementById('passcodeInput').value;
+      const errorDiv = document.getElementById('authError');
+      
+      // Standard AFTI administrative master access code
+      if (input === "1994") {
+        document.getElementById('authModal').style.display = 'none';
+        document.getElementById('staffDashboard').style.display = 'block';
+        loadCachedIntakes();
+      } else {
+        errorDiv.style.display = 'block';
+        document.getElementById('passcodeInput').value = '';
+      }
+    }
+
+    // LOAD CACHED INTAKES FROM SHARED HARVEST FORM
+    function loadCachedIntakes() {
+      const container = document.getElementById('intakeContainer');
+      const savedData = localStorage.getItem('afti_active_landowner_inquiry');
+      
+      if (savedData) {
+        try {
+          const data = JSON.parse(savedData);
+          container.innerHTML = `
+            <div style="background: #0f172a; border: 1px solid #334155; padding: 1.25rem; border-radius: 8px; line-height: 1.6;">
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #334155; padding-bottom: 0.5rem; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+                <strong style="color: #4ade80; font-size: 1.1rem;">👤 ${data.fullName}</strong>
+                <span style="color: #94a3b8; font-size: 0.8rem;">Received: ${new Date(data.submissionDate).toLocaleDateString()}</span>
+              </div>
+              <div style="font-size: 0.95rem; color: #cbd5e1; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <div>📞 <strong>Phone:</strong> ${data.phone}</div>
+                <div>✉️ <strong>Email:</strong> ${data.email}</div>
+                <div>📍 <strong>Location:</strong> ${data.location}</div>
+                <div>🌾 <strong>Acreage:</strong> ${data.acreage} (Water: <span style="color:#38bdf8;">${data.waterAccess}</span>)</div>
+              </div>
+              <div style="background: #1e293b; padding: 0.75rem; border-radius: 6px; font-size: 0.9rem; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.05);">
+                <strong>Goals:</strong> "${data.propertyGoals}"
+              </div>
+            </div>
+          `;
+        } catch(e) {
+          console.error("Error parsing landowner cache telemetry:", e);
+        }
+      }
+    }
+
+    // PUBLISH ACTION: NEWSLETTER DISPATCH
+    function handleNewDispatch(event) {
+      event.preventDefault();
+      const newDispatch = {
+        date: document.getElementById('dispatchDate').value,
+        title: document.getElementById('dispatchTitle').value,
+        desc: document.getElementById('dispatchDesc').value
+      };
+      
+      localStorage.setItem('afti_custom_newsletter_dispatch', JSON.stringify(newDispatch));
+      alert("Success! Dispatch published to local registry cache.");
+      event.target.reset();
+    }
+
+    // PUBLISH ACTION: GALLERY PICTURE
+    function handleNewPhoto(event) {
+      event.preventDefault();
+      const newPhoto = {
+        url: document.getElementById('photoUrl').value,
+        title: document.getElementById('photoTitle').value,
+        caption: document.getElementById('photoCaption').value
+      };
+      
+      localStorage.setItem('afti_custom_gallery_photo', JSON.stringify(newPhoto));
+      alert("Success! Photo properties mounted to public gallery cache.");
+      event.target.reset();
+    }
+
+    // ADMINISTRATIVE EMERGENCY RESET
+    function clearIntakeQueue() {
+      if (confirm("Are you sure you want to purge the incoming registration telemetry cache?")) {
+        localStorage.removeItem('afti_active_landowner_inquiry');
+        document.getElementById('intakeContainer').innerHTML = `
+          <p style="color: #94a3b8; margin: 0; font-size: 0.95rem;">No active landowner inquiries currently cached in this local terminal.</p>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>
