@@ -4,7 +4,7 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AFTI - Agricultural Future &amp; Training Initiative</title>
 <style>
-:root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --grey:#334155; --nav-bg:#144d29; }
+:root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --grey:#334155; --nav-bg:#144d29; --accent:#38bdf8; }
 body { font-family:system-ui,-apple-system,sans-serif; background:var(--bg); color:#fff; margin:0; padding:0; }
 nav { background:var(--nav-bg); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); flex-wrap:wrap; gap:1rem; }
 nav a { color:#cbd5e1; text-decoration:none; font-weight:500; font-size:0.95rem; }
@@ -12,15 +12,30 @@ nav a.active { color:#fff; font-weight:700; border-bottom:2px solid var(--primar
 main { max-width:900px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box; }
 .block { background:var(--card); padding:2.5rem; border-radius:16px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 10px 30px rgba(0,0,0,0.4); margin-bottom:2.5rem; }
 .img-box { width:100%; background:#0f172a; border-radius:12px; border:1px solid rgba(255,255,255,0.15); margin:1.5rem 0; overflow:hidden; position:relative; }
-.btn { display:block; text-align:center; color:#fff; text-decoration:none; padding:15px; border-radius:8px; font-weight:bold; font-size:1.1rem; margin-top:1.2rem; box-shadow:0 4px 15px rgba(0,0,0,0.3); }
+.btn { display:block; text-align:center; color:#fff; text-decoration:none; padding:15px; border-radius:8px; font-weight:bold; font-size:1.1rem; margin-top:1.2rem; box-shadow:0 4px 15px rgba(0,0,0,0.3); transition: transform 0.2s, background 0.2s; }
+.btn:hover { transform: translateY(-2px); }
+.narrative-callout { background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; padding: 25px; margin: 2rem 0; line-height: 1.7; }
 </style>
 </head>
 <body>
 <nav>
 <div style="font-weight:900; font-size:1.25rem; color:#fff;">AFTI Portal</div>
 <div style="display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap;">
-<a href="index.html" class="active">Home</a><a href="training-modules-and-mutual-growth.html">Training &amp; Certification</a><a href="partners.html">For Farmers</a><a href="shared-harvest.html">Shared Harvest</a><a href="incubator.html">Incubator</a><a href="newsletter.html">Newsletter</a><a href="gallery.html">Gallery</a><a href="how-to-help.html">How to Help</a><a href="water-rights.html">Water Rights</a><a href="equipment-sops.html">Equipment SOPs</a><a href="soil-fertility.html">Soil Fertility</a>
-
+<a href="index.html" class="active">Home</a>
+<a href="training-modules-and-mutual-growth.html">Training &amp; Certification</a>
+<a href="partners.html">For Farmers</a>
+<a href="shared-harvest.html">Shared Harvest</a>
+<a href="incubator.html">Incubator</a>
+<a href="newsletter.html">Newsletter</a>
+<a href="gallery.html">Gallery</a>
+<a href="how-to-help.html">How to Help</a>
+<a href="water-rights.html">Water Rights</a>
+<a href="equipment-sops.html">Equipment SOPs</a>
+<a href="soil-fertility.html">Soil Fertility</a>
+<!-- RELOCATED NAVIGATION PORTALS MOVED TO THE TOP NAV BAR -->
+<a href="shared-harvest-hub.html?v=18" style="color: var(--accent); font-weight: 600;">🌾 Landowner Hub</a>
+<a href="technical-tutorials.html?v=18" style="color: var(--accent); font-weight: 600;">🔨 Technical Bank</a>
+<a href="incubator-hub.html?v=18" style="color: var(--accent); font-weight: 600;">🌱 Incubator Launchpad</a>
 </div>
 </nav>
 <main>
@@ -28,6 +43,7 @@ main { max-width:900px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box;
 <span style="background:rgba(39,174,96,0.15); color:#27ae60; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; display:inline-block; margin-bottom:1rem;">Willamette Valley Initiative</span>
 <h1 style="font-size:2.3rem; font-weight:900; margin:0 0 1rem 0; letter-spacing:-0.5px;">Cultivating Agricultural Futures</h1>
 <p style="font-size:1.05rem; line-height:1.7; color:#cbd5e1; margin:0;">The Agricultural Future &amp; Training Initiative (AFTI) bridges the gap between under-utilized rural land and next-generation growers. We combine rigorous vocational pathways, custom advisory SOP alignment, and cooperative land-linking frameworks to deploy elite field teams that ensure mutual economic revitalization and regional food security across Linn County.</p>
+
 <div class="img-box">
 <img src="images/barn-sunset.jpg" alt="Field Operations" style="width:100%; height:300px; object-fit:cover; display:block;">
 <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,23,42,0.95)); padding:1.2rem;">
@@ -35,10 +51,25 @@ main { max-width:900px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box;
 <p style="color:#cbd5e1; margin:0.2rem 0 0 0; font-size:0.9rem;">Restoring under-productive land assets into high-yield community infrastructure.</p>
 </div>
 </div>
-<a href="farmer-apprentice-story.html" class="btn" style="background:var(--primary);">🚀 Launch Immersive Qualification Path &rarr;</a>
-<a href="shared-harvest-hub.html?v=18" class="btn" style="background:var(--grey);">🌾 Open Landowner Mitigation Hub &rarr;</a>
-<a href="technical-tutorials.html?v=18" class="btn" style="background:var(--grey);">🔨 Open Technical Modules Bank &rarr;</a>
-<a href="incubator-hub.html?v=18" class="btn" style="background:var(--grey);">🌱 Open Business Incubator Launchpad &rarr;</a>
+
+<!-- SIMULATION INTERACTIVE BUTTON - MOVED TO THE NORTH -->
+<h3 style="color: #fff; margin-bottom: 5px; font-size: 1.2rem;">Ready to Begin Your Progression?</h3>
+<a href="farmer-apprentice-story.html" class="btn" style="background:var(--primary); margin-top: 0.5rem; margin-bottom: 2rem;">🚀 Launch Immersive Qualification Path &rarr;</a>
+
+<!-- COMPELLING NARRATIVE BLOCK INSERTED INTO THE NEW OPEN VERTICAL SPACE -->
+<div class="narrative-callout">
+<h3 style="color: #4ade80; margin-top: 0; margin-bottom: 12px; font-size: 1.3rem;">Have you ever dreamed of holding the keys to your own farm?</h3>
+<p style="color: #cbd5e1; margin: 0 0 15px 0; font-size: 1rem;">
+To feel the dirt in your hands, grow real food, and anchor your own independence? It feels completely impossible when the daily grind is a brutal battle just to survive—when missing documents, systemic loops, and a lack of capital block every door before you can even take a step. 
+</p>
+<p style="color: #cbd5e1; margin: 0 0 15px 0; font-size: 1rem;">
+<strong>Our simulation is built exactly for you.</strong> Start right where you are standing today. As you navigate choices, handle bureaucratic hurdles, and build team networks, the system registers your effort. Every milestone box you check accumulates points that build a real-world digital portfolio. Completion of these training steps creates verified metrics to help you qualify for land trust grants, farm placement matching programs, and institutional resources to turn your dream into reality.
+</p>
+<p style="color: #cbd5e1; margin: 0; font-size: 1rem;">
+We challenge you to select <strong>The Foster-Alum Route (The Difficult Path)</strong>. See how your resilience locks in at the absolute absolute threshold of the journey. Outmaneuver systemic cracks, coordinate field dispatches, and protect your team to beat the hard winter weather and the bank boss in the final high-stakes battle!
+</p>
+</div>
+
 </div>
 </main>
 </body>
