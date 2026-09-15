@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFTI - Business Incubator Launchpad</title>
+  <style>
+    :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --border:rgba(255,255,255,0.1); }
+    body { font-family:system-ui, -apple-system, sans-serif; background:var(--bg); color:var(--txt); margin:0; padding:0; }
+    
+    /* Sticky Top Portal Nav */
+    nav { background:var(--hud); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:1000; }
+    nav .logo { font-weight:900; font-size:1.25rem; color:#fff; }
+    nav .links { display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap; }
+    nav a { color:#cbd5e1; text-decoration:none; font-weight:500; font-size:0.95rem; }
+    nav a.active { color:#fff; font-weight:700; border-bottom:2px solid var(--primary); padding-bottom:2px; }
+    
+    main { max-width:950px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box; }
+    .panel { background:var(--card); border-radius:14px; border:1px solid var(--border); padding:35px; box-shadow:0 10px 25px rgba(0,0,0,0.4); margin-bottom:2.5rem; }
+    
+    h1 { font-size:2.4rem; font-weight:900; margin-top:0; margin-bottom:1rem; color:#ffffff; letter-spacing:-0.5px; }
+    h2 { font-size:1.5rem; color:#ffffff; margin-top:0; margin-bottom:1.25rem; font-weight:800; }
+    p, li { line-height:1.7; color:#cbd5e1; font-size:1.02rem; }
+    
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1.5rem; margin-top:1.5rem; }
+    .card { background:#0f172a; border:1px solid #334155; border-radius:10px; padding:20px; display:flex; flex-direction:column; justify-content:space-between; }
+    .card h3 { margin-top:0; margin-bottom:8px; color:var(--accent); font-size:1.15rem; }
+    .card p { font-size:0.9rem; margin-bottom:15px; }
+    
+    /* Interactive Checklist Styles */
+    .checklist { display:flex; flex-direction:column; gap:10px; margin-top:1.5rem; }
+    .check-item { background:#0f172a; border:1px solid #334155; padding:14px 18px; border-radius:8px; display:flex; gap:14px; align-items:center; cursor:pointer; }
+    .check-item input[type="checkbox"] { width:20px; height:22px; accent-color:var(--primary); cursor:pointer; margin:0; }
+    .check-text { font-size:0.95rem; font-weight:bold; }
+  </style>
+  <script src="afti-tracker.js"></script>
+</head>
+<body>
+
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
+    <div class="logo">AFTI Portal</div>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="training-modules-and-mutual-growth.html">Training &amp; Certification</a>
+      <a href="partners.html">For Farmers</a>
+      <a href="shared-harvest.html">Shared Harvest</a>
+      <a href="incubator.html" class="active">Incubator</a>
+      <a href="newsletter.html">Newsletter</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="how-to-help.html">How to Help</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- MAIN HERO OVERVIEW PANEL -->
+    <div class="panel">
+      <span style="background:rgba(39,174,96,0.15); color:#27ae60; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; display:inline-block; margin-bottom:1rem;">Micro-Enterprise Development</span>
+      <h1>Business Incubator Launchpad</h1>
+      <p style="margin:0;">
+        The Business Incubator Launchpad bridges the gap between field mastery and economic sovereignty. Once advanced trainees achieve Tier 4 status, they transition from supervised crews into independent managers. Here, we provide the tools to build agricultural micro-enterprises, secure credit union backing, and turn accrued deferred compensation into real-world business start-up capital.
+      </p>
+    </div>
+
+    <!-- CORE CHANNELS GRID -->
+    <div class="panel">
+      <h2>🚀 Start-Up Support Infrastructure</h2>
+      <div class="grid">
+        <div class="card">
+          <div>
+            <h3>🏦 Local Credit Union Integration</h3>
+            <p>Establish fee-free business checking and share-secured tools to bypass predatory fees, unlock local financing paths, and directly receive direct deposits.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div>
+            <h3>📄 Structured Legal Formation</h3>
+            <p>Step-by-step guidance on setting up agricultural LLCs, securing employer identification parameters, and reviewing regulatory tax frameworks.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div>
+            <h3>📦 Wholesale Marketing Nodes</h3>
+            <p>Direct integration into regional cooperative marketing chains, enabling new small-scale growers to distribute crops under a collective banner.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERSISTENT BUSINESS BENCHMARKS BLOCK -->
+    <div class="panel">
+      <h2>📋 Enterprise Milestone Checklist</h2>
+      <p style="margin-top:0; margin-bottom:15px;">Check off your business preparation steps below. Your progress parameters stay saved locally in browser memory:</p>
+      
+      <div class="checklist">
+        <label class="check-item">
+          <input type="checkbox" id="inc-box-1" onchange="saveIncubatorState()">
+          <span class="check-text">Establish Secure, Fee-Free Checking Account</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" id="inc-box-2" onchange="saveIncubatorState()">
+          <span class="check-text">Complete Baseline Agriculture Business Plan Template</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" id="inc-box-3" onchange="saveIncubatorState()">
+          <span class="check-text">Review Standard Share-Crop Memorandum Guidelines</span>
+        </label>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        loadIncubatorState();
+    });
+
+    function saveIncubatorState() {
+        const state = {
+            box1: document.getElementById('inc-box-1').checked,
+            box2: document.getElementById('inc-box-2').checked,
+            box3: document.getElementById('inc-box-3').checked
+        };
+        localStorage.setItem('afti_incubator_checklist_cache', JSON.stringify(state));
+    }
+
+    function loadIncubatorState() {
+        const saved = localStorage.getItem('afti_incubator_checklist_cache');
+        if (saved) {
+            try {
+                const state = JSON.parse(saved);
+                document.getElementById('inc-box-1').checked = !!state.box1;
+                document.getElementById('inc-box-2').checked = !!state.box2;
+                document.getElementById('inc-box-3').checked = !!state.box3;
+            } catch(e) {
+                console.error("Incubator cache parser failure:", e);
+            }
+        }
+    }
+  </script>
+</body>
+</html>
