@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFTI Portal - How to Help &amp; Community Support</title>
+  <style>
+    :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --border:rgba(255,255,255,0.1); }
+    body { font-family:system-ui, -apple-system, sans-serif; background:var(--bg); color:var(--txt); margin:0; padding:0; }
+    
+    /* Sticky Top Portal Nav */
+    nav { background:var(--hud); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:1000; }
+    nav .logo { font-weight:900; font-size:1.25rem; color:#fff; }
+    nav .links { display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap; }
+    nav a { color:#cbd5e1; text-decoration:none; font-weight:500; font-size:0.95rem; }
+    nav a.active { color:#fff; font-weight:700; border-bottom:2px solid var(--primary); padding-bottom:2px; }
+    
+    main { max-width:950px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box; }
+    .panel { background:var(--card); border-radius:14px; border:1px solid var(--border); padding:35px; box-shadow:0 10px 25px rgba(0,0,0,0.4); margin-bottom:2.5rem; }
+    
+    h1 { font-size:2.4rem; font-weight:900; margin-top:0; margin-bottom:1rem; color:#ffffff; letter-spacing:-0.5px; }
+    h2 { font-size:1.5rem; color:#ffffff; margin-top:0; margin-bottom:1.25rem; font-weight:800; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:5px; }
+    h3 { font-size:1.15rem; color:var(--accent); margin-top:1.5rem; margin-bottom:0.5rem; }
+    p, li { line-height:1.7; color:#cbd5e1; font-size:1.02rem; }
+    
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1.5rem; margin-top:1.5rem; }
+    .card { background:#0f172a; border:1px solid #334155; border-radius:10px; padding:20px; }
+    .card h3 { margin-top:0; margin-bottom:8px; color:var(--accent); font-size:1.15rem; }
+    .card p { font-size:0.9rem; margin:0; line-height:1.6; }
+    
+    /* Interactive Engagement Box */
+    .support-box { background:rgba(39, 174, 96, 0.05); border-left:4px solid var(--primary); padding:20px; border-radius:0 8px 8px 0; margin:1.5rem 0; }
+  </style>
+</head>
+<body>
+
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
+    <div class="logo">AFTI Portal</div>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="training-modules-and-mutual-growth.html">Training &amp; Certification</a>
+      <a href="partners.html">For Farmers</a>
+      <a href="shared-harvest.html">Shared Harvest</a>
+      <a href="incubator.html">Incubator</a>
+      <a href="newsletter.html">Newsletter</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="how-to-help.html" class="active">How to Help</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- OVERVIEW HEADER -->
+    <div class="panel">
+      <span style="background:rgba(39,174,96,0.15); color:#27ae60; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; display:inline-block; margin-bottom:1rem;">Community Investment</span>
+      <h1>Supporting Agricultural Independence</h1>
+      <p style="margin:0;">
+        The Agricultural Future &amp; Training Initiative (AFTI) thrives on community trust, shared assets, and coordinated mutual aid. By engaging with our regional programs, you actively invest in unhoused veterans, foster-care alumni, and individuals navigating life transitions to establish long-term economic sovereignty.
+      </p>
+    </div>
+
+    <!-- CHANNELS OF ENGAGEMENT -->
+    <div class="panel">
+      <h2>🛠️ Ways to Invest in the Program</h2>
+      <p style="margin-top:0; color:#94a3b8;">We prefer a strategy centered on small, decentralized community inputs that keep individuals deeply invested in our localized programs.</p>
+      
+      <div class="grid">
+        <!-- MATERIEL INPUTS -->
+        <div class="card">
+          <h3>🔧 Tool &amp; Equipment Donations</h3>
+          <p>We actively seek donations of physical field infrastructure. Contributing small, reliable implements—such as hand tools, grafting knives, seed trays, or irrigation fittings—directly arms our training crews with the assets they depend on.</p>
+        </div>
+        <!-- SKILLED VOLUNTEERING -->
+        <div class="card">
+          <h3>💻 Specialized Volunteer Support</h3>
+          <p>Our program architecture runs lean. You can contribute your professional time to support our back-end infrastructure. We actively route volunteers into dedicated roles for IT configuration, website construction, and community outreach.</p>
+        </div>
+        <!-- SPONSORSHIPS -->
+        <div class="card">
+          <h3>🌱 Sponsorship &amp; Growth Capital</h3>
+          <p>Corporate partners can back specific regional staging plots or cover stipend draws for next-generation growers. This capital directly builds our Credit Union reserves, funding start-up micro-enterprises at graduation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROGRAM ADVOCACY PANEL -->
+    <div class="panel">
+      <h2>🤝 The Value of Shared Credit</h2>
+      <div class="support-box">
+        <strong style="color:#4ade80; font-size:1.1rem; display:block; margin-bottom:5px;">✓ Built on Mutual Dignity</strong>
+        Every bit of support received goes straight to the frontline field teams. By shifting our focus to decentralized community giving and shared credit, we protect our participants from rigid institutional constraints and establish true agricultural independence.
+      </div>
+      <p style="margin-bottom:0;">
+        If you want to coordinate a material tool drop-off, review our active volunteer schedules, or discuss sponsorship boundaries, reach out to our team desks through the community network links.
+      </p>
+    </div>
+  </main>
+
+</body>
+</html>
