@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFTI Command Core - Executive Fiduciary Vault</title>
+  <style>
+    :root { 
+      --bg:#0f172a; 
+      --card:#1e293b; 
+      --txt:#f8fafc; 
+      --primary:#2563eb; 
+      --success:#27ae60; 
+      --warn:#f59e0b; 
+      --border:rgba(255,255,255,0.1); 
+      --accent:#38bdf8; 
+    }
+    body { font-family:system-ui, -apple-system, sans-serif; background:var(--bg); color:var(--txt); margin:0; padding:0; }
+    
+    /* Sticky Top Control Nav */
+    nav { background:#144d29; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:1000; }
+    nav .logo { font-weight:900; font-size:1.25rem; color:#fff; }
+    nav a { color:#cbd5e1; text-decoration:none; font-weight:600; font-size:0.95rem; }
+    nav a:hover { color:#fff; }
+    
+    main { max-width:1100px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box; }
+    
+    /* Layout Structure */
+    .vault-layout { display:grid; grid-template-columns:1fr 2fr; gap:2rem; }
+    @media(max-width:850px) { .vault-layout { grid-template-columns:1fr; } }
+    
+    .panel { background:var(--card); border-radius:14px; border:1px solid var(--border); padding:30px; box-shadow:0 10px 25px rgba(0,0,0,0.4); margin-bottom:2rem; }
+    .panel-title { font-size:1.3rem; margin-top:0; margin-bottom:1.2rem; color:#fff; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.05); display:flex; align-items:center; gap:10px; }
+    
+    .doc-block { background:#0f172a; border:1px solid #334155; border-radius:8px; padding:20px; margin-bottom:1.5rem; line-height:1.6; font-size:0.95rem; }
+    .doc-block h3 { margin-top:0; margin-bottom:10px; font-size:1.1rem; }
+    .param-highlight { color:var(--success); font-weight:bold; }
+    
+    /* Swan Graphic Placeholder */
+    .swan-header { text-align:center; border:1px dashed rgba(56,189,248,0.3); padding:15px; border-radius:8px; background:rgba(56,189,248,0.02); margin-bottom:2rem; color:var(--accent); font-weight:bold; font-size:0.9rem; }
+  </style>
+</head>
+<body>
+
+  <!-- TOP MANAGEMENT PORTAL NAV -->
+  <nav>
+    <div class="logo">AFTI Command Core</div>
+    <div style="display:flex; gap:1.5rem;">
+        <a href="staff-dashboard.html">📂 Staff Dashboard</a>
+        <a href="index.html" style="color:var(--warn);">🔒 Terminate Session</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- SWAN DESIGN THEME ANCHOR -->
+    <div class="swan-header">
+        𓅭 [System Visual Element: Stylized Swan Graphic - Corporate Governance Header]
+    </div>
+
+    <div style="border-bottom:2px solid #334155; padding-bottom:1.5rem; margin-bottom:2.5rem;">
+        <span style="background:rgba(239, 68, 68, 0.15); color:#f87171; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; display:inline-block; margin-bottom:1rem;">Restricted Fiduciary Vault</span>
+        <h1 style="font-size:2.5rem; font-weight:900; color:#ffffff; margin:0 0 0.5rem 0; letter-spacing:-0.5px;">Executive Governance &amp; Compliance</h1>
+        <p style="color:#94a3b8; font-size:1.1rem; margin:0; line-height:1.5;">Official constitutional bylaws, programmatic parameters, and financial structures for internal leadership review.</p>
+    </div>
+
+    <div class="vault-layout">
+        <!-- LEFT COLUMN: RESTRICTED COMPLIANCE UTILITIES -->
+        <div>
+            <div class="panel" style="border-color:rgba(56,189,248,0.2);">
+                <div class="panel-title" style="color:var(--accent);">🛡️ Board Controls</div>
+                <p style="font-size:0.88rem; color:#cbd5e1; line-height:1.6; margin-top:0;">This terminal is synced to a strict <strong style="color:#fff;">3-Person Active Board Matrix</strong> to guarantee rapid, lean decision cycles and eliminate corporate bureaucracy bloat.</p>
+                <div style="font-size:0.85rem; color:#94a3b8; background:#0f172a; padding:12px; border-radius:6px; border:1px solid #334155; margin-bottom:15px;">
+                    <strong>Active Volunteer Resources:</strong><br>
+                    • IT &amp; Architecture Control<br>
+                    • Web Construction Ledger<br>
+                    • Community Outreach Network
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title" style="color:var(--warn);">📊 Audit Status</div>
+                <p style="font-size:0.88rem; color:#cbd5e1; line-height:1.6; margin-top:0; margin-bottom:0;">All parameters are fully structured for immediate federal grant integration. Independent governance protocols ensure 100% audit readiness across the Willamette Valley regional network.</p>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: MASTER REGULATORY DOCUMENTS -->
+        <div>
+            <div class="panel">
+                <div class="panel-title" style="color:var(--success);">💰 Section A: Controlled Fiscal Structures</div>
+                
+                <div class="doc-block">
+                    <h3 style="color:#fff;">1. Trainee Stipend &amp; Capital Accumulation Split</h3>
+                    <p style="margin:0; color:#cbd5e1;">
+                        To protect participant stability while actively bootstrapping their future independence, all programmatic funding channels enforce a rigid disbursement split:
+                    </p>
+                    <ul style="margin:10px 0; padding-left:20px; color:#cbd5e1;">
+                        <li><span class="param-highlight">$1,100 Monthly Active Draw:</span> Distributed immediately onto secure electronic platforms to cover baseline housing, local transportation, and immediate food lines.</li>
+                        <li><span class="param-highlight">$1,100 Monthly Deferred Compensation:</span> Held securely in local credit union reserve portfolios. This accrued balance compiles continuously, unlocking vital startup capital for independent land shares at graduation.</li>
+                    </ul>
+                </div>
+
+                <div class="doc-block">
+                    <h3 style="color:#fff;">2. Heavy Equipment Leasing Exemption Policy</h3>
+                    <p style="margin:0; color:#cbd5e1;">
+                        To shelter the organization from extreme upfront debt traps, Outgrowing-Ag enforces a <strong style="color:var(--warn);">0% equipment leasing stance</strong>. 100% of tractors, tillers, and heavy machinery operations are contracted out to existing local operators at fixed flat rates, recycling financial capital directly back into the local community economy.
+                    </p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title" style="color:var(--accent);">📋 Section B: Program Charter Framework</div>
+                
+                <div class="doc-block">
+                    <h3 style="color:#fff;">1. Non-Punitive Educational Parameters</h3>
+                    <p style="margin:0; color:#cbd5e1;">
+                        All simulation paths and field test software must prevent hard failure states. Sub-optimal choice configurations must award partial points (e.g., Middle Choice = 25 XP, Bad Choice = 0 XP) and provide direct, actionable explanations of the consequences, immediately routing participants onto a functional recovery track.
+                    </p>
+                </div>
+
+                <div class="doc-block">
+                    <h3 style="color:#fff;">2. Regional Symbiosis Directive</h3>
+                    <p style="margin:0; color:#cbd5e1;">
+                        Crews are systematically deployed to restore under-utilized, compacted, or wildfire-affected parcels owned by aging producers or widows. This locks in mutual economic revitalization: landowners receive a 30%–40% equitable share-crop yield value, while next-generation growers bank vital production track records.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </main>
+
+</body>
+</html>
