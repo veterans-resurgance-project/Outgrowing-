@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Stage 5: Harvest Celebration Milestone</title>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --warn:#f59e0b; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:840px; background:var(--card); border-radius:14px; padding:35px; box-sizing:border-box; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
+        .celebration-box { background:rgba(39,174,96,0.05); border-left:4px solid #22c55e; border:1px solid rgba(39,174,96,0.2); padding:25px; border-radius:12px; margin-bottom:25px; }
+        .celebration-title { color:#4ade80; font-size:1.4rem; font-weight:bold; margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+        .portfolio-summary { background:#0f172a; border:1px solid #334155; border-radius:10px; padding:20px; margin-bottom:30px; }
+        .summary-row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:0.95rem; }
+        .summary-row:last-child { border-bottom:none; font-weight:bold; font-size:1.1rem; color:#4ade80; }
+        .nav-bridge { display:inline-block; background:var(--primary); color:#fff; padding:14px 28px; border:none; border-radius:8px; font-weight:bold; cursor:pointer; text-decoration:none; text-align:center; transition: background 0.2s, transform 0.2s; box-shadow:0 4px 15px rgba(39,174,96,0.3); }
+        .nav-bridge:hover { background:#219653; transform:translateY(-2px); }
+    </style>
+    <script src="afti-tracker.js"></script>
+</head>
+<body>
+<div class="container">
+    <!-- GLOBAL SCOREBOARD HUD -->
+    <div class="hud-bar">
+        <span>Path: <span id="hud-track" style="color:var(--accent);">Foster-Alum Track</span></span>
+        <div style="display:flex; align-items:center; gap:20px;">
+            <div>Global XP: <span id="global-points">1125</span></div>
+            <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Exit</button>
+        </div>
+    </div>
+    
+    <div>
+        <div class="celebration-box">
+            <div class="celebration-title">🎉 Winter Term Completion: The Promise Honored</div>
+            <p style="line-height:1.7; color:#cbd5e1; margin:0;">
+                The sun sets golden over the hills of Linn County. Smoke drifts lazily from the chimney of the widow's house. Looking down at the orchard rows, the change is staggering. The hillside gravity lines drip perfectly, the dense clay has been turned into a rich, carbon-buffered soil matrix, and row after row of grafted wagon-train heritage apple trees stand completely stabilized against the coming winter elements. 
+            </p>
+            <p style="line-height:1.7; color:#cbd5e1; margin-top:15px;">
+                Beside the delivery van, your team loads the final wholesale crates of specialty crops destined for local senior nutrition programs and regional food bank boxes. You made it. You stood your ground through the freezing nights, outmaneuvered systemic cracks, and built an unbreakable network. You did not break your promise.
+            </p>
+        </div>
+
+        <h3 style="color:#fff; margin-top:0; margin-bottom:15px; font-size:1.2rem;">📊 Verified Performance Portfolio Metrics</h3>
+        <div class="portfolio-summary">
+            <div class="summary-row"><span>Stage 1: The Initial Threshold Promise</span><span style="color:#4ade80;">Verified ✓</span></div>
+            <div class="summary-row"><span>Stage 1.5: Emergency Cold Triage Clearance</span><span style="color:#4ade80;">Verified ✓</span></div>
+            <div class="summary-row"><span>Stage 1.75: Library Document Portfolios</span><span style="color:#4ade80;">Verified ✓</span></div>
+            <div class="summary-row"><span>Stage 2 &amp; 2.5: Advocate Resiliency Map</span><span style="color:#4ade80;">Verified ✓</span></div>
+            <div class="summary-row"><span>Stage 3 &amp; 3.5: Interim Voucher Protocols</span><span style="color:#4ade80;">Verified ✓</span></div>
+            <div class="summary-row"><span>Stage 3.7: Midnight Ruckus Recovery</span><span style="color:#4ade80;">Verified ✓</span></div>
+            <div class="summary-row"><span>Stage 4: Sanctuary Boundaries Established</span><span style="color:#4ade80;">Verified ✓</span></div>
+            <div class="summary-row"><span>Stage 5: Interdependent Agronomy Practicum</span><span style="color:#4ade80;">Verified ✓</span></div>
+            <div class="summary-row"><span>Final Readiness Standing</span><span id="final-tier-status" style="color:var(--accent);">Tier 4: Enterprise Certified</span></div>
+        </div>
+
+        <div style="text-align:center; padding:10px 0;">
+            <p style="color:#94a3b8; font-size:0.95rem; margin-bottom:20px;">Your portable registry profile has been securely updated. You are fully qualified for upcoming land trust grant matching options.</p>
+            <a href="index.html" class="nav-bridge">🏆 Complete Path &amp; Return to Home Hub &rarr;</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        if (typeof AFTITracker !== 'undefined') {
+            const finalXP = AFTITracker.getXP();
+            document.getElementById('global-points').innerText = finalXP;
+            
+            const tierInfo = AFTITracker.getReadinessTier();
+            const tierEl = document.getElementById('final-tier-status');
+            if (tierEl) {
+                tierEl.innerText = tierInfo.title;
+                tierEl.style.color = tierInfo.color;
+            }
+        } else {
+            document.getElementById('global-points').innerText = localStorage.getItem('afti_global_xp') || '1125';
+        }
+    });
+</script>
+</body>
+</html>
