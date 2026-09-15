@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Stage 3.5: Interim Shelter Queue</title>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --warn:#f59e0b; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:820px; background:var(--card); border-radius:14px; padding:35px; box-sizing:border-box; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
+        .story-lore-box { background:#141c2b; border-left:4px solid var(--warn); border:1px solid #334155; padding:16px; border-radius:8px; margin-bottom:20px; font-size:0.9rem; color:#cbd5e1; line-height:1.6; }
+        .story-lore-box b { color:var(--warn); display:block; margin-bottom:6px; }
+        .checklist-container { display:flex; flex-direction:column; gap:12px; margin-top:20px; margin-bottom:25px; }
+        .check-row { background:#0f172a; border:1px solid #334155; padding:16px 20px; border-radius:8px; display:flex; gap:16px; align-items:flex-start; cursor:pointer; transition: border-color 0.2s; }
+        .check-row:hover { border-color:var(--warn); background:rgba(245,158,11,0.02); }
+        .check-row input[type="checkbox"] { width:22px; height:22px; accent-color:var(--primary); margin-top:2px; cursor:pointer; }
+        .item-title { font-weight:bold; color:#f8fafc; font-size:1.05rem; display:flex; justify-content:space-between; align-items:center; }
+        .item-desc { font-size:0.85rem; color:#94a3b8; margin-top:4px; line-height:1.5; }
+        .xp-tag { background:rgba(39,174,96,0.15); color:#4ade80; font-size:0.75rem; font-weight:bold; padding:2px 8px; border-radius:4px; margin-left:10px; }
+        .nav-bridge { display:inline-block; background:var(--primary); color:#fff; padding:14px 28px; border:none; border-radius:6px; font-weight:bold; cursor:pointer; text-decoration:none; text-align:center; transition: background 0.2s; }
+        .nav-bridge:hover { background:#219653; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- GLOBAL SCOREBOARD HUD -->
+    <div class="hud-bar">
+        <span>Path: <span style="color:var(--accent);">Foster-Alum Track</span></span>
+        <div style="display:flex; align-items:center; gap:20px;">
+            <div>Global XP: <span id="global-points" style="color:#4ade80;">500</span></div>
+            <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Exit</button>
+        </div>
+    </div>
+    
+    <div>
+        <h2 style="margin:0 0 1rem 0; color:#fff;">💤 Stage 3.5: Navigating the Interim Shelter Queue</h2>
+        
+        <div class="story-lore-box">
+            <b>📖 Shelter Dynamics & Structure:</b>
+            Your municipal housing voucher application has officially cleared into the active validation queue. However, local processing waitlists take time. To avoid sliding backward onto the freezing street pavement, you secure a temporary overnight bed allocation assignment at Crossroads Communities Center. Maintaining stable housing milestones requires learning to coexist within rigid communal regulations.
+        </div>
+
+        <p style="line-height:1.6; color:#cbd5e1;">Review and verify your daily shelter program expectations to secure stability metrics. <em>Note: Maintaining accountability points accelerates your readiness score for the upcoming land team deployment.</em></p>
+        
+        <!-- CHECKLIST ELEMENT CONTAINER -->
+        <div class="checklist-container">
+            <!-- ITEM 1 -->
+            <label class="check-row">
+                <input type="checkbox" class="shelter-cb" data-xp="25" onchange="processShelterState()">
+                <div style="flex-grow:1;">
+                    <div class="item-title">1. Lock In Evening Curfew Compliance <span class="xp-tag">+25 XP</span></div>
+                    <div class="item-desc">Sign in at the front intake desk before the 7:00 PM closing bell to protect your assigned bed allocation.</div>
+                </div>
+            </label>
+
+            <!-- ITEM 2 -->
+            <label class="check-row">
+                <input type="checkbox" class="shelter-cb" data-xp="25" onchange="processShelterState()">
+                <div style="flex-grow:1;">
+                    <div class="item-title">2. Maintain Assigned Living Space Upkeep <span class="xp-tag">+25 XP</span></div>
+                    <div class="item-desc">Keep your personal gear and canvas bag organized neatly within your designated storage perimeter to pass morning safety inspections.</div>
+                </div>
+            </label>
+
+            <!-- ITEM 3 -->
+            <label class="check-row">
+                <input type="checkbox" class="shelter-cb" data-xp="40" onchange="processShelterState()">
+                <div style="flex-grow:1;">
+                    <div class="item-title">3. Attend Weekly Housing Navigator Meetings <span class="xp-tag">+40 XP</span></div>
+                    <div class="item-desc">Sit down with your coordinator to update your address trail, review apartment options, and verify grant eligibility targets.</div>
+                </div>
+            </label>
+        </div>
+
+        <!-- PROGRESSION BAR FOOTER ACTION PANEL -->
+        <div style="background:rgba(255,255,255,0.02); border:1px solid #334155; padding:20px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
+            <div style="font-size:0.9rem; color:#94a3b8;">
+                📋 Accountability logs stay preserved in browser memory.
+            </div>
+            <a href="difficult-track-stage4-housing.html" class="nav-bridge">Cross the Threshold Into Housing &rarr;</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let runningTotal = parseInt(localStorage.getItem('afti_global_xp') || '500', 10);
+        localStorage.setItem('afti_base_shelter_xp', runningTotal); // Lock page baseline score
+        
+        loadSavedShelterState();
+    });
+
+    function processShelterState() {
+        const checkBoxes = document.querySelectorAll('.shelter-cb');
+        let baselineScore = parseInt(localStorage.getItem('afti_base_shelter_xp') || '500', 10);
+        let accumulatedShelterXP = 0;
+        const memoryCacheMap = {};
+
+        checkBoxes.forEach((box, itemIndex) => {
+            memoryCacheMap[itemIndex] = box.checked;
+            if (box.checked) {
+                accumulatedShelterXP += parseInt(box.getAttribute('data-xp'), 10);
+            }
+        });
+
+        localStorage.setItem('afti_stage3_5_shelter_cache', JSON.stringify(memoryCacheMap));
+
+        let adjustedGlobalTotal = baselineScore + accumulatedShelterXP;
+        localStorage.setItem('afti_global_xp', adjustedGlobalTotal);
+        document.getElementById('global-points').innerText = adjustedGlobalTotal;
+    }
+
+    function loadSavedShelterState() {
+        const savedCacheString = localStorage.getItem('afti_stage3_5_shelter_cache');
+        const checkBoxes = document.querySelectorAll('.shelter-cb');
+        
+        if (savedCacheString) {
+            try {
+                const parseMap = JSON.parse(savedCacheString);
+                checkBoxes.forEach((box, itemIndex) => {
+                    if (parseMap[itemIndex] !== undefined) {
+                        box.checked = parseMap[itemIndex];
+                    }
+                });
+            } catch (err) {
+                console.error("Error loading shelter state metrics:", err);
+            }
+        }
+        
+        let baselineScore = parseInt(localStorage.getItem('afti_base_shelter_xp') || '500', 10);
+        let accumulatedShelterXP = 0;
+        
+        checkBoxes.forEach((box) => {
+            if (box.checked) {
+                accumulatedShelterXP += parseInt(box.getAttribute('data-xp'), 10);
+            }
+        });
+        
+        let adjustedGlobalTotal = baselineScore + accumulatedShelterXP;
+        localStorage.setItem('afti_global_xp', adjustedGlobalTotal);
+        document.getElementById('global-points').innerText = adjustedGlobalTotal;
+    }
+</script>
+</body>
+</html>
