@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFTI Technical Library - Water Rights &amp; Gravity Flow SOP</title>
+  <style>
+    :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --border:rgba(255,255,255,0.1); --warn:#f59e0b; }
+    body { font-family:system-ui, -apple-system, sans-serif; background:var(--bg); color:var(--txt); margin:0; padding:0; }
+    
+    /* Sticky Top Control Nav */
+    nav { background:var(--hud); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:1000; }
+    nav .logo { font-weight:900; font-size:1.25rem; color:#fff; }
+    nav a { color:#cbd5e1; text-decoration:none; font-weight:600; font-size:0.95rem; }
+    nav a:hover { color:#fff; }
+    
+    main { max-width:950px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box; }
+    .panel { background:var(--card); border-radius:14px; border:1px solid var(--border); padding:35px; box-shadow:0 10px 25px rgba(0,0,0,0.4); margin-bottom:2.5rem; }
+    
+    h1 { font-size:2.4rem; font-weight:900; margin-top:0; margin-bottom:1rem; color:#ffffff; letter-spacing:-0.5px; }
+    h2 { font-size:1.5rem; color:#ffffff; margin-top:0; margin-bottom:1.25rem; font-weight:800; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:5px; }
+    h3 { font-size:1.15rem; color:var(--accent); margin-top:1.5rem; margin-bottom:0.5rem; }
+    p, li { line-height:1.7; color:#cbd5e1; font-size:1.02rem; }
+    
+    .legal-box { background:rgba(245, 158, 11, 0.05); border-left:4px solid var(--warn); padding:15px 20px; border-radius:0 8px 8px 0; margin:1rem 0; }
+    .engineering-box { background:rgba(39, 174, 96, 0.05); border-left:4px solid var(--primary); padding:15px 20px; border-radius:0 8px 8px 0; margin:1rem 0; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav>
+    <div class="logo">AFTI Technical Library</div>
+    <a href="staff-dashboard.html">📂 Return to Staff Dashboard</a>
+  </nav>
+
+  <main>
+    <!-- OVERVIEW PANEL -->
+    <div class="panel">
+      <span style="background:rgba(56,189,248,0.15); color:var(--accent); font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; display:inline-block; margin-bottom:1rem;">Standard Operating Procedure</span>
+      <h1>Water Rights &amp; Gravity Flow SOP</h1>
+      <p style="margin:0;">
+        This document details the mandatory rules for managing surface water delivery networks, tracking legal water rights compliance, and engineering safe gravity-fed low-pressure drip arrays on sloped properties.
+      </p>
+    </div>
+
+    <!-- LEGAL COMPLIANCE SECTION -->
+    <div class="panel">
+      <h2>⚖️ Part 1: Legal Water Rights &amp; Regulatory Tracking</h2>
+      <p style="margin-top:0;">
+        In the Willamette Valley region, all water use is governed strictly by state water laws. Using surface water or ground streams for agricultural production requires verifying legal permissions to ensure total compliance:
+      </p>
+      
+      <div class="legal-box">
+        <strong style="color:#fbcfe8; font-size:1.1rem; display:block; margin-bottom:5px;">⚠️ The Regulatory Diversion Constraint</strong>
+        You cannot simply drop a pump or a pipeline into a passing creek or river. Under state water doctrine, all water belongs to the public. Diverting water without an active, recorded water right certificate, a valid lease, or an official exemption triggers immediate system violations and severe civil compliance penalties.
+      </div>
+
+      <h3>1. Verifying Land Certificates</h3>
+      <p style="margin-top:0;">
+        Before establishing any infrastructure on a shared harvest property, staff must check state water resource records. We look for a valid point of diversion, specified crop acres allowed for watering, and the original priority date to protect the project from water shortages during dry late-summer restrictions.
+      </p>
+
+      <h3>2. Tracking Domestic &amp; Stock Exemption Limits</h3>
+      <p style="margin-top:0;">
+        Small staging plots under a half-acre may utilize a property's standard domestic well exemption lines for small-scale micro-gardens, provided the total daily draw stays well within the strict legal state limit of 5,000 gallons per day. 
+      </p>
+    </div>
+
+    <!-- ENGINEERING AND FLUID DYNAMICS SECTION -->
+    <div class="panel">
+      <h2>💧 Part 2: Low-Pressure Gravity Flow Engineering</h2>
+      <p style="margin-top:0;">
+        When routing water downhill from an upper spring box or holding tank, teams utilize gravity instead of expensive motorized grid pumps. Managing fluid velocity on a slope requires careful plumbing:
+      </p>
+
+      <div class="engineering-box">
+        <strong style="color:#4ade80; font-size:1.1rem; display:block; margin-bottom:5px;">📐 Pressure Calculation Rule (0.433 PSI per Foot)</strong>
+        Every single vertical foot of elevation drop down a hillside builds exactly 0.433 pounds per square inch (PSI) of water pressure. A drop of 35 vertical feet creates approximately 15 PSI—the exact operating sweet spot for standard drip emitter components.
+      </div>
+
+      <h3>1. Contour Row Plumbing Layout</h3>
+      <p style="margin-top:0;">
+        Never run drip tubing straight down a steep slope. Running lines vertically down a hill causes extreme water velocity to spike rapidly at the bottom of the row, blowing out end-caps and connections. Run header supply lines straight down, but weave lateral drip distribution tubes sideways along the hill's natural contour lines to keep pressure perfectly balanced.
+      </p>
+
+      <h3>2. Installing Pressure-Compensating Emitters</h3>
+      <p style="margin-top:0;">
+        Always install specialized pressure-compensating (PC) drip emitters. These custom fittings contain an internal silicone diaphragm that flexes dynamically, ensuring that a tree at the top of the hill receives the exact same amount of water as a tree at the bottom of the line, regardless of gravity spikes.
+      </p>
+    </div>
+  </main>
+
+</body>
+</html>
