@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Stage 1.75: Library Document Checklist</title>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --warn:#f59e0b; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:850px; background:var(--card); border-radius:14px; padding:35px; box-sizing:border-box; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
+        .story-lore-box { background:#141c2b; border-left:4px solid var(--accent); border:1px solid #334155; padding:16px; border-radius:8px; margin-bottom:20px; font-size:0.9rem; color:#cbd5e1; line-height:1.6; }
+        .story-lore-box b { color:var(--accent); display:block; margin-bottom:6px; }
+        
+        /* POLICY PANEL STYLES */
+        .policy-toggle-btn { background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:10px 16px; border-radius:6px; font-size:0.9rem; font-weight:bold; cursor:pointer; width:100%; text-align:left; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; }
+        .policy-panel { background:#0f172a; border:1px solid #334155; border-radius:8px; padding:20px; margin-bottom:20px; display:none; max-height:400px; overflow-y:auto; font-size:0.9rem; line-height:1.6; }
+        .policy-panel h3 { color:#4ade80; margin-top:0; font-size:1.1rem; }
+        .policy-panel h4 { color:var(--accent); margin-bottom:4px; font-size:0.95rem; }
+        
+        .checklist-container { display:flex; flex-direction:column; gap:12px; margin-bottom:25px; }
+        .check-row { background:#0f172a; border:1px solid #334155; padding:16px 20px; border-radius:8px; display:flex; gap:16px; align-items:flex-start; cursor:pointer; transition: border-color 0.2s; }
+        .check-row:hover { border-color:var(--accent); background:rgba(56,189,248,0.02); }
+        .check-row input[type="checkbox"] { width:22px; height:22px; accent-color:var(--primary); margin-top:2px; cursor:pointer; }
+        .item-title { font-weight:bold; color:#f8fafc; font-size:1.05rem; display:flex; justify-content:space-between; align-items:center; }
+        .item-desc { font-size:0.85rem; color:#94a3b8; margin-top:4px; line-height:1.5; }
+        .xp-tag { background:rgba(39,174,96,0.15); color:#4ade80; font-size:0.75rem; font-weight:bold; padding:2px 8px; border-radius:4px; margin-left:10px; }
+        .nav-bridge { display:inline-block; background:var(--primary); color:#fff; padding:14px 28px; border:none; border-radius:6px; font-weight:bold; cursor:pointer; text-decoration:none; text-align:center; transition: background 0.2s; }
+        .nav-bridge:hover { background:#219653; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hud-bar">
+        <span>Path: <span style="color:var(--accent);">Foster-Alum Track</span></span>
+        <div style="display:flex; align-items:center; gap:20px;">
+            <div>Global XP: <span id="global-points" style="color:#4ade80;">200</span></div>
+            <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Exit</button>
+        </div>
+    </div>
+    
+    <div>
+        <h2 style="margin:0 0 1rem 0; color:#fff;">📋 Stage 1.75: Morning Document Preparation Hub</h2>
+        
+        <div class="story-lore-box">
+            <b>📖 Public Library Warmth & Baseline Strategy:</b>
+            The heavy doors of the Lebanon Public Library swing open. You step inside out of the morning frost, instantly feeling the warm air thaw your fingers. Before heading to the case management desk, you use a free library terminal to organize your portfolio requirements.
+        </div>
+
+        <!-- INTERACTIVE VERIFICATION POLICY DISCLOSURE BAR -->
+        <button class="policy-toggle-btn" onclick="togglePolicy()">
+            <span>📋 Open Official Verification & Submission Guidelines</span>
+            <span id="toggle-arrow">▼</span>
+        </button>
+
+        <div id="guidelinesPanel" class="policy-panel">
+            <h3>Outgrowing-Ag: Participant Verification Policy</h3>
+            <p><strong>1. Compliance Overview:</strong> To meet institutional grant and funding requirements, Outgrowing-Ag utilizes a structured verification process for specific demographic tracks. This ensures resources reach intended communities while strictly protecting participant privacy.</p>
+            
+            <h4>2. Status Categories & Acceptable Documentation:</h4>
+            <ul>
+                <li><strong>Veterans / Military Service Members:</strong> Copy of DD-214 (Member-4 preferred), VA Certificate of Eligibility, or military ID. <em>*Redact Social Security Numbers before uploading.*</em></li>
+                <li><strong>Former Foster Youth / Independence Track:</strong> State or county Department of Human Services (DHS) verification letter, or independent living program docs.</li>
+                <li><strong>Individuals with Disabilities / Vocational Access:</strong> Active service connection docs, State Vocational Rehab letters, or SSI/SSDI verification.</li>
+                <li><strong>Underemployed / Low-Income Status:</strong> Recent pay stubs, W-2 forms, unemployment documentation, or a signed self-certification of household income relative to AMI guidelines.</li>
+            </ul>
+
+            <h4>3. Secure Submission & Redaction Protocol:</h4>
+            <p>Prior to uploading, black out or remove sensitive personal identifiers (SSNs, specific medical diagnoses, or banking data). We only require verification of your <em>status</em>. Once reviewed, your profile receives a secure "Verified" flag, unlocking specialized milestone tracks.</p>
+        </div>
+
+        <p style="line-height:1.6; color:#cbd5e1; margin-bottom:20px;">Check off items as you assemble your portfolio. Your selections stay permanently locked into local memory.</p>
+        
+        <div class="checklist-container">
+            <label class="check-row">
+                <input type="checkbox" class="portfolio-cb" data-xp="30" onchange="processChecklistState()">
+                <div style="flex-grow:1;">
+                    <div class="item-title">1. Public Library Card Entry <span class="xp-tag">+30 XP</span></div>
+                    <div class="item-desc">Unlocks free daily computer reservation lines, hardware scanners, high-speed Wi-Fi, and a secure environment to check emails.</div>
+                </div>
+            </label>
+
+            <label class="check-row">
+                <input type="checkbox" class="portfolio-cb" data-xp="50" onchange="processChecklistState()">
+                <div style="flex-grow:1;">
+                    <div class="item-title">2. State Issued Photo ID / Drivers License <span class="xp-tag">+50 XP</span></div>
+                    <div class="item-desc">Critical core document required by local authorities, regional medical clinics, and housing background operators.</div>
+                </div>
+            </label>
+
+            <label class="check-row">
+                <input type="checkbox" class="portfolio-cb" data-xp="60" onchange="processChecklistState()">
+                <div style="flex-grow:1;">
+                    <div class="item-title">3. Signed DHS Foster Care Verification Letter <span class="xp-tag">+60 XP</span></div>
+                    <div class="item-desc">The specific letter confirming your independence status. Required to unlock priority housing entry and fee waivers per program guidelines.</div>
+                </div>
+            </label>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.02); border:1px solid #334155; padding:20px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
+            <div style="font-size:0.9rem; color:#94a3b8;">⚠️ Unfinished document checks stay saved for your next visit.</div>
+            <a href="difficult-track-stage2-daycenter.html" class="nav-bridge">Proceed to Day Center Intake &rarr;</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let runningTotal = parseInt(localStorage.getItem('afti_global_xp') || '200', 10);
+        localStorage.setItem('afti_base_library_xp', runningTotal);
+        loadSavedChecklistState();
+    });
+
+    function togglePolicy() {
+        const panel = document.getElementById('guidelinesPanel');
+        const arrow = document.getElementById('toggle-arrow');
+        if (panel.style.display === 'block') {
+            panel.style.display = 'none';
+            arrow.innerText = '▼';
+        } else {
+            panel.style.display = 'block';
+            arrow.innerText = '▲';
+        }
+    }
+
+    function processChecklistState() {
+        const checkBoxes = document.querySelectorAll('.portfolio-cb');
+        let baselineScore = parseInt(localStorage.getItem('afti_base_library_xp') || '200', 10);
+        let accumulatedChecklistXP = 0;
+        const memoryCacheMap = {};
+
+        checkBoxes.forEach((box, itemIndex) => {
+            memoryCacheMap[itemIndex] = box.checked;
+            if (box.checked) {
+                accumulatedChecklistXP += parseInt(box.getAttribute('data-xp'), 10);
+            }
+        });
+
+        localStorage.setItem('afti_stage1_75_checklist_cache', JSON.stringify(memoryCacheMap));
+  
