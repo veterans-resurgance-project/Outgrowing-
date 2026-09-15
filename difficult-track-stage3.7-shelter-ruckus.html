@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Stage 3.7: Unexpected Storms</title>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --danger:#ef4444; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:800px; background:var(--card); border-radius:14px; padding:35px; box-sizing:border-box; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
+        .story-lore-box { background:#141c2b; border-left:4px solid var(--danger); border:1px solid #334155; padding:20px; border-radius:8px; margin-bottom:25px; font-size:1rem; color:#cbd5e1; line-height:1.7; }
+        .story-lore-box b { color:#f87171; display:block; margin-bottom:8px; font-size:1.1rem; }
+        .choices-container { display:flex; flex-direction:column; gap:12px; margin-top:20px; }
+        .choice-btn { background:#0f172a; border:1px solid #334155; color:#f8fafc; padding:16px 20px; border-radius:8px; cursor:pointer; width:100%; text-align:left; display:flex; flex-direction:column; gap:5px; transition: 0.2s; }
+        .choice-btn:hover { border-color:var(--primary); background:rgba(39,174,96,0.1); }
+        .feedback-box { margin-top:25px; padding:20px; border-radius:8px; display:none; line-height:1.6; border:1px solid rgba(255,255,255,0.2); }
+        .nav-bridge { display:inline-block; margin-top:15px; background:var(--primary); color:#fff; padding:12px 24px; border:none; border-radius:6px; font-weight:bold; cursor:pointer; text-decoration:none; text-align:center; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- GLOBAL SCOREBOARD HUD -->
+    <div class="hud-bar">
+        <span>Path: <span style="color:var(--accent);">Foster-Alum Track</span></span>
+        <div style="display:flex; align-items:center; gap:20px;">
+            <div>Global XP: <span id="global-points" style="color:#4ade80;">590</span></div>
+            <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Exit</button>
+        </div>
+    </div>
+    
+    <div>
+        <h2 style="margin:0 0 1rem 0; color:#fff;">⚡ Stage 3.7: The Midnight Ruckus & Shifting Ground</h2>
+        
+        <div class="story-lore-box">
+            <b>💥 Narrative Event: The Limits of the Net</b>
+            You did everything right. For twelve straight days, you hit curfew, kept your area immaculate, and coordinated flawlessly with your housing navigator. But at 2:00 AM on your final night, the fragile peace of the communal room shatters. A violent fight erupts between two residents near the lockers. Shouted threats echo off the cinderblock walls, lockers are slammed, and the overhead fluorescent lights are thrown on as staff frantically call for emergency backup. 
+            <br><br>
+            In the terrifying rush and chaos of everyone scrambling for safety, your small living perimeter is trampled. By the time the police arrive to clear the room and calm the tension, you look down in disbelief—someone used the distraction to steal a spare jacket and your neatly organized folder of printed library training confirmations. 
+            <br><br>
+            Heart pounding, your voice shakes as you try to explain the theft to an exhausted officer filling out a report. He doesn't even look up from his clipboard. He just waves you off with a cold, dismissive sigh: <i>"Look, kid, it's a crowded room. You should take better care of your things. We're not tracking down a missing folder tonight."</i> 
+        </div>
+
+        <p style="line-height:1.7; color:#cbd5e1;">The bitter sting of injustice burns in your chest. You followed every rule perfectly, yet you are still the one left holding the loss, ignored by the systems meant to protect you. How do you anchor your resolve in the face of this setback?</p>
+        
+        <div class="choices-container" id="choices-wrapper">
+            <button class="choice-btn" onclick="selectOption('A', 50)">
+                <span style="font-weight:bold; color:#4ade80;">Refuse to let the chaos break your promise. Focus on the ultimate goal.</span>
+                <span style="font-size:0.85rem; color:#94a3b8;">Take a deep breath, recognize that your caseworker still has your digital logs on file, and protect your mental energy. (+50 XP)</span>
+            </button>
+        </div>
+        
+        <div id="feedback-viewport" class="feedback-box">
+            <h3 id="feedback-title" style="margin-top:0;"></h3>
+            <p id="feedback-text"></p>
+            <div id="feedback-action-container"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => { 
+        document.getElementById('global-points').innerText = localStorage.getItem('afti_global_xp') || '590'; 
+    });
+
+    function selectOption(choiceType, points) {
+        let currentXP = (parseInt(localStorage.getItem('afti_global_xp') || '590', 10)) + points;
+        localStorage.setItem('afti_global_xp', currentXP); 
+        document.getElementById('global-points').innerText = currentXP;
+        document.getElementById('choices-wrapper').style.display = 'none';
+        
+        const vp = document.getElementById('feedback-viewport'); 
+        const title = document.getElementById('feedback-title');
+        const text = document.getElementById('feedback-text'); 
+        const ac = document.getElementById('feedback-action-container'); 
+        vp.style.display = 'block';
+
+        vp.style.backgroundColor = 'rgba(39,174,96,0.1)'; 
+        title.innerText = "Resilience Anchored (+50 XP)"; 
+        title.style.color = "#4ade80";
+        text.innerText = "The system failed you tonight, but you refuse to fail yourself or the kids counting on you. Your paperwork can be reprinted at the library because your cloud records are secure. The sun is rising, and the caseworker is calling your name. It's time to leave the shelter behind forever.";
+        ac.innerHTML = '<a href="difficult-track-stage4-housing.html" class="nav-bridge">Proceed to Stage 4: Cross the Threshold &rarr;</a>';
+    }
+</script>
+</body>
+</html>
