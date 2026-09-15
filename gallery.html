@@ -36,10 +36,20 @@ main { max-width:1000px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box
 </div>
 </main>
 <script>
+
 function renderGallery() {
 let stored = localStorage.getItem("afti_gallery");
 let photos = stored ? JSON.parse(stored) : [
-{ url: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=900&q=80", title: "Central Operations Hub", caption: "Initial site staging and equipment organization." }
+  { 
+    url: "image_7JISrC.png", 
+    title: "The Watershed Convergence Handshake", 
+    caption: "Trainees uniting forces and shaking hands across the golden fields of Lebanon, Oregon." 
+  },
+  { 
+    url: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=900&q=80", 
+    title: "Central Operations Hub", 
+    caption: "Initial site staging and equipment organization." 
+  }
 ];
 document.getElementById("fullGalleryGrid").innerHTML = photos.map(item => `
 <div class="gallery-card">
@@ -49,8 +59,8 @@ document.getElementById("fullGalleryGrid").innerHTML = photos.map(item => `
 <p style="color:#cbd5e1; font-size:0.9rem; margin:0; line-height:1.4;">${escapeHtml(item.caption)}</p>
 </div>
 </div>`).join('');
-}
-
+      }
+  
 function escapeHtml(str) {
 if (!str) return '';
 return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
