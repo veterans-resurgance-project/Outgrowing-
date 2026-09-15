@@ -122,6 +122,8 @@
             initializeDashboardData();
         });
 
+
+
         function initializeDashboardData() {
             // 1. PROCESS PERSISTENT SHARED HARVEST DATA
             const rawLandowner = localStorage.getItem('afti_active_landowner_inquiry');
@@ -145,6 +147,11 @@
                             <div style="background:#1e293b; padding:10px; border-radius:6px; margin-top:8px; font-size:0.85rem; color:#cbd5e1; border:1px solid rgba(255,255,255,0.03);">
                                 <strong>Goals Telemetry:</strong> "${data.propertyGoals}"
                             </div>
+                            
+                            <!-- EMBEDDED PRINTABLE CONTRACT GENERATOR LINK -->
+                            <div style="margin-top:12px; padding-top:8px; border-top:1px dashed rgba(255,255,255,0.1); text-align:right;">
+                                <a href="shared-harvest-mou-template.html" target="_blank" style="color:#38bdf8; text-decoration:none; font-weight:bold; font-size:0.85rem;">📄 Open &amp; Print MOU Contract &rarr;</a>
+                            </div>
                         </div>
                     `;
                 } catch(e) {
@@ -152,6 +159,12 @@
                 }
             } else {
                 landownerCount.innerText = "0";
+                landownerBox.innerHTML = `
+                    <p style="color:#94a3b8; margin:0;">No active properties submitted to local terminal registry cache yet.</p>
+                    <div style="margin-top:12px; padding-top:8px; border-top:1px dashed rgba(255,255,255,0.1); text-align:right;">
+                        <a href="shared-harvest-mou-template.html" target="_blank" style="color:#94a3b8; text-decoration:none; font-weight:bold; font-size:0.85rem;">📄 View Blank MOU Template &rarr;</a>
+                    </div>
+                `;
             }
 
             // 2. PROCESS PERSISTENT CUSTOM NEWS DISPATCHES
@@ -162,3 +175,40 @@
 
             if (rawNews) {
                 try {
+                    const newsData = JSON.parse(rawNews);
+                    newsCount.innerText = "1";
+                    noNewsTxt.style.display = 'none';
+                    newsCard.style.display = 'block';
+                    
+                    document.getElementById('liveNewsTitle').innerText = `📢 ${newsData.title}`;
+                    document.getElementById('liveNewsDate').innerText = `Timeline: ${newsData.date}`;
+                    document.getElementById('liveNewsDesc').innerText = newsData.desc;
+                } catch(err) {
+                    console.error("News sync telemetry failure:", err);
+                }
+            } else {
+                newsCount.innerText = "0";
+                newsCard.style.display = 'none';
+                noNewsTxt.style.display = 'block';
+            }
+
+            // 3. READ PORTABLE XP TRACKER METRICS FOR THE TOTAL HUD BOX
+            let globalXP = localStorage.getItem('afti_global_xp') || '400';
+            document.getElementById('stat-xp').innerText = `${globalXP} XP`;
+        }
+
+        // EMERGENCY SYSTEM FLUSH CONTROL
+        function purgeDashboardCache() {
+            if (confirm("Are you sure you want to flush all custom staff dispatches, landowner intakes, and portfolio caches from this local environment?")) {
+                localStorage.removeItem('afti_active_landowner_inquiry');
+                localStorage.removeItem('afti_custom_newsletter_dispatch');
+                localStorage.removeItem('afti_custom_gallery_photo');
+                localStorage.removeItem('afti_global_xp');
+                
+                alert("Cache purge operation completely successful.");
+                window.location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
