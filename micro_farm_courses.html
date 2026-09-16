@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outgrowing-Ag // Micro-Farm Design & Community Challenge Engine</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for reactive UI logic -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen">
+
+    <div class="max-w-6xl mx-auto p-6" x-data="microFarmEngine()">
+        
+        <!-- Header -->
+        <header class="border-b border-slate-800 pb-6 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight text-emerald-400">Outgrowing-Ag</h1>
+                <p class="text-slate-400 text-sm">Micro-Farm Design Courses, Community Challenges & Cell Deployment Hub</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="outgrowing_ag_engine.html" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg border border-slate-700 transition">
+                    &larr; Back to Engine
+                </a>
+                <div class="flex flex-wrap gap-2 bg-slate-800 p-1.5 rounded-lg border border-slate-700">
+                    <button @click="activeTab = 'curriculum'" :class="activeTab === 'curriculum' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-2 rounded-md text-sm font-medium transition">Micro-Farm Courses</button>
+                    <button @click="activeTab = 'challenges'" :class="activeTab === 'challenges' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-2 rounded-md text-sm font-medium transition">Community Challenge Portal</button>
+                    <button @click="activeTab = 'exams'" :class="activeTab === 'exams' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-2 rounded-md text-sm font-medium transition">Cell Training Exams</button>
+                    <button @click="activeTab = 'deployment'" :class="activeTab === 'deployment' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-2 rounded-md text-sm font-medium transition">Field Deployment Selector</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- TAB 1: MICRO-FARM CURRICULUM (Square Foot Method) -->
+        <div x-show="activeTab === 'curriculum'" class="space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
+                <div>
+                    <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">Intensive Small-Footprint Methods</span>
+                    <h2 class="text-2xl font-bold text-white">Square-Foot Gardening & Companion Architecture</h2>
+                    <p class="text-slate-300 text-sm mt-1">
+                        Rooted in high-density urban and small-scale growing principles, this curriculum teaches participants how to maximize yields in minimal space using precise companion planting, succession timing, and multi-tier vertical staging.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-slate-900 p-5 rounded-xl border border-slate-700 space-y-2">
+                        <span class="text-emerald-400 font-bold block text-sm">📐 1. The Grid Layout</span>
+                        <p class="text-xs text-slate-400 leading-relaxed">Dividing beds into strict 1-foot squares. Assigning exact plant counts per square (1 large, 4 medium, 9 compact, or 16 micro) to eliminate wasted soil space.</p>
+                    </div>
+                    <div class="bg-slate-900 p-5 rounded-xl border border-slate-700 space-y-2">
+                        <span class="text-emerald-400 font-bold block text-sm">🌿 2. Companion Synergy</span>
+                        <p class="text-xs text-slate-400 leading-relaxed">Pairing deep-root and shallow-root varieties alongside natural pest deterrents (e.g., marigolds, herbs, alliums) to create self-defending micro-ecosystems.</p>
+                    </div>
+                    <div class="bg-slate-900 p-5 rounded-xl border border-slate-700 space-y-2">
+                        <span class="text-emerald-400 font-bold block text-sm">🔄 3. Continuous Rotation</span>
+                        <p class="text-xs text-slate-400 leading-relaxed">Immediate succession sowing the moment a crop is harvested, paired with soil amendment additions to prevent nutrient depletion without heavy tractor tilling.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: COMMUNITY CHALLENGE SUBMISSION PORTAL -->
+        <div x-show="activeTab === 'challenges'" class="space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
+                <div>
+                    <h2 class="text-xl font-semibold mb-2 text-emerald-300">Community Garden Show & Tell / Challenge Submission</h2>
+                    <p class="text-slate-400 text-sm">Local gardeners submit their micro-farm layout attempts and real-world roadblocks. These submissions feed directly into our trainee diagnostic exams and field-trip site selection.</p>
+                </div>
+
+                <form @submit.prevent="submitChallenge" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Gardener Name</label>
+                            <input type="text" x-model="newChallenge.name" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white text-sm focus:outline-none focus:border-emerald-500" placeholder="e.g., Sarah Jenkins">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Location / Setup Type</label>
+                            <input type="text" x-model="newChallenge.location" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white text-sm focus:outline-none focus:border-emerald-500" placeholder="e.g., Urban Backyard Raised Beds">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Educational Value Score (1-10)</label>
+                            <input type="number" min="1" max="10" x-model.number="newChallenge.eduValue" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white text-sm focus:outline-none focus:border-emerald-500" placeholder="e.g., 8">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Specific Roadblock / Challenge Description</label>
+                        <textarea x-model="newChallenge.roadblock" rows="3" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white text-sm focus:outline-none focus:border-emerald-500" placeholder="Describe pest issues, soil compaction, nutrient deficiency, or layout failure..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-3 rounded-lg transition shadow-md text-sm">Submit Garden Challenge for Cell Review</button>
+                </form>
+
+                <!-- Submitted Challenges List -->
+                <div class="border-t border-slate-700 pt-6 space-y-3">
+                    <h3 class="text-sm font-semibold text-emerald-400">Active Community Submissions Queue:</h3>
+                    <div class="space-y-3 max-h-80 overflow-y-auto pr-2">
+                        <template x-for="(c, index) in challenges" :key="index">
+                            <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-medium text-white text-sm" x-text="c.name + ' — ' + c.location"></h4>
+                                        <p class="text-xs text-slate-400 mt-0.5" x-text="'Roadblock: ' + c.roadblock"></p>
+                                    </div>
+                                    <span class="text-xs bg-emerald-950 text-emerald-400 border border-emerald-800 px-2.5 py-1 rounded-full font-mono" x-text="'Edu Value: ' + c.eduValue + '/10'"></span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: CELL TRAINING EXAMS (Roadblock Diagnostics) -->
+        <div x-show="activeTab === 'exams'" class="space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
+                <div>
+                    <h2 class="text-xl font-semibold mb-2 text-emerald-300">Cell Training Exam & Diagnostic Module</h2>
+                    <p class="text-slate-400 text-sm">Instead of abstract textbook quizzes, cell trainees (Expert, Co-Leader, and Cross-Trainees) are tested directly on real-world community garden roadblocks.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <template x-for="(c, index) in challenges" :key="'exam-' + index">
+                        <div class="bg-slate-900 border border-slate-700 rounded-xl p-5 space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs font-mono text-amber-400 uppercase tracking-wider" x-text="'Case Study #' + (index + 1) + ' (' + c.name + ')'"></span>
+                                <span class="text-xs bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700" x-text="c.location"></span>
+                            </div>
+                            <p class="text-sm text-slate-200 font-medium" x-text="'Field Problem: ' + c.roadblock"></p>
+                            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-xs text-slate-300 space-y-1">
+                                <span class="text-emerald-400 font-semibold block">Required Cell Diagnostic Protocol:</span>
+                                1. Identify soil/pest root cause &nbsp;|&nbsp; 2. Formulate amendment remedy (Biochar/Compost ratio) &nbsp;|&nbsp; 3. Establish square-foot layout correction.
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: FIELD DEPLOYMENT SELECTOR (Need vs Edu Value) -->
+        <div x-show="activeTab === 'deployment'" class="space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
+                <div>
+                    <h2 class="text-xl font-semibold mb-2 text-emerald-300">Field Trip Deployment Selector</h2>
+                    <p class="text-slate-400 text-sm">Review the community challenge queue and select the prime site for the 5-person cell to visit based on urgent need and educational training value.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <template x-for="(c, index) in challenges" :key="'deploy-' + index">
+                        <div class="bg-slate-900 border rounded-xl p-5 space-y-3 flex flex-col justify-between"
+                             :class="selectedDeploymentIndex === index ? 'border-emerald-500 bg-slate-950' : 'border-slate-700'">
+                            <div class="space-y-2">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-bold text-white text-sm" x-text="c.name"></h4>
+                                    <span class="text-xs bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded font-mono" x-text="'Score: ' + c.eduValue + '/10'"></span>
+                                </div>
+                                <p class="text-xs text-slate-400" x-text="c.location"></p>
+                                <p class="text-xs text-slate-300 bg-slate-800 p-2.5 rounded border border-slate-700" x-text="c.roadblock"></p>
+                            </div>
+                            <button @click="selectedDeploymentIndex = index" 
+                                    class="w-full py-2 rounded-lg text-xs font-semibold transition border"
+                                    :class="selectedDeploymentIndex === index ? 'bg-emerald-600 text-white border-emerald-500' : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'"
+                                    x-text="selectedDeploymentIndex === index ? '✓ Selected for Cell Deployment' : 'Select for Cell Visit'">
+                            </button>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Selected Deployment Summary -->
+                <template x-if="selectedDeploymentIndex !== null && challenges[selectedDeploymentIndex]">
+                    <div class="bg-slate-900 border border-emerald-500/50 rounded-xl p-6 space-y-3">
+                        <span class="text-xs font-mono text-emerald-400 uppercase">Official Cell Deployment Destination</span>
+                        <h3 class="text-lg font-bold text-white" x-text="'Dispatch Unit to: ' + challenges[selectedDeploymentIndex].name + ' (' + challenges[selectedDeploymentIndex].location + ')'"></h3>
+                        <p class="text-sm text-slate-300" x-text="'Target Mission: ' + challenges[selectedDeploymentIndex].roadblock"></p>
+                        <p class="text-xs text-slate-400 italic">The 5-person cell (Expert, Co-Leader, 3 Trainees) is cleared to stage tools, load soil amendments, and execute on-site consultation.</p>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Alpine.js Application Logic -->
+    <script>
+        function microFarmEngine() {
+            return {
+                activeTab: 'curriculum',
+                selectedDeploymentIndex: 0,
+                newChallenge: {
+                    name: '',
+                    location: '',
+                    eduValue: 8,
+                    roadblock: ''
+                },
+                challenges: [
+                    {
+                        name: 'Arthur Pendelton',
+                        location: 'Suburban Backyard Raised Bed',
+                        eduValue: 9,
+                        roadblock: 'Severe soil compaction and aphid infestation overtaking brassica square-foot blocks.'
+                    },
+                    {
+                        name: 'Maria Santos',
+                        location: 'Urban Balcony Containers',
+                        eduValue: 7,
+                        roadblock: 'Nutrient lockout in tomato containers and lack of vertical trellising space.'
+                    }
+                ],
+                submitChallenge() {
+                    if (!this.newChallenge.name || !this.newChallenge.roadblock) return;
+                    this.challenges.push({
+                        name: this.newChallenge.name,
+                        location: this.newChallenge.location,
+                        eduValue: this.newChallenge.eduValue,
+                        roadblock: this.newChallenge.roadblock
+                    });
+                    this.newChallenge.name = '';
+                    this.newChallenge.location = '';
+                    this.newChallenge.eduValue = 8;
+                    this.newChallenge.roadblock = '';
+                    this.activeTab = 'challenges';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
