@@ -64,8 +64,8 @@
         <div x-show="activeTab === 'challenges'" class="space-y-6">
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
                 <div>
-                    <h2 class="text-xl font-semibold mb-2 text-emerald-300">Community Garden Show & Tell / Challenge Submission</h2>
-                    <p class="text-slate-400 text-sm">Local gardeners submit their micro-farm layout attempts and real-world roadblocks. These submissions feed directly into our trainee diagnostic exams and field-trip site selection.</p>
+                    <h2 class="text-xl font-semibold mb-2 text-emerald-300">Community Garden "Rescue" & Challenge Submission</h2>
+                    <p class="text-slate-400 text-sm">Local gardeners submit their micro-farm layout attempts and roadblocks. Under our <strong>Pay-It-Forward Reciprocity Clause</strong>, selected rescue sites receive an on-site visit from a 5-person cell in exchange for 1 day of volunteer service back to the program.</p>
                 </div>
 
                 <form @submit.prevent="submitChallenge" class="space-y-4">
@@ -87,7 +87,17 @@
                         <label class="block text-sm font-medium text-slate-300 mb-1">Specific Roadblock / Challenge Description</label>
                         <textarea x-model="newChallenge.roadblock" rows="3" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white text-sm focus:outline-none focus:border-emerald-500" placeholder="Describe pest issues, soil compaction, nutrient deficiency, or layout failure..."></textarea>
                     </div>
-                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-3 rounded-lg transition shadow-md text-sm">Submit Garden Challenge for Cell Review</button>
+
+                    <!-- Reciprocity Agreement Checkbox -->
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 flex items-start gap-3">
+                        <input type="checkbox" x-model="newChallenge.agreedToReciprocity" required class="mt-1 h-4 w-4 rounded bg-slate-800 border-slate-600 text-emerald-500 focus:ring-emerald-500">
+                        <div class="text-xs text-slate-300">
+                            <span class="font-semibold text-emerald-400 block mb-0.5">Pay-It-Forward Reciprocity Agreement</span>
+                            "I agree that if my garden is selected for a 5-person cell rescue visit and consultation, I will commit 1 day of volunteer service back to the Outgrowing-Ag program (such as biochar production support or public land restoration assistance) in exchange for free expert training and remediation."
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-3 rounded-lg transition shadow-md text-sm">Submit Garden Challenge & Agree to Reciprocity</button>
                 </form>
 
                 <!-- Submitted Challenges List -->
@@ -101,7 +111,10 @@
                                         <h4 class="font-medium text-white text-sm" x-text="c.name + ' — ' + c.location"></h4>
                                         <p class="text-xs text-slate-400 mt-0.5" x-text="'Roadblock: ' + c.roadblock"></p>
                                     </div>
-                                    <span class="text-xs bg-emerald-950 text-emerald-400 border border-emerald-800 px-2.5 py-1 rounded-full font-mono" x-text="'Edu Value: ' + c.eduValue + '/10'"></span>
+                                    <div class="flex flex-col items-end gap-1">
+                                        <span class="text-xs bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded-full font-mono" x-text="'Edu Value: ' + c.eduValue + '/10'"></span>
+                                        <span class="text-[10px] text-slate-500 italic">Reciprocity Agreed ✓</span>
+                                    </div>
                                 </div>
                             </div>
                         </template>
@@ -115,7 +128,7 @@
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
                 <div>
                     <h2 class="text-xl font-semibold mb-2 text-emerald-300">Cell Training Exam & Diagnostic Module</h2>
-                    <p class="text-slate-400 text-sm">Instead of abstract textbook quizzes, cell trainees (Expert, Co-Leader, and Cross-Trainees) are tested directly on real-world community garden roadblocks.</p>
+                    <p class="text-slate-400 text-sm">Instead of abstract textbook quizzes, cell trainees (Expert, Co-Leader, and Cross-Trainees) are tested directly on real-world community garden roadblocks submitted by local growers.</p>
                 </div>
 
                 <div class="space-y-4">
@@ -128,7 +141,7 @@
                             <p class="text-sm text-slate-200 font-medium" x-text="'Field Problem: ' + c.roadblock"></p>
                             <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-xs text-slate-300 space-y-1">
                                 <span class="text-emerald-400 font-semibold block">Required Cell Diagnostic Protocol:</span>
-                                1. Identify soil/pest root cause &nbsp;|&nbsp; 2. Formulate amendment remedy (Biochar/Compost ratio) &nbsp;|&nbsp; 3. Establish square-foot layout correction.
+                                1. Diagnose soil/pest root cause &nbsp;|&nbsp; 2. Formulate amendment remedy (Biochar/Compost ratio) &nbsp;|&nbsp; 3. Establish square-foot layout correction.
                             </div>
                         </div>
                     </template>
@@ -141,7 +154,7 @@
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
                 <div>
                     <h2 class="text-xl font-semibold mb-2 text-emerald-300">Field Trip Deployment Selector</h2>
-                    <p class="text-slate-400 text-sm">Review the community challenge queue and select the prime site for the 5-person cell to visit based on urgent need and educational training value.</p>
+                    <p class="text-slate-400 text-sm">Review the community challenge queue and select the prime site for the 5-person cell to visit based on urgent need, educational training value, and confirmed reciprocity agreement.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -155,6 +168,7 @@
                                 </div>
                                 <p class="text-xs text-slate-400" x-text="c.location"></p>
                                 <p class="text-xs text-slate-300 bg-slate-800 p-2.5 rounded border border-slate-700" x-text="c.roadblock"></p>
+                                <div class="text-[10px] text-emerald-400 font-mono">✓ 1-Day Sweat Equity Reciprocity Confirmed</div>
                             </div>
                             <button @click="selectedDeploymentIndex = index" 
                                     class="w-full py-2 rounded-lg text-xs font-semibold transition border"
@@ -168,10 +182,10 @@
                 <!-- Selected Deployment Summary -->
                 <template x-if="selectedDeploymentIndex !== null && challenges[selectedDeploymentIndex]">
                     <div class="bg-slate-900 border border-emerald-500/50 rounded-xl p-6 space-y-3">
-                        <span class="text-xs font-mono text-emerald-400 uppercase">Official Cell Deployment Destination</span>
+                        <span class="text-xs font-mono text-emerald-400 uppercase">Official Cell Deployment & Reciprocity Dispatch</span>
                         <h3 class="text-lg font-bold text-white" x-text="'Dispatch Unit to: ' + challenges[selectedDeploymentIndex].name + ' (' + challenges[selectedDeploymentIndex].location + ')'"></h3>
-                        <p class="text-sm text-slate-300" x-text="'Target Mission: ' + challenges[selectedDeploymentIndex].roadblock"></p>
-                        <p class="text-xs text-slate-400 italic">The 5-person cell (Expert, Co-Leader, 3 Trainees) is cleared to stage tools, load soil amendments, and execute on-site consultation.</p>
+                        <p class="text-sm text-slate-300" x-text="'Target Rescue Mission: ' + challenges[selectedDeploymentIndex].roadblock"></p>
+                        <p class="text-xs text-slate-400 italic">The 5-person cell (Expert, Co-Leader, 3 Trainees) is cleared to execute on-site consultation. Return Volunteer Day locked into program schedule.</p>
                     </div>
                 </template>
             </div>
@@ -189,34 +203,39 @@
                     name: '',
                     location: '',
                     eduValue: 8,
-                    roadblock: ''
+                    roadblock: '',
+                    agreedToReciprocity: false
                 },
                 challenges: [
                     {
                         name: 'Arthur Pendelton',
                         location: 'Suburban Backyard Raised Bed',
                         eduValue: 9,
-                        roadblock: 'Severe soil compaction and aphid infestation overtaking brassica square-foot blocks.'
+                        roadblock: 'Severe soil compaction and aphid infestation overtaking brassica square-foot blocks.',
+                        agreedToReciprocity: true
                     },
                     {
                         name: 'Maria Santos',
                         location: 'Urban Balcony Containers',
                         eduValue: 7,
-                        roadblock: 'Nutrient lockout in tomato containers and lack of vertical trellising space.'
+                        roadblock: 'Nutrient lockout in tomato containers and lack of vertical trellising space.',
+                        agreedToReciprocity: true
                     }
                 ],
                 submitChallenge() {
-                    if (!this.newChallenge.name || !this.newChallenge.roadblock) return;
+                    if (!this.newChallenge.name || !this.newChallenge.roadblock || !this.newChallenge.agreedToReciprocity) return;
                     this.challenges.push({
                         name: this.newChallenge.name,
                         location: this.newChallenge.location,
                         eduValue: this.newChallenge.eduValue,
-                        roadblock: this.newChallenge.roadblock
+                        roadblock: this.newChallenge.roadblock,
+                        agreedToReciprocity: this.newChallenge.agreedToReciprocity
                     });
                     this.newChallenge.name = '';
                     this.newChallenge.location = '';
                     this.newChallenge.eduValue = 8;
                     this.newChallenge.roadblock = '';
+                    this.newChallenge.agreedToReciprocity = false;
                     this.activeTab = 'challenges';
                 }
             }
