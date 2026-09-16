@@ -258,7 +258,54 @@
             }
         }
  
-    <!-- VISUAL EVOLUTION ANIMATION: CRAYON SKETCH TO REAL-WORLD DEPLOYMENT -->
+ // Add inside your sharedHarvestEngine() or as a standalone component function
+function sketchAnimation() {
+    return {
+        currentStep: 1,
+        stages: [
+            {
+                tag: 'STAGE 1: CONCEPTUALIZATION',
+                emoji: '🖍️',
+                title: 'The Childlike Crayon Sketch',
+                subtext: 'Hand-drawn bee and rough perimeter line',
+                description: 'The journey starts with a simple, imaginative crayon drawing by a participant. It captures the core desire: a friendly bee resting near a protective border, mapping out the initial concept without rigid constraints.',
+                pipelineNote: 'Raw participant idea captured and submitted via the community challenge portal.'
+            },
+            {
+                tag: 'STAGE 2: INCUBATION',
+                emoji: '🐝',
+                title: 'The Bee & Fire Buffer Corridor',
+                subtext: 'Translating shapes into practical ecosystem zones',
+                description: 'The rough concept is evaluated by the team and merged with practical land requirements. The rough line becomes a designated fire-buffer fuel reduction zone packed with native, nectar-rich flowering perennials.',
+                pipelineNote: 'Reviewed for ecological value and matched with the 3-year shared harvest framework.'
+            },
+            {
+                tag: 'STAGE 3: ARCHITECTURE',
+                emoji: '📐',
+                title: 'Professional Grid Design',
+                subtext: 'Scaled square-foot drafting and layout specs',
+                description: 'Using our digital drafting tools, the sketch is transformed into a clean, professional master schematic complete with exact foot-by-foot grid measurements, companion planting zones, and biochar staging paths.',
+                pipelineNote: 'Drafted into presentation-ready documentation for landowner review and site sponsorship.'
+            },
+            {
+                tag: 'STAGE 4: DEPLOYMENT',
+                emoji: '🌲',
+                title: 'On-Site Fire Buffer Installation',
+                subtext: 'Active 5-person cell execution along the forest edge',
+                description: 'The completed system comes to life on the ground. A trained 5-person cell clears the slash, lays down biochar-amended soil, and establishes the flowering buffer along the forest boundary line ready for 3-year operation.',
+                pipelineNote: 'Active operational cell deployed; ready for Year-3 cost-plus buyout evaluation.'
+            }
+        ],
+        nextStep() {
+            this.currentStep = this.currentStep < 4 ? this.currentStep + 1 : 1;
+        },
+        prevStep() {
+            this.currentStep = this.currentStep > 1 ? this.currentStep - 1 : 4;
+        }
+    }
+}
+        
+        <!-- VISUAL EVOLUTION ANIMATION: CRAYON SKETCH TO REAL-WORLD DEPLOYMENT -->
         <div class="mt-8 bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6" x-data="sketchAnimation()">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
                 <div>
