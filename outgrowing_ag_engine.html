@@ -242,3 +242,123 @@
     </script>
 </body>
 </html>
+'Floral / Specialty Crop Care',
+                    'Watershed Slash Bucking & Piling',
+                    'Fire Buffer Fuel Reduction',
+                    'Biochar Kiln Operation & Tending',
+                    'Super-Sack Handling & Forklift Logistics',
+                    'Pop-Up Farm Stand & Micro-Retail'
+                ],
+                participants: [
+                    {
+                        name: 'Marcus Vance',
+                        track: 'Restoration',
+                        skills: [
+                            'Core Safety & Protocol Baseline',
+                            'Watershed Slash Bucking & Piling',
+                            'Fire Buffer Fuel Reduction',
+                            'Biochar Kiln Operation & Tending',
+                            'Super-Sack Handling & Forklift Logistics'
+                        ]
+                    },
+                    {
+                        name: 'Elena Rostova',
+                        track: 'Specialized',
+                        skills: [
+                            'Core Safety & Protocol Baseline',
+                            'Specialized Mushroom Spore-to-Harvest',
+                            'Floral / Specialty Crop Care',
+                            'Nursery Propagation & Root Care'
+                        ]
+                    }
+                ],
+                wishJobs: [
+                    {
+                        partnerName: 'Willamette Watershed Council',
+                        title: 'Fire Buffer & Biochar Specialist Lead',
+                        deploymentType: 'Specialist Co-Leader Integration',
+                        requiredSkills: [
+                            'Core Safety & Protocol Baseline',
+                            'Watershed Slash Bucking & Piling',
+                            'Fire Buffer Fuel Reduction',
+                            'Biochar Kiln Operation & Tending',
+                            'Super-Sack Handling & Forklift Logistics'
+                        ]
+                    },
+                    {
+                        partnerName: 'Cascade Organic Nursery',
+                        title: 'Propagation & Harvest Cell Lead',
+                        deploymentType: 'Standard 5-Person Cell',
+                        requiredSkills: [
+                            'Core Safety & Protocol Baseline',
+                            'Harvest Pacing & Gentle Handling',
+                            'Nursery Propagation & Root Care',
+                            'Greenhouse Sanitation & Flat Spacing'
+                        ]
+                    }
+                ],
+                newParticipant: {
+                    name: '',
+                    track: 'Harvest',
+                    skills: []
+                },
+                newWishJob: {
+                    partnerName: '',
+                    title: '',
+                    deploymentType: 'Standard 5-Person Cell',
+                    requiredSkills: []
+                },
+                selectedProspectName: '',
+                selectedJobTitle: '',
+
+                get selectedProspect() {
+                    return this.participants.find(p => p.name === this.selectedProspectName) || null;
+                },
+
+                get selectedJob() {
+                    return this.wishJobs.find(j => j.title === this.selectedJobTitle) || null;
+                },
+
+                submitParticipant() {
+                    if (!this.newParticipant.name) return;
+                    this.participants.push({
+                        name: this.newParticipant.name,
+                        track: this.newParticipant.track,
+                        skills: [...this.newParticipant.skills]
+                    });
+                    this.newParticipant.name = '';
+                    this.newParticipant.skills = [];
+                    this.activeTab = 'dashboard';
+                },
+
+                submitWishJob() {
+                    if (!this.newWishJob.partnerName || !this.newWishJob.title) return;
+                    this.wishJobs.push({
+                        partnerName: this.newWishJob.partnerName,
+                        title: this.newWishJob.title,
+                        deploymentType: this.newWishJob.deploymentType,
+                        requiredSkills: [...this.newWishJob.requiredSkills]
+                    });
+                    this.newWishJob.partnerName = '';
+                    this.newWishJob.title = '';
+                    this.newWishJob.requiredSkills = [];
+                    this.activeTab = 'dashboard';
+                },
+
+                calculateMatches(prospect, job) {
+                    let matched = [];
+                    let missing = [];
+                    job.requiredSkills.forEach(req => {
+                        if (prospect.skills.includes(req)) {
+                            matched.push(req);
+                        } else {
+                            missing.push(req);
+                        }
+                    });
+                    return { matched, missing };
+                }
+            }
+        }
+    </script>
+</body>
+</html>
