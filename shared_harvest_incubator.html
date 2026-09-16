@@ -81,38 +81,109 @@
                     </button>
                 </div>
 
-                <!-- Track Details Display -->
-                <div class="bg-slate-900 border border-slate-700 rounded-xl p-6 space-y-4">
-                    <template x-if="selectedTrack === 'flowers'">
-                        <div class="space-y-3">
-                            <h3 class="text-lg font-bold text-pink-400">Specialty Cut Flower & Aesthetic Integration</h3>
-                            <p class="text-sm text-slate-300">Participants draw custom micro-plots for high-value cut flowers that thrive in biochar-amended soil. Landowners review the pencil sketches and sponsor the layout, while the 5-person cell manages bed preparation, irrigation staging, and pop-up farm stand floral bundles.</p>
-                            <div class="text-xs bg-slate-800 p-3 rounded border border-slate-700 text-slate-400">
-                                <strong class="text-slate-200">3-Year Educational Milestone:</strong> Master soil conditioning, stem-harvest timing, cold-storage logistics, and direct-to-consumer micro-retail pricing.
-                            </div>
-                        </div>
-                    </template>
-                    <template x-if="selectedTrack === 'bees'">
-                        <div class="space-y-3">
-                            <h3 class="text-lg font-bold text-amber-400">Pollinator Corridor & Native Forage Architecture</h3>
-                            <p class="text-sm text-slate-300">Participants design perimeter pollinator strips that double as fire-buffer fuel reduction zones. Utilizing cleared biomass converted to biochar, these corridors support native bee populations while protecting the farm's core infrastructure.</p>
-                            <div class="text-xs bg-slate-800 p-3 rounded border border-slate-700 text-slate-400">
-                                <strong class="text-slate-200">3-Year Educational Milestone:</strong> Master seed propagation, ecological corridor maintenance, apiary integration, and grant metric reporting for conservation.
-                            </div>
-                        </div>
-                    </template>
-                    <template x-if="selectedTrack === 'mushrooms'">
-                        <div class="space-y-3">
-                            <h3 class="text-lg font-bold text-purple-400">Myco-Restoration & Specialized Spore Cultivation</h3>
-                            <p class="text-sm text-slate-300">Participants map out wood-chip and slash inoculation beds using post-wildfire clearing debris. This turns hazardous waste into gourmet or medicinal mushroom production units managed directly by the cell's cross-trainees.</p>
-                            <div class="text-xs bg-slate-800 p-3 rounded border border-slate-700 text-slate-400">
-                                <strong class="text-slate-200">3-Year Educational Milestone:</strong> Master sterile spawn handling, wood-waste myco-decomposition, moisture regulation, and specialty crop market distribution.
-                            </div>
-                        </div>
-                    </template>
+               <!-- Track Details Display -->
+<div class="bg-slate-900 border border-slate-700 rounded-xl p-6 space-y-6">
+    
+    <!-- FLOWERS TRACK -->
+    <template x-if="selectedTrack === 'flowers'">
+        <div class="space-y-4">
+            <div>
+                <h3 class="text-lg font-bold text-pink-400">🌸 Specialty Cut Flower & Aesthetic Integration</h3>
+                <p class="text-sm text-slate-300 mt-1">Participants draw custom micro-plots for high-value cut flowers that thrive in biochar-amended soil. Landowners review the pencil sketches and sponsor the layout, while the 5-person cell manages bed preparation, irrigation staging, and pop-up farm stand floral bundles.</p>
+            </div>
+
+            <!-- Operational Metrics Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
+                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Setup Labor</span>
+                    <span class="text-base font-bold text-emerald-400">45 Hours</span>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Bed framing, biochar blending, drip grid installation.</p>
+                </div>
+                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Material / Startup Cost</span>
+                    <span class="text-base font-bold text-emerald-400">$1,850</span>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Lumber, drip parts, compost, bulk biochar, tubers.</p>
+                </div>
+                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Weekly Management</span>
+                    <span class="text-base font-bold text-emerald-400">12 Hrs / Wk</span>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Succession sowing, harvesting, hydration/bundling.</p>
                 </div>
             </div>
+
+            <div class="text-xs bg-slate-800 p-3 rounded border border-slate-700 text-slate-400">
+                <strong class="text-slate-200">3-Year Educational Milestone:</strong> Master soil conditioning, stem-harvest timing, cold-storage logistics, and direct-to-consumer micro-retail pricing.
+            </div>
         </div>
+    </template>
+
+    <!-- BEES TRACK -->
+    <template x-if="selectedTrack === 'bees'">
+        <div class="space-y-4">
+            <div>
+                <h3 class="text-lg font-bold text-amber-400">🐝 Pollinator Corridor & Native Forage Architecture</h3>
+                <p class="text-sm text-slate-300 mt-1">Participants design perimeter pollinator strips that double as fire-buffer fuel reduction zones. Utilizing cleared biomass converted to biochar, these corridors support native bee populations while protecting the farm's core infrastructure.</p>
+            </div>
+
+            <!-- Operational Metrics Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
+                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Setup Labor</span>
+                    <span class="text-base font-bold text-emerald-400">60 Hours</span>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Brush clearing, slash processing, trenching, plug planting.</p>
+                </div>
+                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Material / Startup Cost</span>
+                    <span class="text-base font-bold text-emerald-400">$1,200</span>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Native seed mixes, perennial plugs, tool caches, kiln supplies.</p>
+                </div>
+                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Weekly Management</span>
+                    <span class="text-base font-bold text-emerald-400">6 Hrs / Wk</span>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Invasive weed suppression, moisture checks, fire safety trims.</p>
+                </div>
+            </div>
+
+            <div class="text-xs bg-slate-800 p-3 rounded border border-slate-700 text-slate-400">
+                <strong class="text-slate-200">3-Year Educational Milestone:</strong> Master seed propagation, ecological corridor maintenance, apiary integration, and grant metric reporting for conservation.
+            </div>
+        </div>
+    </template>
+
+    <!-- MUSHROOMS TRACK -->
+    <template x-if="selectedTrack === 'mushrooms'">
+        <div class="space-y-4">
+            <div>
+                <h3 class="text-lg font-bold text-purple-400">🍄 Myco-Restoration & Specialized Spore Cultivation</h3>
+                <p class="text-sm text-slate-300 mt-1">Participants map out wood-chip and slash inoculation beds using post-wildfire clearing debris. This turns hazardous waste into gourmet or medicinal mushroom production units managed directly by the cell's cross-trainees.</p>
+            </div>
+
+            <!-- Operational Metrics Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
+                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Setup Labor</span>
+                    <span class="text-base font-bold text-emerald-400">50 Hours</span>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Log drilling/waxing, chip bed excavation, spawn layering.</p>
+                </div>
+                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Material / Startup Cost</span>
+                    <span class="text-base font-bold text-emerald-400">$2,100</span>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Spawn blocks, plug spawn, cheese wax, shade cloth, misters.</p>
+                </div>
+                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Weekly Management</span>
+                    <span class="text-base font-bold text-emerald-400">8 Hrs / Wk</span>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Humidity regulation, shade adjustments, flush harvesting.</p>
+                </div>
+            </div>
+
+            <div class="text-xs bg-slate-800 p-3 rounded border border-slate-700 text-slate-400">
+                <strong class="text-slate-200">3-Year Educational Milestone:</strong> Master sterile spawn handling, wood-waste myco-decomposition, moisture regulation, and specialty crop market distribution.
+            </div>
+        </div>
+    </template>
+
+</div> 
 
         <!-- VIEW 3: COST-PLUS BUYOUT CALCULATOR -->
         <div x-show="activeView === 'buyout'" class="space-y-6">
