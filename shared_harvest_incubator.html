@@ -8,6 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Alpine.js for reactive UI logic -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Prevent Alpine flash on load -->
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen">
 
@@ -32,7 +36,7 @@
         </header>
 
         <!-- VIEW 1: MODEL OVERVIEW -->
-        <div x-show="activeView === 'overview'" class="space-y-6">
+        <div x-show="activeView === 'overview'" x-cloak class="space-y-6">
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-4">
                 <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">The 3-Year Shared Harvest Loop</span>
                 <h2 class="text-2xl font-bold text-white">From Pencil Design to Turnkey Farm Acquisition</h2>
@@ -58,7 +62,7 @@
         </div>
 
         <!-- VIEW 2: SPECIALTY TRACKS (PENCIL DESIGNS) -->
-        <div x-show="activeView === 'tracks'" class="space-y-6">
+        <div x-show="activeView === 'tracks'" x-cloak class="space-y-6">
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
                 <div>
                     <h2 class="text-xl font-semibold mb-2 text-emerald-300">Participant Specialty Tracks & Pencil Design Incubator</h2>
@@ -81,112 +85,111 @@
                     </button>
                 </div>
 
-               <!-- Track Details Display -->
-<div class="bg-slate-900 border border-slate-700 rounded-xl p-6 space-y-6">
-    
-    <!-- FLOWERS TRACK -->
-    <template x-if="selectedTrack === 'flowers'">
-        <div class="space-y-4">
-            <div>
-                <h3 class="text-lg font-bold text-pink-400">🌸 Specialty Cut Flower & Aesthetic Integration</h3>
-                <p class="text-sm text-slate-300 mt-1">Participants draw custom micro-plots for high-value cut flowers that thrive in biochar-amended soil. Landowners review the pencil sketches and sponsor the layout, while the 5-person cell manages bed preparation, irrigation staging, and pop-up farm stand floral bundles.</p>
-            </div>
+                <!-- Track Details Display -->
+                <div class="bg-slate-900 border border-slate-700 rounded-xl p-6 space-y-6">
+                    
+                    <!-- FLOWERS TRACK -->
+                    <template x-if="selectedTrack === 'flowers'">
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="text-lg font-bold text-pink-400">🌸 Specialty Cut Flower & Aesthetic Integration</h3>
+                                <p class="text-sm text-slate-300 mt-1">Participants draw custom micro-plots for high-value cut flowers that thrive in biochar-amended soil. Landowners review the pencil sketches and sponsor the layout, while the 5-person cell manages bed preparation, irrigation staging, and pop-up farm stand floral bundles.</p>
+                            </div>
 
-            <!-- Operational Metrics Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
-                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Setup Labor</span>
-                    <span class="text-base font-bold text-emerald-400">45 Hours</span>
-                    <p class="text-[11px] text-slate-500 mt-0.5">Bed framing, biochar blending, drip grid installation.</p>
-                </div>
-                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Material / Startup Cost</span>
-                    <span class="text-base font-bold text-emerald-400">$1,850</span>
-                    <p class="text-[11px] text-slate-500 mt-0.5">Lumber, drip parts, compost, bulk biochar, tubers.</p>
-                </div>
-                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Weekly Management</span>
-                    <span class="text-base font-bold text-emerald-400">12 Hrs / Wk</span>
-                    <p class="text-[11px] text-slate-500 mt-0.5">Succession sowing, harvesting, hydration/bundling.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Setup Labor</span>
+                                    <span class="text-base font-bold text-emerald-400">45 Hours</span>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">Bed framing, biochar blending, drip grid installation.</p>
+                                </div>
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Material / Startup Cost</span>
+                                    <span class="text-base font-bold text-emerald-400">$1,850</span>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">Lumber, drip parts, compost, bulk biochar, tubers.</p>
+                                </div>
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Weekly Management</span>
+                                    <span class="text-base font-bold text-emerald-400">12 Hrs / Wk</span>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">Succession sowing, harvesting, hydration/bundling.</p>
+                                </div>
+                            </div>
+
+                            <div class="text-xs bg-slate-800 p-3 rounded border border-slate-700 text-slate-400">
+                                <strong class="text-slate-200">3-Year Educational Milestone:</strong> Master soil conditioning, stem-harvest timing, cold-storage logistics, and direct-to-consumer micro-retail pricing.
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- BEES TRACK -->
+                    <template x-if="selectedTrack === 'bees'">
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="text-lg font-bold text-amber-400">🐝 Pollinator Corridor & Native Forage Architecture</h3>
+                                <p class="text-sm text-slate-300 mt-1">Participants design perimeter pollinator strips that double as fire-buffer fuel reduction zones. Utilizing cleared biomass converted to biochar, these corridors support native bee populations while protecting the farm's core infrastructure.</p>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Setup Labor</span>
+                                    <span class="text-base font-bold text-emerald-400">60 Hours</span>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">Brush clearing, slash processing, trenching, plug planting.</p>
+                                </div>
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Material / Startup Cost</span>
+                                    <span class="text-base font-bold text-emerald-400">$1,200</span>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">Native seed mixes, perennial plugs, tool caches, kiln supplies.</p>
+                                </div>
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Weekly Management</span>
+                                    <span class="text-base font-bold text-emerald-400">6 Hrs / Wk</span>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">Invasive weed suppression, moisture checks, fire safety trims.</p>
+                                </div>
+                            </div>
+
+                            <div class="text-xs bg-slate-800 p-3 rounded border border-slate-700 text-slate-400">
+                                <strong class="text-slate-200">3-Year Educational Milestone:</strong> Master seed propagation, ecological corridor maintenance, apiary integration, and grant metric reporting for conservation.
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- MUSHROOMS TRACK -->
+                    <template x-if="selectedTrack === 'mushrooms'">
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="text-lg font-bold text-purple-400">🍄 Myco-Restoration & Specialized Spore Cultivation</h3>
+                                <p class="text-sm text-slate-300 mt-1">Participants map out wood-chip and slash inoculation beds using post-wildfire clearing debris. This turns hazardous waste into gourmet or medicinal mushroom production units managed directly by the cell's cross-trainees.</p>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Setup Labor</span>
+                                    <span class="text-base font-bold text-emerald-400">50 Hours</span>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">Log drilling/waxing, chip bed excavation, spawn layering.</p>
+                                </div>
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Material / Startup Cost</span>
+                                    <span class="text-base font-bold text-emerald-400">$2,100</span>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">Spawn blocks, plug spawn, cheese wax, shade cloth, misters.</p>
+                                </div>
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Weekly Management</span>
+                                    <span class="text-base font-bold text-emerald-400">8 Hrs / Wk</span>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">Humidity regulation, shade adjustments, flush harvesting.</p>
+                                </div>
+                            </div>
+
+                            <div class="text-xs bg-slate-800 p-3 rounded border border-slate-700 text-slate-400">
+                                <strong class="text-slate-200">3-Year Educational Milestone:</strong> Master sterile spawn handling, wood-waste myco-decomposition, moisture regulation, and specialty crop market distribution.
+                            </div>
+                        </div>
+                    </template>
+
                 </div>
             </div>
-
-            <div class="text-xs bg-slate-800 p-3 rounded border border-slate-700 text-slate-400">
-                <strong class="text-slate-200">3-Year Educational Milestone:</strong> Master soil conditioning, stem-harvest timing, cold-storage logistics, and direct-to-consumer micro-retail pricing.
-            </div>
-        </div>
-    </template>
-
-    <!-- BEES TRACK -->
-    <template x-if="selectedTrack === 'bees'">
-        <div class="space-y-4">
-            <div>
-                <h3 class="text-lg font-bold text-amber-400">🐝 Pollinator Corridor & Native Forage Architecture</h3>
-                <p class="text-sm text-slate-300 mt-1">Participants design perimeter pollinator strips that double as fire-buffer fuel reduction zones. Utilizing cleared biomass converted to biochar, these corridors support native bee populations while protecting the farm's core infrastructure.</p>
-            </div>
-
-            <!-- Operational Metrics Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
-                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Setup Labor</span>
-                    <span class="text-base font-bold text-emerald-400">60 Hours</span>
-                    <p class="text-[11px] text-slate-500 mt-0.5">Brush clearing, slash processing, trenching, plug planting.</p>
-                </div>
-                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Material / Startup Cost</span>
-                    <span class="text-base font-bold text-emerald-400">$1,200</span>
-                    <p class="text-[11px] text-slate-500 mt-0.5">Native seed mixes, perennial plugs, tool caches, kiln supplies.</p>
-                </div>
-                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Weekly Management</span>
-                    <span class="text-base font-bold text-emerald-400">6 Hrs / Wk</span>
-                    <p class="text-[11px] text-slate-500 mt-0.5">Invasive weed suppression, moisture checks, fire safety trims.</p>
-                </div>
-            </div>
-
-            <div class="text-xs bg-slate-800 p-3 rounded border border-slate-700 text-slate-400">
-                <strong class="text-slate-200">3-Year Educational Milestone:</strong> Master seed propagation, ecological corridor maintenance, apiary integration, and grant metric reporting for conservation.
-            </div>
-        </div>
-    </template>
-
-    <!-- MUSHROOMS TRACK -->
-    <template x-if="selectedTrack === 'mushrooms'">
-        <div class="space-y-4">
-            <div>
-                <h3 class="text-lg font-bold text-purple-400">🍄 Myco-Restoration & Specialized Spore Cultivation</h3>
-                <p class="text-sm text-slate-300 mt-1">Participants map out wood-chip and slash inoculation beds using post-wildfire clearing debris. This turns hazardous waste into gourmet or medicinal mushroom production units managed directly by the cell's cross-trainees.</p>
-            </div>
-
-            <!-- Operational Metrics Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
-                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Setup Labor</span>
-                    <span class="text-base font-bold text-emerald-400">50 Hours</span>
-                    <p class="text-[11px] text-slate-500 mt-0.5">Log drilling/waxing, chip bed excavation, spawn layering.</p>
-                </div>
-                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Material / Startup Cost</span>
-                    <span class="text-base font-bold text-emerald-400">$2,100</span>
-                    <p class="text-[11px] text-slate-500 mt-0.5">Spawn blocks, plug spawn, cheese wax, shade cloth, misters.</p>
-                </div>
-                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                    <span class="text-[10px] font-mono text-slate-400 uppercase block">Weekly Management</span>
-                    <span class="text-base font-bold text-emerald-400">8 Hrs / Wk</span>
-                    <p class="text-[11px] text-slate-500 mt-0.5">Humidity regulation, shade adjustments, flush harvesting.</p>
-                </div>
-            </div>
-
-            <div class="text-xs bg-slate-800 p-3 rounded border border-slate-700 text-slate-400">
-                <strong class="text-slate-200">3-Year Educational Milestone:</strong> Master sterile spawn handling, wood-waste myco-decomposition, moisture regulation, and specialty crop market distribution.
-            </div>
-        </div>
-    </template>
-
-</div> 
+        </div> 
 
         <!-- VIEW 3: COST-PLUS BUYOUT CALCULATOR -->
-        <div x-show="activeView === 'buyout'" class="space-y-6">
+        <div x-show="activeView === 'buyout'" x-cloak class="space-y-6">
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
                 <div>
                     <h2 class="text-xl font-semibold mb-2 text-emerald-300">Cost-Plus System Buyout Simulator</h2>
@@ -228,6 +231,49 @@
                         <div>System Margin (<span x-text="markupPercent + '%'"></span>): <strong class="text-slate-200" x-text="formatCurrency(markupAmount)"></strong></div>
                     </div>
                 </div>
+
+                <!-- VISUAL EVOLUTION ANIMATION: CRAYON SKETCH TO REAL-WORLD DEPLOYMENT -->
+                <div class="mt-8 bg-slate-950 border border-slate-800 rounded-xl p-6 shadow-inner space-y-6" x-data="sketchAnimation()">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
+                        <div>
+                            <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">Visual Evolution Track</span>
+                            <h3 class="text-lg font-bold text-white">From Crayon Dream to Real-World Fire Buffer</h3>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button @click="prevStep" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium transition">&larr; Prev</button>
+                            <span class="text-xs font-mono text-slate-400 px-2" x-text="'Stage ' + currentStep + ' of 4'"></span>
+                            <button @click="nextStep" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition">Next &rarr;</button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                        <div class="h-56 bg-slate-900 border border-slate-800 rounded-xl flex flex-col items-center justify-center p-6 text-center relative overflow-hidden shadow-inner">
+                            <span class="absolute top-3 left-3 bg-slate-800 text-slate-300 text-[10px] font-mono px-2 py-1 rounded border border-slate-700" x-text="stages[currentStep - 1].tag"></span>
+                            <div class="space-y-3">
+                                <div class="text-4xl" x-text="stages[currentStep - 1].emoji"></div>
+                                <h4 class="text-base font-bold text-white" x-text="stages[currentStep - 1].title"></h4>
+                                <p class="text-xs text-slate-400 max-w-xs" x-text="stages[currentStep - 1].subtext"></p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h4 class="text-base font-semibold text-emerald-300" x-text="stages[currentStep - 1].title"></h4>
+                            <p class="text-xs text-slate-300 leading-relaxed" x-text="stages[currentStep - 1].description"></p>
+                            
+                            <div class="bg-slate-900 p-3 rounded-lg border border-slate-800 space-y-1 text-xs text-slate-400">
+                                <span class="text-emerald-400 font-semibold block">Design Pipeline Status:</span>
+                                <p x-text="stages[currentStep - 1].pipelineNote"></p>
+                            </div>
+
+                            <div class="flex gap-2 pt-2">
+                                <template x-for="n in 4" :key="n">
+                                    <button @click="currentStep = n" class="h-2 flex-1 rounded-full transition" :class="currentStep === n ? 'bg-emerald-500' : 'bg-slate-800'"></button>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -257,101 +303,52 @@
                 }
             }
         }
- 
- // Add inside your sharedHarvestEngine() or as a standalone component function
-function sketchAnimation() {
-    return {
-        currentStep: 1,
-        stages: [
-            {
-                tag: 'STAGE 1: CONCEPTUALIZATION',
-                emoji: '🖍️',
-                title: 'The Childlike Crayon Sketch',
-                subtext: 'Hand-drawn bee and rough perimeter line',
-                description: 'The journey starts with a simple, imaginative crayon drawing by a participant. It captures the core desire: a friendly bee resting near a protective border, mapping out the initial concept without rigid constraints.',
-                pipelineNote: 'Raw participant idea captured and submitted via the community challenge portal.'
-            },
-            {
-                tag: 'STAGE 2: INCUBATION',
-                emoji: '🐝',
-                title: 'The Bee & Fire Buffer Corridor',
-                subtext: 'Translating shapes into practical ecosystem zones',
-                description: 'The rough concept is evaluated by the team and merged with practical land requirements. The rough line becomes a designated fire-buffer fuel reduction zone packed with native, nectar-rich flowering perennials.',
-                pipelineNote: 'Reviewed for ecological value and matched with the 3-year shared harvest framework.'
-            },
-            {
-                tag: 'STAGE 3: ARCHITECTURE',
-                emoji: '📐',
-                title: 'Professional Grid Design',
-                subtext: 'Scaled square-foot drafting and layout specs',
-                description: 'Using our digital drafting tools, the sketch is transformed into a clean, professional master schematic complete with exact foot-by-foot grid measurements, companion planting zones, and biochar staging paths.',
-                pipelineNote: 'Drafted into presentation-ready documentation for landowner review and site sponsorship.'
-            },
-            {
-                tag: 'STAGE 4: DEPLOYMENT',
-                emoji: '🌲',
-                title: 'On-Site Fire Buffer Installation',
-                subtext: 'Active 5-person cell execution along the forest edge',
-                description: 'The completed system comes to life on the ground. A trained 5-person cell clears the slash, lays down biochar-amended soil, and establishes the flowering buffer along the forest boundary line ready for 3-year operation.',
-                pipelineNote: 'Active operational cell deployed; ready for Year-3 cost-plus buyout evaluation.'
+
+        function sketchAnimation() {
+            return {
+                currentStep: 1,
+                stages: [
+                    {
+                        tag: 'STAGE 1: CONCEPTUALIZATION',
+                        emoji: '🖍️',
+                        title: 'The Childlike Crayon Sketch',
+                        subtext: 'Hand-drawn bee and rough perimeter line',
+                        description: 'The journey starts with a simple, imaginative crayon drawing by a participant. It captures the core desire: a friendly bee resting near a protective border, mapping out the initial concept without rigid constraints.',
+                        pipelineNote: 'Raw participant idea captured and submitted via the community challenge portal.'
+                    },
+                    {
+                        tag: 'STAGE 2: INCUBATION',
+                        emoji: '🐝',
+                        title: 'The Bee & Fire Buffer Corridor',
+                        subtext: 'Translating shapes into practical ecosystem zones',
+                        description: 'The rough concept is evaluated by the team and merged with practical land requirements. The rough line becomes a designated fire-buffer fuel reduction zone packed with native, nectar-rich flowering perennials.',
+                        pipelineNote: 'Reviewed for ecological value and matched with the 3-year shared harvest framework.'
+                    },
+                    {
+                        tag: 'STAGE 3: ARCHITECTURE',
+                        emoji: '📐',
+                        title: 'Professional Grid Design',
+                        subtext: 'Scaled square-foot drafting and layout specs',
+                        description: 'Using our digital drafting tools, the sketch is transformed into a clean, professional master schematic complete with exact foot-by-foot grid measurements, companion planting zones, and biochar staging paths.',
+                        pipelineNote: 'Drafted into presentation-ready documentation for landowner review and site sponsorship.'
+                    },
+                    {
+                        tag: 'STAGE 4: DEPLOYMENT',
+                        emoji: '🌲',
+                        title: 'On-Site Fire Buffer Installation',
+                        subtext: 'Active 5-person cell execution along the forest edge',
+                        description: 'The completed system comes to life on the ground. A trained 5-person cell clears the slash, lays down biochar-amended soil, and establishes the flowering buffer along the forest boundary line ready for 3-year operation.',
+                        pipelineNote: 'Active operational cell deployed; ready for Year-3 cost-plus buyout evaluation.'
+                    }
+                ],
+                nextStep() {
+                    this.currentStep = this.currentStep < 4 ? this.currentStep + 1 : 1;
+                },
+                prevStep() {
+                    this.currentStep = this.currentStep > 1 ? this.currentStep - 1 : 4;
+                }
             }
-        ],
-        nextStep() {
-            this.currentStep = this.currentStep < 4 ? this.currentStep + 1 : 1;
-        },
-        prevStep() {
-            this.currentStep = this.currentStep > 1 ? this.currentStep - 1 : 4;
         }
-    }
-}
-        
-        <!-- VISUAL EVOLUTION ANIMATION: CRAYON SKETCH TO REAL-WORLD DEPLOYMENT -->
-        <div class="mt-8 bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6" x-data="sketchAnimation()">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
-                <div>
-                    <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">Visual Evolution Track</span>
-                    <h2 class="text-xl font-bold text-white">From Crayon Dream to Real-World Fire Buffer</h2>
-                </div>
-                <div class="flex items-center gap-2">
-                    <button @click="prevStep" class="bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium transition">&larr; Prev</button>
-                    <span class="text-xs font-mono text-slate-400 px-2" x-text="'Stage ' + currentStep + ' of 4'"></span>
-                    <button @click="nextStep" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition">Next &rarr;</button>
-                </div>
-            </div>
-
-            <!-- Display Window -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center bg-slate-950 p-6 rounded-xl border border-slate-800">
-                <!-- Visual Box / Placeholder Graphic -->
-                <div class="h-64 bg-slate-900 border border-slate-700 rounded-xl flex flex-col items-center justify-center p-6 text-center relative overflow-hidden shadow-inner">
-                    <span class="absolute top-3 left-3 bg-slate-800 text-slate-300 text-[10px] font-mono px-2 py-1 rounded border border-slate-700" x-text="stages[currentStep - 1].tag"></span>
-                    
-                    <!-- Dynamic Graphic Representation -->
-                    <div class="space-y-3">
-                        <div class="text-4xl" x-text="stages[currentStep - 1].emoji"></div>
-                        <h3 class="text-lg font-bold text-white" x-text="stages[currentStep - 1].title"></h3>
-                        <p class="text-xs text-slate-400 max-w-xs" x-text="stages[currentStep - 1].subtext"></p>
-                    </div>
-                </div>
-
-                <!-- Description & Progress Commentary -->
-                <div class="space-y-4">
-                    <h3 class="text-lg font-semibold text-emerald-300" x-text="stages[currentStep - 1].title"></h3>
-                    <p class="text-sm text-slate-300 leading-relaxed" x-text="stages[currentStep - 1].description"></p>
-                    
-                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-800 space-y-2 text-xs text-slate-400">
-                        <span class="text-emerald-400 font-semibold block">Design Pipeline Status:</span>
-                        <p x-text="stages[currentStep - 1].pipelineNote"></p>
-                    </div>
-
-                    <!-- Step Indicators -->
-                    <div class="flex gap-2 pt-2">
-                        <template x-for="n in 4" :key="n">
-                            <button @click="currentStep = n" class="h-2 flex-1 rounded-full transition" :class="currentStep === n ? 'bg-emerald-500' : 'bg-slate-800'"></button>
-                        </template>
-                    </div>
-                </div>
-            </div>
-        </div>
     </script>
 </body>
 </html>
