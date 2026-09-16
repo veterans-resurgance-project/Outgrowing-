@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Stage 4.5: Specialization Side-Tracks</title>
+    <script src="afti-core.js"></script>
+    <style>
+        :root { 
+            --bg-color: #0f172a; 
+            --card-bg: #1e293b; 
+            --text-color: #f8fafc; 
+            --primary: #27ae60; 
+            --hud-bg: #144d29; 
+            --accent: #38bdf8;
+            --grey-slate: #334155;
+        }
+        body { 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: var(--bg-color); 
+            color: var(--text-color); 
+            padding: 40px 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            box-sizing: border-box;
+        }
+        .container { 
+            width: 100%; 
+            max-width: 840px; 
+            background: var(--card-bg); 
+            border-radius: 16px; 
+            padding: 40px; 
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+        .hud-bar { 
+            background: var(--hud-bg); 
+            border-radius: 8px; 
+            padding: 12px 20px; 
+            margin-bottom: 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            font-weight: bold; 
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95rem;
+        }
+        .prose-block {
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+        .side-track-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+        .track-card {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+        .track-card.completed {
+            border-color: var(--primary);
+            background: rgba(39, 174, 96, 0.05);
+        }
+        .track-info h4 {
+            margin: 0 0 5px 0;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+        .track-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+        .xp-badge {
+            background: rgba(39, 174, 96, 0.15);
+            color: #4ade80;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .action-btn {
+            background: var(--accent);
+            color: #0f172a;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .action-btn:hover {
+            transform: translateY(-1px);
+            background: #7dd3fc;
+        }
+        .action-btn:disabled {
+            background: var(--grey-slate);
+            color: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .footer-panel {
+            text-align: center;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #334155;
+            padding: 25px;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- GLOBAL HUD BAR -->
+    <div class="hud-bar">
+        <span>Path: <span style="color: var(--accent);">Foster-Alum Side-Tracks</span></span>
+        <div>
+            <span>Global XP: <span id="global-points" style="color: #4ade80;">350</span></span>
+        </div>
+    </div>
+
+    <h2 style="color: #fff; margin-top: 0; font-size: 1.6rem; margin-bottom: 15px;">🛠️ Specialization Fields: Locking in Your Value</h2>
+
+    <div class="prose-block">
+        <p>Before you step into the main council room to meet the rest of your new team, you have a brief window to complete specialized field preparation tasks. Use this time to focus your sharp analytical mind and attention to detail. Every subsystem check you complete here adds directly to your digital resume and ensures your team has a rock-solid operational foundation.</p>
+    </div>
+
+    <!-- SIDE-TRACK SELECTION LOOP -->
+    <div class="side-track-grid">
+        <!-- SIDE TRACK 1 -->
+        <div class="track-card" id="card-track1">
+            <div class="track-info">
+                <h4>1. Biochar Kiln Thermal Mapping <span class="xp-badge">+25 XP</span></h4>
+                <p id="desc-track1">Analyze real-time data from local mobile kilns to optimize waste-wood processing safety logs.</p>
+            </div>
+            <button class="action-btn" id="btn-track1" onclick="runSideTrack(1, 25)">Execute Calibration</button>
+        </div>
+
+        <!-- SIDE TRACK 2 -->
+        <div class="track-card" id="card-track2">
+            <div class="track-info">
+                <h4>2. Nursery Water-Rights SOP Alignment <span class="xp-badge">+25 XP</span></h4>
+                <p id="desc-track2">Audit local Linn County water use documents to ensure complete legal compliance before planting.</p>
+            </div>
+            <button class="action-btn" id="btn-track2" onclick="runSideTrack(2, 25)">Audit Regulations</button>
+        </div>
+    </div>
+
+    <!-- PROGRESSION BAR FOOTER PANEL -->
+    <div class="footer-panel">
+        <p style="color: #94a3b8; margin-top: 0; margin-bottom: 15px; font-size: 0.95rem;">Once you have completed your field tasks, proceed to the main strategy tables.</p>
+        <a href="difficult-track-stage4-greenhouse.html" class="action-btn" style="background: var(--primary); color: white; padding: 12px 24px; text-decoration: none; display: inline-block;">Proceed to Greenhouse Council &rarr;</a>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Initialize and carry over the global portfolio scoring baseline
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '350', 10);
+        document.getElementById('global-points').innerText = currentXP;
+        
+        // Restore check progress from storage keys
+        if(localStorage.getItem('afti_sidetrack_1_complete') === 'true') {
+            markCardCompleted(1, "Biochar kiln heat records calibrated and securely logged into the master state system.");
+        }
+        if(localStorage.getItem('afti_sidetrack_2_complete') === 'true') {
+            markCardCompleted(2, "Water tracking charts successfully checked and cleared for agricultural use bounds.");
+        }
+    });
+
+    function runSideTrack(trackId, xpValue) {
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '350', 10);
+        let updatedXP = currentXP + xpValue;
+        
+        // Update persistent browser memory lines
+        localStorage.setItem('afti_global_xp', updatedXP);
+        localStorage.setItem(`afti_sidetrack_${trackId}_complete`, 'true');
+        
+        // Push updated numbers directly to the UI bar
+        document.getElementById('global-points').innerText = updatedXP;
+
+        // Visual code transformations
+        let standardMessage = trackId === 1 ? 
+            "Biochar kiln heat records calibrated and securely logged into the master state system." : 
+            "Water tracking charts successfully checked and cleared for agricultural use bounds.";
+            
+        markCardCompleted(trackId, standardMessage);
+    }
+
+    function markCardCompleted(trackId, successText) {
+        const card = document.getElementById(`card-track1`);
+        const targetCard = document.getElementById(`card-track${trackId}`);
+        const targetDesc = document.getElementById(`desc-track${trackId}`);
+        const targetBtn = document.getElementById(`btn-track${trackId}`);
+
+        targetCard.classList.add('completed');
+        targetDesc.innerHTML = `<strong>✅ System Verified:</strong> ${successText}`;
+        targetBtn.innerText = "Verified";
+        targetBtn.disabled = true;
+    }
+</script>
+
+</body>
+</html>
