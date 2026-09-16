@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Stage 4: Specialized Operations Hub</title>
+    <script src="afti-core.js"></script>
+    <style>
+        :root { 
+            --bg-color: #0f172a; 
+            --card-bg: #1e293b; 
+            --text-color: #f8fafc; 
+            --primary: #27ae60; 
+            --hud-bg: #144d29; 
+            --accent: #38bdf8;
+            --warn: #f59e0b;
+            --grey-slate: #334155;
+        }
+        body { 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: var(--bg-color); 
+            color: var(--text-color); 
+            padding: 40px 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            box-sizing: border-box;
+        }
+        .container { 
+            width: 100%; 
+            max-width: 840px; 
+            background: var(--card-bg); 
+            border-radius: 16px; 
+            padding: 40px; 
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+        .hud-bar { 
+            background: var(--hud-bg); 
+            border-radius: 8px; 
+            padding: 12px 20px; 
+            margin-bottom: 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            font-weight: bold; 
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95rem;
+        }
+        .prose-block {
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+        .desk-panel {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        .submission-item {
+            background: #141c2b;
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 15px;
+        }
+        .sub-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 6px;
+        }
+        .sub-author {
+            font-weight: bold;
+            color: var(--accent);
+            font-size: 0.95rem;
+        }
+        .sub-text {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        .choice-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .choice-btn {
+            background: var(--grey-slate);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .choice-btn:hover {
+            background: #475569;
+        }
+        .choice-btn.selected-correct {
+            background: rgba(39, 174, 96, 0.2);
+            border-color: var(--primary);
+            color: #4ade80;
+        }
+        .feedback-text {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            display: none;
+            padding-left: 5px;
+            border-left: 2px solid var(--accent);
+        }
+        .btn { 
+            display: inline-block; 
+            background: var(--primary); 
+            color: white; 
+            padding: 14px 28px; 
+            border-radius: 8px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 1.05rem;
+            transition: all 0.2s ease;
+        }
+        .btn:hover {
+            background: #219653;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- GLOBAL HUD BAR -->
+    <div class="hud-bar">
+        <span>Path: <span id="hud-track" style="color: var(--accent);">Foster-Alum Track</span></span>
+        <div>
+            <span>Global XP: <span id="global-points" style="color: #4ade80;">400</span></span>
+        </div>
+    </div>
+
+    <h2 style="color: #fff; margin-top: 0; font-size: 1.6rem; margin-bottom: 15px;">🖥️ The Screening Desk: Processing Arriving Solutions</h2>
+
+    <div class="prose-block">
+        <p>The signal terminal blinks steadily. Incoming dispatches from neighborhood advisors and background growers are queuing up. As the station administrator, your task is to screen these solutions. Sort out well-meaning but dangerous methods from scientifically sound, low-cost compliance strategies that protect the soil and the workforce.</p>
+    </div>
+
+    <!-- SCREENING MATRIX DESK -->
+    <div class="desk-panel">
+        <h3 style="color: #fff; margin-top: 0; font-size: 1.15rem; margin-bottom: 15px;">Queue Item 1: Soil Compaction &amp; Acidic pH Fix</h3>
+        <div class="submission-item" id="sub-1">
+            <div class="sub-header">
+                <span class="sub-author">Handle: @ValleyGrower55</span>
+                <span style="color:#94a3b8; font-size:0.8rem;">Incoming Text</span>
+            </div>
+            <div class="sub-text">
+                "For that old orchard's hard, sour soil, just till it deep three times down to 12 inches to smash the compaction, then dump heavy chemical nitrogen fertilizer immediately to jumpstart the dead roots before winter."
+            </div>
+            <div class="choice-row">
+                <button class="choice-btn" id="btn-1a" onclick="evaluateSubmission(1, 'A', false)">Flag as Compliance Deficit (0 XP)</button>
+                <button class="choice-btn" id="btn-1b" onclick="evaluateSubmission(1, 'B', true)">Route to Active Playbook (+25 XP)</button>
+            </div>
+            <div class="feedback-text" id="fb-1"></div>
+        </div>
+
+        <h3 style="color: #fff; margin-top: 25px; font-size: 1.15rem; margin-bottom: 15px;">Queue Item 2: Low-Pressure Gravity Irrigation</h3>
+        <div class="submission-item" id="sub-2">
+            <div class="sub-header">
+                <span class="sub-author">Handle: @BackyardMechanic</span>
+                <span style="color:#94a3b8; font-size:0.8rem;">Incoming Text</span>
+            </div>
+            <div class="sub-text">
+                "Elevate a 275-gallon IBC tote tank 4 feet on stabilized timber skids. Run a 1-inch main header line stepping down to half-inch drip lines with non-compensating emitters. A single individual can open the valve with a basic quarter-turn handle."
+            </div>
+            <div class="choice-row">
+                <button class="choice-btn" id="btn-2a" onclick="evaluateSubmission(2, 'A', true)">Route to Active Playbook (+25 XP)</button>
+                <button class="choice-btn" id="btn-2b" onclick="evaluateSubmission(2, 'B', false)">Flag as Compliance Deficit (0 XP)</button>
+            </div>
+            <div class="feedback-text" id="fb-2"></div>
+        </div>
+    </div>
+
+    <div style="text-align: center; background: rgba(255, 255, 255, 0.02); border: 1px solid #334155; padding: 25px; border-radius: 12px;">
+        <p style="color: #cbd5e1; margin-top: 0; margin-bottom: 15px; font-size: 0.95rem;">Once you have processed the incoming queue data, hand off the reviewed logs to the field squad.</p>
+        <a href="difficult-path-convergence.html" class="btn">Deliver Cleared Playbook to Packing Shed &rarr;</a>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const activeTrackName = localStorage.getItem('afti_track_name') || 'Foster-Alum Track';
+        document.getElementById('hud-track').innerText = activeTrackName;
+        
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '400', 10);
+        document.getElementById('global-points').innerText = currentXP;
+    });
+
+    function evaluateSubmission(itemNum, choiceLetter, isCorrect) {
+        // Prevent double clicking
+        const buttons = document.querySelectorAll(`#sub-${itemNum} .choice-btn`);
+        buttons.forEach(btn => btn.disabled = true);
+
+        const fb = document.getElementById(`fb-${itemNum}`);
+        fb.style.display = "block";
+
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '400', 10);
+
+        if (itemNum === 1) {
+            if (choiceLetter === 'A') {
+                // Correctly spotting the error
+                fb.innerHTML = "<strong>✅ Correct Audit:</strong> Excellent check. Rototilling deep historic orchard floors destroys vital mycelial networks and tears ancient root systems. Chemical nitrogen quick-fixes would wash into waterways during cold rain. This suggestion is flagged as a compliance risk.";
+                updateXP(25);
+                document.getElementById('btn-1a').classList.add('selected-correct');
+            } else {
+                fb.innerHTML = "<strong>⚠️ Incorrect Route:</strong> Tilling historic trees destroys surface feeder roots, and heavy winter nitrogen creates chemical run-off hazards for the local fire-buffer watershed. This should have been flagged.";
+            }
+        } 
+        
+        if (itemNum === 2) {
+            if (choiceLetter === 'A') {
+                // Correctly routing the sound solution
+                fb.innerHTML = "<strong>✅ Correct Audit:</strong> Verified. Raising the tank 4 feet generates roughly 1.7 PSI of pressure, which is ideal for low-pressure gravity drip networks. Emitters without heavy pressure-compensation flow perfectly at low thresholds, making it easy for a single person with low mobility to operate.";
