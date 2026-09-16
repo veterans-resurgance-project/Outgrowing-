@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outgrowing-Ag // 3-Year Shared Harvest & Buyout Architecture</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for reactive UI logic -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen">
+
+    <div class="max-w-6xl mx-auto p-6" x-data="sharedHarvestEngine()">
+        
+        <!-- Header -->
+        <header class="border-b border-slate-800 pb-6 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight text-emerald-400">Outgrowing-Ag</h1>
+                <p class="text-slate-400 text-sm">3-Year Shared Harvest, Pencil Design Incubator & Cost-Plus Buyout Architecture</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="outgrowing_ag_engine.html" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg border border-slate-700 transition">
+                    &larr; Back to Engine
+                </a>
+                <div class="flex flex-wrap gap-2 bg-slate-800 p-1.5 rounded-lg border border-slate-700">
+                    <button @click="activeView = 'overview'" :class="activeView === 'overview' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-2 rounded-md text-sm font-medium transition">Model Overview</button>
+                    <button @click="activeView = 'tracks'" :class="activeView === 'tracks' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-2 rounded-md text-sm font-medium transition">Specialty Tracks (Pencil Designs)</button>
+                    <button @click="activeView = 'buyout'" :class="activeView === 'buyout' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-2 rounded-md text-sm font-medium transition">Cost-Plus Buyout Calc</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- VIEW 1: MODEL OVERVIEW -->
+        <div x-show="activeView === 'overview'" class="space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-4">
+                <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">The 3-Year Shared Harvest Loop</span>
+                <h2 class="text-2xl font-bold text-white">From Pencil Design to Turnkey Farm Acquisition</h2>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    Participants begin their journey by submitting hand-drawn pencil plot designs tailored to their specific passion—whether that is specialty cut flowers, native pollinator habitats, or gourmet mushroom cultivation. When a landowner selects a design, a specialized 5-person cell is deployed to execute it over a 3-year shared harvest program, educating participants into complete system operators. At term completion, the landowner has the option to exercise a cost-plus buyout, proving our systems design and funding the next cohort.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+                        <span class="text-emerald-400 font-bold block mb-1">Year 1: Foundation & Build</span>
+                        <p class="text-xs text-slate-400">Cell deployment, fire-buffer clearing, biochar integration, and initial pencil-design layout implementation on site.</p>
+                    </div>
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+                        <span class="text-emerald-400 font-bold block mb-1">Year 2: Yield & Operation</span>
+                        <p class="text-xs text-slate-400">Cross-training rotation, pop-up micro-business market stands, and peak agricultural yield management.</p>
+                    </div>
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+                        <span class="text-emerald-400 font-bold block mb-1">Year 3: Maturity & Buyout</span>
+                        <p class="text-xs text-slate-400">Full operational handover readiness, system auditing, and cost-plus sell-back evaluation for permanent farm adoption.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 2: SPECIALTY TRACKS (PENCIL DESIGNS) -->
+        <div x-show="activeView === 'tracks'" class="space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
+                <div>
+                    <h2 class="text-xl font-semibold mb-2 text-emerald-300">Participant Specialty Tracks & Pencil Design Incubator</h2>
+                    <p class="text-slate-400 text-sm">Select a track below to explore how individual participant passion projects scale into landowner-selected, 3-year operational modules.</p>
+                </div>
+
+                <!-- Track Selectors -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <button @click="selectedTrack = 'flowers'" :class="selectedTrack === 'flowers' ? 'border-emerald-500 bg-slate-900' : 'border-slate-700 bg-slate-950'" class="p-4 rounded-xl border text-left transition hover:border-slate-600">
+                        <span class="text-pink-400 font-bold block text-sm">🌸 The Flower Lover Track</span>
+                        <span class="text-xs text-slate-400">Specialty cut flowers & companion planting layouts.</span>
+                    </button>
+                    <button @click="selectedTrack = 'bees'" :class="selectedTrack === 'bees' ? 'border-emerald-500 bg-slate-900' : 'border-slate-700 bg-slate-950'" class="p-4 rounded-xl border text-left transition hover:border-slate-600">
+                        <span class="text-amber-400 font-bold block text-sm">🐝 The Bee / Pollinator Track</span>
+                        <span class="text-xs text-slate-400">Native flowering buffers & forage corridors.</span>
+                    </button>
+                    <button @click="selectedTrack = 'mushrooms'" :class="selectedTrack === 'mushrooms' ? 'border-emerald-500 bg-slate-900' : 'border-slate-700 bg-slate-950'" class="p-4 rounded-xl border text-left transition hover:border-slate-600">
+                        <span class="text-purple-400 font-bold block text-sm">🍄 The Mushroom Lover Track</span>
+                        <span class="text-xs text-slate-400">Wood-chip inoculation & burn-scar myco-restoration.</span>
+                    </button>
+                </div>
+
+                <!-- Track Details Display -->
+                <div class="bg-slate-900 border border-slate-700 rounded-xl p-6 space-y-4">
+                    <template x-if="selectedTrack === 'flowers'">
+                        <div class="space-y-3">
+                            <h3 class="text-lg font-bold text-pink-400">Specialty Cut Flower & Aesthetic Integration</h3>
+                            <p class="text-sm text-slate-300">Participants draw custom micro-plots for high-value cut flowers that thrive in biochar-amended soil. Landowners review the pencil sketches and sponsor the layout, while the 5-person cell manages bed preparation, irrigation staging, and pop-up farm stand floral bundles.</p>
+                            <div class="text-xs bg-slate-800 p-3 rounded border border-slate-700 text-slate-400">
+                                <strong class="text-slate-200">3-Year Educational Milestone:</strong> Master soil conditioning, stem-harvest timing, cold-storage logistics, and direct-to-consumer micro-retail pricing.
+                            </div>
+                        </div>
+                    </template>
+                    <template x-if="selectedTrack === 'bees'">
+                        <div class="space-y-3">
+                            <h3 class="text-lg font-bold text-amber-400">Pollinator Corridor & Native Forage Architecture</h3>
+                            <p class="text-sm text-slate-300">Participants design perimeter pollinator strips that double as fire-buffer fuel reduction zones. Utilizing cleared biomass converted to biochar, these corridors support native bee populations while protecting the farm's core infrastructure.</p>
+                            <div class="text-xs bg-slate-800 p-3 rounded border border-slate-700 text-slate-400">
+                                <strong class="text-slate-200">3-Year Educational Milestone:</strong> Master seed propagation, ecological corridor maintenance, apiary integration, and grant metric reporting for conservation.
+                            </div>
+                        </div>
+                    </template>
+                    <template x-if="selectedTrack === 'mushrooms'">
+                        <div class="space-y-3">
+                            <h3 class="text-lg font-bold text-purple-400">Myco-Restoration & Specialized Spore Cultivation</h3>
+                            <p class="text-sm text-slate-300">Participants map out wood-chip and slash inoculation beds using post-wildfire clearing debris. This turns hazardous waste into gourmet or medicinal mushroom production units managed directly by the cell's cross-trainees.</p>
+                            <div class="text-xs bg-slate-800 p-3 rounded border border-slate-700 text-slate-400">
+                                <strong class="text-slate-200">3-Year Educational Milestone:</strong> Master sterile spawn handling, wood-waste myco-decomposition, moisture regulation, and specialty crop market distribution.
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 3: COST-PLUS BUYOUT CALCULATOR -->
+        <div x-show="activeView === 'buyout'" class="space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
+                <div>
+                    <h2 class="text-xl font-semibold mb-2 text-emerald-300">Cost-Plus System Buyout Simulator</h2>
+                    <p class="text-slate-400 text-sm">Model the Year-3 buyout option for a landowner taking over permanent operation of the established cell setup.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+                        <label class="block text-xs font-semibold text-slate-400 uppercase">Equipment Baseline ($)</label>
+                        <input type="number" x-model.number="equipmentCost" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-emerald-500 text-sm">
+                        <p class="text-xs text-slate-500">Trailer, kiln, tool caches, super-sack inventory.</p>
+                    </div>
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+                        <label class="block text-xs font-semibold text-slate-400 uppercase">Installation & Labor ($)</label>
+                        <input type="number" x-model.number="laborCost" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-emerald-500 text-sm">
+                        <p class="text-xs text-slate-500">3-year establishment and setup hours.</p>
+                    </div>
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+                        <label class="block text-xs font-semibold text-slate-400 uppercase">Engineering Margin (%)</label>
+                        <input type="number" x-model.number="markupPercent" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-emerald-500 text-sm">
+                        <p class="text-xs text-slate-500">IP, systems design, and R&D reinvestment.</p>
+                    </div>
+                </div>
+
+                <!-- Calculation Summary Box -->
+                <div class="bg-slate-900 border border-emerald-500/50 rounded-xl p-6 space-y-4">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
+                        <div>
+                            <span class="text-xs font-mono text-emerald-400 uppercase">Year-3 Turnkey Valuation</span>
+                            <h3 class="text-2xl font-bold text-white" x-text="formatCurrency(totalBuyoutPrice)"></h3>
+                        </div>
+                        <span class="bg-emerald-950 text-emerald-400 border border-emerald-800 px-3 py-1 rounded-full text-xs font-semibold">
+                            Proof of Systems Design Verified
+                        </span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-400">
+                        <div>Base Equipment: <strong class="text-slate-200" x-text="formatCurrency(equipmentCost)"></strong></div>
+                        <div>Labor Investment: <strong class="text-slate-200" x-text="formatCurrency(laborCost)"></strong></div>
+                        <div>System Margin (<span x-text="markupPercent + '%'"></span>): <strong class="text-slate-200" x-text="formatCurrency(markupAmount)"></strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Alpine.js Application Logic -->
+    <script>
+        function sharedHarvestEngine() {
+            return {
+                activeView: 'overview',
+                selectedTrack: 'flowers',
+                equipmentCost: 15000,
+                laborCost: 12000,
+                markupPercent: 20,
+
+                get markupAmount() {
+                    let base = (this.equipmentCost || 0) + (this.laborCost || 0);
+                    return base * (this.markupPercent / 100);
+                },
+
+                get totalBuyoutPrice() {
+                    return (this.equipmentCost || 0) + (this.laborCost || 0) + this.markupAmount;
+                },
+
+                formatCurrency(val) {
+                    return '$' + Number(val).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                }
+            }
+        }
+    </script>
+</body>
+</html>
