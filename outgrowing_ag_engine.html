@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Outgrowing-Ag Dynamic Workforce & Matching Engine</title>
+    <title>Outgrowing-Ag Workforce Architecture & Dynamic Cell-Matching Platform</title>
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Alpine.js for reactive UI logic -->
@@ -19,17 +19,19 @@
                 <h1 class="text-3xl font-bold tracking-tight text-emerald-400">Outgrowing-Ag</h1>
                 <p class="text-slate-400 text-sm">Workforce Architecture & Dynamic Cell-Matching Platform</p>
             </div>
-            <div class="flex gap-2 bg-slate-800 p-1.5 rounded-lg border border-slate-700">
-                <button @click="activeTab = 'intake'" :class="activeTab === 'intake' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-4 py-2 rounded-md text-sm font-medium transition">Participant Intake</button>
-                <button @click="activeTab = 'partner'" :class="activeTab === 'partner' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-4 py-2 rounded-md text-sm font-medium transition">Partner Job Portal</button>
-                <button @click="activeTab = 'dashboard'" :class="activeTab === 'dashboard' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-4 py-2 rounded-md text-sm font-medium transition">Cell Matching Dashboard</button>
+            <div class="flex items-center gap-4">
+                <a href="landing.html" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg border border-slate-700 transition">
+                    &larr; Back to Overview
+                </a>
+                <div class="flex flex-wrap gap-2 bg-slate-800 p-1.5 rounded-lg border border-slate-700">
+                    <button @click="activeTab = 'intake'" :class="activeTab === 'intake' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-2 rounded-md text-sm font-medium transition">Participant Intake</button>
+                    <button @click="activeTab = 'wishlist'" :class="activeTab === 'wishlist' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-2 rounded-md text-sm font-medium transition">Partner Job Portal</button>
+                    <button @click="activeTab = 'dashboard'" :class="activeTab === 'dashboard' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-2 rounded-md text-sm font-medium transition">Cell Matching Dashboard</button>
+                    <button @click="activeTab = 'prospectView'" :class="activeTab === 'prospectView' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-2 rounded-md text-sm font-medium transition">Prospect Gap Analyzer</button>
+                </div>
             </div>
         </header>
-<div>
-        <a href="landing.html" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg border border-slate-700 transition">
-            &larr; Back to Overview
-        </a>
-</div>
+
         <!-- TAB 1: PARTICIPANT INTAKE & FAST-TRACK CHECKLIST -->
         <div x-show="activeTab === 'intake'" class="space-y-6">
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg">
@@ -53,26 +55,16 @@
                         </div>
                     </div>
 
-                    <!-- Skill Checkboxes -->
+                    <!-- Master Skill Checklist -->
                     <div class="border-t border-slate-700 pt-4">
-                        <label class="block text-sm font-semibold text-emerald-400 mb-3">Exemption / Fast-Track Checklist (Check boxes you can execute independently):</label>
+                        <label class="block text-sm font-semibold text-emerald-400 mb-3">Master Competency Checklist (Select all you can execute independently):</label>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            <label class="flex items-start gap-3 bg-slate-900 p-3 rounded-lg border border-slate-700 cursor-pointer hover:border-slate-600">
-                                <input type="checkbox" value="Core Safety & Protocol" x-model="newParticipant.skills" class="mt-1 h-4 w-4 rounded bg-slate-800 border-slate-600 text-emerald-500 focus:ring-emerald-500">
-                                <span class="text-sm text-slate-300"><strong>Core Safety Baseline:</strong> Site safety, heat illness prevention, basic tool protocol.</span>
-                            </label>
-                            <label class="flex items-start gap-3 bg-slate-900 p-3 rounded-lg border border-slate-700 cursor-pointer hover:border-slate-600">
-                                <input type="checkbox" value="Harvest Pacing & Grading" x-model="newParticipant.skills" class="mt-1 h-4 w-4 rounded bg-slate-800 border-slate-600 text-emerald-500 focus:ring-emerald-500">
-                                <span class="text-sm text-slate-300"><strong>Harvest Pacing & Grading:</strong> Gentle handling, field sorting, crate management.</span>
-                            </label>
-                            <label class="flex items-start gap-3 bg-slate-900 p-3 rounded-lg border border-slate-700 cursor-pointer hover:border-slate-600">
-                                <input type="checkbox" value="Nursery Propagation" x-model="newParticipant.skills" class="mt-1 h-4 w-4 rounded bg-slate-800 border-slate-600 text-emerald-500 focus:ring-emerald-500">
-                                <span class="text-sm text-slate-300"><strong>Nursery Propagation:</strong> Root-stock care, greenhouse sanitation, flat spacing.</span>
-                            </label>
-                            <label class="flex items-start gap-3 bg-slate-900 p-3 rounded-lg border border-slate-700 cursor-pointer hover:border-slate-600">
-                                <input type="checkbox" value="Specialized Cultivation" x-model="newParticipant.skills" class="mt-1 h-4 w-4 rounded bg-slate-800 border-slate-600 text-emerald-500 focus:ring-emerald-500">
-                                <span class="text-sm text-slate-300"><strong>Specialized Cultivation:</strong> Mushroom spore-to-harvest cycles, floral processing.</span>
-                            </label>
+                            <template x-for="skill in masterSkills" :key="skill">
+                                <label class="flex items-start gap-3 bg-slate-900 p-3 rounded-lg border border-slate-700 cursor-pointer hover:border-slate-600">
+                                    <input type="checkbox" :value="skill" x-model="newParticipant.skills" class="mt-1 h-4 w-4 rounded bg-slate-800 border-slate-600 text-emerald-500 focus:ring-emerald-500">
+                                    <span class="text-sm text-slate-300" x-text="skill"></span>
+                                </label>
+                            </template>
                         </div>
                     </div>
 
@@ -81,44 +73,45 @@
             </div>
         </div>
 
-        <!-- TAB 2: PARTNER JOB PORTAL INPUT -->
-        <div x-show="activeTab === 'partner'" class="space-y-6">
+        <!-- TAB 2: EMPLOYER WISH LIST DATABASE -->
+        <div x-show="activeTab === 'wishlist'" class="space-y-6">
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg">
-                <h2 class="text-xl font-semibold mb-2 text-emerald-300">Partner Job / "Wish List" Request Portal</h2>
-                <p class="text-slate-400 text-sm mb-6">Commercial partners, growers, and nurseries submit field needs here. The system matches job criteria against pre-trained participant badges and active cell units.</p>
+                <h2 class="text-xl font-semibold mb-2 text-emerald-300">Employer Wish List & Job Qualification Builder</h2>
+                <p class="text-slate-400 text-sm mb-6">Define commercial positions by linking them directly to required master competencies. This generates the exact criteria prospects use to evaluate their readiness.</p>
                 
-                <form @submit.prevent="submitJob" class="space-y-4">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <form @submit.prevent="submitWishJob" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-slate-300 mb-1">Partner / Organization Name</label>
-                            <input type="text" x-model="newJob.partnerName" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500" placeholder="e.g., Willamette Valley Growers">
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Employer / Partner Name</label>
+                            <input type="text" x-model="newWishJob.partnerName" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500" placeholder="e.g., Valley Nursery Corp">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-slate-300 mb-1">Project / Task Title</label>
-                            <input type="text" x-model="newJob.title" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500" placeholder="e.g., Berry Harvest Sprint - Cell Deployment">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-slate-300 mb-1">Required Competency Match</label>
-                            <select x-model="newJob.requiredSkill" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500">
-                                <option value="Core Safety & Protocol">Core Safety & Protocol Baseline</option>
-                                <option value="Harvest Pacing & Grading">Harvest Pacing & Grading</option>
-                                <option value="Nursery Propagation">Nursery Propagation</option>
-                                <option value="Specialized Cultivation">Specialized Cultivation (Mushrooms/Floral)</option>
-                            </select>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Position / Role Title</label>
+                            <input type="text" x-model="newWishJob.title" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500" placeholder="e.g., Propagation Tech Cell Lead">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-slate-300 mb-1">Deployment Model</label>
-                            <select x-model="newJob.deploymentType" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500">
-                                <option value="Standard 5-Person Cell">Standard 5-Person Cell (1 Leader + 4 Members)</option>
+                            <select x-model="newWishJob.deploymentType" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500">
+                                <option value="Standard 5-Person Cell">Standard 5-Person Cell</option>
                                 <option value="Specialist Co-Leader Integration">Specialist Co-Leader Integration</option>
                             </select>
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-3 rounded-lg transition shadow-md">Post Job & Run Automated Match</button>
+                    <!-- Required Skills Wish List Selection -->
+                    <div class="border-t border-slate-700 pt-4">
+                        <label class="block text-sm font-semibold text-emerald-400 mb-3">Employer Wish List Requirements (Select all required for this role):</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <template x-for="skill in masterSkills" :key="skill">
+                                <label class="flex items-start gap-3 bg-slate-900 p-3 rounded-lg border border-slate-700 cursor-pointer hover:border-slate-600">
+                                    <input type="checkbox" :value="skill" x-model="newWishJob.requiredSkills" class="mt-1 h-4 w-4 rounded bg-slate-800 border-slate-600 text-emerald-500 focus:ring-emerald-500">
+                                    <span class="text-sm text-slate-300" x-text="skill"></span>
+                                </label>
+                            </template>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-3 rounded-lg transition shadow-md">Publish to Employer Wish List Database</button>
                 </form>
             </div>
         </div>
@@ -130,35 +123,34 @@
                 <div class="bg-slate-800 border border-slate-700 rounded-xl p-6">
                     <h3 class="text-lg font-semibold mb-4 text-emerald-300 flex justify-between items-center">
                         <span>Registered Roster / Waitlist</span>
-                        <span class="text-xs bg-slate-900 px-2.5 py-1 rounded-full text-slate-400 border border-slate-700" x-text="participants.length + ' Active Profiles'"></span>
+                        <span class="text-xs bg-slate-900 px-2.5 py-1 rounded-full text-slate-400 border border-slate-700" x-text="participants.length + ' Profiles'"></span>
                     </h3>
                     <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
                         <template x-for="p in participants" :key="p.name">
-                            <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 flex flex-col gap-2">
+                            <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 space-y-2">
                                 <div class="flex justify-between items-start">
                                     <h4 class="font-medium text-white" x-text="p.name"></h4>
                                     <span class="text-xs bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded border border-emerald-800" x-text="p.track"></span>
                                 </div>
                                 <div class="text-xs text-slate-400 flex flex-wrap gap-1">
-                                    <span class="font-semibold text-slate-300">Verified Skills:</span>
+                                    <span class="font-semibold text-slate-300">Checked Skills:</span>
                                     <template x-for="skill in p.skills">
                                         <span class="bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded border border-slate-700" x-text="skill"></span>
                                     </template>
                                 </div>
                             </div>
                         </template>
-                        <div x-show="participants.length === 0" class="text-slate-500 text-sm text-center py-6">No participants registered yet. Use the Intake tab.</div>
                     </div>
                 </div>
 
-                <!-- Active Jobs & Automated Matches -->
+                <!-- Employer Wish List Roles -->
                 <div class="bg-slate-800 border border-slate-700 rounded-xl p-6">
                     <h3 class="text-lg font-semibold mb-4 text-emerald-300 flex justify-between items-center">
-                        <span>Partner Jobs & Matched Cells</span>
-                        <span class="text-xs bg-slate-900 px-2.5 py-1 rounded-full text-slate-400 border border-slate-700" x-text="jobs.length + ' Open Requests'"></span>
+                        <span>Active Employer Wish List Jobs</span>
+                        <span class="text-xs bg-slate-900 px-2.5 py-1 rounded-full text-slate-400 border border-slate-700" x-text="wishJobs.length + ' Listings'"></span>
                     </h3>
                     <div class="space-y-4 max-h-96 overflow-y-auto pr-2">
-                        <template x-for="job in jobs" :key="job.title">
+                        <template x-for="job in wishJobs" :key="job.title">
                             <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 space-y-3">
                                 <div class="flex justify-between items-start">
                                     <div>
@@ -167,86 +159,120 @@
                                     </div>
                                     <span class="text-xs bg-indigo-950 text-indigo-400 px-2 py-0.5 rounded border border-indigo-800" x-text="job.deploymentType"></span>
                                 </div>
-                                <div class="text-xs bg-slate-800 p-2.5 rounded border border-slate-700">
-                                    <span class="text-emerald-400 font-semibold">Matched Requirement: </span>
-                                    <span class="text-slate-300" x-text="job.requiredSkill"></span>
-                                </div>
-                                <!-- Qualified Candidates Found -->
-                                <div>
-                                    <span class="text-xs font-semibold text-slate-400 block mb-1">Qualified Cell Deployments / Matches:</span>
+                                <div class="text-xs bg-slate-800 p-2.5 rounded border border-slate-700 space-y-1">
+                                    <span class="text-emerald-400 font-semibold block">Wish List Requirements:</span>
                                     <div class="flex flex-wrap gap-1">
-                                        <template x-for="match in findMatches(job.requiredSkill)">
-                                            <span class="text-xs bg-emerald-900/40 text-emerald-300 px-2 py-1 rounded border border-emerald-700/50" x-text="match.name"></span>
+                                        <template x-for="req in job.requiredSkills">
+                                            <span class="bg-slate-900 text-slate-300 px-1.5 py-0.5 rounded border border-slate-700" x-text="req"></span>
                                         </template>
-                                        <span x-show="findMatches(job.requiredSkill).length === 0" class="text-xs text-slate-500 italic">No direct fast-track match yet (routed to baseline pool).</span>
                                     </div>
                                 </div>
                             </div>
                         </template>
-                        <div x-show="jobs.length === 0" class="text-slate-500 text-sm text-center py-6">No partner jobs posted yet. Use the Partner Job Portal tab.</div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: PROSPECT GAP ANALYZER -->
+        <div x-show="activeTab === 'prospectView'" class="space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
+                <div>
+                    <h2 class="text-xl font-semibold mb-2 text-emerald-300">Prospect Qualification & Gap Analyzer</h2>
+                    <p class="text-slate-400 text-sm">Select a participant profile to instantly audit their status against active employer wish list jobs. See what they match and what specific competencies they still need ("needs x").</p>
+                </div>
+
+                <!-- Selection Controls -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Select Prospect / Participant</label>
+                        <select x-model="selectedProspectName" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500">
+                            <option value="">-- Choose Prospect --</option>
+                            <template x-for="p in participants" :key="p.name">
+                                <option :value="p.name" x-text="p.name + ' (' + p.track + ')'"></option>
+                            </template>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Select Target Employer Job</label>
+                        <select x-model="selectedJobTitle" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500">
+                            <option value="">-- Choose Employer Job --</option>
+                            <template x-for="j in wishJobs" :key="j.title">
+                                <option :value="j.title" x-text="j.title + ' [' + j.partnerName + ']'"></option>
+                            </template>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Audit Results Display -->
+                <template x-if="selectedProspect && selectedJob">
+                    <div class="bg-slate-900 border border-slate-700 rounded-xl p-6 space-y-6">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
+                            <div>
+                                <h3 class="text-lg font-bold text-white" x-text="'Audit Report for ' + selectedProspect.name"></h3>
+                                <p class="text-sm text-slate-400" x-text="'Target Role: ' + selectedJob.title + ' (' + selectedJob.partnerName + ')'"></p>
+                            </div>
+                            <div>
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold border"
+                                      :class="calculateMatches(selectedProspect, selectedJob).missing.length === 0 ? 'bg-emerald-950 text-emerald-400 border-emerald-800' : 'bg-amber-950 text-amber-400 border-amber-800'"
+                                      x-text="calculateMatches(selectedProspect, selectedJob).missing.length === 0 ? 'FULLY QUALIFIED (Ready to Deploy)' : 'SKILL GAP DETECTED (Needs X Training)'">
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Qualified / Met Skills -->
+                            <div class="space-y-2">
+                                <h4 class="text-sm font-semibold text-emerald-400">✓ Requirements Met (Already Verified):</h4>
+                                <div class="space-y-2">
+                                    <template x-for="match in calculateMatches(selectedProspect, selectedJob).matched">
+                                        <div class="bg-slate-800 p-3 rounded-lg border border-slate-700 text-sm text-slate-200 flex items-center justify-between">
+                                            <span x-text="match"></span>
+                                            <span class="text-xs bg-emerald-900 text-emerald-300 px-2 py-0.5 rounded">Matched</span>
+                                        </div>
+                                    </template>
+                                    <div x-show="calculateMatches(selectedProspect, selectedJob).matched.length === 0" class="text-xs text-slate-500 italic p-2">None of the employer's requirements met yet.</div>
+                                </div>
+                            </div>
+
+                            <!-- Missing Skills ("Needs X") -->
+                            <div class="space-y-2">
+                                <h4 class="text-sm font-semibold text-amber-400">⚠ Requirements Missing (Needs X):</h4>
+                                <div class="space-y-2">
+                                    <template x-for="miss in calculateMatches(selectedProspect, selectedJob).missing">
+                                        <div class="bg-slate-800 p-3 rounded-lg border border-slate-700 text-sm text-slate-200 flex items-center justify-between">
+                                            <span x-text="miss"></span>
+                                            <span class="text-xs bg-amber-900 text-amber-300 px-2 py-0.5 rounded">Needs Module</span>
+                                        </div>
+                                    </template>
+                                    <div x-show="calculateMatches(selectedProspect, selectedJob).missing.length === 0" class="text-xs text-emerald-500 italic p-2">Zero gaps! Prospect is cleared for deployment.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                
+                <div x-show="!selectedProspect || !selectedJob" class="text-center text-slate-500 py-8 border border-dashed border-slate-700 rounded-xl">
+                    Please select both a prospect and an employer job above to generate the live audit report.
                 </div>
             </div>
         </div>
 
     </div>
 
-    <!-- Alpine.js Application State -->
+    <!-- Alpine.js Application State & Logic -->
     <script>
         function workforceEngine() {
             return {
                 activeTab: 'intake',
-                newParticipant: {
-                    name: '',
-                    track: 'Harvest',
-                    skills: []
-                },
-                newJob: {
-                    partnerName: '',
-                    title: '',
-                    requiredSkill: 'Core Safety & Protocol',
-                    deploymentType: 'Standard 5-Person Cell'
-                },
-                participants: [
-                    { name: 'Marcus Vance', track: 'Harvest', skills: ['Core Safety & Protocol', 'Harvest Pacing & Grading'] },
-                    { name: 'Elena Rostova', track: 'Specialized', skills: ['Core Safety & Protocol', 'Specialized Cultivation'] }
-                ],
-                jobs: [
-                    { partnerName: 'Willamette Berry Co.', title: 'Peak Season Harvest Cell', requiredSkill: 'Harvest Pacing & Grading', deploymentType: 'Standard 5-Person Cell' },
-                    { partnerName: 'Myco-Tech Lab', title: 'Spore Room Expansion Support', requiredSkill: 'Specialized Cultivation', deploymentType: 'Specialist Co-Leader Integration' }
-                ],
-                submitParticipant() {
-                    if(!this.newParticipant.name) return;
-                    this.participants.push({
-                        name: this.newParticipant.name,
-                        track: this.newParticipant.track,
-                        skills: [...this.newParticipant.skills]
-                    });
-                    this.newParticipant.name = '';
-                    this.newParticipant.skills = [];
-                    this.activeTab = 'dashboard';
-                },
-                submitJob() {
-                    if(!this.newJob.partnerName || !this.newJob.title) return;
-                    this.jobs.push({
-                        partnerName: this.newJob.partnerName,
-                        title: this.newJob.title,
-                        requiredSkill: this.newJob.requiredSkill,
-                        deploymentType: this.newJob.deploymentType
-                    });
-                    this.newJob.partnerName = '';
-                    this.newJob.title = '';
-                    this.activeTab = 'dashboard';
-                },
-                findMatches(skill) {
-                    return this.participants.filter(p => p.skills.includes(skill));
-                }
-            }
-        }
-    </script>
-</body>
-</html>
-'Floral / Specialty Crop Care',
+                masterSkills: [
+                    'Core Safety & Protocol Baseline',
+                    'Harvest Pacing & Gentle Handling',
+                    'Field Grading & Crate Management',
+                    'Nursery Propagation & Root Care',
+                    'Greenhouse Sanitation & Flat Spacing',
+                    'Specialized Mushroom Spore-to-Harvest',
+                    'Floral / Specialty Crop Care',
                     'Watershed Slash Bucking & Piling',
                     'Fire Buffer Fuel Reduction',
                     'Biochar Kiln Operation & Tending',
