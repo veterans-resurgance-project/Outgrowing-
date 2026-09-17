@@ -122,3 +122,69 @@
                             <p class="text-xs text-slate-400">Watch your initial concept convert step-by-step into a professional field configuration.</p>
                         </div>
                         <button @click="cycleStage()" class="bg-sky-950 text-sky-400 border border-sky-800 px-4 py-1.5 rounded-lg text-xs font-semibold hover:bg-sky-900 transition-all active:scale-95">
+                </div> <!-- Closes the active layout grid -->
+            </div> <!-- Closes background wrapper slate-800 card -->
+        </div> <!-- Closes activeView wrapper container -->
+
+        <!-- VISUAL EVOLUTION ANIMATION PANEL: FULLY RESOLVED CONTAINMENT -->
+        <div class="mt-8 bg-slate-950 border border-slate-800 rounded-xl p-6 shadow-inner space-y-6" x-data="sketchAnimation()">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-sky-400">🎨 Blueprint Evolution Model</h3>
+                    <p class="text-xs text-slate-400">Watch your initial pencil drawing transform step-by-step into a professional, audit-ready field asset layout.</p>
+                </div>
+                <button @click="cycleStage()" class="bg-sky-950 text-sky-400 border border-sky-800 px-4 py-1.5 rounded-lg text-xs font-semibold hover:bg-sky-900 transition">
+                    Advance Model View &rarr;
+                </button>
+            </div>
+
+            <div class="bg-slate-900 p-8 rounded-xl border border-slate-800 text-center space-y-4">
+                <span class="text-xs font-mono uppercase tracking-wider text-slate-500 block" x-text="'Active View Phase: ' + activePhaseIndex + ' / 3'"></span>
+                <div class="text-xl font-bold text-slate-200 transition-all duration-300" x-text="phaseTitles[activePhaseIndex]"></div>
+                <p class="text-sm text-slate-400 max-w-xl mx-auto" x-text="phaseDescriptions[activePhaseIndex]"></p>
+            </div>
+        </div>
+
+    </div> <!-- Closes the max-w-6xl master div container -->
+</div> <!-- Closes the global x-data root element -->
+
+<!-- CLIENT-SIDE ALPINE DATA INJECTION SCRIPT -->
+<script>
+    function stackedSystemEngine() {
+        return {
+            stackedEquipment: 4500,
+            stackedLaborValue: 8200,
+            annualRevenue: 22500,
+            totalStackedBuyout() {
+                let physicalCosts = this.stackedEquipment + this.stackedLaborValue;
+                let margin = physicalCosts * 0.20;
+                return this.formatCurrency(physicalCosts + margin);
+            },
+            formatCurrency(val) {
+                if (isNaN(val)) return '$0.00';
+                return '$' + Number(val).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+        }
+    }
+
+    function sketchAnimation() {
+        return {
+            activePhaseIndex: 1,
+            phaseTitles: {
+                1: "📝 Step 1: The Initial Pencil Sketch",
+                2: "📐 Step 2: Safety SOP & Matrix Overlay",
+                3: "🏛️ Step 3: Turnkey Board Presentation"
+            },
+            phaseDescriptions: {
+                1: "Your initial creative concept mapped by hand on standard grid paper lines, identifying your primary project boundaries.",
+                2: "Adding technical details into the layout. Layering vehicle turning lanes, tool vaults, and water source lines cleanly.",
+                3: "The finished presentation layout. Bound with legal MOUs and land trust metrics to pass audit review boards easily."
+            },
+            cycleStage() {
+                this.activePhaseIndex = this.activePhaseIndex >= 3 ? 1 : this.activePhaseIndex + 1;
+            }
+        }
+    }
+</script>
+</body>
+</html>
