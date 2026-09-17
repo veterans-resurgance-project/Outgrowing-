@@ -83,7 +83,7 @@
             </div>
         </div>
 
-        <!-- VIEW 3: VISUAL EVOLUTION ANIMATION (MASSIVE GUARANTEED IMAGE BOX DISPLAY) -->
+        <!-- VIEW 3: MULTI-IMAGE SWITCHABLE ANIMATION BOX -->
         <div x-show="activeView === 'evolution'" x-cloak class="flex-grow flex flex-col space-y-6">
             <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 md:p-8 shadow-2xl space-y-6 flex-grow flex flex-col justify-between" x-data="sketchAnimation()">
                 
@@ -96,41 +96,41 @@
                         </div>
                         <div class="flex items-center gap-3">
                             <button @click="prevStep()" class="bg-slate-900 text-slate-200 border border-slate-700 px-4 py-2.5 rounded-xl text-xs font-semibold hover:bg-slate-700 transition shadow">
-                                &larr; Prev Stage
+                                &larr; Prev Image
                             </button>
-                            <span class="text-xs font-mono text-slate-300 px-3 py-1 bg-slate-900 rounded-lg border border-slate-700" x-text="'Step ' + currentStep + ' of 4'"></span>
+                            <span class="text-xs font-mono text-slate-300 px-3 py-1 bg-slate-900 rounded-lg border border-slate-700" x-text="'Image ' + currentStep + ' of 4'"></span>
                             <button @click="nextStep()" class="bg-sky-900 text-sky-100 border border-sky-700 px-4 py-2.5 rounded-xl text-xs font-semibold hover:bg-sky-800 transition shadow">
-                                Next Stage &rarr;
+                                Next Image &rarr;
                             </button>
                         </div>
                     </div>
 
-                    <!-- MASSIVE GUARANTEED IMAGE DISPLAY BOX (FIXED URL) -->
+                    <!-- MASSIVE 700px IMAGE ANIMATION DISPLAY BOX -->
                     <div class="bg-slate-950 border-2 border-emerald-500/60 rounded-2xl p-6 md:p-10 flex-grow flex flex-col items-center justify-center min-h-[700px] relative overflow-hidden group shadow-2xl">
                         
-                        <!-- WORKING EXTERNAL HIGH-RES FORESTRY / AGRICULTURE IMAGE BACKGROUND -->
+                        <!-- SWITCHABLE BACKGROUND IMAGE LAYER -->
                         <div class="absolute inset-0 w-full h-full overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80" alt="Agricultural Landscape Overview" class="w-full h-full object-cover opacity-75 group-hover:opacity-90 transition-all duration-700 scale-100 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-slate-950/20"></div>
+                            <!-- Each image changes dynamically based on currentStep using Alpine's :src binding -->
+                            <img :src="stages[currentStep - 1].imageFile" alt="Step Animation Frame" class="w-full h-full object-cover opacity-85 group-hover:opacity-95 transition-all duration-700 scale-100 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                         </div>
 
-                        <!-- LARGE DYNAMIC OVERLAY CARD HIGHLIGHTING CURRENT STAGE DETAILS -->
-                        <div class="relative z-10 text-center space-y-4 p-8 md:p-12 bg-slate-900/90 backdrop-blur-md rounded-2xl border border-emerald-500/40 max-w-2xl mx-auto shadow-2xl transition-all duration-300 transform group-hover:scale-[1.02]">
-                            <span class="text-7xl md:text-8xl block filter drop-shadow-lg animate-bounce" x-text="stages[currentStep - 1].emoji"></span>
+                        <!-- FLOATING OVERLAY CARD WITH IMAGE DETAILS -->
+                        <div class="relative z-10 text-center space-y-3 p-6 md:p-8 bg-slate-900/90 backdrop-blur-md rounded-2xl border border-emerald-500/40 max-w-xl mx-auto shadow-2xl transition-all duration-300">
                             <div class="text-xs md:text-sm font-mono text-emerald-300 uppercase tracking-widest bg-slate-950 px-4 py-1.5 rounded-full border border-slate-700 inline-block shadow" x-text="stages[currentStep - 1].visualLabel"></div>
-                            <p class="text-base md:text-lg text-slate-100 font-semibold leading-relaxed" x-text="stages[currentStep - 1].visualSubtext"></p>
+                            <p class="text-sm md:text-base text-slate-100 font-semibold leading-relaxed" x-text="stages[currentStep - 1].visualSubtext"></p>
                         </div>
 
-                        <!-- Watermark & Vector Indicator -->
+                        <!-- Watermark & File Name Reference Badge -->
                         <div class="absolute bottom-4 right-5 z-10 text-xs font-mono text-emerald-300 bg-slate-950/90 px-3.5 py-1.5 rounded-md border border-emerald-500/40 shadow">
-                            <span x-text="'RENDER_ID: STAGE_0' + currentStep + ' // LIVE_AGRIFLOW_SYSTEM'"></span>
+                            <span x-text="'FILE: ' + stages[currentStep - 1].imageFile"></span>
                         </div>
                     </div>
 
                     <!-- Stage Narrative Summary Card Below Image Display -->
                     <div class="bg-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700/80 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 shadow-lg">
                         <div class="flex items-center gap-5">
-                            <span class="text-4xl p-4 bg-slate-950 rounded-2xl border border-slate-800 shadow-inner" x-text="stages[currentStep - 1].emoji"></span>
+                            <span class="text-3xl p-3.5 bg-slate-950 rounded-2xl border border-slate-800 text-emerald-400 font-mono font-bold" x-text="'0' + currentStep"></span>
                             <div>
                                 <h3 class="text-lg font-bold text-slate-100" x-text="stages[currentStep - 1].subtext"></h3>
                                 <p class="text-xs font-mono text-emerald-400 mt-1" x-text="stages[currentStep - 1].pipelineNote"></p>
@@ -140,7 +140,7 @@
                     </div>
                 </div>
 
-                <!-- Progress Bar Indicators -->
+                <!-- Clickable Progress Bar Indicators -->
                 <div class="grid grid-cols-4 gap-3 pt-4 border-t border-slate-700/60">
                     <template x-for="stage in stages" :key="stage.tag">
                         <button @click="currentStep = stage.step" 
@@ -180,47 +180,47 @@
             stages: [
                 {
                     step: 1,
-                    tag: 'STAGE 1: CONCEPTUALIZATION',
-                    emoji: '🖍️',
-                    visualLabel: 'Crayon & Paper Concept',
-                    visualSubtext: 'Initial freeform participant drawing featuring rough outlines, a friendly hand-drawn bee, and perimeter boundaries overlaying the live AgriFlow system.',
-                    title: 'The Childlike Crayon Sketch',
-                    subtext: 'Hand-drawn bee and rough perimeter line',
-                    description: 'The journey starts with a simple, imaginative crayon drawing by a participant. It captures the core desire: a friendly bee resting near a protective border, mapping out the initial concept without rigid constraints.',
-                    pipelineNote: 'Raw participant idea captured and submitted via the community challenge portal.'
+                    tag: 'STAGE 1: INITIAL CONCEPT',
+                    imageFile: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80', // <-- Replace with your Image 1 filename or URL
+                    visualLabel: 'Image Frame 1: Concept Draft',
+                    visualSubtext: 'Initial sketch or layout overview framing the starting parameters of the project.',
+                    title: 'Stage 1 Setup',
+                    subtext: 'Core initial design phase',
+                    description: 'This is the first slot in the sequence. You can swap out the image file link in the code for your own custom asset to change what appears in this frame.',
+                    pipelineNote: 'Ready for custom graphic replacement.'
                 },
                 {
                     step: 2,
-                    tag: 'STAGE 2: INCUBATION',
-                    emoji: '🐝',
-                    visualLabel: 'Ecosystem & Fire Corridor Map',
-                    visualSubtext: 'Overlaying fuel-reduction boundaries and native nectar-rich perennial corridors onto the AgriFlow telemetry grid.',
-                    title: 'The Bee & Fire Buffer Corridor',
-                    subtext: 'Translating shapes into practical ecosystem zones',
-                    description: 'The rough concept is evaluated by the team and merged with practical land requirements. The rough line becomes a designated fire-buffer fuel reduction zone packed with native, nectar-rich flowering perennials.',
-                    pipelineNote: 'Reviewed for ecological value and matched with the 3-year shared harvest framework.'
+                    tag: 'STAGE 2: INCUBATION & MAPPING',
+                    imageFile: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80', // <-- Replace with your Image 2 filename or URL
+                    visualLabel: 'Image Frame 2: Mapping Layout',
+                    visualSubtext: 'Secondary phase showing geographical boundaries or structural placement.',
+                    title: 'Stage 2 Expansion',
+                    subtext: 'Translating design into structural zones',
+                    description: 'This is the second slot in the sequence. Use the navigation buttons above or below to flip back and forth between images instantly.',
+                    pipelineNote: 'Ready for custom graphic replacement.'
                 },
                 {
                     step: 3,
-                    tag: 'STAGE 3: ARCHITECTURE',
-                    emoji: '📐',
-                    visualLabel: 'CAD Master Schematic',
-                    visualSubtext: 'Precision square-foot grid design complete with automated tool vaults, nutrient lines, and drone routing paths.',
-                    title: 'Professional Grid Design',
-                    subtext: 'Scaled square-foot drafting and layout specs',
-                    description: 'Using our digital drafting tools, the sketch is transformed into a clean, professional master schematic complete with exact foot-by-foot grid measurements, companion planting zones, and automated sensor arrays.',
-                    pipelineNote: 'Drafted into presentation-ready documentation for landowner review and site sponsorship.'
+                    tag: 'STAGE 3: ARCHITECTURE & GRID',
+                    imageFile: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1600&q=80', // <-- Replace with your Image 3 filename or URL
+                    visualLabel: 'Image Frame 3: Technical Schematic',
+                    visualSubtext: 'Advanced grid layout showcasing technical specifications and asset distribution.',
+                    title: 'Stage 3 Blueprint',
+                    subtext: 'Precision drafting and scaling metrics',
+                    description: 'This is the third slot in the sequence. Each slot updates the background image seamlessly while keeping the large 700px display box locked in place.',
+                    pipelineNote: 'Ready for custom graphic replacement.'
                 },
                 {
                     step: 4,
-                    tag: 'STAGE 4: DEPLOYMENT',
-                    emoji: '🌲',
-                    visualLabel: 'Turnkey Field Operation',
-                    visualSubtext: 'Completed 5-person cell deployment actively running automated telemetry along the forest boundary line.',
-                    title: 'On-Site Fire Buffer Installation',
-                    subtext: 'Active 5-person cell execution along the forest edge',
-                    description: 'The completed system comes to life on the ground. A trained 5-person cell clears the slash, lays down biochar-amended soil, and establishes the flowering buffer along the forest boundary line ready for 3-year operation.',
-                    pipelineNote: 'Active operational cell deployed; ready for Year-3 cost-plus buyout evaluation.'
+                    tag: 'STAGE 4: FINAL DEPLOYMENT',
+                    imageFile: 'https://images.unsplash.com/photo-1511497584788-876761197069?auto=format&fit=crop&w=1600&q=80', // <-- Replace with your Image 4 filename or URL
+                    visualLabel: 'Image Frame 4: Field Execution',
+                    visualSubtext: 'Completed operation state showing the final installed cell configuration.',
+                    title: 'Stage 4 Execution',
+                    subtext: 'Fully operational field implementation',
+                    description: 'This is the final slot in the sequence. Once you drop your files into the folder, just change the file names inside the code array to match yours!',
+                    pipelineNote: 'Ready for custom graphic replacement.'
                 }
             ],
             nextStep() {
