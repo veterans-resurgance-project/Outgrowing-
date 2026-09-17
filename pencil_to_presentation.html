@@ -38,7 +38,7 @@
             </div>
         </header>
 
-        
+        <!-- VIEW 1: GRID SCALING -->
         <div x-show="activeView === 'grid'" x-cloak class="space-y-6 flex-grow">
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-4">
                 <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">Phase 1: Hand Mapping</span>
@@ -84,59 +84,51 @@
             </div>
         </div>
 
-        <!-- VIEW 3: VISUAL EVOLUTION ANIMATION WITH STAGE-ADVANCING IMAGE DISPLAY -->
+        <!-- VIEW 3: VISUAL EVOLUTION ANIMATION (MASSIVE IMMERSIVE VISUAL DISPLAY) -->
         <div x-show="activeView === 'evolution'" x-cloak class="flex-grow flex flex-col space-y-6">
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6 flex-grow flex flex-col justify-between" x-data="sketchAnimation()">
                 
-                <div>
+                <div class="space-y-6 flex-grow flex flex-col">
                     <!-- Header & Step Controls -->
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
                         <div>
                             <span class="text-xs font-mono text-sky-400 uppercase tracking-widest" x-text="stages[currentStep - 1].tag"></span>
                             <h2 class="text-xl font-bold text-white mt-1" x-text="stages[currentStep - 1].title"></h2>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <button @click="prevStep()" class="bg-slate-900 text-slate-300 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-slate-700 transition">
+                        <div class="flex items-center gap-3">
+                            <button @click="prevStep()" class="bg-slate-900 text-slate-300 border border-slate-700 px-4 py-2 rounded-lg text-xs font-semibold hover:bg-slate-700 transition">
                                 &larr; Prev Stage
                             </button>
                             <span class="text-xs font-mono text-slate-400 px-2" x-text="'Step ' + currentStep + ' of 4'"></span>
-                            <button @click="nextStep()" class="bg-sky-950 text-sky-400 border border-sky-800 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-sky-900 transition">
+                            <button @click="nextStep()" class="bg-sky-950 text-sky-400 border border-sky-800 px-4 py-2 rounded-lg text-xs font-semibold hover:bg-sky-900 transition">
                                 Next Stage &rarr;
                             </button>
                         </div>
                     </div>
 
-                    <!-- Main Split Panel: Dynamic Visual Placeholder on Left, Stage Details on Right -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 my-6">
-                        
-                        <!-- Dynamic Visual Evolution Image / Canvas Placeholder -->
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col items-center justify-center min-h-[280px] relative overflow-hidden group">
-                            <!-- Stage Specific Visual Display Container -->
-                            <div class="text-center space-y-3 p-6 transition-all duration-300">
-                                <span class="text-6xl block transform group-hover:scale-110 transition-transform" x-text="stages[currentStep - 1].visualIcon"></span>
-                                <div class="text-xs font-mono text-emerald-400 uppercase tracking-widest bg-slate-900 px-3 py-1 rounded-full border border-slate-800 inline-block" x-text="stages[currentStep - 1].visualLabel"></div>
-                                <p class="text-xs text-slate-500 italic max-w-xs" x-text="stages[currentStep - 1].visualSubtext"></p>
-                            </div>
-                            <!-- Subtle Watermark Indicator -->
-                            <div class="absolute bottom-2 right-3 text-[10px] font-mono text-slate-600">
-                                <span x-text="'RENDER_ID: STAGE_0' + currentStep"></span>
-                            </div>
+                    <!-- MASSIVE EXPANDED VISUAL STAGE AREA (Fills bulk of the bottom half) -->
+                    <div class="bg-slate-950 border border-slate-800 rounded-2xl p-8 flex-grow flex flex-col items-center justify-center min-h-[380px] relative overflow-hidden group shadow-inner">
+                        <div class="text-center space-y-4 p-4 transition-all duration-300">
+                            <span class="text-8xl block transform group-hover:scale-105 transition-transform" x-text="stages[currentStep - 1].visualIcon"></span>
+                            <div class="text-sm font-mono text-emerald-400 uppercase tracking-widest bg-slate-900 px-4 py-1.5 rounded-full border border-slate-800 inline-block shadow" x-text="stages[currentStep - 1].visualLabel"></div>
+                            <p class="text-sm text-slate-400 italic max-w-md mx-auto" x-text="stages[currentStep - 1].visualSubtext"></p>
                         </div>
+                        <!-- Watermark Indicator -->
+                        <div class="absolute bottom-3 right-4 text-xs font-mono text-slate-600">
+                            <span x-text="'RENDER_ID: STAGE_0' + currentStep + ' // ACTIVE_VECTOR'"></span>
+                        </div>
+                    </div>
 
-                        <!-- Stage Narrative Card -->
-                        <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 flex flex-col justify-between space-y-4">
+                    <!-- Stage Narrative Summary Bar Below Visual -->
+                    <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div class="flex items-center gap-4">
+                            <span class="text-3xl p-3 bg-slate-950 rounded-xl border border-slate-800" x-text="stages[currentStep - 1].emoji"></span>
                             <div>
-                                <div class="flex items-center gap-3 mb-3">
-                                    <span class="text-2xl p-2 bg-slate-950 rounded-lg border border-slate-800" x-text="stages[currentStep - 1].emoji"></span>
-                                    <div>
-                                        <h3 class="text-base font-bold text-slate-100" x-text="stages[currentStep - 1].subtext"></h3>
-                                        <p class="text-xs font-mono text-emerald-400 mt-0.5" x-text="stages[currentStep - 1].pipelineNote"></p>
-                                    </div>
-                                </div>
-                                <p class="text-slate-300 text-sm leading-relaxed" x-text="stages[currentStep - 1].description"></p>
+                                <h3 class="text-base font-bold text-slate-100" x-text="stages[currentStep - 1].subtext"></h3>
+                                <p class="text-xs font-mono text-emerald-400 mt-0.5" x-text="stages[currentStep - 1].pipelineNote"></p>
                             </div>
                         </div>
-
+                        <p class="text-slate-300 text-sm max-w-xl leading-relaxed" x-text="stages[currentStep - 1].description"></p>
                     </div>
                 </div>
 
@@ -145,7 +137,7 @@
                     <template x-for="stage in stages" :key="stage.tag">
                         <button @click="currentStep = stage.step" 
                                 :class="currentStep === stage.step ? 'bg-sky-600 border-sky-500' : 'bg-slate-900 border-slate-700 opacity-60 hover:opacity-100'"
-                                class="h-2 rounded-full border transition-all">
+                                class="h-2.5 rounded-full border transition-all">
                         </button>
                     </template>
                 </div>
@@ -184,7 +176,7 @@
                     emoji: '🖍️',
                     visualIcon: '🖍️🐝📄',
                     visualLabel: 'Crayon & Paper Concept',
-                    visualSubtext: 'Initial freeform participant drawing featuring rough outlines and honeybee placement.',
+                    visualSubtext: 'Initial freeform participant drawing featuring rough outlines, a friendly hand-drawn bee, and perimeter boundaries.',
                     title: 'The Childlike Crayon Sketch',
                     subtext: 'Hand-drawn bee and rough perimeter line',
                     description: 'The journey starts with a simple, imaginative crayon drawing by a participant. It captures the core desire: a friendly bee resting near a protective border, mapping out the initial concept without rigid constraints.',
@@ -196,7 +188,7 @@
                     emoji: '🐝',
                     visualIcon: '🗺️🌱🔥',
                     visualLabel: 'Ecosystem & Fire Corridor Map',
-                    visualSubtext: 'Overlaying fuel-reduction boundaries and native nectar-rich perennial corridors.',
+                    visualSubtext: 'Overlaying fuel-reduction boundaries and native nectar-rich perennial corridors onto the site.',
                     title: 'The Bee & Fire Buffer Corridor',
                     subtext: 'Translating shapes into practical ecosystem zones',
                     description: 'The rough concept is evaluated by the team and merged with practical land requirements. The rough line becomes a designated fire-buffer fuel reduction zone packed with native, nectar-rich flowering perennials.',
@@ -208,7 +200,7 @@
                     emoji: '📐',
                     visualIcon: '📐🏛️📍',
                     visualLabel: 'CAD Master Schematic',
-                    visualSubtext: 'Precision square-foot grid design with tool vaults and biochar staging paths.',
+                    visualSubtext: 'Precision square-foot grid design complete with tool vaults, water lines, and biochar staging paths.',
                     title: 'Professional Grid Design',
                     subtext: 'Scaled square-foot drafting and layout specs',
                     description: 'Using our digital drafting tools, the sketch is transformed into a clean, professional master schematic complete with exact foot-by-foot grid measurements, companion planting zones, and biochar staging paths.',
@@ -220,7 +212,7 @@
                     emoji: '🌲',
                     visualIcon: '🌲🏡🌻',
                     visualLabel: 'Turnkey Field Operation',
-                    visualSubtext: 'Completed 5-person cell deployment along the forest boundary line.',
+                    visualSubtext: 'Completed 5-person cell deployment actively running along the forest boundary line.',
                     title: 'On-Site Fire Buffer Installation',
                     subtext: 'Active 5-person cell execution along the forest edge',
                     description: 'The completed system comes to life on the ground. A trained 5-person cell clears the slash, lays down biochar-amended soil, and establishes the flowering buffer along the forest boundary line ready for 3-year operation.',
