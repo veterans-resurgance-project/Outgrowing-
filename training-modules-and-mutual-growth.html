@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AFTI - Training Landing Command Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -229,17 +230,10 @@
     <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
       <a href="index.html">Home</a>
       <a href="training-modules-and-mutual-growth.html" class="active">Training & Certification</a>
-      <a href="partners.html">For Farmers</a>
+      <a href="partners.html">Partners</a>
       <a href="shared-harvest.html">Shared Harvest</a>
-      <a href="incubator.html">Incubator</a>
-      <a href="newsletter.html">Newsletter</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="how-to-help.html">How to Help</a>
-   <!-- RELOCATED NAVIGATION PORTALS MOVED TO THE TOP NAV BAR -->
-<a href="shared-harvest-hub.html?v=18" style="color: var(--accent); font-weight: 600;">🌾 Landowner Hub</a>
-<a href="technical-tutorials.html?v=18" style="color: var(--accent); font-weight: 600;">🔨 Technical Bank</a>
-<a href="incubator-hub.html?v=18" style="color: var(--accent); font-weight: 600;">🌱 Incubator Launchpad</a>
-    </div>   
+      <a href="incubator-hub.html" style="color: var(--accent); font-weight: 600;">🌱 Incubator Launchpad</a>
+      <a href="technical-tutorials.html" style="color: var(--accent); font-weight: 600;">🔨 Technical Bank</a>
     </div>
   </nav>
 
@@ -257,7 +251,7 @@
 
       <h1>🌾 Vocational Training Command Center</h1>
       <p style="text-align: center; margin-bottom: 25px; max-width: 750px; margin-left: auto; margin-right: auto;">
-          Welcome to the primary training ledger. Complete interactive simulation stories, pass skill benchmarks, and prove data metrics required to unlock formal grant channels.
+          Welcome to the primary training ledger. Complete interactive simulation stories, pass skill benchmarks, and prove data metrics required to unlock formal grant channels and partner alignments.
       </p>
 
       <!-- DYNAMIC IMAGE VIEWPORT -->
@@ -280,22 +274,64 @@
 
       <hr class="section-divider">
 
-      <!-- FEATURE BOX LESSON MATRIX POPULATED HERE -->
+      <!-- PARTNER-ALIGNED CURRICULUM MATRIX -->
       <div class="secondary-section">
-          <h3>🌱 Comprehensive Four-Season Agronomy Curriculum</h3>
-          <p style="margin-bottom: 20px;">Trainees progress through rigorous technical training blocks to accumulate a portable Portfolio of Effort for local land trusts:</p>
+          <h3>🌱 Partner-Aligned Training Tracks</h3>
+          <p style="margin-bottom: 20px;">Trainees progress through four specialized curriculum pathways designed to meet the direct standards of our institutional and community partners:</p>
           
           <div class="secondary-grid">
-              <!-- LESSON CARD 1 -->
+              <!-- TRACK 1: ACADEMIC & SOIL SCIENCE -->
               <div class="secondary-card">
                   <div>
-                      <h4>🧪 Soil Science &amp; Diagnostics</h4>
-                      <p>Analyze heavily compacted, acidic clay profiles in the Willamette Valley. Learn to correct pH balances and optimize root environment dynamics.</p>
+                      <h4>🧪 Academic &amp; Soil Science</h4>
+                      <p>Empirical soil diagnostics, clay profile restoration, and regional agricultural research protocols in partnership with extension services.</p>
                   </div>
-                  <a href="soil-fertility.html" class="btn-small">Launch SOP →</a>
+                  <a href="training-academic-soil.html" class="btn-small">Launch Track →</a>
               </div>
 
-              <!-- LESSON CARD 2 -->
+              <!-- TRACK 2: FARMER & GROWER OPERATIONS -->
               <div class="secondary-card">
                   <div>
-                    
+                      <h4>🚜 Farmer &amp; Grower Operations</h4>
+                      <p>Working farm logistics, seasonal crop management, cooperative equipment handling, and regenerative agronomy practices.</p>
+                  </div>
+                  <a href="training-farmer-ops.html" class="btn-small">Launch Track →</a>
+              </div>
+
+              <!-- TRACK 3: EMERGENCY RESPONSE & CERTIFICATIONS -->
+              <div class="secondary-card">
+                  <div>
+                      <h4>🔥 Emergency Response &amp; Certs</h4>
+                      <p>Wildland fire fuel reduction, defensible space clearing, safety compliance audits, and disciplined 5-person crew cell deployment.</p>
+                  </div>
+                  <a href="training-emergency-certs.html" class="btn-small">Launch Track →</a>
+              </div>
+
+              <!-- TRACK 4: LEGAL, ADVOCACY & MENTAL HEALTH -->
+              <div class="secondary-card">
+                  <div>
+                      <h4>⚖️ Legal, Advocacy &amp; Support</h4>
+                      <p>Wraparound stability, trauma-informed peer communication, community re-entry frameworks, and municipal advocacy navigation.</p>
+                  </div>
+                  <a href="training-legal-support.html" class="btn-small">Launch Track →</a>
+              </div>
+          </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+      function toggleTestBypass() {
+          const status = document.getElementById('test-mode-status');
+          if (status.innerText === 'Live Mode') {
+              status.innerText = 'Test Bypass Active';
+              status.style.color = '#22c55e';
+          } else {
+              status.innerText = 'Live Mode';
+              status.style.color = '#cbd5e1';
+          }
+      }
+  </script>
+</body>
+</html>
