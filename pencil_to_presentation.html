@@ -83,7 +83,7 @@
             </div>
         </div>
 
-        <!-- VIEW 3: VISUAL EVOLUTION ANIMATION (TRUE IMAGE-BASED ANIMATION BOX DISPLAY) -->
+        <!-- VIEW 3: VISUAL EVOLUTION ANIMATION (MASSIVE GUARANTEED IMAGE BOX DISPLAY) -->
         <div x-show="activeView === 'evolution'" x-cloak class="flex-grow flex flex-col space-y-6">
             <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 md:p-8 shadow-2xl space-y-6 flex-grow flex flex-col justify-between" x-data="sketchAnimation()">
                 
@@ -105,17 +105,17 @@
                         </div>
                     </div>
 
-                    <!-- MASSIVE TRUE IMAGE-BASED DISPLAY BOX -->
-                    <div class="bg-slate-950 border-2 border-emerald-500/60 rounded-2xl p-4 md:p-6 flex-grow flex flex-col items-center justify-center min-h-[550px] lg:min-h-[640px] relative overflow-hidden group shadow-2xl">
+                    <!-- MASSIVE GUARANTEED IMAGE DISPLAY BOX (FIXED URL) -->
+                    <div class="bg-slate-950 border-2 border-emerald-500/60 rounded-2xl p-6 md:p-10 flex-grow flex flex-col items-center justify-center min-h-[700px] relative overflow-hidden group shadow-2xl">
                         
-                        <!-- REAL BACKGROUND IMAGE LAYER -->
+                        <!-- WORKING EXTERNAL HIGH-RES FORESTRY / AGRICULTURE IMAGE BACKGROUND -->
                         <div class="absolute inset-0 w-full h-full overflow-hidden">
-                            <img src="watermarked_img_9913806307250056505.jpg" alt="Agricultural Automation System Overview" class="w-full h-full object-cover opacity-75 group-hover:opacity-90 transition-all duration-700 scale-100 group-hover:scale-105">
+                            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80" alt="Agricultural Landscape Overview" class="w-full h-full object-cover opacity-75 group-hover:opacity-90 transition-all duration-700 scale-100 group-hover:scale-105">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-slate-950/20"></div>
                         </div>
 
                         <!-- LARGE DYNAMIC OVERLAY CARD HIGHLIGHTING CURRENT STAGE DETAILS -->
-                        <div class="relative z-10 text-center space-y-4 p-8 md:p-10 bg-slate-900/90 backdrop-blur-md rounded-2xl border border-emerald-500/40 max-w-2xl mx-auto shadow-2xl transition-all duration-300 transform group-hover:scale-[1.02]">
+                        <div class="relative z-10 text-center space-y-4 p-8 md:p-12 bg-slate-900/90 backdrop-blur-md rounded-2xl border border-emerald-500/40 max-w-2xl mx-auto shadow-2xl transition-all duration-300 transform group-hover:scale-[1.02]">
                             <span class="text-7xl md:text-8xl block filter drop-shadow-lg animate-bounce" x-text="stages[currentStep - 1].emoji"></span>
                             <div class="text-xs md:text-sm font-mono text-emerald-300 uppercase tracking-widest bg-slate-950 px-4 py-1.5 rounded-full border border-slate-700 inline-block shadow" x-text="stages[currentStep - 1].visualLabel"></div>
                             <p class="text-base md:text-lg text-slate-100 font-semibold leading-relaxed" x-text="stages[currentStep - 1].visualSubtext"></p>
