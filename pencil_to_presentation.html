@@ -23,7 +23,7 @@
 <body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
 
     <!-- MASTER ENGINE CONFIGURATION ROOT -->
-    <div class="max-w-6xl w-full mx-auto p-6 flex-grow flex flex-col" x-data="sharedHarvestEngine()">
+    <div class="max-w-7xl w-full mx-auto p-6 flex-grow flex flex-col" x-data="sharedHarvestEngine()">
         
         <!-- Header & View Toggles -->
         <header class="border-b border-slate-800 pb-6 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -32,15 +32,15 @@
                 <p class="text-slate-400 text-sm">Veterans Resurgence Project // Turnkey On-Site Deployment Engine</p>
             </div>
             <div class="flex flex-wrap gap-2 bg-slate-800 p-1.5 rounded-lg border border-slate-700">
-                <button @click="activeView = 'grid'" :class="activeView === 'grid' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-1.5 rounded-md text-xs font-medium transition">Phase 1: Grid Scaling</button>
-                <button @click="activeView = 'pitch'" :class="activeView === 'pitch' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-1.5 rounded-md text-xs font-medium transition">Phase 3: Cost-Plus Buyout</button>
-                <button @click="activeView = 'evolution'" :class="activeView === 'evolution' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-1.5 rounded-md text-xs font-medium transition">Visual Evolution</button>
+                <button @click="activeView = 'grid'" :class="activeView === 'grid' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3.5 py-2 rounded-md text-xs font-medium transition">Phase 1: Grid Scaling</button>
+                <button @click="activeView = 'pitch'" :class="activeView === 'pitch' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3.5 py-2 rounded-md text-xs font-medium transition">Phase 3: Cost-Plus Buyout</button>
+                <button @click="activeView = 'evolution'" :class="activeView === 'evolution' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3.5 py-2 rounded-md text-xs font-medium transition">Visual Evolution (Immersive)</button>
             </div>
         </header>
 
         <!-- VIEW 1: GRID SCALING -->
         <div x-show="activeView === 'grid'" x-cloak class="space-y-6 flex-grow">
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-4">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-8 shadow-lg space-y-4">
                 <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">Phase 1: Hand Mapping</span>
                 <h2 class="text-2xl font-bold text-white">The Hand-Drawn Scaling Foundation</h2>
                 <p class="text-slate-300 text-sm leading-relaxed">
@@ -51,24 +51,24 @@
 
         <!-- VIEW 2: COST-PLUS BUYOUT SIMULATOR -->
         <div x-show="activeView === 'pitch'" x-cloak class="space-y-6 flex-grow">
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-8 shadow-lg space-y-6">
                 <div>
                     <h2 class="text-xl font-semibold mb-2 text-emerald-300">Cost-Plus System Buyout Simulator</h2>
                     <p class="text-slate-400 text-sm">Model the Year-3 buyout option for landowners taking over permanent operation of the cell setup.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-slate-900 p-5 rounded-xl border border-slate-700 space-y-2">
                         <label class="block text-xs font-semibold text-slate-400 uppercase">Equipment Baseline ($)</label>
-                        <input type="number" x-model.number="equipmentCost" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-emerald-500 focus:outline-none">
+                        <input type="number" x-model.number="equipmentCost" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-white text-sm focus:border-emerald-500 focus:outline-none">
                     </div>
-                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+                    <div class="bg-slate-900 p-5 rounded-xl border border-slate-700 space-y-2">
                         <label class="block text-xs font-semibold text-slate-400 uppercase">Installation &amp; Labor ($)</label>
-                        <input type="number" x-model.number="laborCost" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-emerald-500 focus:outline-none">
+                        <input type="number" x-model.number="laborCost" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-white text-sm focus:border-emerald-500 focus:outline-none">
                     </div>
-                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+                    <div class="bg-slate-900 p-5 rounded-xl border border-slate-700 space-y-2">
                         <label class="block text-xs font-semibold text-slate-400 uppercase">Engineering Margin (%)</label>
-                        <input type="number" x-model.number="markupPercent" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-emerald-500 focus:outline-none">
+                        <input type="number" x-model.number="markupPercent" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-white text-sm focus:border-emerald-500 focus:outline-none">
                     </div>
                 </div>
 
@@ -76,68 +76,78 @@
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
                         <div>
                             <span class="text-xs font-mono text-emerald-400 uppercase">Year-3 Turnkey Valuation</span>
-                            <h3 class="text-2xl font-bold text-white" x-text="formatCurrency(calculateTotalBuyout())"></h3>
+                            <h3 class="text-3xl font-bold text-white mt-1" x-text="formatCurrency(calculateTotalBuyout())"></h3>
                         </div>
-                        <span class="bg-emerald-950 text-emerald-400 border border-emerald-800 px-3 py-1 rounded-full text-xs font-semibold">Verified System Asset</span>
+                        <span class="bg-emerald-950 text-emerald-400 border border-emerald-800 px-3.5 py-1.5 rounded-full text-xs font-semibold">Verified System Asset</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- VIEW 3: VISUAL EVOLUTION ANIMATION (MASSIVE IMMERSIVE VISUAL DISPLAY) -->
+        <!-- VIEW 3: VISUAL EVOLUTION ANIMATION (MASSIVE IMMERSIVE DISPLAY WITH SYSTEM IMAGE) -->
         <div x-show="activeView === 'evolution'" x-cloak class="flex-grow flex flex-col space-y-6">
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6 flex-grow flex flex-col justify-between" x-data="sketchAnimation()">
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 md:p-8 shadow-2xl space-y-6 flex-grow flex flex-col justify-between" x-data="sketchAnimation()">
                 
                 <div class="space-y-6 flex-grow flex flex-col">
                     <!-- Header & Step Controls -->
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-700/80 pb-5">
                         <div>
-                            <span class="text-xs font-mono text-sky-400 uppercase tracking-widest" x-text="stages[currentStep - 1].tag"></span>
-                            <h2 class="text-xl font-bold text-white mt-1" x-text="stages[currentStep - 1].title"></h2>
+                            <span class="text-xs font-mono text-sky-400 uppercase tracking-widest bg-sky-950/80 border border-sky-800 px-3 py-1 rounded-md" x-text="stages[currentStep - 1].tag"></span>
+                            <h2 class="text-2xl font-bold text-white mt-2" x-text="stages[currentStep - 1].title"></h2>
                         </div>
                         <div class="flex items-center gap-3">
-                            <button @click="prevStep()" class="bg-slate-900 text-slate-300 border border-slate-700 px-4 py-2 rounded-lg text-xs font-semibold hover:bg-slate-700 transition">
+                            <button @click="prevStep()" class="bg-slate-900 text-slate-200 border border-slate-700 px-4 py-2.5 rounded-xl text-xs font-semibold hover:bg-slate-700 transition shadow">
                                 &larr; Prev Stage
                             </button>
-                            <span class="text-xs font-mono text-slate-400 px-2" x-text="'Step ' + currentStep + ' of 4'"></span>
-                            <button @click="nextStep()" class="bg-sky-950 text-sky-400 border border-sky-800 px-4 py-2 rounded-lg text-xs font-semibold hover:bg-sky-900 transition">
+                            <span class="text-xs font-mono text-slate-300 px-3 py-1 bg-slate-900 rounded-lg border border-slate-700" x-text="'Step ' + currentStep + ' of 4'"></span>
+                            <button @click="nextStep()" class="bg-sky-900 text-sky-100 border border-sky-700 px-4 py-2.5 rounded-xl text-xs font-semibold hover:bg-sky-800 transition shadow">
                                 Next Stage &rarr;
                             </button>
                         </div>
                     </div>
 
-                    <!-- MASSIVE EXPANDED VISUAL STAGE AREA (Fills bulk of the bottom half) -->
-                    <div class="bg-slate-950 border border-slate-800 rounded-2xl p-8 flex-grow flex flex-col items-center justify-center min-h-[380px] relative overflow-hidden group shadow-inner">
-                        <div class="text-center space-y-4 p-4 transition-all duration-300">
-                            <span class="text-8xl block transform group-hover:scale-105 transition-transform" x-text="stages[currentStep - 1].visualIcon"></span>
-                            <div class="text-sm font-mono text-emerald-400 uppercase tracking-widest bg-slate-900 px-4 py-1.5 rounded-full border border-slate-800 inline-block shadow" x-text="stages[currentStep - 1].visualLabel"></div>
-                            <p class="text-sm text-slate-400 italic max-w-md mx-auto" x-text="stages[currentStep - 1].visualSubtext"></p>
+                    <!-- MASSIVE IMMERSIVE VISUAL ANIMATION CONTAINER (Fills Major Height with Integrated Dashboard View) -->
+                    <div class="bg-slate-950 border border-slate-700/90 rounded-2xl p-4 md:p-6 flex-grow flex flex-col items-center justify-center min-h-[500px] lg:min-h-[580px] relative overflow-hidden group shadow-2xl">
+                        
+                        <!-- Embedded High-Tech Agricultural Dashboard Visual Asset Layer -->
+                        <div class="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center">
+                            <img src="watermarked_img_9913806307250056505.jpg" alt="Agricultural Automation System Overview" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 transition-opacity duration-500 scale-105">
+                            <!-- Subtle Gradient Overlay to Ensure Crisp Legibility -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                         </div>
+
+                        <!-- Foreground Active Stage Data Card Overlay inside the Massive Box -->
+                        <div class="relative z-10 text-center space-y-4 p-8 bg-slate-900/90 backdrop-blur-md rounded-2xl border border-slate-700/80 max-w-2xl mx-auto shadow-2xl transition-all duration-300 transform group-hover:scale-[1.02]">
+                            <span class="text-6xl md:text-7xl block filter drop-shadow-md" x-text="stages[currentStep - 1].visualIcon"></span>
+                            <div class="text-xs md:text-sm font-mono text-emerald-300 uppercase tracking-widest bg-slate-950 px-4 py-1.5 rounded-full border border-slate-700 inline-block shadow-sm" x-text="stages[currentStep - 1].visualLabel"></div>
+                            <p class="text-sm md:text-base text-slate-200 font-medium leading-relaxed" x-text="stages[currentStep - 1].visualSubtext"></p>
+                        </div>
+
                         <!-- Watermark Indicator -->
-                        <div class="absolute bottom-3 right-4 text-xs font-mono text-slate-600">
-                            <span x-text="'RENDER_ID: STAGE_0' + currentStep + ' // ACTIVE_VECTOR'"></span>
+                        <div class="absolute bottom-4 right-5 z-10 text-xs font-mono text-emerald-400 bg-slate-950/80 px-3 py-1 rounded-md border border-slate-800 shadow">
+                            <span x-text="'RENDER_ID: STAGE_0' + currentStep + ' // ACTIVE_AUTOMATION_VECTOR'"></span>
                         </div>
                     </div>
 
-                    <!-- Stage Narrative Summary Bar Below Visual -->
-                    <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                        <div class="flex items-center gap-4">
-                            <span class="text-3xl p-3 bg-slate-950 rounded-xl border border-slate-800" x-text="stages[currentStep - 1].emoji"></span>
+                    <!-- Stage Narrative Summary Card Below Visual -->
+                    <div class="bg-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700/80 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 shadow-lg">
+                        <div class="flex items-center gap-5">
+                            <span class="text-4xl p-4 bg-slate-950 rounded-2xl border border-slate-800 shadow-inner" x-text="stages[currentStep - 1].emoji"></span>
                             <div>
-                                <h3 class="text-base font-bold text-slate-100" x-text="stages[currentStep - 1].subtext"></h3>
-                                <p class="text-xs font-mono text-emerald-400 mt-0.5" x-text="stages[currentStep - 1].pipelineNote"></p>
+                                <h3 class="text-lg font-bold text-slate-100" x-text="stages[currentStep - 1].subtext"></h3>
+                                <p class="text-xs font-mono text-emerald-400 mt-1" x-text="stages[currentStep - 1].pipelineNote"></p>
                             </div>
                         </div>
-                        <p class="text-slate-300 text-sm max-w-xl leading-relaxed" x-text="stages[currentStep - 1].description"></p>
+                        <p class="text-slate-300 text-sm md:text-base max-w-xl leading-relaxed" x-text="stages[currentStep - 1].description"></p>
                     </div>
                 </div>
 
                 <!-- Progress Bar Indicators -->
-                <div class="grid grid-cols-4 gap-2 pt-2">
+                <div class="grid grid-cols-4 gap-3 pt-4 border-t border-slate-700/60">
                     <template x-for="stage in stages" :key="stage.tag">
                         <button @click="currentStep = stage.step" 
-                                :class="currentStep === stage.step ? 'bg-sky-600 border-sky-500' : 'bg-slate-900 border-slate-700 opacity-60 hover:opacity-100'"
-                                class="h-2.5 rounded-full border transition-all">
+                                :class="currentStep === stage.step ? 'bg-sky-500 border-sky-400 shadow-lg shadow-sky-500/30' : 'bg-slate-900 border-slate-700 opacity-50 hover:opacity-100'"
+                                class="h-3 rounded-full border transition-all">
                         </button>
                     </template>
                 </div>
@@ -188,7 +198,7 @@
                     emoji: '🐝',
                     visualIcon: '🗺️🌱🔥',
                     visualLabel: 'Ecosystem & Fire Corridor Map',
-                    visualSubtext: 'Overlaying fuel-reduction boundaries and native nectar-rich perennial corridors onto the site.',
+                    visualSubtext: 'Overlaying fuel-reduction boundaries and native nectar-rich perennial corridors onto the live automation grid.',
                     title: 'The Bee & Fire Buffer Corridor',
                     subtext: 'Translating shapes into practical ecosystem zones',
                     description: 'The rough concept is evaluated by the team and merged with practical land requirements. The rough line becomes a designated fire-buffer fuel reduction zone packed with native, nectar-rich flowering perennials.',
@@ -200,10 +210,10 @@
                     emoji: '📐',
                     visualIcon: '📐🏛️📍',
                     visualLabel: 'CAD Master Schematic',
-                    visualSubtext: 'Precision square-foot grid design complete with tool vaults, water lines, and biochar staging paths.',
+                    visualSubtext: 'Precision square-foot grid design complete with automated tool vaults, nutrient lines, and drone routing paths.',
                     title: 'Professional Grid Design',
                     subtext: 'Scaled square-foot drafting and layout specs',
-                    description: 'Using our digital drafting tools, the sketch is transformed into a clean, professional master schematic complete with exact foot-by-foot grid measurements, companion planting zones, and biochar staging paths.',
+                    description: 'Using our digital drafting tools, the sketch is transformed into a clean, professional master schematic complete with exact foot-by-foot grid measurements, companion planting zones, and automated sensor arrays.',
                     pipelineNote: 'Drafted into presentation-ready documentation for landowner review and site sponsorship.'
                 },
                 {
@@ -212,7 +222,7 @@
                     emoji: '🌲',
                     visualIcon: '🌲🏡🌻',
                     visualLabel: 'Turnkey Field Operation',
-                    visualSubtext: 'Completed 5-person cell deployment actively running along the forest boundary line.',
+                    visualSubtext: 'Completed 5-person cell deployment actively running automated telemetry along the forest boundary line.',
                     title: 'On-Site Fire Buffer Installation',
                     subtext: 'Active 5-person cell execution along the forest edge',
                     description: 'The completed system comes to life on the ground. A trained 5-person cell clears the slash, lays down biochar-amended soil, and establishes the flowering buffer along the forest boundary line ready for 3-year operation.',
