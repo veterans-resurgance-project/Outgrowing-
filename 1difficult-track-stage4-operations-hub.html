@@ -3,228 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFTI - Stage 4: Specialized Operations Hub</title>
-    <script src="afti-core.js"></script>
+    <title>AFTI - Difficult Track Stage 4: Operations Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root { 
-            --bg-color: #0f172a; 
-            --card-bg: #1e293b; 
-            --text-color: #f8fafc; 
-            --primary: #27ae60; 
-            --hud-bg: #144d29; 
-            --accent: #38bdf8;
-            --warn: #f59e0b;
-            --grey-slate: #334155;
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --primary: #27ae60;
+            --primary-hover: #219653;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --hud-bg: #144d29;
+            --blue-accent: #38bdf8;
         }
-        body { 
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            background: var(--bg-color); 
-            color: var(--text-color); 
-            padding: 40px 20px; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
-            margin: 0; 
-            box-sizing: border-box;
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
         }
-        .container { 
-            width: 100%; 
-            max-width: 840px; 
-            background: var(--card-bg); 
-            border-radius: 16px; 
-            padding: 40px; 
-            box-sizing: border-box;
-            border: 1px solid rgba(255,255,255,0.1); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-        }
-        .hud-bar { 
-            background: var(--hud-bg); 
-            border-radius: 8px; 
-            padding: 12px 20px; 
-            margin-bottom: 30px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            font-weight: bold; 
-            border: 1px solid rgba(255,255,255,0.2);
-            font-size: 0.95rem;
-        }
-        .prose-block {
-            line-height: 1.8;
-            color: #cbd5e1;
-            margin-bottom: 25px;
-            font-size: 1.05rem;
-        }
-        .desk-panel {
-            background: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-        }
-        .submission-item {
-            background: #141c2b;
-            border: 1px solid #1e293b;
-            border-radius: 8px;
-            padding: 18px;
-            margin-bottom: 15px;
-        }
-        .sub-header {
+
+        nav {
+            background: #144d29;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
+            box-sizing: border-box;
         }
-        .sub-author {
-            font-weight: bold;
-            color: var(--accent);
-            font-size: 0.95rem;
-        }
-        .sub-text {
-            font-size: 0.95rem;
-            color: #cbd5e1;
-            line-height: 1.6;
-        }
-        .choice-row {
+        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        nav a.active { color: #fff; font-weight: 700; border-bottom: 2px solid var(--primary); padding-bottom: 2px; }
+
+        .page-wrapper {
+            padding: 30px 20px;
             display: flex;
-            gap: 10px;
-            margin-top: 12px;
+            justify-content: center;
         }
-        .choice-btn {
-            background: var(--grey-slate);
-            color: #fff;
+
+        .container {
+            width: 100%;
+            max-width: 950px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            padding: 30px;
+            box-sizing: border-box;
             border: 1px solid rgba(255,255,255,0.1);
-            padding: 8px 14px;
+        }
+
+        .hud-bar {
+            background: var(--hud-bg);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        h1 {
+            color: var(--accent);
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: var(--blue-accent);
+            margin-top: 25px;
+            font-size: 1.3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 8px;
+        }
+
+        p, li {
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .scenario-box {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .action-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn-action {
+            background-color: #334155;
+            color: white;
+            padding: 10px 16px;
             border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .choice-btn:hover {
-            background: #475569;
-        }
-        .choice-btn.selected-correct {
-            background: rgba(39, 174, 96, 0.2);
-            border-color: var(--primary);
-            color: #4ade80;
-        }
-        .feedback-text {
-            margin-top: 10px;
+            text-decoration: none;
             font-size: 0.9rem;
-            color: #94a3b8;
-            display: none;
-            padding-left: 5px;
-            border-left: 2px solid var(--accent);
+            font-weight: bold;
+            transition: background 0.2s;
+            text-align: center;
         }
-        .btn { 
-            display: inline-block; 
-            background: var(--primary); 
-            color: white; 
-            padding: 14px 28px; 
-            border-radius: 8px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            font-size: 1.05rem;
-            transition: all 0.2s ease;
+
+        .btn-action:hover {
+            background-color: var(--primary);
         }
-        .btn:hover {
-            background: #219653;
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #38bdf8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
         }
+        .back-link:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- GLOBAL HUD BAR -->
-    <div class="hud-bar">
-        <span>Path: <span id="hud-track" style="color: var(--accent);">Foster-Alum Track</span></span>
-        <div>
-            <span>Global XP: <span id="global-points" style="color: #4ade80;">400</span></span>
-        </div>
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
+    <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
+    <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+      <a href="index.html">Home</a>
+      <a href="training-modules-and-mutual-growth.html">Training & Certification</a>
+      <a href="partners.html">Partners</a>
+      <a href="shared-harvest.html">Shared Harvest</a>
+      <a href="incubator-hub.html" style="color: var(--accent); font-weight: 600;">🌱 Incubator Launchpad</a>
+      <a href="technical-tutorials.html" style="color: var(--accent); font-weight: 600;">🔨 Technical Bank</a>
     </div>
+  </nav>
 
-    <h2 style="color: #fff; margin-top: 0; font-size: 1.6rem; margin-bottom: 15px;">🖥️ The Screening Desk: Processing Arriving Solutions</h2>
+  <div class="page-wrapper">
+    <div class="container">
+      
+      <a href="training-modules-and-mutual-growth.html" class="back-link">&larr; Back to Training Command Center</a>
 
-    <div class="prose-block">
-        <p>The signal terminal blinks steadily. Incoming dispatches from neighborhood advisors and background growers are queuing up. As the station administrator, your task is to screen these solutions. Sort out well-meaning but dangerous methods from scientifically sound, low-cost compliance strategies that protect the soil and the workforce.</p>
+      <div class="hud-bar">
+          <span>Track Status: Stage 4 Operations Hub</span>
+          <span>Case Study: Widow's Heritage Orchard</span>
+      </div>
+
+      <h1>⚙️ Difficult Track: Stage 4 Field Operations</h1>
+      
+      <!-- NARRATIVE BRIEFING -->
+      <div class="scenario-box">
+          <h4 style="color: var(--accent); margin-top: 0; font-size: 1.1rem;">📍 Operational Briefing: The Heritage Pact</h4>
+          <p style="font-size: 0.95rem; margin-bottom: 10px;">
+              The team has reached Stage 4 execution on the historic wagon train property. Rather than pushing transactional infrastructure sales or burdening the landowner with equipment debt, the operational cell has successfully negotiated a <strong>Maintenance-for-Stewardship Agreement</strong> combined with an equitable <strong>Sharecrop Partnership</strong>.
+          </p>
+          <p style="font-size: 0.95rem; margin: 0;">
+              Your objective in this stage is to deploy crew cells for structural orchard rehabilitation while establishing low-overhead, high-value secondary systems (apiculture and fungal cultivation) to secure immediate cash-flow relief.
+          </p>
+      </div>
+
+      <h3>Core Stage 4 Operations</h3>
+
+      <!-- ACTION 1: ORCHARD REHABILITATION -->
+      <div class="action-card">
+          <div style="max-width: 600px;">
+              <h4 style="margin: 0 0 5px 0; color: var(--blue-accent); font-size: 1.1rem;">1. Orchard Maintenance &amp; Stewardship Protocol</h4>
+              <p style="margin: 0; font-size: 0.9rem;">Execute deadwood clearing, structural pruning, and soil health revival under the formal maintenance agreement.</p>
+          </div>
+          <a href="training-farmer-ops.html" class="btn-action">Deploy Crew Cell →</a>
+      </div>
+
+      <!-- ACTION 2: SHARECROP HARVEST SETUP -->
+      <div class="action-card">
+          <div style="max-width: 600px;">
+              <h4 style="margin: 0 0 5px 0; color: var(--blue-accent); font-size: 1.1rem;">2. Sharecrop Agreement &amp; Intercropping Logistics</h4>
+              <p style="margin: 0; font-size: 0.9rem;">Establish row intercropping and local market channels to generate immediate cash flow and poverty relief for the landowner.</p>
+          </div>
+          <a href="training-farmer-ops.html" class="btn-action">Configure Agreement →</a>
+      </div>
+
+      <!-- SPECIALTY GATE: BEES & MUSHROOMS -->
+      <div style="background: rgba(15, 23, 42, 0.85); border: 2px dashed var(--accent); border-radius: 8px; padding: 20px; margin-top: 30px; text-align: center;">
+          <span style="color: var(--accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Specialty Prerequisite Gate</span>
+          <h4 style="color: #ffffff; margin: 8px 0 5px 0; font-size: 1.15rem;">3. Low-Overhead Expansion: Apiculture &amp; Fungal Understory</h4>
+          <p style="font-size: 0.9rem; max-width: 650px; margin: 0 auto 15px auto;">
+              Deploying working beehives for orchard pollination and inoculating shaded understories for mushroom yields requires verified technical competency. Complete the prerequisite training track or verify crew credentials to advance.
+          </p>
+          <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+              <a href="training-farmer-ops.html" class="btn-action" style="background-color: var(--primary);">
+                  ⚡ Execute Specialty Protocol →
+              </a>
+              <a href="training-modules-and-mutual-growth.html" class="btn-action" style="background-color: #334155;">
+                  📚 Review Training Tracks
+              </a>
+          </div>
+      </div>
+
     </div>
+  </div>
 
-    <!-- SCREENING MATRIX DESK -->
-    <div class="desk-panel">
-        <h3 style="color: #fff; margin-top: 0; font-size: 1.15rem; margin-bottom: 15px;">Queue Item 1: Soil Compaction &amp; Acidic pH Fix</h3>
-        <div class="submission-item" id="sub-1">
-            <div class="sub-header">
-                <span class="sub-author">Handle: @ValleyGrower55</span>
-                <span style="color:#94a3b8; font-size:0.8rem;">Incoming Text</span>
-            </div>
-            <div class="sub-text">
-                "For that old orchard's hard, sour soil, just till it deep three times down to 12 inches to smash the compaction, then dump heavy chemical nitrogen fertilizer immediately to jumpstart the dead roots before winter."
-            </div>
-            <div class="choice-row">
-                <button class="choice-btn" id="btn-1a" onclick="evaluateSubmission(1, 'A', false)">Flag as Compliance Deficit (0 XP)</button>
-                <button class="choice-btn" id="btn-1b" onclick="evaluateSubmission(1, 'B', true)">Route to Active Playbook (+25 XP)</button>
-            </div>
-            <div class="feedback-text" id="fb-1"></div>
-        </div>
-
-        <h3 style="color: #fff; margin-top: 25px; font-size: 1.15rem; margin-bottom: 15px;">Queue Item 2: Low-Pressure Gravity Irrigation</h3>
-        <div class="submission-item" id="sub-2">
-            <div class="sub-header">
-                <span class="sub-author">Handle: @BackyardMechanic</span>
-                <span style="color:#94a3b8; font-size:0.8rem;">Incoming Text</span>
-            </div>
-            <div class="sub-text">
-                "Elevate a 275-gallon IBC tote tank 4 feet on stabilized timber skids. Run a 1-inch main header line stepping down to half-inch drip lines with non-compensating emitters. A single individual can open the valve with a basic quarter-turn handle."
-            </div>
-            <div class="choice-row">
-                <button class="choice-btn" id="btn-2a" onclick="evaluateSubmission(2, 'A', true)">Route to Active Playbook (+25 XP)</button>
-                <button class="choice-btn" id="btn-2b" onclick="evaluateSubmission(2, 'B', false)">Flag as Compliance Deficit (0 XP)</button>
-            </div>
-            <div class="feedback-text" id="fb-2"></div>
-        </div>
-    </div>
-
-    <div style="text-align: center; background: rgba(255, 255, 255, 0.02); border: 1px solid #334155; padding: 25px; border-radius: 12px;">
-        <p style="color: #cbd5e1; margin-top: 0; margin-bottom: 15px; font-size: 0.95rem;">Once you have processed the incoming queue data, hand off the reviewed logs to the field squad.</p>
-        <a href="difficult-path-convergence.html" class="btn">Deliver Cleared Playbook to Packing Shed &rarr;</a>
-    </div>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const activeTrackName = localStorage.getItem('afti_track_name') || 'Foster-Alum Track';
-        document.getElementById('hud-track').innerText = activeTrackName;
-        
-        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '400', 10);
-        document.getElementById('global-points').innerText = currentXP;
-    });
-
-    function evaluateSubmission(itemNum, choiceLetter, isCorrect) {
-        // Prevent double clicking
-        const buttons = document.querySelectorAll(`#sub-${itemNum} .choice-btn`);
-        buttons.forEach(btn => btn.disabled = true);
-
-        const fb = document.getElementById(`fb-${itemNum}`);
-        fb.style.display = "block";
-
-        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '400', 10);
-
-        if (itemNum === 1) {
-            if (choiceLetter === 'A') {
-                // Correctly spotting the error
-                fb.innerHTML = "<strong>✅ Correct Audit:</strong> Excellent check. Rototilling deep historic orchard floors destroys vital mycelial networks and tears ancient root systems. Chemical nitrogen quick-fixes would wash into waterways during cold rain. This suggestion is flagged as a compliance risk.";
-                updateXP(25);
-                document.getElementById('btn-1a').classList.add('selected-correct');
-            } else {
-                fb.innerHTML = "<strong>⚠️ Incorrect Route:</strong> Tilling historic trees destroys surface feeder roots, and heavy winter nitrogen creates chemical run-off hazards for the local fire-buffer watershed. This should have been flagged.";
-            }
-        } 
-        
-        if (itemNum === 2) {
-            if (choiceLetter === 'A') {
-                // Correctly routing the sound solution
-                fb.innerHTML = "<strong>✅ Correct Audit:</strong> Verified. Raising the tank 4 feet generates roughly 1.7 PSI of pressure, which is ideal for low-pressure gravity drip networks. Emitters without heavy pressure-compensation flow perfectly at low thresholds, making it easy for a single person with low mobility to operate.";
+</body>
+</html>
