@@ -159,12 +159,62 @@
     </div>
 
     <!-- Alpine.js Application Logic -->
-    <script>
-        function learningTrackEngine() {
-            return {
-                activePhase: 1
-            }
+    function sharedHarvestEngine() {
+    return {
+        // Global View Active Toggles
+        activeView: 'stacked',
+        selectedTrack: 'flowers',
+        
+        // View 3 Buyout Variables
+        equipmentCost: 5000,
+        laborCost: 7500,
+        markupPercent: 20,
+        
+        // Computed View 3 Values
+        get totalBuyoutPrice() {
+            return this.equipmentCost + this.laborCost + this.markupAmount;
+        },
+        get markupAmount() {
+            return (this.equipmentCost + this.laborCost) * (this.markupPercent / 100);
+        },
+        
+        // View 4 Simulator Variables
+        stackedEquipment: 4500,
+        stackedLaborValue: 8200,
+        annualRevenue: 22500,
+        
+        // RESTORED 6-SECTION CRAYON ANIMATION ENGINE
+        activePhaseIndex: 1,
+        phaseTitles: {
+            1: "📝 Slide 1: The Initial Pencil & Crayon Concept",
+            2: "📐 Slide 2: Scaling the Plot Bounds (1/8 or 1/4 Acre)",
+            3: "⚙️ Slide 3: Writing Task-Based Safety SOPs",
+            4: "🤝 Slide 4: Landowner MOU Protection Boundaries",
+            5: "📜 Slide 5: Structuring the 12-Month Lease Agreement",
+            6: "🏛️ Slide 6: The Final Audit-Ready Board Presentation"
+        },
+        phaseDescriptions: {
+            1: "Your raw, initial creative concept mapped by hand on grid paper lines, identifying your primary agricultural passion track.",
+            2: "Transforming the sketch into accurate physical space. Laying out Marcus's 10-foot vehicle turning lanes, tool locks, and water sources.",
+            3: "Writing the strict step-by-step procedures. Embedding the Double-Buddy framework to eliminate isolated field work risks.",
+            4: "Drafting the mutual agreement lines. Outlining exactly what the student crew provides (fire clearing) vs. what the landowner shares.",
+            5: "Setting up the formal land use terms. Locking in a strict 12-month test window to verify production metrics before scaling.",
+            6: "The finished turnkey package. Combining your physical layout map, written safety rules, and legal protections into an elite presentation."
+        },
+        
+        // Action Mechanics
+        cycleStage() {
+            // Safely cycles through all 6 structural phases without dropping states
+            this.activePhaseIndex = this.activePhaseIndex >= 6 ? 1 : this.activePhaseIndex + 1;
+        },
+        calculateStackedBuyout() {
+            let baseCosts = this.stackedEquipment + this.stackedLaborValue;
+            return this.formatCurrency(baseCosts + (baseCosts * 0.20));
+        },
+        formatCurrency(val) {
+            if (isNaN(val)) return '$0.00';
+            return '$' + Number(val).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
-    </script>
-</body>
-</html>
+    }
+}
+    
