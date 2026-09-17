@@ -6,8 +6,8 @@
     <title>Outgrowing-Ag // Pencil-to-Presentation View Engine</title>
     <!-- Tailwind CSS for styling -->
     <script src="https://tailwindcss.com"></script>
-    <!-- Alpine.js for reactive UI logic -->
-    <script defer src="https://jsdelivr.net"></script>
+    <!-- FIXED: Proper Alpine.js CDN link for reactive UI logic -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Prevent Alpine flash on load -->
     <style>
         [x-cloak] { display: none !important; }
@@ -44,7 +44,7 @@
                 <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">Phase 1: Hand Mapping</span>
                 <h2 class="text-2xl font-bold text-white">The Hand-Drawn Scaling Foundation</h2>
                 <p class="text-slate-300 text-sm leading-relaxed">
-                    Students translate their initial "pencil dream" concepts onto 1-inch scale grid paper. They plot out precise perimeter borders for a 1/8 acre or 1/4 acre initial lease. They integrate Marcus's logistics curves, Sarah's root nursery structures, and Elena's special product loading vectors before drawing lines onto real terrain.
+                    Students translate their initial "pencil dream" concepts onto 1-inch scale grid paper. They plot out precise perimeter borders for a 1/8 acre or 1/4 acre initial lease. They integrate logistics curves, root nursery structures, and special product loading vectors before drawing lines onto real terrain.
                 </p>
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 border-dashed text-center text-slate-500 text-sm font-mono py-12">
                     ✏️ [Interactive Scale Mapping Canvas Block Placement]
@@ -103,62 +103,56 @@
             </div>
         </div>
 
-        <!-- PHASE 4: ON-SITE PLACARD VIEW WITH RESTORED 6-SECTION SLIDER -->
+        <!-- PHASE 4: ON-SITE PLACARD VIEW -->
         <div x-show="activeView === 'placard'" x-cloak class="space-y-6">
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
                 <div>
                     <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Phase 4: Turnkey Handover Display</span>
                     <h2 class="text-2xl font-bold text-white mt-1">Stacked Multi-Track System &amp; Blueprint Evolution</h2>
                     <p class="text-slate-300 text-sm mt-1">
-                        When all tracks are deployed on the same site, they form a closed-loop ecosystem. Cycle through the slides below to review your 6-checkpoint presentation timeline.
+                        When all tracks are deployed on the same site, they form a closed-loop ecosystem. Review your checkpoint presentation timelines below.
                     </p>
                 </div>
 
-                <!-- Combined Slider UI Deck -->
-                <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 shadow-inner space-y-6">
+                <!-- VISUAL EVOLUTION ANIMATION PANEL -->
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 shadow-inner space-y-6" x-data="sketchAnimation()">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
                         <div>
-                            <h3 class="text-lg font-bold text-sky-400">🎨 Blueprint Evolution Slider</h3>
-                            <p class="text-xs text-slate-400">Watch your initial concept convert step-by-step into a professional field configuration.</p>
+                            <h3 class="text-lg font-bold text-sky-400">🎨 Blueprint Evolution Model</h3>
+                            <p class="text-xs text-slate-400">Watch your initial pencil drawing transform step-by-step into a professional, audit-ready field asset layout.</p>
                         </div>
-                        <button @click="cycleStage()" class="bg-sky-950 text-sky-400 border border-sky-800 px-4 py-1.5 rounded-lg text-xs font-semibold hover:bg-sky-900 transition-all active:scale-95">
-                </div> <!-- Closes the active layout grid -->
-            </div> <!-- Closes background wrapper slate-800 card -->
-        </div> <!-- Closes activeView wrapper container -->
+                        <button @click="cycleStage()" class="bg-sky-950 text-sky-400 border border-sky-800 px-4 py-1.5 rounded-lg text-xs font-semibold hover:bg-sky-900 transition">
+                            Advance Model View &rarr;
+                        </button>
+                    </div>
 
-        <!-- VISUAL EVOLUTION ANIMATION PANEL: FULLY RESOLVED CONTAINMENT -->
-        <div class="mt-8 bg-slate-950 border border-slate-800 rounded-xl p-6 shadow-inner space-y-6" x-data="sketchAnimation()">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
-                <div>
-                    <h3 class="text-lg font-bold text-sky-400">🎨 Blueprint Evolution Model</h3>
-                    <p class="text-xs text-slate-400">Watch your initial pencil drawing transform step-by-step into a professional, audit-ready field asset layout.</p>
+                    <div class="bg-slate-900 p-8 rounded-xl border border-slate-800 text-center space-y-4">
+                        <span class="text-xs font-mono uppercase tracking-wider text-slate-500 block" x-text="'Active View Phase: ' + activePhaseIndex + ' / 3'"></span>
+                        <div class="text-xl font-bold text-slate-200 transition-all duration-300" x-text="phaseTitles[activePhaseIndex]"></div>
+                        <p class="text-sm text-slate-400 max-w-xl mx-auto" x-text="phaseDescriptions[activePhaseIndex]"></p>
+                    </div>
                 </div>
-                <button @click="cycleStage()" class="bg-sky-950 text-sky-400 border border-sky-800 px-4 py-1.5 rounded-lg text-xs font-semibold hover:bg-sky-900 transition">
-                    Advance Model View &rarr;
-                </button>
-            </div>
 
-            <div class="bg-slate-900 p-8 rounded-xl border border-slate-800 text-center space-y-4">
-                <span class="text-xs font-mono uppercase tracking-wider text-slate-500 block" x-text="'Active View Phase: ' + activePhaseIndex + ' / 3'"></span>
-                <div class="text-xl font-bold text-slate-200 transition-all duration-300" x-text="phaseTitles[activePhaseIndex]"></div>
-                <p class="text-sm text-slate-400 max-w-xl mx-auto" x-text="phaseDescriptions[activePhaseIndex]"></p>
             </div>
         </div>
 
-    </div> <!-- Closes the max-w-6xl master div container -->
-</div> <!-- Closes the global x-data root element -->
+    </div>
 
 <!-- CLIENT-SIDE ALPINE DATA INJECTION SCRIPT -->
 <script>
-    function stackedSystemEngine() {
+    function sharedHarvestEngine() {
         return {
-            stackedEquipment: 4500,
-            stackedLaborValue: 8200,
-            annualRevenue: 22500,
-            totalStackedBuyout() {
-                let physicalCosts = this.stackedEquipment + this.stackedLaborValue;
-                let margin = physicalCosts * 0.20;
-                return this.formatCurrency(physicalCosts + margin);
+            activeView: 'grid',
+            equipmentCost: 4500,
+            laborCost: 8200,
+            markupPercent: 20,
+            calculateMarginAmount() {
+                let base = Number(this.equipmentCost) + Number(this.laborCost);
+                return base * (Number(this.markupPercent) / 100);
+            },
+            calculateTotalBuyout() {
+                let base = Number(this.equipmentCost) + Number(this.laborCost);
+                return base + this.calculateMarginAmount();
             },
             formatCurrency(val) {
                 if (isNaN(val)) return '$0.00';
