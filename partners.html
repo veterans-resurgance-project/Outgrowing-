@@ -1,177 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For Farmers &amp; Advisory - AFTI Portal</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partnerships Hub - AFTI Portal</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --grey:#334155; --nav-bg:#144d29; --accent:#38bdf8; }
+body { font-family:system-ui,-apple-system,sans-serif; background:var(--bg); color:#fff; margin:0; padding:0; }
+nav { background:var(--nav-bg); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); flex-wrap:wrap; gap:1rem; }
+nav a { color:#cbd5e1; text-decoration:none; font-weight:500; font-size:0.95rem; }
+nav a.active { color:#fff; font-weight:700; border-bottom:2px solid var(--primary); padding-bottom:2px; }
+main { max-width:1100px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box; }
+.block { background:var(--card); padding:2.5rem; border-radius:16px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 10px 30px rgba(0,0,0,0.4); margin-bottom:2.5rem; }
+.track-card { background:var(--card); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:2rem; display:flex; flex-direction:column; justify-content:space-between; transition: transform 0.2s, border-color 0.2s; box-shadow:0 10px 25px rgba(0,0,0,0.3); }
+.track-card:hover { transform: translateY(-3px); border-color: rgba(39,174,96,0.5); }
+.btn-card { display:inline-block; text-align:center; color:#fff; text-decoration:none; padding:10px 20px; border-radius:8px; font-weight:bold; font-size:0.9rem; background:var(--primary); box-shadow:0 4px 12px rgba(0,0,0,0.3); transition: background 0.2s; margin-top:1.5rem; }
+.btn-card:hover { background:#219653; }
+</style>
 </head>
-<body style="background-color: #0f172a; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+<body>
 
-  <!-- Universal Navigation Bar -->
-  <nav style="background: #144d29; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; gap: 1rem; position: sticky; top: 0; z-index: 1000;">
-    <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
-    <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
-      <a href="index.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Home</a>
-      <a href="training-modules-and-mutual-growth.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Training &amp; Certification</a>
-      <a href="partners.html" style="color: #ffffff; text-decoration: none; font-weight: 700; border-bottom: 2px solid #27ae60; padding-bottom: 2px; font-size: 0.95rem;">For Farmers</a>
-      <a href="shared-harvest.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Shared Harvest</a>
-      <a href="incubator.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Incubator</a>
-      <a href="newsletter.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Newsletter</a>
-      <a href="gallery.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">Gallery</a>
-      <a href="how-to-help.html" style="color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem;">How to Help</a>
-    </div>
-  </nav>
-
-  <main style="max-width: 900px; margin: 0 auto; padding: 4rem 2rem;">
-    
-    <!-- Header Section -->
-    <div style="border-bottom: 2px solid #334155; padding-bottom: 2rem; margin-bottom: 3rem;">
-      <span style="background: rgba(39, 174, 96, 0.15); color: #27ae60; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.4rem 1rem; border-radius: 20px; display: inline-block; margin-bottom: 1rem;">Partnership &amp; Advisory Networks</span>
-      <h1 style="font-size: 2.5rem; font-weight: 900; color: #ffffff; margin: 0 0 1rem 0; letter-spacing: -0.5px;">For Farmers &amp; Landowners</h1>
-      <p style="color: #cbd5e1; font-size: 1.15rem; line-height: 1.6; margin: 0;">
-        Revitalize under-utilized Willamette Valley acreage, secure reliable professional teams, and co-design standardized operating procedures that align directly with your operation's exact production requirements.
-      </p>
-    </div>
-
-    <!-- Detailed Value Propositions -->
-    <div style="display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem;">
-      
-      <div style="background: #1e293b; padding: 2rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);">
-        <h2 style="color: #ffffff; font-size: 1.3rem; margin-top: 0; margin-bottom: 0.75rem;">1. Co-Designed SOP Training &amp; Custom Labor Pipelines</h2>
-        <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin: 0;">
-          Traditional seasonal hiring forces growers to continually retrain revolving, unvetted labor. Through our advisory partnership framework, you integrate your specific standard operating procedures (SOPs), equipment protocols, and quality benchmarks directly into our curriculum. This establishes a private, dedicated pipeline of pre-trained workers ready to hit your fields with immediate competence.
-        </p>
-      </div>
-
-      <div style="background: #1e293b; padding: 2rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);">
-        <h2 style="color: #ffffff; font-size: 1.3rem; margin-top: 0; margin-bottom: 0.75rem;">2. Vetted Professional Teams &amp; Accountability</h2>
-        <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin: 0;">
-          AFTI cohorts undergo rigorous screening, practical task trials, and leadership tracking in fields like safety compliance and equipment management. When our teams deploy to your farm, they operate as disciplined, accountable units committed to protecting your capital assets, infrastructure, and soil health.
-        </p>
-      </div>
-
-      <div style="background: #1e293b; padding: 2rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);">
-        <h2 style="color: #ffffff; font-size: 1.3rem; margin-top: 0; margin-bottom: 0.75rem;">3. Acreage Revitalization &amp; Shared Harvest Integration</h2>
-        <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin: 0;">
-          For landowners managing dormant or secondary acreage, our network matches vetted micro-farmers and incubator participants to cultivate plots productively. This reduces liability, keeps land tax-exempt or active under agricultural classifications, and generates supplemental cooperative yield streams.
-        </p>
-      </div>
-
-    </div>
-
-    <!-- Legal & MOU Framework Section -->
-    <div style="margin-bottom: 3rem;">
-      <h2 style="font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-top: 0; margin-bottom: 1.25rem;">Standardized Agreement Frameworks &amp; MOUs</h2>
-      <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
-        We maintain transparent, structured legal agreements designed to protect landowner liability while establishing clear operational boundaries for training and access:
-      </p>
-
-      <div style="background: #1e293b; padding: 2rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem;">
-        <span style="background: rgba(39, 174, 96, 0.15); color: #27ae60; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.2rem 0.6rem; border-radius: 12px;">Agreement Template 01</span>
-        <h3 style="color: #ffffff; font-size: 1.3rem; margin: 0.75rem 0 0.5rem 0;">Host-Farm Land &amp; Training Access MOU</h3>
-        <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin: 0 0 1rem 0;">
-          Defines the parameters for participating agricultural landowners providing acreage or infrastructure access for AFTI trainee development.
-        </p>
-        <ul style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin: 0; padding-left: 1.25rem;">
-          <li><strong>Scope of Access:</strong> Grants designated training access to specific acreage, hoop houses, or utility infrastructure without transferring land title.</li>
-          <li><strong>Safety &amp; Compliance:</strong> Commits both parties to mutual adherence to OSHA agricultural safety standards and AFTI supervision protocols.</li>
-          <li><strong>Liability &amp; Insurance:</strong> Establishes clear liability distribution, ensuring general liability coverage for vocational trainees on-site.</li>
-          <li><strong>Term &amp; Review:</strong> Operates on a seasonal or annual renewal cycle with a 30-day amicable termination clause for either party.</li>
-        </ul>
-      </div>
-    </div>
-<div style="background: #1e293b; padding: 2.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem;">
-        <span style="background: rgba(39, 174, 96, 0.15); color: #27ae60; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.4rem 1rem; border-radius: 20px; display: inline-block; margin-bottom: 1rem;">Mutual Growth Framework</span>
-        <h2 style="font-size: 1.75rem; font-weight: 800; color: #ffffff; margin-top: 0; margin-bottom: 1.25rem;">How Our Training &amp; Farms Support Each Other</h2>
-        <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">
-          Our vocational program and regional farm network operate as a single, supportive ecosystem. What our trainees learn in the classroom is shaped directly by what our partners need in the field.
-        </p>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-          <div style="background: #0f172a; padding: 1.5rem; border-radius: 12px; border: 1px solid #334155;">
-            <h3 style="color: #27ae60; margin-top: 0; margin-bottom: 0.75rem; font-size: 1.1rem;">What AFTI Brings to Your Land</h3>
-            <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; margin: 0;">
-              Reliable, energetic, and disciplined teams trained in core safety and task execution. For smaller homesteads and senior growers, we also help bridge the digital divide—assisting with direct-to-consumer tech, record-keeping, and translating extension service guidance into active field help.
-            </p>
-          </div>
-
-          <div style="background: #0f172a; padding: 1.5rem; border-radius: 12px; border: 1px solid #334155;">
-            <h3 style="color: #27ae60; margin-top: 0; margin-bottom: 0.75rem; font-size: 1.1rem;">What Farms Bring Back to AFTI</h3>
-            <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; margin: 0;">
-              Authentic living classrooms where our participants gain real-world experience. Most importantly, experienced growers pass down invaluable generational wisdom, crop intuition, and regional resilience strategies to our cohorts.
-            </p>
-          </div>
-        </div>
+<!-- STREAMLINED NAVIGATION HEADER -->
+<nav>
+<div style="font-weight:900; font-size:1.25rem; color:#fff;">AFTI Portal</div>
+<div style="display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap;">
+<a href="index.html">Home</a>
+<a href="pencil_to_presentation.html">Design Studio</a>
+<a href="outgrowing_ag_engine.html">Workforce Engine</a>
+<a href="training-modules-and-mutual-growth.html">Training &amp; Certification</a>
+<a href="partners.html" class="active">Partners</a>
+<a href="shared-harvest.html">Shared Harvest</a>
 </div>
-    <!-- Curriculum Navigation Hub Links -->
-    <div style="background: #1e293b; padding: 2.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 3rem;">
-      <h2 style="font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-top: 0; margin-bottom: 1.25rem;">Explore Training Modules Informing Our Crews</h2>
-      <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
-        Review the exact multi-phase curriculum your custom contractor teams master before stepping onto your property:
-      </p>
+</nav>
 
-      <div style="display: grid; gap: 1rem;">
-        <a href="phase1.html" style="background: #0f172a; padding: 1.25rem; border-radius: 10px; border: 1px solid #334155; text-decoration: none; display: block; transition: border-color 0.2s;">
-          <div style="color: #ffffff; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.25rem;">Phase 1: Orientation &amp; Soil Health &rarr;</div>
-          <div style="color: #cbd5e1; font-size: 0.85rem;">OSHA safety, baseline soil chemistry, and regional ecology.</div>
-        </a>
-
-        <a href="phase2.html" style="background: #0f172a; padding: 1.25rem; border-radius: 10px; border: 1px solid #334155; text-decoration: none; display: block; transition: border-color 0.2s;">
-          <div style="color: #ffffff; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.25rem;">Phase 2: Active Cultivation &amp; Crop Management &rarr;</div>
-          <div style="color: #cbd5e1; font-size: 0.85rem;">Greenhouse propagation, irrigation infrastructure, and field care.</div>
-        </a>
-
-        <a href="phase3.html" style="background: #0f172a; padding: 1.25rem; border-radius: 10px; border: 1px solid #334155; text-decoration: none; display: block; transition: border-color 0.2s;">
-          <div style="color: #ffffff; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.25rem;">Phase 3: Enterprise Leadership &amp; Distribution &rarr;</div>
-          <div style="color: #cbd5e1; font-size: 0.85rem;">Crew supervision, post-harvest handling, and cold chain logistics.</div>
-        </a>
-
-        <a href="apiary.html" style="background: #0f172a; padding: 1.25rem; border-radius: 10px; border: 1px solid #334155; text-decoration: none; display: block; transition: border-color 0.2s;">
-          <div style="color: #f59e0b; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.25rem;">Specialized Track: Apiary &amp; Pollinator Management &rarr;</div>
-          <div style="color: #cbd5e1; font-size: 0.85rem;">Integrated hive care, health monitoring, and crop pollination support.</div>
-        </a>
-      </div>
+<main>
+    <!-- HERO SECTION -->
+    <div class="block text-center">
+        <span style="background:rgba(39,174,96,0.15); color:var(--primary); font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; display:inline-block; margin-bottom:1rem;">Collaborative Network</span>
+        <h1 style="font-size:2.5rem; font-weight:900; margin:0 0 1rem 0; letter-spacing:-0.5px;">Partnerships We Value &amp; Support</h1>
+        <p style="font-size:1.1rem; line-height:1.7; color:#cbd5e1; max-width:800px; margin:0 auto;">See how our mission enhances your programs, eases operational loads, and achieves shared community goals. Explore our specialized partnership tracks below to find your tailored pathway.</p>
     </div>
 
-    <!-- Grower Specification Request Form -->
-    <div style="background: #1e293b; padding: 2.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin-bottom: 2.5rem;">
-      <h2 style="font-size: 1.75rem; font-weight: 800; color: #ffffff; margin-top: 0; margin-bottom: 1rem;">Become an Advisory Partner &amp; Submit SOP Requests</h2>
-      <p style="font-size: 1rem; color: #cbd5e1; margin-bottom: 2rem;">
-        Partner with AFTI to shape training criteria around your farm's unique SOPs and secure a specialized contractor team tailored to your harvest and operational needs.
-      </p>
-
-      <form action="#" method="POST" style="display: grid; gap: 1.25rem;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
-          <div>
-            <label style="display: block; font-size: 0.9rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.5rem;">Farm / Organization Name *</label>
-            <input type="text" name="farm_name" required placeholder="e.g., Valley View Orchards" style="width: 100%; padding: 0.875rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #ffffff; font-size: 1rem;">
-          </div>
-          <div>
-            <label style="display: block; font-size: 0.9rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.5rem;">Contact Person &amp; Phone *</label>
-            <input type="text" name="contact_phone" required placeholder="Name &amp; (541) 555-0188" style="width: 100%; padding: 0.875rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #ffffff; font-size: 1rem;">
-          </div>
+    <!-- FOUR TRACKS GRID -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        
+        <!-- Track 1: Farmers & Growers -->
+        <div class="track-card">
+            <div>
+                <span class="text-xs font-mono text-[#27ae60] uppercase tracking-wider font-bold">Agricultural Track</span>
+                <h3 class="text-xl font-bold text-white mt-1 mb-3">Farmers &amp; Growers</h3>
+                <p class="text-slate-300 text-sm leading-relaxed">Focused on land-linking, shared infrastructure, cooperative equipment access, and scaling regenerative agronomy practices across local fields.</p>
+            </div>
+            <a href="partners-farmers.html" class="btn-card">Explore Farmer Track &rarr;</a>
         </div>
 
-        <div>
-          <label style="display: block; font-size: 0.9rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.5rem;">Email Address *</label>
-          <input type="email" name="email" required placeholder="grower@example.com" style="width: 100%; padding: 0.875rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #ffffff; font-size: 1rem;">
+        <!-- Track 2: Academic & Extension -->
+        <div class="track-card">
+            <div>
+                <span class="text-xs font-mono text-[#38bdf8] uppercase tracking-wider font-bold">Institutional Track</span>
+                <h3 class="text-xl font-bold text-white mt-1 mb-3">Academic &amp; Extension</h3>
+                <p class="text-slate-300 text-sm leading-relaxed">Bridging grassroots field operations with institutional science through living labs, empirical data collection, and research collaboration.</p>
+            </div>
+            <a href="partners-academic.html" class="btn-card">Explore Academic Track &rarr;</a>
         </div>
 
-        <div>
-          <label style="display: block; font-size: 0.9rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.5rem;">SOP Requirements, Specialty Skills, or Harvest Surge Needs</label>
-          <textarea name="requirements" rows="4" placeholder="Detail your specific standard operating procedures, equipment handling needs, or seasonal labor volumes..." style="width: 100%; padding: 0.875rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #ffffff; font-size: 1rem; font-family: inherit; resize: vertical;"></textarea>
+        <!-- Track 3: Social Services & Veterans -->
+        <div class="track-card">
+            <div>
+                <span class="text-xs font-mono text-[#27ae60] uppercase tracking-wider font-bold">Community Support Track</span>
+                <h3 class="text-xl font-bold text-white mt-1 mb-3">Social Services &amp; Veterans</h3>
+                <p class="text-slate-300 text-sm leading-relaxed">Eased coordination providing purpose-driven veteran reintegration, wraparound stability, structured outdoor teamwork, and personal growth milestones.</p>
+            </div>
+            <a href="partners-social-services.html" class="btn-card">Explore Community Track &rarr;</a>
         </div>
 
-        <button type="submit" style="background: #27ae60; color: #ffffff; font-weight: 700; font-size: 1.05rem; padding: 1rem 2rem; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; margin-top: 0.5rem;">Submit Advisory &amp; SOP Inquiry</button>
-      </form>
+        <!-- Track 4: Emergency Response -->
+        <div class="track-card">
+            <div>
+                <span class="text-xs font-mono text-[#38bdf8] uppercase tracking-wider font-bold">Operational Readiness Track</span>
+                <h3 class="text-xl font-bold text-white mt-1 mb-3">Emergency Response &amp; Certification</h3>
+                <p class="text-slate-300 text-sm leading-relaxed">Disaster relief readiness pairing trained operational cells with wildland fire agencies, fuel-reduction initiatives, and safety bodies.</p>
+            </div>
+            <a href="partners-emergency.html" class="btn-card">Explore Emergency Track &rarr;</a>
+        </div>
+
     </div>
 
-    <!-- Bottom Navigation Cross-Links -->
-    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #334155; padding-top: 2rem; flex-wrap: wrap; gap: 1rem;">
-      <a href="shared-harvest.html" style="background: #27ae60; color: white; padding: 0.6rem 1.25rem; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.85rem;">Explore Shared Harvest Program &rarr;</a>
-      <a href="index.html" style="color: #a3e635; text-decoration: none; font-weight: 700;">Return to Home Hub &rarr;</a>
-    </div>
-
-  </main>
+</main>
 </body>
 </html>
