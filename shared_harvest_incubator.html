@@ -288,12 +288,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
                         <span class="text-amber-400 font-bold text-sm block">1. Zone 1: Perimeter Fire Buffer</span>
-                        <p class="text-xs text-slate-400">Clearing brush creates safety lines while generating raw woody biomass and carbon for biochar kilns.</p>
-                        <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded inline-block font-mono">Feeds Track 2 (Mushrooms)</span>
-                    </div>
-                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
-                        <span class="text-purple-400 font-bold text-sm block">2. Zone 2: Myco-Understory</span>
-                        <p class="text-xs text-slate-400">Wood-chip and log beds convert clearing debris into high-value gourmet mushroom flushes.</p>
+                                  <p class="text-xs text-slate-400">Wood-chip and log beds convert clearing debris into high-value gourmet mushroom flushes.</p>
                         <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded inline-block font-mono">Feeds Track 3 (Flowers)</span>
                     </div>
                     <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
@@ -344,7 +339,7 @@
                             </div>
                             <div class="md:text-right">
                                 <span class="text-xs font-mono text-amber-400 uppercase">Year-3 Turnkey Buyout Cost</span>
-                                <h4 class="text-2xl font-bold text-white mt-0.5" x-text="formatCurrency(totalStackedBuyout)"></h4>
+                                <h4 class="text-2xl font-bold text-white mt-0.5" x-text="totalStackedBuyout()"></h4>
                                 <p class="text-xs text-slate-400 mt-1">Cost-plus acquisition for landowner permanent adoption.</p>
                             </div>
                         </div>
@@ -359,123 +354,68 @@
 
             </div>
         </div>
-                <!-- VISUAL EVOLUTION ANIMATION: CRAYON SKETCH TO REAL-WORLD DEPLOYMENT -->
-                <div class="mt-8 bg-slate-950 border border-slate-800 rounded-xl p-6 shadow-inner space-y-6" x-data="sketchAnimation()">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
-                        <div>
-                            <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">Visual Evolution Track</span>
-                            <h3 class="text-lg font-bold text-white">From Crayon Dream to Real-World Fire Buffer</h3>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <button @click="prevStep" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium transition">&larr; Prev</button>
-                            <span class="text-xs font-mono text-slate-400 px-2" x-text="'Stage ' + currentStep + ' of 4'"></span>
-                            <button @click="nextStep" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition">Next &rarr;</button>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div class="h-56 bg-slate-900 border border-slate-800 rounded-xl flex flex-col items-center justify-center p-6 text-center relative overflow-hidden shadow-inner">
-                            <span class="absolute top-3 left-3 bg-slate-800 text-slate-300 text-[10px] font-mono px-2 py-1 rounded border border-slate-700" x-text="stages[currentStep - 1].tag"></span>
-                            <div class="space-y-3">
-                                <div class="text-4xl" x-text="stages[currentStep - 1].emoji"></div>
-                                <h4 class="text-base font-bold text-white" x-text="stages[currentStep - 1].title"></h4>
-                                <p class="text-xs text-slate-400 max-w-xs" x-text="stages[currentStep - 1].subtext"></p>
-                            </div>
-                        </div>
-
-                        <div class="space-y-4">
-                            <h4 class="text-base font-semibold text-emerald-300" x-text="stages[currentStep - 1].title"></h4>
-                            <p class="text-xs text-slate-300 leading-relaxed" x-text="stages[currentStep - 1].description"></p>
-                            
-                            <div class="bg-slate-900 p-3 rounded-lg border border-slate-800 space-y-1 text-xs text-slate-400">
-                                <span class="text-emerald-400 font-semibold block">Design Pipeline Status:</span>
-                                <p x-text="stages[currentStep - 1].pipelineNote"></p>
-                            </div>
-
-                            <div class="flex gap-2 pt-2">
-                                <template x-for="n in 4" :key="n">
-                                    <button @click="currentStep = n" class="h-2 flex-1 rounded-full transition" :class="currentStep === n ? 'bg-emerald-500' : 'bg-slate-800'"></button>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
+        
+        <!-- VISUAL EVOLUTION ANIMATION PANEL: FULLY RESOLVED CONTAINMENT -->
+        <div class="mt-8 bg-slate-950 border border-slate-800 rounded-xl p-6 shadow-inner space-y-6" x-data="sketchAnimation()">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-sky-400">🎨 Blueprint Evolution Model</h3>
+                    <p class="text-xs text-slate-400">Watch your initial pencil drawing transform step-by-step into a professional, audit-ready field asset layout.</p>
                 </div>
+                <button @click="cycleStage()" class="bg-sky-950 text-sky-400 border border-sky-800 px-4 py-1.5 rounded-lg text-xs font-semibold hover:bg-sky-900 transition">
+                    Advance Model View &rarr;
+                </button>
+            </div>
 
+            <div class="bg-slate-900 p-8 rounded-xl border border-slate-800 text-center space-y-4">
+                <span class="text-xs font-mono uppercase tracking-wider text-slate-500 block" x-text="'Active View Phase: ' + activePhaseIndex + ' / 3'"></span>
+                <div class="text-xl font-bold text-slate-200 transition-all duration-300" x-text="phaseTitles[activePhaseIndex]"></div>
+                <p class="text-sm text-slate-400 max-w-xl mx-auto" x-text="phaseDescriptions[activePhaseIndex]"></p>
             </div>
         </div>
 
     </div>
+</div>
 
-    <!-- Alpine.js Application Logic -->
-    <script>
-        function sharedHarvestEngine() {
-            return {
-                activeView: 'overview',
-                selectedTrack: 'flowers',
-                equipmentCost: 15000,
-                laborCost: 12000,
-                markupPercent: 20,
-
-                get markupAmount() {
-                    let base = (this.equipmentCost || 0) + (this.laborCost || 0);
-                    return base * (this.markupPercent / 100);
-                },
-
-                get totalBuyoutPrice() {
-                    return (this.equipmentCost || 0) + (this.laborCost || 0) + this.markupAmount;
-                },
-
-                formatCurrency(val) {
-                    return '$' + Number(val).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                }
+<!-- MANDATORY CLIENT-SIDE APINE DATA INJECTION SCRIPT -->
+<script>
+    function stackedSystemEngine() {
+        return {
+            stackedEquipment: 4500,
+            stackedLaborValue: 8200,
+            annualRevenue: 22500,
+            totalStackedBuyout() {
+                let physicalCosts = this.stackedEquipment + this.stackedLaborValue;
+                let margin = physicalCosts * 0.20;
+                return this.formatCurrency(physicalCosts + margin);
+            },
+            formatCurrency(val) {
+                if (isNaN(val)) return '$0.00';
+                return '$' + Number(val).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             }
         }
+    }
 
-        function sketchAnimation() {
-            return {
-                currentStep: 1,
-                stages: [
-                    {
-                        tag: 'STAGE 1: CONCEPTUALIZATION',
-                        emoji: '🖍️',
-                        title: 'The Childlike Crayon Sketch',
-                        subtext: 'Hand-drawn bee and rough perimeter line',
-                        description: 'The journey starts with a simple, imaginative crayon drawing by a participant. It captures the core desire: a friendly bee resting near a protective border, mapping out the initial concept without rigid constraints.',
-                        pipelineNote: 'Raw participant idea captured and submitted via the community challenge portal.'
-                    },
-                    {
-                        tag: 'STAGE 2: INCUBATION',
-                        emoji: '🐝',
-                        title: 'The Bee & Fire Buffer Corridor',
-                        subtext: 'Translating shapes into practical ecosystem zones',
-                        description: 'The rough concept is evaluated by the team and merged with practical land requirements. The rough line becomes a designated fire-buffer fuel reduction zone packed with native, nectar-rich flowering perennials.',
-                        pipelineNote: 'Reviewed for ecological value and matched with the 3-year shared harvest framework.'
-                    },
-                    {
-                        tag: 'STAGE 3: ARCHITECTURE',
-                        emoji: '📐',
-                        title: 'Professional Grid Design',
-                        subtext: 'Scaled square-foot drafting and layout specs',
-                        description: 'Using our digital drafting tools, the sketch is transformed into a clean, professional master schematic complete with exact foot-by-foot grid measurements, companion planting zones, and biochar staging paths.',
-                        pipelineNote: 'Drafted into presentation-ready documentation for landowner review and site sponsorship.'
-                    },
-                    {
-                        tag: 'STAGE 4: DEPLOYMENT',
-                        emoji: '🌲',
-                        title: 'On-Site Fire Buffer Installation',
-                        subtext: 'Active 5-person cell execution along the forest edge',
-                        description: 'The completed system comes to life on the ground. A trained 5-person cell clears the slash, lays down biochar-amended soil, and establishes the flowering buffer along the forest boundary line ready for 3-year operation.',
-                        pipelineNote: 'Active operational cell deployed; ready for Year-3 cost-plus buyout evaluation.'
-                    }
-                ],
-                nextStep() {
-                    this.currentStep = this.currentStep < 4 ? this.currentStep + 1 : 1;
-                },
-                prevStep() {
-                    this.currentStep = this.currentStep > 1 ? this.currentStep - 1 : 4;
-                }
+    function sketchAnimation() {
+        return {
+            activePhaseIndex: 1,
+            phaseTitles: {
+                1: "📝 Step 1: The Initial Pencil Sketch",
+                2: "⚙️ Step 2: Safety SOP Overlay & Track Boundaries",
+                3: "🏛️ Step 3: Formal Presentation & Lease Activation"
+            },
+            phaseDescriptions: {
+                1: "Your initial creative concept mapped by hand on grid paper lines, outlining raw 1/4 acre boundary limits.",
+                2: "Adding technical details. Embedding Marcus's turning arcs, Sarah's row patterns, and Elena's removal logs.",
+                3: "A professional, audit-ready presentation. Bound with legal MOUs and land trust metrics to clear review boards."
+            },
+            cycleStage() {
+                this.activePhaseIndex = this.activePhaseIndex >= 3 ? 1 : this.activePhaseIndex + 1;
             }
         }
-    </script>
+    }
+</script>
+        
+
 </body>
 </html>
