@@ -422,7 +422,7 @@
                         </div>
                     </div>
 
-                    <!-- Financial Summary Readout -->
+                                    <!-- Healed Financial Summary Readout -->
                     <div class="bg-slate-950 border border-emerald-500/50 rounded-xl p-6 space-y-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center border-b border-slate-800 pb-4">
                             <div>
@@ -432,18 +432,96 @@
                             </div>
                             <div class="md:text-right">
                                 <span class="text-xs font-mono text-amber-400 uppercase">Year-3 Turnkey Buyout Cost</span>
-                                <h4 class="text-2xl font-bold text-white mt-0.5" x-text="totalStackedBuyout()"></h4>
+                                <h4 class="text-2xl font-bold text-white mt-0.5" x-text="calculateStackedBuyout()"></h4>
                                 <p class="text-xs text-slate-400 mt-1">Cost-plus acquisition for landowner permanent adoption.</p>
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-400">
-                            <div>Combined Setup & Materials: <strong class="text-slate-200" x-text="formatCurrency(stackedEquipment)"></strong></div>
+                            <div>Combined Setup &amp; Materials: <strong class="text-slate-200" x-text="formatCurrency(stackedEquipment)"></strong></div>
                             <div>Cumulative Labor Investment: <strong class="text-slate-200" x-text="formatCurrency(stackedLaborValue)"></strong></div>
                             <div>System Engineering Margin (20%): <strong class="text-slate-200" x-text="formatCurrency((stackedEquipment + stackedLaborValue) * 0.20)"></strong></div>
                         </div>
                     </div> <!-- Closes Financial Summary Readout -->
-                </div> <!-- Closes Combined Economic & Buyout Simulator x-data scope -->
-            </div> <!-- Closes background wrapper slate-800 div -->
-        </div> <!-- Closes activeView === 'stacked' scope -->
-                        
+                </div> <!-- Closes Combined Economic &amp; Buyout Simulator -->
+            </div> <!-- Closes background wrapper slate-800 padding box -->
+        </div> <!-- Closes VIEW 4 activeView === 'stacked' block container -->
+
+        <!-- CRAYON SKETCH VISUAL ANIMATION OVERLAY HOOK -->
+        <div class="mt-8 bg-slate-950 border border-slate-800 rounded-xl p-6 shadow-inner space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-sky-400">🎨 Blueprint Evolution Model</h3>
+                    <p class="text-xs text-slate-400">Watch your initial crayon sketch layout convert step-by-step into a professional field asset layout.</p>
+                </div>
+                <button @click="cycleStage()" class="bg-sky-950 text-sky-400 border border-sky-800 px-4 py-1.5 rounded-lg text-xs font-semibold hover:bg-sky-900 transition">
+                    Advance Model View &rarr;
+                </button>
+            </div>
+
+            <div class="bg-slate-900 p-8 rounded-xl border border-slate-800 text-center min-h-[140px] flex flex-col justify-center space-y-4">
+                <span class="text-xs font-mono uppercase tracking-wider text-slate-500 block" x-text="'Active View Phase: ' + activePhaseIndex + ' / 3'"></span>
+                <div class="text-xl font-bold text-slate-200" x-text="phaseTitles[activePhaseIndex]"></div>
+                <p class="text-sm text-slate-400 max-w-xl mx-auto" x-text="phaseDescriptions[activePhaseIndex]"></p>
+            </div>
+        </div>
+
+    </div> <!-- Closes the master max-w-6xl mx-auto root div container -->
+
+    <!-- UNIFIED STATE CONTROLLER ENGINE SCRIPT -->
+    <script>
+        function sharedHarvestEngine() {
+            return {
+                // View Active Toggles
+                activeView: 'stacked',
+                selectedTrack: 'flowers',
+                
+                // View 3 Buyout Variables
+                equipmentCost: 5000,
+                laborCost: 7500,
+                markupPercent: 20,
+                
+                // Computed View 3 Values
+                get totalBuyoutPrice() {
+                    return this.equipmentCost + this.laborCost + this.markupAmount;
+                },
+                get markupAmount() {
+                    return (this.equipmentCost + this.laborCost) * (this.markupPercent / 100);
+                },
+                
+                // View 4 Simulator Variables
+                stackedEquipment: 4500,
+                stackedLaborValue: 8200,
+                annualRevenue: 22500,
+                
+                // Crayon Animation States
+                activePhaseIndex: 1,
+                phaseTitles: {
+                    1: "📝 Slide 1: The Initial Crayon Layout Plan",
+                    2: "⚙️ Slide 2: Safety SOP Overlay & Sector Boundaries",
+                    3: "🏛️ Slide 3: Formal Pitch Portfolio Activation"
+                },
+                phaseDescriptions: {
+                    1: "Your raw, initial creative concept mapped by hand on grid paper lines, outlining raw 1/4 acre boundary blocks.",
+                    2: "Integrating operational tracking lines. Mapping out Marcus's turning arcs, Sarah's row structures, and Elena's permit compliance check-gates.",
+                    3: "The finished presentation package. Bound with legal MOUs, cost-plus metrics tables, and unalterable ledger lines ready for the review board."
+                },
+                
+                // Action Mechanics
+                cycleStage() {
+                    this.activePhaseIndex = this.activePhaseIndex >= 3 ? 1 : this.activePhaseIndex + 1;
+                },
+                calculateStackedBuyout() {
+                    let baseCosts = this.stackedEquipment + this.stackedLaborValue;
+                    return this.formatCurrency(baseCosts + (baseCosts * 0.20));
+                },
+                formatCurrency(val) {
+                    if (isNaN(val)) return '$0.00';
+                    return '$' + Number(val).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                }
+            }
+        }
+    </script>
+</body>
+            </html>
+                
