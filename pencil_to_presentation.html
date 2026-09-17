@@ -8,11 +8,10 @@
     <script src="https://tailwindcss.com"></script>
     <!-- Alpine.js for reactive UI logic -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <!-- CRITICAL FALLBACK: Ensures dark theme and layout hold even if CDN is blocked locally -->
     <style>
         body {
-            background-color: #0f172a; /* bg-slate-900 */
-            color: #f1f5f9; /* text-slate-100 */
+            background-color: #0f172a;
+            color: #f1f5f9;
             font-family: system-ui, -apple-system, sans-serif;
             margin: 0;
             padding: 0;
@@ -84,7 +83,7 @@
             </div>
         </div>
 
-        <!-- VIEW 3: VISUAL EVOLUTION ANIMATION (MASSIVE IMMERSIVE DISPLAY WITH SYSTEM IMAGE) -->
+        <!-- VIEW 3: VISUAL EVOLUTION ANIMATION (TRUE IMAGE-BASED ANIMATION BOX DISPLAY) -->
         <div x-show="activeView === 'evolution'" x-cloak class="flex-grow flex flex-col space-y-6">
             <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 md:p-8 shadow-2xl space-y-6 flex-grow flex flex-col justify-between" x-data="sketchAnimation()">
                 
@@ -106,30 +105,29 @@
                         </div>
                     </div>
 
-                    <!-- MASSIVE IMMERSIVE VISUAL ANIMATION CONTAINER (Fills Major Height with Integrated Dashboard View) -->
-                    <div class="bg-slate-950 border border-slate-700/90 rounded-2xl p-4 md:p-6 flex-grow flex flex-col items-center justify-center min-h-[500px] lg:min-h-[580px] relative overflow-hidden group shadow-2xl">
+                    <!-- MASSIVE TRUE IMAGE-BASED DISPLAY BOX -->
+                    <div class="bg-slate-950 border-2 border-emerald-500/60 rounded-2xl p-4 md:p-6 flex-grow flex flex-col items-center justify-center min-h-[550px] lg:min-h-[640px] relative overflow-hidden group shadow-2xl">
                         
-                        <!-- Embedded High-Tech Agricultural Dashboard Visual Asset Layer -->
-                        <div class="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center">
-                            <img src="watermarked_img_9913806307250056505.jpg" alt="Agricultural Automation System Overview" class="w-full h-full object-cover opacity-60 group-hover:opacity-75 transition-opacity duration-500 scale-105">
-                            <!-- Subtle Gradient Overlay to Ensure Crisp Legibility -->
-                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+                        <!-- REAL BACKGROUND IMAGE LAYER -->
+                        <div class="absolute inset-0 w-full h-full overflow-hidden">
+                            <img src="watermarked_img_9913806307250056505.jpg" alt="Agricultural Automation System Overview" class="w-full h-full object-cover opacity-75 group-hover:opacity-90 transition-all duration-700 scale-100 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-slate-950/20"></div>
                         </div>
 
-                        <!-- Foreground Active Stage Data Card Overlay inside the Massive Box -->
-                        <div class="relative z-10 text-center space-y-4 p-8 bg-slate-900/90 backdrop-blur-md rounded-2xl border border-slate-700/80 max-w-2xl mx-auto shadow-2xl transition-all duration-300 transform group-hover:scale-[1.02]">
-                            <span class="text-6xl md:text-7xl block filter drop-shadow-md" x-text="stages[currentStep - 1].visualIcon"></span>
-                            <div class="text-xs md:text-sm font-mono text-emerald-300 uppercase tracking-widest bg-slate-950 px-4 py-1.5 rounded-full border border-slate-700 inline-block shadow-sm" x-text="stages[currentStep - 1].visualLabel"></div>
-                            <p class="text-sm md:text-base text-slate-200 font-medium leading-relaxed" x-text="stages[currentStep - 1].visualSubtext"></p>
+                        <!-- LARGE DYNAMIC OVERLAY CARD HIGHLIGHTING CURRENT STAGE DETAILS -->
+                        <div class="relative z-10 text-center space-y-4 p-8 md:p-10 bg-slate-900/90 backdrop-blur-md rounded-2xl border border-emerald-500/40 max-w-2xl mx-auto shadow-2xl transition-all duration-300 transform group-hover:scale-[1.02]">
+                            <span class="text-7xl md:text-8xl block filter drop-shadow-lg animate-bounce" x-text="stages[currentStep - 1].emoji"></span>
+                            <div class="text-xs md:text-sm font-mono text-emerald-300 uppercase tracking-widest bg-slate-950 px-4 py-1.5 rounded-full border border-slate-700 inline-block shadow" x-text="stages[currentStep - 1].visualLabel"></div>
+                            <p class="text-base md:text-lg text-slate-100 font-semibold leading-relaxed" x-text="stages[currentStep - 1].visualSubtext"></p>
                         </div>
 
-                        <!-- Watermark Indicator -->
-                        <div class="absolute bottom-4 right-5 z-10 text-xs font-mono text-emerald-400 bg-slate-950/80 px-3 py-1 rounded-md border border-slate-800 shadow">
-                            <span x-text="'RENDER_ID: STAGE_0' + currentStep + ' // ACTIVE_AUTOMATION_VECTOR'"></span>
+                        <!-- Watermark & Vector Indicator -->
+                        <div class="absolute bottom-4 right-5 z-10 text-xs font-mono text-emerald-300 bg-slate-950/90 px-3.5 py-1.5 rounded-md border border-emerald-500/40 shadow">
+                            <span x-text="'RENDER_ID: STAGE_0' + currentStep + ' // LIVE_AGRIFLOW_SYSTEM'"></span>
                         </div>
                     </div>
 
-                    <!-- Stage Narrative Summary Card Below Visual -->
+                    <!-- Stage Narrative Summary Card Below Image Display -->
                     <div class="bg-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700/80 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 shadow-lg">
                         <div class="flex items-center gap-5">
                             <span class="text-4xl p-4 bg-slate-950 rounded-2xl border border-slate-800 shadow-inner" x-text="stages[currentStep - 1].emoji"></span>
@@ -146,7 +144,7 @@
                 <div class="grid grid-cols-4 gap-3 pt-4 border-t border-slate-700/60">
                     <template x-for="stage in stages" :key="stage.tag">
                         <button @click="currentStep = stage.step" 
-                                :class="currentStep === stage.step ? 'bg-sky-500 border-sky-400 shadow-lg shadow-sky-500/30' : 'bg-slate-900 border-slate-700 opacity-50 hover:opacity-100'"
+                                :class="currentStep === stage.step ? 'bg-emerald-500 border-emerald-400 shadow-lg shadow-emerald-500/30' : 'bg-slate-900 border-slate-700 opacity-50 hover:opacity-100'"
                                 class="h-3 rounded-full border transition-all">
                         </button>
                     </template>
@@ -184,9 +182,8 @@
                     step: 1,
                     tag: 'STAGE 1: CONCEPTUALIZATION',
                     emoji: '🖍️',
-                    visualIcon: '🖍️🐝📄',
                     visualLabel: 'Crayon & Paper Concept',
-                    visualSubtext: 'Initial freeform participant drawing featuring rough outlines, a friendly hand-drawn bee, and perimeter boundaries.',
+                    visualSubtext: 'Initial freeform participant drawing featuring rough outlines, a friendly hand-drawn bee, and perimeter boundaries overlaying the live AgriFlow system.',
                     title: 'The Childlike Crayon Sketch',
                     subtext: 'Hand-drawn bee and rough perimeter line',
                     description: 'The journey starts with a simple, imaginative crayon drawing by a participant. It captures the core desire: a friendly bee resting near a protective border, mapping out the initial concept without rigid constraints.',
@@ -196,9 +193,8 @@
                     step: 2,
                     tag: 'STAGE 2: INCUBATION',
                     emoji: '🐝',
-                    visualIcon: '🗺️🌱🔥',
                     visualLabel: 'Ecosystem & Fire Corridor Map',
-                    visualSubtext: 'Overlaying fuel-reduction boundaries and native nectar-rich perennial corridors onto the live automation grid.',
+                    visualSubtext: 'Overlaying fuel-reduction boundaries and native nectar-rich perennial corridors onto the AgriFlow telemetry grid.',
                     title: 'The Bee & Fire Buffer Corridor',
                     subtext: 'Translating shapes into practical ecosystem zones',
                     description: 'The rough concept is evaluated by the team and merged with practical land requirements. The rough line becomes a designated fire-buffer fuel reduction zone packed with native, nectar-rich flowering perennials.',
@@ -208,7 +204,6 @@
                     step: 3,
                     tag: 'STAGE 3: ARCHITECTURE',
                     emoji: '📐',
-                    visualIcon: '📐🏛️📍',
                     visualLabel: 'CAD Master Schematic',
                     visualSubtext: 'Precision square-foot grid design complete with automated tool vaults, nutrient lines, and drone routing paths.',
                     title: 'Professional Grid Design',
@@ -220,7 +215,6 @@
                     step: 4,
                     tag: 'STAGE 4: DEPLOYMENT',
                     emoji: '🌲',
-                    visualIcon: '🌲🏡🌻',
                     visualLabel: 'Turnkey Field Operation',
                     visualSubtext: 'Completed 5-person cell deployment actively running automated telemetry along the forest boundary line.',
                     title: 'On-Site Fire Buffer Installation',
