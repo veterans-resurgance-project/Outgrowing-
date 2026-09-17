@@ -3,13 +3,15 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AFTI - Agricultural Future &amp; Training Initiative</title>
+<!-- Tailwind CSS for modern spotlight cards -->
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
 :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --grey:#334155; --nav-bg:#144d29; --accent:#38bdf8; }
 body { font-family:system-ui,-apple-system,sans-serif; background:var(--bg); color:#fff; margin:0; padding:0; }
 nav { background:var(--nav-bg); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); flex-wrap:wrap; gap:1rem; }
 nav a { color:#cbd5e1; text-decoration:none; font-weight:500; font-size:0.95rem; }
 nav a.active { color:#fff; font-weight:700; border-bottom:2px solid var(--primary); padding-bottom:2px; }
-main { max-width:900px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box; }
+main { max-width:1000px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box; }
 .block { background:var(--card); padding:2.5rem; border-radius:16px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 10px 30px rgba(0,0,0,0.4); margin-bottom:2.5rem; }
 .img-box { width:100%; background:#0f172a; border-radius:12px; border:1px solid rgba(255,255,255,0.15); margin:1.5rem 0; overflow:hidden; position:relative; }
 .btn { display:block; text-align:center; color:#fff; text-decoration:none; padding:15px; border-radius:8px; font-weight:bold; font-size:1.1rem; margin-top:1.2rem; box-shadow:0 4px 15px rgba(0,0,0,0.3); transition: transform 0.2s, background 0.2s; }
@@ -18,32 +20,29 @@ main { max-width:900px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box;
 </style>
 </head>
 <body>
+
+<!-- STREAMLINED SITE NAVIGATION BAR -->
 <nav>
 <div style="font-weight:900; font-size:1.25rem; color:#fff;">AFTI Portal</div>
 <div style="display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap;">
 <a href="index.html" class="active">Home</a>
+<a href="pencil_to_presentation.html">Design Studio</a>
+<a href="outgrowing_ag_engine.html">Workforce Engine</a>
 <a href="training-modules-and-mutual-growth.html">Training &amp; Certification</a>
 <a href="partners.html">For Farmers</a>
 <a href="shared-harvest.html">Shared Harvest</a>
 <a href="incubator.html">Incubator</a>
-<a href="newsletter.html">Newsletter</a>
 <a href="gallery.html">Gallery</a>
-<a href="how-to-help.html">How to Help</a>
-<a href="water-rights.html">Water Rights</a>
-<a href="equipment-sops.html">Equipment SOPs</a>
-<a href="soil-fertility.html">Soil Fertility</a>
-<a href="shared_harvest_incubator.html">shared technology</a>
-<a href="pencil_to_presentation.html">Design Studio</a>
-<a href="micro_farm_courses.html">Micro Farm</a>
-<a href="shared_harvest_incubator.html">Shared Harvet Design Studio</a>
-<a href= "outgrowing_ag_engine.html">Outgrowing-Ag Engine</a>
+</div>
 </nav>
+
 <main>
 <div class="block">
 <span style="background:rgba(39,174,96,0.15); color:#27ae60; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; display:inline-block; margin-bottom:1rem;">Willamette Valley Initiative</span>
 <h1 style="font-size:2.3rem; font-weight:900; margin:0 0 1rem 0; letter-spacing:-0.5px;">Cultivating Agricultural Futures</h1>
 <p style="font-size:1.05rem; line-height:1.7; color:#cbd5e1; margin:0;">The Agricultural Future &amp; Training Initiative (AFTI) bridges the gap between under-utilized rural land and next-generation growers. We combine rigorous vocational pathways, custom advisory SOP alignment, and cooperative land-linking frameworks to deploy elite field teams that ensure mutual economic revitalization and regional food security across Linn County.</p>
 
+<!-- ORIGINAL FIELD PHOTO PRESERVED -->
 <div class="img-box">
 <img src="PXL_20250730_184302226.jpg" alt="Field Operations" style="width:100%; height:300px; object-fit:cover; display:block;">
 <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,23,42,0.95)); padding:1.2rem;">
@@ -52,11 +51,43 @@ main { max-width:900px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box;
 </div>
 </div>
 
-<!-- SIMULATION INTERACTIVE BUTTON - MOVED TO THE NORTH -->
+<!-- FEATURE SPOTLIGHT CARDS (DESIGN STUDIO & WORKFORCE ENGINE) -->
+<div class="my-8">
+    <h3 class="text-xl font-bold text-white mb-4">Explore Core Portal Features</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Spotlight Card 1: Design Studio Animation -->
+        <div class="bg-[#0f172a] border border-sky-500/30 rounded-xl p-6 flex flex-col justify-between hover:border-sky-400 transition shadow-lg">
+            <div>
+                <span class="text-xs font-mono text-[#38bdf8] uppercase tracking-wider font-bold">Visual Pipeline</span>
+                <h4 class="text-lg font-bold text-white mt-1 mb-2">Crayon Sketch to Master Plan</h4>
+                <p class="text-sm text-slate-300 leading-relaxed">Experience our 4-stage interactive design animation showing how rough community ideas transform into professional architectural blueprints.</p>
+            </div>
+            <a href="pencil_to_presentation.html" class="mt-6 bg-[#144d29] hover:bg-emerald-800 text-white text-center py-2.5 px-4 rounded-lg text-sm font-bold transition border border-emerald-600/50 block">
+                Launch Design Studio &rarr;
+            </a>
+        </div>
+
+        <!-- Spotlight Card 2: Workforce Engine Simulator -->
+        <div class="bg-[#0f172a] border border-emerald-500/30 rounded-xl p-6 flex flex-col justify-between hover:border-emerald-400 transition shadow-lg">
+            <div>
+                <span class="text-xs font-mono text-[#27ae60] uppercase tracking-wider font-bold">Deployment Tool</span>
+                <h4 class="text-lg font-bold text-white mt-1 mb-2">Cell Matching &amp; Audit Engine</h4>
+                <p class="text-sm text-slate-300 leading-relaxed">Manage participant skill tracks, map partner job wish lists, and run live competency gap audits for active field deployment.</p>
+            </div>
+            <a href="outgrowing_ag_engine.html" class="mt-6 bg-[#27ae60] hover:bg-emerald-600 text-white text-center py-2.5 px-4 rounded-lg text-sm font-bold transition block shadow">
+                Launch Workforce Engine &rarr;
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<!-- SIMULATION INTERACTIVE BUTTON -->
 <h3 style="color: #fff; margin-bottom: 5px; font-size: 1.2rem;">Ready to Begin Your Progression?</h3>
 <a href="farmer-apprentice-story.html" class="btn" style="background:var(--primary); margin-top: 0.5rem; margin-bottom: 2rem;">🚀 Launch Immersive Qualification Path &rarr;</a>
 
-<!-- COMPELLING NARRATIVE BLOCK INSERTED INTO THE NEW OPEN VERTICAL SPACE -->
+<!-- COMPELLING NARRATIVE BLOCK -->
 <div class="narrative-callout">
 <h3 style="color: #4ade80; margin-top: 0; margin-bottom: 12px; font-size: 1.3rem;">Have you ever dreamed of holding the keys to your own farm?</h3>
 <p style="color: #cbd5e1; margin: 0 0 15px 0; font-size: 1rem;">
@@ -66,7 +97,7 @@ To feel the dirt in your hands, grow real food, and anchor your own independence
 <strong>Our simulation is built exactly for you.</strong> Start right where you are standing today. As you navigate choices, handle bureaucratic hurdles, and build team networks, the system registers your effort. Every milestone box you check accumulates points that build a real-world digital portfolio. Completion of these training steps creates verified metrics to help you qualify for land trust grants, farm placement matching programs, and institutional resources to turn your dream into reality.
 </p>
 <p style="color: #cbd5e1; margin: 0; font-size: 1rem;">
-We challenge you to select <strong>The Foster-Alum Route (The Difficult Path)</strong>. See how your resilience locks in at the absolute absolute threshold of the journey. Outmaneuver systemic cracks, coordinate field dispatches, and protect your team to beat the hard winter weather and the bank boss in the final high-stakes battle!
+We challenge you to select <strong>The Foster-Alum Route (The Difficult Path)</strong>. See how your resilience locks in at the absolute threshold of the journey. Outmaneuver systemic cracks, coordinate field dispatches, and protect your team to beat the hard winter weather and the bank boss in the final high-stakes battle!
 </p>
 </div>
 
