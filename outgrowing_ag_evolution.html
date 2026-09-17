@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visual Evolution // AFTI Portal</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Alpine.js -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<style>
+:root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --grey:#334155; --nav-bg:#144d29; --accent:#38bdf8; }
+body { font-family:system-ui,-apple-system,sans-serif; background:var(--bg); color:#fff; margin:0; padding:0; }
+nav { background:var(--nav-bg); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); flex-wrap:wrap; gap:1rem; }
+nav a { color:#cbd5e1; text-decoration:none; font-weight:500; font-size:0.95rem; }
+nav a.active { color:#fff; font-weight:700; border-bottom:2px solid var(--primary); padding-bottom:2px; }
+main { max-width:1100px; margin:0 auto; padding:2.5rem 2rem; box-sizing:border-box; }
+.block { background:var(--card); padding:2.5rem; border-radius:16px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 10px 30px rgba(0,0,0,0.4); margin-bottom:2.5rem; }
+[x-cloak] { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- SITE NAVIGATION BAR -->
+<nav>
+<div style="font-weight:900; font-size:1.25rem; color:#fff;">AFTI Portal</div>
+<div style="display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap;">
+<a href="index.html">Home</a>
+<a href="training-modules-and-mutual-growth.html">Training &amp; Certification</a>
+<a href="partners.html">For Farmers</a>
+<a href="shared-harvest.html">Shared Harvest</a>
+<a href="incubator.html">Incubator</a>
+<a href="newsletter.html">Newsletter</a>
+<a href="gallery.html">Gallery</a>
+<a href="how-to-help.html">How to Help</a>
+<a href="water-rights.html">Water Rights</a>
+<a href="equipment-sops.html">Equipment SOPs</a>
+<a href="soil-fertility.html">Soil Fertility</a>
+<a href="shared_harvest_incubator.html">shared technology</a>
+<a href="pencil_to_presentation.html">Design Studio</a>
+<a href="micro_farm_courses.html">Micro Farm</a>
+<a href="shared_harvest_incubator.html">Shared Harvest Design Studio</a>
+<a href="outgrowing_ag_evolution.html" class="active">Visual Evolution</a>
+</div>
+</nav>
+
+<!-- MAIN CONTENT CONTAINER -->
+<main>
+<div class="block" x-data="evolutionApp()">
+
+    <!-- Header Section -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-white/10 pb-6 mb-6">
+        <div>
+            <span style="background:rgba(56,189,248,0.15); color:#38bdf8; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; display:inline-block; margin-bottom:0.75rem;">Interactive Design Pipeline</span>
+            <h1 style="font-size:2.2rem; font-weight:900; margin:0; letter-spacing:-0.5px;">From Crayon Sketch to Master Plan</h1>
+            <p style="font-size:1.05rem; color:#cbd5e1; margin-top:0.5rem;">Witness how rough community ideas transform step-by-step into professional architectural blueprints.</p>
+        </div>
+        <!-- Progress Controls -->
+        <div class="flex items-center gap-3 bg-[#0f172a] p-2.5 rounded-xl border border-white/10 shadow-lg">
+            <button @click="prevStage()" class="bg-[#1e293b] hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition border border-white/10">
+                &larr; Previous
+            </button>
+            <span class="text-sm font-mono text-[#38bdf8] px-2 font-bold" x-text="'Stage ' + currentStage + ' of 4'"></span>
+            <button @click="nextStage()" class="bg-[#144d29] hover:bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-bold transition border border-emerald-600/50">
+                Next Stage &rarr;
+            </button>
+        </div>
+    </div>
+
+    <!-- STAGE HEADER BANNER -->
+    <div class="mb-4">
+        <span class="text-xs font-mono text-[#38bdf8] uppercase tracking-widest font-bold" x-text="stages[currentStage - 1].tag"></span>
+        <h2 class="text-2xl md:text-3xl font-bold text-white mt-1" x-text="stages[currentStage - 1].title"></h2>
+    </div>
+
+    <!-- HALF-SCREEN IMMERSIVE VISUAL DISPLAY BOX -->
+    <div class="bg-[#0f172a] border border-white/15 rounded-2xl p-8 md:p-12 min-h-[45vh] flex flex-col items-center justify-center relative overflow-hidden shadow-2xl mb-6">
+        
+        <!-- Large Visual Graphic / Illustration Area -->
+        <div class="text-center space-y-6 w-full max-w-2xl transition-all duration-300">
+            <!-- Large Emoji/Visual Art Stage -->
+            <div class="text-8xl md:text-9xl drop-shadow-2xl" x-text="stages[currentStage - 1].visualIcon"></div>
+            
+            <!-- Blueprint Grid Frame / Data Visualizer -->
+            <div class="bg-[#1e293b] border border-white/10 rounded-xl p-4 shadow-inner">
+                <span class="text-xs md:text-sm font-mono text-[#27ae60] uppercase tracking-wider block font-bold mb-1" x-text="stages[currentStage - 1].stageLabel"></span>
+                <p class="text-base md:text-lg text-slate-200 font-medium" x-text="stages[currentStage - 1].visualHeadline"></p>
+            </div>
+        </div>
+
+        <!-- Stage Watermark Indicator -->
+        <div class="absolute bottom-4 right-5 text-xs font-mono text-slate-500 tracking-wider">
+            <span x-text="'BLUEPRINT_SEQ_0' + currentStage + '_ACTIVE'"></span>
+        </div>
+    </div>
+
+    <!-- NARRATIVE & DETAIL BREAKDOWN -->
+    <div class="bg-[#0f172a] border border-white/10 rounded-2xl p-6 md:p-8 space-y-4 mb-6 shadow-md">
+        <div class="flex items-center gap-4">
+            <span class="text-4xl p-3 bg-[#1e293b] rounded-xl border border-white/10 shadow" x-text="stages[currentStage - 1].emoji"></span>
+            <div>
+                <h3 class="text-lg font-bold text-slate-100" x-text="stages[currentStage - 1].subHeading"></h3>
+                <p class="text-xs md:text-sm font-mono text-[#27ae60] font-bold mt-0.5" x-text="stages[currentStage - 1].technicalNote"></p>
+            </div>
+        </div>
+        <p class="text-slate-300 text-base md:text-lg leading-relaxed" x-text="stages[currentStage - 1].description"></p>
+    </div>
+
+    <!-- CLICKABLE PROGRESS DOTS / STEPS NAVIGATION -->
+    <div class="grid grid-cols-4 gap-3">
+        <template x-for="s in stages" :key="s.id">
+            <button @click="currentStage = s.id" 
+                    :class="currentStage === s.id ? 'bg-[#38bdf8] border-[#38bdf8] text-slate-950 font-bold shadow-lg' : 'bg-[#0f172a] border-white/20 text-slate-400 hover:text-white'"
+                    class="py-3 px-4 rounded-xl border text-xs md:text-sm transition flex items-center justify-center gap-2">
+                <span x-text="'0' + s.id"></span>
+                <span class="hidden md:inline" x-text="s.shortName"></span>
+            </button>
+        </template>
+    </div>
+
+</div>
+</main>
+
+<!-- APPLICATION LOGIC SCRIPT -->
+<script>
+    function evolutionApp() {
+        return {
+            currentStage: 1,
+            stages: [
+                {
+                    id: 1,
+                    shortName: 'Crayon Sketch',
+                    tag: 'PHASE 1: FREEFORM INTAKE',
+                    emoji: '🖍️',
+                    visualIcon: '🖍️🐝📄',
+                    stageLabel: 'Participant Concept Board',
+                    visualHeadline: 'Initial Hand-Drawn Crayon Sketch & Honeybee Placement',
+                    subHeading: 'Raw imagination on paper',
+                    technicalNote: 'Input Source: Community Member Initial Submission',
+                    description: 'The process begins with an unfiltered, imaginative crayon drawing from a participant. It captures the heart of what they want to build: a welcoming habitat where pollinators thrive alongside protective boundaries, free of technical restrictions.'
+                },
+                {
+                    id: 2,
+                    shortName: 'Ecosystem Map',
+                    tag: 'PHASE 2: ECOLOGICAL ALIGNMENT',
+                    emoji: '🗺️',
+                    visualIcon: '🗺️🌱🔥',
+                    stageLabel: 'Site Zone Overlay',
+                    visualHeadline: 'Mapping Fuel-Reduction & Native Perennial Corridors',
+                    subHeading: 'Translating shapes into practical geography',
+                    technicalNote: 'Processed via: Regional Fire-Buffer & Watershed Guidelines',
+                    description: 'Our team takes the rough participant drawing and overlays real-world ecological constraints. The general boundary lines are turned into dedicated fire-buffer zones, paired with nectar-rich perennial planting corridors.'
+                },
+                {
+                    id: 3,
+                    shortName: 'CAD Schematic',
+                    tag: 'PHASE 3: TECHNICAL DRAFTING',
+                    emoji: '📐',
+                    visualIcon: '📐🏛️📍',
+                    stageLabel: 'Digital CAD Grid Architecture',
+                    visualSubtext: 'Precision square-foot scaling and layout specifications',
+                    visualHeadline: 'Professional Square-Foot Engineering Schematic',
+                    subHeading: 'Precise measurements and utility pathways',
+                    technicalNote: 'Validated via: Master Site Layout Framework',
+                    description: 'The concept moves into professional digital drafting software. Here, exact foot-by-foot measurements, water line placement, biochar staging paths, and companion planting layouts are precisely calculated.'
+                },
+                {
+                    id: 4,
+                    shortName: 'Master Plan',
+                    tag: 'PHASE 4: FINAL PRESENTATION',
+                    emoji: '🏛️',
+                    visualIcon: '🏛️📊🌲',
+                    stageLabel: 'Turnkey Master Plan View',
+                    visualHeadline: 'Completed Plan-View Blueprint & Field Deployment Ready',
+                    subHeading: 'Fully realized operational blueprint',
+                    technicalNote: 'Approved for: Landowner Review & Year-3 Cell Deployment',
+                    description: 'The final presentation-grade master plan view. This clean, blueprint-style layout is ready for institutional review, land trust grant qualification, and active deployment by a trained 5-person field team.'
+                }
+            ],
+            nextStage() {
+                this.currentStage = this.currentStage < 4 ? this.currentStage + 1 : 1;
+            },
+            prevStage() {
+                this.currentStage = this.currentStage > 1 ? this.currentStage - 1 : 4;
+            }
+        }
+    }
+</script>
+</body>
+</html>
