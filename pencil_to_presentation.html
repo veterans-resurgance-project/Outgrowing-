@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Outgrowing-Ag // Pencil-to-Presentation View Engine</title>
+    <title>Outgrowing-Ag // Veterans Resurgence Project</title>
     <!-- Tailwind CSS for styling -->
     <script src="https://tailwindcss.com"></script>
-    <!-- FIXED: Proper Alpine.js CDN link for reactive UI logic -->
+    <!-- Alpine.js for reactive UI logic -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Prevent Alpine flash on load -->
     <style>
@@ -18,57 +18,36 @@
     <!-- MASTER ENGINE CONFIGURATION ROOT -->
     <div class="max-w-6xl mx-auto p-6" x-data="sharedHarvestEngine()">
         
-        <!-- Header & Curriculum View Toggles -->
+        <!-- Header & View Toggles -->
         <header class="border-b border-slate-800 pb-6 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
                 <h1 class="text-3xl font-bold tracking-tight text-emerald-400">Outgrowing-Ag</h1>
-                <p class="text-slate-400 text-sm">Pencil-to-Presentation Curriculum: Turning Sketches into Turnkey On-Site Displays</p>
+                <p class="text-slate-400 text-sm">Veterans Resurgence Project // Turnkey On-Site Deployment Engine</p>
             </div>
-            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                <a href="outgrowing_ag_engine.html" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg border border-slate-700 transition whitespace-nowrap">
-                    &larr; Back to Micro-Farm Courses
-                </a>
-                <!-- The 4 Core Navigation Views Wired to activeView State -->
-                <div class="flex flex-wrap gap-2 bg-slate-800 p-1.5 rounded-lg border border-slate-700">
-                    <button @click="activeView = 'grid'" :class="activeView === 'grid' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-1.5 rounded-md text-xs font-medium transition">Phase 1: Grid Scaling</button>
-                    <button @click="activeView = 'digital'" :class="activeView === 'digital' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-1.5 rounded-md text-xs font-medium transition">Phase 2: Digital Drafting</button>
-                    <button @click="activeView = 'pitch'" :class="activeView === 'pitch' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-1.5 rounded-md text-xs font-medium transition">Phase 3: Pitch &amp; Buyout</button>
-                    <button @click="activeView = 'placard'" :class="activeView === 'placard' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-1.5 rounded-md text-xs font-medium transition">Phase 4: On-Site Placard</button>
-                </div>
+            <div class="flex flex-wrap gap-2 bg-slate-800 p-1.5 rounded-lg border border-slate-700">
+                <button @click="activeView = 'grid'" :class="activeView === 'grid' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-1.5 rounded-md text-xs font-medium transition">Phase 1: Grid Scaling</button>
+                <button @click="activeView = 'pitch'" :class="activeView === 'pitch' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-1.5 rounded-md text-xs font-medium transition">Phase 3: Cost-Plus Buyout</button>
+                <button @click="activeView = 'evolution'" :class="activeView === 'evolution' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-1.5 rounded-md text-xs font-medium transition">Visual Evolution</button>
             </div>
         </header>
 
-        <!-- PHASE 1: GRID SCALING VIEW -->
+        <!-- VIEW 1: GRID SCALING -->
         <div x-show="activeView === 'grid'" x-cloak class="space-y-6">
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-4">
                 <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">Phase 1: Hand Mapping</span>
                 <h2 class="text-2xl font-bold text-white">The Hand-Drawn Scaling Foundation</h2>
                 <p class="text-slate-300 text-sm leading-relaxed">
-                    Students translate their initial "pencil dream" concepts onto 1-inch scale grid paper. They plot out precise perimeter borders for a 1/8 acre or 1/4 acre initial lease. They integrate logistics curves, root nursery structures, and special product loading vectors before drawing lines onto real terrain.
-                </p>
-                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 border-dashed text-center text-slate-500 text-sm font-mono py-12">
-                    ✏️ [Interactive Scale Mapping Canvas Block Placement]
-                </div>
-            </div>
-        </div>
-
-        <!-- PHASE 2: DIGITAL DRAFTING VIEW -->
-        <div x-show="activeView === 'digital'" x-cloak class="space-y-6">
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-4">
-                <span class="text-xs font-mono text-sky-400 uppercase tracking-widest">Phase 2: CAD conversion</span>
-                <h2 class="text-2xl font-bold text-white">Converting Crayon Sketches to Professional Vectors</h2>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Here, raw drawing designs are cleaned and converted into digital layouts. This converts structural notes, water system lines, and equipment bays into sharp, presentation-ready vector assets that land trust evaluation boards look for.
+                    Translating initial field design concepts onto standardized grid layouts, mapping out fire buffers, biochar staging zones, and multi-track crop integration before laying out physical infrastructure.
                 </p>
             </div>
         </div>
 
-        <!-- PHASE 3: PITCH & BUYOUT VIEW WITH CLOSED-LOOP CALCULATORS -->
+        <!-- VIEW 2: COST-PLUS BUYOUT SIMULATOR -->
         <div x-show="activeView === 'pitch'" x-cloak class="space-y-6">
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
                 <div>
                     <h2 class="text-xl font-semibold mb-2 text-emerald-300">Cost-Plus System Buyout Simulator</h2>
-                    <p class="text-slate-400 text-sm">Model the Year-3 buyout option for a landowner taking over permanent operation of the established cell setup.</p>
+                    <p class="text-slate-400 text-sm">Model the Year-3 buyout option for landowners taking over permanent operation of the cell setup.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -92,45 +71,53 @@
                             <span class="text-xs font-mono text-emerald-400 uppercase">Year-3 Turnkey Valuation</span>
                             <h3 class="text-2xl font-bold text-white" x-text="formatCurrency(calculateTotalBuyout())"></h3>
                         </div>
-                        <span class="bg-emerald-950 text-emerald-400 border border-emerald-800 px-3 py-1 rounded-full text-xs font-semibold">Proof of Systems Design Verified</span>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-400">
-                        <div>Base Equipment: <strong class="text-slate-200" x-text="formatCurrency(equipmentCost)"></strong></div>
-                        <div>Labor Investment: <strong class="text-slate-200" x-text="formatCurrency(laborCost)"></strong></div>
-                        <div>System Margin (<span x-text="markupPercent + '%'"></span>): <strong class="text-slate-200" x-text="formatCurrency(calculateMarginAmount())"></strong></div>
+                        <span class="bg-emerald-950 text-emerald-400 border border-emerald-800 px-3 py-1 rounded-full text-xs font-semibold">Verified System Asset</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- PHASE 4: ON-SITE PLACARD VIEW -->
-        <div x-show="activeView === 'placard'" x-cloak class="space-y-6">
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
-                <div>
-                    <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Phase 4: Turnkey Handover Display</span>
-                    <h2 class="text-2xl font-bold text-white mt-1">Stacked Multi-Track System &amp; Blueprint Evolution</h2>
-                    <p class="text-slate-300 text-sm mt-1">
-                        When all tracks are deployed on the same site, they form a closed-loop ecosystem. Review your checkpoint presentation timelines below.
-                    </p>
-                </div>
-
-                <!-- VISUAL EVOLUTION ANIMATION PANEL -->
-                <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 shadow-inner space-y-6" x-data="sketchAnimation()">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
-                        <div>
-                            <h3 class="text-lg font-bold text-sky-400">🎨 Blueprint Evolution Model</h3>
-                            <p class="text-xs text-slate-400">Watch your initial pencil drawing transform step-by-step into a professional, audit-ready field asset layout.</p>
-                        </div>
-                        <button @click="cycleStage()" class="bg-sky-950 text-sky-400 border border-sky-800 px-4 py-1.5 rounded-lg text-xs font-semibold hover:bg-sky-900 transition">
-                            Advance Model View &rarr;
+        <!-- VIEW 3: VISUAL EVOLUTION ANIMATION (COMMIT DD33E5B INTEGRATED) -->
+        <div x-show="activeView === 'evolution'" x-cloak class="space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6" x-data="sketchAnimation()">
+                
+                <!-- Header & Step Controls -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-mono text-sky-400 uppercase tracking-widest" x-text="stages[currentStep - 1].tag"></span>
+                        <h2 class="text-xl font-bold text-white mt-1" x-text="stages[currentStep - 1].title"></h2>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button @click="prevStep()" class="bg-slate-900 text-slate-300 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-slate-700 transition">
+                            &larr; Prev Stage
+                        </button>
+                        <span class="text-xs font-mono text-slate-400 px-2" x-text="'Step ' + currentStep + ' of 4'"></span>
+                        <button @click="nextStep()" class="bg-sky-950 text-sky-400 border border-sky-800 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-sky-900 transition">
+                            Next Stage &rarr;
                         </button>
                     </div>
+                </div>
 
-                    <div class="bg-slate-900 p-8 rounded-xl border border-slate-800 text-center space-y-4">
-                        <span class="text-xs font-mono uppercase tracking-wider text-slate-500 block" x-text="'Active View Phase: ' + activePhaseIndex + ' / 3'"></span>
-                        <div class="text-xl font-bold text-slate-200 transition-all duration-300" x-text="phaseTitles[activePhaseIndex]"></div>
-                        <p class="text-sm text-slate-400 max-w-xl mx-auto" x-text="phaseDescriptions[activePhaseIndex]"></p>
+                <!-- Main Stage Card -->
+                <div class="bg-slate-900 p-8 rounded-xl border border-slate-800 space-y-6">
+                    <div class="flex items-center gap-4">
+                        <span class="text-4xl p-3 bg-slate-950 rounded-xl border border-slate-800" x-text="stages[currentStep - 1].emoji"></span>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-100" x-text="stages[currentStep - 1].subtext"></h3>
+                            <p class="text-xs font-mono text-emerald-400 mt-0.5" x-text="stages[currentStep - 1].pipelineNote"></p>
+                        </div>
                     </div>
+                    <p class="text-slate-300 text-sm leading-relaxed" x-text="stages[currentStep - 1].description"></p>
+                </div>
+
+                <!-- Progress Bar Indicators -->
+                <div class="grid grid-cols-4 gap-2 pt-2">
+                    <template x-for="stage in stages" :key="stage.tag">
+                        <button @click="currentStep = stage.step" 
+                                :class="currentStep === stage.step ? 'bg-sky-600 border-sky-500' : 'bg-slate-900 border-slate-700 opacity-60 hover:opacity-100'"
+                                class="h-2 rounded-full border transition-all">
+                        </button>
+                    </template>
                 </div>
 
             </div>
@@ -138,21 +125,17 @@
 
     </div>
 
-<!-- CLIENT-SIDE ALPINE DATA INJECTION SCRIPT -->
+<!-- CLIENT-SIDE APPLICATION LOGIC -->
 <script>
     function sharedHarvestEngine() {
         return {
-            activeView: 'grid',
+            activeView: 'evolution',
             equipmentCost: 4500,
             laborCost: 8200,
             markupPercent: 20,
-            calculateMarginAmount() {
-                let base = Number(this.equipmentCost) + Number(this.laborCost);
-                return base * (Number(this.markupPercent) / 100);
-            },
             calculateTotalBuyout() {
                 let base = Number(this.equipmentCost) + Number(this.laborCost);
-                return base + this.calculateMarginAmount();
+                return base + (base * (Number(this.markupPercent) / 100));
             },
             formatCurrency(val) {
                 if (isNaN(val)) return '$0.00';
@@ -163,19 +146,50 @@
 
     function sketchAnimation() {
         return {
-            activePhaseIndex: 1,
-            phaseTitles: {
-                1: "📝 Step 1: The Initial Pencil Sketch",
-                2: "📐 Step 2: Safety SOP & Matrix Overlay",
-                3: "🏛️ Step 3: Turnkey Board Presentation"
+            currentStep: 1,
+            stages: [
+                {
+                    step: 1,
+                    tag: 'STAGE 1: CONCEPTUALIZATION',
+                    emoji: '🖍️',
+                    title: 'The Childlike Crayon Sketch',
+                    subtext: 'Hand-drawn bee and rough perimeter line',
+                    description: 'The journey starts with a simple, imaginative crayon drawing by a participant. It captures the core desire: a friendly bee resting near a protective border, mapping out the initial concept without rigid constraints.',
+                    pipelineNote: 'Raw participant idea captured and submitted via the community challenge portal.'
+                },
+                {
+                    step: 2,
+                    tag: 'STAGE 2: INCUBATION',
+                    emoji: '🐝',
+                    title: 'The Bee & Fire Buffer Corridor',
+                    subtext: 'Translating shapes into practical ecosystem zones',
+                    description: 'The rough concept is evaluated by the team and merged with practical land requirements. The rough line becomes a designated fire-buffer fuel reduction zone packed with native, nectar-rich flowering perennials.',
+                    pipelineNote: 'Reviewed for ecological value and matched with the 3-year shared harvest framework.'
+                },
+                {
+                    step: 3,
+                    tag: 'STAGE 3: ARCHITECTURE',
+                    emoji: '📐',
+                    title: 'Professional Grid Design',
+                    subtext: 'Scaled square-foot drafting and layout specs',
+                    description: 'Using our digital drafting tools, the sketch is transformed into a clean, professional master schematic complete with exact foot-by-foot grid measurements, companion planting zones, and biochar staging paths.',
+                    pipelineNote: 'Drafted into presentation-ready documentation for landowner review and site sponsorship.'
+                },
+                {
+                    step: 4,
+                    tag: 'STAGE 4: DEPLOYMENT',
+                    emoji: '🌲',
+                    title: 'On-Site Fire Buffer Installation',
+                    subtext: 'Active 5-person cell execution along the forest edge',
+                    description: 'The completed system comes to life on the ground. A trained 5-person cell clears the slash, lays down biochar-amended soil, and establishes the flowering buffer along the forest boundary line ready for 3-year operation.',
+                    pipelineNote: 'Active operational cell deployed; ready for Year-3 cost-plus buyout evaluation.'
+                }
+            ],
+            nextStep() {
+                this.currentStep = this.currentStep < 4 ? this.currentStep + 1 : 1;
             },
-            phaseDescriptions: {
-                1: "Your initial creative concept mapped by hand on standard grid paper lines, identifying your primary project boundaries.",
-                2: "Adding technical details into the layout. Layering vehicle turning lanes, tool vaults, and water source lines cleanly.",
-                3: "The finished presentation layout. Bound with legal MOUs and land trust metrics to pass audit review boards easily."
-            },
-            cycleStage() {
-                this.activePhaseIndex = this.activePhaseIndex >= 3 ? 1 : this.activePhaseIndex + 1;
+            prevStep() {
+                this.currentStep = this.currentStep > 1 ? this.currentStep - 1 : 4;
             }
         }
     }
