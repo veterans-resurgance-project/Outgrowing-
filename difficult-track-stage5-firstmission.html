@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Stage 5: The Fire-Buffer Shock &amp; Freezing Line</title>
+    <script src="afti-core.js"></script>
+    <style>
+        :root { 
+            --bg-color: #0f172a; 
+            --card-bg: #1e293b; 
+            --text-color: #f8fafc; 
+            --primary: #27ae60; 
+            --hud-bg: #144d29; 
+            --accent: #38bdf8;
+            --warn: #f59e0b;
+            --danger: #ef4444;
+            --grey-slate: #334155;
+        }
+        body { 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: var(--bg-color); 
+            color: var(--text-color); 
+            padding: 40px 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            box-sizing: border-box;
+        }
+        .container { 
+            width: 100%; 
+            max-width: 840px; 
+            background: var(--card-bg); 
+            border-radius: 16px; 
+            padding: 40px; 
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+        .hud-bar { 
+            background: var(--hud-bg); 
+            border-radius: 8px; 
+            padding: 12px 20px; 
+            margin-bottom: 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            font-weight: bold; 
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95rem;
+        }
+        .story-image-slot { 
+            width: 100%; 
+            height: 220px; 
+            background: #0f172a; 
+            border-radius: 10px; 
+            border: 1px solid rgba(56,189,248,0.3); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin-bottom: 25px; 
+            color: #38bdf8;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .prose-block {
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+        .prose-block p {
+            margin-bottom: 18px;
+        }
+        .weather-alert {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid var(--danger);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .choices-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .choice-card {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            width: 100%;
+            color: inherit;
+            font-family: inherit;
+        }
+        .choice-card:hover {
+            border-color: var(--accent);
+            background: rgba(56, 189, 248, 0.03);
+            transform: translateY(-2px);
+        }
+        .choice-card h4 {
+            margin: 0 0 5px 0;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+        .choice-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+        .feedback-box {
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            line-height: 1.7;
+            display: none;
+            font-size: 1rem;
+        }
+        .feedback-correct {
+            background: rgba(39, 174, 96, 0.1);
+            border: 1px solid var(--primary);
+            color: #86efac;
+        }
+        .feedback-partial {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid var(--warn);
+            color: #fcd34d;
+        }
+        .feedback-fail {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--danger);
+            color: #fca5a5;
+        }
+        .btn-advance {
+            display: none;
+            background: var(--primary);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.05rem;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- GLOBAL HUD BAR -->
+    <div class="hud-bar">
+        <span>Path: <span id="hud-track" style="color: var(--accent);">Foster-Alum Track</span></span>
+        <div>
+            <span>Global XP: <span id="global-points" style="color: #4ade80;">450</span></span>
+            <button onclick="window.location.href='index.html'" style="margin-left: 15px; background: #334155; color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; cursor: pointer;">🏠 Exit</button>
+        </div>
+    </div>
+
+    <!-- STORY IMAGE SLOT -->
+    <div class="story-image-slot">
+        ❄️ [Illustration: A freezing storm rolling over a dark mountain orchard; drone lights pierce the sleet as a unified field team deploys strategic safety lines]
+    </div>
+
+    <h2 style="color: #fff; margin-top: 0; font-size: 1.6rem; margin-bottom: 15px;">Stage 5: The Fire-Buffer Shock &amp; Freezing Line</h2>
+
+    <div class="prose-block">
+        <p>The transition from the warmth of the Greenhouse Council room to the raw edge of the Willamette hillsides is immediate. Your cell stands at the perimeter of the historic wagon-train orchard. To your left, a massive wall of untamed forestry slash sits inside the critical fire-buffer zone. This debris is an open invitation for wildfire come summer, but right now, it is a frozen mass blocking local restoration efforts.</p>
+        <p>As you deploy the tool hitches, the temperature plunges. The gray horizon dissolves into a sudden, blinding front of freezing sleet. The wind starts shouting through the historic branches, threatening to coat the ancient bark in a destructive layer of heavy ice. Working as isolated individuals right now would guarantee frostbite, severe gear damage, and total logistical failure.</p>
+    </div>
+
+    <!-- TACTICAL ALERT MONITOR -->
+    <div class="weather-alert">
+        <h3 style="color: #f87171; margin-top: 0; font-size: 1.15rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+            ⚠️ Environmental Emergency Vector
+        </h3>
+        <p style="color: #fca5a5; margin: 0; font-size: 0.95rem; line-height: 1.6;">
+            Sleet is accumulating fast. Road networks out of the hills are freezing over. The ancient, acidic orchard floor faces structural tree limb snaps, and team communication lines are becoming unstable in the wind. How do you activate your squad's superpowers?
+        </p>
+    </div>
+
+    <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 15px;">Select Tactical Dispatch Strategy:</h3>
+
+    <!-- INTERACTIVE DECISION ARRAYS -->
+    <div class="choices-stack">
+        <!-- CRITICAL CALLOUT OPTION A -->
+        <button class="choice-card" onclick="processMissionChoice('A', 0)">
+            <h4>Strategy A: Separate to cover ground, speed up individual chainsaw logging, and push through the cold manually.</h4>
+            <p>Order the crew to push their physical limits, ignore the telemetry drops, and sprint to clear the fire slash before the roads lock out.</p>
+        </button>
+
+        <!-- CRITICAL CALLOUT OPTION B -->
+        <button class="choice-card" onclick="processMissionChoice('B', 25)">
+            <h4>Strategy B: Halt field logging operations entirely, load the crew into the transport vans, and wait out the sleet front.</h4>
+            <p>Abandon the buffer zone for the night, prioritize comfort, and plan to appeal to the land grant board for a deadline weather extension.</p>
+        </button>
+
+        <!-- CRITICAL CALLOUT OPTION C -->
+        <button class="choice-card" onclick="processMissionChoice('C', 50)">
+            <h4>Strategy C: Launch drone arrays, deploy Double-Buddy protocols, fire up mobile kilns, and execute wild forage emergency routing.</h4>
+            <p>Deploy Chris's drones to map branch weights. Run Marcus's van relays to prevent exposure. Feed wood slash directly into mobile kilns to generate raw shield heat. Have Elena read terrain lines to locate late-season winter yellowfoot chanterelles and hedgehog patches, securing legal transit logs before mountain roads freeze over entirely.</p>
+        </button>
+    </div>
+
+    <!-- DYNAMIC FEEDBACK OUTPUT CARD -->
+    <div class="feedback-box" id="mission-feedback-panel"></div>
+
+    <div style="text-align: center;">
+        <a href="difficult-track-stage5-manifest.html" class="btn-advance" id="advance-mission-btn">Proceed to Master State Ledger Verification &rarr;</a>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const activeTrackName = localStorage.getItem('afti_track_name') || 'Foster-Alum Track';
+        document.getElementById('hud-track').innerText = activeTrackName;
+        
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '450', 10);
+        document.getElementById('global-points').innerText = currentXP;
+    });
+
+    function processMissionChoice(choiceLetter, rewardedPoints) {
+        // Enforce state integrity by locking out decision matrices
+        const cards = document.querySelectorAll('.choice-card');
+        cards.forEach(card => card.disabled = true);
+
