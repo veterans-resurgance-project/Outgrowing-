@@ -8,15 +8,22 @@
     <script src="https://tailwindcss.com"></script>
     <!-- Alpine.js for reactive UI logic -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <!-- Prevent Alpine flash on load -->
+    <!-- CRITICAL FALLBACK: Ensures dark theme and layout hold even if CDN is blocked locally -->
     <style>
+        body {
+            background-color: #0f172a; /* bg-slate-900 */
+            color: #f1f5f9; /* text-slate-100 */
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen">
+<body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
 
     <!-- MASTER ENGINE CONFIGURATION ROOT -->
-    <div class="max-w-6xl mx-auto p-6" x-data="sharedHarvestEngine()">
+    <div class="max-w-6xl w-full mx-auto p-6 flex-grow flex flex-col" x-data="sharedHarvestEngine()">
         
         <!-- Header & View Toggles -->
         <header class="border-b border-slate-800 pb-6 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -32,7 +39,7 @@
         </header>
 
         <!-- VIEW 1: GRID SCALING -->
-        <div x-show="activeView === 'grid'" x-cloak class="space-y-6">
+        <div x-show="activeView === 'grid'" x-cloak class="space-y-6 flex-grow">
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-4">
                 <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">Phase 1: Hand Mapping</span>
                 <h2 class="text-2xl font-bold text-white">The Hand-Drawn Scaling Foundation</h2>
@@ -43,7 +50,7 @@
         </div>
 
         <!-- VIEW 2: COST-PLUS BUYOUT SIMULATOR -->
-        <div x-show="activeView === 'pitch'" x-cloak class="space-y-6">
+        <div x-show="activeView === 'pitch'" x-cloak class="space-y-6 flex-grow">
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
                 <div>
                     <h2 class="text-xl font-semibold mb-2 text-emerald-300">Cost-Plus System Buyout Simulator</h2>
@@ -77,37 +84,39 @@
             </div>
         </div>
 
-        <!-- VIEW 3: VISUAL EVOLUTION ANIMATION (COMMIT DD33E5B INTEGRATED) -->
-        <div x-show="activeView === 'evolution'" x-cloak class="space-y-6">
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6" x-data="sketchAnimation()">
+        <!-- VIEW 3: VISUAL EVOLUTION ANIMATION (Fills the bottom half of the page) -->
+        <div x-show="activeView === 'evolution'" x-cloak class="flex-grow flex flex-col space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6 flex-grow flex flex-col justify-between" x-data="sketchAnimation()">
                 
-                <!-- Header & Step Controls -->
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
-                    <div>
-                        <span class="text-xs font-mono text-sky-400 uppercase tracking-widest" x-text="stages[currentStep - 1].tag"></span>
-                        <h2 class="text-xl font-bold text-white mt-1" x-text="stages[currentStep - 1].title"></h2>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <button @click="prevStep()" class="bg-slate-900 text-slate-300 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-slate-700 transition">
-                            &larr; Prev Stage
-                        </button>
-                        <span class="text-xs font-mono text-slate-400 px-2" x-text="'Step ' + currentStep + ' of 4'"></span>
-                        <button @click="nextStep()" class="bg-sky-950 text-sky-400 border border-sky-800 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-sky-900 transition">
-                            Next Stage &rarr;
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Main Stage Card -->
-                <div class="bg-slate-900 p-8 rounded-xl border border-slate-800 space-y-6">
-                    <div class="flex items-center gap-4">
-                        <span class="text-4xl p-3 bg-slate-950 rounded-xl border border-slate-800" x-text="stages[currentStep - 1].emoji"></span>
+                <div>
+                    <!-- Header & Step Controls -->
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
                         <div>
-                            <h3 class="text-lg font-bold text-slate-100" x-text="stages[currentStep - 1].subtext"></h3>
-                            <p class="text-xs font-mono text-emerald-400 mt-0.5" x-text="stages[currentStep - 1].pipelineNote"></p>
+                            <span class="text-xs font-mono text-sky-400 uppercase tracking-widest" x-text="stages[currentStep - 1].tag"></span>
+                            <h2 class="text-xl font-bold text-white mt-1" x-text="stages[currentStep - 1].title"></h2>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button @click="prevStep()" class="bg-slate-900 text-slate-300 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-slate-700 transition">
+                                &larr; Prev Stage
+                            </button>
+                            <span class="text-xs font-mono text-slate-400 px-2" x-text="'Step ' + currentStep + ' of 4'"></span>
+                            <button @click="nextStep()" class="bg-sky-950 text-sky-400 border border-sky-800 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-sky-900 transition">
+                                Next Stage &rarr;
+                            </button>
                         </div>
                     </div>
-                    <p class="text-slate-300 text-sm leading-relaxed" x-text="stages[currentStep - 1].description"></p>
+
+                    <!-- Main Stage Card (Expanded height for bottom-half immersion) -->
+                    <div class="bg-slate-900 p-8 rounded-xl border border-slate-800 space-y-6 my-6 min-h-[260px] flex flex-col justify-center">
+                        <div class="flex items-center gap-4">
+                            <span class="text-4xl p-3 bg-slate-950 rounded-xl border border-slate-800" x-text="stages[currentStep - 1].emoji"></span>
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-100" x-text="stages[currentStep - 1].subtext"></h3>
+                                <p class="text-xs font-mono text-emerald-400 mt-0.5" x-text="stages[currentStep - 1].pipelineNote"></p>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed" x-text="stages[currentStep - 1].description"></p>
+                    </div>
                 </div>
 
                 <!-- Progress Bar Indicators -->
