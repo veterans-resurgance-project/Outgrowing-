@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic &amp; Soil Science - AFTI Training</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --primary: #27ae60;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --hud-bg: #144d29;
+            --blue-accent: #38bdf8;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        nav {
+            background: #144d29;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        nav a.active { color: #fff; font-weight: 700; border-bottom: 2px solid var(--primary); padding-bottom: 2px; }
+
+        .page-wrapper {
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 950px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            padding: 30px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+        p, li {
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .module-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn-action {
+            background-color: #334155;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn-action:hover {
+            background-color: var(--primary);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #38bdf8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
+    <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
+    <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+      <a href="index.html">Home</a>
+      <a href="training-modules-and-mutual-growth.html" class="active">Training & Certification</a>
+      <a href="partners.html">Partners</a>
+      <a href="shared-harvest.html">Shared Harvest</a>
+      <a href="incubator-hub.html" style="color: var(--accent); font-weight: 600;">🌱 Incubator Launchpad</a>
+      <a href="technical-tutorials.html" style="color: var(--accent); font-weight: 600;">🔨 Technical Bank</a>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="container">
+      
+      <a href="training-modules-and-mutual-growth.html" class="back-link">&larr; Back to Training Command Center</a>
+
+      <span style="background:rgba(39,174,96,0.15); color:var(--primary); font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; display:inline-block; margin-bottom:1rem;">Institutional Track</span>
+      
+      <h1>🧪 Academic &amp; Soil Science</h1>
+      <p style="margin-bottom: 30px;">
+          This track bridges grassroots field application with empirical agricultural science. Trainees learn to analyze regional soil profiles, conduct structured diagnostics, and apply biological soil restoration protocols aligned with extension research standards.
+      </p>
+
+      <h3 style="color: #f8fafc; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-top: 30px;">Core Curriculum Modules</h3>
+
+      <!-- MODULE 1 -->
+      <div class="module-card">
+          <div style="max-width: 600px;">
+              <h4 style="margin: 0 0 5px 0; color: var(--primary); font-size: 1.1rem;">Module 201: Clay Profile Diagnostics &amp; Compaction Analysis</h4>
+              <p style="margin: 0; font-size: 0.9rem;">Examine heavily compacted sub-soils, test structural aggregate stability, and measure bulk density across regional test plots.</p>
+          </div>
+          <a href="#" class="btn-action">Start Module →</a>
+      </div>
+
+      <!-- MODULE 2 -->
+      <div class="module-card">
+          <div style="max-width: 600px;">
+              <h4 style="margin: 0 0 5px 0; color: var(--primary); font-size: 1.1rem;">Module 202: pH Balancing &amp; Nutrient Cycling Protocols</h4>
+              <p style="margin: 0; font-size: 0.9rem;">Learn titration methods, organic amendment calculations, and soil microbe stimulation to restore optimal nutrient exchange capacity.</p>
+          </div>
+          <a href="#" class="btn-action">Start Module →</a>
+      </div>
+
+      <!-- MODULE 3 -->
+      <div class="module-card">
+          <div style="max-width: 600px;">
+              <h4 style="margin: 0 0 5px 0; color: var(--primary); font-size: 1.1rem;">Module 203: Living Laboratory Data Logging &amp; Reporting</h4>
+              <p style="margin: 0; font-size: 0.9rem;">Master the documentation standards required to contribute valid field telemetry back to academic extension partners.</p>
+          </div>
+          <a href="#" class="btn-action">Start Module →</a>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
