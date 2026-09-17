@@ -273,7 +273,92 @@
                         <div>System Margin (<span x-text="markupPercent + '%'"></span>): <strong class="text-slate-200" x-text="formatCurrency(markupAmount)"></strong></div>
                     </div>
                 </div>
+               <!-- VIEW 4: STACKED MULTI-TRACK SYSTEM -->
+        <div x-show="activeView === 'stacked'" x-cloak class="space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
+                <div>
+                    <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest">Regenerative Synergy Architecture</span>
+                    <h2 class="text-2xl font-bold text-white mt-1">Stacked Multi-Track System & Closed-Loop Economics</h2>
+                    <p class="text-slate-300 text-sm mt-1">
+                        When all three tracks (Pollinators, Mushrooms, and Flowers) are deployed on the same site, they form a closed-loop ecosystem. Waste streams become high-value inputs, cutting total setup labor by 25% and maximizing net returns per acre.
+                    </p>
+                </div>
 
+                <!-- Closed-Loop Flow Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+                        <span class="text-amber-400 font-bold text-sm block">1. Zone 1: Perimeter Fire Buffer</span>
+                        <p class="text-xs text-slate-400">Clearing brush creates safety lines while generating raw woody biomass and carbon for biochar kilns.</p>
+                        <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded inline-block font-mono">Feeds Track 2 (Mushrooms)</span>
+                    </div>
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+                        <span class="text-purple-400 font-bold text-sm block">2. Zone 2: Myco-Understory</span>
+                        <p class="text-xs text-slate-400">Wood-chip and log beds convert clearing debris into high-value gourmet mushroom flushes.</p>
+                        <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded inline-block font-mono">Feeds Track 3 (Flowers)</span>
+                    </div>
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+                        <span class="text-pink-400 font-bold text-sm block">3. Zone 3: Intensive Flower Core</span>
+                        <p class="text-xs text-slate-400">Spent mushroom substrate enriches soil beds for high-density cut flowers shielded by perimeter pollinators.</p>
+                        <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded inline-block font-mono">Closed-Loop Complete</span>
+                    </div>
+                </div>
+
+                <!-- Combined Economic & Buyout Simulator -->
+                <div class="bg-slate-900 border border-slate-700 rounded-xl p-6 space-y-6" x-data="stackedSystemEngine()">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-emerald-300">Unified System Revenue & Year-3 Buyout Calculator</h3>
+                            <p class="text-xs text-slate-400">Simulate the combined operational output, total seasonal yield, and turnkey buyout valuation for all three tracks stacked together.</p>
+                        </div>
+                        <span class="bg-emerald-950 text-emerald-400 border border-emerald-800 px-3 py-1 rounded-full text-xs font-semibold">
+                            25% Labor Efficiency Gain
+                        </span>
+                    </div>
+
+                    <!-- Input Controls -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                            <label class="block text-xs font-semibold text-slate-400 uppercase">Shared Equipment Base ($)</label>
+                            <input type="number" x-model.number="stackedEquipment" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-emerald-500 text-sm">
+                            <p class="text-[11px] text-slate-500">Kilns, shared drip grid, wash stations, tool caches.</p>
+                        </div>
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                            <label class="block text-xs font-semibold text-slate-400 uppercase">3-Year Setup & Labor Value ($)</label>
+                            <input type="number" x-model.number="stackedLaborValue" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-emerald-500 text-sm">
+                            <p class="text-[11px] text-slate-500">Optimized cell establishment hours (115 setup hrs total).</p>
+                        </div>
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                            <label class="block text-xs font-semibold text-slate-400 uppercase">Annual Combined Gross Revenue ($)</label>
+                            <input type="number" x-model.number="annualRevenue" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-emerald-500 text-sm">
+                            <p class="text-[11px] text-slate-500">Combined baseline yield across all 3 tracks (~$22,500/yr).</p>
+                        </div>
+                    </div>
+
+                    <!-- Financial Summary Readout -->
+                    <div class="bg-slate-950 border border-emerald-500/50 rounded-xl p-6 space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center border-b border-slate-800 pb-4">
+                            <div>
+                                <span class="text-xs font-mono text-emerald-400 uppercase">Total 3-Year System Revenue</span>
+                                <h4 class="text-2xl font-bold text-white mt-0.5" x-text="formatCurrency(annualRevenue * 3)"></h4>
+                                <p class="text-xs text-slate-400 mt-1">Shared harvest returns distributed across the 3-year incubation lifecycle.</p>
+                            </div>
+                            <div class="md:text-right">
+                                <span class="text-xs font-mono text-amber-400 uppercase">Year-3 Turnkey Buyout Cost</span>
+                                <h4 class="text-2xl font-bold text-white mt-0.5" x-text="formatCurrency(totalStackedBuyout)"></h4>
+                                <p class="text-xs text-slate-400 mt-1">Cost-plus acquisition for landowner permanent adoption.</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-400">
+                            <div>Combined Setup & Materials: <strong class="text-slate-200" x-text="formatCurrency(stackedEquipment)"></strong></div>
+                            <div>Cumulative Labor Investment: <strong class="text-slate-200" x-text="formatCurrency(stackedLaborValue)"></strong></div>
+                            <div>System Engineering Margin (20%): <strong class="text-slate-200" x-text="formatCurrency((stackedEquipment + stackedLaborValue) * 0.20)"></strong></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
                 <!-- VISUAL EVOLUTION ANIMATION: CRAYON SKETCH TO REAL-WORLD DEPLOYMENT -->
                 <div class="mt-8 bg-slate-950 border border-slate-800 rounded-xl p-6 shadow-inner space-y-6" x-data="sketchAnimation()">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
