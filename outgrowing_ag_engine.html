@@ -1,184 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Outgrowing-Ag Engine // AFTI Portal</title>
-<!-- Tailwind CSS for utility styling -->
-<script src="https://cdn.tailwindcss.com"></script>
-<!-- Alpine.js for interactive state -->
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-<style>
-:root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --grey:#334155; --nav-bg:#144d29; --accent:#38bdf8; }
-body { font-family:system-ui,-apple-system,sans-serif; background:var(--bg); color:#fff; margin:0; padding:0; }
-nav { background:var(--nav-bg); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); flex-wrap:wrap; gap:1rem; }
-nav a { color:#cbd5e1; text-decoration:none; font-weight:500; font-size:0.95rem; }
-nav a.active { color:#fff; font-weight:700; border-bottom:2px solid var(--primary); padding-bottom:2px; }
-main { max-width:950px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box; }
-.block { background:var(--card); padding:2.5rem; border-radius:16px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 10px 30px rgba(0,0,0,0.4); margin-bottom:2.5rem; }
-[x-cloak] { display: none !important; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outgrowing-Ag Workforce Architecture & Dynamic Cell-Matching Platform</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for reactive UI logic -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen">
 
-<!-- EXACT WORKING SITE NAVIGATION BAR -->
-<nav>
-<div style="font-weight:900; font-size:1.25rem; color:#fff;">AFTI Portal</div>
-<div style="display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap;">
-<a href="index.html">Home</a>
-<a href="training-modules-and-mutual-growth.html">Training &amp; Certification</a>
-<a href="partners.html">For Farmers</a>
-<a href="shared-harvest.html">Shared Harvest</a>
-<a href="incubator.html">Incubator</a>
-<a href="newsletter.html">Newsletter</a>
-<a href="gallery.html">Gallery</a>
-<a href="how-to-help.html">How to Help</a>
-<a href="water-rights.html">Water Rights</a>
-<a href="equipment-sops.html">Equipment SOPs</a>
-<a href="soil-fertility.html">Soil Fertility</a>
-<a href="shared_harvest_incubator.html">shared technology</a>
-<a href="pencil_to_presentation.html">Design Studio</a>
-<a href="micro_farm_courses.html">Micro Farm</a>
-<a href="shared_harvest_incubator.html">Shared Harvest Design Studio</a>
-<a href="outgrowing_ag_engine.html" class="active">Outgrowing-Ag Engine</a>
-</div>
-</nav>
-
-<!-- MAIN CONTENT WRAPPED IN YOUR STANDARD .BLOCK CONTAINER -->
-<main>
-<div class="block" x-data="sketchAnimation()">
-    
-    <!-- Header / Title inside the block -->
-    <div class="border-b border-white/10 pb-4 mb-6">
-        <span style="background:rgba(39,174,96,0.15); color:#27ae60; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; display:inline-block; margin-bottom:0.75rem;">Visual System Realization</span>
-        <h1 style="font-size:2.2rem; font-weight:900; margin:0; letter-spacing:-0.5px;">Outgrowing-Ag Step-by-Step Evolution</h1>
-        <p style="font-size:1.05rem; color:#cbd5e1; margin-top:0.5rem;">Follow the progression from initial crayon concept sketches to active 5-person field deployment cells.</p>
-    </div>
-
-    <!-- Animation Stage Controls & Header -->
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-white/10 pb-5 mb-6">
-        <div>
-            <span class="text-xs md:text-sm font-mono text-[#38bdf8] uppercase tracking-widest font-bold" x-text="stages[currentStep - 1].tag"></span>
-            <h2 class="text-xl md:text-2xl font-bold text-white mt-1" x-text="stages[currentStep - 1].title"></h2>
-        </div>
-        <div class="flex items-center gap-3 bg-[#0f172a] p-2 rounded-xl border border-white/10 shadow">
-            <button @click="prevStep()" class="bg-[#1e293b] text-white border border-white/20 px-4 py-2 rounded-lg text-sm font-bold hover:bg-slate-700 transition">
-                &larr; Prev Stage
-            </button>
-            <span class="text-sm font-mono text-slate-300 px-3 font-bold" x-text="'Stage ' + currentStep + ' of 4'"></span>
-            <button @click="nextStep()" class="bg-[#144d29] text-[#38bdf8] border border-[#38bdf8]/30 px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-900 transition">
-                Next Stage &rarr;
-            </button>
-        </div>
-    </div>
-
-    <!-- EXPANDED LARGE-FORMAT VISUAL IMAGE / ICON BOX -->
-    <div class="bg-[#0f172a] border border-white/10 rounded-2xl p-12 flex flex-col items-center justify-center min-h-[400px] relative overflow-hidden shadow-2xl mb-6">
-        <div class="text-center space-y-5 transition-all duration-300">
-            <!-- Large Clear Emoji/Visual Graphic -->
-            <span class="text-8xl md:text-9xl block transform hover:scale-105 transition-transform duration-300 drop-shadow-xl" x-text="stages[currentStep - 1].visualIcon"></span>
-            
-            <!-- Category Badge -->
-            <div class="text-xs md:text-sm font-mono text-[#27ae60] uppercase tracking-wider bg-[#1e293b] px-5 py-2 rounded-full border border-white/10 inline-block font-bold shadow" x-text="stages[currentStep - 1].visualLabel"></div>
-            
-            <!-- Clear Subtext Description -->
-            <p class="text-base text-slate-300 italic max-w-lg mx-auto leading-relaxed" x-text="stages[currentStep - 1].visualSubtext"></p>
-        </div>
+    <div class="max-w-6xl mx-auto p-6" x-data="workforceEngine()">
         
-        <!-- Watermark ID -->
-        <div class="absolute bottom-3 right-4 text-xs font-mono text-slate-500 tracking-wider">
-            <span x-text="'RENDER_ID: STAGE_0' + currentStep + '_HIGH_RES'"></span>
-        </div>
-    </div>
-
-    <!-- COMFORTABLE, READABLE NARRATIVE CARD -->
-    <div class="bg-[#0f172a] p-6 md:p-8 rounded-2xl border border-white/10 space-y-4 shadow-md mb-6">
-        <div class="flex items-center gap-4">
-            <span class="text-3xl p-3.5 bg-[#1e293b] rounded-xl border border-white/10 shadow" x-text="stages[currentStep - 1].emoji"></span>
+        <!-- Header -->
+        <header class="border-b border-slate-800 pb-6 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-                <h3 class="text-base md:text-lg font-bold text-slate-100" x-text="stages[currentStep - 1].subtext"></h3>
-                <p class="text-xs md:text-sm font-mono text-[#27ae60] mt-0.5 font-bold" x-text="stages[currentStep - 1].pipelineNote"></p>
+                <h1 class="text-3xl font-bold tracking-tight text-emerald-400">Outgrowing-Ag</h1>
+                <p class="text-slate-400 text-sm">Workforce Architecture & Dynamic Cell-Matching Platform</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="landing.html" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg border border-slate-700 transition">
+                    &larr; Back to Overview
+                </a>
+                <div class="flex flex-wrap gap-2 bg-slate-800 p-1.5 rounded-lg border border-slate-700">
+                    <button @click="activeTab = 'intake'" :class="activeTab === 'intake' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-2 rounded-md text-sm font-medium transition">Participant Intake</button>
+                    <button @click="activeTab = 'wishlist'" :class="activeTab === 'wishlist' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-2 rounded-md text-sm font-medium transition">Partner Job Portal</button>
+                    <button @click="activeTab = 'dashboard'" :class="activeTab === 'dashboard' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-2 rounded-md text-sm font-medium transition">Cell Matching Dashboard</button>
+                    <button @click="activeTab = 'prospectView'" :class="activeTab === 'prospectView' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="px-3 py-2 rounded-md text-sm font-medium transition">Prospect Gap Analyzer</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- TAB 1: PARTICIPANT INTAKE & FAST-TRACK CHECKLIST -->
+        <div x-show="activeTab === 'intake'" class="space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg">
+                <h2 class="text-xl font-semibold mb-2 text-emerald-300">Participant Onboarding & Skills Checklist</h2>
+                <p class="text-slate-400 text-sm mb-6">Check off areas where you already hold verifiable experience. Bypassing baseline modules places you directly into fast-track specialist consideration or co-leadership pipelines.</p>
+                
+                <form @submit.prevent="submitParticipant" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Full Name</label>
+                            <input type="text" x-model="newParticipant.name" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500" placeholder="e.g., Jane Doe">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Primary Track Interest</label>
+                            <select x-model="newParticipant.track" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500">
+                                <option value="Harvest">Harvest & Yield Operations</option>
+                                <option value="Nursery">Nursery & Propagation</option>
+                                <option value="Specialized">Specialized Agriculture (Mushrooms/Floral)</option>
+                                <option value="Restoration">Watershed & Environmental Restoration</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Master Skill Checklist -->
+                    <div class="border-t border-slate-700 pt-4">
+                        <label class="block text-sm font-semibold text-emerald-400 mb-3">Master Competency Checklist (Select all you can execute independently):</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <template x-for="skill in masterSkills" :key="skill">
+                                <label class="flex items-start gap-3 bg-slate-900 p-3 rounded-lg border border-slate-700 cursor-pointer hover:border-slate-600">
+                                    <input type="checkbox" :value="skill" x-model="newParticipant.skills" class="mt-1 h-4 w-4 rounded bg-slate-800 border-slate-600 text-emerald-500 focus:ring-emerald-500">
+                                    <span class="text-sm text-slate-300" x-text="skill"></span>
+                                </label>
+                            </template>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-3 rounded-lg transition shadow-md">Register & Generate Profile Matrix</button>
+                </form>
             </div>
         </div>
-        <p class="text-slate-300 text-base leading-relaxed" x-text="stages[currentStep - 1].description"></p>
+
+        <!-- TAB 2: EMPLOYER WISH LIST DATABASE -->
+        <div x-show="activeTab === 'wishlist'" class="space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg">
+                <h2 class="text-xl font-semibold mb-2 text-emerald-300">Employer Wish List & Job Qualification Builder</h2>
+                <p class="text-slate-400 text-sm mb-6">Define commercial positions by linking them directly to required master competencies. This generates the exact criteria prospects use to evaluate their readiness.</p>
+                
+                <form @submit.prevent="submitWishJob" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Employer / Partner Name</label>
+                            <input type="text" x-model="newWishJob.partnerName" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500" placeholder="e.g., Valley Nursery Corp">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Position / Role Title</label>
+                            <input type="text" x-model="newWishJob.title" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500" placeholder="e.g., Propagation Tech Cell Lead">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Deployment Model</label>
+                            <select x-model="newWishJob.deploymentType" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500">
+                                <option value="Standard 5-Person Cell">Standard 5-Person Cell</option>
+                                <option value="Specialist Co-Leader Integration">Specialist Co-Leader Integration</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Required Skills Wish List Selection -->
+                    <div class="border-t border-slate-700 pt-4">
+                        <label class="block text-sm font-semibold text-emerald-400 mb-3">Employer Wish List Requirements (Select all required for this role):</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <template x-for="skill in masterSkills" :key="skill">
+                                <label class="flex items-start gap-3 bg-slate-900 p-3 rounded-lg border border-slate-700 cursor-pointer hover:border-slate-600">
+                                    <input type="checkbox" :value="skill" x-model="newWishJob.requiredSkills" class="mt-1 h-4 w-4 rounded bg-slate-800 border-slate-600 text-emerald-500 focus:ring-emerald-500">
+                                    <span class="text-sm text-slate-300" x-text="skill"></span>
+                                </label>
+                            </template>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-3 rounded-lg transition shadow-md">Publish to Employer Wish List Database</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- TAB 3: CELL MATCHING DASHBOARD -->
+        <div x-show="activeTab === 'dashboard'" class="space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Participants List -->
+                <div class="bg-slate-800 border border-slate-700 rounded-xl p-6">
+                    <h3 class="text-lg font-semibold mb-4 text-emerald-300 flex justify-between items-center">
+                        <span>Registered Roster / Waitlist</span>
+                        <span class="text-xs bg-slate-900 px-2.5 py-1 rounded-full text-slate-400 border border-slate-700" x-text="participants.length + ' Profiles'"></span>
+                    </h3>
+                    <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
+                        <template x-for="p in participants" :key="p.name">
+                            <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 space-y-2">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-medium text-white" x-text="p.name"></h4>
+                                    <span class="text-xs bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded border border-emerald-800" x-text="p.track"></span>
+                                </div>
+                                <div class="text-xs text-slate-400 flex flex-wrap gap-1">
+                                    <span class="font-semibold text-slate-300">Checked Skills:</span>
+                                    <template x-for="skill in p.skills">
+                                        <span class="bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded border border-slate-700" x-text="skill"></span>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Employer Wish List Roles -->
+                <div class="bg-slate-800 border border-slate-700 rounded-xl p-6">
+                    <h3 class="text-lg font-semibold mb-4 text-emerald-300 flex justify-between items-center">
+                        <span>Active Employer Wish List Jobs</span>
+                        <span class="text-xs bg-slate-900 px-2.5 py-1 rounded-full text-slate-400 border border-slate-700" x-text="wishJobs.length + ' Listings'"></span>
+                    </h3>
+                    <div class="space-y-4 max-h-96 overflow-y-auto pr-2">
+                        <template x-for="job in wishJobs" :key="job.title">
+                            <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 space-y-3">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-medium text-white" x-text="job.title"></h4>
+                                        <p class="text-xs text-slate-400" x-text="'Partner: ' + job.partnerName"></p>
+                                    </div>
+                                    <span class="text-xs bg-indigo-950 text-indigo-400 px-2 py-0.5 rounded border border-indigo-800" x-text="job.deploymentType"></span>
+                                </div>
+                                <div class="text-xs bg-slate-800 p-2.5 rounded border border-slate-700 space-y-1">
+                                    <span class="text-emerald-400 font-semibold block">Wish List Requirements:</span>
+                                    <div class="flex flex-wrap gap-1">
+                                        <template x-for="req in job.requiredSkills">
+                                            <span class="bg-slate-900 text-slate-300 px-1.5 py-0.5 rounded border border-slate-700" x-text="req"></span>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: PROSPECT GAP ANALYZER -->
+        <div x-show="activeTab === 'prospectView'" class="space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg space-y-6">
+                <div>
+                    <h2 class="text-xl font-semibold mb-2 text-emerald-300">Prospect Qualification & Gap Analyzer</h2>
+                    <p class="text-slate-400 text-sm">Select a participant profile to instantly audit their status against active employer wish list jobs. See what they match and what specific competencies they still need ("needs x").</p>
+                </div>
+
+                <!-- Selection Controls -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Select Prospect / Participant</label>
+                        <select x-model="selectedProspectName" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500">
+                            <option value="">-- Choose Prospect --</option>
+                            <template x-for="p in participants" :key="p.name">
+                                <option :value="p.name" x-text="p.name + ' (' + p.track + ')'"></option>
+                            </template>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Select Target Employer Job</label>
+                        <select x-model="selectedJobTitle" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500">
+                            <option value="">-- Choose Employer Job --</option>
+                            <template x-for="j in wishJobs" :key="j.title">
+                                <option :value="j.title" x-text="j.title + ' [' + j.partnerName + ']'"></option>
+                            </template>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Audit Results Display -->
+                <template x-if="selectedProspect && selectedJob">
+                    <div class="bg-slate-900 border border-slate-700 rounded-xl p-6 space-y-6">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
+                            <div>
+                                <h3 class="text-lg font-bold text-white" x-text="'Audit Report for ' + selectedProspect.name"></h3>
+                                <p class="text-sm text-slate-400" x-text="'Target Role: ' + selectedJob.title + ' (' + selectedJob.partnerName + ')'"></p>
+                            </div>
+                            <div>
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold border"
+                                      :class="calculateMatches(selectedProspect, selectedJob).missing.length === 0 ? 'bg-emerald-950 text-emerald-400 border-emerald-800' : 'bg-amber-950 text-amber-400 border-amber-800'"
+                                      x-text="calculateMatches(selectedProspect, selectedJob).missing.length === 0 ? 'FULLY QUALIFIED (Ready to Deploy)' : 'SKILL GAP DETECTED (Needs X Training)'">
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Qualified / Met Skills -->
+                            <div class="space-y-2">
+                                <h4 class="text-sm font-semibold text-emerald-400">✓ Requirements Met (Already Verified):</h4>
+                                <div class="space-y-2">
+                                    <template x-for="match in calculateMatches(selectedProspect, selectedJob).matched">
+                                        <div class="bg-slate-800 p-3 rounded-lg border border-slate-700 text-sm text-slate-200 flex items-center justify-between">
+                                            <span x-text="match"></span>
+                                            <span class="text-xs bg-emerald-900 text-emerald-300 px-2 py-0.5 rounded">Matched</span>
+                                        </div>
+                                    </template>
+                                    <div x-show="calculateMatches(selectedProspect, selectedJob).matched.length === 0" class="text-xs text-slate-500 italic p-2">None of the employer's requirements met yet.</div>
+                                </div>
+                            </div>
+
+                            <!-- Missing Skills ("Needs X") -->
+                            <div class="space-y-2">
+                                <h4 class="text-sm font-semibold text-amber-400">⚠ Requirements Missing (Needs X):</h4>
+                                <div class="space-y-2">
+                                    <template x-for="miss in calculateMatches(selectedProspect, selectedJob).missing">
+                                        <div class="bg-slate-800 p-3 rounded-lg border border-slate-700 text-sm text-slate-200 flex items-center justify-between">
+                                            <span x-text="miss"></span>
+                                            <span class="text-xs bg-amber-900 text-amber-300 px-2 py-0.5 rounded">Needs Module</span>
+                                        </div>
+                                    </template>
+                                    <div x-show="calculateMatches(selectedProspect, selectedJob).missing.length === 0" class="text-xs text-emerald-500 italic p-2">Zero gaps! Prospect is cleared for deployment.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                
+                <div x-show="!selectedProspect || !selectedJob" class="text-center text-slate-500 py-8 border border-dashed border-slate-700 rounded-xl">
+                    Please select both a prospect and an employer job above to generate the live audit report.
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- PROGRESS BAR INDICATOR TABS -->
-    <div class="grid grid-cols-4 gap-3 pt-2">
-        <template x-for="stage in stages" :key="stage.tag">
-            <button @click="currentStep = stage.step" 
-                    :class="currentStep === stage.step ? 'bg-[#38bdf8] border-[#38bdf8] shadow-lg' : 'bg-[#0f172a] border-white/20 opacity-50 hover:opacity-100'"
-                    class="h-3.5 rounded-full border transition-all">
-            </button>
-        </template>
-    </div>
-
-</div>
-</main>
-
-<!-- ALPINE.JS LOGIC SCRIPT -->
-<script>
-    function sketchAnimation() {
-        return {
-            currentStep: 1,
-            stages: [
-                {
-                    step: 1,
-                    tag: 'STAGE 1: CONCEPTUALIZATION',
-                    emoji: '🖍️',
-                    visualIcon: '🖍️🐝📄',
-                    visualLabel: 'Crayon & Paper Concept Board',
-                    visualSubtext: 'Initial freeform participant drawing featuring rough outlines, honeybee placement, and boundary concepts.',
-                    title: 'The Childlike Crayon Sketch',
-                    subtext: 'Hand-drawn bee and rough perimeter line',
-                    description: 'The journey starts with a simple, imaginative crayon drawing by a participant. It captures the core desire: a friendly bee resting near a protective border, mapping out the initial concept without rigid constraints.',
-                    pipelineNote: 'Raw participant idea captured and submitted via community framework.'
-                },
-                {
-                    step: 2,
-                    tag: 'STAGE 2: INCUBATION',
-                    emoji: '🐝',
-                    visualIcon: '🗺️🌱🔥',
-                    visualLabel: 'Ecosystem & Fire Corridor Map',
-                    visualSubtext: 'Overlaying fuel-reduction boundaries, tool staging zones, and native nectar-rich perennial corridors.',
-                    title: 'The Bee & Fire Buffer Corridor',
-                    subtext: 'Translating shapes into practical ecosystem zones',
-                    description: 'The rough concept is evaluated by the team and merged with practical land requirements. The rough line becomes a designated fire-buffer fuel reduction zone packed with native, nectar-rich flowering perennials.',
-                    pipelineNote: 'Reviewed for ecological value and matched with the 3-year shared harvest framework.'
-                },
-                {
-                    step: 3,
-                    tag: 'STAGE 3: ARCHITECTURE',
-                    emoji: '📐',
-                    visualIcon: '📐🏛️📍',
-                    visualLabel: 'CAD Master Schematic Blueprint',
-                    visualSubtext: 'Precision square-foot grid design complete with water lines, safety zones, and biochar staging paths.',
-                    title: 'Professional Grid Design',
-                    subtext: 'Scaled square-foot drafting and layout specs',
-                    description: 'Using our digital drafting tools, the sketch is transformed into a clean, professional master schematic complete with exact foot-by-foot grid measurements, companion planting zones, and biochar staging paths.',
-                    pipelineNote: 'Drafted into presentation-ready documentation for landowner review and site sponsorship.'
-                },
-                {
-                    step: 4,
-                    tag: 'STAGE 4: DEPLOYMENT',
-                    emoji: '🌲',
-                    visualIcon: '🌲🏡🌻',
-                    visualLabel: 'Turnkey Field Operation Display',
-                    visualSubtext: 'Fully established 5-person cell deployment along the forest boundary line with thriving biochar beds.',
-                    title: 'On-Site Fire Buffer Installation',
-                    subtext: 'Active 5-person cell execution along the forest edge',
-                    description: 'The completed system comes to life on the ground. A trained 5-person cell clears the slash, lays down biochar-amended soil, and establishes the flowering buffer along the forest boundary line ready for 3-year operation.',
-                    pipelineNote: 'Active operational cell deployed; ready for Year-3 cost-plus buyout evaluation.'
-                }
-            ],
-            nextStep() {
-                this.currentStep = this.currentStep < 4 ? this.currentStep + 1 : 1;
-            },
-            prevStep() {
-                this.currentStep = this.currentStep > 1 ? this.currentStep - 1 : 4;
-            }
-        }
-    }
-</script>
-</body>
-</html>
+    <!-- Alpine.js Application State & Logic -->
+    <script>
+        function workforceEngine() {
+            return {
+                activeTab: 'intake',
+                masterSkills: [
+           
