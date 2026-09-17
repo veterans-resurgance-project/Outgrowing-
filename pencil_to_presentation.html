@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Outgrowing-Ag // Veterans Resurgence Project</title>
+    <title>Outgrowing-Ag // Visual Evolution</title>
     <!-- Tailwind CSS for styling -->
-    <script src="https://jsdelivr.net"></script>
+    <script src="https://tailwindcss.com"></script>
     <!-- Alpine.js for reactive UI logic -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
         body {
-            background-color: #0f172a;
-            color: #f1f5f9;
+            background-color: #0f172a; /* bg-slate-900 */
+            color: #f1f5f9; /* text-slate-100 */
             font-family: system-ui, -apple-system, sans-serif;
             margin: 0;
             padding: 0;
@@ -21,113 +21,151 @@
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
 
-    <!-- MASTER ENGINE CONFIGURATION ROOT -->
-    <div class="max-w-7xl w-full mx-auto p-8 flex-grow flex flex-col" x-data="sharedHarvestEngine()">
+    <div class="max-w-5xl w-full mx-auto p-6 md:p-10 flex-grow flex flex-col" x-data="sketchAnimation()">
         
-        <!-- Header & View Toggles -->
-        <header class="border-b border-slate-800 pb-8 mb-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+        <!-- Header -->
+        <header class="border-b border-slate-800 pb-6 mb-8 flex justify-between items-center">
             <div>
-                <h1 class="text-4xl font-extrabold tracking-tight text-emerald-400">Outgrowing-Ag</h1>
-                <p class="text-slate-300 text-lg mt-1">Veterans Resurgence Project // Turnkey On-Site Deployment Engine</p>
+                <h1 class="text-2xl md:text-3xl font-bold tracking-tight text-emerald-400">Outgrowing-Ag</h1>
+                <p class="text-slate-400 text-sm">Visual Evolution // Step-by-Step System Realization</p>
             </div>
-            <div class="flex flex-wrap gap-3 bg-slate-800 p-2.5 rounded-xl border border-slate-700 w-full lg:w-auto">
-                <button @click="activeView = 'grid'" :class="activeView === 'grid' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="flex-1 lg:flex-none px-5 py-3 rounded-lg text-sm font-semibold transition">Phase 1: Grid Scaling</button>
-                <button @click="activeView = 'pitch'" :class="activeView === 'pitch' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="flex-1 lg:flex-none px-5 py-3 rounded-lg text-sm font-semibold transition">Phase 3: Cost-Plus Buyout</button>
-                <button @click="activeView = 'evolution'" :class="activeView === 'evolution' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'" class="flex-1 lg:flex-none px-5 py-3 rounded-lg text-sm font-semibold transition">Visual Evolution (Immersive)</button>
-            </div>
+            <a href="index.html" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-lg border border-slate-700 transition">
+                &larr; Return Home
+            </a>
         </header>
 
-        <!-- VIEW 1: GRID SCALING -->
-        <div x-show="activeView === 'grid'" x-cloak class="space-y-8 flex-grow">
-            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-10 shadow-xl space-y-6">
-                <span class="text-sm font-mono text-emerald-400 uppercase tracking-widest bg-emerald-950/60 border border-emerald-800 px-3 py-1 rounded-md">Phase 1: Hand Mapping</span>
-                <h2 class="text-3xl font-bold text-white">The Hand-Drawn Scaling Foundation</h2>
-                <p class="text-slate-200 text-base lg:text-lg leading-relaxed max-w-4xl">
-                    Translating initial field design concepts onto standardized grid layouts, mapping out fire buffers, biochar staging zones, and multi-track crop integration before laying out physical infrastructure.
-                </p>
-            </div>
-        </div>
-
-        <!-- VIEW 2: COST-PLUS BUYOUT SIMULATOR -->
-        <div x-show="activeView === 'pitch'" x-cloak class="space-y-8 flex-grow">
-            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-10 shadow-xl space-y-8">
-                <div>
-                    <h2 class="text-2xl font-bold mb-2 text-emerald-300">Cost-Plus System Buyout Simulator</h2>
-                    <p class="text-slate-300 text-base">Model the Year-3 buyout option for landowners taking over permanent operation of the cell setup.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-slate-900 p-6 rounded-xl border border-slate-700 space-y-3">
-                        <label class="block text-sm font-bold text-slate-300 uppercase tracking-wider">Equipment Baseline ($)</label>
-                        <input type="number" x-model.number="equipmentCost" class="w-full bg-slate-950 border border-slate-600 rounded-lg p-4 text-white text-base focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20">
+        <!-- MAIN EVOLUTION CONTAINER -->
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 md:p-8 shadow-2xl flex-grow flex flex-col justify-between space-y-8">
+            
+            <div>
+                <!-- Top Step Bar & Controls -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-700/60 pb-5">
+                    <div>
+                        <span class="text-xs md:text-sm font-mono text-sky-400 uppercase tracking-widest font-semibold" x-text="stages[currentStep - 1].tag"></span>
+                        <h2 class="text-xl md:text-2xl font-bold text-white mt-1" x-text="stages[currentStep - 1].title"></h2>
                     </div>
-                    <div class="bg-slate-900 p-6 rounded-xl border border-slate-700 space-y-3">
-                        <label class="block text-sm font-bold text-slate-300 uppercase tracking-wider">Installation &amp; Labor ($)</label>
-                        <input type="number" x-model.number="laborCost" class="w-full bg-slate-950 border border-slate-600 rounded-lg p-4 text-white text-base focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20">
-                    </div>
-                    <div class="bg-slate-900 p-6 rounded-xl border border-slate-700 space-y-3">
-                        <label class="block text-sm font-bold text-slate-300 uppercase tracking-wider">Engineering Margin (%)</label>
-                        <input type="number" x-model.number="markupPercent" class="w-full bg-slate-950 border border-slate-600 rounded-lg p-4 text-white text-base focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20">
+                    <div class="flex items-center gap-3 bg-slate-900/80 p-2 rounded-xl border border-slate-700">
+                        <button @click="prevStep()" class="bg-slate-800 text-slate-200 border border-slate-700 px-4 py-2 rounded-lg text-xs md:text-sm font-medium hover:bg-slate-700 transition shadow">
+                            &larr; Prev
+                        </button>
+                        <span class="text-xs md:text-sm font-mono text-slate-300 px-2 font-bold" x-text="'Stage ' + currentStep + ' of 4'"></span>
+                        <button @click="nextStep()" class="bg-sky-900 text-sky-200 border border-sky-700 px-4 py-2 rounded-lg text-xs md:text-sm font-medium hover:bg-sky-800 transition shadow">
+                            Next &rarr;
+                        </button>
                     </div>
                 </div>
 
-                <div class="bg-slate-900 border border-emerald-500/50 rounded-2xl p-8 space-y-4">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
-                        <div>
-                            <span class="text-sm font-mono text-emerald-400 uppercase tracking-wider">Year-3 Turnkey Valuation</span>
-                            <h3 class="text-4xl font-extrabold text-white mt-2" x-text="formatCurrency(calculateTotalBuyout())"></h3>
+                <!-- EXPANDED VISUAL STAGE & NARRATIVE LAYOUT -->
+                <div class="grid grid-cols-1 gap-6 my-6">
+                    
+                    <!-- LARGE VISUAL IMAGE/ICON PRESENTATION BOX -->
+                    <div class="bg-slate-950 border border-slate-700 rounded-2xl p-10 md:p-14 flex flex-col items-center justify-center min-h-[380px] relative overflow-hidden group shadow-inner">
+                        <div class="text-center space-y-6 transition-all duration-300">
+                            <!-- Large Emoji/Visual Placeholder -->
+                            <span class="text-8xl md:text-9xl block transform group-hover:scale-105 transition-transform duration-300 drop-shadow-lg" x-text="stages[currentStep - 1].visualIcon"></span>
+                            
+                            <!-- Category Pill -->
+                            <div class="text-xs md:text-sm font-mono text-emerald-300 uppercase tracking-wider bg-slate-900/90 px-5 py-2 rounded-full border border-slate-700 inline-block shadow" x-text="stages[currentStep - 1].visualLabel"></div>
+                            
+                            <!-- Subtext Description -->
+                            <p class="text-sm md:text-base text-slate-300 italic max-w-lg mx-auto leading-relaxed" x-text="stages[currentStep - 1].visualSubtext"></p>
                         </div>
-                        <span class="bg-emerald-950 text-emerald-300 border border-emerald-800 px-4 py-2 rounded-full text-sm font-bold tracking-wide">Verified System Asset</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- VIEW 3: MULTI-IMAGE SWITCHABLE ANIMATION BOX -->
-        <div x-show="activeView === 'evolution'" x-cloak class="flex-grow flex flex-col space-y-8">
-            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 shadow-2xl space-y-6 flex-grow flex flex-col justify-between" x-data="sketchAnimation()">
-                <div class="space-y-6 flex-grow flex flex-col">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-700/80 pb-6">
-                        <div>
-                            <span class="text-sm font-mono text-sky-400 uppercase tracking-widest bg-sky-950/80 border border-sky-800 px-3 py-1.5 rounded-md" x-text="stages[currentStep - 1].tag"></span>
-                            <h2 class="text-3xl font-bold text-white mt-3" x-text="stages[currentStep - 1].title"></h2>
-                        </div>
-                        <div class="flex items-center gap-4 w-full sm:w-auto">
-                            <button @click="prevStep()" class="flex-1 sm:flex-none bg-slate-900 text-slate-200 border border-slate-700 px-5 py-3 rounded-xl text-sm font-bold hover:bg-slate-700 transition shadow">
-                                &larr; Prev Image
-                            </button>
+                        
+                        <!-- Watermark -->
+                        <div class="absolute bottom-3 right-4 text-xs font-mono text-slate-500 tracking-wider">
+                            <span x-text="'STAGE_RENDER_0' + currentStep"></span>
                         </div>
                     </div>
+
+                    <!-- COMFORTABLE, READABLE NARRATIVE CARD -->
+                    <div class="bg-slate-900/90 p-6 md:p-8 rounded-2xl border border-slate-700 flex flex-col space-y-4 shadow-md">
+                        <div class="flex items-center gap-4">
+                            <span class="text-3xl p-3.5 bg-slate-950 rounded-xl border border-slate-700 shadow" x-text="stages[currentStep - 1].emoji"></span>
+                            <div>
+                                <h3 class="text-base md:text-lg font-bold text-slate-100" x-text="stages[currentStep - 1].subtext"></h3>
+                                <p class="text-xs md:text-sm font-mono text-emerald-400 mt-0.5" x-text="stages[currentStep - 1].pipelineNote"></p>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed" x-text="stages[currentStep - 1].description"></p>
+                    </div>
+
                 </div>
             </div>
-        </div>
 
+            <!-- Enhanced Clickable Progress Tabs -->
+            <div class="grid grid-cols-4 gap-3 pt-2">
+                <template x-for="stage in stages" :key="stage.tag">
+                    <button @click="currentStep = stage.step" 
+                            :class="currentStep === stage.step ? 'bg-sky-600 border-sky-400 shadow-lg' : 'bg-slate-900 border-slate-700 opacity-50 hover:opacity-100'"
+                            class="h-3.5 rounded-full border transition-all">
+                    </button>
+                </template>
+            </div>
+
+        </div>
     </div>
 
-    <!-- Script Context Mock for local test preview execution -->
+    <!-- SCRIPT LOGIC -->
     <script>
-        function sharedHarvestEngine() {
-            return {
-                activeView: 'grid',
-                equipmentCost: 25000,
-                laborCost: 12000,
-                markupPercent: 15,
-                calculateTotalBuyout() {
-                    let base = this.equipmentCost + this.laborCost;
-                    return base + (base * (this.markupPercent / 100));
-                },
-                formatCurrency(val) {
-                    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val);
-                }
-            }
-        }
         function sketchAnimation() {
             return {
                 currentStep: 1,
                 stages: [
-                    { tag: 'Initial Draft', title: 'Hand Mapping Blueprint Layout' }
+                    {
+                        step: 1,
+                        tag: 'STAGE 1: CONCEPTUALIZATION',
+                        emoji: '🖍️',
+                        visualIcon: '🖍️🐝📄',
+                        visualLabel: 'Crayon & Paper Concept Board',
+                        visualSubtext: 'Initial freeform participant drawing featuring rough outlines, honeybee placement, and boundary concepts.',
+                        title: 'The Childlike Crayon Sketch',
+                        subtext: 'Hand-drawn bee and rough perimeter line',
+                        description: 'The journey starts with a simple, imaginative crayon drawing by a participant. It captures the core desire: a friendly bee resting near a protective border, mapping out the initial concept without rigid constraints.',
+                        pipelineNote: 'Raw participant idea captured and submitted via community framework.'
+                    },
+                    {
+                        step: 2,
+                        tag: 'STAGE 2: INCUBATION',
+                        emoji: '🐝',
+                        visualIcon: '🗺️🌱🔥',
+                        visualLabel: 'Ecosystem & Fire Corridor Map',
+                        visualSubtext: 'Overlaying fuel-reduction boundaries, tool staging zones, and native nectar-rich perennial corridors.',
+                        title: 'The Bee & Fire Buffer Corridor',
+                        subtext: 'Translating shapes into practical ecosystem zones',
+                        description: 'The rough concept is evaluated by the team and merged with practical land requirements. The rough line becomes a designated fire-buffer fuel reduction zone packed with native, nectar-rich flowering perennials.',
+                        pipelineNote: 'Reviewed for ecological value and matched with the 3-year shared harvest framework.'
+                    },
+                    {
+                        step: 3,
+                        tag: 'STAGE 3: ARCHITECTURE',
+                        emoji: '📐',
+                        visualIcon: '📐🏛️📍',
+                        visualLabel: 'CAD Master Schematic Blueprint',
+                        visualSubtext: 'Precision square-foot grid design complete with water lines, safety zones, and biochar staging paths.',
+                        title: 'Professional Grid Design',
+                        subtext: 'Scaled square-foot drafting and layout specs',
+                        description: 'Using our digital drafting tools, the sketch is transformed into a clean, professional master schematic complete with exact foot-by-foot grid measurements, companion planting zones, and biochar staging paths.',
+                        pipelineNote: 'Drafted into presentation-ready documentation for landowner review and site sponsorship.'
+                    },
+                    {
+                        step: 4,
+                        tag: 'STAGE 4: DEPLOYMENT',
+                        emoji: '🌲',
+                        visualIcon: '🌲🏡🌻',
+                        visualLabel: 'Turnkey Field Operation Display',
+                        visualSubtext: 'Fully established 5-person cell deployment along the forest boundary line with thriving biochar beds.',
+                        title: 'On-Site Fire Buffer Installation',
+                        subtext: 'Active 5-person cell execution along the forest edge',
+                        description: 'The completed system comes to life on the ground. A trained 5-person cell clears the slash, lays down biochar-amended soil, and establishes the flowering buffer alongauthorization ready for 3-year operation.',
+                        pipelineNote: 'Active operational cell deployed; ready for Year-3 cost-plus buyout evaluation.'
+                    }
                 ],
-                prevStep() { if(this.currentStep > 1) this.currentStep--; }
+                nextStep() {
+                    this.currentStep = this.currentStep < 4 ? this.currentStep + 1 : 1;
+                },
+                prevStep() {
+                    this.currentStep = this.currentStep > 1 ? this.currentStep - 1 : 4;
+                }
             }
         }
     </script>
