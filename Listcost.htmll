@@ -1,4 +1,10 @@
 
+        <!-- VIEW 1: GRID SCALING -->
+        <!-- ITEMIZED AUDIT LEDGER COMPONENT -->
+<div class="bg-slate-900 border border-slate-700 rounded-xl p-6 mt-6 space-y-4">
+    <h3 class="text-sm font-bold text-emerald-400 uppercase tracking-wide">📋 Itemized System Bill of Materials (BOM)</h3>
+    <p class="text-xs text-slate-400 mt-0.5">Every line item below must be physically verified by the 5-person cell leader before field deployment begins.</p>
+    
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-300 pt-2">
         <!-- LEFT COLUMN: PRODUCTION MATERIAILS -->
         <div class="space-y-3">
