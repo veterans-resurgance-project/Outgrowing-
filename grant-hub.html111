@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grant Hub & Portal Navigation | Living Lab Portal</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --txt: #f8fafc;
+            --primary: #27ae60;
+            --primary-dark: #1e8449;
+            --hud: #144d29;
+            --accent: #38bdf8;
+            --muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --warn: #f59e0b;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--txt);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background: var(--card);
+            border-radius: 14px;
+            padding: 40px;
+            box-sizing: border-box;
+            border: 1px solid var(--border);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+        }
+
+        .hud-bar {
+            background: var(--hud);
+            border-radius: 8px;
+            padding: 10px 18px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        h1 {
+            color: #4ade80;
+            font-size: 1.8rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-top: 0;
+        }
+
+        p, li {
+            color: var(--muted);
+        }
+
+        strong {
+            color: var(--txt);
+        }
+
+        .grant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .grant-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .grant-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+        }
+
+        .fit-badge {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .btn-select {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 15px;
+            transition: background 0.2s;
+        }
+
+        .btn-select:hover {
+            background: var(--primary-dark);
+        }
+
+        .action-container {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn-secondary {
+            background: #334155;
+            color: var(--txt);
+            padding: 10px 18px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hud-bar">
+        <span>Portal Navigation Hub: <span style="color:var(--accent);">Active Grant Portfolios</span></span>
+        <div>Global XP Ledger: <span id="global-points" style="color:#4ade80;">400</span></div>
+    </div>
+
+    <h1>Grant Hub &amp; Selection Center</h1>
+    <p>Select a funding track below to access its dedicated staff training manual, operating instructions, and interactive preparation workspace.</p>
+
+    <div class="grant-grid">
+        <!-- BFRDP -->
+        <div class="grant-card">
+            <div>
+                <span class="fit-badge">Fit: Cohort Training &amp; Workforce Progression</span>
+                <h2>USDA BFRDP Grant</h2>
+                <p>Supports training programs, mentorship networks, and structured workforce progression. Funds our three-tier participant model guiding recruits from waitlists into active harvest cells.</p>
+            </div>
+            <a href="grant-process-bfrdp-manual.html" class="btn-select">Open BFRDP Processing &amp; Manual →</a>
+        </div>
+
+        <!-- LFPP -->
+        <div class="grant-card">
+            <div>
+                <span class="fit-badge">Fit: Digital Sales &amp; E-Commerce Pipeline</span>
+                <h2>USDA LFPP Grant</h2>
+                <p>Funds e-commerce infrastructure, processing tracks, and local food distribution networks. Powers our Digital Sales &amp; Processing track bridging grower wisdom with digital pre-orders.</p>
+            </div>
+            <a href="grant-process-lfpp-manual.html" class="btn-select">Open LFPP Processing &amp; Manual →</a>
+        </div>
+
+        <!-- CIG -->
+        <div class="grant-card">
+            <div>
+                <span class="fit-badge">Fit: Telemetry &amp; Academic Extension Data</span>
+                <h2>USDA CIG Grant</h2>
+                <p>Funds innovative, field-tested conservation practices and tech integration. Supports our standardized telemetry pipeline (Module 203) and university extension data feeds.</p>
+            </div>
+            <a href="grant-process-cig-manual.html" class="btn-select">Open CIG Processing &amp; Manual →</a>
+        </div>
+
+        <!-- Workforce -->
+        <div class="grant-card">
+            <div>
+                <span class="fit-badge">Fit: Regional Labor Exchange &amp; Stipends</span>
+                <h2>Workforce Development Initiative</h2>
+                <p>Subsidizes career training, job creation, and apprenticeship pipelines. Connects trained, safety-certified recruits directly with host farms while tracking shared economic impact.</p>
+            </div>
+            <a href="grant-process-workforce-manual.html" class="btn-select">Open Workforce Processing &amp; Manual →</a>
+        </div>
+    </div>
+
+    <!-- FOOTER NAV -->
+    <div class="action-container">
+        <a href="index.html" class="btn-secondary">← Back to Portal Home</a>
+        <span style="color: var(--muted); font-size: 0.85rem;">System Engine Status: Active &amp; Synchronized</span>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const xp = localStorage.getItem('afti_global_xp') || '400';
+        document.getElementById('global-points').innerText = xp;
+    });
+</script>
+
+</body>
+</html>
