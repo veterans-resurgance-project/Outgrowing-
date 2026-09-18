@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grant Processing: USDA BFRDP | Living Lab Portal</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --txt: #f8fafc;
+            --primary: #27ae60;
+            --primary-dark: #1e8449;
+            --hud: #144d29;
+            --accent: #38bdf8;
+            --muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --warn: #f59e0b;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--txt);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: var(--card);
+            border-radius: 14px;
+            padding: 40px;
+            box-sizing: border-box;
+            border: 1px solid var(--border);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+        }
+
+        .hud-bar {
+            background: var(--hud);
+            border-radius: 8px;
+            padding: 10px 18px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        h1 {
+            color: #4ade80;
+            font-size: 1.8rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin-top: 30px;
+            border-left: 4px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        p, li {
+            color: var(--muted);
+        }
+
+        strong {
+            color: var(--txt);
+        }
+
+        .process-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 22px;
+            margin: 20px 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin: 15px 0;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .checklist-item:hover {
+            background: rgba(56, 189, 248, 0.05);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-top: 4px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .btn-action {
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-action:hover {
+            background: var(--primary-dark);
+        }
+
+        .action-container {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn-secondary {
+            background: #334155;
+            color: var(--txt);
+            padding: 12px 20px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .success-banner {
+            display: none;
+            background: rgba(39, 174, 96, 0.2);
+            border: 1px solid var(--primary);
+            color: #4ade80;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hud-bar">
+        <span>Active Workflow: <span style="color:var(--accent);">USDA BFRDP Grant Processing</span></span>
+        <div>Global XP Ledger: <span id="global-points" style="color:#4ade80;">400</span></div>
+    </div>
+
+    <h1>USDA Beginning Farmer and Rancher Development Program (BFRDP)</h1>
+    <p>Complete the milestone tasks below to prepare, verify, and package your application for cohort training, mentorship, and workforce infrastructure funding.</p>
+
+    <!-- WORKFLOW CHECKLIST -->
+    <div class="process-card">
+        <h2>Grant Preparation &amp; Verification Checklist</h2>
+        
+        <label class="checklist-item">
+            <input type="checkbox" id="check-1" onchange="updateProgress()">
+            <div>
+                <strong>Step 1: Export Participant Transcripts &amp; XP Milestone Logs</strong>
+                <p style="margin: 4px 0 0 0; font-size: 0.9rem;">Generate verified records from the portal ledger demonstrating active cohort progression through training modules (e.g., Module 203).</p>
+            </div>
+        </label>
+
+        <label class="checklist-item">
+            <input type="checkbox" id="check-2" onchange="updateProgress()">
+            <div>
+                <strong>Step 2: Attach Partner Farm Training-to-Labor MOU Framework</strong>
+                <p style="margin: 4px 0 0 0; font-size: 0.9rem;">Include pre-signed shared harvest and maintenance agreements establishing structured labor deployment on partner sites.</p>
+            </div>
+        </label>
+
+        <label class="checklist-item">
+            <input type="checkbox" id="check-3" onchange="updateProgress()">
+            <div>
+                <strong>Step 3: Document Curriculum &amp; Three-Tier Wave Structure</strong>
+                <p style="margin: 4px 0 0 0; font-size: 0.9rem;">Detail the progression model from Recruits and Active Learners to Harvest-Ready Cells and structural cell splitting.</p>
+            </div>
+        </label>
+
+        <label class="checklist-item">
+            <input type="checkbox" id="check-4" onchange="updateProgress()">
+            <div>
+                <strong>Step 4: Finalize Budget Allocation &amp; Mentor Stipends</strong>
+                <p style="margin: 4px 0 0 0; font-size: 0.9rem;">Allocate funding requests toward mentor oversight, curriculum software maintenance, and participant field stipends.</p>
+            </div>
+        </label>
+    </div>
+
+    <div id="completion-banner" class="success-banner">
+        ✓ BFRDP Grant Processing Package Fully Verified &amp; Logged (+150 XP Earned!)
+    </div>
+
+    <!-- FOOTER NAV -->
+    <div class="action-container">
+        <a href="grant-hub.html" class="btn-secondary">← Back to Grant Hub</a>
+        <button id="finalize-btn" onclick="finalizeBFRDP()" class="btn-action" disabled style="opacity: 0.5; cursor: not-allowed;">Finalize &amp; Seal Application Package →</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const xp = localStorage.getItem('afti_global_xp') || '400';
+        document.getElementById('global-points').innerText = xp;
+    });
+
+    function updateProgress() {
+        const c1 = document.getElementById('check-1').checked;
+        const c2 = document.getElementById('check-2').checked;
+        const c3 = document.getElementById('check-3').checked;
+        const c4 = document.getElementById('check-4').checked;
+
+        const btn = document.getElementById('finalize-btn');
+        if (c1 && c2 && c3 && c4) {
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            btn.style.cursor = 'pointer';
+        } else {
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+            btn.style.cursor = 'not-allowed';
+        }
+    }
+
+    function finalizeBFRDP() {
+        // Award XP bonus for completion
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '400', 10) + 150;
+        localStorage.setItem('afti_global_xp', currentXP);
+        document.getElementById('global-points').innerText = currentXP;
+
+        // Show success banner
+        document.getElementById('completion-banner').style.display = 'block';
+
+        // Lock button
+        const btn = document.getElementById('finalize-btn');
+        btn.innerText = "Application Package Sealed & Ready";
+        btn.style.background = "#334155";
+        btn.disabled = true;
+        btn.style.cursor = 'default';
+    }
+</script>
+
+</body>
+</html>
