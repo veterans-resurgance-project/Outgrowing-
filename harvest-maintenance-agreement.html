@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cooperative Framework: Harvest &amp; Maintenance Package | Living Lab Portal</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --txt: #f8fafc;
+            --primary: #27ae60;
+            --primary-dark: #1e8449;
+            --hud: #144d29;
+            --accent: #38bdf8;
+            --muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--txt);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: var(--card);
+            border-radius: 14px;
+            padding: 40px;
+            box-sizing: border-box;
+            border: 1px solid var(--border);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+        }
+
+        .hud-bar {
+            background: var(--hud);
+            border-radius: 8px;
+            padding: 10px 18px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        h1 {
+            color: #4ade80;
+            font-size: 1.8rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin-top: 30px;
+            border-left: 4px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        p, li {
+            color: var(--muted);
+        }
+
+        strong {
+            color: var(--txt);
+        }
+
+        .agreement-section {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 22px;
+            margin: 20px 0;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+
+        .action-container {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: #334155;
+            color: var(--txt);
+            padding: 12px 20px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: #475569;
+        }
+
+        .success-banner {
+            display: none;
+            background: rgba(39, 174, 96, 0.2);
+            border: 1px solid var(--primary);
+            color: #4ade80;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hud-bar">
+        <span>Framework: <span style="color:var(--accent);">Integrated Cell Operations</span></span>
+        <div>Global XP Ledger: <span id="global-points" style="color:#4ade80;">400</span></div>
+    </div>
+
+    <h1>Cooperative Harvest &amp; Maintenance Package</h1>
+    <p>This integrated agreement binds cell members across all operational waves (Recruits, Stewards, and Harvest-Ready Cells) to mutual standards of upkeep, data logging, and fair yield distribution.</p>
+
+    <!-- SECTION 1 -->
+    <div class="agreement-section">
+        <h2>1. The Maintenance &amp; Telemetry Commitment ("Sweat Equity")</h2>
+        <p>To preserve long-term soil health, ensure regulatory compliance, and maintain valid research data for academic extension partners, all participants agree to:</p>
+        <ul>
+            <li><strong>Routine Data Logging:</strong> Complete required metric entries (soil moisture, telemetry, labor hours) using portal standards (e.g., Module 203 framework).</li>
+            <li><strong>Upkeep Protocol:</strong> Dedicate baseline hours weekly to plot maintenance, equipment safeguarding, and environmental monitoring.</li>
+            <li><strong>Cell Integrity:</strong> Ensure that when cells reach capacity and execute a structural split, all baseline logs and historical plot tracking transfer seamlessly to the new sub-cell leadership.</li>
+        </ul>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="agreement-section">
+        <h2>2. The Harvest Production Commitment</h2>
+        <p>When transitioning into a Harvest-Ready Cell, participants commit to structured commercial or cooperative fulfillment:</p>
+        <ul>
+            <li><strong>Yield Standards:</strong> Meet established quality thresholds and harvest windows tracked by the system ledger.</li>
+            <li><strong>Cooperative Logistics:</strong> Coordinate distribution targets with regional partners, food hubs, or bulk buyers under verified agreements.</li>
+            <li><strong>Risk Mitigation:</strong> Use historical telemetry dashboards to forecast yields accurately, avoiding over-commitment or supply chain failure.</li>
+        </ul>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="agreement-section">
+        <h2>3. Shared Harvest Allocation &amp; Benefit Distribution</h2>
+        <p>To eliminate disputes and ensure equitable returns, the distribution of surplus harvest, revenue, or community grants is calculated transparently:</p>
+        <ul>
+            <li><strong>Ledger-Based Equity:</strong> Shares are allocated dynamically based on verified maintenance hours logged, telemetry compliance, and active participation points (XP).</li>
+            <li><strong>Transparent Auditing:</strong> The platform records all contributions automatically, providing an audit-ready report for cell members and grant committees alike.</li>
+        </ul>
+    </div>
+
+    <div id="acknowledgment-banner" class="success-banner">
+        ✓ Agreement Digitally Acknowledged &amp; Logged to Your Portfolio Ledger (+50 XP Earned!)
+    </div>
+
+    <!-- FOOTER NAV -->
+    <div class="action-container">
+        <a href="index.html" class="btn-secondary">🏠 Return to Hub</a>
+        <button onclick="acknowledgeAgreement()" class="btn-primary">Acknowledge &amp; Sign Framework →</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const xp = localStorage.getItem('afti_global_xp') || '400';
+        document.getElementById('global-points').innerText = xp;
+    });
+
+    function acknowledgeAgreement() {
+        // Increment XP for signing framework
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '400', 10) + 50;
+        localStorage.setItem('afti_global_xp', currentXP);
+        document.getElementById('global-points').innerText = currentXP;
+
+        // Show confirmation banner
+        document.getElementById('acknowledgment-banner').style.display = 'block';
+        
+        // Disable button to prevent multi-clicks
+        const btn = document.querySelector('.btn-primary');
+        btn.innerText = "Framework Signed & Verified";
+        btn.style.background = "#334155";
+        btn.style.cursor = "default";
+        btn.onclick = null;
+    }
+</script>
+
+</body>
+</html>
