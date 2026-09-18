@@ -56,9 +56,8 @@
             text.innerText = "The tractor looks professional, but high monthly lease payments hit your ledger before you sell a single crop. Over-capitalizing drains your vital operating buffer.";
             ac.innerHTML = '<button onclick="window.location.href=\'capital-track-stage1-recovery-b.html\'" class="nav-bridge" style="background:var(--warn);">Enter Asset Overhead Recovery Loop &rarr;</button>';
         } else {
-            vp.style.backgroundColor = 'rgba(239,68,68,0.1)'; title.innerText = "Capital Depletion Setback (+0 XP)"; title.style.color = 'var(--danger)';
-            text.innerText = "You are entirely cash-poor on day one. You have high-end tech equipment but no remaining cash buffer to buy organic compost, soil covers, or pay field hand wages.";
-            ac.innerHTML = '<button onclick="window.location.href=\'capital-track-stage1-recovery-c.html\'" class="nav-bridge" style="background:var(--danger);">Enter Capital Restructuring Recovery Loop &rarr;</button>';
+            // Choice C directly directs to forest_coop_recovery.html
+            window.location.href = 'forest_coop_recovery.html';
         }
     }
 </script>
