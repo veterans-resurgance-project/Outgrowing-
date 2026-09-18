@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grant Processing Hub | Living Lab Portal</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --txt: #f8fafc;
+            --primary: #27ae60;
+            --primary-dark: #1e8449;
+            --hud: #144d29;
+            --accent: #38bdf8;
+            --muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --warn: #f59e0b;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--txt);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 30px auto;
+            background: var(--card);
+            border-radius: 14px;
+            padding: 40px;
+            box-sizing: border-box;
+            border: 1px solid var(--border);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+        }
+
+        .hud-bar {
+            background: var(--hud);
+            border-radius: 8px;
+            padding: 10px 18px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        h1 {
+            color: #4ade80;
+            font-size: 1.8rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin-top: 30px;
+            border-left: 4px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        p, li {
+            color: var(--muted);
+        }
+
+        strong {
+            color: var(--txt);
+        }
+
+        .grant-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 22px;
+            margin: 20px 0;
+            transition: border-color 0.2s;
+        }
+
+        .grant-card:hover {
+            border-color: var(--accent);
+        }
+
+        .grant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .grant-title {
+            color: var(--txt);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .grant-tag {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .btn-process {
+            background: var(--primary);
+            color: #fff;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.2s;
+        }
+
+        .btn-process:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Modal / Action Output Viewport */
+        .processing-viewport {
+            display: none;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+
+        .processing-viewport h3 {
+            color: #4ade80;
+            margin-top: 0;
+        }
+
+        .steps-list {
+            padding-left: 20px;
+            color: var(--txt);
+        }
+
+        .steps-list li {
+            margin-bottom: 10px;
+        }
+
+        .action-container {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-secondary {
+            background: #334155;
+            color: var(--txt);
+            padding: 10px 18px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hud-bar">
+        <span>Portal Module: <span style="color:var(--accent);">Grant Opportunities &amp; Processing Engine</span></span>
+        <div>Global XP Ledger: <span id="global-points" style="color:#4ade80;">400</span></div>
+    </div>
+
+    <h1>Target Grant Opportunities &amp; Processing</h1>
+    <p>Select a funding opportunity matched to your cooperative model below. Click <strong>"Process Grant"</strong> to initialize completion steps, generate compliance checklists, and log application progress to your system ledger.</p>
+
+    <!-- GRANT 1 -->
+    <div class="grant-card">
+        <div class="grant-header">
+            <h3 class="grant-title">1. USDA Beginning Farmer and Rancher Development Program (BFRDP)</h3>
+            <span class="grant-tag">Workforce &amp; Cohort Training</span>
+        </div>
+        <p><strong>Target Focus:</strong> Funding for structured multi-tier training programs, cohort progression models (Waves 1-3), and mentorship frameworks.</p>
+        <button class="btn-process" onclick="processGrant('BFRDP')">Process Grant &amp; Generate Completion Steps →</button>
+    </div>
+
+    <!-- GRANT 2 -->
+    <div class="grant-card">
+        <div class="grant-header">
+            <h3 class="grant-title">2. USDA Local Food Promotion Program (LFPP)</h3>
+            <span class="grant-tag">Digital Sales &amp; Infrastructure</span>
+        </div>
+        <p><strong>Target Focus:</strong> Supporting digital marketplaces, e-commerce pre-order pipelines, and value-added processing tracks managed by the tech crew.</p>
+        <button class="btn-process" onclick="processGrant('LFPP')">Process Grant &amp; Generate Completion Steps →</button>
+    </div>
+
+    <!-- GRANT 3 -->
+    <div class="grant-card">
+        <div class="grant-header">
+            <h3 class="grant-title">3. USDA Conservation Innovation Grants (CIG)</h3>
+            <span class="grant-tag">Telemetry &amp; Academic Extension</span>
+        </div>
+        <p><strong>Target Focus:</strong> Validating field telemetry logging (Module 203 standards), soil health data collection, and integration with academic extension partners.</p>
+        <button class="btn-process" onclick="processGrant('CIG')">Process Grant &amp; Generate Completion Steps →</button>
+    </div>
+
+    <!-- GRANT 4 -->
+    <div class="grant-card">
+        <div class="grant-header">
+            <h3 class="grant-title">4. State &amp; Regional Workforce Development Initiative</h3>
+            <span class="grant-tag">Partner Farm Labor &amp; Employment</span>
+        </div>
+        <p><strong>Target Focus:</strong> Subsidizing the training-to-labor pipeline, connecting cooperative recruits with partner farm agreements, and ensuring regional economic resilience.</p>
+        <button class="btn-process" onclick="processGrant('Workforce')">Process Grant &amp; Generate Completion Steps →</button>
+    </div>
+
+    <!-- PROCESSING OUTPUT VIEWPORT -->
+    <div id="processing-viewport" class="processing-viewport">
+        <h3 id="viewport-title">Grant Processing Initialized</h3>
+        <p id="viewport-desc" style="color:var(--muted);"></p>
+        <h4 style="color:var(--accent); margin-bottom: 8px;">Action &amp; Completion Checklist:</h4>
+        <ol id="viewport-steps" class="steps-list"></ol>
+        <div style="margin-top: 20px; padding: 12px; background: rgba(39,174,96,0.15); border: 1px solid var(--primary); border-radius: 6px; color: #4ade80; font-weight: bold; text-align: center;">
+            ✓ Grant logged to processing queue. (+100 XP added to Global Ledger)
+        </div>
+    </div>
+
+    <!-- FOOTER NAV -->
+    <div class="action-container">
+        <a href="index.html" class="btn-secondary">🏠 Return to Hub</a>
+        <span style="color: var(--muted); font-size: 0.85rem;">System Engine Status: Active</span>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const xp = localStorage.getItem('afti_global_xp') || '400';
+        document.getElementById('global-points').innerText = xp;
+    });
+
+    function processGrant(grantType) {
+        // Increment XP
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '400', 10) + 100;
+        localStorage.setItem('afti_global_xp', currentXP);
+        document.getElementById('global-points').innerText = currentXP;
+
+        const vp = document.getElementById('processing-viewport');
+        const title = document.getElementById('viewport-title');
+        const desc = document.getElementById('viewport-desc');
+        const steps = document.getElementById('viewport-steps');
+        
+        vp.style.display = 'block';
+        vp.scrollIntoView({ behavior: 'smooth' });
+
+        if (grantType === 'BFRDP') {
+            title.innerText = "Processing: USDA BFRDP (Workforce & Cohort Training)";
+            desc.innerText = "This pathway focuses on scaling your three-tier participant framework, documenting educational module progression, and setting up mentorship validation.";
+            steps.innerHTML = `
+                <li><strong>Step 1:</strong> Export verified participant transcripts and XP milestone logs from the portal ledger.</li>
+                <li><strong>Step 2:</strong> Attach partner farm Memorandum of Understanding (MOU) outlining the training-to-labor exchange.</li>
+                <li><strong>Step 3:</strong> Detail the curriculum structure (including data logging standards like Module 203).</li>
+                <li><strong>Step 4:</strong> Submit budget allocation focusing on mentor stipends and curriculum software maintenance.</li>
+            `;
+        } else if (grantType === 'LFPP') {
+            title.innerText = "Processing: USDA LFPP (Digital Sales & Infrastructure)";
+            desc.innerText = "This pathway highlights your tech/sales crew's role in building e-commerce pipelines, digital pre-order systems, and value-added processing tracks.";
+            steps.innerHTML = `
+                <li><strong>Step 1:</strong> Compile data on projected digital pre-order volume and local consumer reach.</li>
+                <li><strong>Step 2:</strong> Outline the value-added processing track specifications (handling fees, packaging, and distribution).</li>
+                <li><strong>Step 3:</strong> Attach the cooperative digital handling agreement framework.</li>
+                <li><strong>Step 4:</strong> Submit budget allocation for e-commerce software scaling and processing equipment.</li>
+            `;
+        } else if (grantType === 'CIG') {
+            title.innerText = "Processing: USDA CIG (Telemetry & Academic Extension)";
+            desc.innerText = "This pathway leverages your standardized JSON/CSV soil telemetry schemas and integration with regional academic extension partners.";
+            steps.innerHTML = `
+                <li><strong>Step 1:</strong> Document data telemetry collection protocols and calibration rules.</li>
+                <li><strong>Step 2:</strong> Secure letter of intent from regional academic extension partners who will receive the data.</li>
+                <li><strong>Step 3:</strong> Define measurable soil health and environmental impact metrics.</li>
+                <li><strong>Step 4:</strong> Submit budget for sensor deployment, data pipeline hosting, and research reporting.</li>
+            `;
+        } else {
+            title.innerText = "Processing: State & Regional Workforce Development Initiative";
+            desc.innerText = "This pathway emphasizes your pre-signed maintenance and shared harvest agreements that supply trained labor to regional partner farms.";
+            steps.innerHTML = `
+                <li><strong>Step 1:</strong> Compile the signed Cooperative Harvest & Maintenance Package agreements from active cells.</li>
+                <li><strong>Step 2:</strong> Map out partner farm job placement capacity and training hour requirements.</li>
+                <li><strong>Step 3:</strong> Quantify economic savings and labor productivity gains for participating regional farms.</li>
+                <li><strong>Step 4:</strong> Submit final application package to state economic development review board.</li>
+            `;
+        }
+    }
+</script>
+
+</body>
+</html>
