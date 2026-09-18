@@ -1,0 +1,267 @@
+<!-- ========================================== -->
+<!-- OSU EXTENSION SOIL SCIENCE: 6-STEP DIAGNOSTIC DECK -->
+<!-- ========================================== -->
+
+<!-- STEP 1 -->
+<div class="question-step" id="q-step-1">
+    <div style="background: #1e293b; border-radius: 12px; padding: 30px; border: 1px solid rgba(255,255,255,0.1); margin: 20px 0; color: #f8fafc;">
+        <div style="background: #144d29; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold;">
+            <span>Module: Academic &amp; Soil Science (OSU Extension Alignment)</span>
+            <span style="color: #4ade80;">Case Study 1 of 6</span>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 20px; margin-bottom: 25px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 220px;">
+                <span style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 20px; display: inline-block; margin-bottom: 0.75rem;">Field Clue</span>
+                <h4 style="color: #ffffff; margin: 0 0 0.5rem 0; font-size: 1.1rem;">Composite Soil Sampling Protocol</h4>
+                <p style="font-size: 0.9rem; color: #cbd5e1; margin: 0; line-height: 1.5;">Trainee preparing a clean bucket and trowel to collect 6-to-8 inch core samples across a prospective orchard block in a zig-zag pattern.</p>
+            </div>
+            <div style="width: 200px; height: 130px; background: #0f172a; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; text-align: center;">
+                <span style="color: #94a3b8; font-size: 0.8rem; padding: 10px;">[Core Sampling Placeholder]</span>
+            </div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 20px;">
+            <h3 style="color: #ffffff; margin-top: 0; font-size: 1.15rem; margin-bottom: 15px;">Question 1: According to OSU Extension guidelines, what is the recommended core sampling depth and collection pattern for a representative home garden or orchard plot?</h3>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q1" value="a" style="accent-color: #27ae60;"> <span>A) 6 to 8 inches deep, collected in a random zig-zag pattern across the area</span>
+                </label>
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q1" value="b" style="accent-color: #27ae60;"> <span>B) Exactly 2 inches deep from a single low spot where water pools</span>
+                </label>
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q1" value="c" style="accent-color: #27ae60;"> <span>C) 18 to 24 inches deep, isolating the deep R-horizon parent rock</span>
+                </label>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: flex-end; margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+            <button onclick="awardXP(50); goToStep(2);" style="background-color: #27ae60; color: white; border: none; padding: 10px 22px; border-radius: 6px; font-weight: 600; cursor: pointer;">Submit &amp; Next</button>
+        </div>
+    </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="question-step" id="q-step-2" style="display: none;">
+    <div style="background: #1e293b; border-radius: 12px; padding: 30px; border: 1px solid rgba(255,255,255,0.1); margin: 20px 0; color: #f8fafc;">
+        <div style="background: #144d29; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold;">
+            <span>Module: Academic &amp; Soil Science (OSU Extension Alignment)</span>
+            <span style="color: #4ade80;">Case Study 2 of 6</span>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 20px; margin-bottom: 25px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 220px;">
+                <span style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 20px; display: inline-block; margin-bottom: 0.75rem;">Field Clue</span>
+                <h4 style="color: #ffffff; margin: 0 0 0.5rem 0; font-size: 1.1rem;">Soil Profile Horizon Diagnostics</h4>
+                <p style="font-size: 0.9rem; color: #cbd5e1; margin: 0; line-height: 1.5;">Examining an exposed trench wall showing accumulation of silicate clay, iron, and aluminum oxides beneath the topsoil.</p>
+            </div>
+            <div style="width: 200px; height: 130px; background: #0f172a; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; text-align: center;">
+                <span style="color: #94a3b8; font-size: 0.8rem; padding: 10px;">[Horizon Trench Placeholder]</span>
+            </div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 20px;">
+            <h3 style="color: #ffffff; margin-top: 0; font-size: 1.15rem; margin-bottom: 15px;">Question 2: Which master soil horizon is typically designated as the subsoil where clays, iron oxides, and leached organic materials accumulate (zone of illuviation)?</h3>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q2" value="a" style="accent-color: #27ae60;"> <span>A) Horizon O (Organic litter layer)</span>
+                </label>
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q2" value="b" style="accent-color: #27ae60;"> <span>B) Horizon B (Subsoil accumulation zone)</span>
+                </label>
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q2" value="c" style="accent-color: #27ae60;"> <span>C) Horizon R (Unweathered bedrock)</span>
+                </label>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+            <button onclick="goToStep(1)" style="background-color: #334155; color: #cbd5e1; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 600; cursor: pointer;">Previous</button>
+            <button onclick="awardXP(50); goToStep(3);" style="background-color: #27ae60; color: white; border: none; padding: 10px 22px; border-radius: 6px; font-weight: 600; cursor: pointer;">Submit &amp; Next</button>
+        </div>
+    </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="question-step" id="q-step-3" style="display: none;">
+    <div style="background: #1e293b; border-radius: 12px; padding: 30px; border: 1px solid rgba(255,255,255,0.1); margin: 20px 0; color: #f8fafc;">
+        <div style="background: #144d29; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold;">
+            <span>Module: Academic &amp; Soil Science (OSU Extension Alignment)</span>
+            <span style="color: #4ade80;">Case Study 3 of 6</span>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 20px; margin-bottom: 25px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 220px;">
+                <span style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 20px; display: inline-block; margin-bottom: 0.75rem;">Field Clue</span>
+                <h4 style="color: #ffffff; margin: 0 0 0.5rem 0; font-size: 1.1rem;">Soil pH &amp; Nutrient Availability</h4>
+                <p style="font-size: 0.9rem; color: #cbd5e1; margin: 0; line-height: 1.5;">Laboratory report showing western Oregon valley soil with a low pH value (5.2), indicating a need for amendment strategy.</p>
+            </div>
+            <div style="width: 200px; height: 130px; background: #0f172a; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; text-align: center;">
+                <span style="color: #94a3b8; font-size: 0.8rem; padding: 10px;">[pH Meter Placeholder]</span>
+            </div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 20px;">
+            <h3 style="color: #ffffff; margin-top: 0; font-size: 1.15rem; margin-bottom: 15px;">Question 3: When an OSU Extension soil test indicates an acidic soil pH of 5.2 in a crop production zone, what primary amendment is typically prescribed to raise the pH and supply calcium?</h3>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q3" value="a" style="accent-color: #27ae60;"> <span>A) Agricultural limestone (lime)</span>
+                </label>
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q3" value="b" style="accent-color: #27ae60;"> <span>B) Elemental sulfur granules</span>
+                </label>
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q3" value="c" style="accent-color: #27ae60;"> <span>C) Sodium chloride (rock salt)</span>
+                </label>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+            <button onclick="goToStep(2)" style="background-color: #334155; color: #cbd5e1; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 600; cursor: pointer;">Previous</button>
+            <button onclick="awardXP(50); goToStep(4);" style="background-color: #27ae60; color: white; border: none; padding: 10px 22px; border-radius: 6px; font-weight: 600; cursor: pointer;">Submit &amp; Next</button>
+        </div>
+    </div>
+</div>
+
+<!-- STEP 4 -->
+<div class="question-step" id="q-step-4" style="display: none;">
+    <div style="background: #1e293b; border-radius: 12px; padding: 30px; border: 1px solid rgba(255,255,255,0.1); margin: 20px 0; color: #f8fafc;">
+        <div style="background: #144d29; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold;">
+            <span>Module: Academic &amp; Soil Science (OSU Extension Alignment)</span>
+            <span style="color: #4ade80;">Case Study 4 of 6</span>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 20px; margin-bottom: 25px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 220px;">
+                <span style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 20px; display: inline-block; margin-bottom: 0.75rem;">Field Clue</span>
+                <h4 style="color: #ffffff; margin: 0 0 0.5rem 0; font-size: 1.1rem;">Texture &amp; Bulk Density Indicators</h4>
+                <p style="font-size: 0.9rem; color: #cbd5e1; margin: 0; line-height: 1.5;">Field assessment of a compacted clay loam layer displaying restricted root elongation and poor water infiltration.</p>
+            </div>
+            <div style="width: 200px; height: 130px; background: #0f172a; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; text-align: center;">
+                <span style="color: #94a3b8; font-size: 0.8rem; padding: 10px;">[Compaction Indicator Placeholder]</span>
+            </div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 20px;">
+            <h3 style="color: #ffffff; margin-top: 0; font-size: 1.15rem; margin-bottom: 15px;">Question 4: Which physical property metric increases significantly under heavy equipment compaction, directly inhibiting root penetration and gas exchange?</h3>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q4" value="a" style="accent-color: #27ae60;"> <span>A) Soil bulk density</span>
+                </label>
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q4" value="b" style="accent-color: #27ae60;"> <span>B) Total macro-porosity percentage</span>
+                </label>
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q4" value="c" style="accent-color: #27ae60;"> <span>C) Cation Exchange Capacity (CEC)</span>
+                </label>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+            <button onclick="goToStep(3)" style="background-color: #334155; color: #cbd5e1; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 600; cursor: pointer;">Previous</button>
+            <button onclick="awardXP(50); goToStep(5);" style="background-color: #27ae60; color: white; border: none; padding: 10px 22px; border-radius: 6px; font-weight: 600; cursor: pointer;">Submit &amp; Next</button>
+        </div>
+    </div>
+</div>
+
+<!-- STEP 5 -->
+<div class="question-step" id="q-step-5" style="display: none;">
+    <div style="background: #1e293b; border-radius: 12px; padding: 30px; border: 1px solid rgba(255,255,255,0.1); margin: 20px 0; color: #f8fafc;">
+        <div style="background: #144d29; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold;">
+            <span>Module: Academic &amp; Soil Science (OSU Extension Alignment)</span>
+            <span style="color: #4ade80;">Case Study 5 of 6</span>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 20px; margin-bottom: 25px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 220px;">
+                <span style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 20px; display: inline-block; margin-bottom: 0.75rem;">Field Clue</span>
+                <h4 style="color: #ffffff; margin: 0 0 0.5rem 0; font-size: 1.1rem;">Jar Test Texturing Analysis</h4>
+                <p style="font-size: 0.9rem; color: #cbd5e1; margin: 0; line-height: 1.5;">Performing a standard sedimentation jar test to separate sand, silt, and clay fractions.</p>
+            </div>
+            <div style="width: 200px; height: 130px; background: #0f172a; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; text-align: center;">
+                <span style="color: #94a3b8; font-size: 0.8rem; padding: 10px;">[Sedimentation Jar Placeholder]</span>
+            </div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 20px;">
+            <h3 style="color: #ffffff; margin-top: 0; font-size: 1.15rem; margin-bottom: 15px;">Question 5: In a standard soil texture jar test sedimentation breakdown, which soil fraction settles out to the bottom first within the first minute?</h3>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q5" value="a" style="accent-color: #27ae60;"> <span>A) Sand particles</span>
+                </label>
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q5" value="b" style="accent-color: #27ae60;"> <span>B) Silt particles</span>
+                </label>
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q5" value="c" style="accent-color: #27ae60;"> <span>C) Clay particles</span>
+                </label>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+            <button onclick="goToStep(4)" style="background-color: #334155; color: #cbd5e1; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 600; cursor: pointer;">Previous</button>
+            <button onclick="awardXP(50); goToStep(6);" style="background-color: #27ae60; color: white; border: none; padding: 10px 22px; border-radius: 6px; font-weight: 600; cursor: pointer;">Submit &amp; Next</button>
+        </div>
+    </div>
+</div>
+
+<!-- STEP 6 -->
+<div class="question-step" id="q-step-6" style="display: none;">
+    <div style="background: #1e293b; border-radius: 12px; padding: 30px; border: 1px solid rgba(255,255,255,0.1); margin: 20px 0; color: #f8fafc;">
+        <div style="background: #144d29; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold;">
+            <span>Module: Academic &amp; Soil Science (OSU Extension Alignment)</span>
+            <span style="color: #4ade80;">Case Study 6 of 6</span>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 20px; margin-bottom: 25px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 220px;">
+                <span style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 20px; display: inline-block; margin-bottom: 0.75rem;">Final Field Clue</span>
+                <h4 style="color: #ffffff; margin: 0 0 0.5rem 0; font-size: 1.1rem;">Macro-Nutrient &amp; NPK Analysis</h4>
+                <p style="font-size: 0.9rem; color: #cbd5e1; margin: 0; line-height: 1.5;">Interpreting standard commercial or extension lab outputs for Nitrogen (N), Phosphorus (P), Potassium (K), and organic matter percentages.</p>
+            </div>
+            <div style="width: 200px; height: 130px; background: #0f172a; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; text-align: center;">
+                <span style="color: #94a3b8; font-size: 0.8rem; padding: 10px;">[NPK Lab Report Placeholder]</span>
+            </div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 20px;">
+            <h3 style="color: #ffffff; margin-top: 0; font-size: 1.15rem; margin-bottom: 15px;">Question 6: Which macro-element triad forms the core primary nutrients tested and reported on routine agricultural and extension soil fertility panels?</h3>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q6" value="a" style="accent-color: #27ae60;"> <span>A) Nitrogen, Phosphorus, Potassium (N-P-K)</span>
+                </label>
+                <label style="background: #0f172a; border: 1px solid #334155; padding: 12px 15px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.95rem;">
+                    <input type="radio" name="deck_q6" value="b" style="accent-color: #27ae60;"> <span>B) Carbon, Gold, Silicon (C-Au-Si)</span>
+                </label>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+            <button onclick="goToStep(5)" style="background-color: #334155; color: #cbd5e1; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 600; cursor: pointer;">Previous</button>
+            <button onclick="awardXP(50); goToStep(7);" style="background-color: #27ae60; color: white; border: none; padding: 10px 22px; border-radius: 6px; font-weight: 600; cursor: pointer;">Complete &amp; View Results</button>
+        </div>
+    </div>
+</div>
+
+<!-- STEP 7: CONGRATULATIONS & COMPLETION PAGE -->
+<div class="question-step" id="q-step-7" style="display: none;">
+    <div style="background: #1e293b; border-radius: 12px; padding: 40px 30px; border: 1px solid rgba(255,255,255,0.1); margin: 20px 0; color: #f8fafc; text-align: center;">
+        <div style="background: #144d29; border: 1px solid rgba(255,255,255,0.2); border-radius: 50px; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; font-size: 1.8rem; color: #4ade80;">✓</div>
+        
+        <h2 style="color: #2ecc71; margin-top: 0; font-size: 1.8rem; margin-bottom: 10px;">Training Module Complete!</h2>
+        <p style="color: #cbd5e1; font-size: 1.05rem; max-width: 500px; margin: 0 auto 30px auto; line-height: 1.6;">You have successfully cleared all 6 diagnostic cases for Academic &amp; Soil Science and updated your field operations log.</p>
+        
+        <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 20px; max-width: 350px; margin: 0 auto 30px auto; display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: #94a3b8; font-weight: 600;">Total Global XP:</span>
+            <span style="color: #4ade80; font-size: 1.2rem; font-weight: bold;" id="completion-xp-display">400</span>
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+            <a href="training-modules-and-mutual-growth.html" style="background-color: #27ae60; color: white; padding: 12px 22px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.95rem;">Return to Training Portal</a>
+            <a href="index.html" style="background-color: #334155; color: #cbd5e1; padding: 12px 22px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.1);">Return to Home Hub</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function goToStep(stepNumber) {
+        const steps = document.querySelectorAll('.question-step');
+        steps.forEach(step => step.style.display = 'none');
+        
+        const targetStep = document.getElementById(`q-step-${stepNumber}`);
+        if (targetStep) {
+            targetStep.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Update completion screen XP display if hitting step 7
+        if (stepNumber === 7) {
+            const currentXP = localStorage.getItem('afti_global_xp') || 400;
+            const xpDisplay = document.getElementById('completion-xp-display');
+            if (xpDisplay) xpDisplay.innerText = currentXP;
+        }
+    }
+</script>
