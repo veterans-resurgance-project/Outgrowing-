@@ -111,6 +111,68 @@ We challenge you to select <strong>The Foster-Alum Route (The Difficult Path)</s
 <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin: 25px 0; text-align: center;">
     <p style="color: var(--muted); margin: 0 0 15px 0; font-size: 0.95rem;">Looking for a complete breakdown of the backend flow?</p>
     <a href="participant-matching-system.html" style="display: inline-block; background: #334155; color: #f8fafc; padding: 12px 24px; border-radius: 8px; font-weight: bold; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.15); transition: background 0.2s, border-color 0.2s;" onmouseover="this.style.background='#475569'; this.style.borderColor='#38bdf8';" onmouseout="this.style.background='#334155'; this.style.borderColor='rgba(255, 255, 255, 0.15)';">How it all Works →</a>
+<!-- Compact Buy the Farm Button Widget -->
+<style>
+    .buy-farm-widget {
+        background: rgba(15, 23, 42, 0.8);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        border-radius: 10px;
+        padding: 12px 16px;
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        font-family: system-ui, sans-serif;
+    }
+    .buy-farm-widget .label-group {
+        display: flex;
+        flex-direction: column;
+    }
+    .buy-farm-widget .title {
+        color: #f8fafc;
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+    .buy-farm-widget .subtitle {
+        color: #94a3b8;
+        font-size: 0.75rem;
+    }
+    .btn-buy-farm {
+        background: #27ae60;
+        color: #fff;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.1s;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+    .btn-buy-farm:hover {
+        background: #1e8449;
+        transform: translateY(-1px);
+    }
+</style>
+
+<div class="buy-farm-widget">
+    <div class="label-group">
+        <span class="title">Land Acquisition Option</span>
+        <span class="subtitle">Secure permanent title deed</span>
+    </div>
+    <a href="buy-the-farm.html" class="btn-buy-farm" onclick="triggerBuyTheFarm(event)">Buy the Farm →</a>
+</div>
+
+<script>
+    function triggerBuyTheFarm(event) {
+        // Optional: Pass current gameState to your new file via localStorage before navigating
+        if (typeof gameState !== 'undefined') {
+            localStorage.setItem('farmGameState', JSON.stringify(gameState));
+        }
+        // Allows normal navigation to your new buy-the-farm.html file
+    }
+</script>
 </div>
 </div>
 </main>
