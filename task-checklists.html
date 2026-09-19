@@ -103,13 +103,13 @@
         <h2>Cut Flowers Track Task List</h2>
         <p><em>Focus: Hydration telemetry, seasonal trimming, and stem sorting metrics.</em></p>
         <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Daily Routines</h3>
-        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Check field soil moisture maps and verify drip line emitter flows.</span></div>
-        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Execute early morning harvest before direct heat triggers wilting.</span></div>
-        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Sanitize clean harvest buckets and treat water supply with holding solution.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Check field soil moisture maps and verify drip line emitter flows.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Execute early morning harvest before direct heat triggers wilting.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Sanitize clean harvest buckets and treat water supply with holding solution.</span></div>
         
         <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Weekly Routines</h3>
-        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Prune lower canopy leaves to optimize airflow across high-density beds.</span></div>
-        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Grade stem quality lengths and package sets for direct regional shipment.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Prune lower canopy leaves to optimize airflow across high-density beds.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Grade stem quality lengths and package sets for direct regional shipment.</span></div>
     </div>
 
     <!-- 4. FAST GREENS -->
@@ -117,3 +117,70 @@
         <h2>High Yield Fast Greens Task List</h2>
         <p><em>Focus: High turnover cycles, hydro-vat nutrient profiles, and seed layouts.</em></p>
         <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Daily Routines</h3>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Log hydroponic basin nutrient solution levels, EC measurements, and pH values.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Monitor root zone oxygen levels and clear blockages from return lines.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Verify automatic light schedules and measure ceiling height clearance gaps.</span></div>
+        
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Weekly Routines</h3>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Seed new propagation plug boards to protect continuous harvest loops.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Deep-clean holding reservoirs and re-balance water systems with fresh biological trace assets.</span></div>
+    </div>
+
+    <!-- NAVIGATION HUB BOTTOM BANNER -->
+    <div class="panel" style="border-top: 3px solid var(--primary); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+        <div>
+            <h4 style="margin: 0; color: white; font-size: 1.1rem;">Ready to record telemetry readings?</h4>
+            <p style="margin: 5px 0 0 0; font-size: 0.85rem;">Submit your findings and check the diagnostic mitigation logs instantly.</p>
+        </div>
+        <a href="totals-ledger.html" class="btn">Go to Telemetry &amp; Action Hub →</a>
+    </div>
+
+</div> <!-- Closes .container -->
+
+<script>
+    // FIXED INLINE TAB NAV SWITCHER
+    function switchTab(targetId) {
+        // 1. Hide all task sections
+        const sections = document.querySelectorAll('.task-section');
+        sections.forEach(sec => {
+            sec.classList.remove('active');
+            sec.style.display = 'none'; // Hard reset display
+        });
+        
+        // 2. Clear all active tab button styles
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // 3. Target explicitly selected panel and button assets
+        const activeSection = document.getElementById('section-' + targetId);
+        const activeButton = document.getElementById('btn-' + targetId);
+        
+        if (activeSection && activeButton) {
+            activeSection.classList.add('active');
+            activeSection.style.display = 'block';
+            activeButton.classList.add('active');
+        }
+    }
+
+    // INTERACTIVE CHECKBOX STATE MANIPULATION
+    function toggleCheck(event, cardElement) {
+        const checkbox = cardElement.querySelector('input[type="checkbox"]');
+        
+        // Prevent double click interference if clicking the checkbox box itself
+        if (event.target !== checkbox) {
+            checkbox.checked = !checkbox.checked;
+        }
+        
+        if (checkbox.checked) {
+            cardElement.classList.add('completed');
+        } else {
+            cardElement.classList.remove('completed');
+        }
+    }
+</script>
+
+</body>
+</html>
+
