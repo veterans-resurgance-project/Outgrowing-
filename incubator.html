@@ -48,7 +48,59 @@
       <a href="shared_harvest_incubator.html>System Designs</a>
     </div>
   </nav>
+<!-- Compact Buy the Farm Button Widget -->
+<style>
+    .buy-farm-widget {
+        background: rgba(15, 23, 42, 0.8);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        border-radius: 10px;
+        padding: 12px 16px;
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        font-family: system-ui, sans-serif;
+    }
+    .buy-farm-widget .label-group {
+        display: flex;
+        flex-direction: column;
+    }
+    .buy-farm-widget .title {
+        color: #f8fafc;
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+    .buy-farm-widget .subtitle {
+        color: #94a3b8;
+        font-size: 0.75rem;
+    }
+    .btn-buy-farm {
+        background: #27ae60;
+        color: #fff;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.1s;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+    .btn-buy-farm:hover {
+        background: #1e8449;
+        transform: translateY(-1px);
+    }
+</style>
 
+<div class="buy-farm-widget">
+    <div class="label-group">
+        <span class="title">Land Acquisition Option</span>
+        <span class="subtitle">Secure permanent title deed</span>
+    </div>
+    <a href="buy-the-farm.html" class="btn-buy-farm" onclick="triggerBuyTheFarm(event)">Buy the Farm →</a>
+</div>
+</div>
   <main>
     <!-- MAIN HERO OVERVIEW PANEL -->
     <div class="panel">
