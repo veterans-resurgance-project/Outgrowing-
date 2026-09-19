@@ -41,7 +41,7 @@ input[type="text"], select { width:100%; padding:8px; background:#0f172a; border
 </div>
 <button type="submit" class="btn">Submit Secure Partnership Request</button>
 </form>
-<a href="shared-harvest-hub.html?v=6" class="btn-back">← Return to Shared Harvest Hub</a>
+<a href="pshared-harvest-hub.html?v=6" class="btn-back">← Return to Shared Harvest Hub</a>
 </div>
 <script>
 document.getElementById('inquiryForm').addEventListener('submit', function(e) {
@@ -51,7 +51,7 @@ let water = document.getElementById('waterSource').value;
 let xp = parseInt(localStorage.getItem('globalXP')) || 0;
 localStorage.setItem('globalXP', xp + 20);
 alert('Inquiry Successfully Logged!\nPlot Size Secured: ' + acreage + '\nIrrigation Plan Registered: ' + water + '\n+20 Global XP Awarded.');
-window.location.href = 'shared-harvest-hub.html?v=6';
+window.location.href = 'pshared-harvest-hub.html?v=6';
 });
 </script>
 </body>
