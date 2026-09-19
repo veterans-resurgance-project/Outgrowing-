@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Totals Ledger &amp; Enterprise Summary</title>
+    <style>
+        :root {
+            --bg: #0f172a; --card: #1e293b; --txt: #f8fafc; --primary: #27ae60; --primary-dark: #1e8449;
+            --hud: #144d29; --accent: #38bdf8; --muted: #94a3b8; --border: rgba(255, 255, 255, 0.1);
+            --warn: #f59e0b; --danger: #ef4444;
+        }
+        body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 20px; line-height: 1.6; }
+        .container { max-width: 950px; margin: 20px auto; background: var(--card); border-radius: 14px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background: var(--hud); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        h1 { color: #4ade80; font-size: 1.8rem; margin-top: 0; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+        h2 { color: var(--accent); font-size: 1.2rem; margin-top: 25px; border-left: 4px solid var(--accent); padding-left: 10px; }
+        p, label { color: var(--muted); } strong { color: var(--txt); }
+        .panel { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px; padding: 25px; margin-top: 20px; }
+        .btn { background: var(--primary); color: #fff; padding: 12px 24px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: var(--primary-dark); }
+        table { width: 100%; border-collapse: collapse; background: rgba(15, 23, 42, 0.6); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin-top: 15px; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        th { background: rgba(20, 77, 41, 0.4); color: #4ade80; }
+        .highlight-box { background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 10px; padding: 20px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hud-bar">
+        <span>Simulation Milestone: <span style="color:var(--accent);">Master Totals Ledger</span></span>
+        <div>Final Capital Reserve: <strong id="hud-cash" style="color:#4ade80;">$0</strong></div>
+    </div>
+
+    <div class="panel">
+        <h1>Decadal Enterprise &amp; Livestock Summary</h1>
+        <p>Review your compiled production revenues, training class percentage bonuses, and final cumulative financial standing across Linn County.</p>
+
+        <h2>1. Crop &amp; Enterprise History</h2>
+        <div id="crop-ledger-container">
+            <p style="color:var(--muted);">Loading crop history records...</p>
+        </div>
+
+        <h2>2. Livestock Integration &amp; Training Bonus</h2>
+        <div id="livestock-ledger-container" class="panel" style="background: rgba(15, 23, 42, 0.8);">
+            <p style="color:var(--muted);">Loading livestock metrics...</p>
+        </div>
+
+        <div class="highlight-box">
+            <div>
+                <h3 style="color:#4ade80; margin:0 0 5px 0;">Training Class Mastery Bonus Applied</h3>
+                <p id="training-bonus-text" style="margin:0; font-size:0.85rem; color:var(--muted);">Calculated from completed certification modules.</p>
+            </div>
+            <div style="text-align: right;">
+                <span style="font-size:0.8rem; color:var(--muted);">Total Bonus Multiplier</span><br>
+                <strong id="training-bonus-pct" style="color:#38bdf8; font-size: 1.2rem;">0%</strong>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 0.9rem; color: var(--muted);">Ready to secure permanent title deeds?</span>
+        <button class="btn" onclick="proceedToBuyTheFarm()">Proceed to Buy the Farm Module →</button>
+    </div>
+</div>
+
+<script>
+    let gameState = JSON.parse(localStorage.getItem('farmGameState')) || {
+        cash: 25000,
+        history: [
+            { year: 1, upfront: 8000, revenue: 14000, cost: 3500, net: 2500 },
+            { year: 2, upfront: 7500, revenue: 15200, cost: 3500, net: 4200 },
+            { year: 3, upfront: 9000, revenue: 16800, cost: 3500, net: 4300 }
+        ],
+        livestock: { selectedAnimal: 'sheep', units: 2, classes: 4, bonusPercent: 12, totalCost: 8000, finalRev: 14560, netProfit: 6560 }
+    };
+
+    document.getElementById('hud-cash').innerText = '$' + Math.round(gameState.cash).toLocaleString();
+
+    // Render Crop Ledger Table
+    let cropHtml = `<table><thead><tr><th>Year / Phase</th><th>Investments</th><th>Gross Revenue</th><th>Overhead</th><th>Net Position</th></tr></thead><tbody>`;
+    let totalCropNet = 0;
+    if (gameState.history && gameState.history.length > 0) {
+        gameState.history.forEach(h => {
+            totalCropNet += h.net;
+            cropHtml += `<tr><td><strong>Year ${h.year}</strong></td><td>$${h.upfront.toLocaleString()}</td><td>$${h.revenue.toLocaleString()}</td><td>$${h.cost.toLocaleString()}</td><td style="color:${h.net >= 0 ? '#4ade80':'#ef4444'};">$${h.net.toLocaleString()}</td></tr>`;
+        });
+    } else {
+        cropHtml += `<tr><td colspan="5" style="text-align:center; color:var(--muted);">No prior crop history recorded.</td></tr>`;
+    }
+    cropHtml += `</tbody></table>`;
+    document.getElementById('crop-ledger-container').innerHTML = cropHtml;
+
+    // Render Livestock & Training Summary
+    let lv = gameState.livestock || { selectedAnimal: 'Dairy Sheep', units: 2, classes: 4, bonusPercent: 12, totalCost: 4000, finalRev: 7280, netProfit: 3280 };
+    document.getElementById('livestock-ledger-container').innerHTML = `
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+            <div><span style="color:var(--muted); font-size:0.85rem;">Enterprise Track:</span><br><strong style="color:#fff; text-transform:capitalize;">${lv.selectedAnimal} (${lv.units} Units)</strong></div>
+            <div><span style="color:var(--muted); font-size:0.85rem;">Livestock Investment:</span><br><strong style="color:#ef4444;">-$${Math.round(lv.totalCost).toLocaleString()}</strong></div>
+            <div><span style="color:var(--muted); font-size:0.85rem;">Adjusted Revenue:</span><br><strong style="color:#4ade80;">+$${Math.round(lv.finalRev).toLocaleString()}</strong></div>
+            <div><span style="color:var(--muted); font-size:0.85rem;">Net Livestock Return:</span><br><strong style="color:${lv.netProfit >= 0 ? '#4ade80':'#ef4444'};">$${Math.round(lv.netProfit).toLocaleString()}</strong></div>
+        </div>
+    `;
+
+    document.getElementById('training-bonus-text').innerText = `Based on ${lv.classes || 4} certified training classes logged, applying a compounding boost across your revenue streams.`;
+    document.getElementById('training-bonus-pct').innerText = `+${lv.bonusPercent || 12}% Boost`;
+
+    function proceedToBuyTheFarm() {
+        localStorage.setItem('farmGameState', JSON.stringify(gameState));
+        window.location.href = 'buy-the-farm.html';
+    }
+</script>
+</body>
+</html>
