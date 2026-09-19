@@ -43,7 +43,35 @@
     <div id="screen-allocate" class="panel">
         <h1 id="allocation-title">Year 6: Strategic Expansion &amp; Systems Integration</h1>
         <p id="system-perk-summary" style="color: #4ade80; font-weight: bold;"></p>
+<!-- EXPANSION PANEL -->
+<div id="screen-allocate" class="panel">
+    <h1 id="allocation-title">Year 6: Strategic Expansion &amp; Re-allocation</h1>
+    <p id="coop-status-banner" style="color: #4ade80; font-weight: bold;"></p>
 
+    <!-- Your existing expansion select box... -->
+
+    <!-- ADD THE LIVESTOCK MODULE LINK CARD HERE -->
+    <div style="background: rgba(39, 174, 96, 0.05); border: 1px solid rgba(39, 174, 96, 0.3); border-radius: 10px; padding: 20px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+        <div>
+            <h3 style="color:#4ade80; margin:0 0 5px 0;">🐑 Ready to Add Livestock &amp; Training Bonuses?</h3>
+            <p style="color:var(--muted); margin:0; font-size:0.85rem;">Branch into Dairy Sheep, Chickens, Quail, or Horses and calculate your training class multipliers.</p>
+        </div>
+        <div>
+            <a href="livestock-track.html" class="btn" style="text-decoration:none; white-space:nowrap;" onclick="saveStateBeforeLivestock(event)">Open Livestock Track →</a>
+        </div>
+    </div>
+
+    <!-- Your acre allocation inputs below... -->
+</div>
+
+<script>
+    // Optional helper script to make sure your cash/progress is saved before jumping over
+    function saveStateBeforeLivestock(event) {
+        if (typeof gameState !== 'undefined') {
+            localStorage.setItem('farmGameState', JSON.stringify(gameState));
+        }
+    }
+</script>
         <div class="checkbox-group" style="border-color: rgba(74, 222, 128, 0.4); background: rgba(39, 174, 96, 0.05);">
             <h3 style="color:#4ade80; margin-top:0;">🌟 Years 6–10 Strategic Growth Options</h3>
             <select id="expansion-track" onchange="updateExpansionSettings()" style="width:100%; padding:12px; background:var(--bg); border:1px solid var(--border); border-radius:6px; color:var(--txt); font-size:1rem; margin-bottom:15px;">
