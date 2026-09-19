@@ -175,7 +175,7 @@
 
         .secondary-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 15px;
             margin-top: 15px;
         }
@@ -219,6 +219,13 @@
 
         .btn-small:hover {
             background-color: var(--primary);
+        }
+
+        .button-group-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -274,13 +281,13 @@
 
       <hr class="section-divider">
 
-      <!-- PARTNER-ALIGNED CURRICULUM MATRIX -->
+      <!-- BALANCED 6-BOX TRAINING & OPERATIONS MATRIX -->
       <div class="secondary-section">
-          <h3>🌱 Partner-Aligned Training Tracks</h3>
-          <p style="margin-bottom: 20px;">Trainees progress through four specialized curriculum pathways designed to meet the direct standards of our institutional and community partners:</p>
+          <h3>🌱 Partner-Aligned Curriculum & Operational Matrix</h3>
+          <p style="margin-bottom: 20px;">Trainees progress through six comprehensive curriculum and management tracks designed to meet regional agricultural standards:</p>
           
           <div class="secondary-grid">
-              <!-- TRACK 1: ACADEMIC & SOIL SCIENCE -->
+              <!-- BOX 1: ACADEMIC & SOIL SCIENCE -->
               <div class="secondary-card">
                   <div>
                       <h4>🧪 Academic &amp; Soil Science</h4>
@@ -289,7 +296,7 @@
                   <a href="training-academic-soil.html" class="btn-small">Launch Track →</a>
               </div>
 
-              <!-- TRACK 2: FARMER & GROWER OPERATIONS -->
+              <!-- BOX 2: FARMER & GROWER OPERATIONS -->
               <div class="secondary-card">
                   <div>
                       <h4>🚜 Farmer &amp; Grower Operations</h4>
@@ -298,7 +305,7 @@
                   <a href="training-farmer-ops.html" class="btn-small">Launch Track →</a>
               </div>
 
-              <!-- TRACK 3: EMERGENCY RESPONSE & CERTIFICATIONS -->
+              <!-- BOX 3: EMERGENCY RESPONSE & CERTIFICATIONS -->
               <div class="secondary-card">
                   <div>
                       <h4>🔥 Emergency Response &amp; Certs</h4>
@@ -307,13 +314,39 @@
                   <a href="training-emergency-certs.html" class="btn-small">Launch Track →</a>
               </div>
 
-              <!-- TRACK 4: LEGAL, ADVOCACY & MENTAL HEALTH -->
+              <!-- BOX 4: LEGAL, ADVOCACY & MENTAL HEALTH -->
               <div class="secondary-card">
                   <div>
                       <h4>⚖️ Legal, Advocacy &amp; Support</h4>
                       <p>Wraparound stability, trauma-informed peer communication, community re-entry frameworks, and municipal advocacy navigation.</p>
                   </div>
                   <a href="training-legal-support.html" class="btn-small">Launch Track →</a>
+              </div>
+
+              <!-- BOX 5: LEASE & SHARED HARVEST SUBJECT MATTER -->
+              <div class="secondary-card">
+                  <div>
+                      <h4>🤝 Lease &amp; Shared Harvest</h4>
+                      <p>Cooperative lease frameworks, land tenure agreements, shared-harvest revenue splits, and equity incubator strategies.</p>
+                  </div>
+                  <div class="button-group-wrap">
+                      <a href="pencil-to-presentation.html" class="btn-small">Pencil-to-Presentation →</a>
+                      <a href="shared-harvest-incubator.html" class="btn-small">Shared Harvest Hub →</a>
+                  </div>
+              </div>
+
+              <!-- BOX 6: DAILY & WEEKLY OPERATIONAL TASKS HUB -->
+              <div class="secondary-card">
+                  <div>
+                      <h4>📋 Daily &amp; Weekly Tasks Hub</h4>
+                      <p>Core operational routines, safety pairing requirements, and checklists structured across primary enterprise categories.</p>
+                  </div>
+                  <div class="button-group-wrap">
+                      <a href="task-checklists.html?cat=mushrooms" class="btn-small">🍄 Mushrooms</a>
+                      <a href="task-checklists.html?cat=apiary" class="btn-small">🐝 Apiary</a>
+                      <a href="task-checklists.html?cat=greens" class="btn-small">🥗 Greens</a>
+                      <a href="task-checklists.html?cat=flowers" class="btn-small">💐 Flowers</a>
+                  </div>
               </div>
           </div>
       </div>
