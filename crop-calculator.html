@@ -28,7 +28,7 @@
         }
 
         .container {
-            max-width: 950px;
+            max-width: 1050px;
             margin: 30px auto;
             background: var(--card);
             border-radius: 14px;
@@ -97,8 +97,8 @@
 
         .output-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
             margin-top: 25px;
         }
 
@@ -106,15 +106,51 @@
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 20px;
+            padding: 18px;
             text-align: center;
         }
 
         .metric-value {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: var(--accent);
             margin-top: 8px;
+        }
+
+        /* 4-Year Table Styles */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        th {
+            background: rgba(20, 77, 41, 0.4);
+            color: #4ade80;
+            font-weight: 600;
+        }
+
+        td {
+            color: var(--muted);
+        }
+
+        td strong {
+            color: var(--txt);
         }
 
         .strategy-box {
@@ -151,27 +187,34 @@
 
 <div class="container">
     <div class="hud-bar">
-        <span>Decision Engine: <span style="color:var(--accent);">Crop &amp; Infrastructure Calculator</span></span>
+        <span>Decision Engine: <span style="color:var(--accent);">4-Year Economic Lifecycle &amp; Yield Calculator</span></span>
         <div>Global XP Ledger: <span id="global-points" style="color:#4ade80;">400</span></div>
     </div>
 
-    <h1>Crop &amp; Infrastructure Investment Simulator</h1>
-    <p>Select a crop tier and scale to evaluate upfront costs, seasonal labor demand, sustainability footprint, and strategic timing for adoption.</p>
+    <h1>Crop &amp; Enterprise Investment Simulator</h1>
+    <p>Select your agricultural track and scale to evaluate upfront infrastructure, labor demands, harvest yield averages per acre, and a complete 4-year cost-vs-revenue lifecycle.</p>
 
     <!-- CALCULATOR FORM -->
     <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px; padding: 25px; margin-top: 20px;">
         <div class="form-group">
-            <label for="crop-select"><strong>Select Crop / Production Tier:</strong></label>
+            <label for="crop-select"><strong>Select Enterprise / Production Track:</strong></label>
             <select id="crop-select" onchange="calculateMetrics()">
-                <option value="greens">Tier 1: Direct-Market Leafy Greens &amp; Herbs (Low Infrastructure)</option>
-                <option value="root">Tier 2: Storage Root Crops &amp; Field Veggies (Moderate Infrastructure)</option>
-                <option value="berries">Tier 3: High-Tunnel Berries &amp; Specialty Fruit (High Infrastructure)</option>
-                <option value="aquaculture">Tier 4: Integrated Aquaponics &amp; Value-Added Processing (Advanced Infrastructure)</option>
+                <optgroup label="Standard Crops & Value-Added">
+                    <option value="greens">Direct-Market Leafy Greens &amp; Herbs (Low Infrastructure)</option>
+                    <option value="root">Storage Root Crops &amp; Field Veggies (Moderate Infrastructure)</option>
+                    <option value="berries">High-Tunnel Berries &amp; Specialty Fruit (High Infrastructure)</option>
+                    <option value="aquaculture">Integrated Aquaponics &amp; Processing (Advanced Infrastructure)</option>
+                </optgroup>
+                <optgroup label="Specialized Cooperative Tracks">
+                    <option value="mushrooms">Specialized Mushroom Cultivation (Inoculated Logs / Substrate)</option>
+                    <option value="apiary">Apiary &amp; Pollination Track (Honey, Wax &amp; Nectar Yield)</option>
+                    <option value="flowers">Specialty Cut Flowers (High-Value Direct &amp; Event Market)</option>
+                </optgroup>
             </select>
         </div>
 
         <div class="form-group">
-            <label for="scale-input"><strong>Production Scale Factor (Plots / Units):</strong></label>
+            <label for="scale-input"><strong>Production Scale Factor (Acres / Units):</strong></label>
             <input type="number" id="scale-input" value="1" min="1" max="50" oninput="calculateMetrics()">
         </div>
     </div>
@@ -179,17 +222,40 @@
     <!-- OUTPUT METRICS -->
     <div class="output-grid">
         <div class="metric-card">
-            <p style="margin:0; font-size:0.9rem;">Estimated Upfront Infrastructure</p>
+            <p style="margin:0; font-size:0.85rem;">Upfront Infrastructure</p>
             <div id="out-cost" class="metric-value">$1,200</div>
         </div>
         <div class="metric-card">
-            <p style="margin:0; font-size:0.9rem;">Seasonal Labor Demand</p>
-            <div id="out-labor" class="metric-value">120 Hours</div>
+            <p style="margin:0; font-size:0.85rem;">Seasonal Labor Demand</p>
+            <div id="out-labor" class="metric-value">120 Hrs</div>
         </div>
         <div class="metric-card">
-            <p style="margin:0; font-size:0.9rem;">Sustainability Footprint Score</p>
-            <div id="out-footprint" class="metric-value" style="color:#4ade80;">Low Impact (A+)</div>
+            <p style="margin:0; font-size:0.85rem;">Avg Yield / Acre</p>
+            <div id="out-yield" class="metric-value" style="color:#4ade80;">8,500 lbs</div>
         </div>
+        <div class="metric-card">
+            <p style="margin:0; font-size:0.85rem;">Footprint Score</p>
+            <div id="out-footprint" class="metric-value" style="font-size: 1.3rem;">Low (A+)</div>
+        </div>
+    </div>
+
+    <!-- 4-YEAR FINANCIAL LIFECYCLE TABLE -->
+    <h2>4-Year Cost vs. Revenue Lifecycle</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Operating Costs</th>
+                    <th>Projected Revenue</th>
+                    <th>Net Margin</th>
+                    <th>Lifecycle Status</th>
+                </tr>
+            </thead>
+            <tbody id="lifecycle-tbody">
+                <!-- Dynamically populated -->
+            </tbody>
+        </table>
     </div>
 
     <!-- STRATEGIC FIT & STAGE ADVICE -->
@@ -203,7 +269,7 @@
     <!-- FOOTER NAV -->
     <div class="action-container">
         <a href="grant-hub.html" class="btn-secondary">← Back to Grant Hub</a>
-        <span style="color: var(--muted); font-size: 0.85rem;">System Engine Status: Interactive</span>
+        <span style="color: var(--muted); font-size: 0.85rem;">System Engine Status: Multi-Track Active</span>
     </div>
 </div>
 
@@ -216,36 +282,95 @@
 
     const cropData = {
         greens: {
-            baseCost: 800,
-            costPerScale: 400,
-            baseLabor: 90,
-            laborPerScale: 45,
+            baseCost: 800, costPerScale: 400,
+            baseLabor: 90, laborPerScale: 45,
+            yieldPerAcre: "12,000 lbs",
             footprint: "Low Impact (A+)",
-            strategy: "<strong>Ideal for Early-Stage Farms & New Recruits:</strong> Low upfront capital requirements allow you to generate immediate cash flow and test distribution pipelines without financial overextension. Recommended for Year 1 baseline operations."
+            years: [
+                { cost: 1200, rev: 3500, status: "Year 1: Market Entry & Cash Flow" },
+                { cost: 1400, rev: 4500, status: "Year 2: Stable Yields" },
+                { cost: 1500, rev: 5200, status: "Year 3: Expanded Local Contracts" },
+                { cost: 1600, rev: 5800, status: "Year 4: Fully Optimized Cell" }
+            ],
+            strategy: "<strong>Ideal for Early-Stage Farms & New Recruits:</strong> Low upfront capital requirements allow immediate cash flow generation. Recommended for Year 1 baseline operations."
         },
         root: {
-            baseCost: 2500,
-            costPerScale: 1200,
-            baseLabor: 180,
-            laborPerScale: 80,
+            baseCost: 2500, costPerScale: 1200,
+            baseLabor: 180, laborPerScale: 80,
+            yieldPerAcre: "18,500 lbs",
             footprint: "Moderate Impact (A)",
-            strategy: "<strong>Ideal for Mid-Stage Expansion:</strong> Requires basic cold storage and bulk handling infrastructure. Best introduced once direct-market customer bases are established and reliable transport is secured."
+            years: [
+                { cost: 3100, rev: 4800, status: "Year 1: Storage Setup & Inception" },
+                { cost: 2600, rev: 6200, status: "Year 2: Bulk Distribution Active" },
+                { cost: 2700, rev: 7400, status: "Year 3: Regional Wholesale Integration" },
+                { cost: 2800, rev: 8200, status: "Year 4: Mature Scale" }
+            ],
+            strategy: "<strong>Ideal for Mid-Stage Expansion:</strong> Requires basic cold storage and bulk handling infrastructure. Best introduced once direct-market customer bases are established."
         },
         berries: {
-            baseCost: 8500,
-            costPerScale: 3500,
-            baseLabor: 320,
-            laborPerScale: 140,
+            baseCost: 8500, costPerScale: 3500,
+            baseLabor: 320, laborPerScale: 140,
+            yieldPerAcre: "9,000 lbs",
             footprint: "Optimized / Water-Efficient (A-)",
-            strategy: "<strong>Ideal for Growth &amp; Grant Subsidies:</strong> High upfront infrastructure costs (high tunnels, drip irrigation) are offset by premium pricing and high demand. Best deployed using USDA LFPP or CIG grant assistance to mitigate capital risk."
+            years: [
+                { cost: 9500, rev: 3200, status: "Year 1: Establishment & Canopy Growth (Net Deficit)" },
+                { cost: 4200, rev: 11000, status: "Year 2: First Full Harvest Return" },
+                { cost: 4500, rev: 15500, status: "Year 3: Peak Production Cycle" },
+                { cost: 4800, rev: 16800, status: "Year 4: Stable High-Yield Return" }
+            ],
+            strategy: "<strong>Ideal for Growth &amp; Grant Subsidies:</strong> High upfront infrastructure costs (high tunnels) are offset by premium pricing. Best deployed using USDA LFPP or CIG grants."
         },
         aquaculture: {
-            baseCost: 22000,
-            costPerScale: 9500,
-            baseLabor: 500,
-            laborPerScale: 220,
+            baseCost: 22000, costPerScale: 9500,
+            baseLabor: 500, laborPerScale: 220,
+            yieldPerAcre: "24,000 lbs equiv.",
             footprint: "Closed-Loop / High Efficiency (B+)",
-            strategy: "<strong>Advanced / Mature Stage Only:</strong> Demands significant technical oversight, continuous power, and specialized processing workflows. Do not attempt in Year 1; scale into this once your core labor crew and telemetry monitoring pipelines are fully proven."
+            years: [
+                { cost: 24500, rev: 12000, status: "Year 1: System Installation & Testing" },
+                { cost: 11000, rev: 28000, status: "Year 2: Commercial Processing Online" },
+                { cost: 11500, rev: 35000, status: "Year 3: Maximum Closed-Loop Output" },
+                { cost: 12000, rev: 38000, status: "Year 4: Scaled Enterprise Operations" }
+            ],
+            strategy: "<strong>Advanced / Mature Stage Only:</strong> Demands significant technical oversight and continuous power. Scale into this once your core crew and telemetry monitoring pipelines are fully proven."
+        },
+        mushrooms: {
+            baseCost: 4500, costPerScale: 1800,
+            baseLabor: 150, laborPerScale: 60,
+            yieldPerAcre: "14,000 lbs (Substrate/Log)",
+            footprint: "Regenerative / Mycological (A+)",
+            years: [
+                { cost: 5200, rev: 7500, status: "Year 1: Inoculation & Initial Flushes" },
+                { cost: 2400, rev: 12500, status: "Year 2: Yard & Shed Production Scaling" },
+                { cost: 2600, rev: 15000, status: "Year 3: Value-Added Extract & Fresh Markets" },
+                { cost: 2800, rev: 16500, status: "Year 4: Established Mycological Cell" }
+            ],
+            strategy: "<strong>High-Yield Complementary Track:</strong> Excellent for shaded micro-climates or indoor shed setups. Converts agricultural waste into high-value specialty gourmet yield with fast turnarounds."
+        },
+        apiary: {
+            baseCost: 3200, costPerScale: 1400,
+            baseLabor: 80, laborPerScale: 35,
+            yieldPerAcre: "2,200 lbs Honey + Pollination",
+            footprint: "Ecosystem Enhancer (A++)",
+            years: [
+                { cost: 3800, rev: 4200, status: "Year 1: Hive Establishment & Queen Rearing" },
+                { cost: 1600, rev: 8500, status: "Year 2: Full Honey Harvest & Pollination Fees" },
+                { cost: 1800, rev: 11000, status: "Year 3: Multi-Yard Expansion & Wax Products" },
+                { cost: 1900, rev: 12500, status: "Year 4: Stable Pollination Network" }
+            ],
+            strategy: "<strong>Ecosystem Anchor:</strong> Directly boosts yields across all neighboring crop and berry plots through active pollination while generating high-margin honey and wax revenue streams."
+        },
+        flowers: {
+            baseCost: 5500, costPerScale: 2200,
+            baseLabor: 280, laborPerScale: 120,
+            yieldPerAcre: "45,000 Stems",
+            footprint: "Pollinator-Friendly / Direct (A)",
+            years: [
+                { cost: 6400, rev: 9500, status: "Year 1: Soil Prep & Direct Florist Setup" },
+                { cost: 2800, rev: 18000, status: "Year 2: Event & Subscription Expansion" },
+                { cost: 3000, rev: 23000, status: "Year 3: Premium Wholesale & Wedding Pipeline" },
+                { cost: 3200, rev: 25000, status: "Year 4: Prime Floral Acreage" }
+            ],
+            strategy: "<strong>High-Margin Direct Market:</strong> Demands meticulous harvesting and cold-chain handling. Pairs exceptionally well with our digital pre-order and LFPP marketing framework."
         }
     };
 
@@ -258,9 +383,32 @@
         const totalLabor = data.baseLabor + (data.laborPerScale * (scale - 1));
 
         document.getElementById('out-cost').innerText = '$' + totalCost.toLocaleString();
-        document.getElementById('out-labor').innerText = totalLabor.toLocaleString() + ' Hours';
+        document.getElementById('out-labor').innerText = totalLabor.toLocaleString() + ' Hrs';
+        document.getElementById('out-yield').innerText = data.yieldPerAcre;
         document.getElementById('out-footprint').innerText = data.footprint;
         document.getElementById('out-strategy').innerHTML = data.strategy;
+
+        // Populate 4-Year Lifecycle Table
+        const tbody = document.getElementById('lifecycle-tbody');
+        tbody.innerHTML = '';
+
+        for (let i = 0; i < 4; i++) {
+            const yr = data.years[i];
+            const yrCost = yr.cost * scale;
+            const yrRev = yr.rev * scale;
+            const netMargin = yrRev - yrCost;
+            const marginColor = netMargin >= 0 ? '#4ade80' : '#f59e0b';
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><strong>Year ${i + 1}</strong></td>
+                <td>$${yrCost.toLocaleString()}</td>
+                <td>$${yrRev.toLocaleString()}</td>
+                <td style="color: ${marginColor}; font-weight: bold;">$${netMargin.toLocaleString()}</td>
+                <td>${yr.status}</td>
+            `;
+            tbody.appendChild(row);
+        }
     }
 </script>
 
