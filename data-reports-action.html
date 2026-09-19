@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Data Reports & Action Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --primary: #27ae60;
+            --primary-hover: #219653;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --hud-bg: #144d29;
+            --blue-accent: #38bdf8;
+            --danger: #ef4444;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* GLOBAL NAV BAR STYLES */
+        nav {
+            background: #144d29;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        nav a.active { color: #fff; font-weight: 700; border-bottom: 2px solid var(--primary); padding-bottom: 2px; }
+
+        /* PAGE CONTENT WRAPPER */
+        .page-wrapper {
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            padding: 30px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hud-bar {
+            background: var(--hud-bg);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        h1 {
+            color: #2ecc71;
+            margin-top: 0;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        h2, h3 {
+            color: var(--blue-accent);
+        }
+
+        p, li {
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        /* GRID LAYOUT FOR SECTIONS */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .panel {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        /* FORM ELEMENTS */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #94a3b8;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* TROUBLESHOOTING CARDS */
+        .trouble-card {
+            background: rgba(30, 41, 59, 0.8);
+            border-left: 4px solid var(--accent);
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .trouble-card h4 {
+            margin: 0 0 5px 0;
+            color: #f8fafc;
+            font-size: 1rem;
+        }
+
+        .trouble-card p {
+            font-size: 0.85rem;
+            margin: 0 0 8px 0;
+        }
+
+        .steps-box {
+            background: #0f172a;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            color: #38bdf8;
+        }
+
+        /* TABLES */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        th {
+            background: rgba(15, 23, 42, 0.8);
+            color: var(--blue-accent);
+        }
+
+        .badge {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .badge-mushrooms { background: #78350f; color: #fde68a; }
+        .badge-apiary { background: #b45309; color: #fef3c7; }
+        .badge-greens { background: #065f46; color: #a7f3d0; }
+        .badge-flowers { background: #831843; color: #fbcfe8; }
+
+        .section-divider {
+            border: 0;
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
+    <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
+    <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+      <a href="index.html">Home</a>
+      <a href="training-modules-and-mutual-growth.html" class="active">Training & Certification</a>
+      <a href="partners.html">Partners</a>
+      <a href="shared-harvest.html">Shared Harvest</a>
+      <a href="incubator-hub.html" style="color: var(--accent); font-weight: 600;">🌱 Incubator Launchpad</a>
+      <a href="technical-tutorials.html" style="color: var(--accent); font-weight: 600;">🔨 Technical Bank</a>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="container">
+      
+      <!-- HUD BAR -->
+      <div class="hud-bar">
+          <span>📊 Operational Logging & Diagnostic Hub</span>
+          <span style="font-size: 0.85rem; color: #cbd5e1;">Active Site: Linn County Research Plots</span>
+      </div>
+
+      <h1>📋 Daily Task Telemetry & Pest/Disease Action Center</h1>
+      <p style="text-align: center; margin-bottom: 25px; max-width: 800px; margin-left: auto; margin-right: auto;">
+          Submit your daily operational checklists, track critical environmental readings, and instantly reference step-by-step biological remediation protocols for common cultivation anomalies.
+      </p>
+
+      <div class="grid-2">
+          <!-- LEFT PANEL: LOG ENTRY FORM -->
+          <div class="panel">
+              <h2>📝 Submit Task Reading & Issue Log</h2>
+              <form id="task-log-form" onsubmit="submitReport(event)">
+                  <div class="form-group">
+                      <label for="category">Enterprise Category</label>
+                      <select id="category" required>
+                          <option value="mushrooms">🍄 Mushroom Farming (Substrate & Humidity)</option>
+                          <option value="apiary">🐝 Apiary & Pollination (Hive Health)</option>
+                          <option value="greens">🥗 Fast-Growing Greens (Hydro/Soil Beds)</option>
+                          <option value="flowers">💐 Specialty Flowers (Field Production)</option>
+                      </select>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="operator">Operator Pairing (Min. 2 Required)</label>
+                      <input type="text" id="operator" placeholder="e.g., J. Doe & M. Smith" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="metric-status">Key Reading / Observation</label>
+                      <input type="text" id="metric-status" placeholder="e.g., Temp 72°F, RH 85%, or mite count" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="issue-noted">Pest, Disease, or Anomaly Noted (Optional)</label>
+                      <select id="issue-noted">
+                          <option value="None">None - Standard Operational Run</option>
+                          <option value="Trichoderma">Mushroom: Trichoderma (Green Mold)</option>
+                          <option value="VarroaMites">Apiary: Varroa Mites Detected</option>
+                          <option value="PowderyMildew">Greens/Flowers: Powdery Mildew</option>
+                          <option value="Aphids">Greens/Flowers: Aphid Infestation</option>
+                          <option value="DampingOff">Greenhouse: Damping-Off Fungus</option>
+                      </select>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="notes">Corrective Action Taken / Notes</label>
+                      <textarea id="notes" rows="3" placeholder="Describe actions performed according to protocol..."></textarea>
+                  </div>
+
+                  <button type="submit" class="btn-primary">Record Telemetry & Generate Action Log</button>
+              </form>
+          </div>
+
+          <!-- RIGHT PANEL: STEP-BY-STEP TROUBLESHOOTING REFERENCE -->
+          <div class="panel">
+              <h2>🔍 Step-by-Step Diagnostic Guides</h2>
+              <p style="font-size: 0.85rem; margin-bottom: 15px;">Click any issue below to review field containment and remediation procedures:</p>
+
+              <!-- MUSHROOM TROUBLE -->
+              <div class="trouble-card">
+                  <h4>🍄 Trichoderma (Green Mold)</h4>
+                  <p><b>Symptom:</b> White mycelium turns aggressive dark green powdery patches on substrate blocks.</p>
+                  <div class="steps-box">
+                      <b>Remediation Step:</b> 1. Isolate infected block immediately to prevent spore spread. 2. Mist spot with 3% hydrogen peroxide solution. 3. Increase fresh air exchange (FAE) and verify room humidity does not stagnate.
+                  </div>
+              </div>
+
+              <!-- APIARY TROUBLE -->
+              <div class="trouble-card">
+                  <h4>🐝 Varroa Mite Threshold Exceeded</h4>
+                  <p><b>Symptom:</b> >3 mites per 100 bees on sticky board or visible deformed wing virus.</p>
+                  <div class="steps-box">
+                      <b>Remediation Step:</b> 1. Apply organic formic acid or oxalic acid vapor treatment per seasonal protocol. 2. Re-test hive mite load after 14 days. 3. Consider drone brood interruption if population persists.
+                  </div>
+              </div>
+
+              <!-- GREENS & FLOWERS TROUBLE -->
+              <div class="trouble-card">
+                  <h4>🌿 Powdery Mildew / Aphids</h4>
+                  <p><b>Symptom:</b> White powdery spots on leaf surfaces or clustered sticky sap-suckers on stem tips.</p>
+                  <div class="steps-box">
+                      <b>Remediation Step:</b> 1. Spray affected foliage with potassium bicarbonate or diluted neem oil solution at dusk. 2. Improve canopy spacing to lower humidity microclimates. 3. Release beneficial ladybugs if in greenhouse zone.
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- SAVED LOGS TABLE -->
+      <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+              <h2>📂 Active Session Telemetry & Log Archive</h2>
+              <button onclick="clearLogs()" style="background: #334155; color: #f8fafc; border: 1px solid rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 5px; font-size: 0.8rem; cursor: pointer;">Clear Archive</button>
+          </div>
+          <div style="overflow-x: auto;">
+              <table id="reports-table">
+                  <thead>
+                      <tr>
+                          <th>Timestamp</th>
+                          <th>Category</th>
+                          <th>Operators</th>
+                          <th>Reading / Metric</th>
+                          <th>Anomaly Flag</th>
+                          <th>Notes / Actions</th>
+                      </tr>
+                  </thead>
+                  <tbody id="reports-table-body">
+                      <!-- Dynamic rows load here -->
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+      // Load saved logs on page load
+      document.addEventListener('DOMContentLoaded', loadReports);
+
+      function submitReport(e) {
+          e.preventDefault();
+          
+          const category = document.getElementById('category').value;
+          const operator = document.getElementById('operator').value;
+          const metricStatus = document.getElementById('metric-status').value;
+          const issueNoted = document.getElementById('issue-noted').value;
+          const notes = document.getElementById('notes').value;
+          const timestamp = new Date().toLocaleString();
+
+          const newReport = {
+              timestamp,
+              category,
+              operator,
+              metricStatus,
+              issueNoted,
+              notes
+          };
+
+          let reports = JSON.parse(localStorage.getItem('afti_task_reports') || '[]');
+          reports.unshift(newReport);
+          localStorage.setItem('afti_task_reports', JSON.stringify(reports));
+
+          document.getElementById('task-log-form').reset();
+          loadReports();
+          alert('Telemetry successfully logged and saved to archive!');
+      }
+
+      function loadReports() {
+          const tbody = document.getElementById('reports-table-body');
+          const reports = JSON.parse(localStorage.getItem('afti_task_reports') || '[]');
+          
+          if (reports.length === 0) {
+              tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #94a3b8; padding: 20px;">No operational logs recorded yet in this session. Submit a task reading above.</td></tr>`;
+              return;
+          }
+
+          tbody.innerHTML = '';
+          reports.forEach(r => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                  <td>${r.timestamp}</td>
+                  <td><span class="badge badge-${r.category}">${r.category.toUpperCase()}</span></td>
+                  <td>${r.operator}</td>
+                  <td>${r.metricStatus}</td>
+                  <td><b>${r.issueNoted}</b></td>
+                  <td>${r.notes || 'None'}</td>
+              `;
+              tbody.appendChild(tr);
+          });
+      }
+
+      function clearLogs() {
+          if (confirm('Are you sure you want to clear all archived task telemetry for this session?')) {
+              localStorage.removeItem('afti_task_reports');
+              loadReports();
+          }
+      }
+  </script>
+</body>
+</html>
