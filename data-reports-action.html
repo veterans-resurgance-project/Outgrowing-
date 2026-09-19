@@ -152,13 +152,43 @@
             background-color: var(--primary-hover);
         }
 
-        /* TROUBLESHOOTING CARDS */
+        /* TROUBLESHOOTING CATEGORY TABS */
+        .tab-buttons {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #0f172a;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--blue-accent);
+            color: #0f172a;
+            border-color: var(--blue-accent);
+        }
+
         .trouble-card {
             background: rgba(30, 41, 59, 0.8);
             border-left: 4px solid var(--accent);
             padding: 12px 15px;
             margin-bottom: 12px;
             border-radius: 0 6px 6px 0;
+            display: none;
+        }
+
+        .trouble-card.active-card {
+            display: block;
         }
 
         .trouble-card h4 {
@@ -246,7 +276,7 @@
 
       <h1>📋 Daily Task Telemetry & Pest/Disease Action Center</h1>
       <p style="text-align: center; margin-bottom: 25px; max-width: 800px; margin-left: auto; margin-right: auto;">
-          Submit your daily operational checklists, track critical environmental readings, and instantly reference step-by-step biological remediation protocols for common cultivation anomalies.
+          Submit your daily operational checklists, track critical environmental readings, and instantly reference step-by-step biological remediation protocols across all four core categories.
       </p>
 
       <div class="grid-2">
@@ -280,9 +310,8 @@
                           <option value="None">None - Standard Operational Run</option>
                           <option value="Trichoderma">Mushroom: Trichoderma (Green Mold)</option>
                           <option value="VarroaMites">Apiary: Varroa Mites Detected</option>
-                          <option value="PowderyMildew">Greens/Flowers: Powdery Mildew</option>
-                          <option value="Aphids">Greens/Flowers: Aphid Infestation</option>
-                          <option value="DampingOff">Greenhouse: Damping-Off Fungus</option>
+                          <option value="PowderyMildew">Greens: Powdery Mildew</option>
+                          <option value="Aphids">Flowers: Aphid Infestation</option>
                       </select>
                   </div>
 
@@ -298,32 +327,49 @@
           <!-- RIGHT PANEL: STEP-BY-STEP TROUBLESHOOTING REFERENCE -->
           <div class="panel">
               <h2>🔍 Step-by-Step Diagnostic Guides</h2>
-              <p style="font-size: 0.85rem; margin-bottom: 15px;">Click any issue below to review field containment and remediation procedures:</p>
+              <p style="font-size: 0.85rem; margin-bottom: 12px;">Select an enterprise category to view specific pest/disease remediation protocols:</p>
 
-              <!-- MUSHROOM TROUBLE -->
-              <div class="trouble-card">
-                  <h4>🍄 Trichoderma (Green Mold)</h4>
-                  <p><b>Symptom:</b> White mycelium turns aggressive dark green powdery patches on substrate blocks.</p>
+              <!-- CATEGORY TAB BUTTONS -->
+              <div class="tab-buttons">
+                  <button type="button" class="tab-btn active" onclick="switchTab('mushrooms')">🍄 Mushrooms</button>
+                  <button type="button" class="tab-btn" onclick="switchTab('apiary')">🐝 Apiary</button>
+                  <button type="button" class="tab-btn" onclick="switchTab('greens')">🥗 Greens</button>
+                  <button type="button" class="tab-btn" onclick="switchTab('flowers')">💐 Flowers</button>
+              </div>
+
+              <!-- MUSHROOM GUIDE -->
+              <div id="guide-mushrooms" class="trouble-card active-card">
+                  <h4>🍄 Trichoderma (Green Mold) &amp; Cobweb Mold</h4>
+                  <p><b>Symptom:</b> White mycelium develops aggressive dark green powdery patches or wispy grey web over substrate blocks.</p>
                   <div class="steps-box">
-                      <b>Remediation Step:</b> 1. Isolate infected block immediately to prevent spore spread. 2. Mist spot with 3% hydrogen peroxide solution. 3. Increase fresh air exchange (FAE) and verify room humidity does not stagnate.
+                      <b>Remediation Step:</b> 1. Isolate infected block immediately from clean fruiting chamber. 2. Mist spot with 3% hydrogen peroxide solution. 3. Increase fresh air exchange (FAE) and verify room humidity does not stagnate.
                   </div>
               </div>
 
-              <!-- APIARY TROUBLE -->
-              <div class="trouble-card">
-                  <h4>🐝 Varroa Mite Threshold Exceeded</h4>
-                  <p><b>Symptom:</b> >3 mites per 100 bees on sticky board or visible deformed wing virus.</p>
+              <!-- APIARY GUIDE -->
+              <div id="guide-apiary" class="trouble-card">
+                  <h4>🐝 Varroa Mite Infestation &amp; Small Hive Beetle</h4>
+                  <p><b>Symptom:</b> >3 mites per 100 bees on sticky board test, or visible larval slime trails in frames.</p>
                   <div class="steps-box">
-                      <b>Remediation Step:</b> 1. Apply organic formic acid or oxalic acid vapor treatment per seasonal protocol. 2. Re-test hive mite load after 14 days. 3. Consider drone brood interruption if population persists.
+                      <b>Remediation Step:</b> 1. Apply organic formic acid or oxalic acid vapor treatment per seasonal protocol. 2. Install screened bottom board and beetle traps. 3. Re-test hive mite load after 14 days.
                   </div>
               </div>
 
-              <!-- GREENS & FLOWERS TROUBLE -->
-              <div class="trouble-card">
-                  <h4>🌿 Powdery Mildew / Aphids</h4>
-                  <p><b>Symptom:</b> White powdery spots on leaf surfaces or clustered sticky sap-suckers on stem tips.</p>
+              <!-- GREENS GUIDE -->
+              <div id="guide-greens" class="trouble-card">
+                  <h4>🥗 Damping-Off &amp; Root Pythium in Greens</h4>
+                  <p><b>Symptom:</b> Seedlings collapse at the soil line, or roots turn brown, soft, and foul-smelling in hydroponic channels.</p>
                   <div class="steps-box">
-                      <b>Remediation Step:</b> 1. Spray affected foliage with potassium bicarbonate or diluted neem oil solution at dusk. 2. Improve canopy spacing to lower humidity microclimates. 3. Release beneficial ladybugs if in greenhouse zone.
+                      <b>Remediation Step:</b> 1. Flush hydroponic reservoirs with hydrogen peroxide solution or beneficial bacterial inoculants. 2. Reduce nitrogen over-feeding and lower water temperature below 68°F. 3. Sanitize seedling trays before next crop cycle.
+                  </div>
+              </div>
+
+              <!-- FLOWERS GUIDE -->
+              <div id="guide-flowers" class="trouble-card">
+                  <h4>💐 Aphids, Thrips &amp; Powdery Mildew in Flowers</h4>
+                  <p><b>Symptom:</b> Clustered sap-suckers on stem tips or white talcum-like patches on upper leaf surfaces.</p>
+                  <div class="steps-box">
+                      <b>Remediation Step:</b> 1. Spray affected foliage with potassium bicarbonate or diluted horticultural soap/neem oil at dusk. 2. Introduce beneficial predatory insects (lacewings or lady beetles). 3. Prune crowded inner canopy branches to increase air circulation.
                   </div>
               </div>
           </div>
@@ -362,6 +408,22 @@
   <script>
       // Load saved logs on page load
       document.addEventListener('DOMContentLoaded', loadReports);
+
+      function switchTab(category) {
+          // Update active tab buttons
+          const buttons = document.querySelectorAll('.tab-btn');
+          buttons.forEach(btn => btn.classList.remove('active'));
+          event.currentTarget.classList.add('active');
+
+          // Update active guide cards
+          const cards = document.querySelectorAll('.trouble-card');
+          cards.forEach(card => card.classList.remove('active-card'));
+          
+          const targetCard = document.getElementById('guide-' + category);
+          if (targetCard) {
+              targetCard.classList.add('active-card');
+          }
+      }
 
       function submitReport(e) {
           e.preventDefault();
