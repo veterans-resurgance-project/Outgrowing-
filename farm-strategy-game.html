@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acreage & Capital Strategy Simulator | 6-Year Farm Game</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --txt: #f8fafc;
+            --primary: #27ae60;
+            --primary-dark: #1e8449;
+            --hud: #144d29;
+            --accent: #38bdf8;
+            --muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --warn: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--txt);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            background: var(--card);
+            border-radius: 14px;
+            padding: 35px;
+            box-sizing: border-box;
+            border: 1px solid var(--border);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+        }
+
+        .hud-bar {
+            background: var(--hud);
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        h1 {
+            color: #4ade80;
+            font-size: 1.8rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-top: 25px;
+            border-left: 4px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        p, label {
+            color: var(--muted);
+        }
+
+        strong {
+            color: var(--txt);
+        }
+
+        .panel {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #334155;
+            color: var(--txt);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: #475569;
+        }
+
+        .track-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .track-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .track-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .track-card.selected {
+            border-color: var(--primary);
+            background: rgba(39, 174, 96, 0.05);
+        }
+
+        .acre-allocation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .acre-input-box {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--txt);
+            font-size: 1.1rem;
+            margin-top: 8px;
+            box-sizing: border-box;
+        }
+
+        .event-banner {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .event-banner h3 {
+            color: var(--warn);
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: rgba(20, 77, 41, 0.4);
+            color: #4ade80;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- HUD BAR -->
+    <div class="hud-bar">
+        <span>Game Engine: <span style="color:var(--accent);">6-Year Farm Strategy &amp; Acreage Simulator</span></span>
+        <div style="display: flex; gap: 20px;">
+            <span>Year: <strong id="hud-year" style="color:var(--accent);">1</strong> / 6</span>
+            <span>Cash: <strong id="hud-cash" style="color:#4ade80;">$15,000</strong></span>
+            <span>Acres Used: <strong id="hud-acres">0</strong> / 10</span>
+        </div>
+    </div>
+
+    <!-- STAGE 1: SELECT TRACK -->
+    <div id="screen-track" class="panel">
+        <h1>Step 1: Choose Your Capital Track</h1>
+        <p>You have acquired management rights to a 10-acre block in Linn County. Select your starting financial tier. Low Capital tests your bootstrapping survival skills; Moderate Capital gives you room to install higher-tier infrastructure right away.</p>
+        
+        <div class="track-grid">
+            <div class="track-card" id="card-low" onclick="selectTrack('low')">
+                <span style="color:var(--warn); font-weight:bold; font-size:0.85rem; text-transform:uppercase;">Bootstrapping Track</span>
+                <h3 style="color:#fff; margin:5px 0 10px 0;">Low Capital Start</h3>
+                <p><strong>Starting Cash:</strong> $8,000</p>
+                <p><strong>Challenge:</strong> High risk of cash-flow pinches in Year 1. Must rely on fast-turnaround greens and honey to build reserves before touching heavy infrastructure.</p>
+            </div>
+
+            <div class="track-card selected" id="card-mod" onclick="selectTrack('mod')">
+                <span style="color:#4ade80; font-weight:bold; font-size:0.85rem; text-transform:uppercase;">Established Track</span>
+                <h3 style="color:#fff; margin:5px 0 10px 0;">Moderate Capital Start</h3>
+                <p><strong>Starting Cash:</strong> $25,000</p>
+                <p><strong>Advantage:</strong> Enough initial capital to invest in high-tunnel berries, cut flowers, or mushroom setups immediately without immediate debt distress.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; text-align: right;">
+            <button class="btn" onclick="startAllocationPhase()">Proceed to Acre Allocation →</button>
+        </div>
+    </div>
+
+    <!-- STAGE 2: ALLOCATE ACRES -->
+    <div id="screen-allocate" class="panel hidden">
+        <h1 id="allocation-title">Year 1: Allocate Your 10 Acres</h1>
+        <p>Assign how many of your 10 available acres are dedicated to each enterprise. Upfront costs will be deducted from your cash reserves immediately upon starting the year.</p>
+
+        <div class="acre-allocation-grid">
+            <div class="acre-input-box">
+                <label><strong>Leafy Greens &amp; Herbs</strong><br><span style="font-size:0.8rem;">Cost: $800/ac | Rev: $3,500/ac</span></label>
+                <input type="number" id="alloc-greens" value="3" min="0" max="10" oninput="validateAcres()">
+            </div>
+            <div class="acre-input-box">
+                <label><strong>Root Crops &amp; Veggies</strong><br><span style="font-size:0.8rem;">Cost: $2,500/ac | Rev: $4,800/ac</span></label>
+                <input type="number" id="alloc-root" value="2" min="0" max="10" oninput="validateAcres()">
+            </div>
+            <div class="acre-input-box">
+                <label><strong>High-Tunnel Berries</strong><br><span style="font-size:0.8rem;">Cost: $8,500/ac | Rev: $3,200/ac (Y1)</span></label>
+                <input type="number" id="alloc-berries" value="2" min="0" max="10" oninput="validateAcres()">
+            </div>
+            <div class="acre-input-box">
+                <label><strong>Mushroom Cultivation</strong><br><span style="font-size:0.8rem;">Cost: $4,500/ac | Rev: $7,500/ac</span></label>
+                <input type="number" id="alloc-mushrooms" value="1" min="0" max="10" oninput="validateAcres()">
+            </div>
+            <div class="acre-input-box">
+                <label><strong>Apiary &amp; Pollination</strong><br><span style="font-size:0.8rem;">Cost: $3,200/ac | Rev: $4,200/ac</span></label>
+                <input type="number" id="alloc-apiary" value="1" min="0" max="10" oninput="validateAcres()">
+            </div>
+            <div class="acre-input-box">
+                <label><strong>Specialty Cut Flowers</strong><br><span style="font-size:0.8rem;">Cost: $5,500/ac | Rev: $9,500/ac</span></label>
+                <input type="number" id="alloc-flowers" value="1" min="0" max="10" oninput="validateAcres()">
+            </div>
+        </div>
+
+        <div id="acre-warning" style="color: var(--danger); font-weight: bold; margin-top: 15px;"></div>
+
+        <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+            <span id="total-cost-preview" style="font-weight: bold; color: var(--accent);">Estimated Upfront Cost: $0</span>
+            <button id="btn-run-year" class="btn" onclick="executeYear()">Run Season &amp; Trigger Events →</button>
+        </div>
+    </div>
+
+    <!-- STAGE 3: YEARLY EVENT & RESULTS -->
+    <div id="screen-results" class="panel hidden">
+        <h1 id="results-heading">Year Results &amp; Seasonal Shocks</h1>
+        
+        <div class="event-banner" id="event-banner-box">
+            <h3 id="event-title">Seasonal Event</h3>
+            <p id="event-desc" style="color:var(--txt); margin:0;">Event description goes here...</p>
+        </div>
+
+        <h2>Annual Financial Statement</h2>
+        <div id="yearly-summary-text" style="margin: 15px 0; color:var(--muted); line-height: 1.6;"></div>
+
+        <div style="margin-top: 30px; text-align: right;">
+            <button class="btn" id="btn-next-action" onclick="proceedNextStep()">Continue to Next Year →</button>
+        </div>
+    </div>
+
+    <!-- STAGE 4: GAME OVER / FINAL REPORT -->
+    <div id="screen-gameover" class="panel hidden">
+        <h1 style="color:#4ade80;">6-Year Simulation Complete!</h1>
+        <p>You successfully navigated 6 years of agricultural production, capital investments, and unpredictable seasonal shocks across your 10-acre Linn County tract.</p>
+
+        <h2>6-Year Performance Ledger</h2>
+        <div id="ledger-container"></div>
+
+        <div class="panel" style="margin-top: 25px; background: rgba(56, 189, 248, 0.05);">
+            <h3 style="color:var(--accent); margin-top:0;">Final Evaluation</h3>
+            <p id="final-score-text" style="color:var(--txt); margin-bottom:0;"></p>
+        </div>
+
+        <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+            <a href="index.html" class="btn btn-secondary">← Return to Portal Home</a>
+            <button class="btn" onclick="resetGame()">Play Again / Restart Simulation</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Game State
+    let gameState = {
+        track: 'mod',
+        cash: 25000,
+        year: 1,
+        acres: { greens: 3, root: 2, berries: 2, mushrooms: 1, apiary: 1, flowers: 1 },
+        history: []
+    };
+
+    const enterpriseData = {
+        greens: { name: "Leafy Greens", cost: 800, rev: 3500, labor: 95 },
+        root: { name: "Root Crops", cost: 2500, rev: 4800, labor: 160 },
+        berries: { name: "High-Tunnel Berries", cost: 8500, rev: 11000, labor: 300, y1Rev: 3200 },
+        mushrooms: { name: "Mushroom Cultivation", cost: 4500, rev: 7500, labor: 140 },
+        apiary: { name: "Apiary & Pollination", cost: 3200, rev: 4200, labor: 75 },
+        flowers: { name: "Cut Flowers", cost: 5500, rev: 9500, labor: 250 }
+    };
+
+    const randomEvents = [
+        {
+            title: "Late Frost & Weather Shock",
+            desc: "An unexpected late spring frost hit Linn County, lowering fruit and blossom yields by 15% across all active acreage.",
+            effect: (state) => {
+                state.revenueMod -= 0.15;
+                return "Yield reduced by 15% due to frost.";
+            }
+        },
+        {
+            title: "Pest Pressure (Aphids / Beetles)",
+            desc: "Aggressive pest infestation required emergency organic treatment protocols, increasing operating costs by $1,200.",
+            effect: (state) => {
+                state.extraCost += 1200;
+                return "Incurred $1,200 in emergency pest control.";
+            }
+        },
+        {
+            title: "Delayed Grant Disbursement & Cash Pinch",
+            desc: "Administrative bottlenecks delayed your incoming USDA grant disbursement by 6 months, forcing a short-term liquidity pinch.",
+            effect: (state) => {
+                state.cashPenalty += 800;
+                return "Cash flow penalty of $800 due to delayed disbursement financing.";
+            }
+        },
+        {
+            title: "Bumper Harvest Season & Premium Pricing",
+            desc: "Ideal seasonal rainfall and strong local farmers market turnout resulted in a 20% revenue bonus across all direct-market crops!",
+            effect: (state) => {
+                state.revenueMod += 0.20;
+                return "Revenue boosted by 20% due to favorable market conditions.";
+            }
+        },
+        {
+            title: "Equipment Breakdown & Irrigation Repair",
+            desc: "Main irrigation line failure required immediate parts replacement and labor repair costs totaling $1,500.",
+            effect: (state) => {
+                state.extraCost += 1500;
+                return "Paid $1,500 for emergency irrigation repairs.";
+            }
+        },
+        {
+            title: "Favorable Partnership / Restaurant Contract",
+            desc: "A regional farm-to-table restaurant group signed a recurring weekly purchase contract, adding $1,000 in net profit.",
+            effect: (state) => {
+                state.extraRev += 1000;
+                return "Secured $1,000 bonus revenue from restaurant contract.";
+            }
+        }
+    ];
+
+    function selectTrack(track) {
+        gameState.track = track;
+        if (track === 'low') {
+            gameState.cash = 8000;
+            document.getElementById('card-low').classList.add('selected');
+            document.getElementById('card-mod').classList.remove('selected');
+        } else {
+            gameState.cash = 25000;
+            document.getElementById('card-mod').classList.add('selected');
+            document.getElementById('card-low').classList.remove('selected');
+        }
+    }
+
+    function startAllocationPhase() {
+        document.getElementById('screen-track').classList.add('hidden');
+        document.getElementById('screen-allocate').classList.remove('hidden');
+        updateHUD();
+        validateAcres();
+    }
+
+    function validateAcres() {
+        const greens = parseInt(document.getElementById('alloc-greens').value) || 0;
+        const root = parseInt(document.getElementById('alloc-root').value) || 0;
+        const berries = parseInt(document.getElementById('alloc-berries').value) || 0;
+        const mushrooms = parseInt(document.getElementById('alloc-mushrooms').value) || 0;
+        const apiary = parseInt(document.getElementById('alloc-apiary').value) || 0;
+        const flowers = parseInt(document.getElementById('alloc-flowers').value) || 0;
+
+        const totalAcres = greens + root + berries + mushrooms + apiary + flowers;
+        
+        let totalCost = (greens * enterpriseData.greens.cost) +
+                        (root * enterpriseData.root.cost) +
+                        (berries * enterpriseData.berries.cost) +
+                        (mushrooms * enterpriseData.mushrooms.cost) +
+                        (apiary * enterpriseData.apiary.cost) +
+                        (flowers * enterpriseData.flowers.cost);
+
+        document.getElementById('total-cost-preview').innerText = `Estimated Upfront Cost: $${totalCost.toLocaleString()}`;
+
+        const warningEl = document.getElementById('acre-warning');
+        const btnRun = document.getElementById('btn-run-year');
+
+        if (totalAcres !== 10) {
+            warningEl.innerText = `You must allocate exactly 10 acres (Currently allocated: ${totalAcres} acres)`;
+            btnRun.disabled = true;
+            btnRun.style.opacity = '0.5';
+        } else if (totalCost > gameState.cash) {
+            warningEl.innerText = `Insufficient cash reserves! Upfront cost ($${totalCost.toLocaleString()}) exceeds available cash ($${gameState.cash.toLocaleString()}).`;
+            btnRun.disabled = true;
+            btnRun.style.opacity = '0.5';
+        } else {
+            warningEl.innerText = '';
+            btnRun.disabled = false;
+            btnRun.style.opacity = '1';
+        }
+    }
+
+    function executeYear() {
+        // Save current acre choices
+        gameState.acres = {
+            greens: parseInt(document.getElementById('alloc-greens').value) || 0,
+            root: parseInt(document.getElementById('alloc-root').value) || 0,
+            berries: parseInt(document.getElementById('alloc-berries').value) || 0,
+            mushrooms: parseInt(document.getElementById('alloc-mushrooms').value) || 0,
+            apiary: parseInt(document.getElementById('alloc-apiary').value) || 0,
+            flowers: parseInt(document.getElementById('alloc-flowers').value) || 0
+        };
+
+        // Calculate upfront costs
+        let totalCost = 0;
+        let totalRev = 0;
+        for (let key in gameState.acres) {
+            let count = gameState.acres[key];
+            let ent = enterpriseData[key];
+            totalCost += count * ent.cost;
+            
+            // Year 1 berries have reduced revenue during establishment
+            let revPerAc = (key === 'berries' && gameState.year === 1) ? ent.y1Rev : ent.rev;
+            totalRev += count * revPerAc;
+        }
+
+        gameState.cash -= totalCost;
+
+        // Trigger random event
+        let eventObj = randomEvents[Math.floor(Math.random() * randomEvents.length)];
+        let eventState = { revenueMod: 1.0, extraCost: 0, extraRev: 0, cashPenalty: 0 };
+        let eventMsg = eventObj.effect(eventState);
+
+        let finalRev = (totalRev * eventState.revenueMod) + eventState.extraRev;
+        let finalCost = 2000 + eventState.extraCost + eventState.cashPenalty; // Base annual labor/maintenance overhead
+
+        let netYearResult = finalRev - finalCost;
+        gameState.cash += finalRev - finalCost;
+
+        // Record history
+        gameState.history.push({
+            year: gameState.year,
+            upfront: totalCost,
+            revenue: finalRev,
+            cost: finalCost,
+            net: netYearResult,
+            eventTitle: eventObj.title,
+            eventMsg: eventMsg
+        });
+
+        // Display results screen
+        document.getElementById('screen-allocate').classList.add('hidden');
+        document.getElementById('screen-results').classList.remove('hidden');
+        document.getElementById('results-heading').innerText = `Year ${gameState.year} Seasonal Report`;
+        document.getElementById('event-title').innerText = eventObj.title + " — " + eventObj.desc;
+        document.getElementById('event-desc').innerText = eventMsg;
+
+        document.getElementById('yearly-summary-text').innerHTML = `
+            <strong>Infrastructure / Planting Costs:</strong> -$${totalCost.toLocaleString()}<br>
+            <strong>Gross Harvest Revenue:</strong> +$${finalRev.toLocaleString()}<br>
+            <strong>Annual Labor &amp; Overhead:</strong> -$${finalCost.toLocaleString()}<br>
+            <strong>Net Year Position:</strong> <span style="color:${netYearResult >= 0 ? '#4ade80':'#ef4444'}; font-weight:bold;">$${netYearResult.toLocaleString()}</span><br>
+            <strong>Ending Cash Reserve:</strong> <span style="color:#38bdf8; font-weight:bold;">$${gameState.cash.toLocaleString()}</span>
+        `;
+
+        if (gameState.year >= 6) {
+            document.getElementById('btn-next-action').innerText = "View Final 6-Year Evaluation →";
+        }
+    }
+
+    function proceedNextStep() {
+        if (gameState.year >= 6) {
+            showGameOver();
+        } else {
+            gameState.year++;
+            document.getElementById('screen-results').classList.add('hidden');
+            document.getElementById('screen-allocate').classList.remove('hidden');
+            document.getElementById('allocation-title').innerText = `Year ${gameState.year}: Re-allocate Your 10 Acres`;
+            updateHUD();
+            validateAcres();
+        }
+    }
+
+    function showGameOver() {
+        document.getElementById('screen-results').classList.add('hidden');
+        document.getElementById('screen-gameover').classList.remove('hidden');
+
+        let container = document.getElementById('ledger-container');
+        let html = `<table><thead><tr><th>Year</th><th>Investments</th><th>Revenue</th><th>Overhead</th><th>Net Cash</th></tr></thead><tbody>`;
+        
+        let totalNet = 0;
+        gameState.history.forEach(h => {
+            totalNet += h.net;
+            html += `<tr><td><strong>Y${h.year}</strong></td><td>$${h.upfront.toLocaleString()}</td><td>$${h.revenue.toLocaleString()}</td><td>$${h.cost.toLocaleString()}</td><td style="color:${h.net >= 0 ? '#4ade80':'#ef4444'};">$${h.net.toLocaleString()}</td></tr>`;
+        });
+        html += `</tbody></table>`;
+        container.innerHTML = html;
+
+        let evalText = `You finished with <strong>$${gameState.cash.toLocaleString()}</strong> in cash reserves and a cumulative 6-year net of <strong>$${totalNet.toLocaleString()}</strong>. `;
+        if (gameState.cash > 30000) {
+            evalText += "<strong>Master Farm Manager Status:</strong> Exceptional capital allocation and crisis management! Your Linn County enterprise is primed for institutional grant scaling.";
+        } else if (gameState.cash > 10000) {
+            evalText += "<strong>Solid Operator Status:</strong> You successfully navigated weather shocks and cash pinches, maintaining a stable, self-sufficient farm operation.";
+        } else {
+            evalText += "<strong>Survivalist Status:</strong> Margins were razor thin due to unexpected shocks, but your resilience kept the farm afloat through Year 6.";
+        }
+        document.getElementById('final-score-text').innerHTML = evalText;
+    }
+
+    function resetGame() {
+        gameState = {
+            track: 'mod',
+            cash: 25000,
+            year: 1,
+            acres: { greens: 3, root: 2, berries: 2, mushrooms: 1, apiary: 1, flowers: 1 },
+            history: []
+        };
+        document.getElementById('screen-gameover').classList.add('hidden');
+        document.getElementById('screen-track').classList.remove('hidden');
+        selectTrack('mod');
+    }
+
+    function updateHUD() {
+        document.getElementById('hud-year').innerText = gameState.year;
+        document.getElementById('hud-cash').innerText = '$' + gameState.cash.toLocaleString();
+        
+        let greens = parseInt(document.getElementById('alloc-greens').value) || 0;
+        let root = parseInt(document.getElementById('alloc-root').value) || 0;
+        let berries = parseInt(document.getElementById('alloc-berries').value) || 0;
+        let mushrooms = parseInt(document.getElementById('alloc-mushrooms').value) || 0;
+        let apiary = parseInt(document.getElementById('alloc-apiary').value) || 0;
+        let flowers = parseInt(document.getElementById('alloc-flowers').value) || 0;
+        
+        document.getElementById('hud-acres').innerText = (greens + root + berries + mushrooms + apiary + flowers);
+    }
+</script>
+
+</body>
+</html>
