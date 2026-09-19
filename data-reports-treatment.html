@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AFTI - Data Reports & Action Hub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://tailwindcss.com"></script>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -184,11 +184,6 @@
             padding: 12px 15px;
             margin-bottom: 12px;
             border-radius: 0 6px 6px 0;
-            display: none;
-        }
-
-        .trouble-card.active-card {
-            display: block;
         }
 
         .trouble-card h4 {
@@ -257,11 +252,11 @@
     <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
     <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
       <a href="index.html">Home</a>
-      <a href="training-modules-and-mutual-growth.html" class="active">Training & Certification</a>
+      <a href="training-academy.html">Training & Certification</a>
       <a href="partners.html">Partners</a>
-      <a href="shared-harvest.html">Shared Harvest</a>
-      <a href="incubator-hub.html" style="color: var(--accent); font-weight: 600;">🌱 Incubator Launchpad</a>
-      <a href="technical-tutorials.html" style="color: var(--accent); font-weight: 600;">🔨 Technical Bank</a>
+      <a href="shared-harvest-incubator.html">Shared Harvest</a>
+      <a href="shared-harvest-incubator.html" style="color: var(--accent); font-weight: 600;">🌱 Incubator Launchpad</a>
+      <a href="totals-ledger.html" class="active">Data Logs</a>
     </div>
   </nav>
 
@@ -276,213 +271,45 @@
 
       <h1>📋 Daily Task Telemetry & Pest/Disease Action Center</h1>
       <p style="text-align: center; margin-bottom: 25px; max-width: 800px; margin-left: auto; margin-right: auto;">
-          Submit your daily operational checklists, track critical environmental readings, and instantly reference step-by-step biological remediation protocols across all four core categories.
+          Submit daily operational logs, track environmental criteria metrics, and handle localized regional risks dynamically across multiple farm paths.
       </p>
 
       <div class="grid-2">
-          <!-- LEFT PANEL: LOG ENTRY FORM -->
+          
+          <!-- LEFT PANEL: DATA ENTRY FORM -->
           <div class="panel">
-              <h2>📝 Submit Task Reading & Issue Log</h2>
-              <form id="task-log-form" onsubmit="submitReport(event)">
+              <h3 class="text-xl font-bold mb-4">🚀 Submit Field Telemetry</h3>
+              <form id="telemetryForm" onsubmit="handleFormSubmit(event)">
                   <div class="form-group">
-                      <label for="category">Enterprise Category</label>
-                      <select id="category" required>
-                          <option value="mushrooms">🍄 Mushroom Farming (Substrate & Humidity)</option>
-                          <option value="apiary">🐝 Apiary & Pollination (Hive Health)</option>
-                          <option value="greens">🥗 Fast-Growing Greens (Hydro/Soil Beds)</option>
-                          <option value="flowers">💐 Specialty Flowers (Field Production)</option>
+                      <label for="categorySelect">Active Enterprise Track</label>
+                      <select id="categorySelect" onchange="adaptFormFields(this.value)">
+                          <option value="mushrooms">Mushrooms Module</option>
+                          <option value="apiary">Apiary Diagnostics</option>
+                          <option value="greens">High Yield Greens</option>
+                          <option value="flowers">Cut Flowers Track</option>
                       </select>
                   </div>
 
                   <div class="form-group">
-                      <label for="operator">Operator Pairing (Min. 2 Required)</label>
-                      <input type="text" id="operator" placeholder="e.g., J. Doe & M. Smith" required>
+                      <label id="dynamicMetricLabel" for="metricInput">Humidity Parameter (%)</label>
+                      <input type="number" id="metricInput" placeholder="Enter sensor data point" required>
                   </div>
 
                   <div class="form-group">
-                      <label for="metric-status">Key Reading / Observation</label>
-                      <input type="text" id="metric-status" placeholder="e.g., Temp 72°F, RH 85%, or mite count" required>
+                      <label for="observerInput">Lead Operator Pair Initials</label>
+                      <input type="text" id="observerInput" placeholder="e.g., JD / AM" required>
                   </div>
 
                   <div class="form-group">
-                      <label for="issue-noted">Pest, Disease, or Anomaly Noted (Optional)</label>
-                      <select id="issue-noted">
-                          <option value="None">None - Standard Operational Run</option>
-                          <option value="Trichoderma">Mushroom: Trichoderma (Green Mold)</option>
-                          <option value="VarroaMites">Apiary: Varroa Mites Detected</option>
-                          <option value="PowderyMildew">Greens: Powdery Mildew</option>
-                          <option value="Aphids">Flowers: Aphid Infestation</option>
-                      </select>
+                      <label for="notesInput">Field Observations / Flagged Anomalies</label>
+                      <textarea id="notesInput" rows="3" placeholder="Describe layout variables..."></textarea>
                   </div>
 
-                  <div class="form-group">
-                      <label for="notes">Corrective Action Taken / Notes</label>
-                      <textarea id="notes" rows="3" placeholder="Describe actions performed according to protocol..."></textarea>
-                  </div>
-
-                  <button type="submit" class="btn-primary">Record Telemetry & Generate Action Log</button>
+                  <button type="submit" class="btn-primary">Commit Telemetry to Ledger</button>
               </form>
           </div>
 
-          <!-- RIGHT PANEL: STEP-BY-STEP TROUBLESHOOTING REFERENCE -->
+          <!-- RIGHT PANEL: DYNAMIC INTERACTIVE DIAGNOSTICS CARD -->
           <div class="panel">
-              <h2>🔍 Step-by-Step Diagnostic Guides</h2>
-              <p style="font-size: 0.85rem; margin-bottom: 12px;">Select an enterprise category to view specific pest/disease remediation protocols:</p>
-
-              <!-- CATEGORY TAB BUTTONS -->
-              <div class="tab-buttons">
-                  <button type="button" class="tab-btn active" onclick="switchTab('mushrooms')">🍄 Mushrooms</button>
-                  <button type="button" class="tab-btn" onclick="switchTab('apiary')">🐝 Apiary</button>
-                  <button type="button" class="tab-btn" onclick="switchTab('greens')">🥗 Greens</button>
-                  <button type="button" class="tab-btn" onclick="switchTab('flowers')">💐 Flowers</button>
-              </div>
-
-              <!-- MUSHROOM GUIDE -->
-              <div id="guide-mushrooms" class="trouble-card active-card">
-                  <h4>🍄 Trichoderma (Green Mold) &amp; Cobweb Mold</h4>
-                  <p><b>Symptom:</b> White mycelium develops aggressive dark green powdery patches or wispy grey web over substrate blocks.</p>
-                  <div class="steps-box">
-                      <b>Remediation Step:</b> 1. Isolate infected block immediately from clean fruiting chamber. 2. Mist spot with 3% hydrogen peroxide solution. 3. Increase fresh air exchange (FAE) and verify room humidity does not stagnate.
-                  </div>
-              </div>
-
-              <!-- APIARY GUIDE -->
-              <div id="guide-apiary" class="trouble-card">
-                  <h4>🐝 Varroa Mite Infestation &amp; Small Hive Beetle</h4>
-                  <p><b>Symptom:</b> >3 mites per 100 bees on sticky board test, or visible larval slime trails in frames.</p>
-                  <div class="steps-box">
-                      <b>Remediation Step:</b> 1. Apply organic formic acid or oxalic acid vapor treatment per seasonal protocol. 2. Install screened bottom board and beetle traps. 3. Re-test hive mite load after 14 days.
-                  </div>
-              </div>
-
-              <!-- GREENS GUIDE -->
-              <div id="guide-greens" class="trouble-card">
-                  <h4>🥗 Damping-Off &amp; Root Pythium in Greens</h4>
-                  <p><b>Symptom:</b> Seedlings collapse at the soil line, or roots turn brown, soft, and foul-smelling in hydroponic channels.</p>
-                  <div class="steps-box">
-                      <b>Remediation Step:</b> 1. Flush hydroponic reservoirs with hydrogen peroxide solution or beneficial bacterial inoculants. 2. Reduce nitrogen over-feeding and lower water temperature below 68°F. 3. Sanitize seedling trays before next crop cycle.
-                  </div>
-              </div>
-
-              <!-- FLOWERS GUIDE -->
-              <div id="guide-flowers" class="trouble-card">
-                  <h4>💐 Aphids, Thrips &amp; Powdery Mildew in Flowers</h4>
-                  <p><b>Symptom:</b> Clustered sap-suckers on stem tips or white talcum-like patches on upper leaf surfaces.</p>
-                  <div class="steps-box">
-                      <b>Remediation Step:</b> 1. Spray affected foliage with potassium bicarbonate or diluted horticultural soap/neem oil at dusk. 2. Introduce beneficial predatory insects (lacewings or lady beetles). 3. Prune crowded inner canopy branches to increase air circulation.
-                  </div>
-              </div>
-          </div>
-      </div>
-
-      <hr class="section-divider">
-
-      <!-- SAVED LOGS TABLE -->
-      <div>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-              <h2>📂 Active Session Telemetry & Log Archive</h2>
-              <button onclick="clearLogs()" style="background: #334155; color: #f8fafc; border: 1px solid rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 5px; font-size: 0.8rem; cursor: pointer;">Clear Archive</button>
-          </div>
-          <div style="overflow-x: auto;">
-              <table id="reports-table">
-                  <thead>
-                      <tr>
-                          <th>Timestamp</th>
-                          <th>Category</th>
-                          <th>Operators</th>
-                          <th>Reading / Metric</th>
-                          <th>Anomaly Flag</th>
-                          <th>Notes / Actions</th>
-                      </tr>
-                  </thead>
-                  <tbody id="reports-table-body">
-                      <!-- Dynamic rows load here -->
-                  </tbody>
-              </table>
-          </div>
-      </div>
-
-    </div>
-  </div>
-
-  <script>
-      // Load saved logs on page load
-      document.addEventListener('DOMContentLoaded', loadReports);
-
-      function switchTab(category) {
-          // Update active tab buttons
-          const buttons = document.querySelectorAll('.tab-btn');
-          buttons.forEach(btn => btn.classList.remove('active'));
-          event.currentTarget.classList.add('active');
-
-          // Update active guide cards
-          const cards = document.querySelectorAll('.trouble-card');
-          cards.forEach(card => card.classList.remove('active-card'));
-          
-          const targetCard = document.getElementById('guide-' + category);
-          if (targetCard) {
-              targetCard.classList.add('active-card');
-          }
-      }
-
-      function submitReport(e) {
-          e.preventDefault();
-          
-          const category = document.getElementById('category').value;
-          const operator = document.getElementById('operator').value;
-          const metricStatus = document.getElementById('metric-status').value;
-          const issueNoted = document.getElementById('issue-noted').value;
-          const notes = document.getElementById('notes').value;
-          const timestamp = new Date().toLocaleString();
-
-          const newReport = {
-              timestamp,
-              category,
-              operator,
-              metricStatus,
-              issueNoted,
-              notes
-          };
-
-          let reports = JSON.parse(localStorage.getItem('afti_task_reports') || '[]');
-          reports.unshift(newReport);
-          localStorage.setItem('afti_task_reports', JSON.stringify(reports));
-
-          document.getElementById('task-log-form').reset();
-          loadReports();
-          alert('Telemetry successfully logged and saved to archive!');
-      }
-
-      function loadReports() {
-          const tbody = document.getElementById('reports-table-body');
-          const reports = JSON.parse(localStorage.getItem('afti_task_reports') || '[]');
-          
-          if (reports.length === 0) {
-              tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #94a3b8; padding: 20px;">No operational logs recorded yet in this session. Submit a task reading above.</td></tr>`;
-              return;
-          }
-
-          tbody.innerHTML = '';
-          reports.forEach(r => {
-              const tr = document.createElement('tr');
-              tr.innerHTML = `
-                  <td>${r.timestamp}</td>
-                  <td><span class="badge badge-${r.category}">${r.category.toUpperCase()}</span></td>
-                  <td>${r.operator}</td>
-                  <td>${r.metricStatus}</td>
-                  <td><b>${r.issueNoted}</b></td>
-                  <td>${r.notes || 'None'}</td>
-              `;
-              tbody.appendChild(tr);
-          });
-      }
-
-      function clearLogs() {
-          if (confirm('Are you sure you want to clear all archived task telemetry for this session?')) {
-              localStorage.removeItem('afti_task_reports');
-              loadReports();
-          }
-      }
-  </script>
-</body>
-</html>
+              <h3 class="text-xl font-bold mb-3">🛠️ Mitigation Playbook Diagnostic Lookups</h3>
+              
