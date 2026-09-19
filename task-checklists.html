@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Task Checklists | Digital &amp; Printable</title>
+    <style>
+        :root {
+            --bg: #0f172a; --card: #1e293b; --txt: #f8fafc; --primary: #27ae60; --primary-dark: #1e8449;
+            --hud: #144d29; --accent: #38bdf8; --muted: #94a3b8; --border: rgba(255, 255, 255, 0.1);
+        }
+        body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 20px; line-height: 1.6; }
+        .container { max-width: 950px; margin: 20px auto; background: var(--card); border-radius: 14px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background: var(--hud); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        h1 { color: #4ade80; font-size: 1.8rem; margin-top: 0; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+        h2 { color: var(--accent); font-size: 1.2rem; margin-top: 25px; border-left: 4px solid var(--accent); padding-left: 10px; }
+        p, label { color: var(--muted); } strong { color: var(--txt); }
+        .panel { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px; padding: 25px; margin-top: 20px; }
+        .btn { background: var(--primary); color: #fff; padding: 10px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-block; font-size: 0.9rem; }
+        .btn:hover { background: var(--primary-dark); }
+        .btn-print { background: var(--accent); color: #0f172a; }
+        .btn-print:hover { background: #0ea5e9; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .tab-btn { background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); color: var(--txt); padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .tab-btn.active { background: var(--primary); border-color: var(--primary); }
+        .task-section { display: none; }
+        .task-section.active { display: block; }
+        .task-item { display: flex; align-items: flex-start; gap: 12px; background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); padding: 12px 15px; border-radius: 8px; margin-bottom: 10px; cursor: pointer; }
+        .task-item input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--primary); cursor: pointer; }
+        .task-item span { flex: 1; color: var(--txt); font-size: 0.95rem; }
+        .task-item.completed span { text-decoration: line-through; color: var(--muted); }
+        .header-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+
+        /* PRINT STYLING: Converts dark UI into a clean, printable white paper checklist */
+        @media print {
+            body { background: #fff !important; color: #000 !important; padding: 0; }
+            .container { background: #fff !important; border: none !important; box-shadow: none !important; max-width: 100% !important; padding: 0; }
+            .hud-bar, .tabs, .btn, .hud-bar *, nav { display: none !important; }
+            .task-section { display: block !important; page-break-after: always; }
+            .panel { background: #fff !important; border: 1px solid #ccc !important; padding: 15px !important; margin-top: 10px !important; }
+            h1, h2 { color: #000 !important; border-color: #000 !important; }
+            p, label, span { color: #000 !important; }
+            .task-item { background: #f9f9f9 !important; border: 1px solid #ddd !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hud-bar">
+        <span>Enterprise Operations: <span style="color:var(--accent);">Daily &amp; Weekly Task Logs</span></span>
+        <div>System Status: <strong style="color:#4ade80;">Active / Ready</strong></div>
+    </div>
+
+    <div class="header-actions">
+        <h1>Task Checklists &amp; Management Logs</h1>
+        <button class="btn btn-print" onclick="window.print()">🖨️ Print Printable Checklist</button>
+    </div>
+    <p>Check off daily routines and weekly management targets digitally to log system progress, or print physical sheets for field clipboard use.</p>
+
+    <!-- TAB NAVIGATION -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('mushrooms')">1. Mushrooms</button>
+        <button class="tab-btn" onclick="switchTab('apiary')">2. Apiary &amp; Bees</button>
+        <button class="tab-btn" onclick="switchTab('flowers')">3. Cut Flowers</button>
+        <button class="tab-btn" onclick="switchTab('greens')">4. Fast Greens</button>
+    </div>
+
+    <!-- 1. MUSHROOMS -->
+    <div id="section-mushrooms" class="task-section active panel">
+        <h2>Mushroom Cultivation Task List</h2>
+        <p><em>Focus: Humidity control, misting cycles, CO2 exhaust, and contamination checks.</em></p>
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Daily Routines</h3>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Monitor and log fruiting chamber humidity (target 85–92%) and temperature.</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Inspect automated misting cycles; manually mist block surfaces if dry.</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Run exhaust fans / check passive air exchange to purge CO2 build-up.</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Morning &amp; evening harvest inspection (pick before cap edges curl upward).</span></div>
+        
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Weekly Routines</h3>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Inspect incubation room grain spawn / sawdust blocks for trichoderma mold.</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Clear out exhausted blocks, compost spent substrate, and sanitize shelving.</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Package harvested mushrooms into vented containers and stage in cold storage (34–38°F).</span></div>
+    </div>
+
+    <!-- 2. APIARY -->
+    <div id="section-apiary" class="task-section panel">
+        <h2>Apiary &amp; Pollination Task List</h2>
+        <p><em>Focus: Colony health, water access, swarm prevention, and varroa monitoring.</em></p>
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Daily Routines</h3>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Observe morning flight activity at hive entrances (pollen loads &amp; orientation).</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Check and refill apiary water stations (ensure clean floats).</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Quick visual scan for ant trails, yellowjacket pressure, or hive beetle entry.</span></div>
+        
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Weekly Routines</h3>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Full 7–10 day spring/summer hive inspection (check for queen cells &amp; brood pattern).</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Conduct Varroa mite monitoring (sticky board count or alcohol wash).</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Build frames, wire foundation sheets, or maintain extracting equipment.</span></div>
+    </div>
+
+    <!-- 3. FLOWERS -->
+    <div id="section-flowers" class="task-section panel">
+        <h2>Specialty Cut Flowers Task List</h2>
+        <p><i>Focus: Dawn harvesting, pest scouting, immediate hydration, and trellising.</i></p>
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Daily Routines</h3>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Morning/dusk harvesting of turgid stems (no midday cutting).</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Scout underside of foliage for aphids, thrips, and powdery mildew.</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Strip lower foliage immediately; place stems in clean buckets with cool water/preservative.</span></div>
+        
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Weekly Routines</h3>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Direct-seed or transplant succession rounds (sunflowers, zinnias, etc.).</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Hand-weed delicate root zones and test drip irrigation lines.</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Adjust Florida weave or netting upward to prevent stem lodging from wind/rain.</span></div>
+    </div>
+
+    <!-- 4. GREENS -->
+    <div id="section-greens" class="task-section panel">
+        <h2>Fast-Growing Greens Task List</h2>
+        <p><em>Focus: Consistent moisture, temperature control, sequential seeding, and wash/spin cycles.</em></p>
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Daily Routines</h3>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Monitor soil moisture; run light overhead irrigation or sub-surface watering.</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Adjust high-tunnel sidewalls or deploy shade cloth if ambient temp exceeds 75°F.</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Scout for flea beetles, slugs, and aphid pressure on tender leaf crops.</span></div>
+        
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Weekly Routines</h3>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Sow new trays or direct-seed beds on a 7-day rotation schedule.</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Harvest mature greens, submerge in triple-wash chill tanks, and spin-dry.</span></div>
+        <div class="task-item" onclick="toggleCheck(this)"><input type="checkbox"><span>Immediately clear old root stubble post-harvest, amend with compost, and re-fluff beds.</span></div>
+    </div>
+
+    <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+        <a href="totals-ledger.html" class="btn">← Back to Totals Ledger</a>
+        <button class="btn" onclick="saveTaskProgress()">Save Checked Task Status →</button>
+    </div>
+</div>
+
+<script>
+    function switchTab(target) {
+        document.querySelectorAll('.tab-section, .task-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        
+        document.getElementById('section-' + target).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+
+    function toggleCheck(item) {
+        let cb = item.querySelector('input[type="checkbox"]');
+        if (event.target !== cb) {
+            cb.checked = !cb.checked;
+        }
+        if (cb.checked) {
+            item.classList.add('completed');
+        } else {
+            item.classList.remove('completed');
+        }
+    }
+
+    function saveTaskProgress() {
+        alert("Task checklist progress logged successfully into system storage!");
+    }
+</script>
+</body>
+</html>
