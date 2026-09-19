@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livestock Enterprise &amp; Training Bonus Track</title>
+    <style>
+        :root {
+            --bg: #0f172a; --card: #1e293b; --txt: #f8fafc; --primary: #27ae60; --primary-dark: #1e8449;
+            --hud: #144d29; --accent: #38bdf8; --muted: #94a3b8; --border: rgba(255, 255, 255, 0.1);
+            --warn: #f59e0b; --danger: #ef4444;
+        }
+        body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 20px; line-height: 1.6; }
+        .container { max-width: 950px; margin: 20px auto; background: var(--card); border-radius: 14px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background: var(--hud); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        h1 { color: #4ade80; font-size: 1.8rem; margin-top: 0; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+        h2 { color: var(--accent); font-size: 1.2rem; margin-top: 25px; border-left: 4px solid var(--accent); padding-left: 10px; }
+        p, label { color: var(--muted); } strong { color: var(--txt); }
+        .panel { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px; padding: 25px; margin-top: 20px; }
+        .btn { background: var(--primary); color: #fff; padding: 12px 24px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: var(--primary-dark); }
+        .livestock-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 15px; margin-top: 15px; }
+        .livestock-card { background: rgba(15, 23, 42, 0.8); border: 2px solid var(--border); border-radius: 10px; padding: 18px; cursor: pointer; transition: border-color 0.2s; }
+        .livestock-card.selected { border-color: var(--primary); background: rgba(39, 174, 96, 0.05); }
+        .training-box { background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 10px; padding: 20px; margin-top: 20px; }
+        input[type="number"] { width: 100%; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--txt); font-size: 1.1rem; margin-top: 8px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hud-bar">
+        <span>Specialized Module: <span style="color:var(--accent);">Livestock &amp; Training Bonus</span></span>
+        <div>Available Cash: <strong id="hud-cash" style="color:#4ade80;">$15,000</strong></div>
+    </div>
+
+    <div class="panel">
+        <h1>Step 1: Choose Your Livestock Enterprise</h1>
+        <p>Select your primary animal integration track. Each comes with distinct revenue potentials, management issues, and labor overheads.</p>
+
+        <div class="livestock-grid">
+            <div class="livestock-card selected" id="card-sheep" onclick="selectLivestock('sheep')">
+                <h3 style="color:#fff; margin:0 0 8px 0;">Dairy Sheep</h3>
+                <p style="font-size:0.85rem;"><strong>Cost:</strong> $4,000<br><strong>Rev:</strong> $6,500<br><em>High profit, pasture weed management; requires intensive fencing labor.</em></p>
+            </div>
+            <div class="livestock-card" id="card-chickens" onclick="selectLivestock('chickens')">
+                <h3 style="color:#fff; margin:0 0 8px 0;">Pastured Chickens</h3>
+                <p style="font-size:0.85rem;"><strong>Cost:</strong> $2,000<br><strong>Rev:</strong> $3,800<br><em>Quick cash flow &amp; pest control; high feed costs and predator risks.</em></p>
+            </div>
+            <div class="livestock-card" id="card-quail" onclick="selectLivestock('quail')">
+                <h3 style="color:#fff; margin:0 0 8px 0;">Quail Enterprise</h3>
+                <p style="font-size:0.85rem;"><strong>Cost:</strong> $1,500<br><strong>Rev:</strong> $2,600<br><em>Low space footprint; fragile brooding requirements and niche markets.</em></p>
+            </div>
+            <div class="livestock-card" id="card-horses" onclick="selectLivestock('horses')">
+                <h3 style="color:#fff; margin:0 0 8px 0;">Equestrian / Horses</h3>
+                <p style="font-size:0.85rem;"><strong>Cost:</strong> $6,000<br><strong>Rev:</strong> $2,200<br><em>Low/Negative financial return; high lifestyle points &amp; agritourism value.</em></p>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <label><strong>Scale (Number of Units / Herds):</strong></label>
+            <input type="number" id="unit-count" value="2" min="1" max="10" oninput="calculateLivestockTotals()">
+        </div>
+    </div>
+
+    <div class="training-box">
+        <h2>Step 2: Logged Training Classes &amp; Endgame Percentage Bonus</h2>
+        <p>Enter the number of certified agricultural and operational training classes completed. Each passed class grants a <strong>+3% bonus multiplier</strong> to your final ledger totals.</p>
+        <div style="display: flex; gap: 20px; align-items: center; margin-top: 15px;">
+            <div style="flex: 1;">
+                <label><strong>Classes Passed:</strong></label>
+                <input type="number" id="classes-passed" value="4" min="0" max="20" oninput="calculateLivestockTotals()">
+            </div>
+            <div style="flex: 1; background: rgba(15, 23, 42, 0.6); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                <span style="font-size: 0.85rem; color:var(--muted);">Calculated Training Bonus Multiplier:</span><br>
+                <strong id="bonus-display" style="color:#4ade80; font-size: 1.2rem;">+12% Revenue Boost</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel" style="background: rgba(39, 174, 96, 0.05); border-color: rgba(39, 174, 96, 0.3);">
+        <h2>Module Summary Preview</h2>
+        <p id="summary-text" style="color:var(--txt);">Select your options above to preview net financial performance and bonuses.</p>
+    </div>
+
+    <div style="margin-top: 30px; text-align: right;">
+        <button class="btn" onclick="proceedToTotalsPage()">Save &amp; Continue to Totals Ledger →</button>
+    </div>
+</div>
+
+<script>
+    let gameState = JSON.parse(localStorage.getItem('farmGameState')) || { cash: 15000 };
+    document.getElementById('hud-cash').innerText = '$' + Math.round(gameState.cash).toLocaleString();
+
+    let selectedAnimal = 'sheep';
+    const animalData = {
+        sheep: { cost: 4000, rev: 6500, name: 'Dairy Sheep' },
+        chickens: { cost: 2000, rev: 3800, name: 'Pastured Chickens' },
+        quail: { cost: 1500, rev: 2600, name: 'Quail Enterprise' },
+        horses: { cost: 6000, rev: 2200, name: 'Equestrian / Horses' }
+    };
+
+    function selectLivestock(type) {
+        selectedAnimal = type;
+        document.querySelectorAll('.livestock-card').forEach(c => c.classList.remove('selected'));
+        document.getElementById('card-' + type).classList.add('selected');
+        calculateLivestockTotals();
+    }
+
+    function calculateLivestockTotals() {
+        let units = parseInt(document.getElementById('unit-count').value) || 1;
+        let classes = parseInt(document.getElementById('classes-passed').value) || 0;
+        let data = animalData[selectedAnimal];
+
+        let totalCost = data.cost * units;
+        let baseRev = data.rev * units;
+        let bonusPercent = classes * 3; // +3% per class
+        let finalRev = baseRev * (1 + (bonusPercent / 100));
+        let netProfit = finalRev - totalCost;
+
+        document.getElementById('bonus-display').innerText = `+${bonusPercent}% Revenue Boost (${classes} classes)`;
+        document.getElementById('summary-text').innerHTML = `
+            <strong>Selected Enterprise:</strong> ${units}x ${data.name}<br>
+            <strong>Upfront Investment:</strong> -$${Math.round(totalCost).toLocaleString()}<br>
+            <strong>Adjusted Revenue (Incl. ${bonusPercent}% Training Bonus):</strong> +$${Math.round(finalRev).toLocaleString()}<br>
+            <strong>Net Livestock Contribution:</strong> <span style="color:${netProfit >= 0 ? '#4ade80':'#ef4444'};">$${Math.round(netProfit).toLocaleString()}</span>
+        `;
+        
+        return { selectedAnimal, units, classes, bonusPercent, totalCost, finalRev, netProfit };
+    }
+
+    function proceedToTotalsPage() {
+        let metrics = calculateLivestockTotals();
+        gameState.livestock = metrics;
+        localStorage.setItem('farmGameState', JSON.stringify(gameState));
+        window.location.href = 'totals-ledger.html';
+    }
+
+    calculateLivestockTotals();
+</script>
+</body>
+</html>
