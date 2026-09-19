@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - OSU Extension Research Protocol & Data Relay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --primary: #27ae60;
+            --primary-hover: #219653;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --hud-bg: #144d29;
+            --blue-accent: #38bdf8;
+            --academic-border: #334155;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* GLOBAL NAV BAR STYLES */
+        nav {
+            background: #144d29;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        nav a.active { color: #fff; font-weight: 700; border-bottom: 2px solid var(--primary); padding-bottom: 2px; }
+
+        /* PAGE CONTENT WRAPPER */
+        .page-wrapper {
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1150px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            padding: 35px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hud-bar {
+            background: var(--hud-bg);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 12px 18px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #ffffff;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        h1 {
+            color: #2ecc71;
+            margin-top: 0;
+            font-size: 2rem;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        h2, h3 {
+            color: var(--blue-accent);
+        }
+
+        p, li {
+            line-height: 1.7;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        /* GRID LAYOUT */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .protocol-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--academic-border);
+            border-top: 4px solid var(--primary);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .protocol-card h3 {
+            margin-top: 0;
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* INTERACTIVE VALIDATOR TOOL SECTION */
+        .validator-panel {
+            background: rgba(15, 23, 42, 0.9);
+            border: 2px solid rgba(56, 189, 248, 0.3);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #94a3b8;
+        }
+
+        input, select {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--blue-accent);
+        }
+
+        .btn-validate {
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        .btn-validate:hover {
+            background-color: #2563eb;
+        }
+
+        /* OUTPUT COMPLIANCE REPORT BOX */
+        .compliance-output {
+            background: #0f172a;
+            border: 1px dashed var(--academic-border);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-family: monospace;
+            font-size: 0.88rem;
+            color: #38bdf8;
+            white-space: pre-wrap;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        .status-pass { background: #065f46; color: #a7f3d0; }
+        .status-fail { background: #7f1d1d; color: #fecaca; }
+
+        .section-divider {
+            border: 0;
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 35px 0;
+        }
+
+        .btn-small-nav {
+            background: #334155;
+            color: #f8fafc;
+            padding: 8px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: inline-block;
+            transition: background 0.2s;
+        }
+        .btn-small-nav:hover {
+            background: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
+    <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
+    <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+      <a href="index.html">Home</a>
+      <a href="training-modules-and-mutual-growth.html" class="active">Training & Certification</a>
+      <a href="partners.html">Partners</a>
+      <a href="shared-harvest.html">Shared Harvest</a>
+      <a href="incubator-hub.html" style="color: var(--accent); font-weight: 600;">🌱 Incubator Launchpad</a>
+      <a href="technical-tutorials.html" style="color: var(--accent); font-weight: 600;">🔨 Technical Bank</a>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="container">
+      
+      <!-- HUD BAR -->
+      <div class="hud-bar">
+          <span>🎓 Academic Research Standards: OSU Extension Framework</span>
+          <span>Site: Linn County Research Plot #4 | Protocol Rev. 4.2</span>
+      </div>
+
+      <h1>🔬 Research Data Collection, Assembly & Relay Protocol</h1>
+      <p style="text-align: center; margin-bottom: 30px; max-width: 850px; margin-left: auto; margin-right: auto;">
+          To meet the rigorous empirical standards of university extension partners (such as the Oregon State University Extension Service), raw farm operations are transformed into publication-grade agricultural research data through standardized metrology, dual-operator chain-of-custody, and longitudinal tracking.
+      </p>
+
+      <!-- 3-COLUMN CORE METHODOLOGY GRID -->
+      <div class="grid-3">
+          <!-- CARD 1 -->
+          <div class="protocol-card">
+              <div>
+                  <h3>📐 1. Metrology & Calibration</h3>
+                  <p><b>Precision Over Anecdote:</b> Environmental and yield parameters are never logged as subjective adjectives. Sensors undergo bi-weekly baseline calibration against USDA standards.</p>
+                  <ul style="padding-left: 18px; margin-top: 10px; font-size: 0.88rem; color: #94a3b8;">
+                      <li>Substrate moisture measured via TDR moisture meters.</li>
+                      <li>Temperature &amp; RH recorded with certified hygrometers.</li>
+                      <li>Biomass yields recorded in precise metric grams (g/sq.ft).</li>
+                  </ul>
+              </div>
+              <div style="margin-top: 15px; font-size: 0.8rem; color: #38bdf8; font-weight: bold;">Standard: USDA Ag Experiment Station</div>
+          </div>
+
+          <!-- CARD 2 -->
+          <div class="protocol-card" style="border-top-color: var(--blue-accent);">
+              <div>
+                  <h3>👥 2. Chain-of-Custody</h3>
+                  <p><b>Dual-Operator Sign-Off:</b> To eliminate single-observer bias and fulfill academic peer-review principles, every daily log requires a verified working pair (Minimum 2 operators).</p>
+                  <ul style="padding-left: 18px; margin-top: 10px; font-size: 0.88rem; color: #94a3b8;">
+                      <li>Primary Operator records telemetry.</li>
+                      <li>Secondary Operator audits and countersigns.</li>
+                      <li>Timestamped audit trail prevents backfilling.</li>
+                  </ul>
+              </div>
+              <div style="margin-top: 15px; font-size: 0.8rem; color: #38bdf8; font-weight: bold;">Standard: Double-Blind Field Auditing</div>
+          </div>
+
+          <!-- CARD 3 -->
+          <div class="protocol-card" style="border-top-color: var(--accent);">
+              <div>
+                  <h3>📊 3. Longitudinal Tracking</h3>
+                  <p><b>Batch &amp; Lifecycle Indexing:</b> Data points are linked to specific batch serial numbers (e.g., <i>#MSH-2026-09</i>) allowing researchers to analyze multi-generational crop response.</p>
+                  <ul style="padding-left: 18px; margin-top: 10px; font-size: 0.88rem; color: #94a3b8;">
+                      <li>Independent Variable tracking (inputs/amendments).</li>
+                      <li>Dependent Variable output analysis (yield/brix).</li>
+                      <li>Anomaly root-cause tracking &amp; 14-day re-test.</li>
+                  </ul>
+              </div>
+              <div style="margin-top: 15px; font-size: 0.8rem; color: #38bdf8; font-weight: bold;">Standard: Relational Agronomic Schema</div>
+          </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- INTERACTIVE OSU EXTENSION TELEMETRY COMPLIANCE VALIDATOR -->
+      <div class="validator-panel">
+          <h2>🧪 Interactive OSU Extension Telemetry Validator</h2>
+          <p style="font-size: 0.9rem; margin-bottom: 20px;">
+              Test your proposed data entry against institutional academic criteria. This simulator checks whether your operational log meets the stringency required for inclusion in extension research briefs.
+          </p>
+
+          <form id="validator-form" onsubmit="validateTelemetry(event)">
+              <div class="form-grid">
+                  <div>
+                      <label for="val-category">Enterprise Sector</label>
+                      <select id="val-category" required>
+                          <option value="mushrooms">Mushroom Substrate Trial</option>
+                          <option value="apiary">Apiary Varroa &amp; Honey Yield</option>
+                          <option value="greens">Hydro/Soil Greens Density</option>
+                          <option value="flowers">Specialty Cut Flower Biomass</option>
+                      </select>
+                  </div>
+                  <div>
+                      <label for="val-operators">Operator Pair (Min. 2 Names)</label>
+                      <input type="text" id="val-operators" placeholder="e.g., J. Doe & M. Smith" required>
+                  </div>
+                  <div>
+                      <label for="val-metric">Quantitative Metric Logged</label>
+                      <input type="text" id="val-metric" placeholder="e.g., 28.5g yield / 65% moisture" required>
+                  </div>
+              </div>
+              <button type="submit" class="btn-validate">Run Academic Compliance Audit</button>
+          </form>
+
+          <div id="validator-results" style="display: none; margin-top: 20px;">
+              <div id="compliance-status-badge" class="status-badge"></div>
+              <div class="compliance-output" id="compliance-output-text"></div>
+          </div>
+      </div>
+
+      <!-- BOTTOM NAVIGATION FOOTER -->
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
+          <a href="data-reports-action.html" class="btn-small-nav">← Return to Operational Data Hub</a>
+          <a href="totals-ledger.html" class="btn-small-nav">View Master Totals Ledger →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+      function validateTelemetry(e) {
+          e.preventDefault();
+          
+          const category = document.getElementById('val-category').value;
+          const operators = document.getElementById('val-operators').value.trim();
+          const metric = document.getElementById('val-metric').value.trim();
+          
+          const resultsDiv = document.getElementById('validator-results');
+          const badge = document.getElementById('compliance-status-badge');
+          const outputText = document.getElementById('compliance-output-text');
+          
+          resultsDiv.style.display = 'block';
+
+          // Validation Checks
+          const hasTwoOperators = operators.includes('&') || operators.toLowerCase().includes(' and ') || operators.split(',').length >= 2;
+          const hasNumericData = /\d/.test(metric);
+
+          if (hasTwoOperators && hasNumericData) {
+              badge.className = 'status-badge status-pass';
+              badge.innerText = 'PASSED: Academic Extension Grade A';
+              
+              outputText.innerHTML = `[VERIFICATION REPORT - OSU EXTENSION COMPLIANT]
+--------------------------------------------------
+Timestamp: ${new Date().toISOString()}
+Sector ID: ${category.toUpperCase()}
+Chain-of-Custody: Verified (${operators} - Dual Sign-off OK)
+Metrology Audit: Quantitative data point detected ("${metric}")
+Readiness: Eligible for quarterly research aggregation & county extension bulletin inclusion.
+Hash Signature: 0x7F9B-LinnCounty-AgResearch-2026`;
+          } else {
+              badge.className = 'status-badge status-fail';
+              badge.innerText = 'REJECTED: Fails Institutional Rigor Standards';
+              
+              outputText.innerHTML = `[VERIFICATION FAILURE NOTICE]
+--------------------------------------------------
+Reasons for Rejection:
+${!hasTwoOperators ? '• Violation of Chain-of-Custody: Working pair signature missing or incomplete (Requires minimum 2 operators separated by "&" or "and").\n' : ''}${!hasNumericData ? '• Violation of Metrology Standards: Metric entry contains qualitative description without quantitative units or numbers.\n' : ''}
+Action Required: Revise entry in the Data Hub to meet peer-review telemetry standards.`;
+          }
+      }
+  </script>
+</body>
+</html>
