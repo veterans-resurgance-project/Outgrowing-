@@ -3,31 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFTI - Data Reports & Action Hub</title>
-    <script src="https://tailwindcss.com"></script>
+    <title>Enterprise Task Checklists | Digital &amp; Printable</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f8fafc;
-            --primary: #27ae60;
-            --primary-hover: #219653;
-            --secondary: #3b82f6;
-            --accent: #f59e0b;
-            --hud-bg: #144d29;
-            --blue-accent: #38bdf8;
-            --danger: #ef4444;
+            --bg: #0f172a; --card: #1e293b; --txt: #f8fafc; --primary: #27ae60; --primary-dark: #1e8449;
+            --hud: #144d29; --accent: #38bdf8; --muted: #94a3b8; --border: rgba(255, 255, 255, 0.1);
         }
-
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
-
+        body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 20px; line-height: 1.6; }
+        
         /* GLOBAL NAV BAR STYLES */
         nav {
             background: #144d29;
@@ -38,210 +21,50 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
             flex-wrap: wrap;
             gap: 1rem;
-            width: 100%;
+            margin: -20px -20px 20px -20px;
             box-sizing: border-box;
         }
         nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem; }
         nav a.active { color: #fff; font-weight: 700; border-bottom: 2px solid var(--primary); padding-bottom: 2px; }
 
-        /* PAGE CONTENT WRAPPER */
-        .page-wrapper {
-            padding: 30px 20px;
-            display: flex;
-            justify-content: center;
-        }
+        .container { max-width: 950px; margin: 20px auto; background: var(--card); border-radius: 14px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background: var(--hud); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        h1 { color: #4ade80; font-size: 1.8rem; margin-top: 0; border-bottom: 2px solid var(--border); padding-bottom: 15px; margin-bottom: 0; }
+        h2 { color: var(--accent); font-size: 1.2rem; margin-top: 25px; border-left: 4px solid var(--accent); padding-left: 10px; }
+        p, label { color: var(--muted); } strong { color: var(--txt); }
+        .panel { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px; padding: 25px; margin-top: 20px; }
+        
+        .btn { background: var(--primary); color: #fff; padding: 10px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block; font-size: 0.9rem; }
+        .btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .btn-print { background: var(--accent); color: #0f172a; }
+        .btn-print:hover { background: #0ea5e9; }
+        .btn-nav { background: #3b82f6; color: white; }
+        .btn-nav:hover { background: #2563eb; }
 
-        .container {
-            width: 100%;
-            max-width: 1100px;
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-            padding: 30px;
-            box-sizing: border-box;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .tab-btn { background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); color: var(--txt); padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s; }
+        .tab-btn:hover { background: #334155; }
+        .tab-btn.active { background: var(--primary); border-color: var(--primary); color: white; }
+        
+        .task-section { display: none; }
+        .task-section.active { display: block; }
+        .task-item { display: flex; align-items: flex-start; gap: 12px; background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); padding: 12px 15px; border-radius: 8px; margin-bottom: 10px; cursor: pointer; }
+        .task-item input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--primary); cursor: pointer; }
+        .task-item span { flex: 1; color: var(--txt); font-size: 0.95rem; }
+        .task-item.completed span { text-decoration: line-through; color: var(--muted); }
+        
+        .header-actions { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); padding-bottom: 15px; margin-bottom: 15px; flex-wrap: wrap; gap: 15px; }
 
-        .hud-bar {
-            background: var(--hud-bg);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 8px;
-            padding: 10px 15px;
-            margin-bottom: 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: bold;
-            color: #ffffff;
-        }
-
-        h1 {
-            color: #2ecc71;
-            margin-top: 0;
-            font-size: 1.8rem;
-            text-align: center;
-        }
-
-        h2, h3 {
-            color: var(--blue-accent);
-        }
-
-        p, li {
-            line-height: 1.6;
-            color: #cbd5e1;
-        }
-
-        /* GRID LAYOUT FOR SECTIONS */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .panel {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        /* FORM ELEMENTS */
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #94a3b8;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            background: #0f172a;
-            border: 1px solid #334155;
-            color: #f8fafc;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            box-sizing: border-box;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            width: 100%;
-            transition: background 0.2s;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-hover);
-        }
-
-        /* TROUBLESHOOTING CATEGORY TABS */
-        .tab-buttons {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            background: #0f172a;
-            color: #94a3b8;
-            border: 1px solid #334155;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 0.82rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .tab-btn.active {
-            background: var(--blue-accent);
-            color: #0f172a;
-            border-color: var(--blue-accent);
-        }
-
-        .trouble-card {
-            background: rgba(30, 41, 59, 0.8);
-            border-left: 4px solid var(--accent);
-            padding: 12px 15px;
-            margin-bottom: 12px;
-            border-radius: 0 6px 6px 0;
-        }
-
-        .trouble-card h4 {
-            margin: 0 0 5px 0;
-            color: #f8fafc;
-            font-size: 1rem;
-        }
-
-        .trouble-card p {
-            font-size: 0.85rem;
-            margin: 0 0 8px 0;
-        }
-
-        .steps-box {
-            background: #0f172a;
-            padding: 10px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(255,255,255,0.05);
-            color: #38bdf8;
-        }
-
-        /* TABLES */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 0.9rem;
-        }
-
-        th, td {
-            padding: 10px 12px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        th {
-            background: rgba(15, 23, 42, 0.8);
-            color: var(--blue-accent);
-        }
-
-        .badge {
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-
-        .badge-mushrooms { background: #78350f; color: #fde68a; }
-        .badge-apiary { background: #b45309; color: #fef3c7; }
-        .badge-greens { background: #065f46; color: #a7f3d0; }
-        .badge-flowers { background: #831843; color: #fbcfe8; }
-
-        .section-divider {
-            border: 0;
-            height: 1px;
-            background: rgba(255,255,255,0.1);
-            margin: 30px 0;
+        /* PRINT STYLING: Clean white layout */
+        @media print {
+            body { background: #fff !important; color: #000 !important; padding: 0; }
+            .container { background: #fff !important; border: none !important; box-shadow: none !important; max-width: 100% !important; padding: 0; }
+            .hud-bar, .tabs, .btn, nav, .btn-print, .action-group { display: none !important; }
+            .task-section { display: block !important; page-break-after: always; }
+            .panel { background: #fff !important; border: 1px solid #ccc !important; padding: 15px !important; margin-top: 10px !important; }
+            h1, h2 { color: #000 !important; border-color: #000 !important; }
+            p, label, span { color: #000 !important; }
+            .task-item { background: #f9f9f9 !important; border: 1px solid #ddd !important; }
         }
     </style>
 </head>
@@ -255,61 +78,62 @@
       <a href="training-academy.html">Training & Certification</a>
       <a href="partners.html">Partners</a>
       <a href="shared-harvest-incubator.html">Shared Harvest</a>
-      <a href="shared-harvest-incubator.html" style="color: var(--accent); font-weight: 600;">🌱 Incubator Launchpad</a>
-      <a href="totals-ledger.html" class="active">Data Logs</a>
+      <a href="totals-ledger.html" class="active">Task Checklists</a>
     </div>
   </nav>
 
-  <div class="page-wrapper">
-    <div class="container">
-      
-      <!-- HUD BAR -->
-      <div class="hud-bar">
-          <span>📊 Operational Logging & Diagnostic Hub</span>
-          <span style="font-size: 0.85rem; color: #cbd5e1;">Active Site: Linn County Research Plots</span>
-      </div>
+<div class="container">
+    <div class="hud-bar">
+        <span>Enterprise Operations: <span style="color:var(--accent);">Daily &amp; Weekly Task Logs</span></span>
+        <div>System Status: <strong style="color:#4ade80;">Active / Ready</strong></div>
+    </div>
 
-      <h1>📋 Daily Task Telemetry & Pest/Disease Action Center</h1>
-      <p style="text-align: center; margin-bottom: 25px; max-width: 800px; margin-left: auto; margin-right: auto;">
-          Submit daily operational logs, track environmental criteria metrics, and handle localized regional risks dynamically across multiple farm paths.
-      </p>
+    <div class="header-actions">
+        <h1>Task Checklists &amp; Management Logs</h1>
+        <div class="action-group" style="display: flex; gap: 10px;">
+            <button class="btn btn-print" onclick="window.print()">🖨️ Print Checklists</button>
+            <a href="totals-ledger.html" class="btn btn-nav">📊 Open Logging &amp; Action Hub</a>
+        </div>
+    </div>
+    <p>Check off daily routines and weekly management targets digitally to log system progress, or print physical sheets for field clipboard use.</p>
 
-      <div class="grid-2">
-          
-          <!-- LEFT PANEL: DATA ENTRY FORM -->
-          <div class="panel">
-              <h3 class="text-xl font-bold mb-4">🚀 Submit Field Telemetry</h3>
-              <form id="telemetryForm" onsubmit="handleFormSubmit(event)">
-                  <div class="form-group">
-                      <label for="categorySelect">Active Enterprise Track</label>
-                      <select id="categorySelect" onchange="adaptFormFields(this.value)">
-                          <option value="mushrooms">Mushrooms Module</option>
-                          <option value="apiary">Apiary Diagnostics</option>
-                          <option value="greens">High Yield Greens</option>
-                          <option value="flowers">Cut Flowers Track</option>
-                      </select>
-                  </div>
+    <!-- TAB NAVIGATION -->
+    <div class="tabs">
+        <button id="btn-mushrooms" class="tab-btn active" onclick="switchTab('mushrooms')">1. Mushrooms</button>
+        <button id="btn-apiary" class="tab-btn" onclick="switchTab('apiary')">2. Apiary &amp; Bees</button>
+        <button id="btn-flowers" class="tab-btn" onclick="switchTab('flowers')">3. Cut Flowers</button>
+        <button id="btn-greens" class="tab-btn" onclick="switchTab('greens')">4. Fast Greens</button>
+    </div>
 
-                  <div class="form-group">
-                      <label id="dynamicMetricLabel" for="metricInput">Humidity Parameter (%)</label>
-                      <input type="number" id="metricInput" placeholder="Enter sensor data point" required>
-                  </div>
+    <!-- 1. MUSHROOMS -->
+    <div id="section-mushrooms" class="task-section active panel">
+        <h2>Mushroom Cultivation Task List</h2>
+        <p><em>Focus: Humidity control, misting cycles, CO2 exhaust, and contamination checks.</em></p>
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Daily Routines</h3>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Monitor and log fruiting chamber humidity (target 85–92%) and temperature.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Inspect automated misting cycles; manually mist block surfaces if dry.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Run exhaust fans / check passive air exchange to purge CO2 build-up.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Morning &amp; evening harvest inspection (pick before cap edges curl upward).</span></div>
+        
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Weekly Routines</h3>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Inspect incubation room grain spawn / sawdust blocks for trichoderma mold.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Clear out exhausted blocks, compost spent substrate, and sanitize shelving.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Package harvested mushrooms into vented containers and stage in cold storage (34–38°F).</span></div>
+    </div>
 
-                  <div class="form-group">
-                      <label for="observerInput">Lead Operator Pair Initials</label>
-                      <input type="text" id="observerInput" placeholder="e.g., JD / AM" required>
-                  </div>
+    <!-- 2. APIARY -->
+    <div id="section-apiary" class="task-section panel">
+        <h2>Apiary &amp; Pollination Task List</h2>
+        <p><em>Focus: Colony health, water access, swarm prevention, and varroa monitoring.</em></p>
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Daily Routines</h3>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Observe morning flight activity at hive entrances (pollen loads &amp; orientation).</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Check and refill apiary water stations (ensure clean floats).</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Quick visual scan for ant trails, yellowjacket pressure, or hive beetle entry.</span></div>
+        
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Weekly Routines</h3>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Full 7–10 day spring/summer hive inspection (check for queen cells &amp; brood pattern).</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Conduct Varroa mite monitoring (sticky board count or alcohol wash).</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Build frames, wire foundations, or harvest capped honey supers.</span></div>
+    </div>
 
-                  <div class="form-group">
-                      <label for="notesInput">Field Observations / Flagged Anomalies</label>
-                      <textarea id="notesInput" rows="3" placeholder="Describe layout variables..."></textarea>
-                  </div>
-
-                  <button type="submit" class="btn-primary">Commit Telemetry to Ledger</button>
-              </form>
-          </div>
-
-          <!-- RIGHT PANEL: DYNAMIC INTERACTIVE DIAGNOSTICS CARD -->
-          <div class="panel">
-              <h3 class="text-xl font-bold mb-3">🛠️ Mitigation Playbook Diagnostic Lookups</h3>
-              
+    <!-- 3. CUT FLOWERS -->
