@@ -102,7 +102,7 @@
         </label>
         <label class="check-item">
           <input type="checkbox" id="inc-box-3" onchange="saveIncubatorState()">
-          <span class="check-text">Review Standard Share-Crop Memorandum Guidelines</span>
+      <span class="check-text">Review Standard Share-Crop Memorandum Guidelines</span>
         </label>
       </div>
     </div>
@@ -120,8 +120,6 @@
             box3: document.getElementById('inc-box-3').checked
         };
         localStorage.setItem('afti_incubator_checklist_cache', JSON.stringify(state));
-    }
-
     function loadIncubatorState() {
         const saved = localStorage.getItem('afti_incubator_checklist_cache');
         if (saved) {
@@ -138,5 +136,4 @@
   </script>
 </body>
 </html>
-
 
