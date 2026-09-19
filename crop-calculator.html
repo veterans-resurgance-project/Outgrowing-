@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop & Infrastructure Investment Calculator | Living Lab Portal</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --txt: #f8fafc;
+            --primary: #27ae60;
+            --primary-dark: #1e8449;
+            --hud: #144d29;
+            --accent: #38bdf8;
+            --muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --warn: #f59e0b;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--txt);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 30px auto;
+            background: var(--card);
+            border-radius: 14px;
+            padding: 40px;
+            box-sizing: border-box;
+            border: 1px solid var(--border);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+        }
+
+        .hud-bar {
+            background: var(--hud);
+            border-radius: 8px;
+            padding: 10px 18px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        h1 {
+            color: #4ade80;
+            font-size: 1.8rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin-top: 30px;
+            border-left: 4px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        p, label {
+            color: var(--muted);
+        }
+
+        strong {
+            color: var(--txt);
+        }
+
+        .form-group {
+            margin: 20px 0;
+        }
+
+        select, input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--txt);
+            font-size: 1rem;
+            margin-top: 8px;
+            box-sizing: border-box;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .output-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .metric-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-top: 8px;
+        }
+
+        .strategy-box {
+            background: rgba(56, 189, 248, 0.05);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 10px;
+            padding: 22px;
+            margin-top: 25px;
+        }
+
+        .action-container {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn-secondary {
+            background: #334155;
+            color: var(--txt);
+            padding: 10px 18px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hud-bar">
+        <span>Decision Engine: <span style="color:var(--accent);">Crop &amp; Infrastructure Calculator</span></span>
+        <div>Global XP Ledger: <span id="global-points" style="color:#4ade80;">400</span></div>
+    </div>
+
+    <h1>Crop &amp; Infrastructure Investment Simulator</h1>
+    <p>Select a crop tier and scale to evaluate upfront costs, seasonal labor demand, sustainability footprint, and strategic timing for adoption.</p>
+
+    <!-- CALCULATOR FORM -->
+    <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px; padding: 25px; margin-top: 20px;">
+        <div class="form-group">
+            <label for="crop-select"><strong>Select Crop / Production Tier:</strong></label>
+            <select id="crop-select" onchange="calculateMetrics()">
+                <option value="greens">Tier 1: Direct-Market Leafy Greens &amp; Herbs (Low Infrastructure)</option>
+                <option value="root">Tier 2: Storage Root Crops &amp; Field Veggies (Moderate Infrastructure)</option>
+                <option value="berries">Tier 3: High-Tunnel Berries &amp; Specialty Fruit (High Infrastructure)</option>
+                <option value="aquaculture">Tier 4: Integrated Aquaponics &amp; Value-Added Processing (Advanced Infrastructure)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="scale-input"><strong>Production Scale Factor (Plots / Units):</strong></label>
+            <input type="number" id="scale-input" value="1" min="1" max="50" oninput="calculateMetrics()">
+        </div>
+    </div>
+
+    <!-- OUTPUT METRICS -->
+    <div class="output-grid">
+        <div class="metric-card">
+            <p style="margin:0; font-size:0.9rem;">Estimated Upfront Infrastructure</p>
+            <div id="out-cost" class="metric-value">$1,200</div>
+        </div>
+        <div class="metric-card">
+            <p style="margin:0; font-size:0.9rem;">Seasonal Labor Demand</p>
+            <div id="out-labor" class="metric-value">120 Hours</div>
+        </div>
+        <div class="metric-card">
+            <p style="margin:0; font-size:0.9rem;">Sustainability Footprint Score</p>
+            <div id="out-footprint" class="metric-value" style="color:#4ade80;">Low Impact (A+)</div>
+        </div>
+    </div>
+
+    <!-- STRATEGIC FIT & STAGE ADVICE -->
+    <div class="strategy-box">
+        <h2 style="margin-top:0; font-size:1.1rem; color:var(--accent);">Strategic Stage Guidance</h2>
+        <p id="out-strategy" style="margin-bottom:0; color:var(--txt);">
+            Loading strategy...
+        </p>
+    </div>
+
+    <!-- FOOTER NAV -->
+    <div class="action-container">
+        <a href="grant-hub.html" class="btn-secondary">← Back to Grant Hub</a>
+        <span style="color: var(--muted); font-size: 0.85rem;">System Engine Status: Interactive</span>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const xp = localStorage.getItem('afti_global_xp') || '400';
+        document.getElementById('global-points').innerText = xp;
+        calculateMetrics();
+    });
+
+    const cropData = {
+        greens: {
+            baseCost: 800,
+            costPerScale: 400,
+            baseLabor: 90,
+            laborPerScale: 45,
+            footprint: "Low Impact (A+)",
+            strategy: "<strong>Ideal for Early-Stage Farms & New Recruits:</strong> Low upfront capital requirements allow you to generate immediate cash flow and test distribution pipelines without financial overextension. Recommended for Year 1 baseline operations."
+        },
+        root: {
+            baseCost: 2500,
+            costPerScale: 1200,
+            baseLabor: 180,
+            laborPerScale: 80,
+            footprint: "Moderate Impact (A)",
+            strategy: "<strong>Ideal for Mid-Stage Expansion:</strong> Requires basic cold storage and bulk handling infrastructure. Best introduced once direct-market customer bases are established and reliable transport is secured."
+        },
+        berries: {
+            baseCost: 8500,
+            costPerScale: 3500,
+            baseLabor: 320,
+            laborPerScale: 140,
+            footprint: "Optimized / Water-Efficient (A-)",
+            strategy: "<strong>Ideal for Growth &amp; Grant Subsidies:</strong> High upfront infrastructure costs (high tunnels, drip irrigation) are offset by premium pricing and high demand. Best deployed using USDA LFPP or CIG grant assistance to mitigate capital risk."
+        },
+        aquaculture: {
+            baseCost: 22000,
+            costPerScale: 9500,
+            baseLabor: 500,
+            laborPerScale: 220,
+            footprint: "Closed-Loop / High Efficiency (B+)",
+            strategy: "<strong>Advanced / Mature Stage Only:</strong> Demands significant technical oversight, continuous power, and specialized processing workflows. Do not attempt in Year 1; scale into this once your core labor crew and telemetry monitoring pipelines are fully proven."
+        }
+    };
+
+    function calculateMetrics() {
+        const cropKey = document.getElementById('crop-select').value;
+        const scale = parseInt(document.getElementById('scale-input').value) || 1;
+        const data = cropData[cropKey];
+
+        const totalCost = data.baseCost + (data.costPerScale * (scale - 1));
+        const totalLabor = data.baseLabor + (data.laborPerScale * (scale - 1));
+
+        document.getElementById('out-cost').innerText = '$' + totalCost.toLocaleString();
+        document.getElementById('out-labor').innerText = totalLabor.toLocaleString() + ' Hours';
+        document.getElementById('out-footprint').innerText = data.footprint;
+        document.getElementById('out-strategy').innerHTML = data.strategy;
+    }
+</script>
+
+</body>
+</html>
