@@ -318,6 +318,38 @@
         `;
       }
     }
+ <div class="panel" style="max-width: 400px; margin: 50px auto; text-align: center;">
+    <h2>Administrative Portal Login</h2>
+    <p>Enter your 4-digit test passcode to access telemetry.</p>
+    
+    <input type="password" id="passcode-input" maxlength="4" placeholder="••••" style="font-size: 1.5rem; text-align: center; width: 120px; padding: 10px; background: #0f172a; color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; letter-spacing: 5px;">
+    <br><br>
+    <button type="button" class="btn" onclick="verifyPasscode()">Authenticate</button>
+    <p id="error-msg" style="color: #ef4444; margin-top: 10px; font-size: 0.85rem; display: none;">Invalid passcode. Try 6060.</p>
+</div>
+
+<!-- SECURE TELEMETRY DASHBOARD (Hidden until correct code entered) -->
+<div id="telemetry-panel" class="panel" style="display: none;">
+    <h2 style="color: #4ade80;">🔓 Staff Telemetry &amp; System Logs</h2>
+    <p>Authentication successful. Access granted to Linn County enterprise tracking data.</p>
+    <!-- Add your telemetry content here -->
+</div>
+
+<script>
+    function verifyPasscode() {
+        let enteredCode = document.getElementById('passcode-input').value.trim();
+        let testCode = "6060"; // Your test code
+
+        if (enteredCode === testCode) {
+            document.getElementById('passcode-input').parentElement.style.display = 'none';
+            document.getElementById('telemetry-panel').style.display = 'block';
+        } else {
+            let err = document.getElementById('error-msg');
+            err.style.display = 'block';
+            document.getElementById('passcode-input').value = "";
+        }
+    }
+</script>
   </script>
 </body>
 </html>
