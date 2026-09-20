@@ -1,0 +1,310 @@
+t<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Data Reports & Action Hub</title>
+    <script src="https://tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --primary: #27ae60;
+            --primary-hover: #219653;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --hud-bg: #144d29;
+            --blue-accent: #38bdf8;
+            --danger: #ef4444;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* GLOBAL NAV BAR STYLES */
+        nav {
+            background: #144d29;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        nav a.active { color: #fff; font-weight: 700; border-bottom: 2px solid var(--primary); padding-bottom: 2px; }
+
+        /* PAGE CONTENT WRAPPER */
+        .page-wrapper {
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            padding: 30px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hud-bar {
+            background: var(--hud-bg);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        h1 {
+            color: #2ecc71;
+            margin-top: 0;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        h2, h3 {
+            color: var(--blue-accent);
+        }
+
+        p, li {
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        /* GRID LAYOUT FOR SECTIONS */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .panel {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        /* FORM ELEMENTS */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #94a3b8;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* TROUBLESHOOTING CATEGORY TABS */
+        .tab-buttons {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #0f172a;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--blue-accent);
+            color: #0f172a;
+            border-color: var(--blue-accent);
+        }
+
+        .trouble-card {
+            background: rgba(30, 41, 59, 0.8);
+            border-left: 4px solid var(--accent);
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .trouble-card h4 {
+            margin: 0 0 5px 0;
+            color: #f8fafc;
+            font-size: 1rem;
+        }
+
+        .trouble-card p {
+            font-size: 0.85rem;
+            margin: 0 0 8px 0;
+        }
+
+        .steps-box {
+            background: #0f172a;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: #38bdf8;
+        }
+
+        /* TABLES */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        th {
+            background: rgba(15, 23, 42, 0.8);
+            color: var(--blue-accent);
+        }
+
+        .badge {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .badge-mushrooms { background: #78350f; color: #fde68a; }
+        .badge-apiary { background: #b45309; color: #fef3c7; }
+        .badge-greens { background: #065f46; color: #a7f3d0; }
+        .badge-flowers { background: #831843; color: #fbcfe8; }
+    </style>
+</head>
+<body>
+
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
+    <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
+    <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+      <a href="index.html">Home</a>
+      <a href="training-academy.html">Training & Certification</a>
+      <a href="partners.html">Partners</a>
+      <a href="shared-harvest-incubator.html">Shared Harvest</a>
+      <a href="task-checklists.html">Task Checklists</a>
+      <a href="totals-ledger.html" class="active">Data Logs</a>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="container">
+      
+      <!-- HUD BAR -->
+      <div class="hud-bar">
+          <span>📊 Operational Logging & Diagnostic Hub</span>
+          <span style="font-size: 0.85rem; color: #cbd5e1;">Active Site: Linn County Research Plots</span>
+      </div>
+
+      <h1>📋 Daily Task Telemetry & Pest/Disease Action Center</h1>
+      <p style="text-align: center; margin-bottom: 25px; max-width: 800px; margin-left: auto; margin-right: auto;">
+          Submit daily operational logs, track environmental criteria metrics, and handle localized regional risks dynamically across multiple farm paths.
+      </p>
+
+      <div class="grid-2">
+          
+          <!-- LEFT PANEL: DATA ENTRY FORM -->
+          <div class="panel">
+              <h3 class="text-xl font-bold mb-4">🚀 Submit Field Telemetry</h3>
+              <form id="telemetryForm" onsubmit="handleFormSubmit(event)">
+                  <div class="form-group">
+                      <label for="categorySelect">Active Enterprise Track</label>
+                      <select id="categorySelect" onchange="adaptFormFields(this.value)">
+                          <option value="mushrooms">Mushrooms Module</option>
+                          <option value="apiary">Apiary Diagnostics</option>
+                          <option value="greens">High Yield Greens</option>
+                          <option value="flowers">Cut Flowers Track</option>
+                      </select>
+                  </div>
+
+                  <div class="form-group">
+                      <label id="dynamicMetricLabel" for="metricInput">Humidity Parameter (%)</label>
+                      <input type="number" id="metricInput" placeholder="Enter sensor data point" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="observerInput">Lead Operator Pair Initials</label>
+                      <input type="text" id="observerInput" placeholder="e.g., JD / AM" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="notesInput">Field Observations / Flagged Anomalies</label>
+                      <textarea id="notesInput" rows="3" placeholder="Describe layout variables..."></textarea>
+                  </div>
+
+                  <button type="submit" class="btn-primary">Commit Telemetry to Ledger</button>
+              </form>
+          </div>
+
+          <!-- RIGHT PANEL: DYNAMIC INTERACTIVE DIAGNOSTICS CARD -->
+          <div class="panel">
+              <h3 class="text-xl font-bold mb-3">🛠️ Mitigation Playbook Diagnostic Lookups</h3>
+              
+              <div class="tab-buttons">
+                  <button id="tab-mushrooms" class="tab-btn active" onclick="switchCategory('mushrooms', this)">Mushrooms</button>
