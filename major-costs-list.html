@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Major Infrastructure & Stipends Expansion Ledger</title>
+    <script src="https://tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --primary: #27ae60;
+            --primary-hover: #219653;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --hud-bg: #144d29;
+            --blue-accent: #38bdf8;
+            --danger: #ef4444;
+            --expansion: #a855f7;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* GLOBAL NAV BAR STYLES */
+        nav {
+            background: #144d29;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        nav a.active { color: #fff; font-weight: 700; border-bottom: 2px solid var(--primary); padding-bottom: 2px; }
+
+        /* PAGE CONTENT WRAPPER */
+        .page-wrapper {
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            padding: 30px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hud-bar {
+            background: var(--hud-bg);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #ffffff;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        h1 {
+            color: #2ecc71;
+            margin-top: 0;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        h2, h3 {
+            color: var(--blue-accent);
+        }
+
+        p, li {
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        /* STATS SUMMARY CARDS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--blue-accent);
+            margin-top: 5px;
+        }
+
+        /* TABS */
+        .tab-buttons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #0f172a;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--blue-accent);
+            color: #0f172a;
+            border-color: var(--blue-accent);
+        }
+
+        /* TABLES */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 15px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        th {
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--blue-accent);
+            font-weight: 700;
+        }
+
+        /* BADGES */
+        .badge {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        .badge-needed { background: #7f1d1d; color: #fca5a5; }
+        .badge-surplus { background: #065f46; color: #a7f3d0; }
+        .badge-expansion { background: #581c87; color: #e9d5ff; }
+        .badge-major { background: #1e3a8a; color: #93c5fd; }
+        .badge-stipend { background: #78350f; color: #fde68a; }
+
+        .btn-secondary {
+            background-color: #334155;
+            color: #f8fafc;
+            padding: 8px 14px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        .btn-secondary:hover { background-color: #475569; }
+
+        .qty-controls {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+        .qty-btn {
+            background: #334155;
+            color: white;
+            border: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .qty-btn:hover { background: var(--blue-accent); color: #0f172a; }
+
+        @media print {
+            body { background: white; color: black; }
+            nav, .hud-bar button, .qty-controls, .tab-buttons { display: none; }
+            .container { background: white; border: none; box-shadow: none; color: black; }
+            th { background: #e2e8f0; color: black; }
+            td, th, p { color: #1e293b; }
+        }
+    </style>
+</head>
+<body>
+
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
+    <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
+    <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+      <a href="index.html">Home</a>
+      <a href="training-academy.html">Training & Certification</a>
+      <a href="partners.html">Partners</a>
+      <a href="shared-harvest-incubator.html">Shared Harvest</a>
+      <a href="donor-wishlist.html" style="color: var(--accent); font-weight: 600;">🎁 Donor Wishlist</a>
+      <a href="major-expansion-ledger.html" class="active">🚀 Major Infrastructure & Stipends</a>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="container">
+      
+      <!-- HUD BAR -->
+      <div class="hud-bar">
+          <span>🚀 Major Infrastructure, Field Fleet, Technology & Operational Stipends Ledger</span>
+          <div style="display: flex; gap: 10px; align-items: center;">
+              <button onclick="resetMajorLedger()" class="btn-secondary">🔄 Reset Ledger</button>
+              <button onclick="window.print()" class="tab-btn" style="background: var(--primary); color: white; border: none;">🖨️ Print Report</button>
+          </div>
+      </div>
+
+      <p style="text-align: center; margin-bottom: 25px; max-width: 900px; margin-left: auto; margin-right: auto;">
+          This supplemental master ledger tracks <strong>Major Capital Assets</strong> (irrigation infrastructure, mushroom climate structures, rugged field laptops, memory storage, transport trucks, utility trailers, Starlink, and fuel budgets) alongside <strong>Operator & Cohort Stipends</strong>. 
+          Functions dynamically as both a donor ask list and live inventory tracker.
+      </p>
+
+      <!-- STATS SUMMARY -->
+      <div class="stats-grid">
+          <div class="stat-card">
+              <div style="font-size: 0.85rem; color: #94a3b8;">Total Major & Stipend Target</div>
+              <div class="stat-value" id="totalCapitalTarget">$42,850</div>
+          </div>
+          <div class="stat-card">
+              <div style="font-size: 0.85rem; color: #94a3b8;">Funded / Acquired Value</div>
+              <div class="stat-value" id="fundedValue" style="color: var(--primary);">$12,000</div>
+          </div>
+          <div class="stat-card">
+              <div style="font-size: 0.85rem; color: #94a3b8;">Remaining Funding Deficit</div>
+              <div class="stat-value" id="remainingDeficit" style="color: var(--accent);">$30,850</div>
+          </div>
+          <div class="stat-card">
+              <div style="font-size: 0.85rem; color: #94a3b8;">Expansion Surplus Pool</div>
+              <div class="stat-value" id="surplusValue" style="color: var(--expansion);">$0</div>
+          </div>
+      </div>
+
+      <!-- CATEGORY TABS -->
+      <div class="tab-buttons">
+          <button type="button" class="tab-btn active" onclick="filterCategory('All', this)">All Major Items</button>
+          <button type="button" class="tab-btn" onclick="filterCategory('Infrastructure', this)">💧 Irrigation & Mushroom Structures</button>
+          <button type="button" class="tab-btn" onclick="filterCategory('Fleet', this)">🛻 Truck, Trailer & Fuel</button>
+          <button type="button" class="tab-btn" onclick="filterCategory('Technology', this)">💻 Laptops, Memory & Starlink</button>
+          <button type="button" class="tab-btn" onclick="filterCategory('Stipends', this)">👥 Cohort & Lead Operator Stipends</button>
+      </div>
+
+      <!-- MASTER TABLE -->
+      <div class="table-container">
+          <table>
+              <thead>
+                  <tr>
+                      <th>Track / Domain</th>
+                      <th>Major Item Description</th>
+                      <th>Est. Unit Cost</th>
+                      <th>Target Goal (Qty)</th>
+                      <th>Current Stock / Units</th>
+                      <th>Net Balance (Diff)</th>
+                      <th>Status & Allocation</th>
+                      <th>Inventory Adjust</th>
+                  </tr>
+              </thead>
+              <tbody id="majorTableBody">
+                  <!-- Populated via JS -->
+              </tbody>
+          </table>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+      let majorItems = JSON.parse(localStorage.getItem('afti_major_expansion_ledger')) || [
+          // Infrastructure & Water / Mushroom structures
+          { id: 101, category: 'Infrastructure', name: 'High-Yield Mainline Irrigation & Drip Distribution Grid (4 Plots)', unitCost: 850.00, target: 4, current: 1 },
+          { id: 102, category: 'Infrastructure', name: 'Mushroom Climate Fruiting Chamber (Insulated Shed / Clean Room Rigging)', unitCost: 2400.00, target: 2, current: 0 },
+          { id: 103, category: 'Infrastructure', name: 'Commercial Laminar Flow Hood & Sterilization Station', unitCost: 1200.00, target: 2, current: 1 },
+
+          // Fleet & Transport
+          { id: 104, category: 'Fleet', name: 'Utility Farm Truck (4x4 Work Vehicle)', unitCost: 12500.00, target: 1, current: 0 },
+          { id: 105, category: 'Fleet', name: 'Dual-Axle Utility Flatbed Trailer (16ft)', unitCost: 3800.00, target: 1, current: 0 },
+          { id: 106, category: 'Fleet', name: 'Seasonal Operational Fuel Budget (Gasoline/Diesel - 1 Year)', unitCost: 1800.00, target: 1, current: 0 },
+
+          // Technology & Connectivity
+          { id: 107, category: 'Technology', name: 'Rugged Field Laptops (IP65 Weatherproof for Data Logging)', unitCost: 950.00, target: 4, current: 2 },
+          { id: 108, category: 'Technology', name: 'Military-Grade Rugged USB Memory Sticks (Encrypted 256GB)', unitCost: 75.00, target: 8, current: 3 },
+          { id: 109, category: 'Technology', name: 'Starlink Satellite Internet Kit (Remote Field Connectivity + Monthly Data)', unitCost: 850.00, target: 1, current: 1 },
+
+          // Stipends (Cohorts & Lead Operator)
+          { id: 110, category: 'Stipends', name: 'Cohort Operator Stipends (4 Trainee Slots / Season)', unitCost: 6000.00, target: 4, current: 1 },
+          { id: 111, category: 'Stipends', name: 'Lead Operator Stipend ($1,100 / month across 12-month cycle)', unitCost: 13200.00, target: 1, current: 0 }
+      ];
+
+      let activeCategoryFilter = 'All';
+
+      function formatCurrency(amount) {
+          return '$' + amount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+      }
+
+      function renderMajorLedger() {
+          const tbody = document.getElementById('majorTableBody');
+          tbody.innerHTML = '';
+
+          let absoluteTarget = 0;
+          let absoluteFunded = 0;
+          let absoluteDeficit = 0;
+          let absoluteSurplus = 0;
+
+          let filtered = majorItems;
+          if (activeCategoryFilter !== 'All') {
+              filtered = majorItems.filter(i => i.category === activeCategoryFilter);
+          }
+
+          filtered.forEach(item => {
+              const diff = item.current - item.target;
+              const targetVal = item.target * item.unitCost;
+
+              let badgeHtml = '';
+              let rowStyle = '';
+
+              if (diff < 0) {
+                  const needed = Math.abs(diff);
+                  const neededCost = needed * item.unitCost;
+                  badgeHtml = `<span class="badge badge-needed">Need ${needed} (${formatCurrency(neededCost)})</span>`;
+              } else if (diff === 0) {
+                  badgeHtml = `<span class="badge badge-surplus">Fully Funded</span>`;
+              } else {
+                  const surplusCount = diff;
+                  badgeHtml = `<span class="badge badge-expansion">🌱 +${surplusCount} Expansion Pool</span>`;
+                  rowStyle = 'background: rgba(88, 28, 135, 0.15);';
+              }
+
+              let catBadgeClass = 'badge-major';
+              if (item.category === 'Stipends') catBadgeClass = 'badge-stipend';
+              else if (item.category === 'Fleet') catBadgeClass = 'badge-needed';
+
+              const row = document.createElement('tr');
+              row.style.cssText = rowStyle;
+              row.innerHTML = `
+                  <td><span class="badge ${catBadgeClass}">${item.category}</span></td>
+                  <td><strong>${item.name}</strong></td>
+                  <td>${formatCurrency(item.unitCost)}</td>
+                  <td>${item.target}</td>
+                  <td><strong>${item.current}</strong></td>
+                  <td style="color: ${diff < 0 ? '#fca5a5' : (diff === 0 ? '#a7f3d0' : '#e9d5ff')}; font-weight: bold;">
+                      ${diff > 0 ? '+' + diff : diff}
+                  </td>
+                  <td>${badgeHtml}</td>
+                  <td>
+                      <div class="qty-controls">
+                          <button class="qty-btn" onclick="updateStock(${item.id}, -1)">-</button>
+                          <span style="min-width: 20px; text-align: center; font-weight: bold;">${item.current}</span>
+                          <button class="qty-btn" onclick="updateStock(${item.id}, 1)">+</button>
+                      </div>
+                  </td>
+              `;
+              tbody.appendChild(row);
+          });
+
+          // Global calculations across all items
+          majorItems.forEach(item => {
+              const diff = item.current - item.target;
+              const targetVal = item.target * item.unitCost;
+              absoluteTarget += targetVal;
+
+              if (diff < 0) {
+                  absoluteFunded += (item.current * item.unitCost);
+                  absoluteDeficit += (Math.abs(diff) * item.unitCost);
+              } else {
+                  absoluteFunded += targetVal;
+                  if (diff > 0) {
+                      absoluteSurplus += (diff * item.unitCost);
+                  }
+              }
+          });
+
+          document.getElementById('totalCapitalTarget').innerText = formatCurrency(absoluteTarget);
+          document.getElementById('fundedValue').innerText = formatCurrency(absoluteFunded);
+          document.getElementById('remainingDeficit').innerText = formatCurrency(absoluteDeficit);
+          document.getElementById('surplusValue').innerText = formatCurrency(absoluteSurplus);
+
+          localStorage.setItem('afti_major_expansion_ledger', JSON.stringify(majorItems));
+      }
+
+      function updateStock(id, change) {
+          const item = majorItems.find(i => i.id === id);
+          if (item) {
+              item.current = Math.max(0, item.current + change);
+              renderMajorLedger();
+          }
+      }
+
+      function filterCategory(cat, btn) {
+          activeCategoryFilter = cat;
+          const buttons = btn.parentElement.getElementsByClassName('tab-btn');
+          for (let b of buttons) b.classList.remove('active');
+          btn.classList.add('active');
+          renderMajorLedger();
+      }
+
+      function resetMajorLedger() {
+          if (confirm('Reset major infrastructure and stipends ledger to default values?')) {
+              localStorage.removeItem('afti_major_expansion_ledger');
+              location.reload();
+          }
+      }
+
+      window.onload = function() {
+          renderMajorLedger();
+      };
+  </script>
+</body>
+</html>
