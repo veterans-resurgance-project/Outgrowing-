@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Data Reports & Action Hub</title>
+    <script src="https://tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --primary: #27ae60;
+            --primary-hover: #219653;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --hud-bg: #144d29;
+            --blue-accent: #38bdf8;
+            --danger: #ef4444;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* GLOBAL NAV BAR STYLES */
+        nav {
+            background: #144d29;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        nav a.active { color: #fff; font-weight: 700; border-bottom: 2px solid var(--primary); padding-bottom: 2px; }
+
+        /* PAGE CONTENT WRAPPER */
+        .page-wrapper {
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            padding: 30px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hud-bar {
+            background: var(--hud-bg);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #ffffff;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        h1 {
+            color: #2ecc71;
+            margin-top: 0;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        h2, h3 {
+            color: var(--blue-accent);
+        }
+
+        p, li {
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        /* GRID LAYOUT FOR SECTIONS */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .panel {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        /* FORM ELEMENTS */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #94a3b8;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-danger {
+            background-color: #7f1d1d;
+            color: #fca5a5;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .btn-danger:hover {
+            background-color: #991b1b;
+        }
+
+        /* TROUBLESHOOTING CATEGORY TABS */
+        .tab-buttons {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #0f172a;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--blue-accent);
+            color: #0f172a;
+            border-color: var(--blue-accent);
+        }
+
+        .trouble-card {
+            background: rgba(30, 41, 59, 0.8);
+            border-left: 4px solid var(--accent);
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            border-radius: 0 6px 6px 0;
+            display: none;
+        }
+
+        .trouble-card.active-tab {
+            display: block;
+        }
+
+        .trouble-card h4 {
+            margin: 0 0 5px 0;
+            color: #f8fafc;
+            font-size: 1rem;
+        }
+
+        .trouble-card p {
+            font-size: 0.85rem;
+            margin: 0 0 8px 0;
+        }
+
+        .steps-box {
+            background: #0f172a;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            color: #38bdf8;
+        }
+
+        /* TABLES */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        th {
+            background: rgba(15, 23, 42, 0.8);
+            color: var(--blue-accent);
+        }
+
+        .badge {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .badge-mushrooms { background: #78350f; color: #fde68a; }
+        .badge-apiary { background: #b45309; color: #fef3c7; }
+        .badge-greens { background: #065f46; color: #a7f3d0; }
+        .badge-flowers { background: #831843; color: #fbcfe8; }
+
+        .section-divider {
+            border: 0;
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 30px 0;
+        }
+
+        @media print {
+            body { background: white; color: black; }
+            nav, .hud-bar button, .btn-primary, .btn-danger { display: none; }
+            .container { background: white; border: none; box-shadow: none; color: black; }
+            .panel { background: #f8fafc; border: 1px solid #cbd5e1; color: black; }
+            th { background: #e2e8f0; color: black; }
+            td, th, p, label { color: #1e293b; }
+        }
+    </style>
+</head>
+<body>
+
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
+    <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
+    <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+      <a href="index.html">Home</a>
+      <a href="training-academy.html">Training & Certification</a>
+      <a href="partners.html">Partners</a>
+      <a href="shared-harvest-incubator.html">Shared Harvest</a>
+      <a href="shared-harvest-incubator.html" style="color: var(--accent); font-weight: 600;">🌱 Incubator Launchpad</a>
+      <a href="totals-ledger.html" class="active">Data Logs</a>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="container">
+      
+      <!-- HUD BAR -->
+      <div class="hud-bar">
+          <span>📊 OSU Agronomic Research Telemetry & Diagnostic Hub</span>
+          <div style="display: flex; gap: 10px; align-items: center;">
+              <span style="font-size: 0.85rem; color: #cbd5e1;">Active Site: Linn County Research Plots</span>
+              <button onclick="window.print()" class="tab-btn" style="background: var(--primary); color: white; border: none;">🖨️ Print Report</button>
+          </div>
+      </div>
+
+      <h1>📋 Daily Task Telemetry & Pest/Disease Action Center</h1>
+      <p style="text-align: center; margin-bottom: 25px; max-width: 800px; margin-left: auto; margin-right: auto;">
+          Submit daily environmental and agronomic variables (Air Temp, Soil/Substrate Temp, Humidity, and pH levels) for OSU research standards across all four core farm categories, and consult the mitigation playbook for rapid remediation.
+      </p>
+
+      <div class="grid-2">
+          
+          <!-- LEFT PANEL: DATA ENTRY FORM -->
+          <div class="panel">
+              <h3 class="text-xl font-bold mb-4">🚀 Submit Agronomic Telemetry</h3>
+              <form id="telemetryForm" onsubmit="handleFormSubmit(event)">
+                  <div class="form-group">
+                      <label for="categorySelect">Active Enterprise Track</label>
+                      <select id="categorySelect" required>
+                          <option value="Apiary">🐝 Apiary Management</option>
+                          <option value="Fresh Greens">🥬 Fresh Greens Production</option>
+                          <option value="Cut Flowers">🌸 Specialty Cut Flowers</option>
+                          <option value="Mushrooms">🍄 Mushroom Cultivation</option>
+                      </select>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="airTempInput">Air Temperature (°F)</label>
+                      <input type="number" step="0.1" id="airTempInput" placeholder="e.g., 72.5" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="soilTempInput">Soil / Substrate Temperature (°F)</label>
+                      <input type="number" step="0.1" id="soilTempInput" placeholder="e.g., 68.0" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="humidityInput">Relative Humidity (%)</label>
+                      <input type="number" step="0.1" id="humidityInput" placeholder="e.g., 85.0" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="phInput">pH Level (Substrate / Water / Soil)</label>
+                      <input type="number" step="0.01" id="phInput" placeholder="e.g., 6.5" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="observerInput">Lead Operator / Researcher Initials</label>
+                      <input type="text" id="observerInput" placeholder="e.g., J.T. / A.M." required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="notesInput">Field Observations / Anomalies</label>
+                      <textarea id="notesInput" rows="2" placeholder="Note any pest presence, mold coloration, or weather events..."></textarea>
+                  </div>
+
+                  <button type="submit" class="btn-primary">Commit Telemetry to Research Ledger</button>
+              </form>
+          </div>
+
+          <!-- RIGHT PANEL: INTERACTIVE DIAGNOSTICS & PLAYBOOK -->
+          <div class="panel">
+              <h3 class="text-xl font-bold mb-3">🛠️ OSU Mitigation Playbook Directory</h3>
+              <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">
+                  Select a category below to browse common agronomic challenges, environmental indicators, and standard OSU action steps.
+              </p>
+
+              <!-- Category Tabs -->
+              <div class="tab-buttons">
+                  <button type="button" class="tab-btn active" onclick="switchTroubleTab('Apiary', this)">Apiary</button>
+                  <button type="button" class="tab-btn" onclick="switchTroubleTab('Greens', this)">Fresh Greens</button>
+                  <button type="button" class="tab-btn" onclick="switchTroubleTab('Flowers', this)">Cut Flowers</button>
+                  <button type="button" class="tab-btn" onclick="switchTroubleTab('Mushrooms', this)">Mushrooms</button>
+              </div>
+
+              <!-- Apiary Troubles -->
+              <div id="trouble-Apiary" class="trouble-card active-tab" style="border-left-color: #b45309;">
+                  <h4>Varroa Mite Surge / High Hive Mortality Risk</h4>
+                  <p><strong>Indicator:</strong> Hive humidity &gt; 70%, summer air temp &gt; 85°F, mite count &gt; 3% per 100 bees.</p>
+                  <div class="steps-box">
+                      <strong>OSU Action Steps:</strong> Perform alcohol wash sampling. Apply formic acid or thymol treatments following Oregon State Beekeepers Association guidelines. Ensure bottom screen ventilation is fully open.
+                  </div>
+              </div>
+              <div id="trouble-Apiary-2" class="trouble-card active-tab" style="border-left-color: #b45309;">
+                  <h4>Nosema Spore Proliferation</h4>
+                  <p><strong>Indicator:</strong> Damp spring conditions, substrate/hive internal humidity &gt; 75%, fecal spotting on frames.</p>
+                  <div class="steps-box">
+                      <strong>OSU Action Steps:</strong> Replace contaminated comb frames, feed colonies clean 2:1 sugar syrup with Fumagillin (if prescribed), and move hives to well-drained, sunlit southern slopes.
+                  </div>
+              </div>
+
+              <!-- Greens Troubles -->
+              <div id="trouble-Greens" class="trouble-card" style="border-left-color: #065f46;">
+                  <h4>Pythium Root Rot / Damping Off</h4>
+                  <p><strong>Indicator:</strong> Soil pH &gt; 7.2, soil temp &gt; 75°F, over-saturation in high-tunnel beds.</p>
+                  <div class="steps-box">
+                      <strong>OSU Action Steps:</strong> Back off irrigation frequency, apply approved bio-fungicides (e.g., <em>Trichoderma</em> inoculants), and adjust water pH to 5.8–6.2 to optimize nutrient uptake and suppress pathogen spores.
+                  </div>
+              </div>
+              <div id="trouble-Greens-2" class="trouble-card" style="border-left-color: #065f46;">
+                  <h4>Tipburn (Calcium Translocation Failure)</h4>
+                  <p><strong>Indicator:</strong> Rapid growth under high humidity and inadequate airflow in leafy greens.</p>
+                  <div class="steps-box">
+                      <strong>OSU Action Steps:</strong> Increase horizontal air circulation (HAF fans), maintain even soil moisture to prevent water stress, and supplement foliar calcium if tissue tests confirm deficiency.
+                  </div>
+              </div>
+
+              <!-- Flowers Troubles -->
+              <div id="trouble-Flowers" class="trouble-card" style="border-left-color: #831843;">
+                  <h4>Powdery Mildew on Specialty Blooms</h4>
+                  <p><strong>Indicator:</strong> Night humidity spike (&gt; 85%), stagnant canopy air, day/night temp swings &gt; 25°F.</p>
+                  <div class="steps-box">
+                      <strong>OSU Action Steps:</strong> Prune lower foliage for improved air penetration, apply preventative sulfur dust or potassium bicarbonate sprays, and space rows in accordance with OSU Extension field guides.
+                  </div>
+              </div>
+              <div id="trouble-Flowers-2" class="trouble-card" style="border-left-color: #831843;">
+                  <h4>Fusarium Wilt in Cut Flower Beds</h4>
+                  <p><strong>Indicator:</strong> Soil pH &gt; 7.0 combined with high soil temperatures and yellowing lower leaves.</p>
+                  <div class="steps-box">
+                      <strong>OSU Action Steps:</strong> Remove and destroy infected plant debris immediately. Implement a 4-year crop rotation schedule and solarize beds during peak July/August solar radiation windows.
+                  </div>
+              </div>
+
+              <!-- Mushrooms Troubles -->
+              <div id="trouble-Mushrooms" class="trouble-card" style="border-left-color: #78350f;">
+                  <h4>Trichoderma Mold ("Green Mold") Contamination</h4>
+                  <p><strong>Indicator:</strong> Substrate pH &lt; 5.5 or &gt; 7.0, excess moisture pooling on substrate blocks, white mycelium turning powdery green.</p>
+                  <div class="steps-box">
+                      <strong>OSU Action Steps:</strong> Isolate contaminated blocks immediately to prevent spore drift. Sanitize growth chamber surfaces with a 10% bleach solution, verify pasteurization protocols, and maintain room humidity at 85-90%.
+                  </div>
+              </div>
+              <div id="trouble-Mushrooms-2" class="trouble-card" style="border-left-color: #78350f;">
+                  <h4>Stipe Elongation / Cap Abortions (CO2 Buildup)</h4>
+                  <p><strong>Indicator:</strong> Air CO2 levels &gt; 1,200 ppm, insufficient fresh air exchange (FAE) in fruiting rooms.</p>
+                  <div class="steps-box">
+                      <strong>OSU Action Steps:</strong> Increase exhaust fan cycle frequency to achieve 4–6 complete room air exchanges per hour. Lower humidity slightly (2–3%) during flush maturation to prevent bacterial blotch.
+                  </div>
+              </div>
+
+          </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- MASTER RESEARCH DATA LOG TABLE -->
+      <div class="panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+              <h3 class="text-xl font-bold m-0">📁 Cumulative Research Telemetry Ledger</h3>
+              <div style="display: flex; gap: 10px;">
+                  <button type="button" onclick="exportDataCSV()" class="tab-btn" style="background: #1e3a8a; color: white; border: none;">📥 Export CSV</button>
+                  <button type="button" onclick="clearAllLogs()" class="btn-danger">🗑️ Clear All Logs</button>
+              </div>
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">
+              Real-time persistent log of all submitted sensor values across Apiary, Greens, Flowers, and Mushrooms. Formatted for direct analysis by OSU extension researchers.
+          </p>
+          <div class="table-container">
+              <table>
+                  <thead>
+                      <tr>
+                          <th>Timestamp</th>
+                          <th>Category Track</th>
+                          <th>Air Temp (°F)</th>
+                          <th>Soil/Sub Temp (°F)</th>
+                          <th>Humidity (%)</th>
+                          <th>pH Level</th>
+                          <th>Observer</th>
+                          <th>Field Notes</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody id="telemetryTableBody">
+                      <!-- Dynamically populated via JavaScript -->
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+      // Load stored logs or initialize with sample records
+      let telemetryData = JSON.parse(localStorage.getItem('afti_telemetry_logs')) || [
+          {
+              id: 1,
+              timestamp: '2026-09-19 08:30',
+              category: 'Apiary',
+              airTemp: '68.4',
+              soilTemp: '65.0',
+              humidity: '62.0',
+              ph: '6.40',
+              observer: 'J.T.',
+              notes: 'Bottom screens clear; mite board check negative.'
+          },
+          {
+              id: 2,
+              timestamp: '2026-09-19 09:15',
+              category: 'Fresh Greens',
+              airTemp: '74.2',
+              soilTemp: '69.5',
+              humidity: '78.5',
+              ph: '6.00',
+              observer: 'A.M.',
+              notes: 'High tunnel ventilation adjusted; HAF fans active.'
+          },
+          {
+              id: 3,
+              timestamp: '2026-09-19 10:00',
+              category: 'Mushrooms',
+              airTemp: '64.0',
+              soilTemp: '62.5',
+              humidity: '88.0',
+              ph: '6.80',
+              observer: 'D.T.',
+              notes: 'Oyster block flush #2 pinning evenly. FAE cycle stable.'
+          }
+      ];
+
+      function renderTable() {
+          const tbody = document.getElementById('telemetryTableBody');
+          tbody.innerHTML = '';
+
+          if (telemetryData.length === 0) {
+              tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: #94a3b8; padding: 20px;">No telemetry records logged yet. Use the form above to submit data.</td></tr>`;
+              return;
+          }
+
+          telemetryData.forEach((item, index) => {
+              let badgeClass = 'badge-apiary';
+              if (item.category === 'Fresh Greens') badgeClass = 'badge-greens';
+              if (item.category === 'Cut Flowers') badgeClass = 'badge-flowers';
+              if (item.category === 'Mushrooms') badgeClass = 'badge-mushrooms';
+
+              const row = document.createElement('tr');
+              row.innerHTML = `
+                  <td>${item.timestamp}</td>
+                  <td><span class="badge ${badgeClass}">${item.category}</span></td>
+                  <td>${item.airTemp}°F</td>
+                  <td>${item.soilTemp}°F</td>
+                  <td>${item.humidity}%</td>
+                  <td>${item.ph}</td>
+                  <td><strong>${item.observer}</strong></td>
+                  <td style="max-width: 220px; overflow: hidden; text-overflow: ellipsis;" title="${item.notes}">${item.notes || 'None'}</td>
+                  <td><button class="btn-danger" onclick="deleteRow(${item.id})">Delete</button></td>
+              `;
+              tbody.appendChild(row);
+          });
+      }
+
+      function handleFormSubmit(event) {
+          event.preventDefault();
+
+          const now = new Date();
+          const timestamp = now.toISOString().slice(0, 10) + ' ' + now.toTimeString().slice(0, 5);
+
+          const newEntry = {
+              id: Date.now(),
+              timestamp: timestamp,
+              category: document.getElementById('categorySelect').value,
+              airTemp: document.getElementById('airTempInput').value,
+              soilTemp: document.getElementById('soilTempInput').value,
+              humidity: document.getElementById('humidityInput').value,
+              ph: document.getElementById('phInput').value,
+              observer: document.getElementById('observerInput').value,
+              notes: document.getElementById('notesInput').value
+          };
+
+          telemetryData.unshift(newEntry);
+          localStorage.setItem('afti_telemetry_logs', JSON.stringify(telemetryData));
+          
+          renderTable();
+          document.getElementById('telemetryForm').reset();
+          alert('✅ Telemetry successfully committed to the research ledger!');
+      }
+
+      function deleteRow(id) {
+          telemetryData = telemetryData.filter(item => item.id !== id);
+          localStorage.setItem('afti_telemetry_logs', JSON.stringify(telemetryData));
+          renderTable();
+      }
+
+      function clearAllLogs() {
+          if (confirm('Are you sure you want to clear all recorded telemetry logs?')) {
+              telemetryData = [];
+              localStorage.removeItem('afti_telemetry_logs');
+              renderTable();
+          }
+      }
+
+      function exportDataCSV() {
+          if (telemetryData.length === 0) {
+              alert('No data to export.');
+              return;
+          }
+          let csvContent = "data:text/csv;charset=utf-8,Timestamp,Category,AirTemp,SoilTemp,Humidity,pH,Observer,Notes\n";
+          telemetryData.forEach(row => {
+              csvContent += `"${row.timestamp}","${row.category}","${row.airTemp}","${row.soilTemp}","${row.humidity}","${row.ph}","${row.observer}","${row.notes.replace(/"/g, '""')}"\n`;
+          });
+          const encodedUri = encodeURI(csvContent);
+          const link = document.createElement("a");
+          link.setAttribute("href", encodedUri);
+          link.setAttribute("download", "AFTI_Linn_County_Telemetry_Logs.csv");
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+      }
+
+      function switchTroubleTab(category, btnElement) {
+          // Update active tab buttons
+          const buttons = btnElement.parentElement.getElementsByClassName('tab-btn');
+          for (let btn of buttons) {
+              btn.classList.remove('active');
+          }
+          btnElement.classList.add('active');
+
+          // Toggle trouble cards
+          const cards = document.querySelectorAll('.trouble-card');
+          cards.forEach(card => {
+              card.classList.remove('active-tab');
+              if (card.id.startsWith('trouble-' + category)) {
+                  card.classList.add('active-tab');
+              }
+          });
+      }
+
+      // Initial render on page load
+      window.onload = function() {
+          renderTable();
+      };
+  </script>
+</body>
+</html>
