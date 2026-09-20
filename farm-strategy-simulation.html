@@ -293,5 +293,54 @@
         }
     }
 </script>
-</body>
+
+</b<!-- Minimalist Simulation Escape Dock (Add this just before </body> in your simulation files) -->
+<style>
+    .sim-escape-dock {
+        position: fixed;
+        bottom: 15px;
+        right: 15px;
+        z-index: 99999;
+        display: flex;
+        gap: 8px;
+        background: rgba(15, 23, 42, 0.85);
+        padding: 6px 10px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        backdrop-filter: blur(6px);
+    }
+    .sim-escape-btn {
+        background: #144d29;
+        color: #ffffff;
+        border: 1px solid #27ae60;
+        padding: 5px 10px;
+        border-radius: 14px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: all 0.2s ease;
+    }
+    .sim-escape-btn:hover {
+        background: #27ae60;
+    }
+    .sim-escape-btn.home {
+        background: #1e3a8a;
+        border-color: #38bdf8;
+    }
+    .sim-escape-btn.home:hover {
+        background: #38bdf8;
+        color: #0f172a;
+    }
+</style>
+
+<div class="sim-escape-dock">
+    <a href="index.html" class="sim-escape-btn home" title="Return to Home Hub">🏠 Home</a>
+    <a href="donor-wishlist.html" class="sim-escape-btn" title="Donor Wishlist">🎁 Wishlist</a>
+    <a href="major-expansion-ledger.html" class="sim-escape-btn" title="Major Infrastructure & Stipends">🚀 Major</a>
+</div>ody>
 </html>
