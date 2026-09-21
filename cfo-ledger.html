@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -132,7 +131,7 @@
             <h1>📊 Executive CFO & Reserve Ledger</h1>
             <span style="font-size: 0.85rem; color: var(--text-muted);">Veterans Resurgence Project • Linn County Hub</span>
         </div>
-        <div class="badge">Baseline v1.4 Active</div>
+        <div class="badge">Baseline v1.5 Active</div>
     </header>
 
     <div class="grid">
@@ -169,7 +168,7 @@
                 <span id="display-burn" style="color: #f87171;">$6,500</span>
             </div>
             <div class="stat-row">
-                <span>Projected Monthly Inflow:</span>
+                <span>Total Monthly Inflow (Ops + Grants):</span>
                 <span id="display-inflow" class="stat-value">$11,200</span>
             </div>
             <div class="stat-row">
@@ -184,9 +183,9 @@
         </div>
     </div>
 
-    <!-- Panel 3: Enterprise & Service Exchange Revenue Inputs -->
+    <!-- Panel 3: Enterprise, Service Exchange & Grant Match Inputs -->
     <div class="panel" style="margin-bottom: 25px;">
-<h2>Revenue Stream & Service Exchange Parameters</h2>
+        <h2>Revenue Stream, Service Exchange & Grant Matching Parameters</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
             <div class="input-group">
                 <label>Mushroom & Apiary Output ($/mo)</label>
@@ -203,6 +202,10 @@
             <div class="input-group">
                 <label>Bank Stabilization Yards ($65/yd)</label>
                 <input type="number" id="input-stabilization" value="30">
+            </div>
+            <div class="input-group" style="grid-column: span 2; background: rgba(74, 222, 128, 0.05); padding: 10px; border: 1px dashed var(--accent-green); border-radius: 4px;">
+                <label style="color: var(--accent-green); font-weight: bold;">🤝 Partner & External Grant Match ($/mo)</label>
+                <input type="number" id="input-grant-match" value="1500" style="border-color: var(--accent-green);">
             </div>
         </div>
         <button class="btn" style="max-width: 250px;" onclick="updateLedger()">Update Ledger Metrics</button>
@@ -236,9 +239,9 @@
                     <td><span style="color: var(--accent-green);">Aligned</span></td>
                 </tr>
                 <tr>
-                    <td>Lomakatsi Fund Release Sign-Off</td>
-                    <td>100-Point Merit Ledger verification matches monthly roll-ups</td>
-                    <td><span style="color: var(--accent-gold);">Pending Quarter Review</span></td>
+                    <td>Grant Match & In-Kind Verification</td>
+                    <td>Tracking community partner contributions for municipal/state match requirements</td>
+                    <td><span style="color: var(--accent-green);">Active Tracking</span></td>
                 </tr>
             </tbody>
         </table>
@@ -251,11 +254,12 @@
         let greens = parseFloat(document.getElementById('input-greens').value) || 0;
         let clearingHours = parseFloat(document.getElementById('input-clearing').value) || 0;
         let stabilizationYards = parseFloat(document.getElementById('input-stabilization').value) || 0;
+        let grantMatch = parseFloat(document.getElementById('input-grant-match').value) || 0;
 
         let clearingRevenue = clearingHours * 48;
         let stabilizationRevenue = stabilizationYards * 65;
         
-        let totalInflow = agri + greens + clearingRevenue + stabilizationRevenue;
+        let totalInflow = agri + greens + clearingRevenue + stabilizationRevenue + grantMatch;
         let monthlyBurn = 6500; // Fixed baseline overhead
         let netFlow = totalInflow - monthlyBurn;
 
@@ -270,7 +274,6 @@
     }
 
     function runSimulation() {
-        // Mock simulation toggle update
         let currentReserves = 45000;
         let target = 250000;
         let percentage = (currentReserves / target) * 100;
