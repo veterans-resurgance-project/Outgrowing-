@@ -268,39 +268,94 @@
       </p>
 
       <div class="grid-2">
-          
-          <!-- LEFT PANEL: DATA ENTRY FORM -->
+        <!-- LEFT PANEL: DATA ENTRY FORM & TASK INTEGRATION -->
           <div class="panel">
-              <h3 class="text-xl font-bold mb-4">🚀 Submit Field Telemetry</h3>
+              <h3 class="text-xl font-bold mb-2">🚀 Submit Field Task &amp; Telemetry</h3>
+              <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">
+                  Select a standard task from your checklists to automatically load associated instructions and log performance data.
+              </p>
+
               <form id="telemetryForm" onsubmit="handleFormSubmit(event)">
+                  
+                  <!-- TASK BRIDGE SELECTOR -->
+                  <div class="form-group" style="background: rgba(56, 189, 248, 0.05); border: 1px dashed rgba(56, 189, 248, 0.3); padding: 12px; border-radius: 6px; margin-bottom: 20px;">
+                      <label for="taskBridgeSelect" style="color: var(--blue-accent);">🔗 Link to Checklist Task (Optional)</label>
+                      <select id="taskBridgeSelect" onchange="loadTaskInstructions(this.value)">
+                          <option value="">-- Choose Task to Load Instructions --</option>
+                          <optgroup label="Safety &amp; Muster">
+                              <option value="muster-rollcall">0800 Crew Roll Call &amp; Hydration Check</option>
+                              <option value="muster-ppe">Inspect PPE (Chaps, Hard Hats, Boots)</option>
+                              <option value="muster-radio">Test Field Radios &amp; GPS Beacons</option>
+                          </optgroup>
+                          <optgroup label="Burn &amp; Erosion Control">
+                              <option value="erosion-wattles">Install Straw Wattles &amp; Coir Logs</option>
+                              <option value="erosion-checkdams">Construct Hand-Built Woody Check Dams</option>
+                              <option value="erosion-mulch">Apply Certified Weed-Free Mulch</option>
+                          </optgroup>
+                          <optgroup label="Riparian Restoration">
+                              <option value="riparian-slump">Monitor Stream Crossings &amp; Bank Slumping</option>
+                              <option value="riparian-weeds">Invasive Weed Eradication (Blackberry/Knotweed)</option>
+                          </optgroup>
+                          <optgroup label="Enterprise Tracks">
+                              <option value="ent-apiary">Apiary Varroa Mite Sampling / Hive Check</option>
+                              <option value="ent-greens">Fresh Greens Pythium / pH Adjustments</option>
+                              <option value="ent-mushrooms">Mushroom FAE &amp; Humidity Audit</option>
+                          </optgroup>
+                      </select>
+                      
+                      <!-- DYNAMIC INSTRUCTIONS DISPLAY BOX -->
+                      <div id="linkedInstructionsBox" style="margin-top: 10px; display: none; background: #0f172a; padding: 10px; border-radius: 4px; font-size: 0.85rem; border-left: 3px solid var(--blue-accent);">
+                          <strong style="color: var(--blue-accent);" id="instructionTitle">Standard Operating Guidance:</strong>
+                          <p id="instructionText" style="margin: 5px 0 0 0; color: #cbd5e1;"></p>
+                      </div>
+                  </div>
+
                   <div class="form-group">
-                      <label for="categorySelect">Active Enterprise Track</label>
-                      <select id="categorySelect" onchange="adaptFormFields(this.value)">
-                          <option value="mushrooms">Mushrooms Module</option>
-                          <option value="apiary">Apiary Diagnostics</option>
-                          <option value="greens">High Yield Greens</option>
-                          <option value="flowers">Cut Flowers Track</option>
+                      <label for="categorySelect">Active Enterprise / Watershed Track</label>
+                      <select id="categorySelect" required>
+                          <option value="Watershed / Erosion">🌲 Watershed &amp; Burn Stabilization</option>
+                          <option value="Apiary">🐝 Apiary Management</option>
+                          <option value="Fresh Greens">🥬 Fresh Greens Production</option>
+                          <option value="Cut Flowers">🌸 Specialty Cut Flowers</option>
+                          <option value="Mushrooms">🍄 Mushroom Cultivation</option>
                       </select>
                   </div>
 
-                  <div class="form-group">
-                      <label id="dynamicMetricLabel" for="metricInput">Humidity Parameter (%)</label>
-                      <input type="number" id="metricInput" placeholder="Enter sensor data point" required>
+                  <div class="grid-2" style="grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 0;">
+                      <div class="form-group">
+                          <label for="airTempInput">Air Temp (°F)</label>
+                          <input type="number" step="0.1" id="airTempInput" placeholder="72.5" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="soilTempInput">Soil/Sub Temp (°F)</label>
+                          <input type="number" step="0.1" id="soilTempInput" placeholder="68.0" required>
+                      </div>
+                  </div>
+
+                  <div class="grid-2" style="grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 0;">
+                      <div class="form-group">
+                          <label for="humidityInput">Humidity (%)</label>
+                          <input type="number" step="0.1" id="humidityInput" placeholder="85.0" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="phInput">pH Level / Scale</label>
+                          <input type="number" step="0.01" id="phInput" placeholder="6.5" required>
+                      </div>
                   </div>
 
                   <div class="form-group">
-                      <label for="observerInput">Lead Operator Pair Initials</label>
-                      <input type="text" id="observerInput" placeholder="e.g., JD / AM" required>
+                      <label for="observerInput">Lead Crew Member / Observer Initials</label>
+                      <input type="text" id="observerInput" placeholder="e.g., D.T. / Crew Alpha" required>
                   </div>
 
                   <div class="form-group">
-                      <label for="notesInput">Field Observations / Flagged Anomalies</label>
-                      <textarea id="notesInput" rows="3" placeholder="Describe layout variables..."></textarea>
+                      <label for="notesInput">Field Task Notes &amp; Observations</label>
+                      <textarea id="notesInput" rows="2" placeholder="Record materials used, meter readings, or site adjustments..."></textarea>
                   </div>
 
-                  <button type="submit" class="btn-primary">Commit Telemetry to Ledger</button>
+                  <button type="submit" class="btn-primary">Commit Task &amp; Telemetry Ledger Entry</button>
               </form>
-          </div>
+          </div>  
 
           <!-- RIGHT PANEL: DYNAMIC INTERACTIVE DIAGNOSTICS CARD -->
           <div class="panel">
