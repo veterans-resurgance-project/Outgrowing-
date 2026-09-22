@@ -1,195 +1,477 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
-<div style="margin: 1.5rem 0;">
-    <a href="https://www.watershipstewardsempowering.org" target="_blank" style="display: inline-block; background-color: #0ea5e9; color: #ffffff; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-        Explore Our Veteran Programs &amp; Stewardship Mission &rarr;
-    </a>
-</div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Data Reports & Action Hub</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --primary: #27ae60;
+            --primary-hover: #219653;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --hud-bg: #144d29;
+            --blue-accent: #38bdf8;
+            --danger: #ef4444;
+        }
 
-<!-- Watershed Daily Action BUTTON -->
-<h3 style="color: #fff; margin-bottom: 5px; font-size: 1.2rem; margin-top: 2rem;">Daily Research Logs and Action Steps</h3>
-<a href="task-checklist.html" class="btn" style="background:var(--primary); margin-top: 0.5rem; margin-bottom: 2rem;"> Watershed Daily Action Steps &rarr;</a>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
 
-<!-- CENTERED HORIZONTAL RESEARCH PROTOCOL CALLOUT BAR -->
-<div style="width: 100%; display: flex; justify-content: center; margin: 25px 0;">
-    <div style="width: 100%; max-width: 950px; background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(56, 189, 248, 0.3); border-left: 4px solid #38bdf8; border-radius: 8px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; box-sizing: border-box; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
-        <div style="display: flex; align-items: center; gap: 12px;">
-            <span style="font-size: 1.5rem;">🎓</span>
-            <div>
-                <div style="font-weight: bold; color: #f8fafc; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
-                    OSU Extension Research Standards 
-                    <span style="background: rgba(6, 95, 70, 0.8); color: #a7f3d0; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: normal;">Peer-Review Ready</span>
-                </div>
-                <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 2px;">
-                    Review our standardized metrology, dual-operator chain-of-custody, and telemetry protocols.
-                </div>
-            </div>
-        </div>
+        /* GLOBAL NAV BAR STYLES */
+        nav {
+            background: #144d29;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        nav a.active { color: #fff; font-weight: 700; border-bottom: 2px solid var(--primary); padding-bottom: 2px; }
+
+        /* PAGE CONTENT WRAPPER */
+        .page-wrapper {
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            padding: 30px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hud-bar {
+            background: var(--hud-bg);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        h1 {
+            color: #2ecc71;
+            margin-top: 0;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        h2, h3 {
+            color: var(--blue-accent);
+        }
+
+        p, li {
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        /* GRID LAYOUT FOR SECTIONS */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .panel {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        /* FORM ELEMENTS */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #94a3b8;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        .btn-danger:hover { opacity: 0.9; }
+
+        /* TROUBLESHOOTING CATEGORY TABS */
+        .tab-buttons {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #0f172a;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--blue-accent);
+            color: #0f172a;
+            border-color: var(--blue-accent);
+        }
+
+        .trouble-card {
+            display: none;
+            background: rgba(30, 41, 59, 0.8);
+            border-left: 4px solid var(--accent);
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .trouble-card.active-tab {
+            display: block;
+        }
+
+        .trouble-card h4 {
+            margin: 0 0 5px 0;
+            color: #f8fafc;
+            font-size: 1rem;
+        }
+
+        .trouble-card p {
+            font-size: 0.85rem;
+            margin: 0 0 8px 0;
+        }
+
+        .steps-box {
+            background: #0f172a;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: #38bdf8;
+        }
+
+        /* TABLES */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        th {
+            background: rgba(15, 23, 42, 0.8);
+            color: var(--blue-accent);
+        }
+
+        .badge {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        .badge-watershed { background: #1e3a8a; color: #93c5fd; }
+        .badge-apiary { background: #78350f; color: #fde68a; }
+        .badge-greens { background: #065f46; color: #a7f3d0; }
+        .badge-flowers { background: #831843; color: #fbcfe8; }
+        .badge-mushrooms { background: #312e81; color: #c7d2fe; }
+
+        .section-divider {
+            margin: 30px 0;
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
+    <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
+    <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+      <a href="index.html">Home</a>
+      <a href="training-academy.html">Training & Certification</a>
+      <a href="partners.html">Partners</a>
+      <a href="shared-harvest-incubator.html">Shared Harvest</a>
+      <a href="task-checklists.html">Task Checklists</a>
+      <a href="totals-ledger.html" class="active">Data Logs</a>
     </div>
-</div>
+  </nav>
 
-<!-- FEATURE SPOTLIGHT CARDS (DESIGN STUDIO & WORKFORCE ENGINE) -->
-<div class="my-8">
-    <h3 class="text-xl font-bold text-white mb-4">Explore Core Portal Features</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        
-        <!-- Spotlight Card 1: Design Studio Animation -->
-        <div class="bg-[#0f172a] border border-sky-500/30 rounded-xl p-6 flex flex-col justify-between hover:border-sky-400 transition shadow-lg">
-            <div>
-                <span class="text-xs font-mono text-[#38bdf8] uppercase tracking-wider font-bold">Dreamers Visual Pipeline</span>
-                <h4 class="text-lg font-bold text-white mt-1 mb-2">Crayon Sketch to Master Plan</h4>
-                <p class="text-sm text-slate-300 leading-relaxed">Experience our 4-stage interactive design animation showing how rough community ideas transform into professional architectural blueprints.</p>
-            </div>
-            <a href="pencil_to_presentation.html" class="mt-6 bg-[#144d29] hover:bg-emerald-800 text-white text-center py-2.5 px-4 rounded-lg text-sm font-bold transition border border-emerald-600/50 block">
-                Launch Design Studio &rarr;
-            </a>
-        </div>
-
-        <!-- Spotlight Card 2: Workforce Engine Simulator -->
-        <div class="bg-[#0f172a] border border-emerald-500/30 rounded-xl p-6 flex flex-col justify-between hover:border-emerald-400 transition shadow-lg">
-            <div>
-                <span class="text-xs font-mono text-[#27ae60] uppercase tracking-wider font-bold">Skills Match Advanced Placement Engine</span>
-                <h4 class="text-lg font-bold text-white mt-1 mb-2">Cell Matching &amp; Audit Engine</h4>
-                <p class="text-sm text-slate-300 leading-relaxed">Manage participant skill tracks, map partner job wish lists, and run live competency gap audits for active field deployment.</p>
-            </div>
-            <a href="outgrowing_ag_engine.html" class="mt-6 bg-[#27ae60] hover:bg-emerald-600 text-white text-center py-2.5 px-4 rounded-lg text-sm font-bold transition block shadow">
-                Launch Workforce Engine &rarr;
-            </a>
-        </div>
-    </div>
-</div>
-    
-<!-- SIMULATION INTERACTIVE BUTTON -->
-<h3 style="color: #fff; margin-bottom: 5px; font-size: 1.2rem; margin-top: 2rem;">Try our simulations. Do you have what it takes to overcome the occasional mistake or bad luck and beat Weather and the Bank Boss in a final high stakes battle?</h3>
-<a href="farmer-apprentice-story.html" class="btn" style="background:var(--primary); margin-top: 0.5rem; margin-bottom: 2rem;">The Simulator-Battle to Save the Farm &rarr;</a>
-
-<!-- Centered Tasks Hub Box with Full-Width Stacked Buttons -->
-<div style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 2rem 0; box-sizing: border-box;">
-    <div class="secondary-card" style="width: 100%; max-width: 750px; background: #1e293b; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.4); text-align: center;">
-        <div style="margin-bottom: 1.5rem;">
-            <h4 style="color: #4ade80; font-size: 1.4rem; margin-top: 0; margin-bottom: 0.75rem;">📋 Daily &amp; Weekly Tasks Hub</h4>
-            <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.6; margin: 0 auto; max-width: 600px;">Core operational routines, safety pairing requirements, and checklists structured across primary enterprise categories.</p>
-        </div>
-        
-        <!-- Full-width stacked button layout -->
-        <div style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
-            <a href="task-checklists.html?cat=mushrooms" style="display: block; width: 100%; background: #22c55e; color: #0f172a; padding: 14px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1rem; text-align: center; box-sizing: border-box; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">🍄 Mushrooms</a>
-            <a href="task-checklists.html?cat=apiary" style="display: block; width: 100%; background: #22c55e; color: #0f172a; padding: 14px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1rem; text-align: center; box-sizing: border-box; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">🐝 Apiary</a>
-            <a href="task-checklists.html?cat=greens" style="display: block; width: 100%; background: #22c55e; color: #0f172a; padding: 14px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1rem; text-align: center; box-sizing: border-box; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">🥗 Greens</a>
-            <a href="task-checklists.html?cat=flowers" style="display: block; width: 100%; background: #22c55e; color: #0f172a; padding: 14px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1rem; text-align: center; box-sizing: border-box; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">💐 Flowers</a>
-        </div>
-    </div>
-</div>
-
-<!-- Standalone "Crop & Infrastructure Calculator" Button Box -->
-<div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin: 25px 0; text-align: center;">
-    <p style="color: var(--muted); margin: 0 0 15px 0; font-size: 0.95rem;">Evaluate upfront costs, labor demands, and strategic timing for different crop tiers:</p>
-    <a href="crop-calculator.html" style="display: inline-block; background: #334155; color: #f8fafc; padding: 12px 24px; border-radius: 8px; font-weight: bold; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.15); transition: background 0.2s, border-color 0.2s;" onmouseover="this.style.background='#475569'; this.style.borderColor='#38bdf8';" onmouseout="this.style.background='#334155'; this.style.borderColor='rgba(255, 255, 255, 0.15)';">Crop &amp; Infrastructure Calculator →</a>
-</div>
-
-<!-- Standalone "How it all Works" Button Box -->
-<div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin: 25px 0; text-align: center;">
-    <p style="color: var(--muted); margin: 0 0 15px 0; font-size: 0.95rem;">Looking for a complete breakdown of the backend flow?</p>
-    <a href="participant-matching-system.html" style="display: inline-block; background: #334155; color: #f8fafc; padding: 12px 24px; border-radius: 8px; font-weight: bold; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.15); transition: background 0.2s, border-color 0.2s;" onmouseover="this.style.background='#475569'; this.style.borderColor='#38bdf8';" onmouseout="this.style.background='#334155'; this.style.borderColor='rgba(255, 255, 255, 0.15)';">How it all Works →</a>
-</div>
-
-</main>
-</body>
-</html>
-      <h1>🌾 Vocational Training Command Center</h1>
-      <p style="text-align: center; margin-bottom: 25px; max-width: 750px; margin-left: auto; margin-right: auto;">
-          Welcome to the primary training ledger. Daily and weekly task lists, data logging for research and action steps for issues discovered. Complete interactive simulation stories, pass skill benchmarks, and prove data metrics required to unlock formal grant channels and partner alignments.
-      </p>
-
-      <!-- DYNAMIC IMAGE VIEWPORT -->
-      <div class="preview-viewport">
-          <img src="PXL_20251004_222146198.MP.jpg" alt="Willamette Valley Training Grounds">
-          <div class="image-caption">MccDowell Creek Falls</div>
+  <div class="page-wrapper">
+    <div class="container">
+      
+      <!-- HUD BAR -->
+      <div class="hud-bar">
+          <span>📊 Operational Logging & Diagnostic Hub</span>
+          <span style="font-size: 0.85rem; color: #cbd5e1;">Active Site: Linn County Research Plots</span>
       </div>
 
-      <!-- PRIMARY ACTION PORTAL BUTTONS -->
-      <div class="primary-actions">
-          <a href="farmer-apprentice-story.html" class="portal-btn">
-              🎮 Launch Simulator Story Path
-              <span>Test yourself across multi-path choices from the street up.</span>
-          </a>
-          <a href="staff-login.html" class="portal-btn" style="border-color: rgba(56,189,248,0.3);">
-              🔒 Administrative Staff Login
-              <span>Enter secure 4-digit passcode to review incoming telemetry.</span>
-          </a>
+      <h1>📋 Daily Task Telemetry & Pest/Disease Action Center</h1>
+      <p style="text-align: center; margin-bottom: 25px; max-width: 800px; margin-left: auto; margin-right: auto;">
+          Submit daily operational logs, track environmental criteria metrics, and handle localized regional risks dynamically across multiple farm paths.
+      </p>
+
+      <div class="grid-2">
+        <!-- LEFT PANEL: DATA ENTRY FORM & TASK INTEGRATION -->
+          <div class="panel">
+              <h3 class="text-xl font-bold mb-2">🚀 Submit Field Task &amp; Telemetry</h3>
+              <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">
+                  Select a standard task from your checklists to automatically load associated instructions and log performance data.
+              </p>
+
+              <form id="telemetryForm" onsubmit="handleFormSubmit(event)">
+                  
+                  <!-- TASK BRIDGE SELECTOR -->
+                  <div class="form-group" style="background: rgba(56, 189, 248, 0.05); border: 1px dashed rgba(56, 189, 248, 0.3); padding: 12px; border-radius: 6px; margin-bottom: 20px;">
+                      <label for="taskBridgeSelect" style="color: var(--blue-accent);">🔗 Link to Checklist Task (Optional)</label>
+                      <select id="taskBridgeSelect" onchange="loadTaskInstructions(this.value)">
+                          <option value="">-- Choose Task to Load Instructions --</option>
+                          <optgroup label="Safety &amp; Muster">
+                              <option value="muster-rollcall">0800 Crew Roll Call &amp; Hydration Check</option>
+                              <option value="muster-ppe">Inspect PPE (Chaps, Hard Hats, Boots)</option>
+                              <option value="muster-radio">Test Field Radios &amp; GPS Beacons</option>
+                          </optgroup>
+                          <optgroup label="Burn &amp; Erosion Control">
+                              <option value="erosion-wattles">Install Straw Wattles &amp; Coir Logs</option>
+                              <option value="erosion-checkdams">Construct Hand-Built Woody Check Dams</option>
+                              <option value="erosion-mulch">Apply Certified Weed-Free Mulch</option>
+                          </optgroup>
+                          <optgroup label="Riparian Restoration">
+                              <option value="riparian-slump">Monitor Stream Crossings &amp; Bank Slumping</option>
+                              <option value="riparian-weeds">Invasive Weed Eradication (Blackberry/Knotweed)</option>
+                          </optgroup>
+                          <optgroup label="Enterprise Tracks">
+                              <option value="ent-apiary">Apiary Varroa Mite Sampling / Hive Check</option>
+                              <option value="ent-greens">Fresh Greens Pythium / pH Adjustments</option>
+                              <option value="ent-mushrooms">Mushroom FAE &amp; Humidity Audit</option>
+                          </optgroup>
+                      </select>
+                      
+                      <!-- DYNAMIC INSTRUCTIONS DISPLAY BOX -->
+                      <div id="linkedInstructionsBox" style="margin-top: 10px; display: none; background: #0f172a; padding: 10px; border-radius: 4px; font-size: 0.85rem; border-left: 3px solid var(--blue-accent);">
+                          <strong style="color: var(--blue-accent);" id="instructionTitle">Standard Operating Guidance:</strong>
+                          <p id="instructionText" style="margin: 5px 0 0 0; color: #cbd5e1;"></p>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="categorySelect">Active Enterprise / Watershed Track</label>
+                      <select id="categorySelect" required>
+                          <option value="Watershed / Erosion">🌲 Watershed &amp; Burn Stabilization</option>
+                          <option value="Apiary">🐝 Apiary Management</option>
+                          <option value="Fresh Greens">🥬 Fresh Greens Production</option>
+                          <option value="Cut Flowers">🌸 Specialty Cut Flowers</option>
+                          <option value="Mushrooms">🍄 Mushroom Cultivation</option>
+                      </select>
+                  </div>
+
+                  <div class="grid-2" style="grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 0;">
+                      <div class="form-group">
+                          <label for="airTempInput">Air Temp (°F)</label>
+                          <input type="number" step="0.1" id="airTempInput" placeholder="72.5" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="soilTempInput">Soil/Sub Temp (°F)</label>
+                          <input type="number" step="0.1" id="soilTempInput" placeholder="68.0" required>
+                      </div>
+                  </div>
+
+                  <div class="grid-2" style="grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 0;">
+                      <div class="form-group">
+                          <label for="humidityInput">Humidity (%)</label>
+                          <input type="number" step="0.1" id="humidityInput" placeholder="85.0" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="phInput">pH Level / Scale</label>
+                          <input type="number" step="0.01" id="phInput" placeholder="6.5" required>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="observerInput">Lead Crew Member / Observer Initials</label>
+                      <input type="text" id="observerInput" placeholder="e.g., D.T. / Crew Alpha" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="notesInput">Field Task Notes &amp; Observations</label>
+                      <textarea id="notesInput" rows="2" placeholder="Record materials used, meter readings, or site adjustments..."></textarea>
+                  </div>
+
+                  <button type="submit" class="btn-primary">Commit Task &amp; Telemetry Ledger Entry</button>
+              </form>
+          </div>  
+
+          <!-- RIGHT PANEL: DYNAMIC INTERACTIVE DIAGNOSTICS CARD -->
+          <div class="panel">
+              <h3 class="text-xl font-bold mb-3">🛠️ Mitigation Playbook Diagnostic Lookups</h3>
+              
+              <div class="tab-buttons">
+                  <button id="tab-watershed" class="tab-btn active" onclick="switchCategory('watershed', this)">Watershed</button>
+                  <button id="tab-apiary" class="tab-btn" onclick="switchCategory('apiary', this)">Apiary</button>
+                  <button id="tab-greens" class="tab-btn" onclick="switchCategory('greens', this)">Greens</button>
+                  <button id="tab-flowers" class="tab-btn" onclick="switchCategory('flowers', this)">Flowers</button>
+                  <button id="tab-mushrooms" class="tab-btn" onclick="switchCategory('mushrooms', this)">Mushrooms</button>
+              </div>
+
+              <!-- DIAGNOSTIC CARDS -->
+              <div id="diag-watershed" class="trouble-card active-tab" style="border-left-color: #3b82f6;">
+                  <h4>🌲 Burn Scar Erosion &amp; Bank Stabilization</h4>
+                  <p><strong>Indicator:</strong> Active rilling on slopes, hydrophobic ash layers, or culvert silt buildup.</p>
+                  <div class="steps-box">
+                      <strong>Action Steps:</strong> Trench contour lines 2–3 inches deep, lay coir logs or straw wattles secured with wooden stakes every 3–4 feet, and ensure weed-free mulch coverage reaches 75%+.
+                  </div>
+              </div>
+
+              <div id="diag-apiary" class="trouble-card" style="border-left-color: #b45309;">
+                  <h4>🐝 Varroa Mite Surge &amp; Nosema Spore Risk</h4>
+                  <p><strong>Indicator:</strong> Hive humidity &gt; 70%, summer air temp &gt; 85°F, or mite count &gt; 3% per 100 bees.</p>
+                  <div class="steps-box">
+                      <strong>Action Steps:</strong> Perform alcohol wash sampling. Apply formic acid or thymol treatments per OSBA guidelines and ensure bottom screen ventilation is fully open.
+                  </div>
+              </div>
+
+              <div id="diag-greens" class="trouble-card" style="border-left-color: #065f46;">
+                  <h4>🥬 Pythium Root Rot &amp; Tipburn Mitigation</h4>
+                  <p><strong>Indicator:</strong> Soil pH &gt; 7.2, soil temp &gt; 75°F, or calcium translocation failure under high humidity.</p>
+                  <div class="steps-box">
+                      <strong>Action Steps:</strong> Back off irrigation frequency, apply bio-fungicide (<em>Trichoderma</em> inoculants), adjust water pH to 5.8–6.2, and run HAF fans for constant canopy airflow.
+                  </div>
+              </div>
+
+              <div id="diag-flowers" class="trouble-card" style="border-left-color: #831843;">
+                  <h4>💐 Powdery Mildew &amp; Fusarium Wilt Control</h4>
+                  <p><strong>Indicator:</strong> Night humidity spike (&gt; 85%), stagnant air, and day/night temp swings &gt; 25°F.</p>
+                  <div class="steps-box">
+                      <strong>Action Steps:</strong> Prune lower foliage for canopy penetration, apply preventative sulfur dust, and remove infected debris immediately to break disease cycles.
+                  </div>
+              </div>
+
+              <div id="diag-mushrooms" class="trouble-card" style="border-left-color: #78350f;">
+                  <h4>🍄 Trichoderma Mold ("Green Mold") &amp; CO2 Audit</h4>
+                  <p><strong>Indicator:</strong> Substrate pH &lt; 5.5 or &gt; 7.0, excess moisture, or CO2 &gt; 1,200 ppm causing stipe elongation.</p>
+                  <div class="steps-box">
+                      <strong>Action Steps:</strong> Isolate contaminated blocks immediately. Sanitize surfaces with 10% bleach, adjust FAE to 4-6 room exchanges/hour, and maintain room humidity at 85-90%.
+                  </div>
+              </div>
+
+          </div>
       </div>
 
       <hr class="section-divider">
 
-      <!-- BALANCED 6-BOX TRAINING & OPERATIONS MATRIX -->
-      <div class="secondary-section">
-          <h3>🌱 Partner-Aligned Curriculum & Operational Matrix</h3>
-          <p style="margin-bottom: 20px;">Trainees progress through six comprehensive curriculum and management tracks designed to meet regional agricultural standards:</p>
-          
-          <div class="secondary-grid">
-              <!-- BOX 1: ACADEMIC & SOIL SCIENCE -->
-              <div class="secondary-card">
-                  <div>
-                      <h4>🧪 Academic &amp; Soil Science</h4>
-                      <p>Empirical soil diagnostics, clay profile restoration, and regional agricultural research protocols in partnership with extension services.</p>
-                  </div>
-                  <a href="training-academic-soil.html" class="btn-small">Launch Track →</a>
+      <!-- MASTER RESEARCH DATA LOG TABLE -->
+      <div class="panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+              <h3 class="text-xl font-bold m-0">📁 Cumulative Research Telemetry Ledger</h3>
+              <div style="display: flex; gap: 10px;">
+                  <button type="button" onclick="exportDataCSV()" class="tab-btn" style="background: #1e3a8a; color: white; border: none;">📥 Export CSV</button>
+                  <button type="button" onclick="clearAllLogs()" class="btn-danger">🗑️ Clear All Logs</button>
               </div>
-
-              <!-- BOX 2: FARMER & GROWER OPERATIONS -->
-              <div class="secondary-card">
-                  <div>
-                      <h4>🚜 Farmer &amp; Grower Operations</h4>
-                      <p>Working farm logistics, seasonal crop management, cooperative equipment handling, and regenerative agronomy practices.</p>
-                  </div>
-                  <a href="training-farmer-ops.html" class="btn-small">Launch Track →</a>
-              </div>
-
-              <!-- BOX 3: EMERGENCY RESPONSE & CERTIFICATIONS -->
-              <div class="secondary-card">
-                  <div>
-                      <h4>🔥 Emergency Response &amp; Certs</h4>
-                      <p>Wildland fire fuel reduction, defensible space clearing, safety compliance audits, and disciplined 5-person crew cell deployment.</p>
-                  </div>
-                  <a href="training-emergency-certs.html" class="btn-small">Launch Track →</a>
-              </div>
-
-              <!-- BOX 4: LEGAL, ADVOCACY & MENTAL HEALTH -->
-              <div class="secondary-card">
-                  <div>
-                      <h4>⚖️ Legal, Advocacy &amp; Support</h4>
-                      <p>Wraparound stability, trauma-informed peer communication, community re-entry frameworks, and municipal advocacy navigation.</p>
-                  </div>
-                  <a href="training-legal-support.html" class="btn-small">Launch Track →</a>
-              </div>
-
-              <!-- BOX 5: LEASE & SHARED HARVEST SUBJECT MATTER -->
-              <div class="secondary-card">
-                  <div>
-                      <h4>🤝 Lease &amp; Shared Harvest</h4>
-                      <p>Cooperative lease frameworks, land tenure agreements, shared-harvest revenue splits, and equity incubator strategies.</p>
-                  </div>
-                  <div class="button-group-wrap">
-                      <a href="pencil-to-presentation.html" class="btn-small">Pencil-to-Presentation →</a>
-                      <a href="shared-harvest-incubator.html" class="btn-small">Shared Harvest Hub →</a>
-                  </div>
-              </div>
-
-              <!-- BOX 6: DAILY & WEEKLY OPERATIONAL TASKS HUB -->
-              <div class="secondary-card">
-                  <div>
-                      <h4>📋 Daily &amp; Weekly Tasks Hub</h4>
-                      <p>Core operational routines, safety pairing requirements, and checklists structured across primary enterprise categories.</p>
-                  </div>
-                  <div class="button-group-wrap">
-                      <a href="task-checklists.html?cat=mushrooms" class="btn-small">🍄 Mushrooms</a>
-                      <a href="task-checklists.html?cat=apiary" class="btn-small">🐝 Apiary</a>
-                      <a href="task-checklists.html?cat=greens" class="btn-small">🥗 Greens</a>
-                      <a href="task-checklists.html?cat=flowers" class="btn-small">💐 Flowers</a>
-                  </div>
-              </div>
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">
+              Real-time persistent log of all submitted sensor values across Watershed, Apiary, Greens, Flowers, and Mushrooms tracks.
+          </p>
+          <div class="table-container">
+              <table>
+                  <thead>
+                      <tr>
+                          <th>Timestamp</th>
+                          <th>Category Track</th>
+                          <th>Air Temp (°F)</th>
+                          <th>Soil/Sub Temp (°F)</th>
+                          <th>Humidity (%)</th>
+                          <th>pH Level</th>
+                          <th>Observer</th>
+                          <th>Field Notes</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody id="telemetryTableBody">
+                      <!-- Populated via JS -->
+                  </tbody>
+              </table>
           </div>
       </div>
 
@@ -197,15 +479,217 @@
   </div>
 
   <script>
-      function toggleTestBypass() {
-          const status = document.getElementById('test-mode-status');
-          if (status.innerText === 'Live Mode') {
-              status.innerText = 'Test Bypass Active';
-              status.style.color = '#22c55e';
-          } else {
-              status.innerText = 'Live Mode';
-              status.style.color = '#cbd5e1';
+      // Task Instruction Dictionary for the Bridge Selector
+      const taskInstructions = {
+          "muster-rollcall": {
+              title: "Pre-Deployment Muster Protocol",
+              text: "Verify all personnel are present, assess physical fitness-for-duty, confirm hydration reserves (minimum 2L per person), and issue satellite check-in protocols.",
+              category: "Watershed / Erosion"
+          },
+          "muster-ppe": {
+              title: "PPE Safety Audit",
+              text: "Inspect steel-toe boots, chainsaw chaps (UL certified), high-vis vests, eye protection, and hard hat suspension bands prior to entering forestry lanes.",
+              category: "Watershed / Erosion"
+          },
+          "muster-radio": {
+              title: "Communications Check",
+              text: "Perform VHF radio channel check with base camp, verify battery percentages, and test emergency GPS beacon ping functionality.",
+              category: "Watershed / Erosion"
+          },
+          "erosion-wattles": {
+              title: "Straw Wattle & Coir Log Installation",
+              text: "Trench contour lines 2-3 inches deep, lay coir logs or straw wattles firmly against soil, and drive wooden stakes every 3-4 feet at a slight inward angle.",
+              category: "Watershed / Erosion"
+          },
+          "erosion-checkdams": {
+              title: "Woody Debris Check Dam Construction",
+              text: "Select stable logs across minor rills/gullies, key-in lateral ends into side banks to prevent washout, and pack smaller brush upstream to filter sediment.",
+              category: "Watershed / Erosion"
+          },
+          "erosion-mulch": {
+              title: "Burn Scar Mulching",
+              text: "Apply certified weed-free mulch evenly across high-slope hydrophobic ash scars to a 70-80% ground cover density.",
+              category: "Watershed / Erosion"
+          },
+          "riparian-slump": {
+              title: "Stream Bank Monitoring",
+              text: "Inspect culverts and bank stabilization points for active slumping, undercut roots, or accelerated silt accumulation.",
+              category: "Watershed / Erosion"
+          },
+          "riparian-weeds": {
+              title: "Invasive Species Control",
+              text: "Target Himalayan blackberry root crowns and knotweed stems within 50 feet of riparian buffers following approved regional protocols.",
+              category: "Watershed / Erosion"
+          },
+          "ent-apiary": {
+              title: "Apiary Health Protocol",
+              text: "Conduct alcohol wash for Varroa mites, verify honey supers, and record internal hive humidity and temperature metrics.",
+              category: "Apiary"
+          },
+          "ent-greens": {
+              title: "Greenhouse Climate & Nutrient Audit",
+              text: "Check nutrient tank EC and pH levels (target 5.8-6.2), inspect HAF fans, and verify bed moisture saturation.",
+              category: "Fresh Greens"
+          },
+          "ent-mushrooms": {
+              title: "Fruiting Chamber Telemetry Check",
+              text: "Verify CO2 ppm levels are under 1,000, check room humidity gauges (85-90%), and inspect blocks for green mold spores.",
+              category: "Mushrooms"
           }
+      };
+
+      // Load stored telemetry logs on page load
+      document.addEventListener('DOMContentLoaded', function() {
+          renderTable();
+          switchCategory('watershed', document.getElementById('tab-watershed'));
+      });
+
+      // Function to dynamically load instructions when a task is selected
+      function loadTaskInstructions(taskKey) {
+          const box = document.getElementById('linkedInstructionsBox');
+          const titleEl = document.getElementById('instructionTitle');
+          const textEl = document.getElementById('instructionText');
+          const categorySelect = document.getElementById('categorySelect');
+          const notesInput = document.getElementById('notesInput');
+
+          if (!taskKey || !taskInstructions[taskKey]) {
+              box.style.display = 'none';
+              return;
+          }
+
+          const data = taskInstructions[taskKey];
+          titleEl.textContent = "📋 " + data.title;
+          textEl.textContent = data.text;
+          box.style.display = 'block';
+
+          categorySelect.value = data.category;
+          notesInput.value = `Task Performed: ${data.title}. `;
+      }
+
+      // Handle Telemetry Form Submission
+      function handleFormSubmit(event) {
+          event.preventDefault();
+
+          const category = document.getElementById('categorySelect').value;
+          const airTemp = document.getElementById('airTempInput').value;
+          const soilTemp = document.getElementById('soilTempInput').value;
+          const humidity = document.getElementById('humidityInput').value;
+          const ph = document.getElementById('phInput').value;
+          const observer = document.getElementById('observerInput').value;
+          const notes = document.getElementById('notesInput').value || 'None';
+
+          const newLog = {
+              id: Date.now(),
+              timestamp: new Date().toLocaleString(),
+              category,
+              airTemp,
+              soilTemp,
+              humidity,
+              ph,
+              observer,
+              notes
+          };
+
+          let logs = JSON.parse(localStorage.getItem('afti_telemetry_logs')) || [];
+          logs.unshift(newLog);
+          localStorage.setItem('afti_telemetry_logs', JSON.stringify(logs));
+
+          document.getElementById('telemetryForm').reset();
+          document.getElementById('linkedInstructionsBox').style.display = 'none';
+          renderTable();
+          alert('✅ Telemetry successfully committed to the research ledger.');
+      }
+
+      // Render Table from LocalStorage
+      function renderTable() {
+          const tbody = document.getElementById('telemetryTableBody');
+          const logs = JSON.parse(localStorage.getItem('afti_telemetry_logs')) || [];
+
+          if (logs.length === 0) {
+              tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: #64748b; padding: 20px;">No telemetry logs recorded yet. Submit a form entry above to begin tracking.</td></tr>`;
+              return;
+          }
+
+          tbody.innerHTML = '';
+          logs.forEach(log => {
+              let badgeClass = 'badge-watershed';
+              if (log.category === 'Fresh Greens') badgeClass = 'badge-greens';
+              else if (log.category === 'Cut Flowers') badgeClass = 'badge-flowers';
+              else if (log.category === 'Mushrooms') badgeClass = 'badge-mushrooms';
+              else if (log.category === 'Apiary') badgeClass = 'badge-apiary';
+
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                  <td style="color: #94a3b8; font-size: 0.85rem;">${log.timestamp}</td>
+                  <td><span class="badge ${badgeClass}">${log.category}</span></td>
+                  <td>${log.airTemp}°F</td>
+                  <td>${log.soilTemp}°F</td>
+                  <td>${log.humidity}%</td>
+                  <td>${log.ph}</td>
+                  <td><strong>${log.observer}</strong></td>
+                  <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;" title="${log.notes}">${log.notes}</td>
+                  <td><button onclick="deleteLog(${log.id})" class="btn-danger" style="padding: 3px 8px; font-size: 0.75rem;">Delete</button></td>
+              `;
+              tbody.appendChild(tr);
+          });
+      }
+
+      // Delete Individual Log
+      function deleteLog(id) {
+          let logs = JSON.parse(localStorage.getItem('afti_telemetry_logs')) || [];
+          logs = logs.filter(log => log.id !== id);
+          localStorage.setItem('afti_telemetry_logs', JSON.stringify(logs));
+          renderTable();
+      }
+
+      // Clear All Logs
+      function clearAllLogs() {
+          if (confirm('Are you sure you want to clear all cumulative telemetry logs? This action cannot be undone.')) {
+              localStorage.removeItem('afti_telemetry_logs');
+              renderTable();
+          }
+      }
+
+      // Export Logs as CSV
+      function exportDataCSV() {
+          const logs = JSON.parse(localStorage.getItem('afti_telemetry_logs')) || [];
+          if (logs.length === 0) {
+              alert('No data available to export.');
+              return;
+          }
+
+          let csvContent = "data:text/csv;charset=utf-8,Timestamp,Category,AirTemp(F),SoilTemp(F),Humidity(%),pH,Observer,Notes\r\n";
+          logs.forEach(log => {
+              let row = [
+                  `"${log.timestamp}"`,
+                  `"${log.category}"`,
+                  log.airTemp,
+                  log.soilTemp,
+                  log.humidity,
+                  log.ph,
+                  `"${log.observer}"`,
+                  `"${log.notes.replace(/"/g, '""')}"`
+              ];
+              csvContent += row.join(",") + "\r\n";
+          });
+
+          const encodedUri = encodeURI(csvContent);
+          const link = document.createElement("a");
+          link.setAttribute("href", encodedUri);
+          link.setAttribute("download", `AFTI_Research_Telemetry_${new Date().toISOString().slice(0,10)}.csv`);
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+      }
+
+      // Switch Diagnostic Tabs
+      function switchCategory(catName, btnElement) {
+          document.querySelectorAll('.tab-buttons .tab-btn').forEach(btn => btn.classList.remove('active'));
+          if(btnElement) btnElement.classList.add('active');
+
+          document.querySelectorAll('.trouble-card').forEach(card => card.classList.remove('active-tab'));
+          const targetCard = document.getElementById('diag-' + catName.trim());
+          if (targetCard) targetCard.classList.add('active-tab');
       }
   </script>
 </body>
