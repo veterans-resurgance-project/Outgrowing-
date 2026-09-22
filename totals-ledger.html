@@ -4,76 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AFTI - Data Reports & Action Hub</title>
-    <script src="https://tailwindcss.com">
-        // Task Instruction Dictionary for the Bridge Selector
-      const taskInstructions = {
-          "muster-rollcall": {
-              title: "Pre-Deployment Muster Protocol",
-              text: "Verify all personnel are present, assess physical fitness-for-duty, confirm hydration reserves (minimum 2L per person), and issue satellite check-in protocols.",
-              category: "Watershed / Erosion"
-          },
-          "muster-ppe": {
-              title: "PPE Safety Audit",
-              text: "Inspect steel-toe boots, chainsaw chaps (UL certified), high-vis vests, eye protection, and hard hat suspension bands prior to entering forestry lanes.",
-              category: "Watershed / Erosion"
-          },
-          "muster-radio": {
-              title: "Communications Check",
-              text: "Perform VHF radio channel check with base camp, verify battery percentages, and test emergency GPS beacon ping functionality.",
-              category: "Watershed / Erosion"
-          },
-          "erosion-wattles": {
-              title: "Straw Wattle & Coir Log Installation",
-              text: "Trench contour lines 2-3 inches deep, lay coir logs or straw wattles firmly against soil, and drive wooden stakes every 3-4 feet at a slight inward angle.",
-              category: "Watershed / Erosion"
-          },
-          "erosion-checkdams": {
-              title: "Woody Debris Check Dam Construction",
-              text: "Select stable logs across minor rills/gullies, key-in lateral ends into side banks to prevent washout, and pack smaller brush upstream to filter sediment.",
-              category: "Watershed / Erosion"
-          },
-          "erosion-mulch": {
-              title: "Burn Scar Mulching",
-              text: "Apply certified weed-free mulch evenly across high-slope hydrophobic ash scars to a 70-80% ground cover density.",
-              category: "Watershed / Erosion"
-          },
-          "riparian-slump": {
-              title: "Stream Bank Monitoring",
-              text: "Inspect culverts and bank stabilization points for active slumping, undercut roots, or accelerated silt accumulation.",
-              category: "Watershed / Erosion"
-          },
-          "riparian-weeds": {
-              title: "Invasive Species Control",
-              text: "Target Himalayan blackberry root crowns and knotweed stems within 50 feet of riparian buffers following approved regional protocols.",
-              category: "Watershed / Erosion"
-          },
-
-          }
-      };
-
-      // Function to dynamically load instructions when a task is selected
-      function loadTaskInstructions(taskKey) {
-          const box = document.getElementById('linkedInstructionsBox');
-          const titleEl = document.getElementById('instructionTitle');
-          const textEl = document.getElementById('instructionText');
-          const categorySelect = document.getElementById('categorySelect');
-          const notesInput = document.getElementById('notesInput');
-
-          if (!taskKey || !taskInstructions[taskKey]) {
-              box.style.display = 'none';
-              return;
-          }
-
-          const data = taskInstructions[taskKey];
-          titleEl.textContent = "📋 " + data.title;
-          textEl.textContent = data.text;
-          box.style.display = 'block';
-
-          // Automatically set matching category track and pre-fill notes
-          categorySelect.value = data.category;
-          notesInput.value = `Task Performed: ${data.title}. `;
-      }
-    </script>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -122,7 +52,7 @@
 
         .container {
             width: 100%;
-            max-width: 1100px;
+            max-width: 1200px;
             background: var(--card-bg);
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.4);
@@ -142,6 +72,8 @@
             align-items: center;
             font-weight: bold;
             color: #ffffff;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         h1 {
@@ -163,7 +95,7 @@
         /* GRID LAYOUT FOR SECTIONS */
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
@@ -173,6 +105,7 @@
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 8px;
             padding: 20px;
+            box-sizing: border-box;
         }
 
         /* FORM ELEMENTS */
@@ -221,13 +154,16 @@
             background-color: var(--primary-hover);
         }
 
-        /* TROUBLESHOOTING CATEGORY TABS */
-        .tab-buttons {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
+        .btn-danger {
+            background-color: #7f1d1d;
+            color: #fca5a5;
+            padding: 8px 14px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
         }
+        .btn-danger:hover { background-color: #991b1b; }
 
         .tab-btn {
             background: #0f172a;
@@ -240,7 +176,6 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-
         .tab-btn.active {
             background: var(--blue-accent);
             color: #0f172a;
@@ -248,39 +183,39 @@
         }
 
         .trouble-card {
-            background: rgba(30, 41, 59, 0.8);
-            border-left: 4px solid var(--accent);
-            padding: 12px 15px;
-            margin-bottom: 12px;
+            background: rgba(30, 41, 59, 0.9);
+            border-left: 4px solid var(--blue-accent);
+            padding: 15px;
+            margin-bottom: 15px;
             border-radius: 0 6px 6px 0;
         }
 
         .trouble-card h4 {
-            margin: 0 0 5px 0;
-            color: #f8fafc;
-            font-size: 1rem;
-        }
-
-        .trouble-card p {
-            font-size: 0.85rem;
             margin: 0 0 8px 0;
+            color: #f8fafc;
+            font-size: 1.05rem;
         }
 
         .steps-box {
             background: #0f172a;
-            padding: 10px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             color: #38bdf8;
+            margin-top: 8px;
         }
 
         /* TABLES */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 15px;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
             font-size: 0.9rem;
+            white-space: nowrap;
         }
 
         th, td {
@@ -293,14 +228,6 @@
             background: rgba(15, 23, 42, 0.8);
             color: var(--blue-accent);
         }
-
-        .badge {
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-
     </style>
 </head>
 <body>
@@ -329,22 +256,23 @@
 
       <h1>📋 Daily Task Telemetry & Pest/Disease Action Center</h1>
       <p style="text-align: center; margin-bottom: 25px; max-width: 800px; margin-left: auto; margin-right: auto;">
-          Submit daily operational logs, track environmental criteria metrics, and handle localized regional risks dynamically across multiple farm paths.
+          Submit daily operational logs, track environmental criteria metrics, and review detailed live instruction protocols dynamically selected from your left-hand menu.
       </p>
 
       <div class="grid-2">
-        <!-- LEFT PANEL: DATA ENTRY FORM & TASK INTEGRATION -->
+        
+          <!-- LEFT PANEL: DATA ENTRY FORM & TASK BRIDGE SELECTOR -->
           <div class="panel">
-              <h3 class="text-xl font-bold mb-2">🚀 Submit Field Task &amp; Telemetry</h3>
+              <h3 style="margin-top: 0; font-size: 1.2rem;">🚀 Submit Field Task &amp; Telemetry</h3>
               <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">
-                  Select a standard task from your checklists to automatically load associated instructions and log performance data.
+                  Select a standard task below to instantly load its detailed protocol instructions into the right-hand panel.
               </p>
 
               <form id="telemetryForm" onsubmit="handleFormSubmit(event)">
                   
                   <!-- TASK BRIDGE SELECTOR -->
-                  <div class="form-group" style="background: rgba(56, 189, 248, 0.05); border: 1px dashed rgba(56, 189, 248, 0.3); padding: 12px; border-radius: 6px; margin-bottom: 20px;">
-                      <label for="taskBridgeSelect" style="color: var(--blue-accent);">🔗 Link to Checklist Task (Optional)</label>
+                  <div class="form-group" style="background: rgba(56, 189, 248, 0.05); border: 1px dashed rgba(56, 189, 248, 0.3); padding: 12px; border-radius: 6px; margin-bottom: 15px;">
+                      <label for="taskBridgeSelect" style="color: var(--blue-accent);">🔗 Link to Checklist Task</label>
                       <select id="taskBridgeSelect" onchange="loadTaskInstructions(this.value)">
                           <option value="">-- Choose Task to Load Instructions --</option>
                           <optgroup label="Safety &amp; Muster">
@@ -361,21 +289,13 @@
                               <option value="riparian-slump">Monitor Stream Crossings &amp; Bank Slumping</option>
                               <option value="riparian-weeds">Invasive Weed Eradication (Blackberry/Knotweed)</option>
                           </optgroup>
-                          
                       </select>
-                      
-                      <!-- DYNAMIC INSTRUCTIONS DISPLAY BOX -->
-                      <div id="linkedInstructionsBox" style="margin-top: 10px; display: none; background: #0f172a; padding: 10px; border-radius: 4px; font-size: 0.85rem; border-left: 3px solid var(--blue-accent);">
-                          <strong style="color: var(--blue-accent);" id="instructionTitle">Standard Operating Guidance:</strong>
-                          <p id="instructionText" style="margin: 5px 0 0 0; color: #cbd5e1;"></p>
-                      </div>
                   </div>
 
                   <div class="form-group">
                       <label for="categorySelect">Active Enterprise / Watershed Track</label>
                       <select id="categorySelect" required>
                           <option value="Watershed / Erosion">🌲 Watershed &amp; Burn Stabilization</option>
-                          
                       </select>
                   </div>
 
@@ -391,62 +311,65 @@
                   </div>
 
                   <div class="grid-2" style="grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 0;">
-                      <label for=">Humidity (%)</label>
-                      <input type="number" step="0.1" id="humidityInput" placeholder="85.0" required>
+                      <div class="form-group">
+                          <label for="humidityInput">Humidity (%)</label>
+                          <input type="number" step="0.1" id="humidityInput" placeholder="85.0" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="phInput">pH Level / Scale</label>
+                          <input type="number" step="0.01" id="phInput" placeholder="6.5" required>
+                      </div>
                   </div>
+
                   <div class="form-group">
-                      <label for="phInput">pH Level / Scale</label>
-                      <input type="number" step="0.01" id="phInput" placeholder="6.5" required>
+                      <label for="observerInput">Lead Crew Member / Observer Initials</label>
+                      <input type="text" id="observerInput" placeholder="e.g., D.T. / Crew Alpha" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="notesInput">Field Task Notes &amp; Observations</label>
+                      <textarea id="notesInput" rows="2" placeholder="Record materials used, meter readings, or site adjustments..."></textarea>
+                  </div>
+
+                  <button type="submit" class="btn-primary">Commit Task &amp; Telemetry Ledger Entry</button>
+              </form>
+          </div>  
+
+          <!-- RIGHT PANEL: DYNAMIC DETAILED INSTRUCTIONS & DIAGNOSTICS -->
+          <div class="panel">
+              <h3 style="margin-top: 0; font-size: 1.2rem;">📋 Selected Task Instructions &amp; Protocols</h3>
+              <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">
+                  Detailed operational guidance and step-by-step field execution requirements corresponding to your left-hand selection.
+              </p>
+
+              <!-- Dynamic Instruction Card -->
+              <div id="rightPanelInstructions" class="trouble-card">
+                  <h4 id="instructionTitle">👉 Select a task from the left menu</h4>
+                  <p id="instructionSubtitle" style="font-size: 0.85rem; margin-bottom: 5px; color: #94a3b8;">No task currently selected.</p>
+                  <div class="steps-box" id="instructionText">
+                      Detailed step-by-step standard operating procedures, safety checks, and completion criteria will appear here automatically when a checklist item is selected.
                   </div>
               </div>
 
-              <div class="form-group">
-                  <label for="observerInput">Lead Crew Member / Observer Initials</label>
-                  <input type="text" id="observerInput" placeholder="e.g., D.T. / Crew Alpha" required>
-              </div>
-
-              <div class="form-group">
-                  <label for="notesInput">Field Task Notes &amp; Observations</label>
-                  <textarea id="notesInput" rows="2" placeholder="Record materials used, meter readings, or site adjustments..."></textarea>
-              </div>
-
-              <button type="submit" class="btn-primary">Commit Task &amp; Telemetry Ledger Entry</button>
-          </form>
-      </div>  
-
-      <!-- RIGHT PANEL: DYNAMIC INTERACTIVE DIAGNOSTICS CARD -->
-      <div class="panel">
-          <h3 class="text-xl font-bold mb-3">🛠️ Mitigation Playbook Diagnostic Lookups</h3>
-          
-          <div class="tab-buttons">
-              <button id="tab-watershed" class="tab-btn" onclick="switchCategory('watershed', this)">Watershed</button>
-          </div>
-
-          
-          </div>
-
-          <div id="diag-watershed" class="trouble-card" style="border-left-color: #3b82f6;">
-              <h4>🌲 Burn Scar Erosion &amp; Bank Stabilization</h4>
-              <p><strong>Indicator:</strong> Active rilling on slopes, hydrophobic ash layers, or culvert silt buildup.</p>
-              <div class="steps-box">
-                  <strong>Action Steps:</strong> Trench contour lines 2–3 inches deep, lay coir logs or straw wattles secured with wooden stakes every 3–4 feet, and ensure weed-free mulch coverage reaches 75%+.
+              <div class="trouble-card" style="border-left-color: #27ae60; margin-top: 20px;">
+                  <h4 style="color: #2ecc71;">🌲 General Field Protocol Reminder</h4>
+                  <p style="font-size: 0.85rem; margin-bottom: 5px;">Always maintain active radio contact with base camp and verify PPE integrity prior to commencing heavy slope work.</p>
               </div>
           </div>
 
-      </div> <!-- Closes RIGHT PANEL -->
-  </div> <!-- Closes grid-2 container -->        
+      </div> <!-- Closes grid-2 container -->        
 
       <!-- MASTER RESEARCH DATA LOG TABLE -->
       <div class="panel">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
-              <h3 class="text-xl font-bold m-0">📁 Cumulative Research Telemetry Ledger</h3>
+              <h3 style="margin: 0; font-size: 1.2rem;">📁 Cumulative Research Telemetry Ledger</h3>
               <div style="display: flex; gap: 10px;">
                   <button type="button" onclick="exportDataCSV()" class="tab-btn" style="background: #1e3a8a; color: white; border: none;">📥 Export CSV</button>
                   <button type="button" onclick="clearAllLogs()" class="btn-danger">🗑️ Clear All Logs</button>
               </div>
           </div>
           <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">
-              Real-time persistent log of all submitted sensor values across Watershed, Apiary, Greens, Flowers, and Mushrooms tracks.
+              Real-time persistent log of all submitted sensor values and completed task entries.
           </p>
           <div class="table-container">
               <table>
@@ -455,7 +378,7 @@
                           <th>Timestamp</th>
                           <th>Category Track</th>
                           <th>Air Temp (°F)</th>
-                          <th>Soil/Sub Temp (°F)</th>
+                          <th>Soil Temp (°F)</th>
                           <th>Humidity (%)</th>
                           <th>pH Level</th>
                           <th>Observer</th>
@@ -478,201 +401,156 @@
       const taskInstructions = {
           "muster-rollcall": {
               title: "Pre-Deployment Muster Protocol",
-              text: "Verify all personnel are present, assess physical fitness-for-duty, confirm hydration reserves (minimum 2L per person), and issue satellite check-in protocols.",
-              category: "Watershed / Erosion"
+              category: "Watershed / Erosion",
+              text: "Verify all personnel are present, assess physical fitness-for-duty, confirm hydration reserves (minimum 2L per person), and issue satellite check-in protocols before departing base camp."
           },
           "muster-ppe": {
               title: "PPE Safety Audit",
-              text: "Inspect steel-toe boots, chainsaw chaps (UL certified), high-vis vests, eye protection, and hard hat suspension bands prior to entering forestry lanes.",
-              category: "Watershed / Erosion"
+              category: "Watershed / Erosion",
+              text: "Inspect steel-toe boots, chainsaw chaps (UL certified), high-vis vests, eye protection, and hard hat suspension bands prior to entering active forestry lanes."
           },
           "muster-radio": {
               title: "Communications Check",
-              text: "Perform VHF radio channel check with base camp, verify battery percentages, and test emergency GPS beacon ping functionality.",
-              category: "Watershed / Erosion"
+              category: "Watershed / Erosion",
+              text: "Perform VHF radio channel check with base camp, verify battery percentages, and test emergency GPS beacon ping functionality."
           },
           "erosion-wattles": {
               title: "Straw Wattle & Coir Log Installation",
-              text: "Trench contour lines 2-3 inches deep, lay coir logs or straw wattles firmly against soil, and drive wooden stakes every 3-4 feet at a slight inward angle.",
-              category: "Watershed / Erosion"
+              category: "Watershed / Erosion",
+              text: "Trench contour lines 2-3 inches deep, lay coir logs or straw wattles firmly against soil, and drive wooden stakes every 3-4 feet at a slight inward angle to prevent slippage."
           },
           "erosion-checkdams": {
               title: "Woody Debris Check Dam Construction",
-              text: "Select stable logs across minor rills/gullies, key-in lateral ends into side banks to prevent washout, and pack smaller brush upstream to filter sediment.",
-              category: "Watershed / Erosion"
+              category: "Watershed / Erosion",
+              text: "Select stable logs across minor rills/gullies, key-in lateral ends into side banks to prevent washout, and pack smaller brush upstream to filter sediment effectively."
           },
           "erosion-mulch": {
               title: "Burn Scar Mulching",
-              text: "Apply certified weed-free mulch evenly across high-slope hydrophobic ash scars to a 70-80% ground cover density.",
-              category: "Watershed / Erosion"
+              category: "Watershed / Erosion",
+              text: "Apply certified weed-free mulch evenly across high-slope hydrophobic ash scars to achieve a minimum 70-80% ground cover density."
           },
           "riparian-slump": {
               title: "Stream Bank Monitoring",
-              text: "Inspect culverts and bank stabilization points for active slumping, undercut roots, or accelerated silt accumulation.",
-              category: "Watershed / Erosion"
+              category: "Watershed / Erosion",
+              text: "Inspect culverts and bank stabilization points for active slumping, undercut roots, or accelerated silt accumulation following high-flow events."
           },
           "riparian-weeds": {
               title: "Invasive Species Control",
-              text: "Target Himalayan blackberry root crowns and knotweed stems within 50 feet of riparian buffers following approved regional protocols.",
-              category: "Watershed / Erosion"
-          },
-
+              category: "Watershed / Erosion",
+              text: "Target Himalayan blackberry root crowns and knotweed stems within 50 feet of riparian buffers following approved regional manual eradication protocols."
           }
       };
 
-      // Load stored telemetry logs on page load
-      document.addEventListener('DOMContentLoaded', function() {
-          renderTable();
-          switchCategory('mushrooms', document.getElementById('tab-mushrooms'));
-      });
-
-      // Function to dynamically load instructions when a task is selected
+      // Function to dynamically load instructions into the right-hand panel when a task is selected
       function loadTaskInstructions(taskKey) {
-          const box = document.getElementById('linkedInstructionsBox');
           const titleEl = document.getElementById('instructionTitle');
+          const subtitleEl = document.getElementById('instructionSubtitle');
           const textEl = document.getElementById('instructionText');
           const categorySelect = document.getElementById('categorySelect');
           const notesInput = document.getElementById('notesInput');
 
           if (!taskKey || !taskInstructions[taskKey]) {
-              box.style.display = 'none';
+              titleEl.textContent = "👉 Select a task from the left menu";
+              subtitleEl.textContent = "No task currently selected.";
+              textEl.textContent = "Detailed step-by-step standard operating procedures, safety checks, and completion criteria will appear here automatically when a checklist item is selected.";
               return;
           }
 
           const data = taskInstructions[taskKey];
           titleEl.textContent = "📋 " + data.title;
+          subtitleEl.textContent = "Track: " + data.category;
           textEl.textContent = data.text;
-          box.style.display = 'block';
 
+          // Automatically set matching category track and pre-fill notes
           categorySelect.value = data.category;
           notesInput.value = `Task Performed: ${data.title}. `;
       }
 
-      // Handle Telemetry Form Submission
+      // LocalStorage Telemetry Ledger Logic
+      let telemetryLogs = JSON.parse(localStorage.getItem('afti_telemetry_logs')) || [];
+
       function handleFormSubmit(event) {
           event.preventDefault();
-
-          const category = document.getElementById('categorySelect').value;
-          const airTemp = document.getElementById('airTempInput').value;
-          const soilTemp = document.getElementById('soilTempInput').value;
-          const humidity = document.getElementById('humidityInput').value;
-          const ph = document.getElementById('phInput').value;
-          const observer = document.getElementById('observerInput').value;
-          const notes = document.getElementById('notesInput').value || 'None';
-
-          const newLog = {
-              id: Date.now(),
+          const newEntry = {
               timestamp: new Date().toLocaleString(),
-              category,
-              airTemp,
-              soilTemp,
-              humidity,
-              ph,
-              observer,
-              notes
+              category: document.getElementById('categorySelect').value,
+              airTemp: document.getElementById('airTempInput').value,
+              soilTemp: document.getElementById('soilTempInput').value,
+              humidity: document.getElementById('humidityInput').value,
+              ph: document.getElementById('phInput').value,
+              observer: document.getElementById('observerInput').value,
+              notes: document.getElementById('notesInput').value || 'None'
           };
 
-          let logs = JSON.parse(localStorage.getItem('afti_telemetry_logs')) || [];
-          logs.unshift(newLog);
-          localStorage.setItem('afti_telemetry_logs', JSON.stringify(logs));
-
-          document.getElementById('telemetryForm').reset();
-          document.getElementById('linkedInstructionsBox').style.display = 'none';
-          renderTable();
-          alert('✅ Telemetry successfully committed to the research ledger.');
+          telemetryLogs.unshift(newEntry);
+          localStorage.setItem('afti_telemetry_logs', JSON.stringify(telemetryLogs));
+          renderTelemetryTable();
+          event.target.reset();
+          document.getElementById('taskBridgeSelect').value = "";
+          loadTaskInstructions("");
+          alert('Telemetry and task log successfully recorded!');
       }
 
-      // Render Table from LocalStorage
-      function renderTable() {
+      function renderTelemetryTable() {
           const tbody = document.getElementById('telemetryTableBody');
-          const logs = JSON.parse(localStorage.getItem('afti_telemetry_logs')) || [];
-
-          if (logs.length === 0) {
-              tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: #64748b; padding: 20px;">No telemetry logs recorded yet. Submit a form entry above to begin tracking.</td></tr>`;
+          tbody.innerHTML = '';
+          if (telemetryLogs.length === 0) {
+              tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; color: #94a3b8;">No telemetry logs recorded yet.</td></tr>';
               return;
           }
-
-          tbody.innerHTML = '';
-          logs.forEach(log => {
-              let badgeClass = 'badge-apiary';
-              if (log.category === 'Fresh Greens') badgeClass = 'badge-greens';
-              else if (log.category === 'Cut Flowers') badgeClass = 'badge-flowers';
-              else if (log.category === 'Mushrooms') badgeClass = 'badge-mushrooms';
-              else if (log.category === 'Watershed / Erosion') badgeClass = 'badge-apiary';
-
-              const tr = document.createElement('tr');
-              tr.innerHTML = `
-                  <td style="color: #94a3b8; font-size: 0.85rem;">${log.timestamp}</td>
-                  <td><span class="badge ${badgeClass}">${log.category}</span></td>
+          telemetryLogs.forEach((log, index) => {
+              const row = document.createElement('tr');
+              row.innerHTML = `
+                  <td>${log.timestamp}</td>
+                  <td>${log.category}</td>
                   <td>${log.airTemp}°F</td>
                   <td>${log.soilTemp}°F</td>
                   <td>${log.humidity}%</td>
                   <td>${log.ph}</td>
-                  <td><strong>${log.observer}</strong></td>
-                  <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;" title="${log.notes}">${log.notes}</td>
-                  <td><button onclick="deleteLog(${log.id})" class="btn-danger" style="padding: 3px 8px; font-size: 0.75rem;">Delete</button></td>
+                  <td>${log.observer}</td>
+                  <td>${log.notes}</td>
+                  <td><button class="btn-danger" style="padding: 4px 8px; font-size: 0.75rem;" onclick="deleteLog(${index})">Delete</button></td>
               `;
-              tbody.appendChild(tr);
+              tbody.appendChild(row);
           });
       }
 
-      // Delete Individual Log
-      function deleteLog(id) {
-          let logs = JSON.parse(localStorage.getItem('afti_telemetry_logs')) || [];
-          logs = logs.filter(log => log.id !== id);
-          localStorage.setItem('afti_telemetry_logs', JSON.stringify(logs));
-          renderTable();
-      }
-
-      // Clear All Logs
-      function clearAllLogs() {
-          if (confirm('Are you sure you want to clear all cumulative telemetry logs? This action cannot be undone.')) {
-              localStorage.removeItem('afti_telemetry_logs');
-              renderTable();
+      function deleteLog(index) {
+          if (confirm('Delete this log entry?')) {
+              telemetryLogs.splice(index, 1);
+              localStorage.setItem('afti_telemetry_logs', JSON.stringify(telemetryLogs));
+              renderTelemetryTable();
           }
       }
 
-      // Export Logs as CSV
+      function clearAllLogs() {
+          if (confirm('Are you sure you want to clear all telemetry logs?')) {
+              telemetryLogs = [];
+              localStorage.removeItem('afti_telemetry_logs');
+              renderTelemetryTable();
+          }
+      }
+
       function exportDataCSV() {
-          const logs = JSON.parse(localStorage.getItem('afti_telemetry_logs')) || [];
-          if (logs.length === 0) {
-              alert('No data available to export.');
+          if (telemetryLogs.length === 0) {
+              alert('No data to export.');
               return;
           }
-
-          let csvContent = "data:text/csv;charset=utf-8,Timestamp,Category,AirTemp(F),SoilTemp(F),Humidity(%),pH,Observer,Notes\r\n";
-          logs.forEach(log => {
-              let row = [
-                  `"${log.timestamp}"`,
-                  `"${log.category}"`,
-                  log.airTemp,
-                  log.soilTemp,
-                  log.humidity,
-                  log.ph,
-                  `"${log.observer}"`,
-                  `"${log.notes.replace(/"/g, '""')}"`
-              ];
-              csvContent += row.join(",") + "\r\n";
+          let csv = 'Timestamp,Category,Air Temp,Soil Temp,Humidity,pH,Observer,Notes\n';
+          telemetryLogs.forEach(l => {
+              csv += `"${l.timestamp}","${l.category}",${l.airTemp},${l.soilTemp},${l.humidity},${l.ph},"${l.observer}","${l.notes}"\n`;
           });
-
-          const encodedUri = encodeURI(csvContent);
-          const link = document.createElement("a");
-          link.setAttribute("href", encodedUri);
-          link.setAttribute("download", `AFTI_Research_Telemetry_${new Date().toISOString().slice(0,10)}.csv`);
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+          const blob = new Blob([csv], { type: 'text/csv' });
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.setAttribute('href', url);
+          a.setAttribute('download', 'afti-telemetry-logs.csv');
+          a.click();
       }
 
-      // Switch Diagnostic Tabs
-      function switchCategory(catName, btnElement) {
-          document.querySelectorAll('.tab-buttons .tab-btn').forEach(btn => btn.classList.remove('active'));
-          if(btnElement) btnElement.classList.add('active');
-
-          document.querySelectorAll('.trouble-card').forEach(card => card.classList.remove('active-tab'));
-          const targetCard = document.getElementById('diag-' + catName.trim());
-          if (targetCard) targetCard.classList.add('active-tab');
-      }
+      window.onload = function() {
+          renderTelemetryTable();
+      };
   </script>
 </body>
 </html>
