@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watershed Field Checklists | Digital &amp; Printable</title>
+    <style>
+        :root {
+            --bg: #0f172a; --card: #1e293b; --txt: #f8fafc; --primary: #27ae60; --primary-dark: #1e8449;
+            --hud: #144d29; --accent: #38bdf8; --muted: #94a3b8; --border: rgba(255, 255, 255, 0.1);
+        }
+        body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 20px; line-height: 1.6; }
+        .container { max-width: 950px; margin: 20px auto; background: var(--card); border-radius: 14px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background: var(--hud); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        h1 { color: #4ade80; font-size: 1.8rem; margin-top: 0; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+        h2 { color: var(--accent); font-size: 1.2rem; margin-top: 25px; border-left: 4px solid var(--accent); padding-left: 10px; }
+        p, label { color: var(--muted); } strong { color: var(--txt); }
+        .panel { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px; padding: 25px; margin-top: 20px; }
+        .btn { background: var(--primary); color: #fff; padding: 10px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-block; font-size: 0.9rem; }
+        .btn:hover { background: var(--primary-dark); }
+        .btn-print { background: var(--accent); color: #0f172a; }
+        .btn-print:hover { background: #0ea5e9; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .tab-btn { background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); color: var(--txt); padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .tab-btn.active { background: var(--primary); border-color: var(--primary); }
+        .task-section { display: none; }
+        .task-section.active { display: block; }
+        .task-item { display: flex; align-items: flex-start; gap: 12px; background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); padding: 12px 15px; border-radius: 8px; margin-bottom: 10px; cursor: pointer; }
+        .task-item input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--primary); cursor: pointer; }
+        .task-item span { flex: 1; color: var(--txt); font-size: 0.95rem; }
+        .task-item.completed span { text-decoration: line-through; color: var(--muted); }
+        .header-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+
+        /* PRINT STYLING: Converts dark UI into a clean, printable white paper checklist */
+        @media print {
+            body { background: #fff !important; color: #000 !important; padding: 0; }
+            .container { background: #fff !important; border: none !important; box-shadow: none !important; max-width: 100% !important; padding: 0; }
+            .hud-bar, .tabs, .btn, .hud-bar *, nav, .btn-print, .header-actions h1 { display: none !important; }
+            .task-section { display: block !important; page-break-after: always; }
+            .panel { background: #fff !important; border: 1px solid #ccc !important; padding: 15px !important; margin-top: 10px !important; }
+            h1, h2 { color: #000 !important; border-color: #000 !important; }
+            p, label, span { color: #000 !important; }
+            .task-item { background: #f9f9f9 !important; border: 1px solid #ddd !important; }
+            .task-item input[type="checkbox"] { border: 1px solid #000 !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hud-bar">
+        <span>Watershed Operations: <span style="color:var(--accent);">Field Checklists &amp; Safety Logs</span></span>
+        <div>System Status: <strong style="color:#4ade80;">Active / Ready</strong></div>
+    </div>
+
+    <div class="header-actions">
+        <h1>Veteran Crew Task &amp; Remediation Checklists</h1>
+        <button class="btn btn-print" onclick="window.print()">🖨️ Print All Field Checklists</button>
+    </div>
+    <p>Check off safety musters, erosion control routines, and habitat targets digitally to log progress, or print physical sheets for field clipboards.</p>
+
+    <!-- TAB NAVIGATION -->
+    <div class="tabs">
+        <button id="btn-safety" class="tab-btn active" onclick="switchTab('safety')">1. Safety &amp; Muster</button>
+        <button id="btn-erosion" class="tab-btn" onclick="switchTab('erosion')">2. Burn &amp; Erosion Control</button>
+        <button id="btn-riparian" class="tab-btn" onclick="switchTab('riparian')">3. Riparian Restoration</button>
+        <button id="btn-telemetry" class="tab-btn" onclick="switchTab('telemetry')">4. Grant &amp; Data Logging</button>
+    </div>
+
+    <!-- 1. SAFETY & MUSTER -->
+    <div id="section-safety" class="task-section active panel">
+        <h2>Crew Safety &amp; Pre-Deployment Muster</h2>
+        <p><em>Focus: Personal protective equipment (PPE), hazard checks, communications, and daily briefings.</em></p>
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Daily Routines</h3>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Conduct 0800 crew roll call, fitness-for-duty check, and hydration status verification.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Inspect PPE (boots, hard hats, eye protection, high-vis gear, and chainsaw chaps).</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Test field radios, satellite communicators, and emergency GPS beacon check-ins.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Review daily weather forecast, wind speeds, and local fire/slope hazard alerts.</span></div>
+        
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Weekly Routines</h3>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Inspect first-aid trauma kits, eye-wash stations, and vehicle emergency response packs.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Perform vehicle and tool safety audits (chainsaws, hand tools, rigging straps, and fluids).</span></div>
+    </div>
+
+    <!-- 2. BURN & EROSION CONTROL -->
+    <div id="section-erosion" class="task-section panel">
+        <h2>Burn Scar &amp; Erosion Control Task List</h2>
+        <p><em>Focus: Hydrophobic soil mitigation, wattles, contour felling, and runoff barriers.</em></p>
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Daily Routines</h3>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Assess burn scar sections for active rockfall risks and unstable ash pits.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Install straw wattles and coir logs securely anchored along slope contour lines.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Construct hand-built check dams in minor gullies using downed woody debris.</span></div>
+        
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Weekly Routines</h3>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Inspect previously installed sediment barriers following weather events; repair breaches.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Apply certified weed-free mulch and native seed mixes to vulnerable high-slope scars.</span></div>
+    </div>
+
+    <!-- 3. RIPARIAN RESTORATION -->
+    <div id="section-riparian" class="task-section panel">
+        <h2>Riparian Buffer &amp; Habitat Restoration</h2>
+        <p><em>Focus: Stream bank stabilization, invasive weed removal, and native planting.</em></p>
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Daily Routines</h3>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Monitor stream crossing points for bank slumping or accelerated siltation.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Targeted removal of aggressive invasive weeds (blackberry, scotch broom, knotweed).</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Water and inspect newly established riparian saplings and live stakes.</span></div>
+        
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Weekly Routines</h3>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Install protective browse cages or trunk guards around vulnerable young hardwoods.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Clear debris jams threatening culverts while preserving beneficial instream large wood.</span></div>
+    </div>
+
+    <!-- 4. GRANT & DATA LOGGING -->
+    <div id="section-telemetry" class="task-section panel">
+        <h2>Grant Compliance &amp; Field Data Logging</h2>
+        <p><em>Focus: Labor hours tracking, in-kind match records, and GIS sample logging.</em></p>
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Daily Routines</h3>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Log crew man-hours, volunteer participation counts, and equipment usage times.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Record GPS coordinates and photo points for completed remediation sectors.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Compile daily field notes into the centralized digital ledger.</span></div>
+        
+        <h3 style="color:var(--accent); font-size:1rem; margin-top:20px;">Weekly Routines</h3>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Reconcile in-kind matching hour logs against grant milestone deliverables.</span></div>
+        <div class="task-item" onclick="toggleCheck(event, this)"><input type="checkbox"><span>Export weekly telemetry report for administrative review and partner reporting.</span></div>
+    </div>
+
+    <!-- NAVIGATION HUB BOTTOM BANNER -->
+    <div class="panel" style="border-top: 3px solid var(--primary); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+        <div>
+            <h4 style="margin: 0; color: white; font-size: 1.1rem;">Ready to record your field data and training hours?</h4>
+            <p style="margin: 5px 0 0 0; font-size: 0.85rem;">Submit your metrics directly to our integrated operational and training portal.</p>
+        </div>
+        <a href="https://outgrowing-ag.org/training-modules-and-mutual-growth.html" target="_blank" class="btn">Access Outgrowing-Ag Data Portal →</a>
+    </div>
+
+</div> <!-- Closes .container -->
+
+<script>
+    // TAB NAV SWITCHER
+    function switchTab(targetId) {
+        const sections = document.querySelectorAll('.task-section');
+        sections.forEach(sec => {
+            sec.classList.remove('active');
+            sec.style.display = 'none';
+        });
+        
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        const activeSection = document.getElementById('section-' + targetId);
+        const activeButton = document.getElementById('btn-' + targetId);
+        
+        if (activeSection && activeButton) {
+            activeSection.classList.add('active');
+            activeSection.style.display = 'block';
+            activeButton.classList.add('active');
+        }
+    }
+
+    // INTERACTIVE CHECKBOX STATE MANIPULATION
+    function toggleCheck(event, cardElement) {
+        const checkbox = cardElement.querySelector('input[type="checkbox"]');
+        
+        if (event.target !== checkbox) {
+            checkbox.checked = !checkbox.checked;
+        }
+        
+        if (checkbox.checked) {
+            cardElement.classList.add('completed');
+        } else {
+            cardElement.classList.remove('completed');
+        }
+    }
+</script>
+
+</body>
+</html>
