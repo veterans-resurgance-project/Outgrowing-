@@ -1,0 +1,17 @@
+<!-- Centered Tasks Hub Box with Full-Width Stacked Buttons -->
+<div style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 2rem 0; box-sizing: border-box;">
+    <div class="secondary-card" style="width: 100%; max-width: 750px; background: #1e293b; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.4); text-align: center;">
+        <div style="margin-bottom: 1.5rem;">
+            <h4 style="color: #4ade80; font-size: 1.4rem; margin-top: 0; margin-bottom: 0.75rem;">📋 Daily &amp; Weekly Tasks Hub</h4>
+            <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.6; margin: 0 auto; max-width: 600px;">Core operational routines, safety pairing requirements, and checklists structured across primary enterprise categories.</p>
+        </div>
+        
+        <!-- Full-width stacked button layout -->
+        <div style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
+            <a href="task-checklists.html?cat=mushrooms" style="display: block; width: 100%; background: #22c55e; color: #0f172a; padding: 14px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1rem; text-align: center; box-sizing: border-box; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">🍄 Mushrooms</a>
+            <a href="task-checklists.html?cat=apiary" style="display: block; width: 100%; background: #22c55e; color: #0f172a; padding: 14px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1rem; text-align: center; box-sizing: border-box; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">🐝 Apiary</a>
+            <a href="task-checklists.html?cat=greens" style="display: block; width: 100%; background: #22c55e; color: #0f172a; padding: 14px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1rem; text-align: center; box-sizing: border-box; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">🥗 Greens</a>
+            <a href="task-checklists.html?cat=flowers" style="display: block; width: 100%; background: #22c55e; color: #0f172a; padding: 14px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1rem; text-align: center; box-sizing: border-box; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">💐 Flowers</a>
+        </div>
+    </div>
+</div>
