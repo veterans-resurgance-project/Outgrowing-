@@ -445,3 +445,308 @@
               
               <div class="tab-buttons">
                   <button id="tab-mushrooms" class="tab-btn active" onclick="switchCategory('mushrooms', this)">Mushrooms</button>
+<button id="tab-apiary" class="tab-btn" onclick="switchCategory('apiary', this)">Apiary</button>
+                  <button id="tab-greens" class="tab-btn" onclick="switchCategory('greens', this)">Greens</button>
+                  <button id="tab-flowers" class="tab-btn" onclick="switchCategory('flowers', this)">Flowers</button>
+                  <button id="tab-watershed" class="tab-btn" onclick="switchCategory('watershed', this)">Watershed</button>
+              </div>
+
+              <!-- DIAGNOSTIC CARDS -->
+              <div id="diag-mushrooms" class="trouble-card active-tab" style="border-left-color: #78350f;">
+                  <h4>🍄 Trichoderma Mold ("Green Mold") &amp; CO2 Audit</h4>
+                  <p><strong>Indicator:</strong> Substrate pH &lt; 5.5 or &gt; 7.0, excess moisture, or CO2 &gt; 1,200 ppm causing stipe elongation.</p>
+                  <div class="steps-box">
+                      <strong>Action Steps:</strong> Isolate contaminated blocks immediately. Sanitize surfaces with 10% bleach, adjust FAE to 4-6 room exchanges/hour, and maintain room humidity at 85-90%.
+                  </div>
+              </div>
+
+              <div id="diag-apiary" class="trouble-card" style="border-left-color: #b45309;">
+                  <h4>🐝 Varroa Mite Surge &amp; Nosema Spore Risk</h4>
+                  <p><strong>Indicator:</strong> Hive humidity &gt; 70%, summer air temp &gt; 85°F, or mite count &gt; 3% per 100 bees.</p>
+                  <div class="steps-box">
+                      <strong>Action Steps:</strong> Perform alcohol wash sampling. Apply formic acid or thymol treatments per OSBA guidelines and ensure bottom screen ventilation is fully open.
+                  </div>
+              </div>
+
+              <div id="diag-greens" class="trouble-card" style="border-left-color: #065f46;">
+                  <h4>🥬 Pythium Root Rot &amp; Tipburn Mitigation</h4>
+                  <p><strong>Indicator:</strong> Soil pH &gt; 7.2, soil temp &gt; 75°F, or calcium translocation failure under high humidity.</p>
+                  <div class="steps-box">
+                      <strong>Action Steps:</strong> Back off irrigation frequency, apply bio-fungicide (<em>Trichoderma</em> inoculants), adjust water pH to 5.8–6.2, and run HAF fans for constant canopy airflow.
+                  </div>
+              </div>
+
+              <div id="diag-flowers" class="trouble-card" style="border-left-color: #831843;">
+                  <h4>💐 Powdery Mildew &amp; Fusarium Wilt Control</h4>
+                  <p><strong>Indicator:</strong> Night humidity spike (&gt; 85%), stagnant air, and day/night temp swings &gt; 25°F.</p>
+                  <div class="steps-box">
+                      <strong>Action Steps:</strong> Prune lower foliage for canopy penetration, apply preventative sulfur dust, and remove infected debris immediately to break disease cycles.
+                  </div>
+              </div>
+
+              <div id="diag-watershed" class="trouble-card" style="border-left-color: #3b82f6;">
+                  <h4>🌲 Burn Scar Erosion &amp; Bank Stabilization</h4>
+                  <p><strong>Indicator:</strong> Active rilling on slopes, hydrophobic ash layers, or culvert silt buildup.</p>
+                  <div class="steps-box">
+                      <strong>Action Steps:</strong> Trench contour lines 2–3 inches deep, lay coir logs or straw wattles secured with wooden stakes every 3–4 feet, and ensure weed-free mulch coverage reaches 75%+.
+                  </div>
+              </div>
+
+          </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- MASTER RESEARCH DATA LOG TABLE -->
+      <div class="panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+              <h3 class="text-xl font-bold m-0">📁 Cumulative Research Telemetry Ledger</h3>
+              <div style="display: flex; gap: 10px;">
+                  <button type="button" onclick="exportDataCSV()" class="tab-btn" style="background: #1e3a8a; color: white; border: none;">📥 Export CSV</button>
+                  <button type="button" onclick="clearAllLogs()" class="btn-danger">🗑️ Clear All Logs</button>
+              </div>
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">
+              Real-time persistent log of all submitted sensor values across Watershed, Apiary, Greens, Flowers, and Mushrooms tracks.
+          </p>
+          <div class="table-container">
+              <table>
+                  <thead>
+                      <tr>
+                          <th>Timestamp</th>
+                          <th>Category Track</th>
+                          <th>Air Temp (°F)</th>
+                          <th>Soil/Sub Temp (°F)</th>
+                          <th>Humidity (%)</th>
+                          <th>pH Level</th>
+                          <th>Observer</th>
+                          <th>Field Notes</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody id="telemetryTableBody">
+                      <!-- Populated via JS -->
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+      // Task Instruction Dictionary for the Bridge Selector
+      const taskInstructions = {
+          "muster-rollcall": {
+              title: "Pre-Deployment Muster Protocol",
+              text: "Verify all personnel are present, assess physical fitness-for-duty, confirm hydration reserves (minimum 2L per person), and issue satellite check-in protocols.",
+              category: "Watershed / Erosion"
+          },
+          "muster-ppe": {
+              title: "PPE Safety Audit",
+              text: "Inspect steel-toe boots, chainsaw chaps (UL certified), high-vis vests, eye protection, and hard hat suspension bands prior to entering forestry lanes.",
+              category: "Watershed / Erosion"
+          },
+          "muster-radio": {
+              title: "Communications Check",
+              text: "Perform VHF radio channel check with base camp, verify battery percentages, and test emergency GPS beacon ping functionality.",
+              category: "Watershed / Erosion"
+          },
+          "erosion-wattles": {
+              title: "Straw Wattle & Coir Log Installation",
+              text: "Trench contour lines 2-3 inches deep, lay coir logs or straw wattles firmly against soil, and drive wooden stakes every 3-4 feet at a slight inward angle.",
+              category: "Watershed / Erosion"
+          },
+          "erosion-checkdams": {
+              title: "Woody Debris Check Dam Construction",
+              text: "Select stable logs across minor rills/gullies, key-in lateral ends into side banks to prevent washout, and pack smaller brush upstream to filter sediment.",
+              category: "Watershed / Erosion"
+          },
+          "erosion-mulch": {
+              title: "Burn Scar Mulching",
+              text: "Apply certified weed-free mulch evenly across high-slope hydrophobic ash scars to a 70-80% ground cover density.",
+              category: "Watershed / Erosion"
+          },
+          "riparian-slump": {
+              title: "Stream Bank Monitoring",
+              text: "Inspect culverts and bank stabilization points for active slumping, undercut roots, or accelerated silt accumulation.",
+              category: "Watershed / Erosion"
+          },
+          "riparian-weeds": {
+              title: "Invasive Species Control",
+              text: "Target Himalayan blackberry root crowns and knotweed stems within 50 feet of riparian buffers following approved regional protocols.",
+              category: "Watershed / Erosion"
+          },
+          "ent-apiary": {
+              title: "Apiary Health Protocol",
+              text: "Conduct alcohol wash for Varroa mites, verify honey supers, and record internal hive humidity and temperature metrics.",
+              category: "Apiary"
+          },
+          "ent-greens": {
+              title: "Greenhouse Climate & Nutrient Audit",
+              text: "Check nutrient tank EC and pH levels (target 5.8-6.2), inspect HAF fans, and verify bed moisture saturation.",
+              category: "Fresh Greens"
+          },
+          "ent-mushrooms": {
+              title: "Fruiting Chamber Telemetry Check",
+              text: "Verify CO2 ppm levels are under 1,000, check room humidity gauges (85-90%), and inspect blocks for green mold spores.",
+              category: "Mushrooms"
+          }
+      };
+
+      // Load stored telemetry logs on page load
+      document.addEventListener('DOMContentLoaded', function() {
+          renderTable();
+          switchCategory('mushrooms', document.getElementById('tab-mushrooms'));
+      });
+
+      // Function to dynamically load instructions when a task is selected
+      function loadTaskInstructions(taskKey) {
+          const box = document.getElementById('linkedInstructionsBox');
+          const titleEl = document.getElementById('instructionTitle');
+          const textEl = document.getElementById('instructionText');
+          const categorySelect = document.getElementById('categorySelect');
+          const notesInput = document.getElementById('notesInput');
+
+          if (!taskKey || !taskInstructions[taskKey]) {
+              box.style.display = 'none';
+              return;
+          }
+
+          const data = taskInstructions[taskKey];
+          titleEl.textContent = "📋 " + data.title;
+          textEl.textContent = data.text;
+          box.style.display = 'block';
+
+          categorySelect.value = data.category;
+          notesInput.value = `Task Performed: ${data.title}. `;
+      }
+
+      // Handle Telemetry Form Submission
+      function handleFormSubmit(event) {
+          event.preventDefault();
+
+          const category = document.getElementById('categorySelect').value;
+          const airTemp = document.getElementById('airTempInput').value;
+          const soilTemp = document.getElementById('soilTempInput').value;
+          const humidity = document.getElementById('humidityInput').value;
+          const ph = document.getElementById('phInput').value;
+          const observer = document.getElementById('observerInput').value;
+          const notes = document.getElementById('notesInput').value || 'None';
+
+          const newLog = {
+              id: Date.now(),
+              timestamp: new Date().toLocaleString(),
+              category,
+              airTemp,
+              soilTemp,
+              humidity,
+              ph,
+              observer,
+              notes
+          };
+
+          let logs = JSON.parse(localStorage.getItem('afti_telemetry_logs')) || [];
+          logs.unshift(newLog);
+          localStorage.setItem('afti_telemetry_logs', JSON.stringify(logs));
+
+          document.getElementById('telemetryForm').reset();
+          document.getElementById('linkedInstructionsBox').style.display = 'none';
+          renderTable();
+          alert('✅ Telemetry successfully committed to the research ledger.');
+      }
+
+      // Render Table from LocalStorage
+      function renderTable() {
+          const tbody = document.getElementById('telemetryTableBody');
+          const logs = JSON.parse(localStorage.getItem('afti_telemetry_logs')) || [];
+
+          if (logs.length === 0) {
+              tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: #64748b; padding: 20px;">No telemetry logs recorded yet. Submit a form entry above to begin tracking.</td></tr>`;
+              return;
+          }
+
+          tbody.innerHTML = '';
+          logs.forEach(log => {
+              let badgeClass = 'badge-apiary';
+              if (log.category === 'Fresh Greens') badgeClass = 'badge-greens';
+              else if (log.category === 'Cut Flowers') badgeClass = 'badge-flowers';
+              else if (log.category === 'Mushrooms') badgeClass = 'badge-mushrooms';
+              else if (log.category === 'Watershed / Erosion') badgeClass = 'badge-apiary';
+
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                  <td style="color: #94a3b8; font-size: 0.85rem;">${log.timestamp}</td>
+                  <td><span class="badge ${badgeClass}">${log.category}</span></td>
+                  <td>${log.airTemp}°F</td>
+                  <td>${log.soilTemp}°F</td>
+                  <td>${log.humidity}%</td>
+                  <td>${log.ph}</td>
+                  <td><strong>${log.observer}</strong></td>
+                  <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;" title="${log.notes}">${log.notes}</td>
+                  <td><button onclick="deleteLog(${log.id})" class="btn-danger" style="padding: 3px 8px; font-size: 0.75rem;">Delete</button></td>
+              `;
+              tbody.appendChild(tr);
+          });
+      }
+
+      // Delete Individual Log
+      function deleteLog(id) {
+          let logs = JSON.parse(localStorage.getItem('afti_telemetry_logs')) || [];
+          logs = logs.filter(log => log.id !== id);
+          localStorage.setItem('afti_telemetry_logs', JSON.stringify(logs));
+          renderTable();
+      }
+
+      // Clear All Logs
+      function clearAllLogs() {
+          if (confirm('Are you sure you want to clear all cumulative telemetry logs? This action cannot be undone.')) {
+              localStorage.removeItem('afti_telemetry_logs');
+              renderTable();
+          }
+      }
+
+      // Export Logs as CSV
+      function exportDataCSV() {
+          const logs = JSON.parse(localStorage.getItem('afti_telemetry_logs')) || [];
+          if (logs.length === 0) {
+              alert('No data available to export.');
+              return;
+          }
+
+          let csvContent = "data:text/csv;charset=utf-8,Timestamp,Category,AirTemp(F),SoilTemp(F),Humidity(%),pH,Observer,Notes\r\n";
+          logs.forEach(log => {
+              let row = [
+                  `"${log.timestamp}"`,
+                  `"${log.category}"`,
+                  log.airTemp,
+                  log.soilTemp,
+                  log.humidity,
+                  log.ph,
+                  `"${log.observer}"`,
+                  `"${log.notes.replace(/"/g, '""')}"`
+              ];
+              csvContent += row.join(",") + "\r\n";
+          });
+
+          const encodedUri = encodeURI(csvContent);
+          const link = document.createElement("a");
+          link.setAttribute("href", encodedUri);
+          link.setAttribute("download", `AFTI_Research_Telemetry_${new Date().toISOString().slice(0,10)}.csv`);
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+      }
+
+      // Switch Diagnostic Tabs
+      function switchCategory(catName, btnElement) {
+          document.querySelectorAll('.tab-buttons .tab-btn').forEach(btn => btn.classList.remove('active'));
+          if(btnElement) btnElement.classList.add('active');
+
+          document.querySelectorAll('.trouble-card').forEach(card => card.classList.remove('active-tab'));
+          const targetCard = document.getElementById('diag-' + catName.trim());
+          if (targetCard) targetCard.classList.add('active-tab');
+      }
+  </script>
+</body>
+</html>
