@@ -349,46 +349,6 @@
   </div>
 
   <script>
-      function validateTelemetry(e) {
-          e.preventDefault();
-          
-          const category = document.getElementById('val-category').value;
-          const operators = document.getElementById('val-operators').value.trim();
-          const metric = document.getElementById('val-metric').value.trim();
-          
-          const resultsDiv = document.getElementById('validator-results');
-          const badge = document.getElementById('compliance-status-badge');
-          const outputText = document.getElementById('compliance-output-text');
-          
-          resultsDiv.style.display = 'block';
-
-          // Validation Checks
-          const hasTwoOperators = operators.includes('&') || operators.toLowerCase().includes(' and ') || operators.split(',').length >= 2;
-          const hasNumericData = /\d/.test(metric);
-
-          if (hasTwoOperators && hasNumericData) {
-              badge.className = 'status-badge status-pass';
-              badge.innerText = 'PASSED: Academic Extension Grade A';
-              
-              outputText.innerHTML = `[VERIFICATION REPORT - OSU EXTENSION COMPLIANT]
---------------------------------------------------
-Timestamp: ${new Date().toISOString()}
-Sector ID: ${category.toUpperCase()}
-Chain-of-Custody: Verified (${operators} - Dual Sign-off OK)
-Metrology Audit: Quantitative data point detected ("${metric}")
-Readiness: Eligible for quarterly research aggregation & county extension bulletin inclusion.
-Hash Signature: 0x7F9B-LinnCounty-AgResearch-2026`;
-          } else {
-              badge.className = 'status-badge status-fail';
-              badge.innerText = 'REJECTED: Fails Institutional Rigor Standards';
-              
-              outputText.innerHTML = `[VERIFICATION FAILURE NOTICE]
---------------------------------------------------
-Reasons for Rejection:
-${!hasTwoOperators ? '• Violation of Chain-of-Custody: Working pair signature missing or incomplete (Requires minimum 2 operators separated by "&" or "and").\n' : ''}${!hasNumericData ? '• Violation of Metrology Standards: Metric entry contains qualitative description without quantitative units or numbers.\n' : ''}
-Action Required: Revise entry in the Data Hub to meet peer-review telemetry standards.`;
-          }
-      }
-  </script>
+  
 </body>
 </html>
