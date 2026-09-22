@@ -415,89 +415,85 @@
                   </div>
 
                   <div class="grid-2" style="grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 0;">
-                      <div class="form-group">
-                          <label for="humidityInput">Humidity (%)</label>
-                          <input type="number" step="0.1" id="humidityInput" placeholder="85.0" required>
-                      </div>
+              <div class="form-group">
+                      <label for="humidityInput">Humidity (%)</label>
+                      <input type="number" step="0.1" id="humidityInput" placeholder="85.0" required>
                   </div>
-                  
-                      <div class="form-group">
-                          <label for="phInput">pH Level / Scale</label>
-                          <input type="number" step="0.01" id="phInput" placeholder="6.5" required>
-                      </div>
-                  </div>
-
                   <div class="form-group">
-                      <label for="observerInput">Lead Crew Member / Observer Initials</label>
-                      <input type="text" id="observerInput" placeholder="e.g., D.T. / Crew Alpha" required>
-                  </div>
-
-                  <div class="form-group">
-                      <label for="notesInput">Field Task Notes &amp; Observations</label>
-                      <textarea id="notesInput" rows="2" placeholder="Record materials used, meter readings, or site adjustments..."></textarea>
-                  </div>
-
-                  <button type="submit" class="btn-primary">Commit Task &amp; Telemetry Ledger Entry</button>
-              </form>
-          </div>  
-
-          <!-- RIGHT PANEL: DYNAMIC INTERACTIVE DIAGNOSTICS CARD -->
-          <div class="panel">
-              <h3 class="text-xl font-bold mb-3">🛠️ Mitigation Playbook Diagnostic Lookups</h3>
-              
-              <div class="tab-buttons">
-                  <button id="tab-mushrooms" class="tab-btn active" onclick="switchCategory('mushrooms', this)">Mushrooms</button>
-<button id="tab-apiary" class="tab-btn" onclick="switchCategory('apiary', this)">Apiary</button>
-                  <button id="tab-greens" class="tab-btn" onclick="switchCategory('greens', this)">Greens</button>
-                  <button id="tab-flowers" class="tab-btn" onclick="switchCategory('flowers', this)">Flowers</button>
-                  <button id="tab-watershed" class="tab-btn" onclick="switchCategory('watershed', this)">Watershed</button>
-              </div>
-
-              <!-- DIAGNOSTIC CARDS -->
-              <div id="diag-mushrooms" class="trouble-card active-tab" style="border-left-color: #78350f;">
-                  <h4>🍄 Trichoderma Mold ("Green Mold") &amp; CO2 Audit</h4>
-                  <p><strong>Indicator:</strong> Substrate pH &lt; 5.5 or &gt; 7.0, excess moisture, or CO2 &gt; 1,200 ppm causing stipe elongation.</p>
-                  <div class="steps-box">
-                      <strong>Action Steps:</strong> Isolate contaminated blocks immediately. Sanitize surfaces with 10% bleach, adjust FAE to 4-6 room exchanges/hour, and maintain room humidity at 85-90%.
+                      <label for="phInput">pH Level / Scale</label>
+                      <input type="number" step="0.01" id="phInput" placeholder="6.5" required>
                   </div>
               </div>
 
-              <div id="diag-apiary" class="trouble-card" style="border-left-color: #b45309;">
-                  <h4>🐝 Varroa Mite Surge &amp; Nosema Spore Risk</h4>
-                  <p><strong>Indicator:</strong> Hive humidity &gt; 70%, summer air temp &gt; 85°F, or mite count &gt; 3% per 100 bees.</p>
-                  <div class="steps-box">
-                      <strong>Action Steps:</strong> Perform alcohol wash sampling. Apply formic acid or thymol treatments per OSBA guidelines and ensure bottom screen ventilation is fully open.
-                  </div>
+              <div class="form-group">
+                  <label for="observerInput">Lead Crew Member / Observer Initials</label>
+                  <input type="text" id="observerInput" placeholder="e.g., D.T. / Crew Alpha" required>
               </div>
 
-              <div id="diag-greens" class="trouble-card" style="border-left-color: #065f46;">
-                  <h4>🥬 Pythium Root Rot &amp; Tipburn Mitigation</h4>
-                  <p><strong>Indicator:</strong> Soil pH &gt; 7.2, soil temp &gt; 75°F, or calcium translocation failure under high humidity.</p>
-                  <div class="steps-box">
-                      <strong>Action Steps:</strong> Back off irrigation frequency, apply bio-fungicide (<em>Trichoderma</em> inoculants), adjust water pH to 5.8–6.2, and run HAF fans for constant canopy airflow.
-                  </div>
+              <div class="form-group">
+                  <label for="notesInput">Field Task Notes &amp; Observations</label>
+                  <textarea id="notesInput" rows="2" placeholder="Record materials used, meter readings, or site adjustments..."></textarea>
               </div>
 
-              <div id="diag-flowers" class="trouble-card" style="border-left-color: #831843;">
-                  <h4>💐 Powdery Mildew &amp; Fusarium Wilt Control</h4>
-                  <p><strong>Indicator:</strong> Night humidity spike (&gt; 85%), stagnant air, and day/night temp swings &gt; 25°F.</p>
-                  <div class="steps-box">
-                      <strong>Action Steps:</strong> Prune lower foliage for canopy penetration, apply preventative sulfur dust, and remove infected debris immediately to break disease cycles.
-                  </div>
-              </div>
+              <button type="submit" class="btn-primary">Commit Task &amp; Telemetry Ledger Entry</button>
+          </form>
+      </div>  
 
-              <div id="diag-watershed" class="trouble-card" style="border-left-color: #3b82f6;">
-                  <h4>🌲 Burn Scar Erosion &amp; Bank Stabilization</h4>
-                  <p><strong>Indicator:</strong> Active rilling on slopes, hydrophobic ash layers, or culvert silt buildup.</p>
-                  <div class="steps-box">
-                      <strong>Action Steps:</strong> Trench contour lines 2–3 inches deep, lay coir logs or straw wattles secured with wooden stakes every 3–4 feet, and ensure weed-free mulch coverage reaches 75%+.
-                  </div>
-              </div>
-
+      <!-- RIGHT PANEL: DYNAMIC INTERACTIVE DIAGNOSTICS CARD -->
+      <div class="panel">
+          <h3 class="text-xl font-bold mb-3">🛠️ Mitigation Playbook Diagnostic Lookups</h3>
+          
+          <div class="tab-buttons">
+              <button id="tab-mushrooms" class="tab-btn active" onclick="switchCategory('mushrooms', this)">Mushrooms</button>
+              <button id="tab-apiary" class="tab-btn" onclick="switchCategory('apiary', this)">Apiary</button>
+              <button id="tab-greens" class="tab-btn" onclick="switchCategory('greens', this)">Greens</button>
+              <button id="tab-flowers" class="tab-btn" onclick="switchCategory('flowers', this)">Flowers</button>
+              <button id="tab-watershed" class="tab-btn" onclick="switchCategory('watershed', this)">Watershed</button>
           </div>
-      </div>
 
-      <hr class="section-divider">
+          <!-- DIAGNOSTIC CARDS -->
+          <div id="diag-mushrooms" class="trouble-card active-tab" style="border-left-color: #78350f;">
+              <h4>🍄 Trichoderma Mold ("Green Mold") &amp; CO2 Audit</h4>
+              <p><strong>Indicator:</strong> Substrate pH &lt; 5.5 or &gt; 7.0, excess moisture, or CO2 &gt; 1,200 ppm causing stipe elongation.</p>
+              <div class="steps-box">
+                  <strong>Action Steps:</strong> Isolate contaminated blocks immediately. Sanitize surfaces with 10% bleach, adjust FAE to 4-6 room exchanges/hour, and maintain room humidity at 85-90%.
+              </div>
+          </div>
+
+          <div id="diag-apiary" class="trouble-card" style="border-left-color: #b45309;">
+              <h4>🐝 Varroa Mite Surge &amp; Nosema Spore Risk</h4>
+              <p><strong>Indicator:</strong> Hive humidity &gt; 70%, summer air temp &gt; 85°F, or mite count &gt; 3% per 100 bees.</p>
+              <div class="steps-box">
+                  <strong>Action Steps:</strong> Perform alcohol wash sampling. Apply formic acid or thymol treatments per OSBA guidelines and ensure bottom screen ventilation is fully open.
+              </div>
+          </div>
+
+          <div id="diag-greens" class="trouble-card" style="border-left-color: #065f46;">
+              <h4>🥬 Pythium Root Rot &amp; Tipburn Mitigation</h4>
+              <p><strong>Indicator:</strong> Soil pH &gt; 7.2, soil temp &gt; 75°F, or calcium translocation failure under high humidity.</p>
+              <div class="steps-box">
+                  <strong>Action Steps:</strong> Back off irrigation frequency, apply bio-fungicide (<em>Trichoderma</em> inoculants), adjust water pH to 5.8–6.2, and run HAF fans for constant canopy airflow.
+              </div>
+          </div>
+
+          <div id="diag-flowers" class="trouble-card" style="border-left-color: #831843;">
+              <h4>💐 Powdery Mildew &amp; Fusarium Wilt Control</h4>
+              <p><strong>Indicator:</strong> Night humidity spike (&gt; 85%), stagnant air, and day/night temp swings &gt; 25°F.</p>
+              <div class="steps-box">
+                  <strong>Action Steps:</strong> Prune lower foliage for canopy penetration, apply preventative sulfur dust, and remove infected debris immediately to break disease cycles.
+              </div>
+          </div>
+
+          <div id="diag-watershed" class="trouble-card" style="border-left-color: #3b82f6;">
+              <h4>🌲 Burn Scar Erosion &amp; Bank Stabilization</h4>
+              <p><strong>Indicator:</strong> Active rilling on slopes, hydrophobic ash layers, or culvert silt buildup.</p>
+              <div class="steps-box">
+                  <strong>Action Steps:</strong> Trench contour lines 2–3 inches deep, lay coir logs or straw wattles secured with wooden stakes every 3–4 feet, and ensure weed-free mulch coverage reaches 75%+.
+              </div>
+          </div>
+
+      </div> <!-- Closes RIGHT PANEL -->
+  </div> <!-- Closes grid-2 container -->        
 
       <!-- MASTER RESEARCH DATA LOG TABLE -->
       <div class="panel">
