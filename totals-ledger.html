@@ -4,7 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AFTI - Data Reports & Action Hub</title>
-    <script src="https://tailwindcss.com"></script>
+    <script src="https://tailwindcss.com">
+        // Task Instruction Dictionary for the Bridge Selector
+      const taskInstructions = {
+          "muster-rollcall": {
+              title: "Pre-Deployment Muster Protocol",
+              text: "Verify all personnel are present, assess physical fitness-for-duty, confirm hydration reserves (minimum 2L per person), and issue satellite check-in protocols.",
+              category: "Watershed / Erosion"
+          },
+          "muster-ppe": {
+              title: "PPE Safety Audit",
+              text: "Inspect steel-toe boots, chainsaw chaps (UL certified), high-vis vests, eye protection, and hard hat suspension bands prior to entering forestry lanes.",
+              category: "Watershed / Erosion"
+          },
+          "muster-radio": {
+              title: "Communications Check",
+              text: "Perform VHF radio channel check with base camp, verify battery percentages, and test emergency GPS beacon ping functionality.",
+              category: "Watershed / Erosion"
+          },
+          "erosion-wattles": {
+              title: "Straw Wattle & Coir Log Installation",
+              text: "Trench contour lines 2-3 inches deep, lay coir logs or straw wattles firmly against soil, and drive wooden stakes every 3-4 feet at a slight inward angle.",
+              category: "Watershed / Erosion"
+          },
+          "erosion-checkdams": {
+              title: "Woody Debris Check Dam Construction",
+              text: "Select stable logs across minor rills/gullies, key-in lateral ends into side banks to prevent washout, and pack smaller brush upstream to filter sediment.",
+              category: "Watershed / Erosion"
+          },
+          "erosion-mulch": {
+              title: "Burn Scar Mulching",
+              text: "Apply certified weed-free mulch evenly across high-slope hydrophobic ash scars to a 70-80% ground cover density.",
+              category: "Watershed / Erosion"
+          },
+          "riparian-slump": {
+              title: "Stream Bank Monitoring",
+              text: "Inspect culverts and bank stabilization points for active slumping, undercut roots, or accelerated silt accumulation.",
+              category: "Watershed / Erosion"
+          },
+          "riparian-weeds": {
+              title: "Invasive Species Control",
+              text: "Target Himalayan blackberry root crowns and knotweed stems within 50 feet of riparian buffers following approved regional protocols.",
+              category: "Watershed / Erosion"
+          },
+          "ent-apiary": {
+              title: "Apiary Health Protocol",
+              text: "Conduct alcohol wash for Varroa mites, verify honey supers, and record internal hive humidity and temperature metrics.",
+              category: "Apiary"
+          },
+          "ent-greens": {
+              title: "Greenhouse Climate & Nutrient Audit",
+              text: "Check nutrient tank EC and pH levels (target 5.8-6.2), inspect HAF fans, and verify bed moisture saturation.",
+              category: "Fresh Greens"
+          },
+          "ent-mushrooms": {
+              title: "Fruiting Chamber Telemetry Check",
+              text: "Verify CO2 ppm levels are under 1,000, check room humidity gauges (85-90%), and inspect blocks for green mold spores.",
+              category: "Mushrooms"
+          }
+      };
+
+      // Function to dynamically load instructions when a task is selected
+      function loadTaskInstructions(taskKey) {
+          const box = document.getElementById('linkedInstructionsBox');
+          const titleEl = document.getElementById('instructionTitle');
+          const textEl = document.getElementById('instructionText');
+          const categorySelect = document.getElementById('categorySelect');
+          const notesInput = document.getElementById('notesInput');
+
+          if (!taskKey || !taskInstructions[taskKey]) {
+              box.style.display = 'none';
+              return;
+          }
+
+          const data = taskInstructions[taskKey];
+          titleEl.textContent = "📋 " + data.title;
+          textEl.textContent = data.text;
+          box.style.display = 'block';
+
+          // Automatically set matching category track and pre-fill notes
+          categorySelect.value = data.category;
+          notesInput.value = `Task Performed: ${data.title}. `;
+      }
+    </script>
     <style>
         :root {
             --bg-color: #0f172a;
