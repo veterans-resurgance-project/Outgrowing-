@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI Mechanical Track &amp; Equipment Restoration Log</title>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --grey:#334155; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:flex-start; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:900px; background:var(--card); border-radius:14px; padding:35px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); margin-top:20px; margin-bottom:40px; }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
+        
+        .section-box { background: #0f172a; border: 1px solid #334155; padding: 25px; border-radius: 10px; margin-bottom: 25px; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 6px; font-weight: 600; text-transform: uppercase; }
+        .form-control { width: 100%; background: #141c2b; border: 1px solid #334155; color: #fff; padding: 12px; border-radius: 8px; box-sizing: border-box; font-family: inherit; font-size: 0.95rem; }
+        .form-control:focus { outline: none; border-color: var(--accent); }
+
+        .btn-action { background: var(--primary); color: #fff; border: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; font-size: 0.95rem; cursor: pointer; transition: background 0.2s; width: 100%; }
+        .btn-action:hover { background: #219653; }
+
+        .log-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.85rem; }
+        .log-table th, .log-table td { border: 1px solid #334155; padding: 10px; text-align: left; }
+        .log-table th { background: #141c2b; color: var(--accent); }
+        .log-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+        .success-banner { background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.4); padding: 15px; border-radius: 8px; text-align: center; display: none; margin-top: 15px; font-size: 0.9rem; color: #4ade80; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hud-bar">
+        <span>AFTI Mechanical &amp; Small Engine Workshop</span>
+        <div style="display:flex; gap:10px; align-items:center;">
+            <span>Shop Status: <span style="color:#4ade80;">Active</span></span>
+            <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Portal Gateway</button>
+        </div>
+    </div>
+    
+    <div>
+        <span style="background:rgba(56,189,248,0.15); color:var(--accent); font-size:0.75rem; font-weight:700; text-transform:uppercase; padding:4px 8px; border-radius:4px; display:inline-block; margin-bottom:10px;">Vocational Equipment Track</span>
+        <h2 style="margin:0 0 0.5rem 0; font-size:1.6rem;">⚙️ Restoration Shop &amp; Earn-to-Own Tracker</h2>
+        <p style="line-height:1.6; color:#cbd5e1; margin-bottom:25px;">Track incoming donated or salvaged equipment (chainsaws, rototillers, utility units) through diagnostic stages, repairs, and final graduation assignment.</p>
+        
+        <!-- INTAKE & PROGRESS FORM -->
+        <div class="section-box">
+            <h3 style="color:var(--accent); margin-top:0; font-size:1.1rem;">📥 Log New Equipment Intake</h3>
+            
+            <form id="restoration-form" onsubmit="handleRestorationSubmit(event)">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>Equipment Make &amp; Model</label>
+                        <input type="text" id="eq-model" class="form-control" placeholder="e.g. Stihl MS250 Chainsaw / Troy-Bilt Tiller" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Source / Donor</label>
+                        <input type="text" id="eq-source" class="form-control" placeholder="e.g. Donated by local farm / Barn find" required>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>Assigned Trainee / Mechanic</label>
+                        <input type="text" id="eq-trainee" class="form-control" placeholder="e.g. Lead Mechanic / Trainee Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Current Status</label>
+                        <select id="eq-status" class="form-control">
+                            <option value="1. Intake &amp; Wash">1. Intake &amp; Wash</option>
+                            <option value="2. Diagnostic &amp; Tear-Down">2. Diagnostic &amp; Tear-Down</option>
+                            <option value="3. Parts Sourcing &amp; Rebuild">3. Parts Sourcing &amp; Rebuild</option>
+                            <option value="4. Test Run &amp; Tuning">4. Test Run &amp; Tuning</option>
+                            <option value="5. Ready for Graduation Reward">5. Ready for Graduation Reward</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Target Disposition</label>
+                        <select id="eq-target" class="form-control">
+                            <option value="Earn-to-Own Graduation Award">🏆 Earn-to-Own Graduation Award</option>
+                            <option value="Program Fleet Tool">🚜 Retained for Program Fleet</option>
+                            <option value="Return to Owner (Neighbor/Widow)">❤️ Return to Neighbor in Need</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Repair Notes &amp; Required Parts</label>
+                    <textarea id="eq-notes" class="form-control" rows="2" placeholder="e.g. Needs carburetor kit, new fuel lines, and pull cord. Spark and compression are good."></textarea>
+                </div>
+
+                <button type="submit" class="btn-action">💾 Log Equipment to Shop Ledger</button>
+            </form>
+
+            <div id="restoration-success" class="success-banner">Equipment successfully logged into workshop queue!</div>
+
+            <!-- LEDGER TABLE -->
+            <div style="margin-top: 25px;">
+                <h4 style="color: var(--txt); font-size: 0.95rem; margin-bottom: 10px;">📋 Active Shop Ledger</h4>
+                <div style="overflow-x: auto;">
+                    <table class="log-table">
+                        <thead>
+                            <tr>
+                                <th>Date In</th>
+                                <th>Equipment</th>
+                                <th>Source</th>
+                                <th>Trainee</th>
+                                <th>Status</th>
+                                <th>Disposition</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="restoration-table-body">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        loadRestorationLogs();
+    });
+
+    function handleRestorationSubmit(event) {
+        event.preventDefault();
+        
+        const entry = {
+            date: new Date().toLocaleDateString(),
+            model: document.getElementById('eq-model').value,
+            source: document.getElementById('eq-source').value,
+            trainee: document.getElementById('eq-trainee').value,
+            status: document.getElementById('eq-status').value,
+            target: document.getElementById('eq-target').value,
+            notes: document.getElementById('eq-notes').value || 'None'
+        };
+
+        let logs = JSON.parse(localStorage.getItem('afti_restoration_logs') || '[]');
+        logs.unshift(entry);
+        localStorage.setItem('afti_restoration_logs', JSON.stringify(logs));
+
+        document.getElementById('restoration-form').reset();
+        const banner = document.getElementById('restoration-success');
+        banner.style.display = 'block';
+        setTimeout(() => { banner.style.display = 'none'; }, 4000);
+
+        loadRestorationLogs();
+    }
+
+    function loadRestorationLogs() {
+        const tbody = document.getElementById('restoration-table-body');
+        const logs = JSON.parse(localStorage.getItem('afti_restoration_logs') || '[]');
+        
+        if(logs.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #64748b;">No equipment logged in the restoration shop yet. Use the form above to add your first machine!</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = '';
+        logs.forEach(log => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${log.date}</td>
+                <td><strong>${log.model}</strong></td>
+                <td>${log.source}</td>
+                <td>${log.trainee}</td>
+                <td><span style="color:var(--accent);">${log.status}</span></td>
+                <td>${log.target}</td>
+                <td>${log.notes}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+</script>
+</body>
+</html>
