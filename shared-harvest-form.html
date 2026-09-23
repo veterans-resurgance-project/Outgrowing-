@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI Shared Harvest &amp; Partner Agreement Portal</title>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --grey:#334155; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:flex-start; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:850px; background:var(--card); border-radius:14px; padding:35px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); margin-top:20px; margin-bottom:40px; }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 8px; font-weight: 600; text-transform: uppercase; }
+        .form-control { width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 12px; border-radius: 8px; box-sizing: border-box; font-family: inherit; font-size: 0.95rem; }
+        .form-control:focus { outline: none; border-color: var(--accent); }
+        
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 10px; }
+        .checkbox-label { background: #0f172a; padding: 14px; border-radius: 8px; border: 1px solid #334155; display: flex; align-items: flex-start; gap: 12px; cursor: pointer; transition: border-color 0.2s; font-size: 0.9rem; }
+        .checkbox-label:hover { border-color: var(--accent); }
+        .checkbox-input { margin-top: 3px; transform: scale(1.2); accent-color: var(--primary); cursor: pointer; }
+
+        .btn-submit { background: var(--primary); color: #fff; border: none; padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; width: 100%; transition: background 0.2s; margin-top: 10px; }
+        .btn-submit:hover { background: #219653; }
+
+        .success-banner { background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.4); padding: 20px; border-radius: 10px; text-align: center; display: none; margin-top: 20px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hud-bar">
+        <span>AFTI Shared Harvest &amp; Partnership Portal</span>
+        <div style="display:flex; gap:10px; align-items:center;">
+            <span>Portal Status: <span style="color:#4ade80;">Active</span></span>
+            <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Portal Gateway</button>
+        </div>
+    </div>
+    
+    <div>
+        <span style="background:rgba(56,189,248,0.15); color:var(--accent); font-size:0.75rem; font-weight:700; text-transform:uppercase; padding:4px 8px; border-radius:4px; display:inline-block; margin-bottom:10px;">Collaborative Agriculture</span>
+        <h2 style="margin:0 0 0.5rem 0; font-size:1.6rem;">🚜 Shared Harvest &amp; Equipment Barter Agreement Form</h2>
+        <p style="line-height:1.6; color:#cbd5e1; margin-bottom:25px;">Use this online form to propose or formalize a partnership agreement with AFTI. Whether you are offering an equipment exchange (such as tractor use for crop-share) or participating in our shared harvest distribution, submit your details below.</p>
+        
+        <form id="harvest-form" onsubmit="handleHarvestSubmit(event)">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group">
+                    <label>Partner / Owner Name</label>
+                    <input type="text" id="partner-name" class="form-control" placeholder="e.g. John Smith or Green Valley Farm" required>
+                </div>
+                <div class="form-group">
+                    <label>Contact Phone / Email</label>
+                    <input type="text" id="partner-contact" class="form-control" placeholder="e.g. farmer@email.com or 541-555-0199" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Partnership / Proposal Category</label>
+                <select id="partner-category" class="form-control">
+                    <option value="Equipment Barter & Crop-Share">🚜 Equipment Barter &amp; Crop-Share (e.g. Tractor use in exchange for produce)</option>
+                    <option value="Shared Harvest Distribution">🥗 Shared Harvest Produce Recipient / Partner</option>
+                    <option value="Land & Site Collaboration">🌱 Land / Growing Site Collaboration</option>
+                    <option value="General Agricultural Partner">🤝 General Agricultural Supporter</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Select Agreement Elements Included</label>
+                <div class="checkbox-grid">
+                    <label class="checkbox-label"><input type="checkbox" class="checkbox-input" name="agreement_term" value="Equipment Use (Tractor / Implements)"><div><strong>Equipment Use</strong><div style="color:#94a3b8; font-size:0.8rem;">Tractor, tiller, box blade, or loader exchange.</div></div></label>
+                    <label class="checkbox-label"><input type="checkbox" class="checkbox-input" name="agreement_term" value="Agreed Crop-Share Percentage"><div><strong>Crop-Share Percentage</strong><div style="color:#94a3b8; font-size:0.8rem;">Agreed percentage of harvest returned to owner.</div></div></label>
+                    <label class="checkbox-label"><input type="checkbox" class="checkbox-input" name="agreement_term" value="Routine Maintenance & Safety"><div><strong>Maintenance &amp; Safety</strong><div style="color:#94a3b8; font-size:0.8rem;">Commitment to safe operation and upkeep.</div></div></label>
+                    <label class="checkbox-label"><input type="checkbox" class="checkbox-input" name="agreement_term" value="Lease-to-Own Option"><div><strong>Lease-to-Own Option</strong><div style="color:#94a3b8; font-size:0.8rem;">Crop value applied toward permanent ownership.</div></div></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Agreement Details, Equipment Specs, or Crop-Share Terms</label>
+                <textarea id="partner-details" class="form-control" rows="4" placeholder="Describe the equipment model, crop-share percentage (e.g., 20%), delivery schedule, or specific partnership terms..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Submit Partnership &amp; Harvest Pledge &rarr;</button>
+        </form>
+
+        <div id="success-banner" class="success-banner">
+            <h3 style="color:#4ade80; margin-top:0;">✨ Partnership Pledge Recorded Successfully!</h3>
+            <p id="success-msg" style="color:#cbd5e1; font-size:0.95rem; margin:0 0 15px 0;"></p>
+            <button onclick="window.print()" style="background:#334155; color:#fff; font-weight:bold; padding:8px 16px; border:1px solid rgba(255,255,255,0.2); border-radius:6px; cursor:pointer; margin-right:10px;">🖨️ Print Agreement Receipt</button>
+            <button onclick="window.location.reload()" style="background:#334155; color:#fff; font-weight:bold; padding:8px 16px; border:1px solid rgba(255,255,255,0.2); border-radius:6px; cursor:pointer;">Submit Another Proposal</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function handleHarvestSubmit(event) {
+        event.preventDefault();
+        
+        const name = document.getElementById('partner-name').value;
+        const contact = document.getElementById('partner-contact').value;
+        const category = document.getElementById('partner-category').value;
+        const details = document.getElementById('partner-details').value;
+        
+        const checkboxes = document.querySelectorAll('input[name="agreement_term"]:checked');
+        const selectedTerms = Array.from(checkboxes).map(cb => cb.value);
+
+        // Save to LocalStorage to persist across portal sessions
+        const pledgeData = { name, contact, category, selectedTerms, details, date: new Date().toLocaleDateString() };
+        let existingPledges = JSON.parse(localStorage.getItem('afti_shared_harvest_pledges') || '[]');
+        existingPledges.push(pledgeData);
+        localStorage.setItem('afti_shared_harvest_pledges', JSON.stringify(existingPledges));
+
+        // Display Success Confirmation
+        document.getElementById('harvest-form').style.display = 'none';
+        const successBanner = document.getElementById('success-banner');
+        successBanner.style.display = 'block';
+
+        document.getElementById('success-msg').innerHTML = `
+            <strong>Proposal Submitted for Review!</strong><br>
+            Thank you, <em>${name}</em>. Your submission regarding <strong>${category}</strong> has been logged into the AFTI partnership system. Our project lead will reach out to finalize the agreement details.
+        `;
+    }
+</script>
+</body>
+</html>
