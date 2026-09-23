@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Certifications Hub - AFTI Training</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --primary: #27ae60;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --blue-accent: #38bdf8;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        nav {
+            background: #144d29;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        nav a.active { color: #fff; font-weight: 700; border-bottom: 2px solid var(--primary); padding-bottom: 2px; }
+
+        .page-wrapper {
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            padding: 30px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        h1 {
+            color: var(--blue-accent);
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+        p, li {
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .cert-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border-color 0.2s;
+        }
+
+        .cert-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .btn-action {
+            display: block;
+            text-align: center;
+            width: 100%;
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: background 0.2s;
+            box-sizing: border-box;
+        }
+
+        .btn-study {
+            background-color: #334155;
+            color: var(--blue-accent);
+            margin-bottom: 10px;
+        }
+        .btn-study:hover { background-color: #475569; color: white; }
+
+        .btn-test {
+            background-color: var(--primary);
+            color: white;
+        }
+        .btn-test:hover { background-color: #219653; }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #38bdf8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 100;
+        }
+        .modal-content {
+            background: #1e293b;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            max-width: 650px;
+            width: 100%;
+            padding: 30px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
+    <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
+    <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+      <a href="index.html">Home</a>
+      <a href="training-modules-and-mutual-growth.html" class="active">Training & Certification</a>
+      <a href="partners.html">Partners</a>
+      <a href="shared-harvest.html">Shared Harvest</a>
+      <a href="incubator-hub.html" style="color: var(--accent); font-weight: 600;">🌱 Incubator Launchpad</a>
+      <a href="technical-tutorials.html" style="color: var(--accent); font-weight: 600;">🔨 Technical Bank</a>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="container">
+      
+      <a href="certifications-hub.html" class="back-link">&larr; Back to Emergency Response Hub</a>
+
+      <span style="background:rgba(56,189,248,0.15); color:var(--blue-accent); font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; display:inline-block; margin-bottom:1rem;">Master Credentialing Directory</span>
+      
+      <h1>🏥 Professional Certifications Hub</h1>
+      <p style="margin-bottom: 30px;">
+          Review regulatory requirements, explore official training portals, and take interactive practice diagnostics for wilderness medicine, wildland firefighting, and heavy timber sawyer operations.
+      </p>
+
+      <!-- CERTIFICATIONS GRID -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 20px;">
+
+          <!-- 1. Wilderness First Aid / Wilderness EMT -->
+          <div class="cert-card">
+              <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                      <span style="padding: 4px 10px; background: rgba(56,189,248,0.15); color: var(--blue-accent); border-radius: 6px; font-family: monospace; font-size: 0.85rem;">WFA / W-EMT</span>
+                      <span style="font-size: 0.8rem; color: #94a3b8;">16 - 80 Hours</span>
+                  </div>
+                  <h3 style="font-size: 1.25rem; font-weight: 700; color: #f8fafc; margin: 0 0 10px 0;">Wilderness First Aid & EMT</h3>
+                  <p style="font-size: 0.9rem; margin-bottom: 15px;">Advanced remote triage, prolonged patient stabilization, tactical casualty care principles, and improvised hypothermia management for forestry crews.</p>
+                  
+                  <div style="margin-bottom: 20px;">
+                      <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.05em; margin-bottom: 6px;">Statutory Requirements</div>
+                      <ul style="padding-left: 18px; margin: 0; font-size: 0.85rem; space-y: 4px;">
+                          <li>Current CPR / AED Certification</li>
+                          <li>Minimum age: 16 (WFA) / 18 (W-EMT)</li>
+                          <li>Practical scenario check-off evaluation</li>
+                      </ul>
+                  </div>
+              </div>
+
+              <div>
+                  <a href="https://www.nols.edu/en/wilderness-medicine/" target="_blank" class="btn-action btn-study">Official Study Framework &rarr;</a>
+                  <button onclick="launchPracticeTest('wfa')" class="btn-action btn-test">Launch Practice Test</button>
+              </div>
+          </div>
+
+          <!-- 2. NWCG Wildland Firefighter Type 2 (FFT2) -->
+          <div class="cert-card">
+              <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                      <span style="padding: 4px 10px; background: rgba(39,174,96,0.15); color: var(--primary); border-radius: 6px; font-family: monospace; font-size: 0.85rem;">NWCG S-130/190</span>
+                      <span style="font-size: 0.8rem; color: #94a3b8;">Self-Paced + Field</span>
+                  </div>
+                  <h3 style="font-size: 1.25rem; font-weight: 700; color: #f8fafc; margin: 0 0 10px 0;">Wildland Firefighter Type 2</h3>
+                  <p style="font-size: 0.9rem; margin-bottom: 15px;">Foundational training for wildland fire suppression, fire behavior analysis, and safe tool operation under Oregon Department of Forestry guidelines.</p>
+                  
+                  <div style="margin-bottom: 20px;">
+                      <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.05em; margin-bottom: 6px;">Statutory Requirements</div>
+                      <ul style="padding-left: 18px; margin: 0; font-size: 0.85rem;">
+                          <li>Arduous Work Capacity Test (3 miles in 45 mins with 45 lb pack)</li>
+                          <li>Completion of online S-130/S-190 classroom modules</li>
+                          <li>Fire shelter deployment practical exam</li>
+                      </ul>
+                  </div>
+              </div>
+
+              <div>
+                  <a href="https://www.nwcg.gov/publications/training" target="_blank" class="btn-action btn-study">NWCG Curriculum Portal &rarr;</a>
+                  <button onclick="launchPracticeTest('nwcg')" class="btn-action btn-test">Launch Practice Test</button>
+              </div>
+          </div>
+
+          <!-- 3. Chainsaw Safety & Faller Certification (NWCG S-212) -->
+          <div class="cert-card">
+              <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                      <span style="padding: 4px 10px; background: rgba(245,158,11,0.15); color: var(--accent); border-radius: 6px; font-family: monospace; font-size: 0.85rem;">NWCG S-212</span>
+                      <span style="font-size: 0.8rem; color: #94a3b8;">32 Hours</span>
+                  </div>
+                  <h3 style="font-size: 1.25rem; font-weight: 700; color: #f8fafc; margin: 0 0 10px 0;">Wildland Power Saws</h3>
+                  <p style="font-size: 0.9rem; margin-bottom: 15px;">Comprehensive sawyer training covering saw maintenance, bucking, limbing, tension/compression geometry, and hazard tree identification.</p>
+                  
+                  <div style="margin-bottom: 20px;">
+                      <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.05em; margin-bottom: 6px;">Statutory Requirements</div>
+                      <ul style="padding-left: 18px; margin: 0; font-size: 0.85rem;">
+                          <li>Full NFPA 1977 & OSHA PPE Compliance</li>
+                          <li>Prerequisite: FFT2 (S-130/190) completion</li>
+                          <li>Hands-on saw teardown and cutting evaluation</li>
+                      </ul>
+                  </div>
+              </div>
+
+              <div>
+                  <a href="https://www.nwcg.gov/publications/pms304" target="_blank" class="btn-action btn-study">S-212 Field Guide &rarr;</a>
+                  <button onclick="launchPracticeTest('s212')" class="btn-action btn-test">Launch Practice Test</button>
+              </div>
+          </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PRACTICE TEST MODAL -->
+  <div id="test-modal" class="modal-overlay">
+      <div class="modal-content">
+          <button onclick="closeModal()" style="position: absolute; top: 15px; right: 20px; background: none; border: none; color: #94a3b8; font-size: 1.5rem; cursor: pointer;">&times;</button>
+          <div id="modal-body">
+              <!-- Dynamic Content Injected Here -->
+          </div>
+      </div>
+  </div>
+
+  <script>
+      const practiceData = {
+          wfa: {
+              title: "Wilderness First Aid Diagnostic Exam",
+              questions: [
+                  { q: "What is the primary priority during the initial assessment of a remote trauma patient?", options: ["Checking blood glucose levels", "Controlling major bleeding and maintaining airway (ABCDE)", "Administering oral electrolytes", "Applying rigid splints to extremities"], answer: 1 },
+                  { q: "When managing a patient with suspected hypothermia in cold or wet field conditions, what is the initial action?", options: ["Immerse the patient in warm water", "Remove wet clothing and insulate patient from cold ground", "Encourage high-intensity physical movement", "Apply direct high-heat chemical packs to bare skin"], answer: 1 }
+              ]
+          },
+          nwcg: {
+              title: "NWCG S-130/S-190 Practice Exam",
+              questions: [
+                  { q: "What three elements constitute the wildland fire triangle?", options: ["Fuel, Oxygen, Heat", "Wind, Slope, Aspect", "Oxygen, Smoke, Flame", "Fuel, Moisture, Weather"], answer: 0 },
+                  { q: "According to the Standard Firefighting Orders, what must you do when briefed before dispatch?", options: ["File the forecast with dispatch", "Obtain current fire weather forecast and keep informed", "Disregard wind readings under 10 mph", "Check weather once daily at sunset"], answer: 1 }
+              ]
+          },
+          s212: {
+              title: "NWCG S-212 Power Saws Diagnostic Exam",
+              questions: [
+                  { q: "What is the minimum required personal protective equipment (PPE) leg protection for chainsaw operators?", options: ["Standard heavy denim jeans", "Ballistic nylon chainsaw chaps meeting ASTM F1897 standards", "Standard leather work trousers without pads", "Heavy canvas work pants"], answer: 1 },
+                  { q: "When cutting an open-face notch in a tree, what standard depth is typically recommended relative to tree diameter?", options: ["1/4 to 1/3 of the total tree diameter", "1/2 of the total trunk diameter", "Flush with the exterior bark", "Exceeding 3/4 of the trunk diameter"], answer: 0 }
+              ]
+          }
+      };
+
+      function launchPracticeTest(type) {
+          const data = practiceData[type];
+          const modal = document.getElementById('test-modal');
+          const body = document.getElementById('modal-body');
+          
+          let html = `<h2 style="color: var(--blue-accent); margin-top: 0; font-size: 1.5rem; margin-bottom: 20px;">${data.title}</h2><div style="display: flex; flex-direction: column; gap: 20px;">`;
+          
+          data.questions.forEach((item, idx) => {
+              html += `<div style="background: rgba(15, 23, 42, 0.5); padding: 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+                  <p style="font-weight: 600; color: #f8fafc; margin-top: 0; margin-bottom: 12px;">${idx + 1}. ${item.q}</p>
+                  <div style="display: flex; flex-direction: column; gap: 8px;">`;
+              item.options.forEach((opt, optIdx) => {
+                  html += `<label style="display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: #cbd5e1; cursor: pointer;">
+                      <input type="radio" name="q${idx}" value="${optIdx}" style="accent-color: var(--primary);">
+                      <span>${opt}</span>
+                  </label>`;
+              });
+              html += `</div></div>`;
+          });
+
+          html += `<button onclick="submitExam('${type}')" style="background-color: var(--primary); color: white; border: none; padding: 12px; font-weight: bold; border-radius: 6px; cursor: pointer; font-size: 1rem; transition: background 0.2s;">Submit Diagnostic Exam</button></div>`;
+          
+          body.innerHTML = html;
+          modal.style.display = 'flex';
+      }
+
+      function submitExam(type) {
+          const data = practiceData[type];
+          let score = 0;
+          let total = data.questions.length;
+          
+          data.questions.forEach((item, idx) => {
+              const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+              if (selected && parseInt(selected.value) === item.answer) {
+                  score++;
+              }
+          });
+
+          const body = document.getElementById('modal-body');
+          body.innerHTML = `
+              <div style="text-align: center; padding: 20px;">
+                  <h2 style="color: var(--blue-accent); margin-top: 0;">Diagnostic Results</h2>
+                  <p style="font-size: 1.2rem; margin: 20px 0;">You scored <strong>${score} / ${total}</strong> (${Math.round((score/total)*100)}%)</p>
+                  <p style="color: #cbd5e1; margin-bottom: 25px;">${score === total ? 'Outstanding performance! You meet operational proficiency standards for this credential track.' : 'Review the study framework modules and retake the diagnostic to achieve 100% mastery.'}</p>
+                  <button onclick="closeModal()" style="background-color: #334155; color: white; border: none; padding: 10px 20px; font-weight: bold; border-radius: 6px; cursor: pointer;">Close Window</button>
+              </div>
+          `;
+      }
+
+      function closeModal() {
+          document.getElementById('test-modal').style.display = 'none';
+      }
+
+      window.onclick = function(event) {
+          const modal = document.getElementById('test-modal');
+          if (event.target === modal) {
+              modal.style.display = 'none';
+          }
+      }
+  </script>
+</body>
+</html>
