@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Assignment: Initial Lease Blueprint</title>
+    <script src="afti-core.js"></script>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --grey:#334155; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:flex-start; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:900px; background:var(--card); border-radius:16px; padding:40px; box-sizing:border-box; border:1px solid rgba(255,255,255,0.1); box-shadow:0 20px 40px rgba(0,0,0,0.6); margin-top:20px; margin-bottom:40px; }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:12px 20px; margin-bottom:30px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.95rem; }
+        .task-box { background:#0f172a; border:1px solid #334155; border-radius:12px; padding:25px; margin-bottom:20px; }
+        .task-title { color:var(--accent); font-weight:bold; font-size:1.15rem; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+        .status-badge { font-size:0.8rem; padding:4px 10px; border-radius:4px; font-weight:bold; }
+        .status-pending { background:rgba(245,158,11,0.15); color:#fcd34d; border:1px solid #f59e0b; }
+        .status-complete { background:rgba(39,174,96,0.15); color:#4ade80; border:1px solid var(--primary); }
+        textarea { width:100%; height:110px; background:#141c2b; border:1px solid #334155; border-radius:6px; color:#fff; padding:12px; box-sizing:border-box; margin-top:10px; font-family:inherit; resize:vertical; font-size:0.95rem; }
+        textarea:focus { outline:none; border-color:var(--accent); }
+        .btn { display:inline-block; background:var(--primary); color:#fff; padding:12px 24px; border:none; border-radius:6px; font-weight:bold; cursor:pointer; text-decoration:none; font-size:1rem; transition:background 0.2s; }
+        .btn:hover { background:#219653; }
+        
+        /* Portfolio Preview Card */
+        .portfolio-preview-box { background: rgba(56, 189, 248, 0.05); border: 1px dashed rgba(56, 189, 248, 0.4); border-radius: 12px; padding: 25px; margin-top: 30px; }
+        .portfolio-preview-box h3 { color: var(--accent); margin-top: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
+        .resume-snippet { background: #0f172a; border-left: 4px solid var(--primary); padding: 15px; border-radius: 4px; font-family: monospace; font-size: 0.85rem; color: #cbd5e1; white-space: pre-wrap; margin-top: 12px; line-height: 1.5; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hud-bar">
+        <span>Portfolio Focus: <span style="color:var(--accent);">Initial Lease Blueprint</span></span>
+        <div>Global XP: <span id="global-points" style="color:#4ade80;">450</span></div>
+    </div>
+
+    <h2 style="margin-top:0; color:#fff;">📋 Assignment: Your Initial Test Lease Presentation</h2>
+    <p style="color:#cbd5e1; line-height:1.6;">Build out your audited 1/8 or 1/4 acre farm lease module below. Your entries automatically update your permanent digital resume data cache and generate your professional project portfolio entry.</p>
+
+    <!-- TASK 1 -->
+    <div class="task-box" id="box-1">
+        <div class="task-title">
+            <span>Phase 1: The Pencil Dream Dimensions</span>
+            <span class="status-badge status-pending" id="badge-1">Incomplete</span>
+        </div>
+        <p style="font-size:0.9rem; color:#94a3b8; margin:0;">Define your total area boundary (1/8 or 1/4 acre) and list your primary vehicle turning lanes, tool hubs, and shelter lines.</p>
+        <textarea id="text-1" placeholder="Type your spatial asset layout rules here (e.g., 0.25 Acre parcel zoned for intensive vegetable production with 15-ft perimeter vehicle turning lane)..." oninput="saveProgress(1)"></textarea>
+    </div>
+
+    <!-- TASK 2 -->
+    <div class="task-box" id="box-2">
+        <div class="task-title">
+            <span>Phase 2: Specialty Track SOPs</span>
+            <span class="status-badge status-pending" id="badge-2">Incomplete</span>
+        </div>
+        <p style="font-size:0.9rem; color:#94a3b8; margin:0;">Write your step-by-step field execution guidelines. Keep procedures aligned with the Double-Buddy framework.</p>
+        <textarea id="text-2" placeholder="Type your specialized safety SOP parameters here (e.g., Dual-operator chain-of-custody for tool handling, mandatory 0800 gear inspection)..." oninput="saveProgress(2)"></textarea>
+    </div>
+
+    <!-- TASK 3 -->
+    <div class="task-box" id="box-3">
+        <div class="task-title">
+            <span>Phase 3: Landowner MOU Conditions</span>
+            <span class="status-badge status-pending" id="badge-3">Incomplete</span>
+        </div>
+        <p style="font-size:0.9rem; color:#94a3b8; margin:0;">Outline the reciprocal benefits protecting the student group and the regional landholder.</p>
+        <textarea id="text-3" placeholder="Type your mutual leasehold protection codes here (e.g., Zero-rent tenancy exchanged for fuel load reduction and watershed buffer maintenance)..." oninput="saveProgress(3)"></textarea>
+    </div>
+
+    <!-- LIVE PORTFOLIO PREVIEW GENERATOR -->
+    <div class="portfolio-preview-box">
+        <h3>✨ Live Portfolio Resume Output Preview</h3>
+        <p style="font-size: 0.85rem; color: #94a3b8; margin: 0 0 10px 0;">As you complete your lease blueprint above, this block compiles your work into a formal project portfolio entry ready for professional grant applications and stakeholder reviews.</p>
+        <div class="resume-snippet" id="resume-output">
+[AFTI Field Project Portfolio Entry - Pending Completion of All 3 Phases]
+        </div>
+    </div>
+
+    <div style="text-align:center; margin-top:35px;">
+        <a href="difficult-track-stage5-firstmission.html" class="btn">Lock Design Portfolio &rarr;</a>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '450', 10);
+        document.getElementById('global-points').innerText = currentXP;
+        
+        // Restore existing text data lines
+        for(let i=1; i<=3; i++) {
+            let savedText = localStorage.getItem(`afti_lease_step_${i}`);
+            if(savedText) {
+                document.getElementById(`text-${i}`).value = savedText;
+                let hasContent = savedText.trim().length > 5;
+                updateBadgeStatus(i, hasContent);
+            }
+        }
+        updatePortfolioPreview();
+    });
+
+    function saveProgress(stepId) {
+        let content = document.getElementById(`text-${stepId}`).value;
+        localStorage.setItem(`afti_lease_step_${stepId}`, content);
+        
+        let hasContent = content.trim().length > 5;
+        updateBadgeStatus(stepId, hasContent);
+        updatePortfolioPreview();
+    }
+
+    function updateBadgeStatus(stepId, isComplete) {
+        const badge = document.getElementById(`badge-${stepId}`);
+        if(isComplete) {
+            badge.innerText = "Verified Blueprint Asset";
+            badge.className = "status-badge status-complete";
+        } else {
+            badge.innerText = "Incomplete";
+            badge.className = "status-badge status-pending";
+        }
+    }
+
+    function updatePortfolioPreview() {
+        const p1 = localStorage.getItem('afti_lease_step_1') || '[Phase 1 Draft Pending]';
+        const p2 = localStorage.getItem('afti_lease_step_2') || '[Phase 2 Draft Pending]';
+        const p3 = localStorage.getItem('afti_lease_step_3') || '[Phase 3 Draft Pending]';
+
+        const snippet = `PROJECT TITLE: Outgrowing-Ag Initial Lease Blueprint & Spatial Layout
+GEOGRAPHIC SCOPE: Linn County & Willamette Valley, Oregon
+CORE DELIVERABLES AUTHORED:
+
+1. Spatial Design & Infrastructure:
+   "${p1}"
+
+2. Operational Protocols & SOP Alignment:
+   "${p2}"
+
+3. Reciprocal Landholder MOU & Community Exchange:
+   "${p3}"`;
+
+        document.getElementById('resume-output').innerText = snippet;
+    }
+</script>
+</body>
+</html>
