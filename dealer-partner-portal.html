@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI Mechanical Training &amp; Dealer Sponsorship Portal</title>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --grey:#334155; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:flex-start; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:850px; background:var(--card); border-radius:14px; padding:35px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); margin-top:20px; margin-bottom:40px; }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 8px; font-weight: 600; text-transform: uppercase; }
+        .form-control { width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff; padding: 12px; border-radius: 8px; box-sizing: border-box; font-family: inherit; font-size: 0.95rem; }
+        .form-control:focus { outline: none; border-color: var(--accent); }
+        
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 10px; }
+        .checkbox-label { background: #0f172a; padding: 14px; border-radius: 8px; border: 1px solid #334155; display: flex; align-items: flex-start; gap: 12px; cursor: pointer; transition: border-color 0.2s; font-size: 0.9rem; }
+        .checkbox-label:hover { border-color: var(--accent); }
+        .checkbox-input { margin-top: 3px; transform: scale(1.2); accent-color: var(--primary); cursor: pointer; }
+
+        .btn-submit { background: var(--primary); color: #fff; border: none; padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; width: 100%; transition: background 0.2s; margin-top: 10px; }
+        .btn-submit:hover { background: #219653; }
+
+        .success-banner { background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.4); padding: 20px; border-radius: 10px; text-align: center; display: none; margin-top: 20px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hud-bar">
+        <span>AFTI Mechanical Training &amp; Sponsor Portal</span>
+        <div style="display:flex; gap:10px; align-items:center;">
+            <span>Network Status: <span style="color:#4ade80;">Active</span></span>
+            <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Portal Gateway</button>
+        </div>
+    </div>
+    
+    <div>
+        <span style="background:rgba(56,189,248,0.15); color:var(--accent); font-size:0.75rem; font-weight:700; text-transform:uppercase; padding:4px 8px; border-radius:4px; display:inline-block; margin-bottom:10px;">Equipment &amp; Dealer Sponsorship</span>
+        <h2 style="margin:0 0 0.5rem 0; font-size:1.6rem;">🔧 Mechanical Training &amp; Dealer Partner Portal</h2>
+        <p style="line-height:1.6; color:#cbd5e1; margin-bottom:25px;">Welcome, Equipment Dealer or Rental Partner! Use this portal to register your support, propose parts/equipment sponsorships, or collaborate on vocational training modules for our mechanical restoration track.</p>
+        
+        <form id="dealer-form" onsubmit="handleDealerSubmit(event)">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group">
+                    <label>Dealership / Company Name</label>
+                    <input type="text" id="dealer-name" class="form-control" placeholder="e.g. Valley Tractor &amp; Equipment" required>
+                </div>
+                <div class="form-group">
+                    <label>Contact Representative &amp; Email</label>
+                    <input type="text" id="dealer-contact" class="form-control" placeholder="e.g. Service Mgr / parts@dealer.com" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Partnership / Sponsorship Track</label>
+                <select id="dealer-category" class="form-control">
+                    <option value="Parts & Filters Sponsorship">🛠️ Parts, Filters &amp; Fluid Sponsorship</option>
+                    <option value="Surplus / Trade-In Equipment">🚜 Surplus / Trade-In Equipment Donation</option>
+                    <option value="Technical Training Modules">📚 Technical Manuals &amp; Training Curriculum Support</option>
+                    <option value="General Mechanical Sponsor">🤝 General Agricultural Mechanics Supporter</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Select Partnership Contributions</label>
+                <div class="checkbox-grid">
+                    <label class="checkbox-label"><input type="checkbox" class="checkbox-input" name="dealer_term" value="Surplus Parts / Cores"><div><strong>Surplus Parts &amp; Cores</strong><div style="color:#94a3b8; font-size:0.8rem;">Discontinued items, old stock, or rebuildable cores.</div></div></label>
+                    <label class="checkbox-label"><input type="checkbox" class="checkbox-input" name="dealer_term" value="Equipment / Implement Donation"><div><strong>Equipment Donation</strong><div style="color:#94a3b8; font-size:0.8rem;">Retired rental units or trade-ins needing restoration.</div></div></label>
+                    <label class="checkbox-label"><input type="checkbox" class="checkbox-input" name="dealer_term" value="Technical Manuals / Training"><div><strong>Training &amp; Manuals</strong><div style="color:#94a3b8; font-size:0.8rem;">Diagnostic guides, service manuals, or safety tutorials.</div></div></label>
+                    <label class="checkbox-label"><input type="checkbox" class="checkbox-input" name="dealer_term" value="Apprentice Pipeline"><div><strong>Apprentice Pipeline</strong><div style="color:#94a3b8; font-size:0.8rem;">Connecting trained graduates with employment opportunities.</div></div></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Proposal Notes, Inventory Details, or Sponsorship Terms</label>
+                <textarea id="dealer-details" class="form-control" rows="4" placeholder="Describe available parts, equipment models, or how you'd like to collaborate with our mechanical training track..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Submit Dealer Partnership Proposal &rarr;</button>
+        </form>
+
+        <div id="success-banner" class="success-banner">
+            <h3 style="color:#4ade80; margin-top:0;">✨ Dealer Partnership Proposal Logged!</h3>
+            <p id="success-msg" style="color:#cbd5e1; font-size:0.95rem; margin:0 0 15px 0;"></p>
+            <button onclick="window.print()" style="background:#334155; color:#fff; font-weight:bold; padding:8px 16px; border:1px solid rgba(255,255,255,0.2); border-radius:6px; cursor:pointer; margin-right:10px;">🖨️ Print Proposal Receipt</button>
+            <button onclick="window.location.reload()" style="background:#334155; color:#fff; font-weight:bold; padding:8px 16px; border:1px solid rgba(255,255,255,0.2); border-radius:6px; cursor:pointer;">Submit Another Proposal</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function handleDealerSubmit(event) {
+        event.preventDefault();
+        
+        const name = document.getElementById('dealer-name').value;
+        const contact = document.getElementById('dealer-contact').value;
+        const category = document.getElementById('dealer-category').value;
+        const details = document.getElementById('dealer-details').value;
+        
+        const checkboxes = document.querySelectorAll('input[name="dealer_term"]:checked');
+        const selectedTerms = Array.from(checkboxes).map(cb => cb.value);
+
+        // Save to LocalStorage
+        const proposalData = { name, contact, category, selectedTerms, details, date: new Date().toLocaleDateString() };
+        let existingProposals = JSON.parse(localStorage.getItem('afti_dealer_proposals') || '[]');
+        existingProposals.push(proposalData);
+        localStorage.setItem('afti_dealer_proposals', JSON.stringify(existingProposals));
+
+        // Display Success Confirmation
+        document.getElementById('dealer-form').style.display = 'none';
+        const successBanner = document.getElementById('success-banner');
+        successBanner.style.display = 'block';
+
+        document.getElementById('success-msg').innerHTML = `
+            <strong>Proposal Recorded Successfully!</strong><br>
+            Thank you, <em>${name}</em>. Your submission for <strong>${category}</strong> has been logged into the AFTI mechanical track database. Our project lead (Donald Truex) will contact you shortly to coordinate.
+        `;
+    }
+</script>
+</body>
+</html>
