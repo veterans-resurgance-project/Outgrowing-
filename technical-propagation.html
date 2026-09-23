@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI Technical Guide: Greenhouse Propagation Masterclass</title>
+    <script src="afti-core.js?v=2"></script>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --grey:#334155; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:flex-start; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:900px; background:var(--card); border-radius:14px; padding:35px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); margin-top:20px; margin-bottom:40px; }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
+        .task-label { background:#0f172a; padding:18px; border-radius:10px; border:1px solid #334155; display:flex; align-items:flex-start; gap:15px; cursor:pointer; margin-bottom:12px; transition:border-color 0.2s; }
+        .task-label:hover { border-color:var(--accent); }
+        .task-cb { margin-top:4px; transform:scale(1.3); accent-color:var(--primary); cursor:pointer; }
+        
+        /* Telemetry Input Panel */
+        .telemetry-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; background: #0f172a; border: 1px solid #334155; padding: 20px; border-radius: 10px; margin-bottom: 25px; }
+        .telemetry-field label { display: block; font-size: 0.8rem; color: #94a3b8; margin-bottom: 5px; font-weight: 600; text-transform: uppercase; }
+        .telemetry-field input { width: 100%; background: #141c2b; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 6px; box-sizing: border-box; font-family: inherit; }
+        
+        /* Portfolio Snippet Box */
+        .portfolio-box { background: rgba(56, 189, 248, 0.05); border: 1px dashed rgba(56, 189, 248, 0.4); border-radius: 12px; padding: 20px; margin-top: 25px; margin-bottom: 25px; }
+        .resume-snippet { background: #0f172a; border-left: 4px solid var(--primary); padding: 15px; border-radius: 4px; font-family: monospace; font-size: 0.85rem; color: #cbd5e1; white-space: pre-wrap; margin-top: 10px; line-height: 1.5; }
+
+        .bridge-box { background:rgba(39,174,96,0.1); border:1px solid rgba(39,174,96,0.4); padding:25px; border-radius:12px; text-align:center; display:none; margin-top:20px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hud-bar">
+        <span>AFTI Technical Mastery Module</span>
+        <div style="display:flex; gap:10px; align-items:center;">
+            <span>Global XP: <span id="global-points" style="color:#4ade80;">450</span></span>
+            <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Portal</button>
+        </div>
+    </div>
+    
+    <div>
+        <span style="background:rgba(56,189,248,0.15); color:var(--accent); font-size:0.75rem; font-weight:700; text-transform:uppercase; padding:4px 8px; border-radius:4px; display:inline-block; margin-bottom:10px;">Crop &amp; Plant Production Tutorials</span>
+        <h2 style="margin:0 0 0.5rem 0; font-size:1.6xl;">🌱 Comprehensive Greenhouse Propagation &amp; Telemetry Masterclass</h2>
+        <p style="line-height:1.6; color:#cbd5e1; margin-bottom:20px;">Master early seedling care, winter cold stratification cycles, and strict greenhouse hygiene protocols aligned with OSU Extension standards. Complete all 8 milestones and log active telemetry data to update your permanent portfolio.</p>
+        
+        <!-- TELEMETRY RECORDING PANEL -->
+        <h3 style="color:var(--accent); font-size:1.05rem; margin-bottom:10px;">📊 Live Greenhouse Environment Telemetry</h3>
+        <div class="telemetry-grid">
+            <div class="telemetry-field">
+                <label>Greenhouse Air Temp (°F)</label>
+                <input type="number" id="tele-temp" placeholder="e.g. 68.5" oninput="saveTelemetry()">
+            </div>
+            <div class="telemetry-field">
+                <label>Relative Humidity (%)</label>
+                <input type="number" id="tele-hum" placeholder="e.g. 75" oninput="saveTelemetry()">
+            </div>
+            <div class="telemetry-field">
+                <label>Soil Moisture Index</label>
+                <input type="text" id="tele-soil" placeholder="e.g. Field Capacity (Sponge test passed)" oninput="saveTelemetry()">
+            </div>
+        </div>
+
+        <!-- 8-POINT MASTER CHECKLIST -->
+        <h3 style="color:var(--accent); font-size:1.05rem; margin-bottom:10px;">✅ Propagation Protocol Milestones</h3>
+        <div style="margin-bottom:25px;">
+            <label class="task-label"><input type="checkbox" class="task-cb" id="cb-1" onchange="checkProg(1)"><div><strong>1. Select Container Cell Geometry</strong><div style="color:#cbd5e1; font-size:0.9rem;">Match crop varieties to proper sizes, utilizing deep tree plugs specifically for native watershed roots.</div></div></label>
+            <label class="task-label"><input type="checkbox" class="task-cb" id="cb-2" onchange="checkProg(2)"><div><strong>2. Execute Soil Pre-Wetting Sponge Test</strong><div style="color:#cbd5e1; font-size:0.9rem;">Pre-mix loose dry media with water until damp to stop hydrophobic run-off during seeding.</div></div></label>
+            <label class="task-label"><input type="checkbox" class="task-cb" id="cb-3" onchange="checkProg(3)"><div><strong>3. Pack Trays to Rim with Zero Compaction</strong><div style="color:#cbd5e1; font-size:0.9rem;">Fill trays loosely to maintain critical micro air pockets, allowing new root systems to expand freely.</div></div></label>
+            <label class="task-label"><input type="checkbox" class="task-cb" id="cb-4" onchange="checkProg(4)"><div><strong>4. Enforce 2x Seed-Depth Sowing Limits</strong><div style="color:#cbd5e1; font-size:0.9rem;">Plant seeds at twice their width, capping top rows with lightweight moisture-retaining vermiculite.</div></div></label>
+            <label class="task-label"><input type="checkbox" class="task-cb" id="cb-5" onchange="checkProg(5)"><div><strong>5. Initialize Bleach Sanitation &amp; Air Fans</strong><div style="color:#cbd5e1; font-size:0.9rem;">Soak reused trays in a 10% bleach bath and deploy active fans to completely eliminate damping-off mold threats.</div></div></label>
+            <label class="task-label"><input type="checkbox" class="task-cb" id="cb-6" onchange="checkProg(6)"><div><strong>6. Cold Stratification &amp; Dormancy Breaking</strong><div style="color:#cbd5e1; font-size:0.9rem;">Execute cold-moist stratification schedules for native Willamette Valley tree and shrub seeds prior to bench placement.</div></div></label>
+            <label class="task-label"><input type="checkbox" class="task-cb" id="cb-7" onchange="checkProg(7)"><div><strong>7. Micro-Climate Humidity Dome Management</strong><div style="color:#cbd5e1; font-size:0.9rem;">Monitor germination domes closely; vent humidity covers daily upon initial cotyledon emergence to prevent stem rot.</div></div></label>
+            <label class="task-label"><input type="checkbox" class="task-cb" id="cb-8" onchange="checkProg(8)"><div><strong>8. Hardening-Off Transition Protocols</strong><div style="color:#cbd5e1; font-size:0.9rem;">Gradually step down greenhouse thermal regulation and expose seedlings to outdoor ambient conditions prior to field outplanting.</div></div></label>
+        </div>
+
+        <!-- PORTFOLIO PREVIEW GENERATOR -->
+        <div class="portfolio-box">
+            <h3 style="color:var(--accent); margin-top:0; font-size:1.05rem;">✨ Live Portfolio Resume Output Preview</h3>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin: 0 0 10px 0;">As you check off milestones and log telemetry data above, your professional project resume updates instantly.</p>
+            <div class="resume-snippet" id="resume-output">
+[AFTI Technical Portfolio Entry - Propagation Module Pending Completion]
+            </div>
+        </div>
+
+        <div id="bridge-panel" class="bridge-box">
+            <h3 style="color:#4ade80; margin-top:0;">🎉 Module Complete: Greenhouse Propagation Mastered!</h3>
+            <p style="color:#cbd5e1; font-size:0.95rem; margin:0 0 15px 0;">Your seedling cultivation analytics and telemetry logs have been securely locked into your permanent portfolio.</p>
+            <button onclick="window.print()" style="background:#334155; color:#fff; font-weight:bold; padding:10px 20px; border:1px solid rgba(255,255,255,0.2); border-radius:6px; cursor:pointer; margin-right:10px;">🖨️ Print Log</button>
+            <button onclick="window.location.href='index.html'" style="background:var(--primary); color:#fff; font-weight:bold; padding:10px 20px; border:none; border-radius:6px; cursor:pointer;">Return to Portal Home &rarr;</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '450', 10);
+        document.getElementById('global-points').innerText = currentXP;
+
+        // Restore Telemetry
+        document.getElementById('tele-temp').value = localStorage.getItem('afti_prop_temp') || '';
+        document.getElementById('tele-hum').value = localStorage.getItem('afti_prop_hum') || '';
+        document.getElementById('tele-soil').value = localStorage.getItem('afti_prop_soil') || '';
+
+        // Restore Checkboxes
+        for(let i=1; i<=8; i++) {
+            let isChecked = localStorage.getItem(`afti_prop_cb_${i}`) === 'true';
+            document.getElementById(`cb-${i}`).checked = isChecked;
+        }
+        checkCompletionState();
+    });
+
+    function saveTelemetry() {
+        localStorage.setItem('afti_prop_temp', document.getElementById('tele-temp').value);
+        localStorage.setItem('afti_prop_hum', document.getElementById('tele-hum').value);
+        localStorage.setItem('afti_prop_soil', document.getElementById('tele-soil').value);
+        updatePortfolioPreview();
+    }
+
+    function checkProg(index) {
+        const cb = document.getElementById(`cb-${index}`);
+        localStorage.setItem(`afti_prop_cb_${index}`, cb.checked);
+        
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '450', 10);
+        currentXP += cb.checked ? 15 : -15;
+        localStorage.setItem('afti_global_xp', currentXP);
+        document.getElementById('global-points').innerText = currentXP;
+
+        if(window.awardGlobalXP) { window.awardGlobalXP(cb.checked ? 15 : -15); }
+        
+        checkCompletionState();
+        updatePortfolioPreview();
+    }
+
+    function checkCompletionState() {
+        const cbs = document.querySelectorAll('.task-cb');
+        const all = Array.from(cbs).every(c => c.checked);
+        document.getElementById('bridge-panel').style.display = all ? 'block' : 'none';
+    }
+
+    function updatePortfolioPreview() {
+        let completedCount = 0;
+        for(let i=1; i<=8; i++) {
+            if(document.getElementById(`cb-${i}`).checked) completedCount++;
+        }
+
+        const temp = document.getElementById('tele-temp').value || 'N/A';
+        const hum = document.getElementById('tele-hum').value || 'N/A';
+        const soil = document.getElementById('tele-soil').value || 'N/A';
+
+        const snippet = `PROJECT TITLE: OSU-Aligned Greenhouse Propagation & Telemetry Masterclass
+STATUS: ${completedCount} / 8 Milestones Verified (${Math.round((completedCount/8)*100)}% Complete)
+LIVE TELEMETRY LOG: Air Temp: ${temp}°F | Humidity: ${hum}% | Soil Index: ${soil}
+CORE PROTOCOLS AUTHORED:
+- Container plug geometry selection for native root development
+- Soil pre-wetting sponge tests & zero-compaction tray packing
+- Cold stratification dormancy breaking & anti-fungal sanitation protocols`;
+
+        document.getElementById('resume-output').innerText = snippet;
+    }
+</script>
+</body>
+</html>
