@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI Technical Masterclass: Square Foot Gardening & Companion Science</title>
+    <script src="afti-core.js?v=2"></script>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --grey:#334155; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:flex-start; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:960px; background:var(--card); border-radius:14px; padding:35px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); margin-top:20px; margin-bottom:40px; }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; }
+        
+        /* Grid & Catalog Layout */
+        .sfg-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px; }
+        @media (max-width: 768px) { .sfg-layout { grid-template-columns: 1fr; } }
+        
+        .panel { background: #0f172a; border: 1px solid #334155; padding: 20px; border-radius: 10px; }
+        
+        /* 4x4 Grid */
+        .garden-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 15px; }
+        .grid-cell { aspect-ratio: 1; background: #141c2b; border: 2px dashed #475569; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 5px; cursor: pointer; transition: all 0.2s; font-size: 0.8rem; position: relative; }
+        .grid-cell:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+        .grid-cell.occupied { border-style: solid; border-color: var(--primary); background: rgba(39, 174, 96, 0.1); }
+        
+        /* Plant Catalog List */
+        .catalog-item { background: #141c2b; border: 1px solid #334155; padding: 12px; border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: border-color 0.2s; }
+        .catalog-item:hover { border-color: var(--accent); }
+        .catalog-item.selected { border-color: var(--primary); background: rgba(39, 174, 96, 0.1); }
+        
+        /* Quiz Box */
+        .quiz-box { background: #0f172a; border: 1px solid #334155; padding: 20px; border-radius: 10px; margin-top: 25px; }
+        .quiz-option { display: block; background: #141c2b; border: 1px solid #334155; padding: 10px 15px; border-radius: 6px; margin-top: 8px; cursor: pointer; transition: background 0.2s; }
+        .quiz-option:hover { background: #1e293b; }
+        
+        /* Portfolio Snippet Box */
+        .portfolio-box { background: rgba(56, 189, 248, 0.05); border: 1px dashed rgba(56, 189, 248, 0.4); border-radius: 12px; padding: 20px; margin-top: 25px; margin-bottom: 25px; }
+        .resume-snippet { background: #0f172a; border-left: 4px solid var(--primary); padding: 15px; border-radius: 4px; font-family: monospace; font-size: 0.85rem; color: #cbd5e1; white-space: pre-wrap; margin-top: 10px; line-height: 1.5; }
+
+        .bridge-box { background:rgba(39,174,96,0.1); border:1px solid rgba(39,174,96,0.4); padding:25px; border-radius:12px; text-align:center; display:none; margin-top:20px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hud-bar">
+        <span>AFTI Technical Masterclass: Horticultural Science</span>
+        <div style="display:flex; gap:10px; align-items:center;">
+            <span>Global XP: <span id="global-points" style="color:#4ade80;">450</span></span>
+            <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Portal Gateway</button>
+        </div>
+    </div>
+    
+    <div>
+        <span style="background:rgba(56,189,248,0.15); color:var(--accent); font-size:0.75rem; font-weight:700; text-transform:uppercase; padding:4px 8px; border-radius:4px; display:inline-block; margin-bottom:10px;">Interactive Challenge Module</span>
+        <h2 style="margin:0 0 0.5rem 0; font-size:1.6rem;">🌱 Square Foot Garden &amp; Companion Science Masterclass</h2>
+        <p style="line-height:1.6; color:#cbd5e1; margin-bottom:20px;">Master high-density intensive gardening principles. Populate your 4x4 raised bed grid using companion planting rules, master soil science tips, and complete the final certification quiz.</p>
+        
+        <!-- SCIENTIFIC BACKGROUND & METHODOLOGY -->
+        <div style="background:#0f172a; border:1px solid #334155; padding:20px; border-radius:10px; margin-bottom:25px;">
+            <h3 style="color:var(--accent); margin-top:0; font-size:1.1rem;">📐 Square Foot Gardening (SFG) Method &amp; Plant Science</h3>
+            <p style="font-size:0.9rem; line-height:1.6; color:#cbd5e1; margin-bottom:10px;">
+                Developed by Mel Bartholomew, the Square Foot Gardening system organizes raised beds into 1x1 foot grids, eliminating single-row spacing waste. By utilizing a "Mel's Mix" soil substrate (1/3 vermiculite, 1/3 peat moss, 1/3 blended compost), roots experience loose aeration, optimal water retention, and high nutrient availability without compacted walking paths.
+            </p>
+            <p style="font-size:0.9rem; line-height:1.6; color:#cbd5e1; margin:0;">
+                <strong>Companion Planting Synergy:</strong> Grouping mutually beneficial species enhances pest deterrence (e.g., marigolds releasing root exudates discouraging nematodes), optimizes vertical space (vining legumes fixing atmospheric nitrogen for heavy-feeding brassicas or solanaceae), and attracts beneficial pollinators.
+            </p>
+        </div>
+
+        <!-- INTERACTIVE SFG CHALLENGE LAYOUT -->
+        <div class="sfg-layout">
+            <!-- PLANT CATALOG -->
+            <div class="panel">
+                <h3 style="color:var(--accent); margin-top:0; font-size:1.05rem;">📦 Select Crop from Catalog</h3>
+                <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:15px;">Click a plant to select it, then click any empty cell in your 4x4 garden grid to plant it.</p>
+                <div id="catalog-container" style="max-height: 380px; overflow-y: auto; padding-right: 5px;">
+                    <!-- Populated via JavaScript -->
+                </div>
+            </div>
+
+            <!-- 4X4 GARDEN BED -->
+            <div class="panel">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+                    <h3 style="color:var(--accent); margin:0; font-size:1.05rem;">🪴 4x4 Raised Bed Grid</h3>
+                    <button onclick="clearGrid()" style="background:#334155; color:#fff; border:none; padding:4px 10px; border-radius:4px; font-size:0.75rem; cursor:pointer;">Reset Grid</button>
+                </div>
+                <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:15px;">Fill at least 8 squares to validate your garden ecosystem design.</p>
+                <div class="garden-grid" id="garden-grid">
+                    <!-- 16 Cells Populated via JavaScript -->
+                </div>
+                <div id="grid-status" style="margin-top: 15px; font-size: 0.85rem; color: #f59e0b; text-align: center; font-weight: 600;">
+                    Grid Status: 0 / 8 Minimum Squares Populated
+                </div>
+            </div>
+        </div>
+
+        <!-- INTERACTIVE KNOWLEDGE QUIZ -->
+        <div class="quiz-box">
+            <h3 style="color:var(--accent); margin-top:0; font-size:1.1rem;">📝 Horticultural Science &amp; SFG Certification Quiz</h3>
+            <div id="quiz-question-container">
+                <!-- Populated via JavaScript -->
+            </div>
+            <div id="quiz-feedback" style="margin-top: 15px; font-size: 0.9rem; font-weight: 600;"></div>
+        </div>
+
+        <!-- PORTFOLIO PREVIEW GENERATOR -->
+        <div class="portfolio-box">
+            <h3 style="color:var(--accent); margin-top:0; font-size:1.05rem;">✨ Live Portfolio Resume Output Preview</h3>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin: 0 0 10px 0;">As you populate your garden grid and pass the quiz, your professional project resume updates instantly.</p>
+            <div class="resume-snippet" id="resume-output">
+[AFTI Technical Portfolio Entry - Square Foot Gardening Challenge Pending Completion]
+            </div>
+        </div>
+
+        <div id="bridge-panel" class="bridge-box">
+            <h3 style="color:#4ade80; margin-top:0;">🎉 Challenge Complete: SFG &amp; Companion Science Mastered!</h3>
+            <p style="color:#cbd5e1; font-size:0.95rem; margin:0 0 15px 0;">Your garden bed design and horticultural knowledge quiz have been successfully verified and locked into your permanent portfolio.</p>
+            <button onclick="window.print()" style="background:#334155; color:#fff; font-weight:bold; padding:10px 20px; border:1px solid rgba(255,255,255,0.2); border-radius:6px; cursor:pointer; margin-right:10px;">🖨️ Print Challenge Log</button>
+            <button onclick="window.location.href='index.html'" style="background:var(--primary); color:#fff; font-weight:bold; padding:10px 20px; border:none; border-radius:6px; cursor:pointer;">Return to Portal Gateway &rarr;</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Plant Catalog Data
+    const plantCatalog = [
+        { id: 'tomato', name: '🍅 Heirloom Tomato', spacing: '1 per sq ft', care: 'Full sun, heavy feeder, stake/prune', companion: 'Basil, Marigold, Carrots' },
+        { id: 'basil', name: '🌿 Genovese Basil', spacing: '4 per sq ft', care: 'Full sun, regular moisture, pinch flowers', companion: 'Tomatoes, Peppers' },
+        { id: 'carrot', name: '🥕 Nantes Carrot', spacing: '16 per sq ft', care: 'Loose sandy soil, consistent moisture', companion: 'Tomatoes, Rosemary, Lettuce' },
+        { id: 'lettuce', name: '🥬 Butterhead Lettuce', spacing: '4 per sq ft', care: 'Partial shade in peak summer, cool season', companion: 'Carrots, Radishes, Chives' },
+        { id: 'marigold', name: '🌼 French Marigold', spacing: '9 per sq ft', care: 'Full sun, nematode deterrent', companion: 'Tomatoes, Peppers, Brassicas' },
+        { id: 'bean', name: '🫘 Bush Green Bean', spacing: '9 per sq ft', care: 'Nitrogen fixer, moderate water', companion: 'Carrots, Cucumbers, Marigolds' },
+        { id: 'spinach', name: '🍃 Bloomsdale Spinach', spacing: '9 per sq ft', care: 'Rich nitrogen soil, cool weather tolerant', companion: 'Strawberries, Brassicas' },
+        { id: 'radish', name: '🔴 Cherry Bell Radish', spacing: '16 per sq ft', care: 'Fast grower (21 days), frequent watering', companion: 'Lettuce, Spinach, Peas' }
+    ];
+
+    let selectedPlant = null;
+    let gridState = Array(16).fill(null);
+    let quizPassed = false;
+
+    // Quiz Data
+    const quizData = {
+        question: "What is the primary ratio composition of traditional 'Mel's Mix' soil substrate used in Square Foot Gardening?",
+        options: [
+            "A) 50% Topsoil and 50% Chemical Fertilizer",
+            "B) 1/3 Vermiculite, 1/3 Peat Moss, 1/3 Blended Compost",
+            "C) 100% Native Clay and Sand Substrate",
+            "D) 75% Bark Mulch and 25% Perlite"
+        ],
+        correctIndex: 1,
+        explanation: "Correct! Mel's Mix utilizes equal parts coarse vermiculite (for moisture retention), peat moss (for aeration and moisture), and blended compost (for rich organic nutrients)."
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+        let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '450', 10);
+        document.getElementById('global-points').innerText = currentXP;
+
+        renderCatalog();
+        renderGrid();
+        renderQuiz();
+        loadSavedData();
+        updatePortfolioPreview();
+    });
+
+    function renderCatalog() {
+        const container = document.getElementById('catalog-container');
+        container.innerHTML = '';
+        plantCatalog.forEach(plant => {
+            const div = document.createElement('div');
+            div.className = `catalog-item ${selectedPlant && selectedPlant.id === plant.id ? 'selected' : ''}`;
+            div.innerHTML = `
+                <div style="font-weight: bold; color: #f8fafc; font-size: 0.9rem;">${plant.name}</div>
+                <div style="font-size: 0.75rem; color: #38bdf8; margin-top: 2px;">Density: ${plant.spacing}</div>
+                <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 2px;">Care: ${plant.care}</div>
+                <div style="font-size: 0.75rem; color: #4ade80; margin-top: 2px;">Companion: ${plant.companion}</div>
+            `;
+            div.onclick = () => {
+                selectedPlant = plant;
+                renderCatalog();
+            };
+            container.appendChild(div);
+        });
+    }
+
+    function renderGrid() {
+        const grid = document.getElementById('garden-grid');
+        grid.innerHTML = '';
+        gridState.forEach((plant, index) => {
+            const cell = document.createElement('div');
+            cell.className = `grid-cell ${plant ? 'occupied' : ''}`;
+            if(plant) {
+                cell.innerHTML = `
+                    <div style="font-size: 1.2rem; margin-bottom: 2px;">${plant.name.split(' ')[0]}</div>
+                    <div style="font-size: 0.65rem; color: #cbd5e1; line-height: 1.1;">${plant.name.split(' ').slice(1).join(' ')}</div>
+                    <div style="font-size: 0.55rem; color: #38bdf8; margin-top: 2px;">Sq #${index+1}</div>
+                `;
+            } else {
+                cell.innerHTML = `<span style="color: #64748b; font-size: 0.75rem;">Sq #${index+1}<br>Empty</span>`;
+            }
+            cell.onclick = () => {
+                if(selectedPlant) {
+                    gridState[index] = selectedPlant;
+                    saveGridData();
+                    renderGrid();
+                    checkGridCompletion();
+                    updatePortfolioPreview();
+                } else {
+                    alert('Please select a plant from the catalog on the left first!');
+                }
+            };
+            grid.appendChild(cell);
+        });
+    }
+
+    function clearGrid() {
+        gridState = Array(16).fill(null);
+        saveGridData();
+        renderGrid();
+        checkGridCompletion();
+        updatePortfolioPreview();
+    }
+
+    function renderQuiz() {
+        const container = document.getElementById('quiz-question-container');
+        container.innerHTML = `
+            <p style="font-size: 0.95rem; font-weight: 600; color: #f8fafc; margin-bottom: 15px;">${quizData.question}</p>
+        `;
+        quizData.options.forEach((opt, idx) => {
+            const btn = document.createElement('div');
+            btn.className = 'quiz-option';
+            btn.innerText = opt;
+            btn.onclick = () => handleQuizAnswer(idx);
+            container.appendChild(btn);
+        });
+    }
+
+    function handleQuizAnswer(selectedIndex) {
+        const feedback = document.getElementById('quiz-feedback');
+        if(selectedIndex === quizData.correctIndex) {
+            quizPassed = true;
+            feedback.style.color = '#4ade80';
+            feedback.innerText = quizData.explanation;
+            
+            let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '450', 10);
+            if(!localStorage.getItem('afti_sfg_quiz_rewarded')) {
+                currentXP += 25;
+                localStorage.setItem('afti_global_xp', currentXP);
+                localStorage.setItem('afti_sfg_quiz_rewarded', 'true');
+                document.getElementById('global-points').innerText = currentXP;
+                if(window.awardGlobalXP) { window.awardGlobalXP(25); }
+            }
+        } else {
+            quizPassed = false;
+            feedback.style.color = '#f87171';
+            feedback.innerText = 'Incorrect. Review the Square Foot Gardening methodology section above and try again!';
+        }
+        checkGridCompletion();
+        updatePortfolioPreview();
+    }
+
+    function checkGridCompletion() {
+        const filledCount = gridState.filter(p => p !== null).length;
+        const statusEl = document.getElementById('grid-status');
+        statusEl.innerText = `Grid Status: ${filledCount} / 8 Minimum Squares Populated`;
+
+        if(filledCount >= 8) {
+            statusEl.style.color = '#4ade80';
+        } else {
+            statusEl.style.color = '#f59e0b';
+        }
+
+        const allDone = filledCount >= 8 && quizPassed;
+        document.getElementById('bridge-panel').style.display = allDone ? 'block' : 'none';
+    }
+
+    function saveGridData() {
+        localStorage.setItem('afti_sfg_grid', JSON.stringify(gridState.map(p => p ? p.id : null)));
+    }
+
+    function loadSavedData() {
+        const savedGrid = localStorage.getItem('afti_sfg_grid');
+        if(savedGrid) {
+            const ids = JSON.parse(savedGrid);
+            gridState = ids.map(id => plantCatalog.find(p => p.id === id) || null);
+            renderGrid();
+        }
+        if(localStorage.getItem('afti_sfg_quiz_rewarded') === 'true') {
+            quizPassed = true;
+            document.getElementById('quiz-feedback').style.color = '#4ade80';
+            document.getElementById('quiz-feedback').innerText = quizData.explanation;
+        }
+        checkGridCompletion();
+    }
+
+    function updatePortfolioPreview() {
+        const filledCount = gridState.filter(p => p !== null).length;
+        const populatedNames = [...new Set(gridState.filter(p => p !== null).map(p => p.name))].join(', ') || 'None';
+
+        const snippet = `PROJECT TITLE: Square Foot Gardening & Companion Science Design Challenge
+STATUS: ${filledCount}/16 Grid Squares Populated | Quiz Certification: ${quizPassed ? 'PASSED (+25 XP)' : 'Pending'}
+PLANTS UTILIZED: ${populatedNames}
+CORE PROTOCOLS AUTHORED:
+- Mel's Mix soil substrate composition and intensive raised bed spatial efficiency
+- Companion planting synergy for pest deterrence (marigolds/nematodes) and nitrogen fixation
+- Horticultural crop spacing densities and continuous harvest rotation management`;
+
+        document.getElementById('resume-output').innerText = snippet;
+    }
+</script>
+</body>
+</html>
