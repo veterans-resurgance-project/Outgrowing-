@@ -247,7 +247,7 @@
     function nextYear() {
         if (gameState.year >= 5) {
             alert(`Simulation Complete! You finished 5 years on the Independent Track with $${Math.round(gameState.cash).toLocaleString()}. Ready to compare with the Shared Harvest path?`);
-            window.location.href = 'index.html';
+            window.location.href = 'shared-harvest-hub.html';
         } else {
             gameState.year++;
             document.getElementById('screen-results').classList.add('hidden');
