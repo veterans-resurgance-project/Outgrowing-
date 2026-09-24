@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI Young Scientist Garden Lab & Question Desk</title>
+    <style>
+        :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --grey:#334155; }
+        body { font-family:system-ui, sans-serif; background:var(--bg); color:var(--txt); padding:20px; display:flex; justify-content:center; align-items:flex-start; min-height:100vh; margin:0; }
+        .container { width:100%; max-width:900px; background:var(--card); border-radius:14px; padding:35px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 32px rgba(0,0,0,0.5); margin-top:20px; margin-bottom:40px; }
+        .hud-bar { background:var(--hud); border-radius:8px; padding:10px 18px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:0.9rem; flex-wrap: wrap; gap: 10px; }
+        
+        .section-box { background: #0f172a; border: 1px solid #334155; padding: 25px; border-radius: 10px; margin-bottom: 25px; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 6px; font-weight: 600; text-transform: uppercase; }
+        .form-control { width: 100%; background: #141c2b; border: 1px solid #334155; color: #fff; padding: 12px; border-radius: 8px; box-sizing: border-box; font-family: inherit; font-size: 0.95rem; }
+        .form-control:focus { outline: none; border-color: var(--accent); }
+
+        .btn-action { background: var(--primary); color: #fff; border: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; font-size: 0.95rem; cursor: pointer; transition: background 0.2s; width: 100%; }
+        .btn-action:hover { background: #219653; }
+
+        .quiz-card { background: #141c2b; border: 1px solid #334155; padding: 18px; border-radius: 8px; margin-bottom: 15px; }
+        .quiz-option { display: block; background: #0f172a; border: 1px solid #334155; padding: 10px 15px; border-radius: 6px; margin-top: 8px; cursor: pointer; transition: background 0.2s; font-size: 0.9rem; }
+        .quiz-option:hover { background: #1e293b; border-color: var(--accent); }
+
+        .log-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.85rem; }
+        .log-table th, .log-table td { border: 1px solid #334155; padding: 10px; text-align: left; }
+        .log-table th { background: #141c2b; color: var(--accent); }
+        .log-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+        .success-banner { background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.4); padding: 15px; border-radius: 8px; text-align: center; display: none; margin-top: 15px; font-size: 0.9rem; color: #4ade80; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hud-bar">
+        <span>AFTI Youth Science &amp; Inquiry Portal</span>
+        <div style="display:flex; gap:10px; align-items:center; flex-wrap: wrap;">
+            <span>Global XP: <span id="global-points" style="color:#4ade80;">450</span></span>
+            <button onclick="window.location.href='square-foot-gardening.html'" style="background:#27ae60; color:#fff; border:none; padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer; font-weight: bold;">🌱 SFG Masterclass</button>
+            <button onclick="window.location.href='index.html'" style="background:#334155; color:#fff; border:1px solid rgba(255,255,255,0.2); padding:5px 12px; border-radius:6px; font-size:0.75rem; cursor:pointer;">🏠 Portal Gateway</button>
+        </div>
+    </div>
+    
+    <div>
+        <span style="background:rgba(56,189,248,0.15); color:var(--accent); font-size:0.75rem; font-weight:700; text-transform:uppercase; padding:4px 8px; border-radius:4px; display:inline-block; margin-bottom:10px;">STEM &amp; Community Engagement</span>
+        <h2 style="margin:0 0 0.5rem 0; font-size:1.6rem;">🔬 Little Scientist Garden Lab &amp; Question Desk</h2>
+        <p style="line-height:1.6; color:#cbd5e1; margin-bottom:25px;">Welcome, Young Scientists &amp; Teams! Test your botanical knowledge with our rapid learning quizzes, record daily plant growth data to earn XP points, and consult our expert panel with your garden questions.</p>
+        
+        <!-- SECTION 1: FUN LEARNING QUIZZES -->
+        <div class="section-box">
+            <h3 style="color:var(--accent); margin-top:0; font-size:1.1rem;">🧠 Garden Science Rapid Quizzes (+20 XP Each)</h3>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 20px;">Master these concepts to become an expert square foot gardener and boost your team's point total.</p>
+            
+            <div id="quiz-container">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+
+        <!-- SECTION 2: SCIENTIST OBSERVATION LOGGER -->
+        <div class="section-box">
+            <h3 style="color:var(--accent); margin-top:0; font-size:1.1rem;">📊 Team Plant Observation &amp; Growth Logger (+15 XP)</h3>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 20px;">Record your team measurements to track garden growth trends and earn team points.</p>
+            
+            <form id="science-log-form" onsubmit="handleScienceLog(event)">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>Scientist / Team Name</label>
+                        <input type="text" id="sci-name" class="form-control" placeholder="e.g. Team Green Thumbs" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Plant / Crop Name &amp; Grid #</label>
+                        <input type="text" id="sci-plant" class="form-control" placeholder="e.g. Heirloom Tomato (Square #1)" required>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>Plant Height (cm)</label>
+                        <input type="number" step="0.5" id="sci-height" class="form-control" placeholder="e.g. 12.5" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Leaf Count</label>
+                        <input type="number" id="sci-leaves" class="form-control" placeholder="e.g. 8" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Soil Moisture Check</label>
+                        <select id="sci-moisture" class="form-control">
+                            <option value="Wet / Moist">💧 Wet / Moist</option>
+                            <option value="Damp / Ideal">🌱 Damp / Ideal</option>
+                            <option value="Dry (Needs Water)">☀️ Dry (Needs Water)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Daily Scientific Notes &amp; Observations</label>
+                    <textarea id="sci-notes" class="form-control" rows="2" placeholder="e.g. First flower bud appeared today! Noticed ladybugs on stems..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-action">💾 Save Observation &amp; Claim Team XP</button>
+            </form>
+
+            <div id="log-success" class="success-banner">Observation successfully recorded! +15 XP added to your global total.</div>
+
+            <!-- LOG HISTORY TABLE -->
+            <div style="margin-top: 25px;">
+                <h4 style="color: var(--txt); font-size: 0.95rem; margin-bottom: 10px;">📋 Saved Observations Ledger</h4>
+                <div style="overflow-x: auto;">
+                    <table class="log-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Team / Scientist</th>
+                                <th>Plant</th>
+                                <th>Height</th>
+                                <th>Leaves</th>
+                                <th>Moisture</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="log-table-body">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: ASK A GARDEN EXPERT -->
+        <div class="section-box">
+            <h3 style="color:var(--accent); margin-top:0; font-size:1.1rem;">❓ Ask a Garden Expert</h3>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 20px;">Stuck on a pest, wondering why leaves are turning yellow, or have an idea for the Wish Garden? Send your question here!</p>
+            
+            <form id="question-form" onsubmit="handleQuestionSubmit(event)">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>Your Name / Team</label>
+                        <input type="text" id="q-name" class="form-control" placeholder="e.g. Alex" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Question Topic</label>
+                        <select id="q-topic" class="form-control">
+                            <option value="Pests & Insects">🐛 Pests &amp; Insects</option>
+                            <option value="Watering & Soil">💧 Watering &amp; Soil</option>
+                            <option value="Plant Health">🌿 Plant Health / Yellow Leaves</option>
+                            <option value="Wish Garden Idea">🌟 Wish Garden Idea</option>
+                            <option value="General Question">🔍 General Gardening Question</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Your Question for the Expert</label>
+                    <textarea id="q-text" class="form-control" rows="3" placeholder="Type your question clearly here..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-action" style="background: #38bdf8; color: #0f172a;">📤 Send Question to Expert</button>
+            </form>
+
+            <div id="q-success" class="success-banner" style="background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.4); color: #38bdf8;">Your question has been sent to our expert team! We will review it at our next garden workshop.</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Rapid Learning Quizzes Data
+    const learningQuizzes = [
+        {
+            id: 'quiz_1',
+            question: "🌿 Companion Science: Which brightly colored flower is famous for releasing root scents that repel harmful nematodes in a square foot garden?",
+            options: [
+                "A) Dandelion",
+                "B) French Marigold",
+                "C) Sunflower",
+                "D) Common Daisy"
+            ],
+            correct: 1,
+            explanation: "Correct! French Marigolds release natural compounds that deter root-knot nematodes, protecting nearby heavy feeders like tomatoes."
+        },
+        {
+            id: 'quiz_2',
+            question: "🥕 Spacing Strategy: How many carrot plants can you comfortably and efficiently grow in a single 1x1 foot square?",
+            options: [
+                "A) 1 plant",
+                "B) 4 plants",
+                "C) 9 plants",
+                "D) 16 plants"
+            ],
+            correct: 3,
+            explanation: "Correct! Small root crops like Nantes Carrots are planted at a dense spacing of 16 per square foot."
+        },
+        {
+            id: 'quiz_3',
+            question: "💧 Soil Science: What are the three equal parts that make up traditional 'Mel's Mix' soil substrate?",
+            options: [
+                "A) Clay, Sand, and Gravel",
+                "B) Vermiculite, Peat Moss, and Blended Compost",
+                "C) Topsoil, Sawdust, and Chemical Fertilizer",
+                "D) Bark Mulch, Perlite, and Peat"
+            ],
+            correct: 1,
+            explanation: "Correct! Mel's Mix uses 1/3 vermiculite for moisture, 1/3 peat moss for aeration, and 1/3 blended compost for nutrients."
+        }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+        updateXPDisplay();
+        renderQuizzes();
+        loadLogs();
+    });
+
+    function getGlobalXP() {
+        return parseInt(localStorage.getItem('afti_global_xp') || '450', 10);
+    }
+
+    function addGlobalXP(amount) {
+        let currentXP = getGlobalXP();
+        currentXP += amount;
+        localStorage.setItem('afti_global_xp', currentXP);
+        updateXPDisplay();
+    }
+
+    function updateXPDisplay() {
+        document.getElementById('global-points').innerText = getGlobalXP();
+    }
+
+    function renderQuizzes() {
+        const container = document.getElementById('quiz-container');
+        container.innerHTML = '';
+
+        learningQuizzes.forEach((q, qIndex) => {
+            const isCompleted = localStorage.getItem(`afti_lab_quiz_${q.id}`) === 'true';
+            
+            const card = document.createElement('div');
+            card.className = 'quiz-card';
+            
+            let optionsHTML = '';
+            q.options.forEach((opt, oIndex) => {
+                optionsHTML += `<div class="quiz-option" onclick="handleQuizAnswer('${q.id}', ${oIndex}, ${q.correct})">${opt}</div>`;
+            });
+
+            card.innerHTML = `
+                <div style="font-size: 0.95rem; font-weight: bold; color: #f8fafc; margin-bottom: 10px;">Question ${qIndex + 1}: ${q.question}</div>
+                <div id="quiz-options-${q.id}">
+                    ${isCompleted ? `<div style="color: #4ade80; font-size: 0.85rem; font-weight: bold; padding: 8px; background: rgba(39,174,96,0.1); border-radius: 6px;">✅ Completed! (+20 XP Earned) — ${q.explanation}</div>` : optionsHTML}
+                </div>
+                <div id="quiz-feedback-${q.id}" style="margin-top: 10px; font-size: 0.85rem; font-weight: 600;"></div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function handleQuizAnswer(quizId, selectedIdx, correctIdx) {
+        const feedbackEl = document.getElementById(`quiz-feedback-${quizId}`);
+        const quizObj = learningQuizzes.find(q => q.id === quizId);
+
+        if (selectedIdx === correctIdx) {
+            feedbackEl.style.color = '#4ade80';
+            feedbackEl.innerText = quizObj.explanation;
+            
+            if (localStorage.getItem(`afti_lab_quiz_${quizId}`) !== 'true') {
+                localStorage.setItem(`afti_lab_quiz_${quizId}`, 'true');
+                addGlobalXP(20);
+                setTimeout(() => renderQuizzes(), 1500);
+            }
+        } else {
+            feedbackEl.style.color = '#f87171';
+            feedbackEl.innerText = 'Incorrect! Review your Square Foot Gardening notes and try again.';
+        }
+    }
+
+    function handleScienceLog(event) {
+        event.preventDefault();
+        
+        const entry = {
+            date: new Date().toLocaleDateString(),
+            name: document.getElementById('sci-name').value,
+            plant: document.getElementById('sci-plant').value,
+            height: document.getElementById('sci-height').value + ' cm',
+            leaves: document.getElementById('sci-leaves').value,
+            moisture: document.getElementById('sci-moisture').value,
+            notes: document.getElementById('sci-notes').value || 'None'
+        };
+
+        let logs = JSON.parse(localStorage.getItem('afti_scientist_logs') || '[]');
+        logs.unshift(entry); 
+        localStorage.setItem('afti_scientist_logs', JSON.stringify(logs));
+
+        // Award XP for logging data
+        addGlobalXP(15);
+
+        // Reset form & show banner
+        document.getElementById('science-log-form').reset();
+        const banner = document.getElementById('log-success');
+        banner.style.display = 'block';
+        setTimeout(() => { banner.style.display = 'none'; }, 4000);
+
+        loadLogs();
+    }
+
+    function loadLogs() {
+        const tbody = document.getElementById('log-table-body');
+        const logs = JSON.parse(localStorage.getItem('afti_scientist_logs') || '[]');
+        
+        if(logs.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #64748b;">No observations logged yet. Be the first team to add an entry!</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = '';
+        logs.forEach(log => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${log.date}</td>
+                <td>${log.name}</td>
+                <td>${log.plant}</td>
+                <td>${log.height}</td>
+                <td>${log.leaves}</td>
+                <td>${log.moisture}</td>
+                <td>${log.notes}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function handleQuestionSubmit(event) {
+        event.preventDefault();
+
+        const questionEntry = {
+            date: new Date().toLocaleDateString(),
+            name: document.getElementById('q-name').value,
+            topic: document.getElementById('q-topic').value,
+            question: document.getElementById('q-text').value
+        };
+
+        let questions = JSON.parse(localStorage.getItem('afti_garden_questions') || '[]');
+        questions.unshift(questionEntry);
+        localStorage.setItem('afti_garden_questions', JSON.stringify(questions));
+
+        document.getElementById('question-form').reset();
+        const banner = document.getElementById('q-success');
+        banner.style.display = 'block';
+        setTimeout(() => { banner.style.display = 'none'; }, 4000);
+    }
+</script>
+</body>
+</html>
