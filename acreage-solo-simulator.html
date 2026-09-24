@@ -130,6 +130,31 @@
 </div>
 
 <script>
+   
+    // Complete 5-Year Independent Solo Track Narratives
+const soloTrackNarratives = {
+    1: {
+        title: "Year 1: The Solo Prep, The YouTube Crop Trap, & Hard Lessons",
+        story: "You did it—you finally have a place to grow, and you know that with enough hard work, you can make it. But this first year was brutal. Everyone worked incredibly long hours just to get the site prepped. Realizing you couldn't manage the whole plot alone, you made a handshake deal letting a neighbor use three acres to grow a wide variety of high-dollar crops they saw on YouTube, promising a share of the harvest as a 'sure thing, the way of the future.' Well... as it turned out, they made a massive mess, failed to show up to take care of it, and assumed it would just grow itself. Cleaning up their neglected plot caused you more work than if you'd farmed it alone—and now they are mad at you. But through pure grit and relentless hard work, you live to fight another season. You're a little bruised, but the lesson is learned."
+    },
+    2: {
+        title: "Year 2: Guarded Independence, Heat Spikes, and Field Losses",
+        story: "That neighbor land-share fiasco taught you a harsh lesson. You enter Year 2 more determined than ever to go it entirely alone—no more risking outside entanglements. You and the family poured everything into the greens, and you did well. However, brutal summer heat caused product loss during harvest and storage. Plus, one of the kids accidentally ruined their phone out in the fields while working, setting you back $1,200 for equipment and spoilage. Combined with unpredictable weather, it was an uphill battle. But you made it, and you still pulled off a profit. Don't let anyone ever tell you farmers don't work hard."
+    },
+    3: {
+        title: "Year 3: Burnout, The Wish Garden, and Early Morning Pivots",
+        story: "By Year 3, the constant grind was taking a heavy toll. Everyone was exhausted, and the family was starting to think this lifestyle wasn't so much fun anymore—which defeated the entire reason you started this journey in the first place. But then you spotted a notice for a 'wish garden' complete with unique planting recipes and guides. Figuring that if you were going to go down, you were going to go down swinging, you decided to devote one acre to it. The family loved the concept and agreed. While the work was still fiercely demanding, a bit of practical wisdom from local garden volunteers helped you make crucial changes: you shifted harvests to the cool early morning hours, locked up the phones until break time, and walked away with a surprisingly better harvest and some solid marketing advice. The family is back on board, though you know you'll need to figure out a real vacation or emergency backup plan next year. You did a little better this time—let's see how next year goes."
+    },
+    4: {
+        title: "Year 4: The Research Plot, Specialty Crops, and Finding a Rhythm",
+        story: "The family has been itching to grow some higher-dollar crops, but the startup costs are out of reach, and you're already working 24/7. Switching tracks entirely wasn't an option—you finally have a rough system that is feeding you and keeping you afloat. However, you did agree to host a small shared harvest research and educational plot (marking Year 2 of your wish garden experiment), which finally gave you a way to learn new specialty crops with zero startup costs. It requires a very precise routine, but when you follow the steps, the results are fantastic. You can genuinely see the potential in these crops, and the kids are completely hooked on the science behind it. It turned out to be a really good year. You're still looking forward to that long-overdue vacation, but you're stepping into the future with much more confidence that you're going to make it."
+    },
+    5: {
+        title: "Year 5: The First Vacation, Trusted Partners, and the Expansion Crossroads",
+        story: "Year 5 finally brought the impossible: a real, actual vacation! With the wish garden in its third year and your new specialty shared crop agreements, you've finally built a network of partners you genuinely trust, allowing you to step away, relax, and have some fun before the next planting season. Looking back over five grueling years, you've transformed from a stressed-out solo beginner into a resilient grower who knows how to survive the hard knocks. But success brings a new challenge: how to expand. The family vote is completely split, ranging from adding ponies and goats to leasing more acreage or investing heavily in infrastructure. Remembering the hard lessons of the past—'fool me once'—you know you have to map this out carefully, weighing the real costs and challenges of each path. Whatever comes next, you're stepping into it with confidence and your family right by your side."
+    }
+};
+    
     let gameState = {
         cash: 25000, year: 1,
         acres: { greens: 3, root: 2, berries: 2, mushrooms: 1, apiary: 1, flowers: 1 },
