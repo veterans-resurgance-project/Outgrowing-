@@ -1,0 +1,5 @@
+// Updated Year 1 Shared Harvest Narrative Integration
+const sharedHarvestYear1Narrative = {
+    title: "Year 1: The Hard Work, Fresh Greens, & Junior Scientist Gardens",
+    story: "Year one was grueling—much harder work than you or the family ever expected. But you made it through to the second year with a verified profit! With an $8,000 starting budget, startup costs meant you had to concentrate solely on fast-turnaround fresh greens. Fortunately, through the team's digital connection hub, you learned post-harvest storage and processing procedures you hadn't considered before, allowing you to secure top dollar for your yield. With newfound knowledge and the comforting realization that you aren't alone, you enter Year 2 with real confidence. Even better, the kids are learning the ropes and helping out more—especially with their favorite junior scientist test gardens. You're tired, but looking forward to what next year brings."
+};
