@@ -1,0 +1,7 @@
+<div class="hud-bar">
+    <span>Campaign: <span style="color:var(--accent);">Shared Harvest &amp; Learning Track</span></span>
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <span>Year: <strong id="hud-year" style="color:var(--accent);">1</strong> / 5 | Cash: <strong id="hud-cash" style="color:#6ee7b7;">$8,000</strong></span>
+        <a href="acreage-path-select.html" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.8rem; text-decoration: none;">&larr; Exit Simulation</a>
+    </div>
+</div>
