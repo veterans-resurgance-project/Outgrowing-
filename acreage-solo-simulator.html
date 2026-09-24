@@ -52,7 +52,7 @@
         <span class="active-path-badge">⚡ Hard Mode Simulation</span>
         <h1>⚡ Welcome to the Independent Solo Farm Startup</h1>
         <p style="font-size: 1.05rem; line-height: 1.7;">
-            You have chosen total autonomy with <strong>$25,000 in self-funded capital</strong>. In Years 1 and 2, budget and startup limits restrict you strictly to fast-turnaround greens and root vegetables. Specialty crops unlock in Year 3 with the Wish Garden and daily task lists.
+            You have chosen total autonomy with <strong>$25,000 in self-funded capital</strong>. Years 1 through 3 restrict you strictly to fast-turnaround greens and root vegetables. Specialty crops unlock in Year 4 once you host the research plot and review the daily operational task checklists.
         </p>
         <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
             <a href="acreage-path-select.html" class="btn btn-secondary">&larr; Back to Path Selection</a>
@@ -61,15 +61,15 @@
     </div>
 
     <!-- ALLOCATION SCREEN -->
-    <div id="screen-allocate" class="panel">
+    <div id="screen-allocate" class="panel hidden">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 15px;">
             <h1 id="allocation-title" style="margin:0; border:none; padding:0;">Year 1: Allocate Your 10 Acres (Solo Mode)</h1>
             <span class="active-path-badge">⚡ Independent Track</span>
         </div>
-        <p id="allocation-subtitle" style="color:var(--accent);">Years 1 &amp; 2: Limited to Greens &amp; Root Crops due to startup budget constraints.</p>
+        <p id="allocation-subtitle" style="color:var(--accent);">Years 1–3: Limited to Greens &amp; Root Crops due to startup budget constraints.</p>
 
         <div id="specialty-lock-notice" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 12px 15px; margin-bottom: 15px; color: #fca5a5; font-size: 0.9rem;">
-            🔒 <strong>Specialty Crops Locked:</strong> Berries, Mushrooms, Apiary, and Flowers are restricted during Years 1 &amp; 2. They will unlock in Year 3 with your Wish Garden and daily task list routine!
+            🔒 <strong>Specialty Crops Locked:</strong> Berries, Mushrooms, Apiary, and Flowers are restricted during Years 1, 2, &amp; 3. They will unlock in Year 4 after reviewing the daily task checklists!
         </div>
 
         <div class="acre-allocation-grid">
@@ -85,30 +85,30 @@
                 <input type="number" id="alloc-root" value="4" min="0" max="10" oninput="validateAcres()">
             </div>
 
-            <!-- UNLOCKED YEAR 3+ -->
+            <!-- UNLOCKED YEAR 4+ -->
             <div class="acre-input-box" id="box-berries">
                 <span class="enterprise-icon">🍓</span>
                 <label><strong>High-Tunnel Berries</strong><br><span style="font-size:0.8rem;">Cost: $8,500/ac | Rev: $11,000/ac</span></label>
                 <input type="number" id="alloc-berries" value="0" min="0" max="10" oninput="validateAcres()" disabled>
-                <span class="lock-badge" id="lock-berries">🔒 Unlocks Year 3</span>
+                <span class="lock-badge" id="lock-berries">🔒 Unlocks Year 4</span>
             </div>
             <div class="acre-input-box" id="box-mushrooms">
                 <span class="enterprise-icon">🍄</span>
                 <label><strong>Mushroom Cultivation</strong><br><span style="font-size:0.8rem;">Cost: $4,500/ac | Rev: $7,500/ac</span></label>
                 <input type="number" id="alloc-mushrooms" value="0" min="0" max="10" oninput="validateAcres()" disabled>
-                <span class="lock-badge" id="lock-mushrooms">🔒 Unlocks Year 3</span>
+                <span class="lock-badge" id="lock-mushrooms">🔒 Unlocks Year 4</span>
             </div>
             <div class="acre-input-box" id="box-apiary">
                 <span class="enterprise-icon">🐝</span>
                 <label><strong>Apiary &amp; Pollination</strong><br><span style="font-size:0.8rem;">Cost: $3,200/ac | Rev: $4,200/ac</span></label>
                 <input type="number" id="alloc-apiary" value="0" min="0" max="10" oninput="validateAcres()" disabled>
-                <span class="lock-badge" id="lock-apiary">🔒 Unlocks Year 3</span>
+                <span class="lock-badge" id="lock-apiary">🔒 Unlocks Year 4</span>
             </div>
             <div class="acre-input-box" id="box-flowers">
                 <span class="enterprise-icon">🌸</span>
                 <label><strong>Specialty Cut Flowers</strong><br><span style="font-size:0.8rem;">Cost: $5,500/ac | Rev: $9,500/ac</span></label>
                 <input type="number" id="alloc-flowers" value="0" min="0" max="10" oninput="validateAcres()" disabled>
-                <span class="lock-badge" id="lock-flowers">🔒 Unlocks Year 3</span>
+                <span class="lock-badge" id="lock-flowers">🔒 Unlocks Year 4</span>
             </div>
         </div>
 
@@ -140,6 +140,12 @@
         <div class="narrative-card">
             <h3 id="narrative-title" style="color:var(--accent); margin-top:0;">Title</h3>
             <p id="narrative-story" style="font-size: 1.1rem; line-height: 1.8; color: var(--txt); margin-bottom: 0;"></p>
+        </div>
+        <!-- Optional Checklist Link for Year 3 End -->
+        <div id="checklist-callout" style="display: none; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 15px; margin-top: 20px;">
+            <h4 style="color:var(--accent); margin-top:0;">📋 Preparation for Year 4 Specialty Crops</h4>
+            <p style="font-size: 0.95rem; margin-bottom: 10px;">Before entering Year 4 and unlocking your specialty research plot, review the daily operational steps and routines:</p>
+            <a href="tasks-checklist.html" class="btn btn-secondary" style="font-size: 0.9rem; padding: 8px 16px;">View Daily Tasks Checklist →</a>
         </div>
         <div style="margin-top: 30px; text-align: right;">
             <button class="btn" onclick="advanceToNextYearOrHub()">Step Into Next Season →</button>
@@ -195,8 +201,8 @@
         let specialtyInputs = ['alloc-berries', 'alloc-mushrooms', 'alloc-apiary', 'alloc-flowers'];
         let specialtyLocks = ['lock-berries', 'lock-mushrooms', 'lock-apiary', 'lock-flowers'];
         
-        if (gameState.year < 3) {
-            // Lock specialty crops for Years 1 & 2
+        if (gameState.year < 4) {
+            // Lock specialty crops for Years 1, 2, & 3
             specialtyBoxes.forEach((id, idx) => {
                 document.getElementById(id).style.opacity = '0.4';
                 let inp = document.getElementById(specialtyInputs[idx]);
@@ -207,7 +213,6 @@
             document.getElementById('specialty-lock-notice').style.display = 'block';
             document.getElementById('allocation-subtitle').innerText = `Year ${gameState.year}: Restricted to Greens & Root Crops due to startup budget constraints.`;
             
-            // Ensure default allocation sums to 10 between greens and root
             let currentGreens = parseInt(document.getElementById('alloc-greens').value) || 0;
             let currentRoot = parseInt(document.getElementById('alloc-root').value) || 0;
             if (currentGreens + currentRoot !== 10) {
@@ -215,14 +220,14 @@
                 document.getElementById('alloc-root').value = 4;
             }
         } else {
-            // Unlock specialty crops starting Year 3 (Wish Garden / Daily Task List routine unlocked)
+            // Unlock specialty crops starting Year 4 (Research plot & daily tasks mastered)
             specialtyBoxes.forEach((id, idx) => {
                 document.getElementById(id).style.opacity = '1';
                 document.getElementById(specialtyInputs[idx]).disabled = false;
                 document.getElementById(specialtyLocks[idx]).style.display = 'none';
             });
             document.getElementById('specialty-lock-notice').style.display = 'none';
-            document.getElementById('allocation-subtitle').innerText = `Year ${gameState.year}: Wish Garden & Specialty Crops Unlocked! Allocate your 10 acres.`;
+            document.getElementById('allocation-subtitle').innerText = `Year ${gameState.year}: Research Plot & Specialty Crops Unlocked! Allocate your 10 acres.`;
         }
         validateAcres();
     }
@@ -230,10 +235,10 @@
     function validateAcres() {
         let g = parseInt(document.getElementById('alloc-greens').value) || 0;
         let r = parseInt(document.getElementById('alloc-root').value) || 0;
-        let b = (gameState.year >= 3) ? (parseInt(document.getElementById('alloc-berries').value) || 0) : 0;
-        let m = (gameState.year >= 3) ? (parseInt(document.getElementById('alloc-mushrooms').value) || 0) : 0;
-        let a = (gameState.year >= 3) ? (parseInt(document.getElementById('alloc-apiary').value) || 0) : 0;
-        let f = (gameState.year >= 3) ? (parseInt(document.getElementById('alloc-flowers').value) || 0) : 0;
+        let b = (gameState.year >= 4) ? (parseInt(document.getElementById('alloc-berries').value) || 0) : 0;
+        let m = (gameState.year >= 4) ? (parseInt(document.getElementById('alloc-mushrooms').value) || 0) : 0;
+        let a = (gameState.year >= 4) ? (parseInt(document.getElementById('alloc-apiary').value) || 0) : 0;
+        let f = (gameState.year >= 4) ? (parseInt(document.getElementById('alloc-flowers').value) || 0) : 0;
 
         let total = g + r + b + m + a + f;
         let cost = (g * enterpriseData.greens.cost) + (r * enterpriseData.root.cost) + 
@@ -260,10 +265,10 @@
         gameState.acres = {
             greens: parseInt(document.getElementById('alloc-greens').value) || 0,
             root: parseInt(document.getElementById('alloc-root').value) || 0,
-            berries: (gameState.year >= 3) ? (parseInt(document.getElementById('alloc-berries').value) || 0) : 0,
-            mushrooms: (gameState.year >= 3) ? (parseInt(document.getElementById('alloc-mushrooms').value) || 0) : 0,
-            apiary: (gameState.year >= 3) ? (parseInt(document.getElementById('alloc-apiary').value) || 0) : 0,
-            flowers: (gameState.year >= 3) ? (parseInt(document.getElementById('alloc-flowers').value) || 0) : 0
+            berries: (gameState.year >= 4) ? (parseInt(document.getElementById('alloc-berries').value) || 0) : 0,
+            mushrooms: (gameState.year >= 4) ? (parseInt(document.getElementById('alloc-mushrooms').value) || 0) : 0,
+            apiary: (gameState.year >= 4) ? (parseInt(document.getElementById('alloc-apiary').value) || 0) : 0,
+            flowers: (gameState.year >= 4) ? (parseInt(document.getElementById('alloc-flowers').value) || 0) : 0
         };
 
         let cost = 0; let rev = 0;
@@ -330,6 +335,13 @@
         document.getElementById('narrative-heading').innerText = `Chapter ${gameState.year}: The Solo Journey`;
         document.getElementById('narrative-title').innerText = currentNarrative.title;
         document.getElementById('narrative-story').innerText = currentNarrative.story;
+
+        // Show checklist callout specifically at the end of Year 3 before heading into Year 4
+        if (gameState.year === 3) {
+            document.getElementById('checklist-callout').style.display = 'block';
+        } else {
+            document.getElementById('checklist-callout').style.display = 'none';
+        }
     }
 
     function advanceToNextYearOrHub() {
