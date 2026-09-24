@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acreage Simulator | Program Overview &amp; Guide</title>
+    <style>
+        :root {
+            --bg: #0f172a; --card: #1e293b; --txt: #f8fafc; --primary: #27ae60; --primary-dark: #1e8449;
+            --hud: #144d29; --accent: #38bdf8; --muted: #94a3b8; --border: rgba(255, 255, 255, 0.1);
+            --warn: #f59e0b; --danger: #ef4444;
+        }
+        body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 20px; line-height: 1.6; }
+        .container { max-width: 950px; margin: 20px auto; background: var(--card); border-radius: 14px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background: var(--hud); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; flex-wrap: wrap; gap: 10px; }
+        h1 { color: #4ade80; font-size: 1.8rem; margin-top: 0; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+        h2 { color: var(--accent); font-size: 1.2rem; margin-top: 25px; border-left: 4px solid var(--accent); padding-left: 10px; }
+        p { color: var(--muted); } 
+        strong { color: var(--txt); }
+        
+        .panel { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px; padding: 25px; margin-top: 20px; }
+        
+        /* Image Placeholder Box */
+        .image-placeholder {
+            width: 100%;
+            height: 320px;
+            background: #141c2b;
+            border: 2px dashed rgba(56, 189, 248, 0.4);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+        .image-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+        .placeholder-text {
+            color: var(--accent);
+            font-size: 1.05rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .placeholder-sub {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 20px; }
+        .guide-card { background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+
+        .btn-container { display: flex; justify-content: space-between; align-items: center; margin-top: 35px; border-top: 1px solid var(--border); padding-top: 20px; flex-wrap: wrap; gap: 15px; }
+        .btn { background: var(--primary); color: #fff; padding: 12px 24px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-block; font-size: 0.95rem; }
+        .btn:hover { background: var(--primary-dark); }
+        .btn-secondary { background: #334155; }
+        .btn-secondary:hover { background: #475569; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hud-bar">
+        <span>AFTI Agricultural Simulation</span>
+        <div>Module: <strong style="color:var(--accent);">Years 1–5 Startup Overview</strong></div>
+    </div>
+
+    <!-- MAIN INTRODUCTION PANEL -->
+    <div class="panel">
+        <h1>🌱 Welcome to the Linn County Acreage Simulator</h1>
+        <p style="font-size: 1.05rem; line-height: 1.7;">
+            Before stepping into your 10-acre agricultural startup, this briefing outlines how your operational decisions will dictate your success over a 5-year economic cycle. You will balance capital allocation, leverage cooperative partnerships, and weather unpredictable regional challenges.
+        </p>
+
+        <!-- IMAGE PLACEHOLDER BOX (Ready for your image insertion later) -->
+        <div class="image-placeholder" id="graphic-dropzone">
+            <!-- 
+              To add your image later, replace the inner HTML or insert an <img> tag like:
+              <img src="your-image-file.png" alt="Simulator Overview">
+            -->
+            <div style="font-size: 3rem; margin-bottom: 10px;">🖼️</div>
+            <div class="placeholder-text">[ Insert Simulator Concept / Map Graphic Here ]</div>
+            <div class="placeholder-sub">Recommended dimensions: 800px × 400px or higher. Drop your image asset into this container.</div>
+        </div>
+
+        <h2>📋 Core Simulation Mechanics &amp; Goals</h2>
+        <div class="guide-grid">
+            <div class="guide-card">
+                <h3 style="color:#fff; margin-top:0; font-size:1rem;">1. Track Selection</h3>
+                <p style="font-size: 0.85rem; margin-bottom:0;">Choose between a <strong>Bootstrapping Track</strong> ($8k starting cash with Shared Harvest subsidies) or an <strong>Independent Track</strong> ($25k starting cash with total autonomy).</p>
+            </div>
+            <div class="guide-card">
+                <h3 style="color:#fff; margin-top:0; font-size:1rem;">2. Acre Allocation</h3>
+                <p style="font-size: 0.85rem; margin-bottom:0;">Distribute your 10 land plots across high-yield enterprises: Leafy Greens, Root Veggies, High-Tunnel Berries, Mushrooms, Apiary, and Cut Flowers.</p>
+            </div>
+            <div class="guide-card">
+                <h3 style="color:#fff; margin-top:0; font-size:1rem;">3. Seasonal Events</h3>
+                <p style="font-size: 0.85rem; margin-bottom:0;">Navigate variable climate shocks (like late spring frost) and take advantage of bumper harvest markets or advisory mitigation protocols.</p>
+            </div>
+        </div>
+
+        <h2>🎯 Your 5-Year Objective</h2>
+        <p style="margin-bottom: 0;">
+            Manage overhead, maintain cash flow through multi-year crop cycles (such as establishing perennial berries), and successfully scale your enterprise across 5 full operational seasons to unlock your final graduation report and advance to the Shared Harvest Hub.
+        </p>
+    </div>
+
+    <!-- NAVIGATION BUTTONS -->
+    <div class="btn-container">
+        <a href="index.html" class="btn btn-secondary">&larr; Return to Portal Gateway</a>
+        <a href="acreage-simulator.html" class="btn">Launch Acreage Simulator (Years 1–5) &rarr;</a>
+    </div>
+
+</div>
+
+</body>
+</html>
