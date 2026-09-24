@@ -3,108 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shared Harvest Hub | Years 6–10 Convergence</title>
+    <title>Year 6 Farm Ownership Convergence Hub</title>
     <style>
         :root {
-            --bg: #0f172a; --card: #1e293b; --txt: #f8fafc; --primary: #27ae60; --primary-dark: #1e8449;
-            --hud: #144d29; --accent: #38bdf8; --muted: #94a3b8; --border: rgba(255, 255, 255, 0.1);
-            --warn: #f59e0b; --success: #4ade80;
+            --bg: #0f172a; --card: #1e293b; --txt: #f8fafc; --primary: #10b981; --primary-dark: #059669;
+            --hud: #064e3b; --accent: #34d399; --muted: #94a3b8; --border: rgba(255, 255, 255, 0.1);
+            --danger: #ef4444; --warning-glow: rgba(16, 185, 129, 0.15); --selected-glow: rgba(52, 211, 153, 0.3);
         }
         body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 20px; line-height: 1.6; }
-        .container { max-width: 1000px; margin: 20px auto; background: var(--card); border-radius: 14px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
-        .hud-bar { background: var(--hud); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; flex-wrap: wrap; gap: 10px; }
-        h1 { color: #4ade80; font-size: 1.8rem; margin-top: 0; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+        .container { max-width: 1100px; margin: 20px auto; background: var(--card); border-radius: 14px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background: var(--hud); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; flex-wrap: wrap; gap: 10px; border: 1px solid rgba(52, 211, 153, 0.3); }
+        h1 { color: #6ee7b7; font-size: 1.8rem; margin-top: 0; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
         h2 { color: var(--accent); font-size: 1.2rem; margin-top: 25px; border-left: 4px solid var(--accent); padding-left: 10px; }
         p, label { color: var(--muted); } strong { color: var(--txt); }
-        
         .panel { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px; padding: 25px; margin-top: 20px; }
-        
-        .journal-box { background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 20px; margin-top: 15px; }
-        
-        .btn { background: var(--primary); color: #fff; padding: 12px 24px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-block; }
-        .btn:hover { background: var(--primary-dark); }
-        .btn-secondary { background: #334155; }
+        .btn { background: var(--primary); color: #022c22; padding: 12px 24px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: var(--primary-dark); color: #fff; }
+        .btn-secondary { background: #334155; color: #fff; }
         .btn-secondary:hover { background: #475569; }
+
+        .finance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-top: 15px; }
+        .finance-card { background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; }
+        .finance-val { font-size: 1.6rem; color: var(--accent); font-weight: bold; margin-top: 5px; }
+
+        .twin-options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 20px; margin-top: 20px; }
+        .twin-option-card { background: rgba(15, 23, 42, 0.8); border: 2px solid var(--border); border-radius: 10px; padding: 22px; cursor: pointer; transition: all 0.2s ease; position: relative; }
+        .twin-option-card:hover { border-color: rgba(52, 211, 153, 0.5); transform: translateY(-3px); }
+        .twin-option-card.selected { border-color: var(--accent); background: rgba(16, 185, 129, 0.08); box-shadow: 0 0 15px var(--selected-glow); }
+        
+        .badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
+        .badge-green { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .badge-warning { background: rgba(245, 158, 11, 0.2); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.4); }
+
+        .requirement-box { background: rgba(0,0,0,0.3); border-radius: 6px; padding: 12px; margin-top: 12px; font-size: 0.9rem; border-left: 3px solid var(--accent); }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="hud-bar">
-        <span>Shared Harvest Hub</span>
-        <div>Campaign Stage: <strong style="color:var(--accent);">Years 6–10 Convergence</strong></div>
+        <span>Milestone: <span style="color:var(--accent);">Year 6 Farm Ownership Convergence</span></span>
+        <div>Status: <strong style="color:#6ee7b7;">Deed Acquired</strong> | Reserve Cash: <strong style="color:var(--accent);">$50,000</strong></div>
     </div>
 
-    <!-- WELCOME / JOURNAL PANEL -->
-    <div class="panel">
-        <h1>🌟 Welcome to the Shared Harvest Convergence Hub</h1>
-        <p style="font-size: 1.05rem;">
-            You have successfully navigated your first 5-year agricultural cycle! Your operational paths now merge here in the regional hub for Years 6 through 10.
+    <!-- WELCOME & FINANCIAL RESTRUCTURE PANEL -->
+    <div id="screen-finance" class="panel">
+        <span class="badge badge-green">🚜 Full Generational Ownership</span>
+        <h1>Welcome to Year 6: The Farm Deed is Yours</h1>
+        <p style="font-size: 1.05rem; line-height: 1.7;">
+            Whether you arrived via the Independent Solo Track or the Shared Harvest Learning Track, your paths have successfully merged. You have officially purchased the farm property. To anchor this next chapter, you begin with a <strong>$50,000 cash reserve</strong>, balanced against a new long-term farm mortgage and an employment-backed credit safety line.
         </p>
 
-        <div class="journal-box">
-            <h3 style="color:var(--accent); margin-top:0;">📖 Your 5-Year Farm Journal &amp; Financial Summary</h3>
-            <p id="player-score-summary" style="color: var(--txt); line-height: 1.7; margin-bottom: 0;">
-                Loading your stored 5-year results from localStorage...
-            </p>
+        <div class="finance-grid">
+            <div class="finance-card">
+                <label>Starting Cash Reserve</label>
+                <div class="finance-val" style="color:#6ee7b7;">$50,000</div>
+                <p style="font-size:0.8rem; margin:5px 0 0 0;">Liquid operating capital</p>
+            </div>
+            <div class="finance-card">
+                <label>Annual Farm Mortgage</label>
+                <div class="finance-val" style="color:#fcd34d;">-$7,400 / yr</div>
+                <p style="font-size:0.8rem; margin:5px 0 0 0;">Principal &amp; interest service</p>
+            </div>
+            <div class="finance-card">
+                <label>Off-Farm Credit Line</label>
+                <div class="finance-val" style="color:#38bdf8;">12% Deduction</div>
+                <p style="font-size:0.8rem; margin:5px 0 0 0;">Automated payroll offset for short-term gaps</p>
+            </div>
         </div>
 
-        <h2>🚀 Entering Years 6 through 10: Advanced Scaling</h2>
-        <p>
-            With your foundation established, Years 6–10 introduce regional land stewardship, advanced automated internet marketing funnels, and bulk cooperative distribution contracts across Linn County.
+        <div style="margin-top: 30px; text-align: right;">
+            <button class="btn" onclick="showTwinsSection()">Proceed to the Twins' 5-Acre Allocation →</button>
+        </div>
+    </div>
+
+    <!-- TWINS 5-ACRE ENTERPRISE SELECTION PANEL -->
+    <div id="screen-twins" class="panel hidden">
+        <span class="badge badge-warning">👨‍👩‍👧‍👦 Next Generation Integration</span>
+        <h1>The Twins' 5-Acre Enterprise Decision</h1>
+        <p style="font-size: 1.05rem; line-height: 1.7;">
+            Your twins have turned 18 and are claiming their promised 5-acre carve-out to run their own venture. They start with <strong>$1,000 combined cash</strong> and shared access to the family Kubota tractor. 
+            <br><em>Rule:</em> Because $1,000 is not enough for full startup infrastructure immediately, every path requires dedicating at least 2 to 3 acres in Year 1 to fast-turnaround starter crops to fund their vision.
         </p>
+
+        <div class="twin-options-grid">
+            <!-- OPTION A: PONIES -->
+            <div class="twin-option-card" id="card-ponies" onclick="selectTwinPath('ponies')">
+                <span style="font-size:2rem; float:right;">🐴</span>
+                <span class="badge badge-warning">Option A: Equine &amp; Ponies</span>
+                <h3 style="color:var(--txt); margin: 5px 0 10px 0;">Ponies &amp; Pasture Care</h3>
+                <p style="font-size:0.9rem;">Small-scale pony boarding, riding lessons, and petting agritourism.</p>
+                
+                <div class="requirement-box">
+                    <strong>Financial Realities:</strong><br>
+                    • Startup Cost: $4,500 ($3,500 funding gap)<br>
+                    • **Year 1 Mandate:** Must devote 3 acres to high-margin cut flowers and honeybees.<br>
+                    • **Required Module:** Animal Husbandry &amp; Rotational Grazing Prep.
+                </div>
+            </div>
+
+            <!-- OPTION B: POTATOES -->
+            <div class="twin-option-card" id="card-potatoes" onclick="selectTwinPath('potatoes')">
+                <span style="font-size:2rem; float:right;">🥔</span>
+                <span class="badge badge-green">Option B: Staple Crops</span>
+                <h3 style="color:var(--txt); margin: 5px 0 10px 0;">Bulk Potato Production</h3>
+                <p style="font-size:0.9rem;">High-yield root crop production for local storage buyers and markets.</p>
+                
+                <div class="requirement-box">
+                    <strong>Financial Realities:</strong><br>
+                    • Startup Cost: $1,200 ($200 funding gap)<br>
+                    • **Year 1 Mandate:** Intensive Kubota tillage on 3 acres of potatoes + 2 acres of quick leafy greens.<br>
+                    • **Required Module:** Tractor Attachment Maintenance &amp; Bulk Logistics.
+                </div>
+            </div>
+
+            <!-- OPTION C: HIPCAMP -->
+            <div class="twin-option-card" id="card-hipcamp" onclick="selectTwinPath('hipcamp')">
+                <span style="font-size:2rem; float:right;">⛺</span>
+                <span class="badge" style="background:rgba(56, 189, 248, 0.2); color:#38bdf8; border:1px solid rgba(56, 189, 248, 0.4);">Option C: Hospitality</span>
+                <h3 style="color:var(--txt); margin: 5px 0 10px 0;">Hipcamp &amp; Eco-Camping</h3>
+                <p style="font-size:0.9rem;">Low-impact glamping sites, tent platforms, and farm-stay camping.</p>
+                
+                <div class="requirement-box">
+                    <strong>Financial Realities:</strong><br>
+                    • Startup Cost: $2,500 ($1,500 funding gap)<br>
+                    • **Year 1 Mandate:** Shaded mushroom &amp; herb cultivation while building platforms.<br>
+                    • **Required Module:** County Legal Permits &amp; Sanitation Compliance.
+                </div>
+            </div>
+        </div>
+
+        <div id="selection-error" style="color: var(--danger); font-weight: bold; margin-top: 15px; text-align: center;"></div>
+
+        <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+            <button class="btn btn-secondary" onclick="backToFinance()">&larr; Back to Farm Finance</button>
+            <button id="btn-lock-twins" class="btn" onclick="confirmTwinsPath()" disabled style="opacity: 0.5;">Lock In Twins' Path &amp; Launch Year 6 →</button>
+        </div>
     </div>
 
-    <!-- NAVIGATION / ACTION -->
-    <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-        <a href="acreage-path-select.html" class="btn btn-secondary">&larr; Replay Years 1–5 (Choose Different Track)</a>
-        <button class="btn" onclick="alert('Years 6–10 Advanced Expansion modules are ready for deployment!')">Enter Years 6–10 Operations →</button>
-    </div>
+    <!-- CONFIRMATION / LAUNCH READY SCREEN -->
+    <div id="screen-launch" class="panel hidden">
+        <span class="badge badge-green">🚀 Year 6 Operational Phase Ready</span>
+        <h1 id="launch-heading">Twins' Enterprise Locked In!</h1>
+        <p id="launch-summary" style="font-size: 1.05rem; line-height: 1.7;"></p>
+        
+        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 20px; margin: 20px 0;">
+            <h3 style="color:var(--accent); margin-top:0;">Next Operational Objectives (Year 6)</h3>
+            <ul style="color:var(--txt); margin-bottom:0; line-height: 1.7;">
+                <li>Service the first annual farm mortgage payment ($7,400).</li>
+                <li>Supervise the twins as they complete their required Year 1 starter crop bridge ($1,000 cash + Kubota).</li>
+                <li>Clear the mandatory animal husbandry, tractor, or county permit modules.</li>
+            </ul>
+        </div>
 
+        <div style="margin-top: 30px; text-align: right;">
+            <button class="btn" onclick="alert('Simulation Hub Operational! Ready for Year 6 simulation loop.')">Begin Year 6 Operations 🚜</button>
+        </div>
+    </div>
 </div>
 
 <script>
-    const soloTrackNarratives = {
-        1: "Year 1: The Solo Prep, The YouTube Crop Trap, & Hard Lessons (Dealing with the messy neighbor land-share).",
-        2: "Year 2: Guarded Independence, Heat Spikes, and Field Losses ($1,200 phone and spoilage setback).",
-        3: "Year 3: Burnout, The Wish Garden, and Early Morning Pivots (Shifting harvest times and planting the 1-acre wish garden).",
-        4: "Year 4: The Research Plot, Specialty Crops, and Finding a Rhythm (Hosting a shared harvest research plot with zero startup costs).",
-        5: "Year 5: The First Vacation, Trusted Partners, and the Expansion Crossroads (Taking a real vacation and debating animal expansion)."
-    };
+    let selectedPath = null;
 
-    const coopTrackNarratives = {
-        1: "Year 1: Hard Work, Fresh Greens, & Junior Scientist Gardens (Focusing on fresh greens on an $8k budget and kids' test gardens).",
-        2: "Year 2: Equipment Sharing and Expanding Horizons (Leveraging co-op bulk tractor and wash-station sharing).",
-        3: "Year 3: Digital Marketing Funnels and Weather Protection (Surviving frost with co-op alerts and direct-to-consumer digital pre-sales).",
-        4: "Year 4: Specialty Crops and Collaborative Rotations (Introducing test plots with shared labor and getting weekends off).",
-        5: "Year 5: Mastery, Vacation Freedom, and the Convergence Hub (Taking a relaxed family vacation right before harvest)."
-    };
+    function showTwinsSection() {
+        document.getElementById('screen-finance').classList.add('hidden');
+        document.getElementById('screen-twins').classList.remove('hidden');
+    }
 
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedState = localStorage.getItem('farmGameState');
-        const summaryBox = document.getElementById('player-score-summary');
-        
-        if (savedState) {
-            const data = JSON.parse(savedState);
-            const trackName = data.track === 'coop' ? 'Cooperative Partnership Track' : 'Independent Solo Track';
-            const narrativeList = data.track === 'coop' ? coopTrackNarratives : soloTrackNarratives;
-            
-            let milestonesHTML = `<ul style="margin: 10px 0 0 0; padding-left: 20px; color: var(--muted); font-size: 0.95rem;">`;
-            for (let yr = 1; yr <= 5; yr++) {
-                milestonesHTML += `<li style="margin-bottom: 5px;"><strong style="color:var(--txt);">Year ${yr}:</strong> ${narrativeList[yr]}</li>`;
+    function backToFinance() {
+        document.getElementById('screen-twins').classList.add('hidden');
+        document.getElementById('screen-finance').classList.remove('hidden');
+    }
+
+    function selectTwinPath(path) {
+        selectedPath = path;
+        ['ponies', 'potatoes', 'hipcamp'].forEach(p => {
+            let card = document.getElementById(`card-${p}`);
+            if (p === path) {
+                card.classList.add('selected');
+            } else {
+                card.classList.remove('selected');
             }
-            milestonesHTML += `</ul>`;
+        });
 
-            summaryBox.innerHTML = `
-                You completed Years 1–5 on the <strong style="color:var(--success);">${trackName}</strong> with an ending cash position of <strong style="color:var(--accent);">$${Math.round(data.cash || 0).toLocaleString()}</strong>.<br><br>
-                <strong>Key Milestones &amp; Journal Highlights:</strong>
-                ${milestonesHTML}
-            `;
-        } else {
-            summaryBox.innerHTML = `You arrived at the Hub! (Tip: Play through either the Cooperative or Independent simulator to record your 5-year story arc here).`;
+        let btn = document.getElementById('btn-lock-twins');
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        document.getElementById('selection-error').innerText = '';
+    }
+
+    function confirmTwinsPath() {
+        if (!selectedPath) {
+            document.getElementById('selection-error').innerText = 'Please select one of the three paths for the twins before proceeding.';
+            return;
         }
-    });
-</script>
 
+        let summaries = {
+            ponies: "The twins have chosen **Equine & Ponies**. With $1,000 cash in hand and the Kubota, they are dedicating 3 acres to cut flowers and honeybees in Year 1 to bridge the $3,500 gap while completing their Animal Husbandry modules.",
+            potatoes: "The twins have chosen **Potatoes & Staple Crops**. They are putting their $1,000 to work immediately with intensive Kubota tillage on 3 acres of potatoes and 2 acres of quick greens to close the $200 gap.",
+            hipcamp: "The twins have chosen **Hipcamp & Eco-Camping**. They are tackling county legal modules and growing shaded mushrooms and herbs on their acreage to fund their glamping platforms and close the $1,500 gap."
+        };
+
+        document.getElementById('screen-twins').classList.add('hidden');
+        document.getElementById('screen-launch').classList.remove('hidden');
+        document.getElementById('launch-summary').innerHTML = summaries[selectedPath];
+    }
+</script>
 </body>
 </html>
