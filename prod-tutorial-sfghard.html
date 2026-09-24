@@ -72,7 +72,7 @@
             <div class="panel">
                 <h3 style="color:var(--accent); margin-top:0; font-size:1.05rem;">📦 Select Crop from Catalog</h3>
                 <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:15px;">Click a plant to select it, then click any empty cell in your 4x4 garden grid to plant it.</p>
-                <div id="catalog-container" style="max-height: 380px; overflow-y: auto; padding-right: 5px;">
+                <div id="catalog-container" style="max-height: 420px; overflow-y: auto; padding-right: 5px;">
                     <!-- Populated via JavaScript -->
                 </div>
             </div>
@@ -121,7 +121,7 @@
 </div>
 
 <script>
-    // Plant Catalog Data
+    // Expanded Plant Catalog (16 Diverse Choices)
     const plantCatalog = [
         { id: 'tomato', name: '🍅 Heirloom Tomato', spacing: '1 per sq ft', care: 'Full sun, heavy feeder, stake/prune', companion: 'Basil, Marigold, Carrots' },
         { id: 'basil', name: '🌿 Genovese Basil', spacing: '4 per sq ft', care: 'Full sun, regular moisture, pinch flowers', companion: 'Tomatoes, Peppers' },
@@ -130,7 +130,15 @@
         { id: 'marigold', name: '🌼 French Marigold', spacing: '9 per sq ft', care: 'Full sun, nematode deterrent', companion: 'Tomatoes, Peppers, Brassicas' },
         { id: 'bean', name: '🫘 Bush Green Bean', spacing: '9 per sq ft', care: 'Nitrogen fixer, moderate water', companion: 'Carrots, Cucumbers, Marigolds' },
         { id: 'spinach', name: '🍃 Bloomsdale Spinach', spacing: '9 per sq ft', care: 'Rich nitrogen soil, cool weather tolerant', companion: 'Strawberries, Brassicas' },
-        { id: 'radish', name: '🔴 Cherry Bell Radish', spacing: '16 per sq ft', care: 'Fast grower (21 days), frequent watering', companion: 'Lettuce, Spinach, Peas' }
+        { id: 'radish', name: '🔴 Cherry Bell Radish', spacing: '16 per sq ft', care: 'Fast grower (21 days), frequent watering', companion: 'Lettuce, Spinach, Peas' },
+        { id: 'pepper', name: '🌶️ Bell Pepper', spacing: '1 per sq ft', care: 'Warm season, consistent phosphorus', companion: 'Basil, Onions, Marigolds' },
+        { id: 'kale', name: '🥬 Lacinato Kale', spacing: '1 per sq ft', care: 'Frost hardy, rich compost, pest netting', companion: 'Thyme, Marigolds, Mint' },
+        { id: 'zucchini', name: '🥒 Summer Zucchini', spacing: '1 per 2 sq ft', care: 'Full sun, heavy pollinator feeder', companion: 'Beans, Nasturtiums, Radishes' },
+        { id: 'pea', name: '🟢 Sugar Snap Pea', spacing: '8 per sq ft', care: 'Treillage support, cool weather legume', companion: 'Carrots, Radishes, Spinach' },
+        { id: 'onion', name: '🧅 Yellow Storage Onion', spacing: '16 per sq ft', care: 'Full sun, shallow roots, pest repellent', companion: 'Carrots, Lettuce, Beets' },
+        { id: 'beet', name: '🟣 Detroit Dark Red Beet', spacing: '9 per sq ft', care: 'Loose soil, potassium-rich fertilizer', companion: 'Onions, Lettuce, Brassicas' },
+        { id: 'cilantro', name: '🌿 Cilantro / Coriander', spacing: '9 per sq ft', care: 'Cool weather, bolts in heat, attracts beneficials', companion: 'Tomatoes, Peppers, Spinach' },
+        { id: 'strawberry', name: '🍓 June-Bearing Strawberry', spacing: '4 per sq ft', care: 'Acidic soil, straw mulch, runner control', companion: 'Spinach, Thyme, Lettuce' }
     ];
 
     let selectedPlant = null;
