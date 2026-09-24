@@ -3,40 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acreage Simulator | Years 1–5 Strategic Startup</title>
+    <title>Cooperative Acreage Simulator | The Shared Harvest Track (Years 1–5)</title>
     <style>
         :root {
-            --bg: #0f172a; --card: #1e293b; --txt: #f8fafc; --primary: #27ae60; --primary-dark: #1e8449;
-            --hud: #144d29; --accent: #38bdf8; --muted: #94a3b8; --border: rgba(255, 255, 255, 0.1);
-            --warn: #f59e0b; --danger: #ef4444; --coop-glow: rgba(56, 189, 248, 0.15);
+            --bg: #0f172a; --card: #1e293b; --txt: #f8fafc; --primary: #10b981; --primary-dark: #059669;
+            --hud: #064e3b; --accent: #34d399; --muted: #94a3b8; --border: rgba(255, 255, 255, 0.1);
+            --danger: #ef4444; --warning-glow: rgba(16, 185, 129, 0.15);
         }
         body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 20px; line-height: 1.6; }
         .container { max-width: 1050px; margin: 20px auto; background: var(--card); border-radius: 14px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
-        .hud-bar { background: var(--hud); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; flex-wrap: wrap; gap: 10px; }
-        h1 { color: #4ade80; font-size: 1.8rem; margin-top: 0; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+        .hud-bar { background: var(--hud); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; flex-wrap: wrap; gap: 10px; border: 1px solid rgba(52, 211, 153, 0.3); }
+        h1 { color: #6ee7b7; font-size: 1.8rem; margin-top: 0; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
         h2 { color: var(--accent); font-size: 1.2rem; margin-top: 25px; border-left: 4px solid var(--accent); padding-left: 10px; }
         p, label { color: var(--muted); } strong { color: var(--txt); }
         .panel { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px; padding: 25px; margin-top: 20px; }
-        .btn { background: var(--primary); color: #fff; padding: 12px 24px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-block; }
-        .btn:hover { background: var(--primary-dark); }
-        
-        .track-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-top: 20px; }
-        .track-card { background: rgba(15, 23, 42, 0.8); border: 2px solid var(--border); border-radius: 10px; padding: 22px; cursor: pointer; transition: all 0.2s; }
-        .track-card.selected { border-color: var(--primary); background: rgba(39, 174, 96, 0.08); box-shadow: 0 0 15px rgba(39,174,96,0.2); }
+        .btn { background: var(--primary); color: #022c22; padding: 12px 24px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: var(--primary-dark); color: #fff; }
+        .btn-secondary { background: #334155; color: #fff; }
+        .btn-secondary:hover { background: #475569; }
         
         .acre-allocation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; margin-top: 15px; }
-        .acre-input-box { background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); border-radius: 8px; padding: 15px; position: relative; }
+        .acre-input-box { background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); border-radius: 8px; padding: 15px; position: relative; transition: opacity 0.3s ease; }
         .enterprise-icon { font-size: 1.8rem; float: right; background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 6px; }
         
         input[type="number"] { width: 100%; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--txt); font-size: 1.1rem; margin-top: 8px; box-sizing: border-box; }
+        input[type="number"]:disabled { opacity: 0.5; cursor: not-allowed; }
         
-        .event-banner { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 10px; padding: 20px; margin: 20px 0; }
-        .event-banner h3 { color: var(--warn); margin-top: 0; }
+        .event-banner { background: var(--warning-glow); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 8px; padding: 20px; margin: 20px 0; }
+        .event-banner h3 { color: var(--accent); margin-top: 0; }
         
-        .active-path-badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
-        .badge-coop { background: rgba(56, 189, 248, 0.2); color: var(--accent); border: 1px solid rgba(56, 189, 248, 0.4); }
-        .badge-solo { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+        .narrative-card { background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 25px; margin: 15px 0; }
+        .lock-badge { display: block; color: var(--danger); font-size: 0.75rem; font-weight: bold; margin-top: 5px; text-transform: uppercase; }
         
+        .active-path-badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.4); }
         .hidden { display: none !important; }
     </style>
 </head>
@@ -44,88 +43,72 @@
 
 <div class="container">
     <div class="hud-bar">
-        <span>Strategic Campaign: <span style="color:var(--accent);">Years 1–5 Startup</span></span>
-        <div>Path: <span id="hud-path-label" style="color:#4ade80;">Cooperative Partnership</span> | Year: <strong id="hud-year" style="color:var(--accent);">1</strong> / 5 | Cash: <strong id="hud-cash" style="color:#4ade80;">$8,000</strong></div>
+        <span>Campaign: <span style="color:var(--accent);">Cooperative "Shared Harvest" Track</span></span>
+        <div>Year: <strong id="hud-year" style="color:var(--accent);">1</strong> / 5 | Pooled Capital: <strong id="hud-cash" style="color:#6ee7b7;">$32,000</strong></div>
     </div>
 
-    <!-- TRACK SELECTION SCREEN -->
-    <div id="screen-track" class="panel">
-        <h1>Step 1: Choose Your Operational Pathway</h1>
-        <p>Decide whether to bootstrap with expert network support or forge ahead completely independently on your 10-acre Linn County parcel.</p>
-        
-        <div class="track-grid">
-            <div class="track-card selected" id="card-coop" onclick="selectTrack('coop')">
-                <span class="active-path-badge badge-coop">Recommended Track</span>
-                <h3 style="color:#fff; margin:5px 0 10px 0;">🤝 Shared Harvest Cooperative Track</h3>
-                <p><strong>Starting Cash:</strong> $8,000 (Bootstrapping)</p>
-                <p><strong>Core Advantage:</strong> Sign the Shared Harvest MOU for a 25% infrastructure subsidy on 3 cooperative acres, guided expert SOPs, and built-in internet marketing funnels.</p>
-                <p style="font-size:0.85rem; color:#4ade80; margin-top:10px;">✨ <em>Low financial risk, high teamwork support, structured learning.</em></p>
-            </div>
-
-            <div class="track-card" id="card-solo" onclick="selectTrack('solo')">
-                <span class="active-path-badge badge-solo" style="background:rgba(245,158,11,0.2); color:#f59e0b; border-color:rgba(245,158,11,0.4);">Hard Mode</span>
-                <h3 style="color:#fff; margin:5px 0 10px 0;">⚡ Independent "Winging It" Track</h3>
-                <p><strong>Starting Cash:</strong> $25,000 (Self-Funded)</p>
-                <p><strong>Core Advantage:</strong> Complete autonomy with zero cooperative mandates, but you face weather/pest penalties unmitigated and handle all marketing solo.</p>
-                <p style="font-size:0.85rem; color:#f59e0b; margin-top:10px;">⚠️ <em>High capital start, trial-and-error learning, full solo grind.</em></p>
-            </div>
-        </div>
-
-        <div id="coop-perks-box" style="background: var(--coop-glow); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 20px; margin-top: 20px;">
-            <h3 style="color:var(--accent); margin-top:0;">🌟 Shared Harvest Partnership Protocols</h3>
-            <label style="display: block; margin-bottom: 10px; cursor: pointer;">
-                <input type="checkbox" id="perk-mou" checked style="margin-right: 8px;"> 
-                <strong>Activate Cooperative MOU Subsidy:</strong> 25% discount on 3 core acres &amp; guaranteed cooperative offtake.
-            </label>
-            <label style="display: block; cursor: pointer;">
-                <input type="checkbox" id="perk-marketing" checked style="margin-right: 8px;"> 
-                <strong>Enroll in Co-op Internet Marketing &amp; Specialty Sales Modules:</strong> Boost direct-to-consumer demand and cut local advertising overhead by 50%.
-            </label>
-        </div>
-
-        <div style="margin-top: 30px; text-align: right;">
-            <button class="btn" onclick="startAllocationPhase()">Lock In Path &amp; Proceed to Acre Allocation →</button>
+    <!-- INTRO PANEL -->
+    <div id="screen-intro" class="panel">
+        <span class="active-path-badge">🤝 Community Partnership Simulation</span>
+        <h1>🤝 Welcome to the Cooperative Farm Startup</h1>
+        <p style="font-size: 1.05rem; line-height: 1.7;">
+            You have pooled resources with trusted community partners, starting with <strong>$32,000 in collaborative capital</strong>. Years 1 through 3 focus on establishing core greens and root vegetables together. Specialty crops unlock in Year 4 once you establish the community research plot and review the daily task checklists.
+        </p>
+        <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <a href="acreage-path-select.html" class="btn btn-secondary">&larr; Back to Path Selection</a>
+            <button class="btn" onclick="startAllocationPhase()">Proceed to Year 1 Acre Allocation →</button>
         </div>
     </div>
 
     <!-- ALLOCATION SCREEN -->
     <div id="screen-allocate" class="panel hidden">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 15px;">
-            <h1 id="allocation-title" style="margin:0; border:none; padding:0;">Year 1: Allocate Your 10 Acres</h1>
-            <div id="active-badge-container"></div>
+            <h1 id="allocation-title" style="margin:0; border:none; padding:0;">Year 1: Allocate Your 10 Acres (Co-op Mode)</h1>
+            <span class="active-path-badge">🤝 Cooperative Track</span>
         </div>
-        <p id="path-status-msg" style="font-weight: bold;"></p>
+        <p id="allocation-subtitle" style="color:var(--accent);">Years 1–3: Limited to Greens &amp; Root Crops to build foundational teamwork and budget stability.</p>
+
+        <div id="specialty-lock-notice" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 12px 15px; margin-bottom: 15px; color: #fca5a5; font-size: 0.9rem;">
+            🔒 <strong>Specialty Crops Locked:</strong> Berries, Mushrooms, Apiary, and Flowers are restricted during Years 1, 2, &amp; 3. They will unlock in Year 4 after reviewing the daily task checklists with your co-op partners!
+        </div>
 
         <div class="acre-allocation-grid">
-            <div class="acre-input-box">
+            <!-- ALWAYS AVAILABLE -->
+            <div class="acre-input-box" id="box-greens">
                 <span class="enterprise-icon">🥬</span>
                 <label><strong>Leafy Greens &amp; Herbs</strong><br><span style="font-size:0.8rem;">Cost: $800/ac | Rev: $3,500/ac</span></label>
-                <input type="number" id="alloc-greens" value="3" min="0" max="10" oninput="validateAcres()">
+                <input type="number" id="alloc-greens" value="6" min="0" max="10" oninput="validateAcres()">
             </div>
-            <div class="acre-input-box">
+            <div class="acre-input-box" id="box-root">
                 <span class="enterprise-icon">🥕</span>
                 <label><strong>Root Crops &amp; Veggies</strong><br><span style="font-size:0.8rem;">Cost: $2,500/ac | Rev: $4,800/ac</span></label>
-                <input type="number" id="alloc-root" value="2" min="0" max="10" oninput="validateAcres()">
+                <input type="number" id="alloc-root" value="4" min="0" max="10" oninput="validateAcres()">
             </div>
-            <div class="acre-input-box">
+
+            <!-- UNLOCKED YEAR 4+ -->
+            <div class="acre-input-box" id="box-berries">
                 <span class="enterprise-icon">🍓</span>
                 <label><strong>High-Tunnel Berries</strong><br><span style="font-size:0.8rem;">Cost: $8,500/ac | Rev: $11,000/ac</span></label>
-                <input type="number" id="alloc-berries" value="2" min="0" max="10" oninput="validateAcres()">
+                <input type="number" id="alloc-berries" value="0" min="0" max="10" oninput="validateAcres()" disabled>
+                <span class="lock-badge" id="lock-berries">🔒 Unlocks Year 4</span>
             </div>
-            <div class="acre-input-box">
+            <div class="acre-input-box" id="box-mushrooms">
                 <span class="enterprise-icon">🍄</span>
                 <label><strong>Mushroom Cultivation</strong><br><span style="font-size:0.8rem;">Cost: $4,500/ac | Rev: $7,500/ac</span></label>
-                <input type="number" id="alloc-mushrooms" value="1" min="0" max="10" oninput="validateAcres()">
+                <input type="number" id="alloc-mushrooms" value="0" min="0" max="10" oninput="validateAcres()" disabled>
+                <span class="lock-badge" id="lock-mushrooms">🔒 Unlocks Year 4</span>
             </div>
-            <div class="acre-input-box">
+            <div class="acre-input-box" id="box-apiary">
                 <span class="enterprise-icon">🐝</span>
                 <label><strong>Apiary &amp; Pollination</strong><br><span style="font-size:0.8rem;">Cost: $3,200/ac | Rev: $4,200/ac</span></label>
-                <input type="number" id="alloc-apiary" value="1" min="0" max="10" oninput="validateAcres()">
+                <input type="number" id="alloc-apiary" value="0" min="0" max="10" oninput="validateAcres()" disabled>
+                <span class="lock-badge" id="lock-apiary">🔒 Unlocks Year 4</span>
             </div>
-            <div class="acre-input-box">
+            <div class="acre-input-box" id="box-flowers">
                 <span class="enterprise-icon">🌸</span>
                 <label><strong>Specialty Cut Flowers</strong><br><span style="font-size:0.8rem;">Cost: $5,500/ac | Rev: $9,500/ac</span></label>
-                <input type="number" id="alloc-flowers" value="1" min="0" max="10" oninput="validateAcres()">
+                <input type="number" id="alloc-flowers" value="0" min="0" max="10" oninput="validateAcres()" disabled>
+                <span class="lock-badge" id="lock-flowers">🔒 Unlocks Year 4</span>
             </div>
         </div>
 
@@ -133,7 +116,7 @@
 
         <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
             <span id="total-cost-preview" style="font-weight: bold; color: var(--accent);">Estimated Cost: $0</span>
-            <button id="btn-run-year" class="btn" onclick="executeYear()">Run Season &amp; Trigger Events →</button>
+            <button id="btn-run-year" class="btn" onclick="executeYear()">Run Cooperative Season &amp; Trigger Events →</button>
         </div>
     </div>
 
@@ -146,89 +129,119 @@
         </div>
         <div id="yearly-summary-text" style="margin: 15px 0; color:var(--muted); line-height: 1.6;"></div>
         <div style="margin-top: 30px; text-align: right;">
-            <button class="btn" id="btn-next-year" onclick="nextYear()">Continue to Next Year →</button>
+            <button class="btn" onclick="showNarrativeCard()">Read Field Journal &amp; Continue →</button>
+        </div>
+    </div>
+
+    <!-- NARRATIVE INTERSTITIAL SCREEN -->
+    <div id="screen-narrative" class="panel hidden">
+        <span class="active-path-badge" id="narrative-badge">Field Journal</span>
+        <h1 id="narrative-heading" style="color:#6ee7b7;">Story Chapter</h1>
+        <div class="narrative-card">
+            <h3 id="narrative-title" style="color:var(--accent); margin-top:0;">Title</h3>
+            <p id="narrative-story" style="font-size: 1.1rem; line-height: 1.8; color: var(--txt); margin-bottom: 0;"></p>
+        </div>
+        <!-- Checklist Callout for Year 3 End -->
+        <div id="checklist-callout" style="display: none; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 15px; margin-top: 20px;">
+            <h4 style="color:var(--accent); margin-top:0;">📋 Preparation for Year 4 Specialty Crops</h4>
+            <p style="font-size: 0.95rem; margin-bottom: 10px;">Before entering Year 4 and unlocking cooperative specialty crops, review the shared daily operational steps and routines:</p>
+            <a href="tasks-checklist.html" class="btn btn-secondary" style="font-size: 0.9rem; padding: 8px 16px;">View Daily Tasks Checklist →</a>
+        </div>
+        <div style="margin-top: 30px; text-align: right;">
+            <button class="btn" onclick="advanceToNextYearOrHub()">Step Into Next Season →</button>
         </div>
     </div>
 </div>
 
 <script>
     let gameState = {
-        track: 'coop', cash: 8000, year: 1, mouActive: true, marketingActive: true, educationPoints: 15,
-        acres: { greens: 3, root: 2, berries: 2, mushrooms: 1, apiary: 1, flowers: 1 },
+        track: 'cooperative',
+        cash: 32000, year: 1,
+        acres: { greens: 6, root: 4, berries: 0, mushrooms: 0, apiary: 0, flowers: 0 },
         history: []
     };
 
     const enterpriseData = {
-        greens: { cost: 800, rev: 3500 }, root: { cost: 2500, rev: 4800 },
-        berries: { cost: 8500, rev: 11000, y1Rev: 3200 }, mushrooms: { cost: 4500, rev: 7500 },
-        apiary: { cost: 3200, rev: 4200 }, flowers: { cost: 5500, rev: 9500 }
+        greens: { cost: 800, rev: 3800 }, root: { cost: 2500, rev: 5200 },
+        berries: { cost: 8500, rev: 11500 }, mushrooms: { cost: 4500, rev: 7800 },
+        apiary: { cost: 3200, rev: 4500 }, flowers: { cost: 5500, rev: 9800 }
     };
 
-    function selectTrack(track) {
-        gameState.track = track;
-        const coopBox = document.getElementById('coop-perks-box');
-        if (track === 'coop') {
-            gameState.cash = 8000;
-            document.getElementById('card-coop').classList.add('selected');
-            document.getElementById('card-solo').classList.remove('selected');
-            coopBox.classList.remove('hidden');
-            document.getElementById('hud-path-label').innerText = "Cooperative Partnership";
-            document.getElementById('hud-path-label').style.color = "#4ade80";
-        } else {
-            gameState.cash = 25000;
-            document.getElementById('card-solo').classList.add('selected');
-            document.getElementById('card-coop').classList.remove('selected');
-            coopBox.classList.add('hidden');
-            document.getElementById('hud-path-label').innerText = "Independent Solo";
-            document.getElementById('hud-path-label').style.color = "#f59e0b";
+    const coopTrackNarratives = {
+        1: {
+            title: "Year 1: Pooling Resources, Shared Visions, and Early Alignment",
+            story: "Choosing the cooperative path immediately changed the dynamic. Instead of carrying the weight alone, you and three dedicated partners pooled your capital and your skills. Year 1 was all about communication: learning how to coordinate crop rotations, sharing equipment maintenance schedules, and setting up joint task rotations. While there were initial debates over irrigation timing and seed varieties, the collective workload made the heavy site preparation feel manageable. You finished your first season with steady greens and root crops, a healthy shared bank account, and a real sense of community trust."
+        },
+        2: {
+            title: "Year 2: Community Trust, Bulk Purchasing, and Expanded Networks",
+            story: "With Year 1 under your belts, the cooperative really hit its stride in Year 2. By buying compost, seeds, and irrigation supplies in bulk together, you cut input costs significantly across all ten acres. Local volunteers from the neighborhood started pitching in on weekends, drawn by the welcoming community atmosphere. Though a sudden mid-summer pest scare threatened part of the root crop yield, your partners acted quickly, organizing a joint harvest and washing rotation that saved the crop. You closed the year stronger and more unified than ever."
+        },
+        3: {
+            title: "Year 3: The Wish Garden Partnership & Refining Daily Routines",
+            story: "By Year 3, the cooperative decided to establish a dedicated 'wish garden' and educational research plot to test new growing techniques and engage local youth. To avoid burnout, the group implemented structured morning shifts and rotating break schedules. Local volunteers helped streamline the processing stations. By refining your daily operational task lists and sticking to cool morning harvests, your yields jumped, and the community support network solidified. You are now fully prepared to introduce high-value specialty crops next year."
+        },
+        4: {
+            title: "Year 4: Unlocking Specialty Crops & The Shared Research Plot",
+            story: "Year 4 brought the long-awaited milestone: specialty crops are officially unlocked! Utilizing the exact daily task checklists and insights from your shared research plot, the co-op successfully launched high-tunnel berries, mushrooms, and specialty cut flowers. The collaborative division of labor made managing these delicate crops remarkably smooth. The market response was phenomenal, proving that cooperative agriculture isn't just sustainable—it's highly profitable. The kids and partners are thriving, and the farm is humming like clockwork."
+        },
+        5: {
+            title: "Year 5: Regional Hub Status, Rotational Vacations, and Community Expansion",
+            story: "Year 5 crowned your cooperative experiment with unprecedented success. Because you built a trusted network of partners and shared responsibilities, every single member of the co-op was able to take a real, worry-free vacation for the first time in years! Looking back, transforming from a stressed-out beginner into the anchor of a thriving regional cooperative has been life-changing. With community demand soaring, the co-op now faces exciting expansion choices—whether to mentor new grower groups, lease neighboring acreage, or build an on-site educational center. Whatever path you choose next, you walk it together."
         }
-    }
+    };
 
     function startAllocationPhase() {
-        if (gameState.track === 'coop') {
-            gameState.mouActive = document.getElementById('perk-mou').checked;
-            gameState.marketingActive = document.getElementById('perk-marketing').checked;
-            if(gameState.mouActive) gameState.educationPoints += 20;
-            if(gameState.marketingActive) gameState.educationPoints += 15;
-        } else {
-            gameState.mouActive = false;
-            gameState.marketingActive = false;
-        }
-
-        document.getElementById('screen-track').classList.add('hidden');
+        document.getElementById('screen-intro').classList.add('hidden');
         document.getElementById('screen-allocate').classList.remove('hidden');
+        updateCropAvailabilityForYear();
+    }
+
+    function updateCropAvailabilityForYear() {
+        let specialtyBoxes = ['box-berries', 'box-mushrooms', 'box-apiary', 'box-flowers'];
+        let specialtyInputs = ['alloc-berries', 'alloc-mushrooms', 'alloc-apiary', 'alloc-flowers'];
+        let specialtyLocks = ['lock-berries', 'lock-mushrooms', 'lock-apiary', 'lock-flowers'];
         
-        let badgeContainer = document.getElementById('active-badge-container');
-        let statusMsg = document.getElementById('path-status-msg');
-
-        if (gameState.track === 'coop') {
-            badgeContainer.innerHTML = `<span class="active-path-badge badge-coop">🤝 Shared Harvest Track Active</span>`;
-            statusMsg.innerHTML = `<span style="color:#4ade80;">Cooperative perks active: 25% subsidy on greens/crops, guided internet marketing funnels, and advisory weather protection.</span>`;
+        if (gameState.year < 4) {
+            specialtyBoxes.forEach((id, idx) => {
+                document.getElementById(id).style.opacity = '0.4';
+                let inp = document.getElementById(specialtyInputs[idx]);
+                inp.value = 0;
+                inp.disabled = true;
+                document.getElementById(specialtyLocks[idx]).style.display = 'block';
+            });
+            document.getElementById('specialty-lock-notice').style.display = 'block';
+            document.getElementById('allocation-subtitle').innerText = `Year ${gameState.year}: Restricted to Greens & Root Crops to build teamwork and budget stability.`;
+            
+            let currentGreens = parseInt(document.getElementById('alloc-greens').value) || 0;
+            let currentRoot = parseInt(document.getElementById('alloc-root').value) || 0;
+            if (currentGreens + currentRoot !== 10) {
+                document.getElementById('alloc-greens').value = 6;
+                document.getElementById('alloc-root').value = 4;
+            }
         } else {
-            badgeContainer.innerHTML = `<span class="active-path-badge badge-solo" style="background:rgba(245,158,11,0.2); color:#f59e0b; border-color:rgba(245,158,11,0.4);">⚡ Independent Solo Track Active</span>`;
-            statusMsg.innerHTML = `<span style="color:#f59e0b;">Independent mode: Full capital ($25k) with total autonomy. Weather shocks and marketing overhead are borne 100% solo.</span>`;
+            specialtyBoxes.forEach((id, idx) => {
+                document.getElementById(id).style.opacity = '1';
+                document.getElementById(specialtyInputs[idx]).disabled = false;
+                document.getElementById(specialtyLocks[idx]).style.display = 'none';
+            });
+            document.getElementById('specialty-lock-notice').style.display = 'none';
+            document.getElementById('allocation-subtitle').innerText = `Year ${gameState.year}: Specialty Crops Unlocked via Cooperative Task Lists! Allocate your 10 acres.`;
         }
-
         validateAcres();
     }
 
     function validateAcres() {
         let g = parseInt(document.getElementById('alloc-greens').value) || 0;
         let r = parseInt(document.getElementById('alloc-root').value) || 0;
-        let b = parseInt(document.getElementById('alloc-berries').value) || 0;
-        let m = parseInt(document.getElementById('alloc-mushrooms').value) || 0;
-        let a = parseInt(document.getElementById('alloc-apiary').value) || 0;
-        let f = parseInt(document.getElementById('alloc-flowers').value) || 0;
+        let b = (gameState.year >= 4) ? (parseInt(document.getElementById('alloc-berries').value) || 0) : 0;
+        let m = (gameState.year >= 4) ? (parseInt(document.getElementById('alloc-mushrooms').value) || 0) : 0;
+        let a = (gameState.year >= 4) ? (parseInt(document.getElementById('alloc-apiary').value) || 0) : 0;
+        let f = (gameState.year >= 4) ? (parseInt(document.getElementById('alloc-flowers').value) || 0) : 0;
 
         let total = g + r + b + m + a + f;
-        
         let cost = (g * enterpriseData.greens.cost) + (r * enterpriseData.root.cost) + 
                    (b * enterpriseData.berries.cost) + (m * enterpriseData.mushrooms.cost) + 
                    (a * enterpriseData.apiary.cost) + (f * enterpriseData.flowers.cost);
-        
-        if (gameState.track === 'coop' && gameState.mouActive) {
-            cost = cost - ((enterpriseData.greens.cost * 0.25) * Math.min(3, g)); 
-        }
 
         document.getElementById('total-cost-preview').innerText = `Estimated Upfront Cost: $${Math.round(cost).toLocaleString()}`;
         
@@ -239,7 +252,7 @@
             warn.innerText = `You must allocate exactly 10 acres across your plots (Currently allocated: ${total})`;
             btn.disabled = true; btn.style.opacity = '0.5';
         } else if (cost > gameState.cash) {
-            warn.innerText = `Insufficient cash! Investment cost ($${Math.round(cost).toLocaleString()}) exceeds available cash ($${gameState.cash.toLocaleString()}).`;
+            warn.innerText = `Insufficient pooled cash! Investment cost ($${Math.round(cost).toLocaleString()}) exceeds available funds ($${gameState.cash.toLocaleString()}).`;
             btn.disabled = true; btn.style.opacity = '0.5';
         } else {
             warn.innerText = ''; btn.disabled = false; btn.style.opacity = '1';
@@ -250,46 +263,39 @@
         gameState.acres = {
             greens: parseInt(document.getElementById('alloc-greens').value) || 0,
             root: parseInt(document.getElementById('alloc-root').value) || 0,
-            berries: parseInt(document.getElementById('alloc-berries').value) || 0,
-            mushrooms: parseInt(document.getElementById('alloc-mushrooms').value) || 0,
-            apiary: parseInt(document.getElementById('alloc-apiary').value) || 0,
-            flowers: parseInt(document.getElementById('alloc-flowers').value) || 0
+            berries: (gameState.year >= 4) ? (parseInt(document.getElementById('alloc-berries').value) || 0) : 0,
+            mushrooms: (gameState.year >= 4) ? (parseInt(document.getElementById('alloc-mushrooms').value) || 0) : 0,
+            apiary: (gameState.year >= 4) ? (parseInt(document.getElementById('alloc-apiary').value) || 0) : 0,
+            flowers: (gameState.year >= 4) ? (parseInt(document.getElementById('alloc-flowers').value) || 0) : 0
         };
 
         let cost = 0; let rev = 0;
         for (let k in gameState.acres) {
             let count = gameState.acres[k];
             let ent = enterpriseData[k];
-            let itemCost = count * ent.cost;
-            if (gameState.track === 'coop' && gameState.mouActive && k === 'greens') itemCost *= 0.75; 
-            cost += itemCost;
-            let revPerAc = (k === 'berries' && gameState.year === 1) ? ent.y1Rev : ent.rev;
-            rev += count * revPerAc;
+            cost += count * ent.cost;
+            rev += count * ent.rev;
         }
 
         gameState.cash -= cost;
 
-        // Event generation modified by track choice
-        let mod = 1.0; 
-        let eventTitle = "Favorable Growing & Market Season";
-        let eventMsg = "Standard climate conditions across Linn County with steady local demand.";
-        
+        // Cooperative bonus modifier (co-op performs slightly more stable/efficiently)
+        let mod = 1.05; 
+        let eventTitle = "Cooperative Community Harvest Success";
+        let eventMsg = "Partner collaboration and volunteer support boosted operational efficiency and market distribution.";
         let rand = Math.random();
         if (rand < 0.25) {
-            let penalty = (gameState.track === 'coop' && gameState.marketingActive) ? 0.075 : 0.15;
-            mod -= penalty;
-            eventTitle = "Late Spring Frost Shock";
-            eventMsg = `A sudden freeze impacted crop yields. Revenue reduced by ${Math.round(penalty*100)}% ${(gameState.track === 'coop') ? '(Mitigated by Co-op Advisory SOPs)' : '(Full solo impact)'}.`;
-        } else if (rand > 0.70) {
-            let bonus = (gameState.track === 'coop' && gameState.marketingActive) ? 0.25 : 0.15;
-            mod += bonus;
-            eventTitle = "Bumper Harvest & Internet Sales Surge";
-            eventMsg = `Strong farmers market turnout and online pre-orders boosted revenue by ${Math.round(bonus*100)}%!`;
+            mod -= 0.10;
+            eventTitle = "Co-op Coordination Delay";
+            eventMsg = "Scheduling conflicts among partners slowed down mid-season weeding, slightly reducing revenue.";
+        } else if (rand > 0.60) {
+            mod += 0.18;
+            eventTitle = "Community Market Bumper Demand";
+            eventMsg = "Local restaurant partnerships and weekend farmers market demand exceeded all expectations!";
         }
 
         let finalRev = rev * mod;
-        let overheadBase = (gameState.track === 'coop' && gameState.marketingActive) ? 1500 : 2200;
-        let overhead = overheadBase + (10 * 120);
+        let overhead = 2200 + (10 * 110); // Slightly lower overhead due to shared infrastructure
         let net = finalRev - overhead;
         gameState.cash += finalRev - overhead;
 
@@ -303,30 +309,47 @@
 
         document.getElementById('screen-allocate').classList.add('hidden');
         document.getElementById('screen-results').classList.remove('hidden');
-        document.getElementById('results-heading').innerText = `Year ${gameState.year} (${gameState.track === 'coop' ? 'Cooperative Track' : 'Independent Track'}) Report`;
+        document.getElementById('results-heading').innerText = `Year ${gameState.year} (Cooperative Track) Report`;
         document.getElementById('event-title').innerText = eventTitle;
         document.getElementById('event-desc').innerText = eventMsg;
         document.getElementById('yearly-summary-text').innerHTML = `
-            <strong>Investments &amp; Subsidies:</strong> -$${Math.round(cost).toLocaleString()}<br>
-            <strong>Gross Revenue (with Marketing Modifiers):</strong> +$${Math.round(finalRev).toLocaleString()}<br>
-            <strong>Overhead &amp; Labor:</strong> -$${Math.round(overhead).toLocaleString()}<br>
-            <strong>Net Year Position:</strong> <span style="color:${net >= 0 ? '#4ade80':'#ef4444'};">$${Math.round(net).toLocaleString()}</span><br>
-            <strong>Ending Cash:</strong> <span style="color:#38bdf8;">$${Math.round(gameState.cash).toLocaleString()}</span>
+            <strong>Pooled Investments:</strong> -$${Math.round(cost).toLocaleString()}<br>
+            <strong>Gross Revenue:</strong> +$${Math.round(finalRev).toLocaleString()}<br>
+            <strong>Shared Overhead &amp; Maintenance:</strong> -$${Math.round(overhead).toLocaleString()}<br>
+            <strong>Net Year Position:</strong> <span style="color:${net >= 0 ? '#6ee7b7':'#ef4444'};">$${Math.round(net).toLocaleString()}</span><br>
+            <strong>Ending Pooled Cash:</strong> <span style="color:#34d399;">$${Math.round(gameState.cash).toLocaleString()}</span>
         `;
     }
 
-    function nextYear() {
+    function showNarrativeCard() {
+        document.getElementById('screen-results').classList.add('hidden');
+        document.getElementById('screen-narrative').classList.remove('hidden');
+
+        let currentNarrative = coopTrackNarratives[gameState.year];
+        document.getElementById('narrative-badge').innerText = `Field Journal — Year ${gameState.year} Completed`;
+        document.getElementById('narrative-heading').innerText = `Chapter ${gameState.year}: The Shared Harvest`;
+        document.getElementById('narrative-title').innerText = currentNarrative.title;
+        document.getElementById('narrative-story').innerText = currentNarrative.story;
+
+        if (gameState.year === 3) {
+            document.getElementById('checklist-callout').style.display = 'block';
+        } else {
+            document.getElementById('checklist-callout').style.display = 'none';
+        }
+    }
+
+    function advanceToNextYearOrHub() {
         if (gameState.year >= 5) {
             localStorage.setItem('farmGameState', JSON.stringify(gameState));
             window.location.href = 'shared-harvest-hub.html';
         } else {
             gameState.year++;
-            document.getElementById('screen-results').classList.add('hidden');
+            document.getElementById('screen-narrative').classList.add('hidden');
             document.getElementById('screen-allocate').classList.remove('hidden');
             document.getElementById('allocation-title').innerText = `Year ${gameState.year}: Re-allocate Your Acres`;
             document.getElementById('hud-year').innerText = gameState.year;
             document.getElementById('hud-cash').innerText = '$' + Math.round(gameState.cash).toLocaleString();
-            validateAcres();
+            updateCropAvailabilityForYear();
         }
     }
 </script>
