@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Your Operational Pathway | Acreage Simulator</title>
+    <style>
+        :root {
+            --bg: #0f172a; --card: #1e293b; --txt: #f8fafc; --primary: #27ae60; --primary-dark: #1e8449;
+            --hud: #144d29; --accent: #38bdf8; --muted: #94a3b8; --border: rgba(255, 255, 255, 0.1);
+            --warn: #f59e0b; --solo-bg: #451a03; --solo-accent: #fbbf24;
+        }
+        body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 20px; line-height: 1.6; }
+        .container { max-width: 1050px; margin: 20px auto; background: var(--card); border-radius: 14px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background: var(--hud); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; flex-wrap: wrap; gap: 10px; }
+        h1 { color: #4ade80; font-size: 1.8rem; margin-top: 0; border-bottom: 2px solid var(--border); padding-bottom: 15px; text-align: center; }
+        h2 { color: var(--accent); font-size: 1.2rem; margin-top: 0; }
+        p, label { color: var(--muted); } strong { color: var(--txt); }
+        
+        .path-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 25px; }
+        
+        .path-card { background: rgba(15, 23, 42, 0.8); border: 2px solid var(--border); border-radius: 12px; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, border-color 0.2s; }
+        .path-card:hover { transform: translateY(-3px); }
+        
+        .card-coop { border-color: rgba(39, 174, 96, 0.4); }
+        .card-coop:hover { border-color: var(--primary); box-shadow: 0 0 20px rgba(39,174,96,0.2); }
+        
+        .card-solo { border-color: rgba(245, 158, 11, 0.4); }
+        .card-solo:hover { border-color: var(--solo-accent); box-shadow: 0 0 20px rgba(245,158,11,0.2); }
+
+        .btn { padding: 12px 24px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; text-decoration: none; display: block; text-align: center; margin-top: 20px; font-size: 1rem; }
+        .btn-coop { background: var(--primary); color: #fff; }
+        .btn-coop:hover { background: var(--primary-dark); }
+        
+        .btn-solo { background: var(--solo-accent); color: #1e1b4b; }
+        .btn-solo:hover { background: #d97706; color: #fff; }
+
+        .btn-secondary { background: #334155; color: #fff; display: inline-block; width: auto; margin-top: 0; }
+        .btn-secondary:hover { background: #475569; }
+
+        .feature-list { list-style: none; padding: 0; margin: 20px 0; }
+        .feature-list li { margin-bottom: 10px; font-size: 0.9rem; display: flex; align-items: flex-start; gap: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hud-bar">
+        <span>AFTI Agricultural Simulation Gateway</span>
+        <div>Step 2 of 5: <strong style="color:var(--accent);">Choose Your Track</strong></div>
+    </div>
+
+    <h1>Select Your 5-Year Operational Style</h1>
+    <p style="text-align: center; max-width: 700px; margin: 0 auto 30px auto;">
+        Your choice determines your starting capital, how you handle labor and marketing, and the specific challenges you will encounter across Years 1 through 5. Both paths converge at Year 6 in the Shared Harvest Hub.
+    </p>
+
+    <div class="path-grid">
+        <!-- COOPERATIVE PATH -->
+        <div class="path-card card-coop">
+            <div>
+                <div style="font-size: 0.75rem; font-weight: bold; color: #4ade80; text-transform: uppercase; margin-bottom: 5px;">Recommended Pathway</div>
+                <h2>🤝 Shared Harvest Cooperative Track</h2>
+                <p><strong>Starting Capital:</strong> $8,000 (Bootstrapping with Subsidies)</p>
+                <ul class="feature-list">
+                    <li>✅ <strong>25% MOU Subsidy</strong> on core crop infrastructure.</li>
+                    <li>✅ <strong>Guided Internet Marketing</strong> &amp; specialty sales funnels.</li>
+                    <li>✅ <strong>Advisory Protection</strong> against severe frost &amp; climate shocks.</li>
+                    <li>✨ <em>Focus on teamwork, shared SOPs, and low financial risk.</em></li>
+                </ul>
+            </div>
+            <a href="acreage-simulator.html" class="btn btn-coop">Launch Cooperative Track (Years 1–5) →</a>
+        </div>
+
+        <!-- SOLO PATH -->
+        <div class="path-card card-solo">
+            <div>
+                <div style="font-size: 0.75rem; font-weight: bold; color: var(--solo-accent); text-transform: uppercase; margin-bottom: 5px;">Hard Mode / Autonomous</div>
+                <h2>⚡ Independent "Winging It" Track</h2>
+                <p><strong>Starting Capital:</strong> $25,000 (Self-Funded Solo Grind)</p>
+                <ul class="feature-list">
+                    <li>⚠️ <strong>Untrained Labor Friction:</strong> Risk of turnover and seasonal crop mistakes.</li>
+                    <li>⚠️ <strong>Equipment Wear &amp; Tear:</strong> Higher solo maintenance overhead.</li>
+                    <li>⚠️ <strong>Trial-and-Error Marketing:</strong> Full solo responsibility for sales.</li>
+                    <li>✨ <em>Focus on complete autonomy, high starting cash, and high variance.</em></li>
+                </ul>
+            </div>
+            <a href="acreage-solo-simulator.html" class="btn btn-solo">Launch Independent Track (Years 1–5) →</a>
+        </div>
+    </div>
+
+    <div style="margin-top: 35px; border-top: 1px solid var(--border); padding-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+        <a href="acreage-intro.html" class="btn btn-secondary">&larr; Return to Program Overview</a>
+        <span style="font-size: 0.85rem; color: var(--muted);">All paths converge at Year 6 in the Shared Harvest Hub.</span>
+    </div>
+
+</div>
+
+</body>
+</html>
