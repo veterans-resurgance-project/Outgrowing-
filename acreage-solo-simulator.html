@@ -260,7 +260,111 @@
     }
 </script>
     </div>
- 
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shared Harvest Hub | Years 6–10 Convergence</title>
+    <style>
+        :root {
+            --bg: #0f172a; --card: #1e293b; --txt: #f8fafc; --primary: #27ae60; --primary-dark: #1e8449;
+            --hud: #144d29; --accent: #38bdf8; --muted: #94a3b8; --border: rgba(255, 255, 255, 0.1);
+            --warn: #f59e0b; --success: #4ade80;
+        }
+        body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 20px; line-height: 1.6; }
+        .container { max-width: 1000px; margin: 20px auto; background: var(--card); border-radius: 14px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background: var(--hud); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; flex-wrap: wrap; gap: 10px; }
+        h1 { color: #4ade80; font-size: 1.8rem; margin-top: 0; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+        h2 { color: var(--accent); font-size: 1.2rem; margin-top: 25px; border-left: 4px solid var(--accent); padding-left: 10px; }
+        p, label { color: var(--muted); } strong { color: var(--txt); }
+        
+        .panel { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px; padding: 25px; margin-top: 20px; }
+        
+        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+        .comparison-card { background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+        
+        .btn { background: var(--primary); color: #fff; padding: 12px 24px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: var(--primary-dark); }
+        .btn-secondary { background: #334155; }
+        .btn-secondary:hover { background: #475569; }
+
+        .stat-highlight { font-size: 1.4rem; font-weight: bold; color: var(--success); margin: 5px 0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hud-bar">
+        <span>Shared Harvest Hub</span>
+        <div>Campaign Stage: <strong style="color:var(--accent);">Years 6–10 Convergence</strong></div>
+    </div>
+
+    <!-- WELCOME / RETROSPECTIVE PANEL -->
+    <div class="panel">
+        <h1>🌟 Welcome to the Shared Harvest Convergence Hub</h1>
+        <p style="font-size: 1.05rem;">
+            You have successfully navigated your first 5-year agricultural cycle! Regardless of whether you started on the Cooperative Partnership track or grinded it out on the Independent Solo track, your operational paths now merge. 
+        </p>
+
+        <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 20px; margin-top: 20px;">
+            <h3 style="color:var(--accent); margin-top:0;">📊 Your Playthrough Summary</h3>
+            <p id="player-score-summary" style="color: var(--txt); margin-bottom: 0;">
+                Loading your stored 5-year results from localStorage...
+            </p>
+        </div>
+
+        <h2>⚖️ The Side-by-Side Reality: Teamwork vs. Winging It</h2>
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <h3 style="color: #4ade80; margin-top:0;">🤝 The Shared Harvest Advantage</h3>
+                <p style="font-size: 0.9rem;">
+                    Farmers who leaned into cooperative partnerships benefited from shared bulk equipment, vetted seasonal labor pools, and pre-negotiated B2B distribution. They experienced lower stress, steady compounding growth, and built-in climate risk mitigation.
+                </p>
+            </div>
+            <div class="comparison-card">
+                <h3 style="color: #fbbf24; margin-top:0;">⚡ The Independent Solo Lessons</h3>
+                <p style="font-size: 0.9rem;">
+                    Farmers who chose the solo grind discovered immense autonomy and high initial capital ($25k), but battled higher turnover overhead, equipment maintenance fatigue, and unpredictable market swings without co-op backing.
+                </p>
+            </div>
+        </div>
+
+        <h2>🚀 Entering Years 6 through 10: Advanced Scaling</h2>
+        <p>
+            With your foundation established, Years 6–10 introduce regional land stewardship, advanced automated internet marketing funnels, and bulk cooperative distribution contracts across Linn County.
+        </p>
+    </div>
+
+    <!-- NAVIGATION / ACTION -->
+    <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+        <a href="acreage-path-select.html" class="btn btn-secondary">&larr; Replay Years 1–5 (Choose Different Track)</a>
+        <button class="btn" onclick="alert('Years 6–10 Advanced Expansion modules are ready for deployment!')">Enter Years 6–10 Operations →</button>
+    </div>
+
+</div>
+
+<script>
+    // Pull saved game state if available from the 1-5 simulators
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedState = localStorage.getItem('farmGameState');
+        const summaryBox = document.getElementById('player-score-summary');
+        
+        if (savedState) {
+            const data = JSON.parse(savedState);
+            summaryBox.innerHTML = `
+                You completed Years 1–5 with an ending cash position of <strong style="color:var(--success);">$${Math.round(data.cash || 0).toLocaleString()}</strong> 
+                (${data.track === 'coop' ? 'Cooperative Partnership Track' : 'Independent Solo Track'}). 
+                Your experience directly informs your leadership role in the shared hub for Years 6–10.
+            `;
+        } else {
+            summaryBox.innerHTML = `You arrived at the Hub! (Tip: Play through either the Cooperative or Independent simulator to record your specific financial history here).`;
+        }
+    });
+</script>
+
+</body>
+</html>
   </div>
 </body>
 </html>
