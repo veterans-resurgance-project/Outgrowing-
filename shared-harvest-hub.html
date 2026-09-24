@@ -19,15 +19,12 @@
         
         .panel { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px; padding: 25px; margin-top: 20px; }
         
-        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
-        .comparison-card { background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+        .journal-box { background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 20px; margin-top: 15px; }
         
         .btn { background: var(--primary); color: #fff; padding: 12px 24px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-block; }
         .btn:hover { background: var(--primary-dark); }
         .btn-secondary { background: #334155; }
         .btn-secondary:hover { background: #475569; }
-
-        .stat-highlight { font-size: 1.4rem; font-weight: bold; color: var(--success); margin: 5px 0; }
     </style>
 </head>
 <body>
@@ -38,34 +35,18 @@
         <div>Campaign Stage: <strong style="color:var(--accent);">Years 6–10 Convergence</strong></div>
     </div>
 
-    <!-- WELCOME / RETROSPECTIVE PANEL -->
+    <!-- WELCOME / JOURNAL PANEL -->
     <div class="panel">
         <h1>🌟 Welcome to the Shared Harvest Convergence Hub</h1>
         <p style="font-size: 1.05rem;">
-            You have successfully navigated your first 5-year agricultural cycle! Regardless of whether you started on the Cooperative Partnership track or grinded it out on the Independent Solo track, your operational paths now merge. 
+            You have successfully navigated your first 5-year agricultural cycle! Your operational paths now merge here in the regional hub for Years 6 through 10.
         </p>
 
-        <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 20px; margin-top: 20px;">
-            <h3 style="color:var(--accent); margin-top:0;">📊 Your Playthrough Summary</h3>
-            <p id="player-score-summary" style="color: var(--txt); margin-bottom: 0;">
+        <div class="journal-box">
+            <h3 style="color:var(--accent); margin-top:0;">📖 Your 5-Year Farm Journal &amp; Financial Summary</h3>
+            <p id="player-score-summary" style="color: var(--txt); line-height: 1.7; margin-bottom: 0;">
                 Loading your stored 5-year results from localStorage...
             </p>
-        </div>
-
-        <h2>⚖️ The Side-by-Side Reality: Teamwork vs. Winging It</h2>
-        <div class="comparison-grid">
-            <div class="comparison-card">
-                <h3 style="color: #4ade80; margin-top:0;">🤝 The Shared Harvest Advantage</h3>
-                <p style="font-size: 0.9rem;">
-                    Farmers who leaned into cooperative partnerships benefited from shared bulk equipment, vetted seasonal labor pools, and pre-negotiated B2B distribution. They experienced lower stress, steady compounding growth, and built-in climate risk mitigation.
-                </p>
-            </div>
-            <div class="comparison-card">
-                <h3 style="color: #fbbf24; margin-top:0;">⚡ The Independent Solo Lessons</h3>
-                <p style="font-size: 0.9rem;">
-                    Farmers who chose the solo grind discovered immense autonomy and high initial capital ($25k), but battled higher turnover overhead, equipment maintenance fatigue, and unpredictable market swings without co-op backing.
-                </p>
-            </div>
         </div>
 
         <h2>🚀 Entering Years 6 through 10: Advanced Scaling</h2>
@@ -83,20 +64,44 @@
 </div>
 
 <script>
-    // Pull saved game state if available from the 1-5 simulators
+    const soloTrackNarratives = {
+        1: "Year 1: The Solo Prep, The YouTube Crop Trap, & Hard Lessons (Dealing with the messy neighbor land-share).",
+        2: "Year 2: Guarded Independence, Heat Spikes, and Field Losses ($1,200 phone and spoilage setback).",
+        3: "Year 3: Burnout, The Wish Garden, and Early Morning Pivots (Shifting harvest times and planting the 1-acre wish garden).",
+        4: "Year 4: The Research Plot, Specialty Crops, and Finding a Rhythm (Hosting a shared harvest research plot with zero startup costs).",
+        5: "Year 5: The First Vacation, Trusted Partners, and the Expansion Crossroads (Taking a real vacation and debating animal expansion)."
+    };
+
+    const coopTrackNarratives = {
+        1: "Year 1: Hard Work, Fresh Greens, & Junior Scientist Gardens (Focusing on fresh greens on an $8k budget and kids' test gardens).",
+        2: "Year 2: Equipment Sharing and Expanding Horizons (Leveraging co-op bulk tractor and wash-station sharing).",
+        3: "Year 3: Digital Marketing Funnels and Weather Protection (Surviving frost with co-op alerts and direct-to-consumer digital pre-sales).",
+        4: "Year 4: Specialty Crops and Collaborative Rotations (Introducing test plots with shared labor and getting weekends off).",
+        5: "Year 5: Mastery, Vacation Freedom, and the Convergence Hub (Taking a relaxed family vacation right before harvest)."
+    };
+
     window.addEventListener('DOMContentLoaded', () => {
         const savedState = localStorage.getItem('farmGameState');
         const summaryBox = document.getElementById('player-score-summary');
         
         if (savedState) {
             const data = JSON.parse(savedState);
+            const trackName = data.track === 'coop' ? 'Cooperative Partnership Track' : 'Independent Solo Track';
+            const narrativeList = data.track === 'coop' ? coopTrackNarratives : soloTrackNarratives;
+            
+            let milestonesHTML = `<ul style="margin: 10px 0 0 0; padding-left: 20px; color: var(--muted); font-size: 0.95rem;">`;
+            for (let yr = 1; yr <= 5; yr++) {
+                milestonesHTML += `<li style="margin-bottom: 5px;"><strong style="color:var(--txt);">Year ${yr}:</strong> ${narrativeList[yr]}</li>`;
+            }
+            milestonesHTML += `</ul>`;
+
             summaryBox.innerHTML = `
-                You completed Years 1–5 with an ending cash position of <strong style="color:var(--success);">$${Math.round(data.cash || 0).toLocaleString()}</strong> 
-                (${data.track === 'coop' ? 'Cooperative Partnership Track' : 'Independent Solo Track'}). 
-                Your experience directly informs your leadership role in the shared hub for Years 6–10.
+                You completed Years 1–5 on the <strong style="color:var(--success);">${trackName}</strong> with an ending cash position of <strong style="color:var(--accent);">$${Math.round(data.cash || 0).toLocaleString()}</strong>.<br><br>
+                <strong>Key Milestones &amp; Journal Highlights:</strong>
+                ${milestonesHTML}
             `;
         } else {
-            summaryBox.innerHTML = `You arrived at the Hub! (Tip: Play through either the Cooperative or Independent simulator to record your specific financial history here).`;
+            summaryBox.innerHTML = `You arrived at the Hub! (Tip: Play through either the Cooperative or Independent simulator to record your 5-year story arc here).`;
         }
     });
 </script>
