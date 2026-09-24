@@ -1,0 +1,5 @@
+// Year 3 Independent Solo Track Narrative
+const soloTrackYear3Narrative = {
+    title: "Year 3: Burnout, The Wish Garden, and Early Morning Pivots",
+    story: "By Year 3, the constant grind was taking a heavy toll. Everyone was exhausted, and the family was starting to think this lifestyle wasn't so much fun anymore—which defeated the entire reason you started this journey in the first place. But then you spotted a notice for a 'wish garden' complete with unique planting recipes and guides. Figuring that if you were going to go down, you were going to go down swinging, you decided to devote one acre to it. The family loved the concept and agreed. While the work was still fiercely demanding, a bit of practical wisdom from local garden volunteers helped you make crucial changes: you shifted harvests to the cool early morning hours, locked up the phones until break time, and walked away with a surprisingly better harvest and some solid marketing advice. The family is back on board, though you know you'll need to figure out a real vacation or emergency backup plan next year. You did a little better this time—let's see how next year goes."
+};
