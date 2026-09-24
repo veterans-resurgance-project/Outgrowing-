@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Little Scientist Environmental Data Logger</title>
+    <!-- Tailwind CSS for modern, accessible styling -->
+    <script src="https://tailwindcss.com"></script>
+    <style>
+        .custom-gradient {
+            background: linear-gradient(135deg, #1e3a1e 0%, #0f172a 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 min-h-screen flex flex-col">
+
+    <!-- Header / Navigation Bar -->
+    <header class="custom-gradient text-white shadow-md p-4">
+        <div class="max-width-7xl mx-auto flex flex-col sm:flex-row justify-between items-center max-w-6xl">
+            <div class="flex items-center space-x-3 mb-2 sm:mb-0">
+                <span class="text-2xl">🌱</span>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight">AFTI Initiative</h1>
+                    <p class="text-xs text-green-300 font-medium">Youth Science & STEM Data Portal</p>
+                </div>
+            </div>
+            <div class="text-sm bg-green-900/50 px-3 py-1.5 rounded-md border border-green-700 text-green-200">
+                🔬 Module: <strong>"Little Scientist" Environmental Logger</strong>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-6xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left Column: Form Input -->
+        <section class="lg:col-span-1 bg-white rounded-xl shadow-sm border border-gray-200 p-5 h-fit">
+            <h2 class="text-lg font-bold text-gray-900 mb-1 flex items-center gap-2">
+                📝 Log New Reading
+            </h2>
+            <p class="text-xs text-gray-500 mb-4">Record daily field metrics from your assigned raised bed or monitoring plot.</p>
+
+            <form id="dataLoggerForm" class="space-y-4">
+                <!-- Scientist Name & Date -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1" for="scientistName">Scientist Initials / Team</label>
+                    <input type="text" id="scientistName" required placeholder="e.g., Team Alpha" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-600 focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1" for="logDate">Date & Time</label>
+                    <input type="datetime-local" id="logDate" required class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-600 focus:outline-none">
+                </div>
+
+                <!-- Plot/Bed Location Selection -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1" for="plotLocation">Anchor Plot Location</label>
+                    <select id="plotLocation" required class="w-full text-sm p-2 border border-gray-300 rounded bg-white focus:ring-2 focus:ring-green-600 focus:outline-none">
+                        <option value="">-- Select Anchor Site Bed --</option>
+                        <option value="Cinder-Bed-A">Cinder Raised Bed A</option>
+                        <option value="Timber-Bed-B">Timber Raised Bed B</option>
+                        <option value="Myco-Nutrient-Zone">Myco-Nutrient Zone 1</option>
+                        <option value="CEA-Greenhouse-1">CEA Greenhouse Hub</option>
+                    </select>
+                </div>
+
+                <hr class="border-gray-200 my-2">
+
+                <!-- Core Science Metrics Grid -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1" for="temperature">Temp (°F)</label>
+                        <input type="number" step="0.1" id="temperature" required placeholder="72.5" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-600 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1" for="soilMoisture">Soil Moisture (%)</label>
+                        <input type="number" step="1" min="0" max="100" id="soilMoisture" required placeholder="45" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-600 focus:outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1" for="cropYieldEst">Est. Crop Yield / Health Rating</label>
+                    <select id="cropYieldEst" required class="w-full text-sm p-2 border border-gray-300 rounded bg-white focus:ring-2 focus:ring-green-600 focus:outline-none">
+                        <option value="Excellent">Excellent (Optimal Growth / High Yield)</option>
+                        <option value="Good">Good (Healthy Baseline)</option>
+                        <option value="Fair">Fair (Minor Biological Stresses Observed)</option>
+                        <option value="Action Required">Action Required (Needs Immediate Core 5 Inspection)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1" for="fieldNotes">Observations & Biology Notes</label>
+                    <textarea id="fieldNotes" rows="3" placeholder="Note mycological activity, pollinator presence, or soil conditions..." class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-600 focus:outline-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded text-sm transition duration-150 ease-in-out shadow-sm">
+                    💾 Commit to System Ledger
+                </button>
+            </form>
+        </section>
+
+        <!-- Right Column: Interactive Ledger Data View -->
+        <section class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-200 p-5 flex flex-col">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-200 pb-3 mb-4 gap-2">
+                <div>
+                    <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+                        📊 Central Field Ledger
+                    </h2>
+                    <p class="text-xs text-gray-500">Persistent historical data entries logged across active regional hub networks.</p>
+                </div>
+                <div class="flex gap-2 w-full sm:w-auto">
+                    <button id="mockDataBtn" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-medium py-1.5 px-3 rounded transition">
+                        ⚡ Load Mock Stream
+                    </button>
+                    <button id="clearLedgerBtn" class="text-xs bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 font-medium py-1.5 px-3 rounded transition">
+                        Clear All
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Metric Cards Summary -->
+            <div class="grid grid-cols-3 gap-4 mb-4 text-center">
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-2.5">
+                    <div class="text-xs font-semibold text-blue-700 uppercase tracking-tight">Avg Soil Moisture</div>
+                    <div id="statMoisture" class="text-xl font-bold text-blue-900 mt-0.5">--</div>
+                </div>
+                <div class="bg-orange-50 border border-orange-200 rounded-lg p-2.5">
+                    <div class="text-xs font-semibold text-orange-700 uppercase tracking-tight">Avg Temperature</div>
+                    <div id="statTemp" class="text-xl font-bold text-orange-900 mt-0.5">--</div>
+                </div>
+                <div class="bg-green-50 border border-green-200 rounded-lg p-2.5">
+                    <div class="text-xs font-semibold text-green-700 uppercase tracking-tight">Total Records</div>
+                    <div id="statTotal" class="text-xl font-bold text-green-900 mt-0.5">0</div>
+                </div>
+            </div>
+
+            <!-- Ledger Table Container -->
+            <div class="flex-grow overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[500px]">
+                    <thead>
+                        <tr class="bg-gray-100 border-b border-gray-200 text-xs font-bold text-gray-600 uppercase tracking-wider">
+                            <th class="p-3">Timestamp / Plot</th>
+                            <th class="p-3">Scientist</th>
+                            <th class="p-3 text-center">Temp / Moisture</th>
+                            <th class="p-3">Health Status</th>
+                            <th class="p-3">Field Observations</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ledgerBody" class="text-sm divide-y divide-gray-100">
+                        <!-- Dynamic content injected here -->
+                    </tbody>
+                </table>
+                <div id="emptyLedgerMessage" class="text-center py-12 text-gray-400 text-sm hidden">
+                    No data logged in this session yet. Use the entry form on the left or load a mock data stream.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Footer -->
+    <footer class="bg-gray-900 text-gray-400 text-center py-4 border-t border-gray-800 text-xs">
