@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Executive Vault - Board Resolution & Policy</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --grey:#334155; --accent:#38bdf8; --muted:#94a3b8; }
+body { font-family:system-ui,-apple-system,sans-serif; background:var(--bg); color:#fff; margin:0; padding:2rem; }
+.container { max-width:850px; margin:0 auto; background:var(--card); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:2.5rem; box-shadow:0 10px 30px rgba(0,0,0,0.4); }
+h1 { color:var(--accent); font-size:1.8rem; font-weight:900; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.5rem; text-align:center; }
+h2 { color:#2ecc71; font-size:1.3rem; margin-top:2rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.5rem; }
+p, li { color:#cbd5e1; line-height:1.7; font-size:1rem; }
+.badge { background:rgba(56,189,248,0.15); color:var(--accent); font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.15em; padding:0.3rem 0.9rem; border-radius:20px; display:inline-block; margin-bottom:1.5rem; }
+.copy-btn { background:#27ae60; color:#fff; border:none; padding:12px 20px; border-radius:8px; font-weight:bold; cursor:pointer; width:100%; font-size:1rem; margin-top:2rem; transition:background 0.2s; box-shadow:0 4px 12px rgba(0,0,0,0.3); }
+.copy-btn:hover { background:#219653; }
+</style>
+<script>
+function copyToClipboard() {
+    const text = document.getElementById("resolution-text").innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById("btn-feedback");
+        btn.innerText = "✓ Copied Successfully to Clipboard!";
+        btn.style.background = "#0ea5e9";
+        setTimeout(() => {
+            btn.innerText = "Copy Resolution Text";
+            btn.style.background = "#27ae60";
+        }, 3000);
+    });
+}
+</script>
+</head>
+<body>
+
+<div class="container">
+    <div style="text-align: center;">
+        <span class="badge">Executive Vault Document</span>
+        <h1>Board Resolution & Policy Statement</h1>
+        <p style="color:var(--muted); font-size:0.95rem;">Executive Compensation, Cash-Flow Deferral, and Operating Reserve Policy</p>
+    </div>
+
+    <div id="resolution-text" style="background:rgba(15,23,42,0.6); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:2rem; margin-top:1.5rem;">
+        <h3 style="color:#fff; margin-top:0; font-size:1.1rem; font-weight:bold; text-transform:uppercase; letter-spacing:0.05em;">BOARD RESOLUTION OF THE BOARD OF DIRECTORS OF</h3>
+        <p><strong>Corporation:</strong> [Insert Legal Nonprofit Name / Agricultural Future & Training Initiative / The Watershed Stewards]<br>
+        <strong>Subject:</strong> Adoption of Executive Compensation, Cash-Flow Deferral, and Operating Reserve Policy</p>
+
+        <h2>RECITALS</h2>
+        <p><strong>WHEREAS</strong>, the Corporation is a recognized nonprofit entity dedicated to agricultural development, vocational training, and community land stewardship; and</p>
+        <p><strong>WHEREAS</strong>, the Corporation desires to attract and retain executive leadership while ensuring the highest standards of fiscal responsibility, long-term financial sustainability, and compliance with institutional grant requirements; and</p>
+        <p><strong>WHEREAS</strong>, the Executive Director has agreed to structure their compensation with an initial baseline expense stipend, a deferred executive salary subject to specific operational liquidity benchmarks, and a pro-rata catch-up mechanism tied to seasonal revenue and grant inflows;</p>
+
+        <p><strong>NOW, THEREFORE, BE IT RESOLVED</strong>, that the Board of Directors hereby adopts the following official Executive Compensation and Reserve Policy:</p>
+
+        <h2>SECTION 1: BASELINE OPERATING RESERVE ("THE WATERLINE")</h2>
+        <ol>
+            <li><strong>Definition of Reserve:</strong> The Corporation shall establish and maintain a strict 90-day operating reserve fund. The baseline "burn rate" calculation for this reserve shall include all mandatory recurring operational overhead (e.g., rent, utilities, insurance, materials, and contracted services) excluding executive salary draws.</li>
+            <li><strong>Prioritization of Reserve:</strong> No executive compensation beyond the approved baseline stipend (outlined in Section 2) shall be drawn or accrued until the 90-day operating reserve is fully funded and locked in unencumbered cash accounts.</li>
+        </ol>
+
+        <h2>SECTION 2: INITIAL STIPEND & SALARY DEFERRAL</h2>
+        <ol>
+            <li><strong>Expense Stipend:</strong> During the initial startup phase and periods where reserves are building, the Executive Director shall receive a monthly expense and living stipend of <strong>$1,100</strong>. This stipend represents a fully realized operational expense.</li>
+            <li><strong>Deferred Executive Compensation:</strong> The full executive salary structure (set at <strong>$6,500 per month</strong>, totaling an annual cap of <strong>$78,000</strong>) shall be deferred. No unearned executive salary liability shall be artificially accrued on the Corporation's balance sheet during months where cash flow or reserves do not support it.</li>
+        </ol>
+
+        <h2>SECTION 3: PRO-RATA AND CATCH-UP DRAWS (SURPLUS LIQUIDITY)</h2>
+        <ol>
+            <li><strong>Surplus Threshold:</strong> Once the 90-day operating reserve is fully met, any additional unencumbered cash flow, seasonal harvest revenue, or grant reimbursement received by the Corporation shall be classified as surplus liquidity.</li>
+            <li><strong>Pro-Rata / Partial Payments:</strong> If surplus liquidity is insufficient to cover a full monthly executive salary draw but exceeds the baseline reserve, the Board authorizes <strong>partial or pro-rata draws</strong> funded exclusively by that surplus, ensuring the 90-day reserve waterline is never breached.</li>
+            <li><strong>Cumulative Catch-Up:</strong> During peak cash-flow periods (such as major grant inflows or seasonal revenue surges), the Executive Director is authorized to draw previously deferred executive compensation amounts, provided that:
+                <ul style="list-style-type: disc; margin-top: 5px;">
+                    <li>The 90-day operating reserve remains fully intact and untouched after the catch-up disbursement.</li>
+                    <li><strong>The total cumulative compensation paid to the Executive Director within any given fiscal year shall never exceed the agreed-upon annual salary cap of $78,000.</strong></li>
+                </ul>
+            </li>
+        </ol>
+
+        <h2>SECTION 4: COMPLIANCE AND REVIEW</h2>
+        <ol>
+            <li><strong>Transparency:</strong> The Corporation’s bookkeeper/CPA shall log all actual stipend and catch-up disbursements in accordance with standard cash-basis or incurred-expense accounting principles to ensure transparent reporting for grant audits.</li>
+            <li><strong>Annual Review:</strong> The Board of Directors shall review this compensation and reserve policy annually to evaluate organizational growth, grant milestones, and financial health.</li>
+        </ol>
+
+        <h2 style="margin-top:2.5rem;">CERTIFICATION</h2>
+        <p>I, the undersigned, being the duly elected and acting Secretary of [Insert Nonprofit Name], hereby certify that the foregoing resolution was duly adopted by the Board of Directors at a meeting held on the date indicated below, and that said resolution has not been modified or rescinded.</p>
+        
+        <p style="margin-top: 2rem;">
+            ___________________________________<br>
+            <strong>Secretary, Board of Directors</strong><br><br>
+            <strong>Date:</strong> _________________
+        </p>
+    </div>
+
+    <button id="btn-feedback" class="copy-btn" onclick="copyToClipboard()">Copy Resolution Text</button>
+</div>
+
+</body>
+</html>
