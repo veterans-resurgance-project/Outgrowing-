@@ -64,7 +64,95 @@ main { max-width:1000px; margin:0 auto; padding:2rem 1rem; box-sizing:border-box
         <p style="color: #ffffff;">This program is designed to help boost income on farms, while providing essential training, certification and advancement paths for workers, bringing essential surge labor and harvest-saver support to local producers facing severe seasonal labor shortages during peak crunch times.</p>
     </div>
  </section>
+<!-- Major Announcements & News Carousel -->
+<div id="announcement-carousel" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 20px; margin: 15px 0; position: relative; overflow: hidden;" class="shadow-lg">
+    
+    <!-- Top Bar / Category Tag -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <span id="announcement-tag" style="background: #064e3b; color: #34d399; font-size: 0.75rem; font-weight: bold; padding: 3px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em;">Program Launch</span>
+        <span id="announcement-counter" style="color: #64748b; font-size: 0.8rem;">1 of 3</span>
+    </div>
 
+    <!-- Content Area (Updates dynamically) -->
+    <div id="announcement-content" style="min-height: 70px;">
+        <h3 id="announcement-title" style="color: #f8fafc; font-size: 1.1rem; font-weight: bold; margin: 0 0 5px 0;">New Small Engine Cohort Enrolling</h3>
+        <p id="announcement-desc" style="color: #cbd5e1; font-size: 0.9rem; margin: 0;">Week 1 teardown modules open for incoming regional trainees. Secure your slot through the logistics portal.</p>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 10px;">
+        <div style="display: flex; gap: 6px;" id="carousel-dots">
+            <!-- Dynamic dots injected via JS -->
+        </div>
+        <div style="display: flex; gap: 8px;">
+            <button onclick="prevSlide()" style="background: #334155; color: #f8fafc; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-size: 0.8rem;">← Prev</button>
+            <button onclick="nextSlide()" style="background: #334155; color: #f8fafc; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-size: 0.8rem;">Next →</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Manage your announcements right here at the top of the array
+    const announcements = [
+        {
+            tag: "Program Launch",
+            title: "New Small Engine Cohort Enrolling",
+            desc: "Week 1 teardown modules open for incoming regional trainees. Secure your slot through the logistics portal."
+        },
+        {
+            tag: "Host Recognition",
+            title: "Willamette Valley Milestone Reached",
+            desc: "Over 40 acres successfully integrated into the Shared Harvest pipeline this quarter. Thank you to our anchor property hosts."
+        },
+        {
+            tag: "System Update",
+            title: "Tax Ledgering & Receipt Module Active",
+            desc: "Host partners can now automatically calculate fair-market-value receipts for 20% food bank contributions."
+        }
+    ];
+
+    let currentSlide = 0;
+    let slideInterval;
+
+    function renderSlide() {
+        const slide = announcements[currentSlide];
+        document.getElementById('announcement-tag').innerText = slide.tag;
+        document.getElementById('announcement-title').innerText = slide.title;
+        document.getElementById('announcement-desc').innerText = slide.desc;
+        document.getElementById('announcement-counter').innerText = `${currentSlide + 1} of ${announcements.length}`;
+        
+        // Update dots
+        const dotsContainer = document.getElementById('carousel-dots');
+        dotsContainer.innerHTML = announcements.map((_, idx) => `
+            <span onclick="goToSlide(${idx})" style="width: ${idx === currentSlide ? '16px' : '6px'}; height: 6px; border-radius: 3px; background: ${idx === currentSlide ? '#38bdf8' : '#475569'}; cursor: pointer; transition: width 0.2s;"></span>
+        `).join('');
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % announcements.length;
+        renderSlide();
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + announcements.length) % announcements.length;
+        renderSlide();
+    }
+
+    function goToSlide(idx) {
+        currentSlide = idx;
+        renderSlide();
+        resetTimer();
+    }
+
+    function resetTimer() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, 7000); // Rotates every 7 seconds
+    }
+
+    // Initialize carousel on page load
+    renderSlide();
+    slideInterval = setInterval(nextSlide, 7000);
+            </script>
 <!-- Side-by-Side Wrapper for the Two Main Sections -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4 w-full">
     
