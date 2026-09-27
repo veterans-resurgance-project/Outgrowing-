@@ -139,3 +139,182 @@ main { max-width: 900px; margin: 2rem auto; padding: 0 1.5rem; }
     }
 </style>
 </div>
+<!-- SIMULATION INTERACTIVE SECTION WRAPPER -->
+<div style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85)); border: 2px solid rgba(156, 175, 136, 0.35); border-radius: 20px; padding: 30px; margin-bottom: 25px; font-family: 'Inter', system-ui, sans-serif; box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.5);">
+    
+    <!-- Header / Intro Badge -->
+    <div style="text-align: center; margin-bottom: 25px;">
+        <span style="background: rgba(156, 175, 136, 0.15); color: #9CAF88; font-family: 'Fredoka', sans-serif; font-size: 0.85rem; font-weight: 700; padding: 6px 16px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid rgba(156, 175, 136, 0.3);">🎮 Interactive Field Simulations &amp; Labs</span>
+        <h2 style="font-family: 'Fredoka', sans-serif; color: #fff; font-size: 1.85rem; margin-top: 12px; margin-bottom: 0; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Test Your Farming Future</h2>
+    </div>
+
+    <!-- 1. Simulator-Battle Card -->
+    <div class="sim-card">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <span style="font-size: 1.3rem;">⚡</span>
+            <h3 class="sim-title" style="margin: 0;">The Battle to Save the Farm</h3>
+        </div>
+        <p class="sim-desc">Have you dreamed of growing your own food one day on your own land? But it seems completely impossible from where you are at now, and you don't know how to get any closer? Try our simulator. The odds are stacked just to survive it's not easy there are things you can do we are rooting for you. Can you outsmart unpredictable weather and the Bank Boss in a high-stakes showdown to save the farm?</p>
+        <a href="farmer-apprentice-story.html" class="sim-btn">Play Simulator-Battle &rarr;</a>
+    </div>
+
+    <!-- 2. Land Acquisition Card -->
+    <div class="sim-card">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <span style="font-size: 1.3rem;">🚜</span>
+            <h3 class="sim-title" style="margin: 0;">Land Acquisition Option</h3>
+        </div>
+        <p class="sim-desc">You've secured a 10-acre lease. Make sharp choices, work hard, and earn enough keen sense to secure the permanent title deed. <em>(Hint: Training modules boost profit percentages and minimize challenge damages.)</em></p>
+        <a href="acreage-path-select.html" class="sim-btn" onclick="triggerBuyTheFarm(event)">Be the Farmer. Buy the Farm &rarr;</a>
+    </div>
+
+    <!-- START OF SIDE-BY-SIDE CALCULATOR CARDS -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 20px;">
+        
+        <!-- 1. Original Calculator Card -->
+        <div class="sim-card" style="margin-bottom: 0; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div style="font-size: 1.5rem; margin-bottom: 5px;">📊</div>
+                <h3 class="sim-title" style="font-size: 1.15rem; justify-content: center;">Shared Crops Calculator</h3>
+                <p class="sim-desc">Evaluate upfront costs, labor demands, and strategic timing for different crop tiers before you plant.</p>
+            </div>
+            <div style="margin-top: 20px;">
+                <a href="crop-calculator.html" class="sim-btn" style="display: inline-block; width: 100%; box-sizing: border-box;">Open Calculator &rarr;</a>
+            </div>
+        </div>
+
+        <!-- 2. New Specialty Crops Infrastructure Card -->
+        <div class="sim-card" style="margin-bottom: 0; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div style="font-size: 1.5rem; margin-bottom: 5px;">🏗️</div>
+                <h3 class="sim-title" style="font-size: 1.15rem; justify-content: center;">Specialty Crops System Design</h3>
+                <p class="sim-desc">Review high-tunnel setups, irrigation grids, and specialized tools required for advanced crop scaling.</p>
+            </div>
+            <div style="margin-top: 20px;">
+                <a href="shared_harvest_incubator.html" class="sim-btn" style="display: inline-block; width: 100%; box-sizing: border-box;">Open Incubator &rarr;</a>
+            </div>
+        </div>
+
+    </div>
+    <!-- END OF SIDE-BY-SIDE CALCULATOR CARDS -->
+
+    <!-- START OF CHALLENGES BUTTON PAIRING -->
+    <div style="display: flex; justify-content: center; margin: 15px 0 0 0;">
+        <div style="background: rgba(15, 23, 42, 0.75); border: 2px dashed #9CAF88; border-radius: 16px; padding: 22px 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align: center; max-width: 100%; width: 100%; position: relative; overflow: hidden;">
+            
+            <!-- Background glow effect for the cute kids box -->
+            <div style="position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 200px; height: 100px; background: rgba(156,175,136,0.1); filter: blur(40px); pointer-events: none;"></div>
+
+            <!-- Fun Category Header / Font Style -->
+            <h4 style="margin: 0 0 18px 0; font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', system-ui, sans-serif; font-size: 1.15rem; color: #9CAF88; letter-spacing: 0.5px; text-transform: uppercase;">
+                🌟 Ready for the Challenge? Pick Your Path! 🌟
+            </h4>
+
+            <!-- Side-by-Side Buttons Container -->
+            <div style="display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap;">
+                
+                <!-- Button 1: Little Scientist Lab -->
+                <a href="little-scientist-lab.html" class="challenge-btn">
+                    🌸 Little Scientist Lab
+                </a>
+
+                <!-- Button 2: Square Foot Garden Challenge -->
+                <a href="prod-tutorial-sfghard.html" class="challenge-btn">
+                    🌱 Square Foot Garden Challenge
+                </a>
+
+            </div>
+        </div>
+    </div>
+    <!-- END OF CHALLENGES BUTTON PAIRING -->
+
+</div>
+<!-- END OF SIMULATION INTERACTIVE SECTION WRAPPER -->
+
+<style>
+    .sim-card {
+        background: rgba(15, 23, 42, 0.8);
+        border: 1px solid rgba(156, 175, 136, 0.2);
+        border-radius: 14px;
+        padding: 24px;
+        margin-bottom: 20px;
+        transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .sim-card:hover { 
+        border-color: rgba(156, 175, 136, 0.6);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+    .sim-title {
+        font-family: 'Fredoka', system-ui, sans-serif;
+        color: #f8fafc;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-top: 0;
+        margin-bottom: 8px;
+        letter-spacing: 0.01em;
+        display: flex;
+        align-items: center;
+    }
+    .sim-desc {
+        font-size: 0.95rem;
+        color: #cbd5e1;
+        line-height: 1.6;
+        margin: 0 0 18px 0;
+    }
+    /* Unified Sage Button Style */
+    .sim-btn {
+        background: #9CAF88;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-family: 'Fredoka', system-ui, sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+        white-space: nowrap;
+    }
+    .sim-btn:hover {
+        background: #6b705c;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+    /* Unified Challenge Button Style matching the theme */
+    .challenge-btn {
+        background: #9CAF88;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 14px 24px;
+        border-radius: 12px;
+        font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', system-ui, sans-serif;
+        font-weight: bold;
+        font-size: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .challenge-btn:hover {
+        background: #6b705c;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+</style>
+
+<script>
+    function triggerBuyTheFarm(event) {
+        if (typeof gameState !== 'undefined') {
+            localStorage.setItem('farmGameState', JSON.stringify(gameState));
+        }
+    }
+</script>
+
