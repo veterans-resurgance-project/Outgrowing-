@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFO & Board Secretary Compliance Memorandum</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --grey:#334155; --accent:#38bdf8; --muted:#94a3b8; }
+body { font-family:system-ui,-apple-system,sans-serif; background:var(--bg); color:#fff; margin:0; padding:2rem; }
+.container { max-width:900px; margin:0 auto; background:var(--card); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:2.5rem; box-shadow:0 10px 30px rgba(0,0,0,0.4); }
+h1 { color:var(--accent); font-size:1.8rem; font-weight:900; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.5rem; text-align:center; }
+h2 { color:#2ecc71; font-size:1.3rem; margin-top:2rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.5rem; }
+h3 { color:#38bdf8; font-size:1.1rem; margin-top:1.5rem; }
+p, li { color:#cbd5e1; line-height:1.7; font-size:1rem; }
+.badge { background:rgba(56,189,248,0.15); color:var(--accent); font-size:0.85rem; font-weight:800; text-transform:uppercase; letter-spacing:0.15em; padding:0.3rem 0.9rem; border-radius:20px; display:inline-block; margin-bottom:1.5rem; }
+.memo-box { background:rgba(15,23,42,0.7); border:1px solid rgba(56,189,248,0.25); border-radius:12px; padding:2rem; margin-top:1.5rem; }
+.table-container { width:100%; overflow-x:auto; margin:1.5rem 0; }
+table { width:100%; border-collapse:collapse; text-align:left; font-size:0.9rem; }
+th, td { padding:12px; border:1px solid rgba(255,255,255,0.15); color:#cbd5e1; }
+th { background:rgba(30,41,59,0.9); color:#fff; font-weight:bold; }
+.copy-btn { background:#27ae60; color:#fff; border:none; padding:12px 20px; border-radius:8px; font-weight:bold; cursor:pointer; width:100%; font-size:1rem; margin-top:2rem; transition:background 0.2s; box-shadow:0 4px 12px rgba(0,0,0,0.3); }
+.copy-btn:hover { background:#219653; }
+</style>
+<script>
+function copyMemoToClipboard() {
+    const text = document.getElementById("memo-text").innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById("btn-feedback");
+        btn.innerText = "✓ CFO Memorandum Copied Successfully!";
+        btn.style.background = "#0ea5e9";
+        setTimeout(() => {
+            btn.innerText = "Copy CFO Compliance Memorandum";
+            btn.style.background = "#27ae60";
+        }, 3000);
+    });
+}
+</script>
+</head>
+<body>
+
+<div class="container">
+    <div style="text-align: center;">
+        <span class="badge">Executive Vault &middot; Financial Governance</span>
+        <h1>CFO &amp; Secretary Compliance Memorandum</h1>
+        <p style="color:var(--muted); font-size:0.95rem;">Accounting Treatment &amp; Separation Protocols: Stipends, Upskilling Scholarships, and Executive Transition</p>
+    </div>
+
+    <div id="memo-text" class="memo-box">
+        <p><strong>TO:</strong> Chief Financial Officer / Board Secretary<br>
+        <strong>FROM:</strong> Executive Director &amp; Governance Committee<br>
+        <strong>DATE:</strong> September 27, 2026<br>
+        <strong>SUBJECT:</strong> Financial, Tax, and Grant Accounting Framework for Trainee Stipends, Upskilling Scholarships, and Executive Compensation Phase-In</p>
+
+        <h2>1. Executive Summary &amp; Purpose</h2>
+        <p>As our organization scales through its early operational phases, personnel and participants will transition across three distinct tiers: (1) Initial Training Stipends, (2) Advanced Upskilling/Certifications, and (3) Full-Time Executive Employment. To ensure complete audit readiness, IRS compliance (avoiding employee/independent contractor misclassification and stipend-to-wage leakage), and institutional grant compliance, this memorandum establishes the mandatory General Ledger (GL) segregation and governance rules.</p>
+
+        <h2>2. Comparative Accounting Matrix: The Three Operational Tiers</h2>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operational Tier</th>
+                        <th>Primary Mechanism</th>
+                        <th>GL / Budget Category</th>
+                        <th>IRS / Tax Treatment</th>
+                        <th>Grant Compliance Rule</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Tier 1: Basic Training &amp; Field Support</strong></td>
+                        <td>Training MOU &amp; Living Stipend ($1,100/mo cap)</td>
+                        <td>Participant Support Costs / Stipends</td>
+                        <td>Reported as non-wage living support (Form 1099-NEC/Misc or exempt tracking per IRS guidelines)</td>
+                        <td>Must be mapped exclusively to "Participant Support" line items. Prohibited from mixing with admin overhead.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tier 2: Advanced Upskilling &amp; Licensing</strong></td>
+                        <td>Dedicated Educational Scholarship / Vendor Contract</td>
+                        <td>Professional Development / Training Grants</td>
+                        <td>Tax-free educational assistance or direct vendor payment for professional credentials (CDL, licenses)</td>
+                        <td>Restricted to dedicated training grants or line-item budget modifications. Requires a Service Commitment Agreement.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tier 3: Executive Leadership</strong></td>
+                        <td>Employment Agreement &amp; Board Resolution</td>
+                        <td>Administrative Overhead / Executive Compensation</td>
+                        <td>Standard W-2 payroll withholding, subject to annual cap ($78,000) and 90-day reserve waterline</td>
+                        <td>Deferred until liquidity benchmarks are met; catch-up draws restricted to surplus cash flow and annual caps.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>3. Detailed Operational &amp; Accounting Procedures</h2>
+
+        <h3>A. Handling Tier 1 (Stipends)</h3>
+        <ul>
+            <li><strong>No Payroll Tax Withholding:</strong> Because stipends are designed to offset living expenses during introductory service/training rather than act as hourly wages, they must not be processed through standard W-2 payroll.</li>
+            <li><strong>Audit Trail:</strong> Each stipend disbursement requires an active Training MOU signed by the participant, tracking attendance or milestone completion.</li>
+        </ul>
+
+        <h3>B. Handling Tier 2 (Upskilling &amp; Certifications)</h3>
+        <ul>
+            <li><strong>Direct-to-Vendor Model:</strong> When a participant or staff member undergoes specialized training (e.g., CDL testing, heavy equipment certification, specialized ag-tech courses), invoice payments must go <strong>directly</strong> from the nonprofit to the educational institution or testing facility.</li>
+            <li><strong>Service Commitment Agreement:</strong> To protect the organization's investment, any specialized upskilling grant or scholarship exceeding $500 must be backed by a written agreement requiring the recipient to complete a designated period of service with the organization or its partner network upon completion.</li>
+        </ul>
+
+        <h3>C. Handling Tier 3 (Executive Phase-In &amp; Catch-Up Draws)</h3>
+        <ul>
+            <li><strong>Zero Artificial Accrual:</strong> Per our Board Resolution, the $6,500/month executive salary is strictly deferred. No unearned liability shall be placed on the balance sheet during lean months.</li>
+            <li><strong>The Waterline Rule:</strong> The 90-day operating reserve (excluding executive pay) must remain untouched. Catch-up draws for deferred executive pay are only triggered when surplus cash exceeds this waterline, and cumulative annual pay cannot exceed $78,000.</li>
+        </ul>
+
+        <h2>4. Action Items for the CFO / Bookkeeper</h2>
+        <ol>
+            <li>Establish three distinct General Ledger (GL) expense accounts: <em>(Account 5100: Participant Support Stipends)</em>, <em>(Account 5200: Professional Development &amp; Training Scholarships)</em>, and <em>(Account 6100: Executive Administration)</em>.</li>
+            <li>Ensure future grant proposals strictly segregate "Participant Support" from "Administrative Overhead" to prevent audit exceptions.</li>
+            <li>File this memorandum in the permanent corporate governance vault.</li>
+        </ol>
+    </div>
+
+    <button id="btn-feedback" class="copy-btn" onclick="copyMemoToClipboard()">Copy CFO Compliance Memorandum</button>
+</div>
+
+</body>
+</html>
