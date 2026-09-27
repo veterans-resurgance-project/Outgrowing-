@@ -317,4 +317,68 @@ main { max-width: 900px; margin: 2rem auto; padding: 0 1.5rem; }
         }
     }
 </script>
+<section id="enterprise-overview" class="w-full">
+    <div style="background-color: #1e293b; color: #ffffff; border: 2px solid rgba(156,175,136,0.3); font-size: 14px; line-height: 1.6;" class="p-3 sm:p-6 rounded-lg w-full mb-6">
+        <h2 style="color: #9CAF88; font-weight: bold; font-size: 18px;" class="mb-2">Enterprise Overview &amp; Scalable Model</h2>
+        <p style="color: #cbd5e1; margin: 0;">The Shared Harvest Incubator &amp; Watershed Restoration Enterprise is an integrated, scalable agricultural model designed to address critical regional production bottlenecks and workforce shortages through a dual-track training ecosystem. Operating across five modular production systems (High-Tunnel Greens, Specialty Cut Flowers, Pollinator/Apiary Lanes, Mushroom Cultivation, and Watershed Remediation), the enterprise bridges commercial agriculture with vocational rehabilitation for military veterans and agricultural recruits. The program utilizes a rigorous, tiered participation architecture: Tier 1 supports a core cohort of 10 intensive trainees executing foundational infrastructure build-outs and rotational management; Tier 2 mobilizes an enterprise reserve pool of surge harvesters via earned-income and piece-rate models to directly stabilize regional farm labor shortages during peak harvest; and Tier 3 deploys skilled work-teams for regional wildfire-fuel reduction and public land watershed restoration. By anchoring financial sustainability to a milestone-driven enterprise output and landowner partnerships, the model replaces permanent grant dependency with a self-sustaining economic engine that delivers measurable environmental, food security, and workforce outcomes.</p>
+    </div>
+</section>
 
+<!-- CENTERED HORIZONTAL RESEARCH PROTOCOL CALLOUT BAR -->
+<div style="width: 100%; display: flex; justify-content: center; margin: 25px 0;">
+    <div style="width: 100%; max-width: 950px; background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(156, 175, 136, 0.35); border-left: 4px solid #9CAF88; border-radius: 8px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; box-sizing: border-box; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+        
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="font-size: 1.5rem;">🎓</span>
+            <div>
+                <div style="font-weight: bold; color: #f8fafc; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+                    OSU Extension Research Standards 
+                    <span style="background: rgba(156, 175, 136, 0.2); color: #D0D9CD; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: normal; border: 1px solid rgba(156, 175, 136, 0.3);">Peer-Review Ready</span>
+                </div>
+                <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 2px;">
+                    Review our standardized metrology, dual-operator chain-of-custody, and telemetry protocols.
+                </div>
+            </div>
+        </div>
+
+        <a href="research-protocol.html" style="background: #9CAF88; color: white; padding: 9px 16px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: bold; transition: background 0.2s; white-space: nowrap;" onmouseover="this.style.backgroundColor='#6b705c'" onmouseout="this.style.backgroundColor='#9CAF88'">
+            View Research Protocol →
+        </a>
+
+    </div>
+</div>
+
+<!-- FEATURE SPOTLIGHT CARDS (DESIGN STUDIO & WORKFORCE ENGINE) -->
+<div class="my-8">
+    <h3 class="text-xl font-bold text-white mb-4"></h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Spotlight Card 1: Design Studio Animation -->
+        <div class="bg-[#0f172a] border border-[#9CAF88]/30 rounded-xl p-6 flex flex-col justify-between hover:border-[#9CAF88] transition shadow-lg">
+            <div>
+                <span class="text-xs font-mono text-[#9CAF88] uppercase tracking-wider font-bold">Dreamers Visual Pipeline</span>
+                <h4 class="text-lg font-bold text-white mt-1 mb-2">Crayon Sketch to Master Plan</h4>
+                <p class="text-sm text-slate-300 leading-relaxed">Experience our 4-stage interactive design animation showing how rough community ideas transform into professional architectural blueprints.</p>
+            </div>
+            <a href="pencil_to_presentation.html" class="mt-6 bg-[#9CAF88] hover:bg-[#6b705c] text-white text-center py-2.5 px-4 rounded-lg text-sm font-bold transition border border-[rgba(255,255,255,0.2)] block">
+                Launch Design Studio &rarr;
+            </a>
+        </div>
+
+        <!-- Spotlight Card 2: Workforce Engine Simulator -->
+        <div class="bg-[#0f172a] border border-[#9CAF88]/30 rounded-xl p-6 flex flex-col justify-between hover:border-[#9CAF88] transition shadow-lg">
+            <div>
+                <span class="text-xs font-mono text-[#9CAF88] uppercase tracking-wider font-bold">Skills Match Advanced Placement Engine</span>
+                <h4 class="text-lg font-bold text-white mt-1 mb-2">Skill Matching &amp; Audit Engine</h4>
+                <p class="text-sm text-slate-300 leading-relaxed">Manage participant skill tracks, map partner job wish lists, and run live competency gap audits for active field deployment.</p>
+            </div>
+            <a href="outgrowing_ag_engine.html" class="mt-6 bg-[#9CAF88] hover:bg-[#6b705c] text-white text-center py-2.5 px-4 rounded-lg text-sm font-bold transition block shadow border border-[rgba(255,255,255,0.2)]">
+                Launch Workforce Engine &rarr;
+            </a>
+        </div>
+    </div>
+</div>
+
+</main>
+</body>
+</html>
