@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Universal Operational Logging & Action Hub</title>
+    <script src="https://tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --primary: #9CAF88; /* Light botanical sage */
+            --primary-hover: #6b705c; /* Earthy sage hover */
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --hud-bg: #144d29;
+            --blue-accent: #38bdf8;
+            --sage-light: #D0D9CD;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* GLOBAL NAV BAR STYLES */
+        nav {
+            background: #144d29;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(156,175,136,0.3);
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color 0.2s; }
+        nav a:hover, nav a.active { color: var(--primary); font-weight: 700; }
+
+        .page-wrapper {
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 30px;
+            box-sizing: border-box;
+            border: 1px solid rgba(156,175,136,0.3);
+        }
+
+        .hud-bar {
+            background: rgba(20, 77, 41, 0.8);
+            border: 1px solid rgba(156,175,136,0.4);
+            border-radius: 10px;
+            padding: 12px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #ffffff;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        h1 {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--primary);
+            margin-top: 0;
+            font-size: 2rem;
+            text-align: center;
+            letter-spacing: 0.02em;
+        }
+
+        h2, h3 {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--blue-accent);
+        }
+
+        p, li {
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .panel {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(156,175,136,0.25);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        /* INSTRUCTION GUIDANCE BOX INSIDE LEFT PANEL */
+        .instruction-box {
+            background: rgba(156, 175, 136, 0.1);
+            border: 1px solid rgba(156, 175, 136, 0.4);
+            border-left: 4px solid var(--primary);
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .instruction-box h4 {
+            margin: 0 0 6px 0;
+            color: var(--primary);
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.05rem;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #cbd5e1;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: bold;
+            font-size: 1.05rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        /* TROUBLESHOOTING / DIAGNOSTIC TABS */
+        .tab-buttons {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #0f172a;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: #0f172a;
+            border-color: var(--primary);
+        }
+
+        .trouble-card {
+            background: rgba(30, 41, 59, 0.8);
+            border-left: 4px solid var(--accent);
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-right: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .trouble-card h4 {
+            margin: 0 0 5px 0;
+            color: #f8fafc;
+            font-size: 1rem;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .trouble-card p {
+            font-size: 0.85rem;
+            margin: 0 0 8px 0;
+        }
+
+        .steps-box {
+            background: #0f172a;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #38bdf8;
+        }
+
+        /* TABLES */
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 12px 14px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        th {
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--primary);
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .badge-mushrooms { background: #78350f; color: #fde68a; }
+        .badge-apiary { background: #b45309; color: #fef3c7; }
+        .badge-greens { background: #065f46; color: #a7f3d0; }
+        .badge-flowers { background: #831843; color: #fbcfe8; }
+        .badge-service { background: #1e3a8a; color: #93c5fd; }
+        .badge-maintenance { background: #374151; color: #e5e7eb; }
+
+        .section-divider {
+            border: 0;
+            height: 1px;
+            background: rgba(156,175,136,0.3);
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
+    <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
+    <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+      <a href="index.html">Home</a>
+      <a href="training-modules-and-mutual-growth.html">Training & Certification</a>
+      <a href="partners.html">Partners</a>
+      <a href="shared-harvest-incubator.html">Shared Harvest</a>
+      <a href="totals-ledger.html" class="active">Data & Task Hub</a>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="container">
+      
+      <!-- HUD BAR -->
+      <div class="hud-bar">
+          <span>📊 Universal Operational Logging &amp; Task Command Hub</span>
+          <span style="font-size: 0.85rem; color: var(--sage-light);">Active Site: Linn County &amp; Regional Public Lands</span>
+      </div>
+
+      <h1>📋 Daily Task Telemetry &amp; Action Center</h1>
+      <p style="text-align: center; margin-bottom: 25px; max-width: 800px; margin-left: auto; margin-right: auto; color: #cbd5e1;">
+          Log daily agricultural metrics, community service hours, maintenance logs, and manage localized regional mitigation steps dynamically.
+      </p>
+
+      <div class="grid-2">
+          
+          <!-- LEFT PANEL: DATA ENTRY FORM + DETAILED INSTRUCTIONS -->
+          <div class="panel">
+              <h3 class="text-xl font-bold mb-3">🚀 Submit Record / Telemetry</h3>
+              
+              <!-- DYNAMIC INSTRUCTION & SOP GUIDANCE BOX -->
+              <div id="categoryInstructionBox" class="instruction-box">
+                  <h4 id="instTitle">🍄 Mushrooms Module SOP</h4>
+                  <p id="instDesc" style="margin: 0; color: #cbd5e1;">Monitor substrate moisture and block humidity. Ensure air exchange cycles run every 4 hours. Log relative humidity percentage and any green mold indicators immediately.</p>
+              </div>
+
+              <form id="telemetryForm" onsubmit="handleFormSubmit(event)">
+                  <div class="form-group">
+                      <label for="categorySelect">Logging Category / Track</label>
+                      <select id="categorySelect" onchange="adaptFormFields(this.value)">
+                          <option value="mushrooms">Mushrooms Module</option>
+                          <option value="apiary">Apiary Diagnostics</option>
+                          <option value="greens">High Yield Greens</option>
+                          <option value="flowers">Cut Flowers Track</option>
+                          <option value="service">Community Service / Volunteer Hours</option>
+                          <option value="maintenance">Facility / Equipment Maintenance</option>
+                      </select>
+                  </div>
+
+                  <div class="form-group">
+                      <label id="dynamicMetricLabel" for="metricInput">Humidity Parameter (%)</label>
+                      <input type="number" id="metricInput" placeholder="Enter sensor data point or metric" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="observerInput">Operator / Participant Name or Initials</label>
+                      <input type="text" id="observerInput" placeholder="e.g., JD / Volunteer Crew A" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="notesInput">Field Observations / Notes / Actions Taken</label>
+                      <textarea id="notesInput" rows="3" placeholder="Describe layout variables, hours completed, or maintenance actions..."></textarea>
+                  </div>
+
+                  <button type="submit" class="btn-primary">Commit Entry to Permanent Ledger</button>
+              </form>
+          </div>
+
+          <!-- RIGHT PANEL: DYNAMIC INTERACTIVE DIAGNOSTICS & PLAYBOOK -->
+          <div class="panel">
+              <h3 class="text-xl font-bold mb-3">🛠️ Mitigation Playbook &amp; Guides</h3>
+              
+              <div class="tab-buttons">
+                  <button class="tab-btn active" onclick="switchTab(event, 'tab-mushrooms')">Mushrooms</button>
+                  <button class="tab-btn" onclick="switchTab(event, 'tab-apiary')">Apiary</button>
+                  <button class="tab-btn" onclick="switchTab(event, 'tab-service')">Community Service</button>
+              </div>
+
+              <!-- TAB 1: MUSHROOMS -->
+              <div id="tab-mushrooms" class="tab-content">
+                  <div class="trouble-card">
+                      <h4>Trichoderma (Green Mold) Spore Outbreak</h4>
+                      <p>Contamination on substrate blocks during incubation phase.</p>
+                      <div class="steps-box">
+                          <strong>Protocol:</strong> Isolate block immediately, spray 3% hydrogen peroxide solution on localized spot, increase fresh air exchange.
+                      </div>
+                  </div>
+                  <div class="trouble-card">
+                      <h4>Substrate Drying / Stipe Cracking</h4>
+                      <p>Inadequate ambient tent humidity causing premature cap drying.</p>
+                      <div class="steps-box">
+                          <strong>Protocol:</strong> Check ultrasonic fogger nozzles, adjust misting timer frequency from 15 min to 25 min intervals.
+                      </div>
+                  </div>
+              </div>
+
+              <!-- TAB 2: APIARY -->
+              <div id="tab-apiary" class="tab-content" style="display:none;">
+                  <div class="trouble-card">
+                      <h4>Varroa Mite Threshold Exceeded</h4>
+                      <p>Alcohol wash screening shows >3 mites per 100 bees.</p>
+                      <div class="steps-box">
+                          <strong>Protocol:</strong> Apply organic oxalic acid vaporization or thymol pads according to seasonal temperature guidelines.
+                      </div>
+                  </div>
+                  <div class="trouble-card">
+                      <h4>Low Feed Reserves in Super</h4>
+                      <p>Unseasonable cold snap halting forage nectar flow.</p>
+                      <div class="steps-box">
+                          <strong>Protocol:</strong> Install internal 2:1 sugar syrup feeder frame immediately to prevent starvation risk.
+                      </div>
+                  </div>
+              </div>
+
+              <!-- TAB 3: COMMUNITY SERVICE -->
+              <div id="tab-service" class="tab-content" style="display:none;">
+                  <div class="trouble-card">
+                      <h4>Public Land Trail / Brush Restoration</h4>
+                      <p>Clearing invasive species and wildfire fuel reduction lanes.</p>
+                      <div class="steps-box">
+                          <strong>Protocol:</strong> Wear required PPE (gloves, eye protection), stack slash piles according to ODF forestry clearance guidelines, and log exact participant hours.
+                      </div>
+                  </div>
+                  <div class="trouble-card">
+                      <h4>Site Clean-up &amp; Waste Sorting</h4>
+                      <p>Municipal solid waste infrastructure support and sorting.</p>
+                      <div class="steps-box">
+                          <strong>Protocol:</strong> Separate recyclables, organic compostables, and landfill refuse into designated bins. Record total weight or bag count.
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- MASTER LEDGER TABLE SECTION -->
+      <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px;">
+              <h3 style="margin: 0; font-size: 1.3rem;">📜 Active Operational &amp; Task Ledger</h3>
+              <button onclick="exportLedgerCSV()" style="background: rgba(156,175,136,0.2); color: var(--primary); border: 1px solid rgba(156,175,136,0.4); padding: 8px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85rem;">
+                  📥 Export Ledger to CSV
+              </button>
+          </div>
+          
+          <div class="table-responsive">
+              <table id="ledgerTable">
+                  <thead>
+                      <tr>
+                          <th>Timestamp</th>
+                          <th>Category / Track</th>
+                          <th>Metric / Value</th>
+                          <th>Operator</th>
+                          <th>Observations &amp; Notes</th>
+                      </tr>
+                  </thead>
+                  <tbody id="ledgerBody">
+                      <tr>
+                          <td>2026-09-27 14:15</td>
+                          <td><span class="badge badge-mushrooms">Mushrooms</span></td>
+                          <td>88% Humidity</td>
+                          <td>JD / AM</td>
+                          <td>Substrate block set 4 running stable. Fogger cycle verified.</td>
+                      </tr>
+                      <tr>
+                          <td>2026-09-27 11:30</td>
+                          <td><span class="badge badge-service">Community Service</span></td>
+                          <td>4.5 Hours</td>
+                          <td>Volunteer Crew B</td>
+                          <td>Tillamook forest lane brush clearance and slash piling completed.</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+      // Detailed SOP instructions for each track displayed on the left side
+      const trackSOPs = {
+          mushrooms: {
+              title: "🍄 Mushrooms Module SOP",
+              desc: "Monitor substrate moisture and block humidity. Ensure air exchange cycles run every 4 hours. Log relative humidity percentage and any green mold indicators immediately."
+          },
+          apiary: {
+              title: "🐝 Apiary Diagnostics SOP",
+              desc: "Inspect hive temper, brood pattern health, and mite counts. Log temperature/humidity inside the brood box and verify syrup feeder levels."
+          },
+          greens: {
+              title: "🥬 High Yield Greens SOP",
+              desc: "Check high-tunnel drip line pressure, soil moisture tension, and ambient temperature. Log nutrient EC/pH levels and harvest weight yields."
+          },
+          flowers: {
+              title: "🌸 Cut Flowers Track SOP",
+              desc: "Inspect stem lengths, check for aphid/pest pressure on budding stems, and record irrigation run times for specialty rows."
+          },
+          service: {
+              title: "🤝 Community Service & Volunteer SOP",
+              desc: "Log exact hours worked, participant names, and task category (e.g., forestry restoration, waste sorting, public land cleanup). Ensure safety protocols are met."
+          },
+          maintenance: {
+              title: "🔧 Facility & Equipment Maintenance SOP",
+              desc: "Record equipment hours, oil/filter checks, tool calibration status, or structural repairs completed on site."
+          }
+      };
+
+      function adaptFormFields(val) {
+          const label = document.getElementById('dynamicMetricLabel');
+          const input = document.getElementById('metricInput');
+          const instTitle = document.getElementById('instTitle');
+          const instDesc = document.getElementById('instDesc');
+
+          // Update left-side instruction box
+          if (trackSOPs[val]) {
+              instTitle.innerText = trackSOPs[val].title;
+              instDesc.innerText = trackSOPs[val].desc;
+          }
+
+          // Adapt metric label based on category
+          if(val === 'mushrooms') {
+              label.innerText = 'Humidity Parameter (%)';
+              input.placeholder = 'e.g., 88';
+          } else if(val === 'apiary') {
+              label.innerText = 'Hive Temperature (°F) / Mite Count';
+              input.placeholder = 'e.g., 94 or 2 mites';
+          } else if(val === 'greens' || val === 'flowers') {
+              label.innerText = 'Yield Weight (lbs) or Soil Moisture (%)';
+              input.placeholder = 'e.g., 15 lbs';
+          } else if(val === 'service') {
+              label.innerText = 'Total Service Hours Completed';
+              input.placeholder = 'e.g., 4.5';
+          } else if(val === 'maintenance') {
+              label.innerText = 'Equipment Hours / Task Code';
+              input.placeholder = 'e.g., 120 hrs';
+          }
+      }
+
+      function switchTab(evt, tabId) {
+          const contents = document.querySelectorAll('.tab-content');
+          contents.forEach(c => c.style.display = 'none');
+
+          const buttons = document.querySelectorAll('.tab-btn');
+          buttons.forEach(b => b.classList.remove('active'));
+
+          document.getElementById(tabId).style.display = 'block';
+          evt.currentTarget.classList.add('active');
+      }
+
+      function handleFormSubmit(event) {
+          event.preventDefault();
+          
+          const category = document.getElementById('categorySelect').value;
+          const metric = document.getElementById('metricInput').value;
+          const observer = document.getElementById('observerInput').value;
+          const notes = document.getElementById('notesInput').value;
+
+          const now = new Date();
+          const timestamp = now.toISOString().slice(0, 10) + ' ' + now.toTimeString().slice(0, 5);
+
+          const tbody = document.getElementById('ledgerBody');
+          const row = document.createElement('tr');
+
+          // Badge formatting
+          let badgeClass = 'badge-mushrooms';
+          let badgeText = 'Mushrooms';
+          if(category === 'apiary') { badgeClass = 'badge-apiary'; badgeText = 'Apiary'; }
+          else if(category === 'greens') { badgeClass = 'badge-greens'; badgeText = 'Greens'; }
+          else if(category === 'flowers') { badgeClass = 'badge-flowers'; badgeText = 'Cut Flowers'; }
+          else if(category === 'service') { badgeClass = 'badge-service'; badgeText = 'Community Service'; }
+          else if(category === 'maintenance') { badgeClass = 'badge-maintenance'; badgeText = 'Maintenance'; }
+
+          row.innerHTML = `
+              <td>${timestamp}</td>
+              <td><span class="badge ${badgeClass}">${badgeText}</span></td>
+              <td>${metric}</td>
+              <td>${observer}</td>
+              <td>${notes || 'No observations recorded.'}</td>
+          `;
+
+          tbody.prepend(row);
+          document.getElementById('telemetryForm').reset();
+          adaptFormFields('mushrooms');
+          alert('Record successfully committed to the active ledger!');
+      }
+
+      function exportLedgerCSV() {
+          const table = document.getElementById('ledgerTable');
+          let csv = [];
+          for (let i = 0; i < table.rows.length; i++) {
+              let row = [], cols = table.rows[i].querySelectorAll("td, th");
+              for (let j = 0; j < cols.length; j++) 
+                  row.push('"' + cols[j].innerText.replace(/"/g, '""') + '"');
+              csv.push(row.join(","));
+          }
+          let csvFile = new Blob([csv.join("\n")], { type: "text/csv" });
+          let downloadLink = document.createElement("a");
+          downloadLink.download = "AFTI_Operational_Ledger.csv";
+          downloadLink.href = window.URL.createObjectURL(csvFile);
+          downloadLink.style.display = "none";
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+      }
+  </script>
+
+</body>
+</html>
