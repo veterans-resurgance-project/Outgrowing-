@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI Operations Portal | Secure Access Gate</title>
+    <script src="https://tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --txt: #f8fafc;
+            --primary: #27ae60;
+            --primary-dark: #1e8449;
+            --hud: #144d29;
+            --accent: #38bdf8;
+            --muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--txt);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gate-container {
+            max-width: 480px;
+            width: 100%;
+            background: var(--card);
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        .hud-banner {
+            background: var(--hud);
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 25px;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-family: 'Fredoka', sans-serif;
+            color: #4ade80;
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        p.subtitle {
+            color: var(--muted);
+            text-align: center;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: var(--muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, select {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-gate {
+            background: var(--primary);
+            color: #fff;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-family: 'Fredoka', sans-serif;
+            margin-top: 10px;
+        }
+
+        .btn-gate:hover {
+            background: var(--primary-dark);
+        }
+
+        .system-footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="gate-container">
+    <div class="hud-banner">
+        <span>AFTI Portal Access</span>
+        <span style="color: #4ade80;">● Secure Gateway</span>
+    </div>
+
+    <h1>Crew &amp; Operator Login</h1>
+    <p class="subtitle">Enter your credentials to access active checklists, simulators, and time clocks.</p>
+
+    <form id="accessGateForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+            <label for="username">Username / Operator ID</label>
+            <input type="text" id="username" placeholder="e.g., d_truex" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+            <label for="accessRole">Assigned Operational Role</label>
+            <select id="accessRole">
+                <option value="watershed">Watershed Restoration &amp; Field Crew</option>
+                <option value="agriculture">Agriculture Operations &amp; Ag Hub</option>
+                <option value="simulation">Job Match Simulations &amp; Training</option>
+                <option value="admin">Administrator / Grant Supervisor</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="passcode">Security Access Code</label>
+            <input type="password" id="passcode" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" class="btn-gate">Authenticate &amp; Launch Portal →</button>
+    </form>
+
+    <div class="system-footer">
+        Authorized personnel only. All access attempts and telemetry are logged securely.
+    </div>
+</div>
+
+<script>
+    function handleLogin(event) {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value.trim();
+        const role = document.getElementById('accessRole').value;
+
+        // Save session details to localStorage so other pages know who is logged in
+        localStorage.setItem('afti_user', username);
+        localStorage.setItem('afti_role', role);
+
+        // Route the user based on their selected role
+        let targetPage = 'watershed-hub.html';
+        if (role === 'agriculture') targetPage = 'ag-portal.html';
+        else if (role === 'simulation') targetPage = 'simulations.html';
+        else if (role === 'admin') targetPage = 'admin-ledger.html';
+
+        // Brief success feedback and redirect
+        alert(`Welcome back, ${username}! Initializing secure session for ${role.toUpperCase()} operations.`);
+        
+        // In a live environment, you would redirect:
+        // window.location.href = targetPage;
+    }
+</script>
+
+</body>
+</html>
