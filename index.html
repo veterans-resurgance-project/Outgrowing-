@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Inside <head> -->
-<script src="[https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2](https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2)"></script> in the <head>    
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="afti-tracker.js" defer></script>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AFTI Portal</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-:root { 
-    --bg: #0f172a; 
-    --card: #1e293b; 
-    --txt: #f8fafc; 
-    --sage-light: #D0D9CD; 
-    --sage-botanical: #9CAF88; 
-    --sage-earth: #6b705c;
-    --accent: #38bdf8; 
-    --muted: #94a3b8; 
-}
-body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 0; }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI Portal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Core Tracker & Matching Engine -->
+    <script src="afti-tracker.js" defer></script>
+    <style>
+        :root { 
+            --bg: #0f172a; 
+            --card: #1e293b; 
+            --txt: #f8fafc; 
+            --sage-light: #D0D9CD; 
+            --sage-botanical: #9CAF88; 
+            --sage-earth: #6b705c;
+            --accent: #38bdf8; 
+            --muted: #94a3b8; 
+        }
+        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 0; }
 
-/* MOBILE-OPTIMIZED NAV */
-nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; background: var(--card); border-bottom: 1px solid rgba(156, 175, 136, 0.2); flex-wrap: wrap; gap: 0.75rem; }
-nav .nav-links { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-nav a { color: #cbd5e1; text-decoration: none; transition: color 0.2s; font-size: 0.9rem; }
-nav a:hover { color: var(--sage-botanical); }
+        /* MOBILE-OPTIMIZED NAV */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; background: var(--card); border-bottom: 1px solid rgba(156, 175, 136, 0.2); flex-wrap: wrap; gap: 0.75rem; }
+        nav .nav-links { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+        nav a { color: #cbd5e1; text-decoration: none; transition: color 0.2s; font-size: 0.9rem; }
+        nav a:hover { color: var(--sage-botanical); }
 
-main { max-width: 900px; margin: 1.5rem auto; padding: 0 1rem; }
-.block { background: var(--card); border: 1px solid rgba(156, 175, 136, 0.25); border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin-bottom: 2rem; }
-.img-box { border-radius: 12px; border: 1px solid rgba(156, 175, 136, 0.3); margin: 1.5rem 0; overflow: hidden; position: relative; }
-.btn { display: block; text-align: center; color: #fff; text-decoration: none; background: var(--sage-botanical); padding: 15px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; margin-top: 1.2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.2s, background 0.2s; }
-.btn:hover { background: var(--sage-earth); transform: translateY(-2px); }
-.btn-action { background: rgba(156, 175, 136, 0.15); color: var(--sage-botanical); padding: 0.4rem 0.8rem; border-radius: 20px; font-weight: 600; border: 1px solid rgba(156, 175, 136, 0.3); display: inline-block; }
-.btn-action:hover { background: rgba(156, 175, 136, 0.3); color: #fff; }
-.narrative-callout { background: rgba(156, 175, 136, 0.05); border: 1px solid rgba(156, 175, 136, 0.2); border-radius: 12px; padding: 25px; margin: 2rem 0; line-height: 1.7; }
+        main { max-width: 900px; margin: 1.5rem auto; padding: 0 1rem; }
+        .block { background: var(--card); border: 1px solid rgba(156, 175, 136, 0.25); border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin-bottom: 2rem; }
+        .img-box { border-radius: 12px; border: 1px solid rgba(156, 175, 136, 0.3); margin: 1.5rem 0; overflow: hidden; position: relative; }
+        .btn { display: block; text-align: center; color: #fff; text-decoration: none; background: var(--sage-botanical); padding: 15px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; margin-top: 1.2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.2s, background 0.2s; }
+        .btn:hover { background: var(--sage-earth); transform: translateY(-2px); }
+        .btn-action { background: rgba(156, 175, 136, 0.15); color: var(--sage-botanical); padding: 0.4rem 0.8rem; border-radius: 20px; font-weight: 600; border: 1px solid rgba(156, 175, 136, 0.3); display: inline-block; }
+        .btn-action:hover { background: rgba(156, 175, 136, 0.3); color: #fff; }
+        .narrative-callout { background: rgba(156, 175, 136, 0.05); border: 1px solid rgba(156, 175, 136, 0.2); border-radius: 12px; padding: 25px; margin: 2rem 0; line-height: 1.7; }
 
-/* RESPONSIVE ADJUSTMENTS FOR PHONES */
-@media (min-width: 640px) {
-    .block { padding: 2.5rem; }
-    main { padding: 0 1.5rem; }
-}
-</style>
+        /* RESPONSIVE ADJUSTMENTS FOR PHONES */
+        @media (min-width: 640px) {
+            .block { padding: 2.5rem; }
+            main { padding: 0 1.5rem; }
+        }
+    </style>
 </head>
 <body>
 
-</nav>
 <!-- SITE NAVIGATION BAR -->
 <nav>
-    <a href="index.html" class="brand">AFTI Portal</a>
+    <a href="index.html" class="brand font-bold text-lg text-white">AFTI Portal</a>
     <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="welcome.html" style="color: var(--accent);">Get Started / XP</a>
@@ -59,6 +59,13 @@ main { max-width: 900px; margin: 1.5rem auto; padding: 0 1rem; }
         <a href="access-gates.html" class="nav-gate-btn">🔒 Sign In / Gate</a>
     </div>
 </nav>
+
+<main>
+    <!-- Your page content goes here -->
+</main>
+
+</body>
+</html>
 <main>
 <div class="block">
     <!-- OUTGROWING-AG CENTERED AT TOP -->
