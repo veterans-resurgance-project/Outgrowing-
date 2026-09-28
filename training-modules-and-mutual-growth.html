@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFTI Portal - Training Modules & XP Catalog</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root { 
+    --bg: #0f172a; 
+    --card: #1e293b; 
+    --txt: #f8fafc; 
+    --sage-light: #D0D9CD; 
+    --sage-botanical: #9CAF88; 
+    --sage-earth: #6b705c;
+    --accent: #38bdf8; 
+    --muted: #94a3b8; 
+}
+body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 0; }
+
+nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; background: var(--card); border-bottom: 1px solid rgba(156, 175, 136, 0.2); flex-wrap: wrap; gap: 0.75rem; }
+nav .brand { font-weight: 900; font-size: 1.2rem; color: #fff; text-decoration: none; }
+nav .nav-links { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+nav a { color: #cbd5e1; text-decoration: none; transition: color 0.2s; font-size: 0.9rem; }
+nav a:hover { color: var(--sage-botanical); }
+
+.nav-gate-btn { background: rgba(56, 189, 248, 0.15); color: var(--accent) !important; padding: 0.4rem 0.8rem; border-radius: 20px; font-weight: 600; border: 1px solid rgba(56, 189, 248, 0.3); }
+.nav-gate-btn:hover { background: rgba(56, 189, 248, 0.3); color: #fff !important; }
+
+main { max-width: 900px; margin: 1.5rem auto; padding: 0 1rem; }
+.hero-block { background: var(--card); border: 1px solid rgba(156, 175, 136, 0.25); border-radius: 16px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin-bottom: 2rem; text-align: center; }
+.module-grid { display: grid; gap: 1.5rem; }
+.module-card { background: var(--card); border: 1px solid rgba(156, 175, 136, 0.3); border-radius: 12px; padding: 1.5rem; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: border-color 0.2s; }
+.module-card:hover { border-color: var(--accent); }
+.xp-badge { background: rgba(74, 222, 128, 0.15); color: #4ade80; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; border: 1px solid rgba(74, 222, 128, 0.3); display: inline-block; }
+</style>
+</head>
+<body>
+
+<!-- SITE NAVIGATION BAR -->
+<nav>
+    <a href="index.html" class="brand">AFTI Portal</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="welcome.html">Get Started</a>
+        <a href="training-modules-and-mutual-growth.html" style="color: var(--sage-botanical);">Training &amp; XP</a>
+        <a href="shared-harvest.html">Shared Harvest</a>
+        <a href="partners.html">Partners</a>
+        <a href="access-gates.html" class="nav-gate-btn">🔒 Sign In / Gate</a>
+    </div>
+</nav>
+
+<main>
+    <!-- HERO ADVERTISEMENT SECTION -->
+    <div class="hero-block">
+        <span style="font-size:0.85rem; font-weight:900; text-transform:uppercase; letter-spacing:0.2em; color:var(--sage-botanical);">Curriculum Showcase</span>
+        <h1 style="color: #fff; font-size: 1.8rem; margin: 0.5rem 0 1rem 0;">Explore Our Vocational Training &amp; XP Pathways</h1>
+        <p style="color: #cbd5e1; line-height: 1.6; max-width: 700px; margin: 0 auto 1.5rem auto;">
+            Browse our core operational curriculum below. Every module is designed to build verifiable field skills in agricultural management, land restoration, and telemetry. Sign in to track your progress, log completions, and unlock advanced simulations.
+        </p>
+        <a href="access-gates.html" style="display: inline-block; background: var(--sage-botanical); color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: bold; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+            Sign In to Start Earning XP &rarr;
+        </a>
+    </div>
+
+    <!-- MODULE CATALOG GRID -->
+    <div class="module-grid">
+        
+        <!-- Module 1 -->
+        <div class="module-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+                <h3 style="color: #fff; font-size: 1.2rem; margin: 0;">Module 1: High-Tunnel &amp; Controlled Environment Basics</h3>
+                <span class="xp-badge">+250 XP</span>
+            </div>
+            <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.2rem;">
+                Learn the foundational mechanics of high-tunnel setup, passive climate regulation, and micro-irrigation management to maximize seasonal yield and crop protection.
+            </p>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(156,175,136,0.2); padding-top: 1rem; flex-wrap: wrap; gap: 1rem;">
+                <span style="color: var(--muted); font-size: 0.85rem;">Prerequisite: None (Entry Level)</span>
+                <a href="access-gates.html" style="background: rgba(56,189,248,0.15); color: var(--accent); padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.9rem; border: 1px solid rgba(56,189,248,0.3);">
+                    Sign In to Launch Module &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="module-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+                <h3 style="color: #fff; font-size: 1.2rem; margin: 0;">Module 2: Irrigation Telemetry &amp; Water Management</h3>
+                <span class="xp-badge">+400 XP</span>
+            </div>
+            <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.2rem;">
+                Master automated soil moisture monitoring, valve scheduling, and pressure calibration protocols for efficient regional water conservation.
+            </p>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(156,175,136,0.2); padding-top: 1rem; flex-wrap: wrap; gap: 1rem;">
+                <span style="color: var(--muted); font-size: 0.85rem;">Prerequisite: Module 1 Completed</span>
+                <a href="access-gates.html" style="background: rgba(56,189,248,0.15); color: var(--accent); padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.9rem; border: 1px solid rgba(56,189,248,0.3);">
+                    Sign In to Unlock &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="module-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+                <h3 style="color: #fff; font-size: 1.2rem; margin: 0;">Module 3: Wilderness Burn Scar &amp; Watershed Remediation</h3>
+                <span class="xp-badge">+600 XP</span>
+            </div>
+            <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.2rem;">
+                Advanced field protocols for soil stabilization, native reseeding frameworks, and post-wildfire watershed recovery strategies across regional public lands.
+            </p>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(156,175,136,0.2); padding-top: 1rem; flex-wrap: wrap; gap: 1rem;">
+                <span style="color: var(--muted); font-size: 0.85rem;">Prerequisite: Stage 1 Simulations Cleared</span>
+                <a href="access-gates.html" style="background: rgba(56,189,248,0.15); color: var(--accent); padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.9rem; border: 1px solid rgba(56,189,248,0.3);">
+                    Sign In to Unlock &rarr;
+                </a>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+</body>
+</html>
