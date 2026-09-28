@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Core Support, Maintenance & Training Hub</title>
+    <script src="https://tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --primary: #9CAF88; /* Light botanical sage */
+            --primary-hover: #6b705c; /* Earthy sage hover */
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --hud-bg: #144d29;
+            --blue-accent: #38bdf8;
+            --sage-light: #D0D9CD;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* GLOBAL NAV BAR STYLES */
+        nav {
+            background: #144d29;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(156,175,136,0.3);
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color 0.2s; }
+        nav a:hover, nav a.active { color: var(--primary); font-weight: 700; }
+
+        .page-wrapper {
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 30px;
+            box-sizing: border-box;
+            border: 1px solid rgba(156,175,136,0.3);
+        }
+
+        .hud-bar {
+            background: rgba(20, 77, 41, 0.8);
+            border: 1px solid rgba(156,175,136,0.4);
+            border-radius: 10px;
+            padding: 12px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #ffffff;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        h1 {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--primary);
+            margin-top: 0;
+            font-size: 2rem;
+            text-align: center;
+            letter-spacing: 0.02em;
+        }
+
+        h2, h3 {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--blue-accent);
+        }
+
+        p, li {
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .panel {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(156,175,136,0.25);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        /* INSTRUCTION & CHECKLIST BOX */
+        .instruction-box {
+            background: rgba(156, 175, 136, 0.1);
+            border: 1px solid rgba(156, 175, 136, 0.4);
+            border-left: 4px solid var(--primary);
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .instruction-box h4 {
+            margin: 0 0 6px 0;
+            color: var(--primary);
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.05rem;
+        }
+
+        .checklist-container {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid #334155;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #cbd5e1;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: bold;
+            font-size: 1.05rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        /* TABS FOR LEFT/RIGHT INSTRUCTIONS */
+        .tab-buttons {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #0f172a;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: #0f172a;
+            border-color: var(--primary);
+        }
+
+        .guide-card {
+            background: rgba(30, 41, 59, 0.8);
+            border-left: 4px solid var(--accent);
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            border-radius: 0 8px 8px 0;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-left-width: 4px;
+        }
+
+        .guide-card h4 {
+            margin: 0 0 5px 0;
+            color: #f8fafc;
+            font-size: 1rem;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .guide-card p {
+            font-size: 0.85rem;
+            margin: 0 0 8px 0;
+        }
+
+        .frequency-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+        .freq-daily { background: #065f46; color: #a7f3d0; }
+        .freq-weekly { background: #1e3a8a; color: #93c5fd; }
+        .freq-monthly { background: #78350f; color: #fde68a; }
+
+        .steps-box {
+            background: #0f172a;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #38bdf8;
+        }
+
+        /* TABLES */
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 650px;
+        }
+
+        th, td {
+            padding: 12px 14px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        th {
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--primary);
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .badge-tools { background: #374151; color: #e5e7eb; }
+        .badge-service { background: #065f46; color: #a7f3d0; }
+        .badge-training { background: #1e3a8a; color: #93c5fd; }
+        .badge-facility { background: #b45309; color: #fef3c7; }
+
+        .section-divider {
+            border: 0;
+            height: 1px;
+            background: rgba(156,175,136,0.3);
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+
+  <!-- GLOBAL TOP NAVIGATION BAR -->
+  <nav>
+    <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
+    <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+      <a href="index.html">Home</a>
+      <a href="apiary-mushrooms.html">Production Hub</a>
+      <a href="remediation-safety.html">Remediation Hub</a>
+      <a href="core-support-hub.html" class="active">Core Support &amp; Maintenance Hub</a>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="container">
+      
+      <!-- HUD BAR -->
+      <div class="hud-bar">
+          <span>🛠️ Core Support, Tool Maintenance &amp; Training Command Hub</span>
+          <span style="font-size: 0.85rem; color: var(--sage-light);">Operational Standards &amp; Hour Ledger</span>
+      </div>
+
+      <h1>📋 Core Support Functions &amp; Time Credit Logging</h1>
+      <p style="text-align: center; margin-bottom: 25px; max-width: 800px; margin-left: auto; margin-right: auto; color: #cbd5e1;">
+          Execute daily checklists, select work functions for tools, community service, facility organization, or classroom training, and cross-reference hours with your grant and training milestones.
+      </p>
+
+      <div class="grid-2">
+          
+          <!-- LEFT PANEL: DATA ENTRY & DYNAMIC DROPDOWN -->
+          <div class="panel">
+              <h3 class="text-xl font-bold mb-3">⏱️ Task &amp; Time Entry Portal</h3>
+              
+              <!-- PRE-SHIFT SAFETY CHECKLIST -->
+              <div class="instruction-box">
+                  <h4>🔒 Pre-Shift Safety &amp; Readiness</h4>
+                  <p style="margin: 0 0 10px 0; color: #cbd5e1;">Complete pre-shift verifications before starting maintenance or service tracks.</p>
+                  
+                  <div class="checklist-container">
+                      <label class="checklist-item"><input type="checkbox" id="chk1"> PPE / eye &amp; foot protection equipped</label>
+                      <label class="checklist-item"><input type="checkbox" id="chk2"> Area hazard &amp; tool power lockout checked</label>
+                      <label class="checklist-item"><input type="checkbox" id="chk3"> Hydration and communication check completed</label>
+                  </div>
+              </div>
+
+              <form id="coreSupportForm" onsubmit="handleCoreSubmit(event)">
+                  <div class="form-group">
+                      <label for="categorySelect">Support Category</label>
+                      <select id="categorySelect" onchange="updateFunctionDropdown(this.value)">
+                          <option value="tools">Tools &amp; Equipment Maintenance</option>
+                          <option value="facility">Facility &amp; Site Organization</option>
+                          <option value="service">Community Service / Public Land Restoration</option>
+                          <option value="training">Classroom &amp; Certification Training</option>
+                      </select>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="functionSelect">Work Function (Daily / Weekly / Monthly)</label>
+                      <select id="functionSelect">
+                          <!-- Populated dynamically via JS -->
+                      </select>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="operatorName">Participant / Operator Name</label>
+                      <input type="text" id="operatorName" placeholder="e.g., Donald Truex / Crew B" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="hoursLogged">Hours Logged or Count</label>
+                      <input type="text" id="hoursLogged" placeholder="e.g., 2.5 Hours or 12 Tools Serviced" required>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="notesInput">Notes / Compliance &amp; Cross-Check Data</label>
+                      <textarea id="notesInput" rows="3" placeholder="Specify blade sharpness, workshop area cleaned, or modules reviewed..."></textarea>
+                  </div>
+
+                  <button type="submit" class="btn-primary">Commit to Verified Ledger</button>
+              </form>
+          </div>
+
+          <!-- RIGHT PANEL: SOP INSTRUCTIONS & FREQUENCY GUIDES -->
+          <div class="panel">
+              <h3 class="text-xl font-bold mb-3">📖 Standard Work Function Guides</h3>
+              
+              <div class="tab-buttons">
+                  <button class="tab-btn active" onclick="switchGuideTab(event, 'guide-tools')">Tools &amp; Equip</button>
+                  <button class="tab-btn" onclick="switchGuideTab(event, 'guide-facility')">Facility</button>
+                  <button class="tab-btn" onclick="switchGuideTab(event, 'guide-service')">Service</button>
+                  <button class="tab-btn" onclick="switchGuideTab(event, 'guide-training')">Training</button>
+              </div>
+
+              <!-- TOOLS GUIDE -->
+              <div id="guide-tools" class="guide-content">
+                  <div class="guide-card">
+                      <span class="frequency-badge freq-daily">DAILY FUNCTION</span>
+                      <h4>Daily Tool Cleaning &amp; Inspection</h4>
+                      <p>Wipe down hand tools, remove sap/debris, check wooden handles for splinters.</p>
+                      <div class="steps-box"><strong>Standard:</strong> Apply light linseed oil to wood and sanitizing spray to cutting edges.</div>
+                  </div>
+                  <div class="guide-card">
+                      <span class="frequency-badge freq-weekly">WEEKLY FUNCTION</span>
+                      <h4>Sharpening &amp; Power Equipment Checks</h4>
+                      <p>Sharpen loppers, shears, and mower blades; inspect air filters and fuel lines.</p>
+                  </div>
+              </div>
+
+              <!-- FACILITY GUIDE -->
+              <div id="guide-facility" class="guide-content" style="display:none;">
+                  <div class="guide-card">
+                      <span class="frequency-badge freq-daily">DAILY FUNCTION</span>
+                      <h4>Workshop &amp; Storage Area Reset</h4>
+                      <p>Sweep floors, return PPE to designated racks, and secure hazardous materials storage.</p>
+                  </div>
+                  <div class="guide-card">
+                      <span class="frequency-badge freq-monthly">MONTHLY FUNCTION</span>
+                      <h4>Inventory Audit &amp; Safety Station Restock</h4>
+                      <p>Check first-aid kits, eye-wash stations, and consumables inventory counts.</p>
+                  </div>
+              </div>
+
+              <!-- SERVICE GUIDE -->
+              <div id="guide-service" class="guide-content" style="display:none;">
+                  <div class="guide-card">
+                      <span class="frequency-badge freq-daily">DAILY FUNCTION</span>
+                      <h4>Public Land Restoration &amp; Trail Maintenance</h4>
+                      <p>Clearing brush lanes, invasive weed pulling, and trash mitigation protocols.</p>
+                  </div>
+              </div>
+
+              <!-- TRAINING GUIDE -->
+              <div id="guide-training" class="guide-content" style="display:none;">
+                  <div class="guide-card">
+                      <span class="frequency-badge freq-weekly">WEEKLY FUNCTION</span>
+                      <h4>Classroom Instruction &amp; Safety Modules</h4>
+                      <p>Reviewing grant compliance standards, equipment operation manuals, and testing.</p>
+                  </div>
+              </div>
+
+          </div>
+
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- LEDGER TABLE -->
+      <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px;">
+              <h3 style="margin: 0; font-size: 1.3rem;">📜 Core Support &amp; Maintenance Ledger</h3>
+              <button onclick="exportCSV()" style="background: rgba(156,175,136,0.2); color: var(--primary); border: 1px solid rgba(156,175,136,0.4); padding: 8px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85rem;">
+                  📥 Export Ledger to CSV
+              </button>
+          </div>
+          
+          <div class="table-responsive">
+              <table id="supportTable">
+                  <thead>
+                      <tr>
+                          <th>Timestamp</th>
+                          <th>Operator</th>
+                          <th>Category</th>
+                          <th>Work Function</th>
+                          <th>Time / Metric</th>
+                          <th>Notes &amp; Cross-Check</th>
+                      </tr>
+                  </thead>
+                  <tbody id="supportTableBody">
+                      <tr>
+                          <td>2026-09-27 09:15</td>
+                          <td>Donald Truex</td>
+                          <td><span class="badge badge-tools">Tools &amp; Equipment</span></td>
+                          <td>Daily Tool Cleaning &amp; Sanitization</td>
+                          <td>1.5 Hours</td>
+                          <td>All hand pruners and loppers cleaned and oiled. Checklist verified.</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+      // Function lists categorized by Daily/Weekly/Monthly
+      const functionOptions = {
+          tools: [
+              "[Daily] Daily Tool Cleaning, Sap Removal & Sanitization",
+              "[Daily] Power Equipment Visual Check & Fluid Inspection",
+              "[Weekly] Blade Sharpening (Pruners, Shears, Mower Blades)",
+              "[Monthly] Deep Maintenance & Rust Prevention Treatment"
+          ],
+          facility: [
+              "[Daily] Workshop Floor Sweep & Debris Clear",
+              "[Daily] PPE & Gear Racks Organization",
+              "[Weekly] Material Storage Bin Sorting & Labeling",
+              "[Monthly] First-Aid Kit & Emergency Station Inventory Audit"
+          ],
+          service: [
+              "[Daily] Public Land Trail Brush Clearing & Slash Piling",
+              "[Daily] Invasive Species Removal & Waste Sorting",
+              "[Weekly] Public Land Restoration Site Cleanup Log"
+          ],
+          training: [
+              "[Weekly] Classroom Safety Briefing & Module Review",
+              "[Monthly] CDL / Equipment Operation & Grant Compliance Testing"
+          ]
+      };
+
+      function updateFunctionDropdown(cat) {
+          const funcSelect = document.getElementById('functionSelect');
+          funcSelect.innerHTML = "";
+          if (functionOptions[cat]) {
+              functionOptions[cat].forEach(item => {
+                  const opt = document.createElement('option');
+                  opt.value = item;
+                  opt.innerText = item;
+                  funcSelect.appendChild(opt);
+              });
+          }
+      }
+
+      // Initialize dropdown on load
+      window.onload = function() {
+          updateFunctionDropdown('tools');
+      };
+
+      function switchGuideTab(evt, tabId) {
+          const contents = document.querySelectorAll('.guide-content');
+          contents.forEach(c => c.style.display = 'none');
+
+          const buttons = document.querySelectorAll('.tab-btn');
+          buttons.forEach(b => b.classList.remove('active'));
+
+          document.getElementById(tabId).style.display = 'block';
+          evt.currentTarget.classList.add('active');
+      }
+
+      function handleCoreSubmit(event) {
+          event.preventDefault();
+
+          const c1 = document.getElementById('chk1').checked;
+          const c2 = document.getElementById('chk2').checked;
+          const c3 = document.getElementById('chk3').checked;
+
+          if (!c1 || !c2 || !c3) {
+              alert('⚠️ Please complete all pre-shift safety checklist items before committing your entry!');
+              return;
+          }
+
+          const cat = document.getElementById('categorySelect').value;
+          const func = document.getElementById('functionSelect').value;
+          const name = document.getElementById('operatorName').value;
+          const metric = document.getElementById('hoursLogged').value;
+          const notes = document.getElementById('notesInput').value;
+
+          const now = new Date();
+          const timestamp = now.toISOString().slice(0, 10) + ' ' + now.toTimeString().slice(0, 5);
+
+          const tbody = document.getElementById('supportTableBody');
+          const row = document.createElement('tr');
+
+          let badgeClass = 'badge-tools';
+          let catText = 'Tools & Equipment';
+          if(cat === 'facility') { badgeClass = 'badge-facility'; catText = 'Facility / Site'; }
+          else if(cat === 'service') { badgeClass = 'badge-service'; catText = 'Community Service'; }
+          else if(cat === 'training') { badgeClass = 'badge-training'; catText = 'Classroom Training'; }
+
+          row.innerHTML = `
+              <td>${timestamp}</td>
+              <td>${name}</td>
+              <td><span class="badge ${badgeClass}">${catText}</span></td>
+              <td>${func}</td>
+              <td>${metric}</td>
+              <td>${notes || 'Pre-shift checklist verified.'}</td>
+          `;
+
+          tbody.prepend(row);
+          document.getElementById('coreSupportForm').reset();
+          
+          document.getElementById('chk1').checked = false;
+          document.getElementById('chk2').checked = false;
+          document.getElementById('chk3').checked = false;
+
+          alert('Success! Core support task and time credit successfully committed to ledger.');
+      }
+
+      function exportCSV() {
+          const table = document.getElementById('supportTable');
+          let csv = [];
+          for (let i = 0; i < table.rows.length; i++) {
+              let row = [], cols = table.rows[i].querySelectorAll("td, th");
+              for (let j = 0; j < cols.length; j++) 
+                  row.push('"' + cols[j].innerText.replace(/"/g, '""') + '"');
+              csv.push(row.join(","));
+          }
+          let csvFile = new Blob([csv.join("\n")], { type: "text/csv" });
+          let downloadLink = document.createElement("a");
+          downloadLink.download = "AFTI_CoreSupport_Ledger.csv";
+          downloadLink.href = window.URL.createObjectURL(csvFile);
+          downloadLink.style.display = "none";
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+      }
+  </script>
+
+</body>
+</html>
