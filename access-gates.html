@@ -5,6 +5,30 @@
         <input type="text" id="username" required placeholder="Enter your name..." style="width: 100%; padding: 12px; background: #0f172a; border: 1px solid rgba(156,175,136,0.3); border-radius: 8px; color: #fff; box-sizing: border-box;">
     </div>
 
+   <div x-data="{ 
+    pendingList: [], 
+    async init() {
+        const { data } = await supabase.from('participants').select('*').eq('status', 'Pending Review');
+        if (data) this.pendingList = data;
+    },
+    async approveCell(id) {
+        await supabase.from('participants').update({ status: 'Verified Active' }).eq('id', id);
+        this.pendingList = this.pendingList.filter(p => p.id !== id);
+    }
+}" class="p-6">
+    <h3 class="text-xl font-bold mb-4">Pending Workforce Cells (Admin View)</h3>
+    <template x-for="item in pendingList" :key="item.id">
+        <div class="flex justify-between items-center p-3 bg-white border rounded mb-2 shadow-sm">
+            <div>
+                <span class="font-semibold" x-text="item.name"></span> 
+                <span class="text-sm text-slate-500" x-text="'[' + item.skill_track + ']'"></span>
+            </div>
+            <button @click="approveCell(item.id)" class="bg-emerald-600 text-white px-3 py-1 rounded text-sm hover:bg-emerald-700">
+                Approve Cell
+            </button>
+        </div>
+    </template>
+   </div> 
     <!-- Your Role Selector -->
     <div style="margin-bottom: 1.5rem;">
         <label style="display: block; color: var(--sage-botanical); font-weight: bold; margin-bottom: 0.5rem;">Select Workspace Route</label>
