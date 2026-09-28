@@ -3,129 +3,121 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AFTI - Business Incubator Launchpad</title>
+  <title>Business Incubator Launchpad - Agricultural Mentorship Initiative</title>
   <style>
-    :root { --bg:#0f172a; --card:#1e293b; --txt:#f8fafc; --primary:#27ae60; --hud:#144d29; --accent:#38bdf8; --border:rgba(255,255,255,0.1); }
-    body { font-family:system-ui, -apple-system, sans-serif; background:var(--bg); color:var(--txt); margin:0; padding:0; }
-    
-    /* Sticky Top Portal Nav */
-    nav { background:var(--hud); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:1000; }
-    nav .logo { font-weight:900; font-size:1.25rem; color:#fff; }
-    nav .links { display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap; }
-    nav a { color:#cbd5e1; text-decoration:none; font-weight:500; font-size:0.95rem; }
-    nav a.active { color:#fff; font-weight:700; border-bottom:2px solid var(--primary); padding-bottom:2px; }
-    
-    main { max-width:950px; margin:0 auto; padding:3rem 2rem; box-sizing:border-box; }
-    .panel { background:var(--card); border-radius:14px; border:1px solid var(--border); padding:35px; box-shadow:0 10px 25px rgba(0,0,0,0.4); margin-bottom:2.5rem; }
-    
-    h1 { font-size:2.4rem; font-weight:900; margin-top:0; margin-bottom:1rem; color:#ffffff; letter-spacing:-0.5px; }
-    h2 { font-size:1.5rem; color:#ffffff; margin-top:0; margin-bottom:1.25rem; font-weight:800; }
-    p, li { line-height:1.7; color:#cbd5e1; font-size:1.02rem; }
-    
-    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1.5rem; margin-top:1.5rem; }
-    .card { background:#0f172a; border:1px solid #334155; border-radius:10px; padding:20px; display:flex; flex-direction:column; justify-content:space-between; }
-    .card h3 { margin-top:0; margin-bottom:8px; color:var(--accent); font-size:1.15rem; }
-    .card p { font-size:0.9rem; margin-bottom:15px; }
-    
-    /* Interactive Checklist Styles */
-    .checklist { display:flex; flex-direction:column; gap:10px; margin-top:1.5rem; }
-    .check-item { background:#0f172a; border:1px solid #334155; padding:14px 18px; border-radius:8px; display:flex; gap:14px; align-items:center; cursor:pointer; }
-    .check-item input[type="checkbox"] { width:20px; height:22px; accent-color:var(--primary); cursor:pointer; margin:0; }
-    .check-text { font-size:0.95rem; font-weight:bold; }
+    :root {
+      --bg: #0f172a;
+      --panel-bg: #1e293b;
+      --border: rgba(255, 255, 255, 0.1);
+      --accent: #27ae60;
+      --text: #ffffff;
+      --text-muted: #cbd5e1;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    .panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(15, 23, 42, 0.4);
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+    .check-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    .nav-bar {
+      background: #144d29;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      flex-wrap: wrap;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    .nav-links a.active {
+      color: #ffffff;
+      font-weight: 700;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 2px;
+    }
   </style>
-  <script src="afti-tracker.js"></script>
 </head>
 <body>
 
-  <!-- GLOBAL TOP NAVIGATION BAR -->
-  <nav>
-    <div class="logo">AFTI Portal</div>
-    <div class="links">
+  <!-- Universal Navigation Bar -->
+  <nav class="nav-bar">
+    <div style="font-weight: 900; font-size: 1.25rem; letter-spacing: -0.5px; color: #ffffff;">AFTI Portal</div>
+    <div class="nav-links">
       <a href="index.html">Home</a>
+      <a href="training-modules-and-mutual-growth.html">Training and Certification</a>
       <a href="partners.html">For Farmers</a>
       <a href="shared-harvest.html">Shared Harvest</a>
-      <a href="pencil_to_presentation.html>Design Studio</a>
-      <a href="shared_harvest_incubator.html>System Designs</a>
+      <a href="incubator.html" class="active">Incubator</a>
+      <a href="newsletter.html">Newsletter</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="how-to-help.html">How to Help</a>
     </div>
   </nav>
-<!-- Compact Buy the Farm Button Widget -->
-<style>
-    .buy-farm-widget {
-        background: rgba(15, 23, 42, 0.8);
-        border: 1px solid rgba(56, 189, 248, 0.3);
-        border-radius: 10px;
-        padding: 12px 16px;
-        display: inline-flex;
-        align-items: center;
-        gap: 15px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        font-family: system-ui, sans-serif;
-    }
-    .buy-farm-widget .label-group {
-        display: flex;
-        flex-direction: column;
-    }
-    .buy-farm-widget .title {
-        color: #f8fafc;
-        font-size: 0.9rem;
-        font-weight: bold;
-    }
-    .buy-farm-widget .subtitle {
-        color: #94a3b8;
-        font-size: 0.75rem;
-    }
-    .btn-buy-farm {
-        background: #27ae60;
-        color: #fff;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 6px;
-        font-weight: bold;
-        font-size: 0.85rem;
-        cursor: pointer;
-        transition: background 0.2s, transform 0.1s;
-        text-decoration: none;
-        white-space: nowrap;
-    }
-    .btn-buy-farm:hover {
-        background: #1e8449;
-        transform: translateY(-1px);
-    }
-</style>
 
-<div class="buy-farm-widget">
-    <div class="label-group">
-        <span class="title">Land Acquisition Option</span>
-        <span class="subtitle">Secure permanent title deed</span>
-    </div>
-    <a href="buy-the-farm.html" class="btn-buy-farm" onclick="triggerBuyTheFarm(event)">Buy the Farm →</a>
-</div>
- <!-- Standalone "Crop & Infrastructure Calculator" Button Box -->
-<div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin: 25px 0; text-align: center;">
-    <p style="color: var(--muted); margin: 0 0 15px 0; font-size: 0.95rem;">Evaluate upfront costs, labor demands, and strategic timing for different crop tiers:</p>
-    <a href="crop-calculator.html" style="display: inline-block; background: #334155; color: #f8fafc; padding: 12px 24px; border-radius: 8px; font-weight: bold; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.15); transition: background 0.2s, border-color 0.2s;" onmouseover="this.style.background='#475569'; this.style.borderColor='#38bdf8';" onmouseout="this.style.background='#334155'; this.style.borderColor='rgba(255, 255, 255, 0.15)';">Crop &amp; Infrastructure Calculator →</a>
-</div>
- <!-- Centered Tasks Hub Box -->
-<div style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 2rem 1rem; box-sizing: border-box;">
-    <div class="secondary-card" style="width: 100%; max-width: 750px; background: #1e293b; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.4); text-align: center;">
-        <div style="margin-bottom: 1.5rem;">
-            <h4 style="color: #4ade80; font-size: 1.4rem; margin-top: 0; margin-bottom: 0.75rem;">📋 Daily &amp; Weekly Tasks Hub</h4>
-            <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.6; margin: 0 auto; max-width: 600px;">Core operational routines, safety pairing requirements, and checklists structured across primary enterprise categories.</p>
-        </div>
-        
-        <div class="button-group-wrap" style="display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap;">
-            <a href="task-checklists.html?cat=mushrooms" class="btn-small" style="background: #22c55e; color: #0f172a; padding: 10px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.9rem; transition: transform 0.2s;">🍄 Mushrooms</a>
-            <a href="task-checklists.html?cat=apiary" class="btn-small" style="background: #22c55e; color: #0f172a; padding: 10px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.9rem; transition: transform 0.2s;">🐝 Apiary</a>
-            <a href="task-checklists.html?cat=greens" class="btn-small" style="background: #22c55e; color: #0f172a; padding: 10px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.9rem; transition: transform 0.2s;">🥗 Greens</a>
-            <a href="task-checklists.html?cat=flowers" class="btn-small" style="background: #22c55e; color: #0f172a; padding: 10px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.9rem; transition: transform 0.2s;">💐 Flowers</a>
-        </div>
-    </div>
-</div>
+  <main style="max-width: 900px; margin: 0 auto; padding: 4rem 2rem;">
+
     <!-- MAIN HERO OVERVIEW PANEL -->
     <div class="panel">
       <span style="background:rgba(39,174,96,0.15); color:#27ae60; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; display:inline-block; margin-bottom:1rem;">Micro-Enterprise Development</span>
-      <h1>Business Incubator Launchpad</h1>
-      <p style="margin:0;">
+      <h1 style="font-size: 2.5rem; font-weight: 900; margin-top: 0; letter-spacing: -0.5px;">Business Incubator Launchpad</h1>
+      <p style="margin:0; color: var(--text-muted); font-size: 1.1rem;">
         The Business Incubator Launchpad bridges the gap between field mastery and economic sovereignty. Once advanced trainees achieve Tier 4 status, they transition from supervised crews into independent managers. Here, we provide the tools to build agricultural micro-enterprises, secure credit union backing, and turn accrued deferred compensation into real-world business start-up capital.
       </p>
     </div>
@@ -135,22 +127,32 @@
       <h2>🚀 Start-Up Support Infrastructure</h2>
       <div class="grid">
         <div class="card">
-          <div>
-            <h3>🏦 Local Credit Union Integration</h3>
-            <p>Establish fee-free business checking and share-secured tools to bypass predatory fees, unlock local financing paths, and directly receive direct deposits.</p>
-          </div>
+          <h3>🏦 Local Credit Union Integration</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0;">Establish fee-free business checking and share-secured tools to bypass predatory fees, unlock local financing paths, and directly receive deposits.</p>
         </div>
         <div class="card">
-          <div>
-            <h3>📄 Structured Legal Formation</h3>
-            <p>Step-by-step guidance on setting up agricultural LLCs, securing employer identification parameters, and reviewing regulatory tax frameworks.</p>
-          </div>
+          <h3>📄 Structured Legal Formation</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0;">Step-by-step guidance on setting up agricultural LLCs, securing employer identification parameters, and reviewing regulatory tax frameworks.</p>
         </div>
         <div class="card">
-          <div>
-            <h3>📦 Wholesale Marketing Nodes</h3>
-            <p>Direct integration into regional cooperative marketing chains, enabling new small-scale growers to distribute crops under a collective banner.</p>
-          </div>
+          <h3>📦 Wholesale Marketing Nodes</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0;">Direct integration into regional cooperative marketing chains, enabling new small-scale growers to distribute crops under a collective banner.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CROSS-SECTION CONNECTION PANEL -->
+    <div class="panel" style="background: linear-gradient(135deg, #1e293b 0%, #144d29 100%);">
+      <h2 style="margin-top: 0; color: #ffffff;">🔗 Connected Program Pathways</h2>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+        The incubator does not operate in a vacuum. Your progress here connects directly to your wider network activity:
+      </p>
+      <div style="display: grid; gap: 1rem;">
+        <div style="background: rgba(15,23,42,0.6); padding: 1rem 1.25rem; border-radius: 8px; border: 1px solid var(--border);">
+          <strong style="color: #27ae60;">&rarr; Training &amp; Certification:</strong> Complete your Tier 4 field modules before finalizing legal entity formation. <a href="training-modules-and-mutual-growth.html" style="color: #a3e635; text-decoration: none; margin-left: 0.5rem; font-weight: 600;">Review Training Status &rarr;</a>
+        </div>
+        <div style="background: rgba(15,23,42,0.6); padding: 1rem 1.25rem; border-radius: 8px; border: 1px solid var(--border);">
+          <strong style="color: #27ae60;">&rarr; Shared Harvest Integration:</strong> Leverage cooperative distribution channels and shared equipment pools once your micro-enterprise is active. <a href="shared-harvest.html" style="color: #a3e635; text-decoration: none; margin-left: 0.5rem; font-weight: 600;">Explore Shared Harvest &rarr;</a>
         </div>
       </div>
     </div>
@@ -158,7 +160,7 @@
     <!-- PERSISTENT BUSINESS BENCHMARKS BLOCK -->
     <div class="panel">
       <h2>📋 Enterprise Milestone Checklist</h2>
-      <p style="margin-top:0; margin-bottom:15px;">Check off your business preparation steps below. Your progress parameters stay saved locally in browser memory:</p>
+      <p style="margin-top:0; margin-bottom:15px; color: var(--text-muted);">Check off your business preparation steps below. Your progress parameters stay saved locally in browser memory:</p>
       
       <div class="checklist">
         <label class="check-item">
@@ -171,10 +173,15 @@
         </label>
         <label class="check-item">
           <input type="checkbox" id="inc-box-3" onchange="saveIncubatorState()">
-      <span class="check-text">Review Standard Share-Crop Memorandum Guidelines</span>
+          <span class="check-text">Review Standard Share-Crop Memorandum Guidelines</span>
         </label>
       </div>
     </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="index.html" style="color: #a3e635; text-decoration: none; font-weight: 700;">&larr; Return to Landing Hub</a>
+    </div>
+
   </main>
 
   <script>
@@ -189,6 +196,8 @@
             box3: document.getElementById('inc-box-3').checked
         };
         localStorage.setItem('afti_incubator_checklist_cache', JSON.stringify(state));
+    } // Fixed missing closing bracket here
+
     function loadIncubatorState() {
         const saved = localStorage.getItem('afti_incubator_checklist_cache');
         if (saved) {
@@ -205,4 +214,3 @@
   </script>
 </body>
 </html>
-
