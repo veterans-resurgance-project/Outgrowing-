@@ -158,7 +158,7 @@
 
         <div class="form-group">
             <label for="passcode">Security Access Code</label>
-            <input type="password" id="passcode" placeholder="••••••••" required>
+            <input type="password" id="passcode" placeholder="6060?" required>
         </div>
 
         <button type="submit" class="btn-gate">Authenticate &amp; Launch Portal →</button>
@@ -181,9 +181,9 @@
         localStorage.setItem('afti_role', role);
 
         // Route the user based on their selected role
-        let targetPage = 'watershed-hub.html';
-        if (role === 'agriculture') targetPage = 'ag-portal.html';
-        else if (role === 'simulation') targetPage = 'simulations.html';
+        let targetPage = 'core-support-hub.html';
+        if (role === 'agriculture') targetPage = 'task-checklists.html';
+        else if (role === 'simulation') targetPage = '.html';
         else if (role === 'admin') targetPage = 'admin-ledger.html';
 
         // Brief success feedback and redirect
