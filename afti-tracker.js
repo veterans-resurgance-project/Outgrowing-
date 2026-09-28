@@ -1,3 +1,66 @@
+// --- 1. INITIALIZE SUPABASE ---
+const SUPABASE_URL = 'YOUR_SUPABASE_URL_HERE';      // Replace with your Supabase Project URL
+const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE'; // Replace with your Supabase Anon/Public Key
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// --- 2. ALPINE.JS MATCHING ENGINE COMPONENT ---
+document.addEventListener('alpine:init', () => {
+    Alpine.data('matchEngine', () => ({
+        participants: [],
+        jobRequests: [],
+        newParticipant: { name: '', skillTrack: 'Restoration' },
+        isSubmitting: false,
+        successMessage: '',
+
+        // Runs automatically when the component loads on the page
+        async init() {
+            await this.fetchData();
+        },
+
+        // Fetch live records from Supabase tables
+        async fetchData() {
+            try {
+                const { data: pData, error: pError } = await supabase.from('participants').select('*');
+                const { data: jData, error: jError } = await supabase.from('job_requests').select('*');
+                
+                if (pData) this.participants = pData;
+                if (jData) this.jobRequests = jData;
+                
+                if (pError || jError) console.error('Error fetching data:', pError || jError);
+            } catch (err) {
+                console.error('Network or client error during fetch:', err);
+            }
+        },
+
+        // Submit new participant profile directly to the database
+        async submitParticipant() {
+            this.isSubmitting = true;
+            this.successMessage = '';
+
+            const { data, error } = await supabase
+                .from('participants')
+                .insert([
+                    { 
+                        name: this.newParticipant.name, 
+                        skill_track: this.newParticipant.skillTrack,
+                        status: 'Pending Review'
+                    }
+                ]);
+
+            this.isSubmitting = false;
+
+            if (error) {
+                alert('Error registering profile. Please check your network or credentials.');
+                console.error(error);
+            } else {
+                this.successMessage = 'Profile registered successfully for administrative review!';
+                this.newParticipant.name = '';
+                await this.fetchData(); // Refresh the list dynamically
+                setTimeout(() => { this.successMessage = ''; }, 4000);
+            }
+        }
+    }));
+});
 /**
  * AFTI - Global Experience Point & Readiness Tier Tracking Engine
  * Architecture: Vanilla, self-contained utility supporting local-to-cloud portability.
