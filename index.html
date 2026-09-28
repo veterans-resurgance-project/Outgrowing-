@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AFTI Portal</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
@@ -16,86 +17,96 @@
     --muted: #94a3b8; 
 }
 body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 0; }
-nav { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2rem; background: var(--card); border-bottom: 1px solid rgba(156, 175, 136, 0.2); }
-nav a { color: #cbd5e1; text-decoration: none; transition: color 0.2s; font-size: 0.95rem; }
+
+/* MOBILE-OPTIMIZED NAV */
+nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; background: var(--card); border-bottom: 1px solid rgba(156, 175, 136, 0.2); flex-wrap: wrap; gap: 0.75rem; }
+nav .nav-links { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+nav a { color: #cbd5e1; text-decoration: none; transition: color 0.2s; font-size: 0.9rem; }
 nav a:hover { color: var(--sage-botanical); }
-main { max-width: 900px; margin: 2rem auto; padding: 0 1.5rem; }
-.block { background: var(--card); border: 1px solid rgba(156, 175, 136, 0.25); border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin-bottom: 2rem; }
+
+main { max-width: 900px; margin: 1.5rem auto; padding: 0 1rem; }
+.block { background: var(--card); border: 1px solid rgba(156, 175, 136, 0.25); border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin-bottom: 2rem; }
 .img-box { border-radius: 12px; border: 1px solid rgba(156, 175, 136, 0.3); margin: 1.5rem 0; overflow: hidden; position: relative; }
 .btn { display: block; text-align: center; color: #fff; text-decoration: none; background: var(--sage-botanical); padding: 15px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; margin-top: 1.2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.2s, background 0.2s; }
 .btn:hover { background: var(--sage-earth); transform: translateY(-2px); }
-.btn-action { background: rgba(156, 175, 136, 0.15); color: var(--sage-botanical); padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; border: 1px solid rgba(156, 175, 136, 0.3); }
+.btn-action { background: rgba(156, 175, 136, 0.15); color: var(--sage-botanical); padding: 0.4rem 0.8rem; border-radius: 20px; font-weight: 600; border: 1px solid rgba(156, 175, 136, 0.3); display: inline-block; }
 .btn-action:hover { background: rgba(156, 175, 136, 0.3); color: #fff; }
 .narrative-callout { background: rgba(156, 175, 136, 0.05); border: 1px solid rgba(156, 175, 136, 0.2); border-radius: 12px; padding: 25px; margin: 2rem 0; line-height: 1.7; }
+
+/* RESPONSIVE ADJUSTMENTS FOR PHONES */
+@media (min-width: 640px) {
+    .block { padding: 2.5rem; }
+    main { padding: 0 1.5rem; }
+}
 </style>
 </head>
 <body>
 
 <!-- STREAMLINED SITE NAVIGATION BAR -->
 <nav>
-    <div style="font-weight:900; font-size:1.25rem; color:#fff;">AFTI Portal</div>
-    <div style="display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap;">
-        <a href="training-modules-and-mutual-growth.html">Training &amp; Certification</a>
+    <div style="font-weight:900; font-size:1.2rem; color:#fff;">AFTI Portal</div>
+    <div class="nav-links">
+        <a href="training-modules-and-mutual-growth.html">Training</a>
         <a href="partners.html">Partners</a>
-        <a href="shared-harvest.html">Shared Harvest</a>
-        <a href="participant-matching-system.html" class="btn-action">System Architecture &amp; Portfolio Building &rarr;</a>
-        <a href="access-gates.html">Access Gate</a>
-              
+        <a href="shared-harvest.html">Harvest</a>
+        <a href="participant-matching-system.html" class="btn-action">Portfolio Building &rarr;</a>
+        <a href="access-gates.html">Gate</a>
     </div>
 </nav>
 
 <main>
 <div class="block">
     <!-- OUTGROWING-AG CENTERED AT TOP -->
-    <div style="text-align: center; margin-bottom: 2.0rem;">
-        <span style="font-size:1.2rem; font-weight:900; text-transform:uppercase; letter-spacing:0.25em; color:var(--sage-botanical);">Outgrowing-Ag</span>
+    <div style="text-align: center; margin-bottom: 1.25rem;">
+        <span style="font-size:1rem; font-weight:900; text-transform:uppercase; letter-spacing:0.2em; color:var(--sage-botanical);">Outgrowing-Ag</span>
     </div>
 
-    <!-- WILLAMETTE VALLEY INITIATIVE BOX CENTERED BELOW TEXT -->
-    <div style="text-align: center; margin-bottom: 1.5rem;">
-        <span style="background:rgba(156,175,136,0.15); color:var(--sage-botanical); font-size:1.5rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; padding:0.4rem 1rem; border-radius:20px; border:1px solid rgba(156,175,136,0.3); display:inline-block;">Willamette Valley Initiative</span>
+    <!-- WILLAMETTE VALLEY INITIATIVE BOX (RESPONSIVE FONT & PADDING) -->
+    <div style="text-align: center; margin-bottom: 1.25rem;">
+        <span style="background:rgba(156,175,136,0.15); color:var(--sage-botanical); font-size:clamp(1.1rem, 4vw, 1.4rem); font-weight:800; text-transform:uppercase; letter-spacing:0.08em; padding:0.4rem 0.8rem; border-radius:20px; border:1px solid rgba(156,175,136,0.3); display:inline-block; max-width: 100%; box-sizing: border-box;">Willamette Valley Initiative</span>
     </div>
 
-    <p style="font-size:1.05rem; line-height:1.7; color:#cbd5e1; margin:0 0 1.3rem 0;">The Agricultural Future &amp; Training Initiative (AFTI) bridges the gap between under-utilized land and next-generation growers. We combine rigorous vocational pathways, custom advisory SOP alignment, and cooperative land-linking frameworks to deploy elite field teams that ensure mutual economic revitalization and regional food security across Linn County.</p>
+    <p style="font-size:1rem; line-height:1.6; color:#cbd5e1; margin:0 0 1.3rem 0;">The Agricultural Future &amp; Training Initiative (AFTI) bridges the gap between under-utilized land and next-generation growers. We combine rigorous vocational pathways, custom advisory SOP alignment, and cooperative land-linking frameworks to deploy elite field teams that ensure mutual economic revitalization and regional food security across Linn County.</p>
 
     <!-- ORIGINAL FIELD PHOTO PRESERVED -->
     <div class="img-box">
-        <img src="PXL_20250730_184302226.jpg" alt="Field Operations" style="width:100%; height:300px; object-fit:cover; display:block;">
-        <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,23,42,0.95)); padding:1.2rem;">
-            <span style="color:var(--sage-botanical); font-weight:900; font-size:1.0rem; text-transform:uppercase;">Linn County Field Operations</span>
-            <p style="color:#cbd5e1; margin:0.2rem 0 0 0; font-size:1.0rem;">Restoring under-productive land assets into high-yield community infrastructure.</p>
+        <img src="PXL_20250730_184302226.jpg" alt="Field Operations" style="width:100%; height:240px; sm:height:300px; object-fit:cover; display:block;">
+        <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(15,23,42,0.95)); padding:1rem;">
+            <span style="color:var(--sage-botanical); font-weight:900; font-size:0.95rem; text-transform:uppercase;">Linn County Field Operations</span>
+            <p style="color:#cbd5e1; margin:0.2rem 0 0 0; font-size:0.9rem;">Restoring under-productive land assets into high-yield community infrastructure.</p>
         </div>
     </div>
 </div>
-</main>
 
-</body>
-</html>
-<section id="build-your-future" class="w-full">
+<section id="build-your-future" class="w-full mb-8">
     <div style="background-color: #1e293b; color: #ffffff; border: 2px solid rgba(156,175,136,0.3); font-size: 14px; line-height: 1.5;" class="p-4 sm:p-6 rounded-lg w-full">
         <h2 style="color: #9CAF88; font-weight: bold; font-size: 18px;" class="mb-2">Grow Ahead, Build Your Future, Heal The Land. Watershed Stewards / Outgrowing-Ag</h2>
-        <p style="color: #cbd5e1;">Whether you are an agricultural recruit, a military veteran transitioning into civilian enterprise, or a seasonal participant joining our reserve pool, Outgrowing-Ag builds your professional portfolio from day one. Master high-tunnel management, irrigation telemetry, precision crop rotation, forestry safety, wilderness burn scar environmental remediation strategies and research data tracking through hands-on rotations. Every hour spent executing foundational builds, managing commercial yields, or stabilizing regional harvests is logged into your permanent professional record, providing verifiable credentials and clear pathways into independent micro-plot entrepreneurship, agricultural co-op equity, or professional land management roles.</p>
+        <p style="color: #cbd5e1; margin: 0;">Whether you are an agricultural recruit, a military veteran transitioning into civilian enterprise, or a seasonal participant joining our reserve pool, Outgrowing-Ag builds your professional portfolio from day one. Master high-tunnel management, irrigation telemetry, precision crop rotation, forestry safety, wilderness burn scar environmental remediation strategies and research data tracking through hands-on rotations. Every hour spent executing foundational builds, managing commercial yields, or stabilizing regional harvests is logged into your permanent professional record, providing verifiable credentials and clear pathways into independent micro-plot entrepreneurship, agricultural co-op equity, or professional land management roles.</p>
     </div>
 </section>
 
 <!-- Veteran Programs Link Button -->
 <div style="text-align: center; margin: 1.5rem 0;">
-    <a href="https://www.watershipstewardsempowering.org" target="_blank" style="display: inline-block; background-color: #9CAF88; color: #ffffff; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1rem; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: background 0.2s;" onmouseover="this.style.background='#6b705c';" onmouseout="this.style.background='#9CAF88';">
+    <a href="https://www.watershipstewardsempowering.org" target="_blank" style="display: inline-block; background-color: #9CAF88; color: #ffffff; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 4px 10px rgba(0,0,0,0.3);" onmouseover="this.style.background='#6b705c';" onmouseout="this.style.background='#9CAF88';">
         Explore Our Veteran Programs &amp; Stewardship Mission &rarr;
     </a>
 </div> 
 
 <!-- Standalone "How it all Works" Button Box -->
 <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(156,175,136,0.3); border-radius: 10px; padding: 20px; margin: 25px 0; text-align: center;">
-    <a href="participant-matching-system.html" style="display: inline-block; background: #9CAF88; color: #ffffff; padding: 12px 24px; border-radius: 8px; font-weight: bold; text-decoration: none; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: background 0.2s, border-color 0.2s;" onmouseover="this.style.background='#6b705c'; this.style.borderColor='#38bdf8';" onmouseout="this.style.background='#9CAF88'; this.style.borderColor='rgba(255,255,255,0.15)';">Build a Real World Portfolio. How it Works →</a>
+    <a href="participant-matching-system.html" style="display: inline-block; background: #9CAF88; color: #ffffff; padding: 12px 20px; border-radius: 8px; font-weight: bold; text-decoration: none; border: 1px solid rgba(156,255,255,0.15); box-shadow: 0 4px 10px rgba(0,0,0,0.3);" onmouseover="this.style.background='#6b705c';" onmouseout="this.style.background='#9CAF88';">Build a Real World Portfolio. How it Works →</a>
 </div>
 
 <section id="landowner-partnerships" class="w-full">
-    <div style="background-color: #1e293b; color: #ffffff; border: 2px solid rgba(156,175,136,0.3); font-size: 14px; line-height: 1.6;" class="p-3 sm:p-6 rounded-lg w-full">
+    <div style="background-color: #1e293b; color: #ffffff; border: 2px solid rgba(156,175,136,0.3); font-size: 14px; line-height: 1.6;" class="p-4 sm:p-6 rounded-lg w-full">
         <h2 style="color: #9CAF88; font-weight: bold; font-size: 18px;" class="mb-2">Landowner Partnerships &amp; Farm Income Solutions</h2>
         <p style="color: #cbd5e1; margin: 0;">Turning underutilized land into productive, high-value assets through collaborative lease frameworks and structured enterprise splits. Shared Harvest is specifically designed to boost the bottom line increasing profitability, while providing essential surge labor and harvest-saver support to local producers facing severe seasonal labor shortages during peak crunch times. Furthermore, landowners and farm operators benefit from our phone-free work blocks, our training and standardized operating procedures (SOPs). Let us know what skills and attributes you are looking for, and we will add that to our employer priority skills list. Run an audit in our Skills Match Engine to find the skilled workers that match your requirements.</p>
     </div>
 </section>
+</main>
+
+</body>
+</html>
 
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
