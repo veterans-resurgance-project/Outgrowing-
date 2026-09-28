@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI Technical Modules Bank</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --primary: #27ae60;
+            --accent: #a855f7;
+            --blue-accent: #38bdf8;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 40px 20px;
+            margin: 0;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: 16px;
+            max-width: 850px;
+            margin: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+            box-sizing: border-box;
+        }
+
+        h2 {
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 15px;
+        }
+
+        /* 2-Column Responsive Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .item {
+            background: rgba(15, 23, 42, 0.7);
+            padding: 16px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-decoration: none;
+            color: #fff;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            transition: all 0.2s ease;
+        }
+
+        .item:hover {
+            border-color: var(--blue-accent);
+            transform: translateY(-2px);
+            background: rgba(15, 23, 42, 0.9);
+            box-shadow: 0 6px 16px rgba(56, 189, 248, 0.15);
+        }
+
+        .item-icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .item-content {
+            flex-grow: 1;
+        }
+
+        .item-title {
+            font-weight: 700;
+            color: #f8fafc;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .item-desc {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .lock-hint {
+            display: inline-block;
+            margin-top: 6px;
+            font-size: 0.75rem;
+            color: var(--blue-accent);
+            font-weight: 600;
+        }
+
+        .btn-back {
+            display: block;
+            text-align: center;
+            background: #334155;
+            color: white;
+            padding: 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.2s;
+        }
+
+        .btn-back:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>🛠️ Technical Mastery Checklists</h2>
+    <p class="subtitle">
+        Explore our standalone field training modules below. Preview standard operating procedures (SOPs) and compliance requirements freely. <strong style="color: #fff;">Sign in to launch modules, log training completions, and build your operational portfolio.</strong>
+    </p>
+
+    <div class="grid">
+        
+        <!-- Wildfire Suppression -->
+        <a href="access-gates.html" class="item" style="border-left: 4px solid #ef4444;">
+            <div class="item-icon">🔥</div>
+            <div class="item-content">
+                <span class="item-title">Wildfire Suppression</span>
+                <span class="item-desc">Forestry safety protocols and active line work ($24.50/hr).</span>
+                <span class="lock-hint">🔒 Sign In to Unlock Module</span>
+            </div>
+        </a>
+
+        <!-- Roadside Farm Stand -->
+        <a href="access-gates.html" class="item" style="border-left: 4px solid #38bdf8;">
+            <div class="item-icon">🔨</div>
+            <div class="item-content">
+                <span class="item-title">Roadside Farm Stand</span>
+                <span class="item-desc">EFU zoning rules, site compliance, and safety setbacks.</span>
+                <span class="lock-hint">🔒 Sign In to Unlock Module</span>
+            </div>
+        </a>
+
+        <!-- Market Merchandising -->
+        <a href="access-gates.html" class="item" style="border-left: 4px solid #38bdf8;">
+            <div class="item-icon">🛒</div>
+            <div class="item-content">
+                <span class="item-title">Market Merchandising</span>
+                <span class="item-desc">Display design, stock rotation, and abundance masking strategies.</span>
+                <span class="lock-hint">🔒 Sign In to Unlock Module</span>
+            </div>
+        </a>
+
+        <!-- Customer Interaction -->
+        <a href="access-gates.html" class="item" style="border-left: 4px solid #38bdf8;">
+            <div class="item-icon">🗣️</div>
+            <div class="item-content">
+                <span class="item-title">Customer Interaction</span>
+                <span class="item-desc">Curiosity scripts, active engagement, and handling price resistance.</span>
+                <span class="lock-hint">🔒 Sign In to Unlock Module</span>
+            </div>
+        </a>
+
+        <!-- Kitchen Accounts -->
+        <a href="access-gates.html" class="item" style="border-left: 4px solid #38bdf8;">
+            <div class="item-icon">🤝</div>
+            <div class="item-content">
+                <span class="item-title">Kitchen Accounts</span>
+                <span class="item-desc">Chef communication etiquette, delivery windows, and washing rules.</span>
+                <span class="lock-hint">🔒 Sign In to Unlock Module</span>
+            </div>
+        </a>
+
+        <!-- Utility Tractor -->
+        <a href="access-gates.html" class="item" style="border-left: 4px solid #27ae60;">
+            <div class="item-icon">🚜</div>
+            <div class="item-content">
+                <span class="item-title">Utility Tractor Operations</span>
+                <span class="item-desc">Pre-start safety checks, PTO safety, and vertical ROPS cages.</span>
+                <span class="lock-hint">🔒 Sign In to Unlock Module</span>
+            </div>
+        </a>
+
+        <!-- Chainsaw Safety -->
+        <a href="access-gates.html" class="item" style="border-left: 4px solid #27ae60;">
+            <div class="item-icon">🪚</div>
+            <div class="item-content">
+                <span class="item-title">Chainsaw Safety &amp; Felling</span>
+                <span class="item-desc">PPE armor chaps, kickback prevention, and log fiber tension.</span>
+                <span class="lock-hint">🔒 Sign In to Unlock Module</span>
+            </div>
+        </a>
+
+        <!-- Greenhouse Prop -->
+        <a href="access-gates.html" class="item" style="border-left: 4px solid #a855f7;">
+            <div class="item-icon">🌱</div>
+            <div class="item-content">
+                <span class="item-title">Greenhouse Propagation</span>
+                <span class="item-desc">Cell geometry, moisture management, and damping-off controls.</span>
+                <span class="lock-hint">🔒 Sign In to Unlock Module</span>
+            </div>
+        </a>
+
+        <!-- Organic Compost -->
+        <a href="access-gates.html" class="item" style="border-left: 4px solid #a855f7;">
+            <div class="item-icon">🪱</div>
+            <div class="item-content">
+                <span class="item-title">Organic Compost Systems</span>
+                <span class="item-desc">3:1 carbon lasagna layering and 131°F core temp logs.</span>
+                <span class="lock-hint">🔒 Sign In to Unlock Module</span>
+            </div>
+        </a>
+
+        <!-- Soil Weight Math -->
+        <a href="access-gates.html" class="item" style="border-left: 4px solid #a855f7;">
+            <div class="item-icon">🧪</div>
+            <div class="item-content">
+                <span class="item-title">Soil Weight &amp; N-P-K Math</span>
+                <span class="item-desc">Nutrient percentage metrics, amendment calculations, and lab reports.</span>
+                <span class="lock-hint">🔒 Sign In to Unlock Module</span>
+            </div>
+        </a>
+
+    </div>
+
+    <a href="index.html?v=18" class="btn-back">← Return to Main Dashboard</a>
+</div>
+
+</body>
+</html>
