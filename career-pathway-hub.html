@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI - Job Match Simulation &amp; Career Hub</title>
+    <script src="https://tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --txt: #f8fafc;
+            --primary: #27ae60;
+            --primary-dark: #1e8449;
+            --hud: #144d29;
+            --accent: #38bdf8;
+            --muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--txt);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        nav {
+            background: #144d29;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(156,175,136,0.3);
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color 0.2s; }
+        nav a:hover, nav a.active { color: #4ade80; font-weight: 700; }
+
+        .container { max-width: 1100px; margin: 0 auto; background: var(--card); border-radius: 14px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background: var(--hud); border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; flex-wrap: wrap; gap: 10px; }
+        
+        h1 { font-family: 'Fredoka', sans-serif; color: #4ade80; font-size: 1.8rem; margin-top: 0; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+        h2 { font-family: 'Fredoka', sans-serif; color: var(--accent); font-size: 1.2rem; margin-top: 25px; border-left: 4px solid var(--accent); padding-left: 10px; }
+        
+        p, label { color: var(--muted); } 
+        strong { color: var(--txt); }
+
+        .panel { background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border); border-radius: 10px; padding: 25px; margin-top: 20px; }
+        
+        .btn { background: var(--primary); color: #fff; padding: 10px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-block; font-size: 0.9rem; font-family: 'Fredoka', sans-serif; }
+        .btn:hover { background: var(--primary-dark); }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .form-group { margin-bottom: 18px; }
+        input, select, textarea {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+        }
+        input:focus, select:focus { outline: none; border-color: var(--primary); }
+
+        .checkbox-item { display: flex; align-items: center; gap: 10px; background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); padding: 10px 14px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; }
+        .checkbox-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; }
+        .checkbox-item span { font-size: 0.9rem; color: var(--txt); }
+
+        .result-box {
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .score-display {
+            font-size: 2.2rem;
+            font-family: 'Fredoka', sans-serif;
+            color: #4ade80;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- GLOBAL NAV -->
+    <nav>
+        <div style="font-weight: 900; font-size: 1.25rem; color: #ffffff;">AFTI Portal</div>
+        <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+            <a href="index.html">Gate / Login</a>
+            <a href="watershed-hub.html">Watershed Field Hub</a>
+            <a href="simulations.html" class="active">Job Match Simulations</a>
+        </div>
+    </nav>
+
+    <div class="hud-bar">
+        <span>Protected Workspace: <span style="color:var(--accent);">Job Match &amp; Career Pathway Simulation</span></span>
+        <div>Session Status: <strong style="color:#4ade80;">Authenticated</strong></div>
+    </div>
+
+    <h1>🎯 Career Pathway &amp; Job Match Simulator</h1>
+    <p>Select your target career track, check off your current certifications and field experience, and run the simulator to evaluate your placement readiness and identify missing steps.</p>
+
+    <div class="grid-2">
+        <!-- LEFT: SIMULATION INPUTS -->
+        <div class="panel">
+            <h2>1. Profile &amp; Target Track</h2>
+            <form id="simForm" onsubmit="runSimulation(event)">
+                <div class="form-group">
+                    <label for="targetTrack">Target Industry Track</label>
+                    <select id="targetTrack">
+                        <option value="watershed">Watershed Restoration &amp; Heavy Field Crew</option>
+                        <option value="transportation">Commercial Transportation &amp; Bus Operations (CDL)</option>
+                        <option value="care">Direct Support &amp; Community Care Services</option>
+                        <option value="waste">Municipal Solid Waste &amp; Infrastructure Policy</option>
+                    </select>
+                </div>
+
+                <label style="margin-bottom: 10px; display: block;">Check Your Active Qualifications &amp; Gear:</label>
+                
+                <div class="checkbox-item" onclick="toggleSimCheck(this)">
+                    <input type="checkbox" value="field_exp" class="sim-check">
+                    <span>Prior outdoor fieldwork, conservation, or disaster relief experience</span>
+                </div>
+                <div class="checkbox-item" onclick="toggleSimCheck(this)">
+                    <input type="checkbox" value="cdl_test" class="sim-check">
+                    <span>Commercial Driver's License (CDL) knowledge tests or endorsements</span>
+                </div>
+                <div class="checkbox-item" onclick="toggleSimCheck(this)">
+                    <input type="checkbox" value="first_aid" class="sim-check">
+                    <span>Current First Aid / CPR / Trauma Response Certification</span>
+                </div>
+                <div class="checkbox-item" onclick="toggleSimCheck(this)">
+                    <input type="checkbox" value="safety_gear" class="sim-check">
+                    <span>Full PPE readiness (Hard hat, boots, high-vis, chainsaw safety gear)</span>
+                </div>
+                <div class="checkbox-item" onclick="toggleSimCheck(this)">
+                    <input type="checkbox" value="admin_exp" class="sim-check">
+                    <span>Experience with data logs, GPS mapping, or grant tracking metrics</span>
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Run Job Match Simulation 🚀</button>
+            </form>
+        </div>
+
+        <!-- RIGHT: SIMULATION RESULTS & RECOMMENDATIONS -->
+        <div class="panel">
+            <h2>2. Match Analysis &amp; Pathway</h2>
+            <div id="simResultsPlaceholder" style="text-align: center; color: var(--muted); padding: 40px 0;">
+                <p>Configure your profile on the left and hit <strong>Run Job Match Simulation</strong> to generate your readiness breakdown.</p>
+            </div>
+
+            <div id="simResultsContent" style="display: none;">
+                <div class="result-box">
+                    <span style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent);">Calculated Alignment Score</span>
+                    <div id="scoreOutput" class="score-display">85%</div>
+                    <p id="matchSummaryText" style="margin: 0; font-size: 0.95rem;">Strong alignment with targeted field operations. Minimal supplementary training required.</p>
+                </div>
+
+                <h3 style="font-family: 'Fredoka', sans-serif; color: #4ade80; font-size: 1.1rem; margin-top: 20px;">Recommended Next Steps:</h3>
+                <ul id="recommendationsList" style="padding-left: 20px; font-size: 0.9rem; color: var(--muted);">
+                    <!-- Populated dynamically -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function toggleSimCheck(cardElement) {
+        const checkbox = cardElement.querySelector('input[type="checkbox"]');
+        checkbox.checked = !checkbox.checked;
+    }
+
+    function runSimulation(event) {
+        event.preventDefault();
+
+        const track = document.getElementById('targetTrack').value;
+        const checkedBoxes = document.querySelectorAll('.sim-check:checked');
+        const count = checkedBoxes.length;
+
+        // Calculate a simulated match score based on selections
+        let baseScore = 50 + (count * 10);
+        if (baseScore > 98) baseScore = 98;
+
+        document.getElementById('simResultsPlaceholder').style.display = 'none';
+        document.getElementById('simResultsContent').style.display = 'block';
+        document.getElementById('scoreOutput').innerText = baseScore + '%';
+
+        let summary = "";
+        let recs = [];
+
+        if (track === 'watershed') {
+            summary = "Your profile shows solid readiness for watershed restoration and burn-scar remediation crews.";
+            recs = [
+                "Review daily safety muster checklists in the Watershed Hub.",
+                "Ensure your chainsaw chaps and PPE certifications are up to date.",
+                "Log your initial training hours in the shift time clock portal."
+            ];
+        } else if (track === 'transportation') {
+            summary = "Good alignment with commercial transit and passenger operations.";
+            recs = [
+                "Verify state DMV airbrake and passenger endorsement status.",
+                "Complete pre-trip vehicle inspection simulation modules.",
+                "Coordinate with transit dispatch for onboarding schedules."
+            ];
+        } else if (track === 'care') {
+            summary = "Strong community readiness for direct support and human services roles.";
+            recs = [
+                "Complete background check and training onboarding modules.",
+                "Review client safety and support documentation protocols."
+            ];
+        } else {
+            summary = "Well-positioned for municipal infrastructure and waste management advocacy.";
+            recs = [
+                "Review task force meeting schedules and local solid waste guidelines.",
+                "Familiarize yourself with grant compliance and telemetry reporting."
+            ];
+        }
+
+        const recList = document.getElementById('recommendationsList');
+        recList.innerHTML = "";
+        recs.forEach(rec => {
+            const li = document.createElement('li');
+            li.style.marginBottom = "8px";
+            li.innerHTML = `<span style="color: var(--txt);">${rec}</span>`;
+            recList.appendChild(li);
+        });
+
+        alert("Simulation complete! Your career match breakdown has been updated.");
+    }
+</script>
+
+</body>
+</html>
