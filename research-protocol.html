@@ -299,45 +299,7 @@
           </div>
       </div>
 
-      <hr class="section-divider">
-
-      <!-- INTERACTIVE OSU EXTENSION TELEMETRY COMPLIANCE VALIDATOR -->
-      <div class="validator-panel">
-          <h2>🧪 Interactive OSU Extension Telemetry Validator</h2>
-          <p style="font-size: 0.9rem; margin-bottom: 20px;">
-              Test your proposed data entry against institutional academic criteria. This simulator checks whether your operational log meets the stringency required for inclusion in extension research briefs.
-          </p>
-
-          <form id="validator-form" onsubmit="validateTelemetry(event)">
-              <div class="form-grid">
-                  <div>
-                      <label for="val-category">Enterprise Sector</label>
-                      <select id="val-category" required>
-                          <option value="mushrooms">Mushroom Substrate Trial</option>
-                          <option value="apiary">Apiary Varroa &amp; Honey Yield</option>
-                          <option value="greens">Hydro/Soil Greens Density</option>
-                          <option value="flowers">Specialty Cut Flower Biomass</option>
-                      </select>
-                  </div>
-                  <div>
-                      <label for="val-operators">Operator Pair (Min. 2 Names)</label>
-                      <input type="text" id="val-operators" placeholder="e.g., J. Doe & M. Smith" required>
-                  </div>
-                  <div>
-                      <label for="val-metric">Quantitative Metric Logged</label>
-                      <input type="text" id="val-metric" placeholder="e.g., 28.5g yield / 65% moisture" required>
-                  </div>
-              </div>
-              <button type="submit" class="btn-validate">Run Academic Compliance Audit</button>
-          </form>
-
-          <div id="validator-results" style="display: none; margin-top: 20px;">
-              <div id="compliance-status-badge" class="status-badge"></div>
-              <div class="compliance-output" id="compliance-output-text"></div>
-          </div>
-      </div>
-
-      
+      <hr class="section-divider">      
 
     </div>
   </div>
