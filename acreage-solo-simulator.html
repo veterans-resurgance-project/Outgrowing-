@@ -41,13 +41,15 @@
 </head>
 <body>
 
-<div class="hud-bar">
-    <span>Campaign: <span style="color:var(--accent);">Shared Harvest &amp; Learning Track</span></span>
-    <div style="display: flex; align-items: center; gap: 15px;">
-        <span>Year: <strong id="hud-year" style="color:var(--accent);">1</strong> / 5 | Cash: <strong id="hud-cash" style="color:#6ee7b7;">$8,000</strong></span>
-        <a href="acreage-path-select.html" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.8rem; text-decoration: none;">&larr; Exit Simulation</a>
+<div class="container">
+    <div class="hud-bar">
+        <span>Campaign: <span style="color:var(--accent);">Independent Solo Track</span></span>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <span>Year: <strong id="hud-year" style="color:var(--accent);">1</strong> / 5 | Cash: <strong id="hud-cash" style="color:#6ee7b7;">$25,000</strong></span>
+            <a href="acreage-path-select.html" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.8rem; text-decoration: none;">&larr; Exit Simulation</a>
+        </div>
     </div>
-</div>
+
     <!-- INTRO PANEL -->
     <div id="screen-intro" class="panel">
         <span class="active-path-badge">⚡ Hard Mode Simulation</span>
@@ -142,7 +144,20 @@
             <h3 id="narrative-title" style="color:var(--accent); margin-top:0;">Title</h3>
             <p id="narrative-story" style="font-size: 1.1rem; line-height: 1.8; color: var(--txt); margin-bottom: 0;"></p>
         </div>
-        <!-- Optional Checklist Link for Year 3 End -->
+
+        <!-- SIGN-IN / ACCREDITATION INCENTIVE BOX (Year 3 End) -->
+        <div id="sign-in-incentive-box" style="display: none; background: rgba(245, 158, 11, 0.1); border: 1px solid var(--primary); border-radius: 12px; padding: 20px; margin-top: 20px;">
+            <h3 style="color: var(--accent); margin-top: 0;">✨ Claim Your Specialty Crop Research Access (+500 XP)</h3>
+            <p style="font-size: 0.95rem; color: var(--txt); margin-bottom: 15px;">
+                Ready to step into Year 4 and host the specialty research plot? Sign in with your grower credentials to save your progress, sync your XP, and unlock high-value crops.
+            </p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                <input type="text" id="trainee-sign-in-name" placeholder="Enter Your Grower / Farm Name" style="flex: 1; min-width: 200px; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--txt);">
+                <button class="btn" onclick="claimXpAndSignIn()">Sign In &amp; Claim +500 XP →</button>
+            </div>
+        </div>
+
+        <!-- Checklist Callout for Year 3 End -->
         <div id="checklist-callout" style="display: none; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 15px; margin-top: 20px;">
             <h4 style="color:var(--accent); margin-top:0;">📋 Preparation for Year 4 Specialty Crops</h4>
             <p style="font-size: 0.95rem; margin-bottom: 10px;">Before entering Year 4 and unlocking your specialty research plot, review the daily operational steps and routines:</p>
@@ -191,6 +206,23 @@
         }
     };
 
+    function claimXpAndSignIn() {
+        let nameInput = document.getElementById('trainee-sign-in-name').value.trim();
+        if (!nameInput) {
+            alert("Please enter your farm or grower name to claim your accreditation!");
+            return;
+        }
+        
+        gameState.growerName = nameInput;
+        gameState.xp = (gameState.xp || 0) + 500;
+        localStorage.setItem('farmGameState', JSON.stringify(gameState));
+        
+        alert(`Great work, ${nameInput}! +500 XP credited. Specialty research plots unlocked for Year 4.`);
+        
+        document.getElementById('sign-in-incentive-box').style.display = 'none';
+        advanceToNextYearOrHub();
+    }
+
     function startAllocationPhase() {
         document.getElementById('screen-intro').classList.add('hidden');
         document.getElementById('screen-allocate').classList.remove('hidden');
@@ -203,7 +235,6 @@
         let specialtyLocks = ['lock-berries', 'lock-mushrooms', 'lock-apiary', 'lock-flowers'];
         
         if (gameState.year < 4) {
-            // Lock specialty crops for Years 1, 2, & 3
             specialtyBoxes.forEach((id, idx) => {
                 document.getElementById(id).style.opacity = '0.4';
                 let inp = document.getElementById(specialtyInputs[idx]);
@@ -221,7 +252,6 @@
                 document.getElementById('alloc-root').value = 4;
             }
         } else {
-            // Unlock specialty crops starting Year 4 (Research plot & daily tasks mastered)
             specialtyBoxes.forEach((id, idx) => {
                 document.getElementById(id).style.opacity = '1';
                 document.getElementById(specialtyInputs[idx]).disabled = false;
@@ -337,10 +367,12 @@
         document.getElementById('narrative-title').innerText = currentNarrative.title;
         document.getElementById('narrative-story').innerText = currentNarrative.story;
 
-        // Show checklist callout specifically at the end of Year 3 before heading into Year 4
+        // Show sign-in box and checklist callout at the end of Year 3 before heading into Year 4
         if (gameState.year === 3) {
+            document.getElementById('sign-in-incentive-box').style.display = 'block';
             document.getElementById('checklist-callout').style.display = 'block';
         } else {
+            document.getElementById('sign-in-incentive-box').style.display = 'none';
             document.getElementById('checklist-callout').style.display = 'none';
         }
     }
