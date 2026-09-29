@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAA Part 107 Cohort Training | AFTI Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between p-4 sm:p-6">
+
+    <!-- Top Navigation Bar -->
+    <header class="max-w-4xl mx-auto w-full flex justify-between items-center border-b border-slate-800 pb-4 mb-6">
+        <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-950/40 px-3 py-1 rounded-full border border-amber-800/50">AFTI Workforce Engine</span>
+            <h2 class="text-lg font-extrabold text-white mt-1">Drone Operations & Licensing Hub</h2>
+        </div>
+        <nav class="flex items-center gap-4 text-sm font-medium">
+            <a href="training-modules-and-mutual-growth.html" class="text-slate-400 hover:text-sky-400 transition">← Back to Hub</a>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto w-full flex-grow">
+
+        <!-- AUTHENTICATION GATE (Visible by default) -->
+        <div id="auth-gate" class="max-w-md mx-auto mt-12 bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-2xl space-y-6">
+            <div class="text-center space-y-2">
+                <div class="inline-flex p-3 bg-sky-950/50 text-sky-400 rounded-full border border-sky-800/50 mb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+                <h1 class="text-xl font-bold text-white">Secure Recruit Portal Access</h1>
+                <p class="text-xs text-slate-400">Enter your assigned cohort callsign or recruit identifier to load Day 1 training materials.</p>
+            </div>
+
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Recruit Callsign / Name</label>
+                    <input type="text" id="recruit-name" required placeholder="e.g. VET-042 or John Doe" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:border-sky-500 transition">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Cohort Access Code</label>
+                    <input type="password" id="access-code" required placeholder="••••••••" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:border-sky-500 transition">
+                </div>
+                <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2.5 rounded-lg text-sm transition shadow-lg shadow-sky-900/30">
+                    Authorize & Load Lesson
+                </button>
+                <p id="error-msg" class="text-xs text-rose-400 text-center hidden">Invalid access code. Please use your assigned cohort code.</p>
+            </form>
+        </div>
+
+        <!-- PROTECTED CURRICULUM CONTENT (Hidden until login) -->
+        <div id="curriculum-content" class="hidden max-w-4xl mx-auto bg-slate-900 text-slate-100 rounded-xl border border-slate-800 p-6 sm:p-8 space-y-8 shadow-xl">
+            
+            <!-- Welcome Banner showing active user -->
+            <div class="bg-sky-950/40 border border-sky-800/60 p-4 rounded-lg flex justify-between items-center text-xs text-slate-300">
+                <span>Authenticated Session: <strong id="user-display" class="text-sky-400"></strong></span>
+                <button onclick="location.reload()" class="text-slate-400 hover:text-white underline">Log Out</button>
+            </div>
+
+            <!-- Header Section -->
+            <div class="border-b border-slate-800 pb-6">
+                <h1 class="text-2xl font-extrabold text-sky-400 mb-2">FAA Part 107 Cohort Training | Day 1: Regulations & Operations</h1>
+                <div class="flex flex-wrap gap-4 text-xs font-semibold text-slate-400">
+                    <span class="bg-slate-950 px-3 py-1 rounded-full border border-slate-800">Target Audience: Veteran Cohort (Hillside Remediation & Agricultural Missions)</span>
+                    <span class="bg-slate-950 px-3 py-1 rounded-full border border-slate-800">Total Time: 4.5 Hours (2.5 hr morning block, 2 hr afternoon practical block)</span>
+                </div>
+            </div>
+
+            <!-- Core Lecture Modules -->
+            <section class="space-y-6">
+                <h2 class="text-xl font-bold text-amber-400 border-b border-slate-800 pb-2">I. Core Lecture Modules</h2>
+
+                <!-- Module 1 -->
+                <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+                    <h3 class="font-bold text-lg text-white">Module 1: The Remote Pilot in Command (RPIC) & Certification (75 Mins)</h3>
+                    <ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+                        <li><strong class="text-slate-100">Legal Accountability:</strong> The Remote Pilot in Command (RPIC) holds ultimate responsibility and final authority for the operation of the sUAS (14 CFR Section 107.19).</li>
+                        <li><strong class="text-slate-100">Certification Requirements:</strong> Must be at least 16 years old, pass the initial aeronautical knowledge test (UAG), pass a TSA background security vetting check, and hold a physical or digital Remote Pilot Certificate during flight operations.</li>
+                        <li><strong class="text-slate-100">Registration & Remote ID:</strong> All aircraft over 250 grams must be registered via <a href="https://faadronezone.faa.gov" target="_blank" class="text-sky-400 underline hover:text-sky-300">FAA DroneZone</a>. Standard Remote ID compliance is mandatory.</li>
+                        <li><strong class="text-slate-100">Fitness for Flight (IMSAFE Checklist):</strong> Covers Illness, Medication, Stress, Alcohol (zero tolerance, 8 hours bottle to throttle, BAC &lt; 0.04%), Fatigue, and Emotion.</li>
+                    </ul>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+                    <h3 class="font-bold text-lg text-white">Module 2: Operating Rules & Airspace Boundaries (75 Mins)</h3>
+                    <ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+                        <li><strong class="text-slate-100">Visual Line of Sight (VLOS) Mandate:</strong> The RPIC or Visual Observer (VO) must see the aircraft unaided (except corrective lenses). FPV goggles alone do not satisfy legal VLOS.</li>
+                        <li><strong class="text-slate-100">Flight Envelopes (Part 107.51):</strong> Max altitude 400 feet AGL (unless near a structure), max speed 87 knots (100 mph), min visibility 3 statute miles, and strict cloud clearances.</li>
+                        <li><strong class="text-slate-100">Right-of-Way Rules:</strong> Small unmanned aircraft must yield the right-of-way to all manned aircraft at all times.</li>
+                        <li><strong class="text-slate-100">Operations Over People:</strong> Categorized under Categories 1–4 based on weight and kinetic energy impact thresholds.</li>
+                    </ul>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+                    <h3 class="font-bold text-lg text-white">Module 3: Mishap Reporting & Mission Scenarios (45 Mins)</h3>
+                    <ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+                        <li><strong class="text-slate-100">Mandatory FAA Reporting (Section 107.9):</strong> Must report accidents within 10 days if resulting in serious injury/loss of consciousness or property damage exceeding $500.</li>
+                        <li><strong class="text-slate-100">Cohort Context:</strong> Managing rapid elevation drops on hillside burn scars and scanning for low-flying agricultural sprayers in valley sectors.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- End-of-Day Diagnostic Pretest -->
+            <section class="space-y-6">
+                <h2 class="text-xl font-bold text-amber-400 border-b border-slate-800 pb-2">II. End-of-Day Diagnostic Pretest</h2>
+
+                <!-- Question 1 -->
+                <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+                    <p class="font-semibold text-slate-200">Question 1: Visual Line of Sight</p>
+                    <p class="text-sm text-slate-300">You are conducting an environmental scan of a steep hillside burn scar. Your drone dips down into a ravine, completely disappearing behind a rocky ridge from your physical vantage point, though you maintain connection via your FPV screen. Is this flight legal under Part 107?</p>
+                    <div class="text-xs space-y-1 text-slate-400 pl-4">
+                        <p>A) Yes, as long as telemetry and video feed remain active.</p>
+                        <p class="text-emerald-400 font-bold">B) No, because visual line of sight (VLOS) must be maintained unaided by any device other than corrective lenses. (Correct)</p>
+                        <p>C) Yes, provided you notify local air traffic control.</p>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+                    <p class="font-semibold text-slate-200">Question 2: Accident Reporting</p>
+                    <p class="text-sm text-slate-300">While operating a heavy mapping drone, you collide with a farmer's irrigation pump house. Structural damage totals roughly $750. What is your obligation?</p>
+                    <div class="text-xs space-y-1 text-slate-400 pl-4">
+                        <p>A) No report is required unless someone was hurt.</p>
+                        <p>B) Report to the local sheriff within 48 hours.</p>
+                        <p class="text-emerald-400 font-bold">C) Report the accident to the FAA portal or local FSDO within 10 days. (Correct)</p>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+                    <p class="font-semibold text-slate-200">Question 3: Night Operations</p>
+                    <p class="text-sm text-slate-300">You plan to launch a pre-dawn thermal mission before sunrise. What specific equipment must your drone feature?</p>
+                    <div class="text-xs space-y-1 text-slate-400 pl-4">
+                        <p>A) High-intensity landing floodlights pointing straight down.</p>
+                        <p class="text-emerald-400 font-bold">B) Anti-collision lighting visible for at least 3 statute miles, with a flash rate sufficient to prevent spatial disorientation. (Correct)</p>
+                        <p>C) A certified aviation radio tuned to local tower frequencies.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bottom Navigation / Links -->
+            <div class="pt-6 border-t border-slate-800 flex flex-wrap justify-between items-center gap-4 text-sm font-medium">
+                <a href="training-modules-and-mutual-growth.html" class="text-slate-400 hover:text-sky-400 transition">← Back To Training Hub</a>
+                <a href="drone-school2.html" class="bg-slate-800 hover:bg-slate-700 text-sky-400 px-5 py-2.5 rounded-lg border border-slate-700 transition">Proceed to FAA Licensing Training L2 →</a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-4xl mx-auto w-full text-center text-xs text-slate-500 pt-8 border-t border-slate-900 mt-12">
+        AFTI Portal &bull; Agricultural Future &amp; Training Initiative &bull; Willamette Valley Operations
+    </footer>
+
+    <!-- Simple Client-Side Auth Script -->
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const authGate = document.getElementById('auth-gate');
+        const curriculumContent = document.getElementById('curriculum-content');
+        const userDisplay = document.getElementById('user-display');
+        const errorMsg = document.getElementById('error-msg');
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const recruitName = document.getElementById('recruit-name').value.trim();
+            const accessCode = document.getElementById('access-code').value.trim();
+
+            // Simple validation check (You can customize the accepted code here)
+            // Accepts any non-empty name and a code like "afti2026" or similar
+            if (recruitName.length > 0 && accessCode.length > 0) {
+                // Save session state locally if desired
+                localStorage.setItem('afti_recruit', recruitName);
+                
+                // Hide gate, show curriculum
+                authGate.classList.add('hidden');
+                userDisplay.textContent = recruitName;
+                curriculumContent.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                errorMsg.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
