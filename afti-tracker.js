@@ -1,7 +1,7 @@
 /**
  * AFTI - Global Experience Point, Readiness Tier & Workforce Cell Matching Engine
  * Architecture: Vanilla, self-contained utility supporting local-to-cloud portability.
- * Version: 2.4.0 - Generation 16 Stable Anchor with Drone Cohort & Watershed Telemetry
+ * Version: 2.5.0 - Generation 16 Stable Anchor with Drone Cohort & Watershed Telemetry
  */
 
 // =========================================================================
@@ -120,23 +120,31 @@ if (typeof document !== 'undefined') {
             }
         }));
 
-        // Track B: Watershed Telemetry Engine Component
+        // Track B: Watershed Telemetry & Prescription Engine Component
         Alpine.data('watershedEngine', () => ({
             siteName: '',
             ndviInput: '',
-            soilType: 'Willamette Silty Clay Loam',
+            slopeInput: 20, // Added slope angle input support
+            targetAcres: 10, // Added acreage input support
             result: null,
             activeStatus: 'Awaiting Data',
 
             generatePrescription() {
                 if (!this.siteName || this.ndviInput === '') return;
-                this.result = AFTIWaterTelemetry.evaluateSite(this.ndviInput, this.soilType);
+                // Calls the enhanced calculation engine handling NDVI + Slope + Acres
+                this.result = AFTIWaterTelemetry.evaluateSite(this.ndviInput, this.slopeInput, this.targetAcres);
                 this.activeStatus = 'Prescription Generated';
             },
 
             async saveTelemetry() {
                 if (!this.result) return;
-                const res = await AFTIWaterTelemetry.logTelemetryData(this.siteName, this.ndviInput, this.result.prescription.seedBlend);
+                const res = await AFTIWaterTelemetry.logTelemetryData(
+                    this.siteName, 
+                    this.ndviInput, 
+                    this.slopeInput,
+                    this.targetAcres,
+                    this.result
+                );
                 alert(res.message);
             }
         }));
@@ -154,7 +162,7 @@ const AFTITracker = (() => {
     };
 
     const TIERS = [
-        { minXp: 0,   maxXp: 499,   title: 'Tier 1: Initial Field Placement', color: '#38bdf8' },
+        { minXp: 0,    maxXp: 499,   title: 'Tier 1: Initial Field Placement', color: '#38bdf8' },
         { minXp: 500, maxXp: 699,   title: 'Tier 2: Active Practicum',        color: '#f59e0b' },
         { minXp: 700, maxXp: 999,   title: 'Tier 3: Advanced Technical',       color: '#f43f5e' },
         { minXp: 1000, maxXp: Infinity, title: 'Tier 4: Enterprise Certified', color: '#22c55e' }
@@ -234,57 +242,114 @@ const AFTITracker = (() => {
 
 
 // =========================================================================
-// 4. TRACK B: WATERSHED TELEMETRY & CROP-MATCHING UTILITY
+// 4. TRACK B: WATERSHED TELEMETRY & EROSION RISK CALCULATION ENGINE
 // =========================================================================
 const AFTIWaterTelemetry = (() => {
-    const RESTORATION_PROFILES = [
-        {
-            id: 'slopes_high_erosion',
-            name: 'Hillside Post-Fire / High Erosion Slope',
-            targetNdiMin: 0.10, targetNdiMax: 0.35,
-            recommendedBlend: 'Native Deep-Root Grass Mix (Blue Wildrye, Roemer’s Fescue)',
-            nitrogenFixer: 'Crimson Clover / Vetch Inter-seed',
-            applicationRate: '45 lbs/acre (Hydro-seeding or Drone Broadcast)'
+    // Standard seed mix densities for Willamette Valley / Hillside burn scars (lbs/acre)
+    const PRESCRIPTION_PRESETS = {
+        severe_erosion: { 
+            name: "Deep-Root Native Grass & Straw Mulch Mix", 
+            rateLbsPerAcre: 65, 
+            priority: "High",
+            nitrogenFixer: "Crimson Clover / Vetch Inter-seed"
         },
-        {
-            id: 'riparian_buffer',
-            name: 'Riparian / Stream Corridor Restoration',
-            targetNdiMin: 0.36, targetNdiMax: 0.65,
-            recommendedBlend: 'Streamside Stabilization Mix (Slough Sedge, Red Alder Stakes)',
-            nitrogenFixer: 'Native Lupine',
-            applicationRate: '30 lbs/acre + Live Stakes'
+        moderate_stress: { 
+            name: "Cover Crop & Soil Stabilization Blend", 
+            rateLbsPerAcre: 40, 
+            priority: "Medium",
+            nitrogenFixer: "Austrian Winter Pea"
         },
-        {
-            id: 'agricultural_rehab',
-            name: 'Depleted Agricultural / Pasture Recovery',
-            targetNdiMin: 0.00, targetNdiMax: 0.09,
-            recommendedBlend: 'Cover Crop Heavy Biomass (Daikon Radish, Winter Rye)',
-            nitrogenFixer: 'Austrian Winter Pea',
-            applicationRate: '100 lbs/acre Drill Seeded'
+        stable_canopy: { 
+            name: "Maintenance / Spot Seeding", 
+            rateLbsPerAcre: 15, 
+            priority: "Low",
+            nitrogenFixer: "Native Lupine"
         }
-    ];
+    };
 
-    function evaluateSite(ndviValue) {
+    /**
+     * Evaluates site conditions based on NDVI index and terrain slope angle.
+     * @param {number} ndviValue - NDVI value (-1.0 to 1.0)
+     * @param {number} slopeDegrees - Terrain slope angle in degrees
+     * @param {number} totalAcres - Size of target sector block in acres
+     */
+    function evaluateSite(ndviValue, slopeDegrees = 15, totalAcres = 10) {
         const parsedNdvi = parseFloat(ndviValue);
-        const match = RESTORATION_PROFILES.find(p => parsedNdvi >= p.targetNdiMin && parsedNdvi <= p.targetNdiMax) || RESTORATION_PROFILES[0];
+        const parsedSlope = parseFloat(slopeDegrees) || 0;
+        const acres = parseFloat(totalAcres) || 1;
+
+        let riskScore = 0;
+
+        // Evaluate NDVI (lower vegetation = higher erosion risk)
+        if (parsedNdvi <= 0.15) {
+            riskScore += 5; // Bare soil / burn scar
+        } else if (parsedNdvi <= 0.40) {
+            riskScore += 3; // Sparse brush
+        } else {
+            riskScore += 1; // Healthy canopy
+        }
+
+        // Evaluate Slope (steeper terrain = higher erosion risk)
+        if (parsedSlope >= 25) {
+            riskScore += 5; // Steep hillside
+        } else if (parsedSlope >= 12) {
+            riskScore += 3; // Moderate slope
+        } else {
+            riskScore += 1; // Flat terrain
+        }
+
+        // Select Preset Category
+        let selectedPreset = PRESCRIPTION_PRESETS.stable_canopy;
+        let riskLevelName = "STABLE / LOW RISK";
+        let colorClass = "text-emerald-400 bg-emerald-950/40 border-emerald-800";
+
+        if (riskScore >= 8) {
+            riskLevelName = "CRITICAL EROSION HAZARD";
+            selectedPreset = PRESCRIPTION_PRESETS.severe_erosion;
+            colorClass = "text-rose-400 bg-rose-950/40 border-rose-800";
+        } else if (riskScore >= 5) {
+            riskLevelName = "MODERATE STRESS ZONE";
+            selectedPreset = PRESCRIPTION_PRESETS.moderate_stress;
+            colorClass = "text-amber-400 bg-amber-950/40 border-amber-800";
+        }
+
+        const totalPoundsNeeded = Math.ceil(acres * selectedPreset.rateLbsPerAcre);
+        const standardHopperCapacityLbs = 100; // Standard agricultural drone hopper capacity
+        const estimatedFlights = Math.ceil(totalPoundsNeeded / standardHopperCapacityLbs);
+
         return {
-            siteCondition: match.name,
+            riskLevel: riskLevelName,
+            riskScore: riskScore,
+            colorClass: colorClass,
             ndviRecorded: parsedNdvi,
-            prescription: { seedBlend: match.recommendedBlend, coverCrop: match.nitrogenFixer, rate: match.applicationRate }
+            slopeRecorded: parsedSlope,
+            totalAcres: acres,
+            prescription: {
+                seedBlend: selectedPreset.name,
+                coverCrop: selectedPreset.nitrogenFixer,
+                applicationRate: `${selectedPreset.rateLbsPerAcre} lbs/acre`,
+                totalPounds: totalPoundsNeeded,
+                estimatedFlights: estimatedFlights
+            }
         };
     }
 
-    async function logTelemetryData(siteName, ndviScore, selectedPrescription) {
+    async function logTelemetryData(siteName, ndviScore, slopeDegrees, totalAcres, evaluationResult) {
         if (!supabase) return { success: true, message: "Stored locally (Offline mode)." };
         try {
             const { error } = await supabase.from('afti_watershed_telemetry').insert([{
                 site_name: siteName,
                 ndvi_score: parseFloat(ndviScore),
-                prescription_summary: selectedPrescription,
+                slope_degrees: parseFloat(slopeDegrees),
+                target_acres: parseFloat(totalAcres),
+                risk_level: evaluationResult.riskLevel,
+                prescription_summary: evaluationResult.prescription.seedBlend,
+                total_seed_lbs: evaluationResult.prescription.totalPounds,
+                flight_sorties: evaluationResult.prescription.estimatedFlights,
                 logged_at: new Date().toISOString()
             }]);
             if (error) throw error;
-            return { success: true, message: "Telemetry synced to Supabase!" };
+            return { success: true, message: "Telemetry synced to Supabase cloud successfully!" };
         } catch (err) {
             return { success: false, message: err.message };
         }
