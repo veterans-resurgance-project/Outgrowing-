@@ -205,6 +205,25 @@
         }
     };
 
+  function claimXpAndSignIn() {
+    let nameInput = document.getElementById('trainee-sign-in-name').value.trim();
+    if (!nameInput) {
+        alert("Please enter your trainee name or grower handle to claim your accreditation!");
+        return;
+    }
+    
+    // Save user state + XP to localStorage
+    gameState.traineeName = nameInput;
+    gameState.xp = (gameState.xp || 0) + 500;
+    localStorage.setItem('farmGameState', JSON.stringify(gameState));
+    
+    alert(`Welcome aboard, ${nameInput}! +500 XP credited. Specialty crops unlocked for Year 2.`);
+    
+    // Hide the sign-in box and proceed
+    document.getElementById('sign-in-incentive-box').style.display = 'none';
+    advanceToNextYearOrHub();
+    }
+ 
     function startAllocationPhase() {
         document.getElementById('screen-intro').classList.add('hidden');
         document.getElementById('screen-allocate').classList.remove('hidden');
