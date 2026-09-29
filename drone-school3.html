@@ -1,67 +1,100 @@
-# FAA Part 107 Cohort Training | Day 3: Aviation Weather, METARs, TAFs & Microclimates
-* **Target Audience:** Veteran Cohort (Hillside Remediation & Agricultural Missions)
-* **Total Time:** 4.5 Hours (2.5 hr morning block, 2 hr afternoon practical weather decoding & microclimate workshop)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3: Broadcast & Seeding Payloads | AFTI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen p-6">
 
----
+<div class="max-w-4xl mx-auto p-6 bg-slate-900 text-slate-100 rounded-xl border border-slate-800 space-y-8 shadow-xl">
+    
+    <!-- Header Section -->
+    <div class="border-b border-slate-800 pb-6">
+        <h1 class="text-2xl font-extrabold text-sky-400 mb-2">FAA Part 107 Cohort Training | Day 3: Broadcast & Seeding Payloads</h1>
+        <div class="flex flex-wrap gap-4 text-xs font-semibold text-slate-400">
+            <span class="bg-slate-950 px-3 py-1 rounded-full border border-slate-800">Target Audience: Veteran Cohort (Hillside Remediation & Agricultural Missions)</span>
+            <span class="bg-slate-950 px-3 py-1 rounded-full border border-slate-800">Total Time: 4.5 Hours (2.0 hr morning mechanics, 2.5 hr field calibration & live drop simulation)</span>
+        </div>
+    </div>
 
-## I. Core Lecture Modules
+    <!-- Core Lecture Modules -->
+    <section class="space-y-6">
+        <h2 class="text-xl font-bold text-amber-400 border-b border-slate-800 pb-2">I. Core Lecture Modules</h2>
 
-### Module 1: Atmospheric Physics & Microclimates (75 Mins)
-* **The Structure of the Atmosphere:**
-  * Troposphere (where sUAS operate) and how temperature, pressure, and moisture dictate flying conditions.
-* **Density Altitude:**
-  * Definition: Pressure altitude corrected for non-standard temperature. 
-  * **The Impact:** High density altitude means *thin, hot air*. Thinner air reduces aerodynamic lift for multirotors and fixed-wing agricultural drones, forcing motors to work harder, draining batteries faster, and reducing payload capacity (crucial when carrying heavy multispectral sensors or remediation liquids).
-* **Wind Dynamics & Terrain Effects:**
-  * **Mechanical Turbulence:** How hills, ridges, and tree lines disrupt smooth airflow, creating rotors, downdrafts, and severe wind shear on the lee side of hillsides.
-  * **Thermal Currents:** Rising columns of hot air over bare soil or burn scars that disrupt stable hover and tracking.
+        <!-- Module 1 -->
+        <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+            <h3 class="font-bold text-lg text-white">Module 1: Agricultural & Restoration Spreading Mechanics (75 Mins)</h3>
+            <ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+                <li><strong class="text-slate-100">Granular Spreader Systems:</strong> Operating high-capacity agricultural spreading payloads (e.g., DJI Agras T-series spreading tanks) for cover crop seeding and fertilizer broadcast.</li>
+                <li><strong class="text-slate-100">Particle Ballistics & Wind Drift:</strong> Factoring in seed weight, shape, density, and local crosswinds to calculate dispersion drift across steep slopes.</li>
+                <li><strong class="text-slate-100">Swath Width Calibration:</strong> Determining effective spread width based on flight height (typically 3 to 5 meters AGL for agricultural broadcast) to prevent striping or gaps.</li>
+                <li><strong class="text-slate-100">Material Flow Control:</strong> Calibrating gate opening sizes and disc RPM to match target application rates (e.g., 30–100 lbs/acre depending on prescription maps).</li>
+            </ul>
+        </div>
 
-### Module 2: Decoding Aviation Weather Reports (METARs & TAFs) (75 Mins)
-* **Reading METARs (Meteorological Aerodrome Reports):**
-  * Raw observations of current weather at airports.
-  * **Anatomy Breakdown:**
-    * Type & Station ID: `METAR KPDX` (Portland International)
-    * Date/Time (Zulu/UTC): `131753Z` (13th day of the month, 17:53 UTC)
-    * Wind: `04012KT` (Wind blowing from 040° true at 12 knots)
-    * Visibility: `1SM` (1 Statute Mile)
-    * Weather Phenomena: `-RA BR` (Light rain, mist)
-    * Sky Condition: `OVC008` (Overcast ceiling at 800 feet AGL)
-    * Temperature / Dew Point: `11/10` (Temp 11°C, Dew point 10°C - high humidity indicator)
-    * Altimeter Setting: `A2992` (Barometric pressure 29.92 inHg)
-* **Reading TAFs (Terminal Aerodrome Forecasts):**
-  * Future weather predictions for a 24-to-30-hour window, detailing expected changes in wind, visibility, and storms.
+        <!-- Module 2 -->
+        <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+            <h3 class="font-bold text-lg text-white">Module 2: Pre-Flight Payload Inspection & Weight Limits (75 Mins)</h3>
+            <ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+                <li><strong class="text-slate-100">Maximum Takeoff Weight (MTOW):</strong> Strict adherence to aircraft structural limits and Part 107 weight category thresholds when handling heavy payloads.</li>
+                <li><strong class="text-slate-100">Center of Gravity (CG) Verification:</strong> Ensuring payload hopper weight is evenly distributed to prevent motor strain, unstable flight dynamics, or attitude control failure.</li>
+                <li><strong class="text-slate-100">Emergency Hopper Jettison:</strong> Knowing manual and automated emergency release protocols if an engine failure or power loss occurs mid-flight with a heavy load.</li>
+                <li><strong class="text-slate-100">Pre-Flight Mechanical Check:</strong> Inspecting augers, spinner disks, gate actuators, and quick-release pins for jamming or debris buildup.</li>
+            </ul>
+        </div>
 
-### Module 3: Operational Weather Minimums & Go/No-Go Protocols (45 Mins)
-* **Part 107 Legal Weather Minimums:**
-  * Minimum flight visibility: **3 statute miles** from the control station.
-  * Cloud clearance: **500 feet below** clouds and **2,000 feet horizontally** from clouds.
-* **Micro-Weather Decision Making for Veterans:**
-  * Establishing a strict pre-flight "Go/No-Go" checklist that accounts for valley fog inversions, sudden ridge winds, and unexpected precipitation that could damage sensitive electronics or compromise safety during hillside stabilization flights.
+        <!-- Module 3 -->
+        <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+            <h3 class="font-bold text-lg text-white">Module 3: Live Field Execution & Post-Mission Logging (45 Mins)</h3>
+            <ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+                <li><strong class="text-slate-100">Crew Resource Management (CRM):</strong> Coordinating roles between the Remote Pilot in Command (RPIC), Visual Observer (VO), and Payload Ground Crew during active spreading operations.</li>
+                <li><strong class="text-slate-100">Telemetry & Task Logging:</strong> Recording total seed weight dispensed, area covered (acres), and flight logs to sync with watershed tracking databases.</li>
+            </ul>
+        </div>
+    </section>
 
----
+    <!-- End-of-Day Diagnostic Pretest -->
+    <section class="space-y-6">
+        <h2 class="text-xl font-bold text-amber-400 border-b border-slate-800 pb-2">II. End-of-Day Diagnostic Pretest</h2>
 
-## II. End-of-Day Diagnostic Pretest
+        <!-- Question 1 -->
+        <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+            <p class="font-semibold text-slate-200">Question 1: Swath Width & Application Rate</p>
+            <p class="text-sm text-slate-300">You are calibrating a granular spreading drone to distribute a native deep-root grass mix over a hillside burn scar at 45 lbs/acre. If you increase your operational flight altitude from 3 meters to 6 meters AGL without adjusting spreader parameters, what is the most likely result?</p>
+            <div class="text-xs space-y-1 text-slate-400 pl-4">
+                <p>A) The seed will automatically sink deeper into the soil upon impact.</p>
+                <p class="text-emerald-400 font-bold">B) The effective swath width will widen, but lateral wind drift will increase, leading to uneven distribution and missed coverage zones. (Correct)</p>
+                <p>C) The aircraft maximum takeoff weight limit will double.</p>
+            </div>
+        </div>
 
-### Question 1: Density Altitude & Performance
-How does high density altitude (resulting from a hot, dry afternoon in the Willamette Valley) impact the operational performance of an agricultural drone?
-* A) It increases battery efficiency and prolongs flight times.
-* B) It decreases aerodynamic lift and motor efficiency, requiring higher power output and draining batteries faster.
-* C) It has no effect on electric multirotors, only on turbine aircraft.
-> **Correct Answer: B**
-> *Explanation:* Thin air caused by high density altitude reduces propeller bite and lift, requiring more electrical current to maintain flight and degrading payload performance.
+        <!-- Question 2 -->
+        <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+            <p class="font-semibold text-slate-200">Question 2: Center of Gravity & Payload Safety</p>
+            <p class="text-sm text-slate-300">Before launching an agricultural mission with a fully loaded hopper, why is verifying the Center of Gravity (CG) critical?</p>
+            <div class="text-xs space-y-1 text-slate-400 pl-4">
+                <p>A) An improperly balanced payload can cause severe motor strain, attitude instability, and loss of control authority. (Correct)</p>
+                <p>B) It satisfies FAA Remote ID broadcast requirements.</p>
+                <p>C) It prevents the onboard camera from recording NDVI imagery.</p>
+            </div>
+        </div>
 
-### Question 2: METAR Decoding
-Analyze this METAR weather group: `SKC` or `FEW020`. What does `FEW020` indicate regarding cloud cover?
-* A) Clear skies from the surface up to 20,000 feet.
-* B) Few clouds at 2,000 feet AGL.
-* C) Fog layer extending 20 miles.
-> **Correct Answer: B**
-> *Explanation:* `FEW` represents scattered/few coverage (1/8 to 2/8 of the sky), and the trailing digits `020` indicate a cloud base height of 2,000 feet Above Ground Level (AGL).
+        <!-- Question 3 -->
+        <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+            <p class="font-semibold text-slate-200">Question 3: Crew Resource Management (CRM)</p>
+            <p class="text-sm text-slate-300">During a low-altitude agricultural broadcast mission, your Visual Observer (VO) spots a crop duster entering the local sector. What is the immediate required protocol?</p>
+            <div class="text-xs space-y-1 text-slate-400 pl-4">
+                <p>A) Continue the autonomous grid since the drone has the right-of-way.</p>
+                <p class="text-emerald-400 font-bold">B) Immediately alert the RPIC, yield right-of-way by altering course or landing the sUAS immediately, as unmanned aircraft must yield to all manned aircraft. (Correct)</p>
+                <p>C) Switch the drone camera to thermal mode.</p>
+            </div>
+        </div>
+    </section>
 
-### Question 3: Legal Weather Minimums
-You are preparing to launch a drone mission to inspect a hillside slide area. Local automated weather reports show visibility is currently at 2 statute miles due to light haze, and the cloud ceiling is broken at 1,500 feet AGL. Can you legally conduct this flight under standard Part 107 rules?
-* A) Yes, because the cloud ceiling is well above the 400-foot AGL maximum flight altitude.
-* B) No, because Part 107 requires a minimum flight visibility of at least 3 statute miles from the control station.
-* C) Yes, provided you stay below 200 feet AGL.
-> **Correct Answer: B**
-> *Explanation:* The legal flight visibility minimum under Part 107 is 3 statute miles from the control station. Operating at 2 SM visibility violates the regulation without a waiver.
+</div>
+
+</body>
+</html>
