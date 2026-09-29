@@ -158,7 +158,17 @@
 <script>
     let gameState = {
         track: 'shared-harvest',
-        cash: 8000, year: 1,
+        cash: 8000, year: 1,<!-- SIGN-IN / ACCREDITATION INCENTIVE BOX -->
+<div id="sign-in-incentive-box" style="display: none; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--primary); border-radius: 12px; padding: 20px; margin-top: 20px;">
+    <h3 style="color: var(--accent); margin-top: 0;">✨ Claim Your Specialty Crop Accreditation (+500 XP)</h3>
+    <p style="font-size: 0.95rem; color: var(--txt); margin-bottom: 15px;">
+        Ready to step into Year 2? Sign in with your trainee credentials to save your progress, sync your XP to the main portal, and officially unlock berries, mushrooms, apiaries, and cut flowers.
+    </p>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+        <input type="text" id="trainee-sign-in-name" placeholder="Enter Your Trainee / Grower Name" style="flex: 1; min-width: 200px; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--txt);">
+        <button class="btn" onclick="claimXpAndSignIn()">Sign In &amp; Claim +500 XP →</button>
+    </div>
+</div>
         acres: { greens: 6, root: 4, berries: 0, mushrooms: 0, apiary: 0, flowers: 0 },
         history: []
     };
