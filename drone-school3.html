@@ -1,0 +1,67 @@
+# FAA Part 107 Cohort Training | Day 3: Aviation Weather, METARs, TAFs & Microclimates
+* **Target Audience:** Veteran Cohort (Hillside Remediation & Agricultural Missions)
+* **Total Time:** 4.5 Hours (2.5 hr morning block, 2 hr afternoon practical weather decoding & microclimate workshop)
+
+---
+
+## I. Core Lecture Modules
+
+### Module 1: Atmospheric Physics & Microclimates (75 Mins)
+* **The Structure of the Atmosphere:**
+  * Troposphere (where sUAS operate) and how temperature, pressure, and moisture dictate flying conditions.
+* **Density Altitude:**
+  * Definition: Pressure altitude corrected for non-standard temperature. 
+  * **The Impact:** High density altitude means *thin, hot air*. Thinner air reduces aerodynamic lift for multirotors and fixed-wing agricultural drones, forcing motors to work harder, draining batteries faster, and reducing payload capacity (crucial when carrying heavy multispectral sensors or remediation liquids).
+* **Wind Dynamics & Terrain Effects:**
+  * **Mechanical Turbulence:** How hills, ridges, and tree lines disrupt smooth airflow, creating rotors, downdrafts, and severe wind shear on the lee side of hillsides.
+  * **Thermal Currents:** Rising columns of hot air over bare soil or burn scars that disrupt stable hover and tracking.
+
+### Module 2: Decoding Aviation Weather Reports (METARs & TAFs) (75 Mins)
+* **Reading METARs (Meteorological Aerodrome Reports):**
+  * Raw observations of current weather at airports.
+  * **Anatomy Breakdown:**
+    * Type & Station ID: `METAR KPDX` (Portland International)
+    * Date/Time (Zulu/UTC): `131753Z` (13th day of the month, 17:53 UTC)
+    * Wind: `04012KT` (Wind blowing from 040° true at 12 knots)
+    * Visibility: `1SM` (1 Statute Mile)
+    * Weather Phenomena: `-RA BR` (Light rain, mist)
+    * Sky Condition: `OVC008` (Overcast ceiling at 800 feet AGL)
+    * Temperature / Dew Point: `11/10` (Temp 11°C, Dew point 10°C - high humidity indicator)
+    * Altimeter Setting: `A2992` (Barometric pressure 29.92 inHg)
+* **Reading TAFs (Terminal Aerodrome Forecasts):**
+  * Future weather predictions for a 24-to-30-hour window, detailing expected changes in wind, visibility, and storms.
+
+### Module 3: Operational Weather Minimums & Go/No-Go Protocols (45 Mins)
+* **Part 107 Legal Weather Minimums:**
+  * Minimum flight visibility: **3 statute miles** from the control station.
+  * Cloud clearance: **500 feet below** clouds and **2,000 feet horizontally** from clouds.
+* **Micro-Weather Decision Making for Veterans:**
+  * Establishing a strict pre-flight "Go/No-Go" checklist that accounts for valley fog inversions, sudden ridge winds, and unexpected precipitation that could damage sensitive electronics or compromise safety during hillside stabilization flights.
+
+---
+
+## II. End-of-Day Diagnostic Pretest
+
+### Question 1: Density Altitude & Performance
+How does high density altitude (resulting from a hot, dry afternoon in the Willamette Valley) impact the operational performance of an agricultural drone?
+* A) It increases battery efficiency and prolongs flight times.
+* B) It decreases aerodynamic lift and motor efficiency, requiring higher power output and draining batteries faster.
+* C) It has no effect on electric multirotors, only on turbine aircraft.
+> **Correct Answer: B**
+> *Explanation:* Thin air caused by high density altitude reduces propeller bite and lift, requiring more electrical current to maintain flight and degrading payload performance.
+
+### Question 2: METAR Decoding
+Analyze this METAR weather group: `SKC` or `FEW020`. What does `FEW020` indicate regarding cloud cover?
+* A) Clear skies from the surface up to 20,000 feet.
+* B) Few clouds at 2,000 feet AGL.
+* C) Fog layer extending 20 miles.
+> **Correct Answer: B**
+> *Explanation:* `FEW` represents scattered/few coverage (1/8 to 2/8 of the sky), and the trailing digits `020` indicate a cloud base height of 2,000 feet Above Ground Level (AGL).
+
+### Question 3: Legal Weather Minimums
+You are preparing to launch a drone mission to inspect a hillside slide area. Local automated weather reports show visibility is currently at 2 statute miles due to light haze, and the cloud ceiling is broken at 1,500 feet AGL. Can you legally conduct this flight under standard Part 107 rules?
+* A) Yes, because the cloud ceiling is well above the 400-foot AGL maximum flight altitude.
+* B) No, because Part 107 requires a minimum flight visibility of at least 3 statute miles from the control station.
+* C) Yes, provided you stay below 200 feet AGL.
+> **Correct Answer: B**
+> *Explanation:* The legal flight visibility minimum under Part 107 is 3 statute miles from the control station. Operating at 2 SM visibility violates the regulation without a waiver.
