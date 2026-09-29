@@ -41,23 +41,21 @@
 </head>
 <body>
 
-<div class="hud-bar">
-    <span>Campaign: <span style="color:var(--accent);">Shared Harvest &amp; Learning Track</span></span>
-    <div style="display: flex; align-items: center; gap: 15px;">
-        <span>Year: <strong id="hud-year" style="color:var(--accent);">1</strong> / 5 | Cash: <strong id="hud-cash" style="color:#6ee7b7;">$8,000</strong></span>
-        <a href="acreage-path-select.html" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.8rem; text-decoration: none;">&larr; Exit Simulation</a>
+<div class="container">
+    <div class="hud-bar">
+        <span>Campaign: <span style="color:var(--accent);">Shared Harvest &amp; Learning Track</span></span>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <span>Year: <strong id="hud-year" style="color:var(--accent);">1</strong> / 5 | Cash: <strong id="hud-cash" style="color:#6ee7b7;">$8,000</strong></span>
+            <a href="acreage-path-select.html" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.8rem; text-decoration: none;">&larr; Exit Simulation</a>
+        </div>
     </div>
-</div>
 
     <!-- INTRO PANEL -->
     <div id="screen-intro" class="panel">
         <span class="active-path-badge">🌱 Educational Partnership Simulation</span>
         <h1>🌱 Welcome to the Shared Harvest Learning Track</h1>
         <p style="font-size: 1.05rem; line-height: 1.7;">
-       1: {
-    title: "Year 1: The Educational Partnership & Foundational Greens",
-    story: "You enter the shared harvest educational program with $8,000 in startup capital. Year 1 focuses on mastering the fundamentals: growing leafy greens and root vegetables under the direct guidance of program mentors. You've built solid soil health, learned site scheduling, and generated steady revenue. Now, mentors invite you to sign your formal Educational Partnership Agreement to unlock specialty crops and claim your official grower profile!"
-}
+            You enter the shared harvest educational program with $8,000 in startup capital. Year 1 focuses on mastering the fundamentals: growing leafy greens and root vegetables under the direct guidance of program mentors. You've built solid soil health, learned site scheduling, and generated steady revenue. Now, mentors invite you to sign your formal Educational Partnership Agreement to unlock specialty crops and claim your official grower profile!
         </p>
         <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
             <a href="acreage-path-select.html" class="btn btn-secondary">&larr; Back to Path Selection</a>
@@ -146,6 +144,19 @@
             <h3 id="narrative-title" style="color:var(--accent); margin-top:0;">Title</h3>
             <p id="narrative-story" style="font-size: 1.1rem; line-height: 1.8; color: var(--txt); margin-bottom: 0;"></p>
         </div>
+
+        <!-- SIGN-IN / ACCREDITATION INCENTIVE BOX -->
+        <div id="sign-in-incentive-box" style="display: none; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--primary); border-radius: 12px; padding: 20px; margin-top: 20px;">
+            <h3 style="color: var(--accent); margin-top: 0;">✨ Claim Your Specialty Crop Accreditation (+500 XP)</h3>
+            <p style="font-size: 0.95rem; color: var(--txt); margin-bottom: 15px;">
+                Ready to step into Year 2? Sign in with your trainee credentials to save your progress, sync your XP to the main portal, and officially unlock berries, mushrooms, apiaries, and cut flowers.
+            </p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                <input type="text" id="trainee-sign-in-name" placeholder="Enter Your Trainee / Grower Name" style="flex: 1; min-width: 200px; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--txt);">
+                <button class="btn" onclick="claimXpAndSignIn()">Sign In &amp; Claim +500 XP →</button>
+            </div>
+        </div>
+
         <!-- Checklist Callout for Year 1 End -->
         <div id="checklist-callout" style="display: none; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 15px; margin-top: 20px;">
             <h4 style="color:var(--accent); margin-top:0;">📋 Preparation for Year 2 Specialty Crops</h4>
@@ -161,17 +172,8 @@
 <script>
     let gameState = {
         track: 'shared-harvest',
-        cash: 8000, year: 1,<!-- SIGN-IN / ACCREDITATION INCENTIVE BOX -->
-<div id="sign-in-incentive-box" style="display: none; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--primary); border-radius: 12px; padding: 20px; margin-top: 20px;">
-    <h3 style="color: var(--accent); margin-top: 0;">✨ Claim Your Specialty Crop Accreditation (+500 XP)</h3>
-    <p style="font-size: 0.95rem; color: var(--txt); margin-bottom: 15px;">
-        Ready to step into Year 2? Sign in with your trainee credentials to save your progress, sync your XP to the main portal, and officially unlock berries, mushrooms, apiaries, and cut flowers.
-    </p>
-    <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-        <input type="text" id="trainee-sign-in-name" placeholder="Enter Your Trainee / Grower Name" style="flex: 1; min-width: 200px; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--txt);">
-        <button class="btn" onclick="claimXpAndSignIn()">Sign In &amp; Claim +500 XP →</button>
-    </div>
-</div>
+        cash: 8000, 
+        year: 1,
         acres: { greens: 6, root: 4, berries: 0, mushrooms: 0, apiary: 0, flowers: 0 },
         history: []
     };
@@ -185,7 +187,7 @@
     const sharedTrackNarratives = {
         1: {
             title: "Year 1: The Educational Partnership & Foundational Greens",
-            story: "You enter the shared harvest educational program with $8,000 in startup capital. Year 1 focuses on mastering the fundamentals: growing leafy greens and root vegetables under the direct guidance of program mentors as they set up infrastructure for other specialty crops creating some helpful additional income based on a share of the harvest the specialty research plots produce. Plus new skills. site planning, soil health, and structured scheduling without taking on all the financial risk alone. It's a solid foundation, and at the end of the season, your mentors give you the green light to prepare for specialty crops next year."
+            story: "You enter the shared harvest educational program with $8,000 in startup capital. Year 1 focuses on mastering the fundamentals: growing leafy greens and root vegetables under the direct guidance of program mentors as they set up infrastructure for other specialty crops creating some helpful additional income based on a share of the harvest the specialty research plots produce. Plus new skills, site planning, soil health, and structured scheduling without taking on all the financial risk alone. It's a solid foundation, and at the end of the season, your mentors give you the green light to prepare for specialty crops next year."
         },
         2: {
             title: "Year 2: Specialty Crops Unlock & The Educational Agreement",
@@ -201,29 +203,27 @@
         },
         5: {
             title: "Year 5: The First Vacation & Regional Program Maturity",
-            story: "Thanks to the trusted partnerships built through the shared harvest program, every member takes a real, worry-free vacation for the first time! Looking back over five years, the educational track proved that structured cooperation accelerates success. You step into Year 5 ready to help expand the program's regional footprint but new challenges are on the horizon. you have the farm, now the twins are 18 and have earned that 5 acres you promised they could work. ,but they need to decide how to use it and the choices range from ponies to potatos. Next: The Math"
+            story: "Thanks to the trusted partnerships built through the shared harvest program, every member takes a real, worry-free vacation for the first time! Looking back over five years, the educational track proved that structured cooperation accelerates success. You step into Year 5 ready to help expand the program's regional footprint but new challenges are on the horizon. you have the farm, now the twins are 18 and have earned that 5 acres you promised they could work. But they need to decide how to use it and the choices range from ponies to potatoes. Next: The Math"
         }
     };
 
-  function claimXpAndSignIn() {
-    let nameInput = document.getElementById('trainee-sign-in-name').value.trim();
-    if (!nameInput) {
-        alert("Please enter your trainee name or grower handle to claim your accreditation!");
-        return;
+    function claimXpAndSignIn() {
+        let nameInput = document.getElementById('trainee-sign-in-name').value.trim();
+        if (!nameInput) {
+            alert("Please enter your trainee name or grower handle to claim your accreditation!");
+            return;
+        }
+        
+        gameState.traineeName = nameInput;
+        gameState.xp = (gameState.xp || 0) + 500;
+        localStorage.setItem('farmGameState', JSON.stringify(gameState));
+        
+        alert(`Welcome aboard, ${nameInput}! +500 XP credited. Specialty crops unlocked for Year 2.`);
+        
+        document.getElementById('sign-in-incentive-box').style.display = 'none';
+        advanceToNextYearOrHub();
     }
-    
-    // Save user state + XP to localStorage
-    gameState.traineeName = nameInput;
-    gameState.xp = (gameState.xp || 0) + 500;
-    localStorage.setItem('farmGameState', JSON.stringify(gameState));
-    
-    alert(`Welcome aboard, ${nameInput}! +500 XP credited. Specialty crops unlocked for Year 2.`);
-    
-    // Hide the sign-in box and proceed
-    document.getElementById('sign-in-incentive-box').style.display = 'none';
-    advanceToNextYearOrHub();
-    }
- 
+
     function startAllocationPhase() {
         document.getElementById('screen-intro').classList.add('hidden');
         document.getElementById('screen-allocate').classList.remove('hidden');
@@ -364,10 +364,11 @@
         document.getElementById('narrative-title').innerText = currentNarrative.title;
         document.getElementById('narrative-story').innerText = currentNarrative.story;
 
-        // Show checklist callout specifically at the end of Year 1 before entering Year 2
         if (gameState.year === 1) {
+            document.getElementById('sign-in-incentive-box').style.display = 'block';
             document.getElementById('checklist-callout').style.display = 'block';
         } else {
+            document.getElementById('sign-in-incentive-box').style.display = 'none';
             document.getElementById('checklist-callout').style.display = 'none';
         }
     }
