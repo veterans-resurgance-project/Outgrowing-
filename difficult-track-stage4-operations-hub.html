@@ -71,7 +71,22 @@
             font-weight: bold;
             color: #ffffff;
             font-size: 0.95rem;
+            flex-wrap: wrap;
+            gap: 10px;
         }
+
+        .sign-in-btn {
+            background: var(--accent);
+            color: #0f172a;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: opacity 0.2s;
+        }
+        .sign-in-btn:hover { opacity: 0.9; }
 
         h1 {
             color: var(--accent);
@@ -147,6 +162,8 @@
             transition: background 0.2s;
             display: inline-block;
             margin-top: 15px;
+            border: none;
+            cursor: pointer;
         }
         .btn-action:hover {
             background-color: var(--primary-hover);
@@ -161,6 +178,43 @@
             font-weight: 600;
         }
         .back-link:hover { text-decoration: underline; }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        .modal-card {
+            background: var(--card-bg);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+        .modal-input {
+            width: 100%;
+            padding: 10px 14px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #fff;
+            border-radius: 6px;
+            margin: 15px 0 20px 0;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+        .modal-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
     </style>
 </head>
 <body>
@@ -178,6 +232,19 @@
     </div>
   </nav>
 
+  <!-- AUTHENTICATION MODAL -->
+  <div id="auth-modal" class="modal-overlay">
+      <div class="modal-card">
+          <h3 style="color: var(--accent); margin-top: 0;">🔒 Agent Authentication Required</h3>
+          <p style="font-size: 0.9rem; color: #cbd5e1;">Please enter your assigned Agent Name or ID to unlock operational training pathways and record progress.</p>
+          <input type="text" id="agent-name-input" class="modal-input" placeholder="e.g., Agent Vance" autocomplete="off">
+          <div style="display: flex; gap: 10px; justify-content: flex-end;">
+              <button onclick="closeAuthModal()" style="background: transparent; border: 1px solid #475569; color: #cbd5e1; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: 600;">Cancel</button>
+              <button onclick="saveAgentName()" class="btn-action" style="margin-top: 0;">Authenticate &amp; Proceed</button>
+          </div>
+      </div>
+  </div>
+
   <div class="page-wrapper">
     <div class="container">
       
@@ -185,7 +252,10 @@
 
       <div class="hud-bar">
           <span>Track Status: Stage 4 Operations Hub</span>
-          <span>Agent: <span id="hud-agent-name" style="color: var(--blue-accent);">Guest</span></span>
+          <div style="display: flex; align-items: center; gap: 12px;">
+              <span>Agent: <span id="hud-agent-name" style="color: var(--blue-accent);">Guest</span></span>
+              <button id="auth-toggle-btn" class="sign-in-btn" onclick="openAuthModal()">Sign In</button>
+          </div>
       </div>
 
       <h1>⚙️ Difficult Track: Stage 4 Field Operations</h1>
@@ -214,14 +284,14 @@
       <div id="module1" class="module-panel active">
           <h4 style="margin-top: 0; color: var(--blue-accent); font-size: 1.2rem;">Orchard Maintenance &amp; Stewardship Protocol</h4>
           <p>Execute deadwood clearing, structural pruning, and soil health revival under the formal maintenance agreement. Ensure heritage scion woods are protected before seasonal frost cycles.</p>
-          <a href="training-farmer-ops.html" class="btn-action">Deploy Crew Cell →</a>
+          <button onclick="handleSecuredAction('training-farmer-ops.html')" class="btn-action">Deploy Crew Cell →</button>
       </div>
 
       <!-- PANEL 2: SHARECROP AGREEMENT -->
       <div id="module2" class="module-panel">
           <h4 style="margin-top: 0; color: var(--blue-accent); font-size: 1.2rem;">Sharecrop Agreement &amp; Intercropping Logistics</h4>
           <p>Establish row intercropping and local market channels to generate immediate cash flow and poverty relief for the landowner while safeguarding historical land rights.</p>
-          <a href="training-farmer-ops.html" class="btn-action">Configure Agreement →</a>
+          <button onclick="handleSecuredAction('training-farmer-ops.html')" class="btn-action">Configure Agreement →</button>
       </div>
 
       <!-- PANEL 3: SPECIALTY GATE -->
@@ -230,8 +300,8 @@
           <h4 style="margin: 8px 0 10px 0; color: #ffffff; font-size: 1.2rem;">Low-Overhead Expansion: Apiculture &amp; Fungal Understory</h4>
           <p>Deploying working beehives for orchard pollination and inoculating shaded understories for mushroom yields requires verified technical competency. Complete the prerequisite training track or verify crew credentials to advance.</p>
           <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 15px;">
-              <a href="training-farmer-ops.html" class="btn-action" style="background-color: var(--primary); margin-top: 0;">⚡ Execute Specialty Protocol →</a>
-              <a href="difficult-track-stage4-heritage-orchard.html" class="btn-action" style="background-color: #334155; margin-top: 0;">📚 Review Training Tracks</a>
+              <button onclick="handleSecuredAction('training-farmer-ops.html')" class="btn-action" style="background-color: var(--primary); margin-top: 0;">⚡ Execute Specialty Protocol →</button>
+              <button onclick="handleSecuredAction('difficult-track-stage4-heritage-orchard.html')" class="btn-action" style="background-color: #334155; margin-top: 0;">📚 Review Training Tracks</button>
           </div>
       </div>
 
@@ -240,22 +310,59 @@
 
   <script>
       document.addEventListener("DOMContentLoaded", () => {
-          const savedAgent = localStorage.getItem('afti_agent_name');
-          if (savedAgent) {
-              document.getElementById('hud-agent-name').innerText = savedAgent;
-          }
+          checkAuthState();
       });
 
+      function checkAuthState() {
+          const savedAgent = localStorage.getItem('afti_agent_name');
+          const hudAgent = document.getElementById('hud-agent-name');
+          const authBtn = document.getElementById('auth-toggle-btn');
+
+          if (savedAgent && savedAgent.trim() !== "") {
+              hudAgent.innerText = savedAgent;
+              authBtn.innerText = "Switch Agent";
+          } else {
+              hudAgent.innerText = "Guest";
+              authBtn.innerText = "Sign In";
+          }
+      }
+
+      function openAuthModal() {
+          document.getElementById('auth-modal').style.display = 'flex';
+          document.getElementById('agent-name-input').focus();
+      }
+
+      function closeAuthModal() {
+          document.getElementById('auth-modal').style.display = 'none';
+      }
+
+      function saveAgentName() {
+          const nameInput = document.getElementById('agent-name-input').value.trim();
+          if (nameInput) {
+              localStorage.setItem('afti_agent_name', nameInput);
+              checkAuthState();
+              closeAuthModal();
+          } else {
+              alert("Please enter a valid agent name.");
+          }
+      }
+
+      function handleSecuredAction(targetUrl) {
+          const savedAgent = localStorage.getItem('afti_agent_name');
+          if (!savedAgent || savedAgent.trim() === "") {
+              openAuthModal();
+          } else {
+              window.location.href = targetUrl;
+          }
+      }
+
       function switchModule(moduleId, btnElement) {
-          // Hide all panels
           document.querySelectorAll('.module-panel').forEach(panel => {
               panel.classList.remove('active');
           });
-          // Deactivate all tab buttons
           document.querySelectorAll('.tab-btn').forEach(btn => {
               btn.classList.remove('active');
           });
-          // Show selected panel & activate button
           document.getElementById(moduleId).classList.add('active');
           btnElement.classList.add('active');
       }
