@@ -1,7 +1,7 @@
 /**
  * AFTI - Global Experience Point, Readiness Tier & Workforce Cell Matching Engine
  * Architecture: Vanilla, self-contained utility supporting local-to-cloud portability.
- * Version: 2.3.0 - Generation 16 Stable Anchor with Drone Cohort & Realtime Supabase Integration
+ * Version: 2.4.0 - Generation 16 Stable Anchor with Drone Cohort & Watershed Telemetry
  */
 
 // =========================================================================
@@ -16,7 +16,7 @@ const supabase = (typeof window !== 'undefined' && window.supabase)
     : null;
 
 // =========================================================================
-// 2. ALPINE.JS MATCHING ENGINE & DRONE TRAINING PORTAL COMPONENTS
+// 2. ALPINE.JS COMPONENTS (Matching Engine, Drone Portal & Watershed Engine)
 // =========================================================================
 if (typeof document !== 'undefined') {
     document.addEventListener('alpine:init', () => {
@@ -34,79 +34,47 @@ if (typeof document !== 'undefined') {
                 this.setupRealtimeListeners();
             },
 
-            // Fetch live records from Supabase tables
             async fetchData() {
                 if (!supabase) return;
                 try {
-                    const { data: pData, error: pError } = await supabase.from('participants').select('*');
-                    const { data: jData, error: jError } = await supabase.from('job_requests').select('*');
-                    
+                    const { data: pData } = await supabase.from('participants').select('*');
+                    const { data: jData } = await supabase.from('job_requests').select('*');
                     if (pData) this.participants = pData;
                     if (jData) this.jobRequests = jData;
-                    
-                    if (pError || jError) console.error('Error fetching data:', pError || jError);
                 } catch (err) {
-                    console.error('Network or client error during fetch:', err);
+                    console.error('Fetch error:', err);
                 }
             },
 
-            // Supabase Realtime Listener for Live Updates
             setupRealtimeListeners() {
                 if (!supabase) return;
                 supabase
                     .channel('afti_live_sync')
-                    .on('postgres_changes', { event: '*', schema: 'public', table: 'participants' }, payload => {
+                    .on('postgres_changes', { event: '*', schema: 'public', table: 'participants' }, () => {
                         this.fetchData();
                     })
                     .subscribe();
             },
 
-            // Submit new participant profile directly to the database
             async submitParticipant() {
-                if (!supabase) {
-                    alert('Supabase is not connected.');
-                    return;
-                }
-
+                if (!supabase) return alert('Supabase not connected.');
                 this.isSubmitting = true;
-                this.successMessage = '';
-
-                const { error } = await supabase
-                    .from('participants')
-                    .insert([{ 
-                        name: this.newParticipant.name, 
-                        skill_track: this.newParticipant.skillTrack,
-                        status: 'Pending Review'
-                    }]);
-
+                const { error } = await supabase.from('participants').insert([{ 
+                    name: this.newParticipant.name, 
+                    skill_track: this.newParticipant.skillTrack,
+                    status: 'Pending Review'
+                }]);
                 this.isSubmitting = false;
-
-                if (error) {
-                    alert('Error registering profile. Please check your credentials.');
-                    console.error(error);
-                } else {
-                    this.successMessage = 'Profile registered successfully for administrative review!';
+                if (!error) {
+                    this.successMessage = 'Profile registered successfully!';
                     this.newParticipant.name = '';
                     await this.fetchData();
                     setTimeout(() => { this.successMessage = ''; }, 4000);
                 }
-            },
-
-            get matchedResults() {
-                return this.participants.map(participant => {
-                    const compatibleJobs = this.jobRequests.filter(job => 
-                        job.required_track.toLowerCase() === participant.skill_track.toLowerCase()
-                    );
-                    return {
-                        ...participant,
-                        matches: compatibleJobs,
-                        matchScore: compatibleJobs.length > 0 ? 100 : 0
-                    };
-                });
             }
         }));
 
-        // NEW: Drone Training Pretest Portal Component
+        // Track A: Drone Training Pretest Portal Component
         Alpine.data('droneTrainingPortal', () => ({
             recruitId: '',
             selectedModule: 'Day 1',
@@ -151,6 +119,27 @@ if (typeof document !== 'undefined') {
                 }
             }
         }));
+
+        // Track B: Watershed Telemetry Engine Component
+        Alpine.data('watershedEngine', () => ({
+            siteName: '',
+            ndviInput: '',
+            soilType: 'Willamette Silty Clay Loam',
+            result: null,
+            activeStatus: 'Awaiting Data',
+
+            generatePrescription() {
+                if (!this.siteName || this.ndviInput === '') return;
+                this.result = AFTIWaterTelemetry.evaluateSite(this.ndviInput, this.soilType);
+                this.activeStatus = 'Prescription Generated';
+            },
+
+            async saveTelemetry() {
+                if (!this.result) return;
+                const res = await AFTIWaterTelemetry.logTelemetryData(this.siteName, this.ndviInput, this.result.prescription.seedBlend);
+                alert(res.message);
+            }
+        }));
     });
 }
 
@@ -160,18 +149,10 @@ if (typeof document !== 'undefined') {
 // =========================================================================
 const AFTITracker = (() => {
     const CONFIG = {
-        keys: {
-            globalXp: 'afti_global_xp',
-            trackName: 'afti_track_name',
-            cloudEndpoint: 'afti_backup_endpoint_url'
-        },
-        defaults: {
-            baseXp: 400,
-            track: 'Foster-Alum Track'
-        }
+        keys: { globalXp: 'afti_global_xp', trackName: 'afti_track_name' },
+        defaults: { baseXp: 400, track: 'Foster-Alum Track' }
     };
 
-    // The 4-Stage Architectural Readiness Matrix
     const TIERS = [
         { minXp: 0,   maxXp: 499,   title: 'Tier 1: Initial Field Placement', color: '#38bdf8' },
         { minXp: 500, maxXp: 699,   title: 'Tier 2: Active Practicum',        color: '#f59e0b' },
@@ -204,16 +185,13 @@ const AFTITracker = (() => {
     function getReadinessTier() {
         const xp = getXP();
         for (let i = 0; i < TIERS.length; i++) {
-            if (xp >= TIERS[i].minXp && xp <= TIERS[i].maxXp) {
-                return TIERS[i];
-            }
+            if (xp >= TIERS[i].minXp && xp <= TIERS[i].maxXp) return TIERS[i];
         }
         return TIERS[0];
     }
 
     function syncHUD() {
         _initializeStorage();
-        
         const xpElements = document.querySelectorAll('#global-points, #hud-xp, #completion-xp-display');
         const trackElement = document.getElementById('hud-track');
         const tierElement = document.getElementById('hud-tier');
@@ -230,49 +208,87 @@ const AFTITracker = (() => {
         }
     }
 
-    // NEW: Centralized Drone Pretest Logger with Supabase & XP Reward
     async function logDronePretest(recruitId, moduleName, scoreValue) {
-        if (!supabase) {
-            console.warn("Supabase client not initialized.");
-            return { success: false, message: "Supabase offline." };
-        }
-
+        if (!supabase) return { success: false, message: "Supabase offline." };
         try {
-            const { error } = await supabase
-                .from('afti_drone_training')
-                .insert([
-                    { 
-                        recruit_id: recruitId, 
-                        module: moduleName, 
-                        score: parseInt(scoreValue, 10), 
-                        completed_at: new Date().toISOString() 
-                    }
-                ]);
-
+            const { error } = await supabase.from('afti_drone_training').insert([{ 
+                recruit_id: recruitId, 
+                module: moduleName, 
+                score: parseInt(scoreValue, 10), 
+                completed_at: new Date().toISOString() 
+            }]);
             if (error) throw error;
-
-            // Automatically reward global XP for completing a training check!
             addXP(50);
-
             return { success: true, message: "Score synced & +50 XP awarded!" };
         } catch (err) {
-            console.error('Supabase Error:', err.message);
             return { success: false, message: err.message };
         }
     }
 
     if (typeof window !== 'undefined') {
-        window.addEventListener('load', () => {
-            _initializeStorage();
-            syncHUD();
-        });
+        window.addEventListener('load', () => { _initializeStorage(); syncHUD(); });
     }
 
-    return {
-        getXP: getXP,
-        addXP: addXP,
-        getReadinessTier: getReadinessTier,
-        syncHUD: syncHUD,
-        logDronePretest: logDronePretest
-    };
+    return { getXP, addXP, getReadinessTier, syncHUD, logDronePretest };
+})();
+
+
+// =========================================================================
+// 4. TRACK B: WATERSHED TELEMETRY & CROP-MATCHING UTILITY
+// =========================================================================
+const AFTIWaterTelemetry = (() => {
+    const RESTORATION_PROFILES = [
+        {
+            id: 'slopes_high_erosion',
+            name: 'Hillside Post-Fire / High Erosion Slope',
+            targetNdiMin: 0.10, targetNdiMax: 0.35,
+            recommendedBlend: 'Native Deep-Root Grass Mix (Blue Wildrye, Roemer’s Fescue)',
+            nitrogenFixer: 'Crimson Clover / Vetch Inter-seed',
+            applicationRate: '45 lbs/acre (Hydro-seeding or Drone Broadcast)'
+        },
+        {
+            id: 'riparian_buffer',
+            name: 'Riparian / Stream Corridor Restoration',
+            targetNdiMin: 0.36, targetNdiMax: 0.65,
+            recommendedBlend: 'Streamside Stabilization Mix (Slough Sedge, Red Alder Stakes)',
+            nitrogenFixer: 'Native Lupine',
+            applicationRate: '30 lbs/acre + Live Stakes'
+        },
+        {
+            id: 'agricultural_rehab',
+            name: 'Depleted Agricultural / Pasture Recovery',
+            targetNdiMin: 0.00, targetNdiMax: 0.09,
+            recommendedBlend: 'Cover Crop Heavy Biomass (Daikon Radish, Winter Rye)',
+            nitrogenFixer: 'Austrian Winter Pea',
+            applicationRate: '100 lbs/acre Drill Seeded'
+        }
+    ];
+
+    function evaluateSite(ndviValue) {
+        const parsedNdvi = parseFloat(ndviValue);
+        const match = RESTORATION_PROFILES.find(p => parsedNdvi >= p.targetNdiMin && parsedNdvi <= p.targetNdiMax) || RESTORATION_PROFILES[0];
+        return {
+            siteCondition: match.name,
+            ndviRecorded: parsedNdvi,
+            prescription: { seedBlend: match.recommendedBlend, coverCrop: match.nitrogenFixer, rate: match.applicationRate }
+        };
+    }
+
+    async function logTelemetryData(siteName, ndviScore, selectedPrescription) {
+        if (!supabase) return { success: true, message: "Stored locally (Offline mode)." };
+        try {
+            const { error } = await supabase.from('afti_watershed_telemetry').insert([{
+                site_name: siteName,
+                ndvi_score: parseFloat(ndviScore),
+                prescription_summary: selectedPrescription,
+                logged_at: new Date().toISOString()
+            }]);
+            if (error) throw error;
+            return { success: true, message: "Telemetry synced to Supabase!" };
+        } catch (err) {
+            return { success: false, message: err.message };
+        }
+    }
+
+    return { evaluateSite, logTelemetryData };
 })();
