@@ -63,13 +63,14 @@
             background: var(--hud-bg);
             border: 1px solid rgba(255,255,255,0.2);
             border-radius: 8px;
-            padding: 10px 15px;
+            padding: 12px 20px;
             margin-bottom: 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-weight: bold;
             color: #ffffff;
+            font-size: 0.95rem;
         }
 
         h1 {
@@ -99,33 +100,56 @@
             margin-bottom: 25px;
         }
 
-        .action-card {
+        /* Tab Navigation for Modules */
+        .module-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #94a3b8;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .tab-btn.active {
+            background: var(--hud-bg);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .module-panel {
+            display: none;
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        .module-panel.active {
+            display: block;
         }
 
         .btn-action {
-            background-color: #334155;
+            background-color: var(--primary);
             color: white;
-            padding: 10px 16px;
+            padding: 12px 20px;
             border-radius: 6px;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: bold;
             transition: background 0.2s;
-            text-align: center;
+            display: inline-block;
+            margin-top: 15px;
         }
-
         .btn-action:hover {
-            background-color: var(--primary);
+            background-color: var(--primary-hover);
         }
 
         .back-link {
@@ -161,7 +185,7 @@
 
       <div class="hud-bar">
           <span>Track Status: Stage 4 Operations Hub</span>
-          <span>Case Study: Widow's Heritage Orchard</span>
+          <span>Agent: <span id="hud-agent-name" style="color: var(--blue-accent);">Guest</span></span>
       </div>
 
       <h1>⚙️ Difficult Track: Stage 4 Field Operations</h1>
@@ -170,52 +194,72 @@
       <div class="scenario-box">
           <h4 style="color: var(--accent); margin-top: 0; font-size: 1.1rem;">📍 Operational Briefing: The Heritage Pact</h4>
           <p style="font-size: 0.95rem; margin-bottom: 10px;">
-              The major emergency dealt with The next problem, producing an income stream for the orchard. The team suggested a shared harvest agreement might work well. they could install mushroom and apiary systems and produce an additional $10,000 annually for the farmers share on a 1/4 acre footprint.<strong>Sharecrop Partnership</strong>.
+              With initial emergency stabilization complete, the core challenge shifts to producing a resilient income stream for the orchard. Through a formal <strong>Sharecrop Partnership</strong>, the team can install apiary and fungal understory systems to generate an estimated $10,000 annually on a compact 1/4 acre footprint.
           </p>
           <p style="font-size: 0.95rem; margin: 0;">
-              Your objective in this stage is to deploy crew cells for structural orchard rehabilitation while establishing low-overhead, high-value secondary systems (apiculture and fungal cultivation) to secure immediate cash-flow relief.
+              Select an operational module below to deploy crew cells, establish the agreement, or execute the specialty expansion protocol.
           </p>
       </div>
 
-      <h3>Core Stage 4 Operations</h3>
+      <h3>Modular Operation Selectors</h3>
 
-      <!-- ACTION 1: ORCHARD REHABILITATION -->
-      <div class="action-card">
-          <div style="max-width: 600px;">
-              <h4 style="margin: 0 0 5px 0; color: var(--blue-accent); font-size: 1.1rem;">1. Orchard Maintenance &amp; Stewardship Protocol</h4>
-              <p style="margin: 0; font-size: 0.9rem;">Execute deadwood clearing, structural pruning, and soil health revival under the formal maintenance agreement.</p>
-          </div>
+      <!-- MODULE TABS -->
+      <div class="module-tabs">
+          <button class="tab-btn active" onclick="switchModule('module1', this)">1. Orchard Maintenance</button>
+          <button class="tab-btn" onclick="switchModule('module2', this)">2. Sharecrop Agreement</button>
+          <button class="tab-btn" onclick="switchModule('module3', this)">3. Apiculture &amp; Fungi</button>
+      </div>
+
+      <!-- PANEL 1: ORCHARD REHABILITATION -->
+      <div id="module1" class="module-panel active">
+          <h4 style="margin-top: 0; color: var(--blue-accent); font-size: 1.2rem;">Orchard Maintenance &amp; Stewardship Protocol</h4>
+          <p>Execute deadwood clearing, structural pruning, and soil health revival under the formal maintenance agreement. Ensure heritage scion woods are protected before seasonal frost cycles.</p>
           <a href="training-farmer-ops.html" class="btn-action">Deploy Crew Cell →</a>
       </div>
 
-      <!-- ACTION 2: SHARECROP HARVEST SETUP -->
-      <div class="action-card">
-          <div style="max-width: 600px;">
-              <h4 style="margin: 0 0 5px 0; color: var(--blue-accent); font-size: 1.1rem;">2. Sharecrop Agreement &amp; Intercropping Logistics</h4>
-              <p style="margin: 0; font-size: 0.9rem;">Establish row intercropping and local market channels to generate immediate cash flow and poverty relief for the landowner.</p>
-          </div>
+      <!-- PANEL 2: SHARECROP AGREEMENT -->
+      <div id="module2" class="module-panel">
+          <h4 style="margin-top: 0; color: var(--blue-accent); font-size: 1.2rem;">Sharecrop Agreement &amp; Intercropping Logistics</h4>
+          <p>Establish row intercropping and local market channels to generate immediate cash flow and poverty relief for the landowner while safeguarding historical land rights.</p>
           <a href="training-farmer-ops.html" class="btn-action">Configure Agreement →</a>
       </div>
 
-      <!-- SPECIALTY GATE: BEES & MUSHROOMS -->
-      <div style="background: rgba(15, 23, 42, 0.85); border: 2px dashed var(--accent); border-radius: 8px; padding: 20px; margin-top: 30px; text-align: center;">
-          <span style="color: var(--accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Specialty Prerequisite Gate</span>
-          <h4 style="color: #ffffff; margin: 8px 0 5px 0; font-size: 1.15rem;">3. Low-Overhead Expansion: Apiculture &amp; Fungal Understory</h4>
-          <p style="font-size: 0.9rem; max-width: 650px; margin: 0 auto 15px auto;">
-              Deploying working beehives for orchard pollination and inoculating shaded understories for mushroom yields requires verified technical competency. Complete the prerequisite training track or verify crew credentials to advance.
-          </p>
-          <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-              <a href="training-farmer-ops.html" class="btn-action" style="background-color: var(--primary);">
-                  ⚡ Execute Specialty Protocol →
-              </a>
-              <a href="difficult-track-stage4-heritage-orchard.html" class="btn-action" style="background-color: #334155;">
-                  📚 Review Training Tracks
-              </a>
+      <!-- PANEL 3: SPECIALTY GATE -->
+      <div id="module3" class="module-panel" style="border: 2px dashed var(--accent);">
+          <span style="color: var(--accent); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Specialty Prerequisite Gate</span>
+          <h4 style="margin: 8px 0 10px 0; color: #ffffff; font-size: 1.2rem;">Low-Overhead Expansion: Apiculture &amp; Fungal Understory</h4>
+          <p>Deploying working beehives for orchard pollination and inoculating shaded understories for mushroom yields requires verified technical competency. Complete the prerequisite training track or verify crew credentials to advance.</p>
+          <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 15px;">
+              <a href="training-farmer-ops.html" class="btn-action" style="background-color: var(--primary); margin-top: 0;">⚡ Execute Specialty Protocol →</a>
+              <a href="difficult-track-stage4-heritage-orchard.html" class="btn-action" style="background-color: #334155; margin-top: 0;">📚 Review Training Tracks</a>
           </div>
       </div>
 
     </div>
   </div>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", () => {
+          const savedAgent = localStorage.getItem('afti_agent_name');
+          if (savedAgent) {
+              document.getElementById('hud-agent-name').innerText = savedAgent;
+          }
+      });
+
+      function switchModule(moduleId, btnElement) {
+          // Hide all panels
+          document.querySelectorAll('.module-panel').forEach(panel => {
+              panel.classList.remove('active');
+          });
+          // Deactivate all tab buttons
+          document.querySelectorAll('.tab-btn').forEach(btn => {
+              btn.classList.remove('active');
+          });
+          // Show selected panel & activate button
+          document.getElementById(moduleId).classList.add('active');
+          btnElement.classList.add('active');
+      }
+  </script>
 
 </body>
 </html>
