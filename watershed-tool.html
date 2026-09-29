@@ -19,6 +19,13 @@
     <!-- Calculator Card -->
     <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 shadow-xl space-y-6">
         
+        <!-- Site Name Input for DB Logging -->
+        <div class="space-y-2">
+            <label class="block text-xs font-semibold text-slate-300">Sector / Site Identifier</label>
+            <input type="text" id="input-sitename" value="Sector B-4 Hillside Burn Scar" 
+                class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-white text-sm focus:outline-none focus:border-sky-500">
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <!-- NDVI Input -->
             <div class="space-y-2">
@@ -44,9 +51,12 @@
                 class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-white text-sm focus:outline-none focus:border-sky-500">
         </div>
 
-        <button onclick="runAnalysis()" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 px-4 rounded-lg transition shadow-lg">
-            Generate Telemetry Prescription
+        <button onclick="runAndSyncAnalysis()" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 px-4 rounded-lg transition shadow-lg flex items-center justify-center gap-2">
+            <span>Generate & Sync Telemetry Prescription</span>
         </button>
+
+        <!-- Status / Notification Feedback Banner -->
+        <div id="sync-status" class="hidden text-xs p-3 rounded border text-center font-semibold"></div>
 
         <!-- Results Box -->
         <div id="results-container" class="hidden bg-slate-950 p-5 rounded-lg border border-slate-800 space-y-4 mt-4">
@@ -83,36 +93,52 @@
 
 </div>
 
-<!-- Load Engine Script -->
-<script src="watershed-engine.js"></script>
+<!-- Load Unified Tracker and Engine Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="afti-tracker.js"></script>
 <script>
-    function runAnalysis() {
+    async function runAndSyncAnalysis() {
+        const siteName = document.getElementById('input-sitename').value || 'Unnamed Sector';
         const ndvi = parseFloat(document.getElementById('input-ndvi').value);
         const slope = parseFloat(document.getElementById('input-slope').value);
         const acres = parseFloat(document.getElementById('input-acres').value);
 
-        // Run analysis from engine
-        const analysis = watershedEngine.analyzeZone(ndvi, slope);
-        
-        // Determine category key for batch calculation
-        let categoryKey = "stable_canopy";
-        if (analysis.riskLevel.includes("CRITICAL")) categoryKey = "severe_erosion";
-        else if (analysis.riskLevel.includes("MODERATE")) categoryKey = "moderate_stress";
+        // 1. Run evaluation using the unified engine from afti-tracker.js
+        const evaluation = AFTIWaterTelemetry.evaluateSite(ndvi, slope, acres);
 
-        const batch = watershedEngine.calculateBatchLoad(acres, categoryKey);
-
-        // Populate UI
+        // 2. Populate UI Results Box
         const resultsBox = document.getElementById('results-container');
         resultsBox.classList.remove('hidden');
 
         const riskBadge = document.getElementById('res-risk');
-        riskBadge.className = `font-bold text-sm mt-1 px-3 py-1 rounded border inline-block ${analysis.colorClass}`;
-        riskBadge.innerText = analysis.riskLevel;
+        riskBadge.className = `font-bold text-sm mt-1 px-3 py-1 rounded border inline-block ${evaluation.colorClass}`;
+        riskBadge.innerText = evaluation.riskLevel;
 
-        document.getElementById('res-blend').innerText = batch.materialName;
-        document.getElementById('res-rate').innerText = `${batch.applicationRate} lbs/acre`;
-        document.getElementById('res-weight').innerText = `${batch.totalPounds} lbs`;
-        document.getElementById('res-flights').innerText = `${batch.estimatedFlights} Runs`;
+        document.getElementById('res-blend').innerText = evaluation.prescription.seedBlend;
+        document.getElementById('res-rate').innerText = evaluation.prescription.applicationRate;
+        document.getElementById('res-weight').innerText = `${evaluation.prescription.totalPounds} lbs`;
+        document.getElementById('res-flights').innerText = `${evaluation.prescription.estimatedFlights} Runs`;
+
+        // 3. Automatically execute database insert / update sync
+        const statusEl = document.getElementById('sync-status');
+        statusEl.classList.remove('hidden');
+        statusEl.className = "text-xs p-3 rounded border text-center font-semibold bg-amber-950/40 border-amber-800 text-amber-400";
+        statusEl.innerText = "Syncing telemetry data to cloud database...";
+
+        const syncResult = await AFTIWaterTelemetry.logTelemetryData(siteName, ndvi, slope, acres, evaluation);
+
+        if (syncResult.success) {
+            statusEl.className = "text-xs p-3 rounded border text-center font-semibold bg-emerald-950/40 border-emerald-800 text-emerald-400";
+            statusEl.innerText = syncResult.message;
+        } else {
+            statusEl.className = "text-xs p-3 rounded border text-center font-semibold bg-rose-950/40 border-rose-800 text-rose-400";
+            statusEl.innerText = `Sync Warning: ${syncResult.message}`;
+        }
+
+        // Auto-hide status banner after 5 seconds
+        setTimeout(() => {
+            statusEl.classList.add('hidden');
+        }, 5000);
     }
 </script>
 
