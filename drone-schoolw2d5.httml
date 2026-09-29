@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 2, Day 5: Advanced GIS & Watershed Mapping | AFTI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen p-6">
+
+<div class="max-w-4xl mx-auto p-6 bg-slate-900 text-slate-100 rounded-xl border border-slate-800 space-y-8 shadow-xl">
+    
+    <!-- Header Section -->
+    <div class="border-b border-slate-800 pb-6">
+        <h1 class="text-2xl font-extrabold text-sky-400 mb-2">FAA Part 107 Cohort Training | Week 2, Day 5: Advanced GIS & Watershed Mapping</h1>
+        <div class="flex flex-wrap gap-4 text-xs font-semibold text-slate-400">
+            <span class="bg-slate-950 px-3 py-1 rounded-full border border-slate-800">Target Audience: Veteran Cohort (Hillside Remediation & Agricultural Missions)</span>
+            <span class="bg-slate-950 px-3 py-1 rounded-full border border-slate-800">Total Time: 4.5 Hours (2.5 hr photogrammetry & GIS pipeline, 2 hr orthomosaic data processing lab)</span>
+        </div>
+    </div>
+
+    <!-- Core Lecture Modules -->
+    <section class="space-y-6">
+        <h2 class="text-xl font-bold text-amber-400 border-b border-slate-800 pb-2">I. Core Lecture Modules</h2>
+
+        <!-- Module 1 -->
+        <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+            <h3 class="font-bold text-lg text-white">Module 1: Photogrammetry & Orthomosaic Stitching Pipelines (75 Mins)</h3>
+            <ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+                <li><strong class="text-slate-100">From Raw Imagery to 3D Models:</strong> Processing thousands of overlapping nadir and oblique images using photogrammetry software (e.g., WebODM, Pix4D, or Agisoft Metashape).</li>
+                <li><strong class="text-slate-100">Ground Control Points (GCPs):</strong> Utilizing high-accuracy GPS/RTK ground markers to georeference maps down to centimeter-level accuracy for repeatable multi-temporal watershed comparisons.</li>
+                <li><strong class="text-slate-100">Digital Elevation Models (DEM) & DSM:</strong> Generating Digital Surface Models (DSM) and Digital Terrain Models (DTM) to analyze water flow paths, slope gradients, and erosion-prone gullies on burned hillsides.</li>
+            </ul>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+            <h3 class="font-bold text-lg text-white">Module 2: Watershed Hydrology & Runoff Modeling (75 Mins)</h3>
+            <ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+                <li><strong class="text-slate-100">Flow Accumulation & Direction:</strong> Utilizing GIS software to map how water drains across post-wildfire terrain during heavy precipitation events.</li>
+                <li><strong class="text-slate-100">Identifying Vulnerable Zones:</strong> Pinpointing high-risk debris flow channels, soil slumping areas, and sediment transport vectors threatening local infrastructure.</li>
+                <li><strong class="text-slate-100">Targeted Seeding Prescriptions:</strong> Exporting custom vector shapefiles directly from GIS maps into agricultural drone controllers for variable-rate seed and mulch deployment.</li>
+            </ul>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+            <h3 class="font-bold text-lg text-white">Module 3: Post-Processing Quality Control & Client Deliverables (45 Mins)</h3>
+            <ul class="list-disc list-inside space-y-2 text-sm text-slate-300">
+                <li><strong class="text-slate-100">Data Hygiene & Storage:</strong> Managing large geotiff datasets, flight logs, and metadata securely across local drives and cloud archives.</li>
+                <li><strong class="text-slate-100">Reporting for Land Stewards:</strong> Packaging analytics into actionable reports for conservation districts, forestry departments, and land managers.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- End-of-Day Diagnostic Pretest -->
+    <section class="space-y-6">
+        <h2 class="text-xl font-bold text-amber-400 border-b border-slate-800 pb-2">II. End-of-Day Diagnostic Pretest</h2>
+
+        <!-- Question 1 -->
+        <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+            <p class="font-semibold text-slate-200">Question 1: Ground Control Points (GCPs)</p>
+            <p class="text-sm text-slate-300">Why are Ground Control Points (GCPs) measured with high-accuracy RTK/GNSS equipment integrated into a photogrammetry flight?</p>
+            <div class="text-xs space-y-1 text-slate-400 pl-4">
+                <p>A) To keep the drone legally compliant with FAA Part 107 visual line of sight limits.</p>
+                <p class="text-emerald-400 font-bold">B) To anchor the orthomosaic and digital elevation model to precise real-world coordinates, ensuring centimeter-level absolute spatial accuracy over time. (Correct)</p>
+                <p>C) To automatically adjust the drone’s motor speed during heavy crosswinds.</p>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+            <p class="font-semibold text-slate-200">Question 2: Digital Elevation Models (DEM)</p>
+            <p class="text-sm text-slate-300">When planning post-fire watershed restoration, what is the primary operational difference between a Digital Surface Model (DSM) and a Digital Terrain Model (DTM)?</p>
+            <div class="text-xs space-y-1 text-slate-400 pl-4">
+                <p class="text-emerald-400 font-bold">A) A DSM captures the elevation of everything on the surface (trees, structures, canopy), while a DTM strips away vegetation to reveal the bare earth ground topography underneath. (Correct)</p>
+                <p>B) A DSM is used exclusively for night flights, while a DTM is used for daytime mapping.</p>
+                <p>C) A DTM calculates battery consumption rates, whereas a DSM measures wind speed.</p>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="bg-slate-950 p-5 rounded-lg border border-slate-800/80 space-y-3">
+            <p class="font-semibold text-slate-200">Question 3: Variable-Rate Prescriptions</p>
+            <p class="text-sm text-slate-300">How are processed GIS shapefiles utilized when transitioning from data analysis to live drone seeding operations?</p>
+            <div class="text-xs space-y-1 text-slate-400 pl-4">
+                <p>A) They are uploaded to FAA DroneZone to satisfy Remote ID regulations.</p>
+                <p class="text-emerald-400 font-bold">B) They are loaded into the agricultural ground station software to execute variable-rate spreading, dropping heavier seed concentrations over high-erosion burn scars and less over stable areas. (Correct)</p>
+                <p>C) They serve as a backup checklist for manual pre-flight mechanical inspections.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
