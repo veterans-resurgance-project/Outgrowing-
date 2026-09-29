@@ -172,8 +172,8 @@
             font-size: 1rem;
             margin-bottom: 25px;
         }
-        .close-modal-btn {
-            background: #334155;
+        .close-modal-btn, .form-submit-btn {
+            background: var(--primary);
             color: #f8fafc;
             border: none;
             padding: 10px 20px;
@@ -182,8 +182,19 @@
             cursor: pointer;
             transition: background 0.2s;
         }
-        .close-modal-btn:hover {
-            background: #475569;
+        .close-modal-btn:hover, .form-submit-btn:hover {
+            background: #219653;
+        }
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: #fff;
+            box-sizing: border-box;
+            font-size: 1rem;
         }
         .footer-action {
             text-align: center;
@@ -216,10 +227,14 @@
 <div class="container">
     <!-- GLOBAL HUD BAR -->
     <div class="hud-bar">
-        <span>Path: <span id="hud-track" style="color: var(--accent);">Foster-Alum Track</span></span>
+        <div>
+            <span>Path: <span id="hud-track" style="color: var(--accent);">Foster-Alum Track</span></span> | 
+            <span>Agent: <span id="hud-player-name" style="color: #38bdf8;">Guest</span></span>
+        </div>
         <div>
             <span>Global XP: <span id="global-points" style="color: #4ade80;">400</span></span>
-            <button onclick="window.location.href='index.html'" style="margin-left: 15px; background: #334155; color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; cursor: pointer;">🏠 Exit</button>
+            <button onclick="openSignInModal()" style="margin-left: 10px; background: #2563eb; color: #fff; border: none; padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; cursor: pointer;">🔑 Sign In</button>
+            <button onclick="window.location.href='index.html'" style="margin-left: 5px; background: #334155; color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; cursor: pointer;">🏠 Exit</button>
         </div>
     </div>
 
@@ -250,18 +265,17 @@
 
     <h3 style="color: #38bdf8; font-size: 1.2rem; margin-bottom: 15px;">Explore Specialized Operational Tracks:</h3>
 
-        <!-- UPDATED TEAM OPERATIONAL SPECIALTIES WITH FORAGING INTEGRATION -->
-    <div class="section-header">👥 Team Operational Specialties</div>
+    <div class="section-header" style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 10px; font-weight: bold;">👥 Team Operational Specialties</div>
     <div class="paths-array">
-        <div class="path-option-card" onclick="openModal('Logistics')">
+        <div class="path-option-card" onclick="openModal('logistics')">
             <div class="path-info">
                 <h4>Advanced Field Logistics</h4>
-                <p>Navigating</p>
+                <p>Navigating distribution nodes and heavy supply routes.</p>
             </div>
             <span class="path-badge">Review Profile</span>
         </div>
 
-        <div class="path-option-card" onclick="openModal('Nursery')">
+        <div class="path-option-card" onclick="openModal('nursery')">
             <div class="path-info">
                 <h4>Controlled Nursery &amp; Plant Cultivation</h4>
                 <p>Managing sensory-response environments through precise planting records.</p>
@@ -269,17 +283,17 @@
             <span class="path-badge">Review Profile</span>
         </div>
 
-        <div class="path-option-card" onclick="openModal('Imaging')">
+        <div class="path-option-card" onclick="openModal('restoration')">
             <div class="path-info">
-                <h4>Technology Array Operator</h4>
-                <p>Deploying aerial thermal imaging to map invasive species and safety lines.</p>
+                <h4>Watershed Mapping &amp; Environmental Compliance</h4>
+                <p>Deploying aerial mapping and clearing choked irrigation lines.</p>
             </div>
             <span class="path-badge">Review Profile</span>
         </div>
+    </div>
     
     <div class="footer-action">
         <p style="color: #cbd5e1; margin-top: 0; margin-bottom: 15px; font-size: 0.95rem;">With the mission chosen and your team aligned, step forward to draft the dispatch.</p>
-        <!-- UPDATED LINK TO POINT TO THE NEWSLETTER / BAT-SIGNAL PAGE -->
         <a href="difficult-track-stage4-newsletter-bat-signal.html" class="btn">Proceed to Newsletter &amp; Bat-Signal Dispatch &rarr;</a>
     </div>
 </div>
@@ -288,10 +302,24 @@
 <div id="pathModal" class="modal-overlay">
     <div class="modal-content">
         <h3 id="modalTitle" class="modal-title">Path Details</h3>
-        <div id="modalBody" class="modal-body">
-            <!-- Dynamically populated description -->
-        </div>
+        <div id="modalBody" class="modal-body"></div>
         <button class="close-modal-btn" onclick="closeModal()">Back to Options</button>
+    </div>
+</div>
+
+<!-- SIGN-IN MODAL -->
+<div id="signInModal" class="modal-overlay" style="display: flex;"> <!-- Default open on first load if not signed in -->
+    <div class="modal-content">
+        <h3 class="modal-title">🔒 Agent Sign-In &amp; Progress Sync</h3>
+        <div class="modal-body">
+            <p>Enter your credentials to lock in your operational track record, save your global XP, and authenticate your clearance level for the greenhouse dispatch.</p>
+            <input type="text" id="agentNameInput" class="form-input" placeholder="Agent Codename / Name">
+            <input type="email" id="agentEmailInput" class="form-input" placeholder="Secure Email Address">
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <button class="form-submit-btn" onclick="handleSignIn()">Authenticate &amp; Proceed</button>
+            <button class="close-modal-btn" style="background: #334155;" onclick="skipSignIn()">Continue as Guest</button>
+        </div>
     </div>
 </div>
 
@@ -302,7 +330,34 @@
         
         let currentXP = parseInt(localStorage.getItem('afti_global_xp') || '400', 10);
         document.getElementById('global-points').innerText = currentXP;
+
+        const savedAgent = localStorage.getItem('afti_agent_name');
+        if (savedAgent) {
+            document.getElementById('hud-player-name').innerText = savedAgent;
+            document.getElementById('signInModal').style.display = 'none'; // Hide if already signed in
+        }
     });
+
+    function openSignInModal() {
+        document.getElementById('signInModal').style.display = 'flex';
+    }
+
+    function handleSignIn() {
+        const name = document.getElementById('agentNameInput').value.trim();
+        const email = document.getElementById('agentEmailInput').value.trim();
+        if(name) {
+            localStorage.setItem('afti_agent_name', name);
+            if(email) localStorage.setItem('afti_agent_email', email);
+            document.getElementById('hud-player-name').innerText = name;
+            document.getElementById('signInModal').style.display = 'none';
+        } else {
+            alert('Please enter a valid agent name.');
+        }
+    }
+
+    function skipSignIn() {
+        document.getElementById('signInModal').style.display = 'none';
+    }
 
     const pathDetails = {
         nursery: {
