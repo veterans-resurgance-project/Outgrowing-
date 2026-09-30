@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track 03: Emergency Response & First Aid | VRP Training Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between p-4 sm:p-6">
+
+    <header class="max-w-4xl mx-auto w-full flex justify-between items-center border-b border-slate-800 pb-4 mb-6">
+        <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-rose-400 bg-rose-950/40 px-3 py-1 rounded-full border border-rose-800/50">Track 03 Curriculum</span>
+            <h2 class="text-lg font-extrabold text-white mt-1">Emergency Response &amp; First Aid Study Hub</h2>
+        </div>
+        <nav class="flex items-center gap-4 text-sm font-medium">
+            <a href="recruit-hub.html" class="text-slate-400 hover:text-sky-400 transition">← Back to Hub</a>
+        </nav>
+    </header>
+
+    <main class="max-w-4xl mx-auto w-full flex-grow space-y-8">
+        
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-4">
+            <h1 class="text-2xl font-extrabold text-white">Module Overview &amp; Protocol Standards</h1>
+            <p class="text-sm text-slate-300 leading-relaxed">
+                Designed around American Red Cross standards and wilderness trauma protocols. Recruits learn rapid triage, tourniquet application, heat exhaustion mitigation, and remote radio emergency communication procedures.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-3">
+                <h3 class="text-base font-bold text-rose-400">Unit 1: Wilderness Triage &amp; Bleeding Control</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Prioritizing casualties in low-resource environments. Proper windlass tourniquet placement, wound packing techniques, and managing hypothermia during extended field delays.
+                </p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-3">
+                <h3 class="text-base font-bold text-rose-400">Unit 2: Environmental Hazard Mitigation</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Recognizing stages of heat stroke versus dehydration, bee/asp sting anaphylaxis response, and safe evacuation signaling using GPS coordinates and mirror/smoke vectors.
+                </p>
+            </div>
+        </div>
+
+        <div class="bg-slate-900 border border-rose-900/60 p-6 rounded-2xl shadow-xl space-y-6">
+            <div>
+                <span class="text-xs font-bold text-rose-400 bg-rose-950/60 px-2.5 py-1 rounded border border-rose-800/40">Diagnostic Checkpoint</span>
+                <h2 class="text-lg font-bold text-white mt-2">Emergency Response Knowledge Verification</h2>
+                <p class="text-xs text-slate-400">Select an answer to reveal detailed operational explanations.</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div class="space-y-3 border-t border-slate-800 pt-4">
+                <p class="text-sm font-semibold text-slate-200">1. Where should a windlass tourniquet be placed on an extremity with a severe arterial bleed?</p>
+                <div class="space-y-2">
+                    <button onclick="checkAnswer('q1', 0, false)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">A) Directly over the joint (elbow or knee) for maximum stability.</button>
+                    <button onclick="checkAnswer('q1', 1, true)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">B) 2 to 3 inches above the wound, high and tight on the limb, never on a joint.</button>
+                    <button onclick="checkAnswer('q1', 2, false)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">C) Exactly 1 inch below the wound site.</button>
+                </div>
+                <div id="q1-feedback" class="hidden text-xs p-3 rounded-lg bg-slate-950 border"></div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="max-w-4xl mx-auto w-full text-center text-xs text-slate-500 pt-8 border-t border-slate-900 mt-12">
+        Watershed Stewards &bull; Emergency Response Training Track
+    </footer>
+
+    <script>
+        function checkAnswer(questionId, selectedIdx, isCorrect) {
+            const feedbackEl = document.getElementById(questionId + '-feedback');
+            feedbackEl.classList.remove('hidden');
+            if (isCorrect) {
+                feedbackEl.className = "text-xs p-3 rounded-lg bg-emerald-950/40 border border-emerald-800/50 text-emerald-300";
+                feedbackEl.innerHTML = "<strong>Correct!</strong> Explanation: Placing a tourniquet high and tight on the limb (proximal to the wound) over single-bone structures ensures effective arterial compression without slipping over joint hinges.";
+            } else {
+                feedbackEl.className = "text-xs p-3 rounded-lg bg-rose-950/40 border border-rose-800/50 text-rose-300";
+                feedbackEl.innerHTML = "<strong>Incorrect.</strong> Review protocol guidelines on tourniquet placement.";
+            }
+        }
+    </script>
+</body>
+</html>
