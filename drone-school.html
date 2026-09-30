@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recruit Training Hub | Watershed Stewards & VRP</title>
+    <title>Recruit Training Hub | Watershed Stewards &amp; VRP</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -65,28 +65,23 @@
                     Log Out / Switch User
                 </button>
             </div>
-            
-                    
-    </main>
+                
+            <!-- Quick Module Launch Switcher -->
+            <div class="flex gap-4 flex-wrap mt-6">
+                <a href="module-1-high-tunnel.html" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-3 rounded-xl font-bold text-sm inline-block transition shadow-lg shadow-emerald-900/30">Launch Farmer X High Tunnel</a>
+                <a href="module-2-irrigation.html" class="bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 px-5 py-3 rounded-xl font-semibold text-sm inline-block transition">Irrigation</a>
+                <a href="module-3-watershed.html" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-3 rounded-xl font-bold text-sm inline-block transition shadow-lg shadow-emerald-900/30">Watershed Remediation</a>
+            </div>
 
-            <!-- Track Switcher Buttons -->
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
-        <a href"module-1-high-tunnel" style="background-color: #27ae60; color: #ffffff; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.95rem; display: inline-block; transition: background 0.2s; box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);">Launch Farmer X High Tunnel</a>
-        
-        <a href="module-2-irrigation.html" style="background-color: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.25); padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; display: inline-block; transition: background 0.2s;">Irrigation</a>
-     
-        <a href="module-3-watershed.html" style="background-color: #27ae60; color: #ffffff; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.95rem; display: inline-block; transition: background 0.2s; box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);">Watershed Remediation</a>
-      </div>
-        </div>
             <!-- Training Track Grid (6 Tracks) -->
-            <div class="space-y-4">
+            <div class="space-y-4 pt-4">
                 <div class="border-b border-slate-800 pb-2 flex justify-between items-center">
                     <h2 class="text-lg font-bold text-amber-400">Select Your Training &amp; Certification Track</h2>
                     <span class="text-xs text-slate-400">6 Professional Pathways Available</span>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                    <!-- TRACK 1: Drone Licensing (Linked to Drone School) -->
+                    <!-- TRACK 1: Drone Licensing -->
                     <div class="bg-slate-900 border border-sky-800/60 rounded-xl p-6 shadow-xl flex flex-col justify-between space-y-4 hover:border-sky-500 transition">
                         <div class="space-y-2">
                             <span class="text-xs font-bold text-sky-400 bg-sky-950/60 px-2.5 py-1 rounded border border-sky-800/40">Track 01</span>
@@ -97,6 +92,7 @@
                             Enter Drone Training &rarr;
                         </a>
                     </div>
+
                     <!-- TRACK 2: Agricultural Training & Soil Diagnostics -->
                     <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl flex flex-col justify-between space-y-4 hover:border-slate-600 transition">
                         <div class="space-y-2">
@@ -104,11 +100,11 @@
                             <h3 class="text-lg font-bold text-white">Ag Systems &amp; Soil Diagnostics</h3>
                             <p class="text-xs text-slate-400 leading-relaxed">Learn micro-farm design, soil amendment strategies, crop-matching metrics, and landowner optimization protocols.</p>
                         </div>
-                        <!-- REPLACE href="#" with your ag training link -->
                         <a href="track-2-ag.html" class="block w-full text-center bg-slate-800 hover:bg-slate-700 text-emerald-400 font-semibold py-2.5 rounded-lg text-xs border border-slate-700 transition">
                             Launch Ag Track &rarr;
                         </a>
                     </div>
+
                     <!-- TRACK 3: Emergency Response & Red Cross Certs -->
                     <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl flex flex-col justify-between space-y-4 hover:border-slate-600 transition">
                         <div class="space-y-2">
@@ -116,11 +112,11 @@
                             <h3 class="text-lg font-bold text-white">Emergency Response &amp; First Aid</h3>
                             <p class="text-xs text-slate-400 leading-relaxed">Complete American Red Cross certifications, wilderness first aid, trauma response, and disaster relief preparedness protocols.</p>
                         </div>
-                        <!-- REPLACE href="#" with your emergency cert link -->
                         <a href="track-3-safety.html" class="block w-full text-center bg-slate-800 hover:bg-slate-700 text-rose-400 font-semibold py-2.5 rounded-lg text-xs border border-slate-700 transition">
                             Launch Safety Track &rarr;
                         </a>
                     </div>
+
                     <!-- TRACK 4: Watershed Restoration & Fuels Reduction -->
                     <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl flex flex-col justify-between space-y-4 hover:border-slate-600 transition">
                         <div class="space-y-2">
@@ -128,11 +124,11 @@
                             <h3 class="text-lg font-bold text-white">Watershed &amp; Fuels Reduction</h3>
                             <p class="text-xs text-slate-400 leading-relaxed">Field training on post-wildfire hillside stabilization, invasive species control, timber subcontracts, and hazardous fuels management.</p>
                         </div>
-                        <!-- REPLACE href="#" with your forestry link -->
                         <a href="track-4-watershed.html" class="block w-full text-center bg-slate-800 hover:bg-slate-700 text-amber-400 font-semibold py-2.5 rounded-lg text-xs border border-slate-700 transition">
                             Launch Field Track &rarr;
                         </a>
                     </div>
+
                     <!-- TRACK 5: Native Plant Propagation -->
                     <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl flex flex-col justify-between space-y-4 hover:border-slate-600 transition">
                         <div class="space-y-2">
@@ -140,11 +136,11 @@
                             <h3 class="text-lg font-bold text-white">Native Plant Propagation</h3>
                             <p class="text-xs text-slate-400 leading-relaxed">Greenhouse nursery operations, seed collection, rootstock management, and botanical restoration for regional riverbanks.</p>
                         </div>
-                        <!-- REPLACE href="#" with your botany/nursery link -->
                         <a href="track-5-nursery.html" class="block w-full text-center bg-slate-800 hover:bg-slate-700 text-purple-400 font-semibold py-2.5 rounded-lg text-xs border border-slate-700 transition">
                             Launch Nursery Track &rarr;
                         </a>
                     </div>
+
                     <!-- TRACK 6: Equipment Maintenance & Logistics -->
                     <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl flex flex-col justify-between space-y-4 hover:border-slate-600 transition">
                         <div class="space-y-2">
@@ -152,14 +148,17 @@
                             <h3 class="text-lg font-bold text-white">Equipment &amp; Fleet Logistics</h3>
                             <p class="text-xs text-slate-400 leading-relaxed">Small engine repair, heavy tool maintenance, fleet safety inspections, and asset-light resource tracking.</p>
                         </div>
-                        <!-- REPLACE href="#" with your equipment link -->
                         <a href="track-6-logistics.html" class="block w-full text-center bg-slate-800 hover:bg-slate-700 text-blue-400 font-semibold py-2.5 rounded-lg text-xs border border-slate-700 transition">
                             Launch Logistics Track &rarr;
                         </a>
                     </div>
+
                 </div>
             </div>
+
         </div>
+    </main>
+
     <!-- Footer -->
     <footer class="max-w-6xl mx-auto w-full text-center text-xs text-slate-500 pt-8 border-t border-slate-900 mt-12">
         Watershed Stewards &amp; Veterans Resurgence Project &bull; Linn County, Oregon Operations
