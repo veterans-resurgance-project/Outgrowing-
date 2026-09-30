@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track 02: Ag Systems & Soil Diagnostics | VRP Training Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between p-4 sm:p-6">
+
+    <header class="max-w-4xl mx-auto w-full flex justify-between items-center border-b border-slate-800 pb-4 mb-6">
+        <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950/40 px-3 py-1 rounded-full border border-emerald-800/50">Track 02 Curriculum</span>
+            <h2 class="text-lg font-extrabold text-white mt-1">Ag Systems &amp; Soil Diagnostics Study Hub</h2>
+        </div>
+        <nav class="flex items-center gap-4 text-sm font-medium">
+            <a href="recruit-hub.html" class="text-slate-400 hover:text-sky-400 transition">← Back to Hub</a>
+        </nav>
+    </header>
+
+    <main class="max-w-4xl mx-auto w-full flex-grow space-y-8">
+        
+        <!-- Overview Section -->
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-4">
+            <h1 class="text-2xl font-extrabold text-white">Module Overview &amp; Field Protocols</h1>
+            <p class="text-sm text-slate-300 leading-relaxed">
+                This track establishes foundational competency in sustainable high-tunnel management, soil texture analysis, organic amendment dosing, and passive moisture balancing. Recruits will master testing soil composition to match optimal crop yield parameters across Willamette Valley microclimates.
+            </p>
+        </div>
+
+        <!-- Study Guide Sections -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-3">
+                <h3 class="text-base font-bold text-emerald-400">Unit 1: Soil Texture &amp; Composition</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Understanding the ratio of sand, silt, and clay. Field testing via ribbon tests and jar settling methods to evaluate drainage rates, cation exchange capacity (CEC), and organic matter content.
+                </p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-3">
+                <h3 class="text-base font-bold text-emerald-400">Unit 2: Micro-Irrigation &amp; Fertigation</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Configuring pressure-compensating drip tape, liquid organic fertilizer injection rates, and moisture sensor threshold triggers to prevent nutrient leaching and root saturation.
+                </p>
+            </div>
+        </div>
+
+        <!-- Interactive Practice Assessment -->
+        <div class="bg-slate-900 border border-emerald-900/60 p-6 rounded-2xl shadow-xl space-y-6">
+            <div>
+                <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded border border-emerald-800/40">Diagnostic Checkpoint</span>
+                <h2 class="text-lg font-bold text-white mt-2">Ag Systems Knowledge Verification</h2>
+                <p class="text-xs text-slate-400">Select an answer to reveal detailed operational explanations.</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div class="space-y-3 border-t border-slate-800 pt-4">
+                <p class="text-sm font-semibold text-slate-200">1. What is the primary indicator of heavy clay content during a field ribbon test?</p>
+                <div class="space-y-2" id="q1-options">
+                    <button onclick="checkAnswer('q1', 0, false)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">A) Soil crumbles immediately without forming a ball.</button>
+                    <button onclick="checkAnswer('q1', 1, true)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">B) Soil forms a long, flexible ribbon that resists breaking.</button>
+                    <button onclick="checkAnswer('q1', 2, false)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">C) Soil feels gritty and leaves no residue on fingers.</button>
+                </div>
+                <div id="q1-feedback" class="hidden text-xs p-3 rounded-lg bg-slate-950 border"></div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="space-y-3 border-t border-slate-800 pt-4">
+                <p class="text-sm font-semibold text-slate-200">2. Why is drip irrigation preferred over overhead sprinklers in high-tunnel cultivation?</p>
+                <div class="space-y-2" id="q2-options">
+                    <button onclick="checkAnswer('q2', 0, true)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">A) It minimizes foliage moisture, reducing fungal pathogen outbreaks.</button>
+                    <button onclick="checkAnswer('q2', 1, false)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">B) It increases overall relative humidity inside the structure.</button>
+                    <button onclick="checkAnswer('q2', 2, false)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">C) It requires zero water filtration maintenance.</button>
+                </div>
+                <div id="q2-feedback" class="hidden text-xs p-3 rounded-lg bg-slate-950 border"></div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="max-w-4xl mx-auto w-full text-center text-xs text-slate-500 pt-8 border-t border-slate-900 mt-12">
+        Watershed Stewards &bull; Ag Systems &amp; Soil Diagnostics Training Track
+    </footer>
+
+    <script>
+        function checkAnswer(questionId, selectedIdx, isCorrect) {
+            const feedbackEl = document.getElementById(questionId + '-feedback');
+            feedbackEl.classList.remove('hidden');
+            
+            if (isCorrect) {
+                feedbackEl.className = "text-xs p-3 rounded-lg bg-emerald-950/40 border border-emerald-800/50 text-emerald-300";
+                feedbackEl.innerHTML = "<strong>Correct!</strong> Explanation: " + 
+                    (questionId === 'q1' ? "Clay particles bind tightly together due to high surface area, allowing long ribbons to form without fracturing." : 
+                                          "Keeping foliage dry prevents water-borne spores (like powdery mildew) from germinating in enclosed environments.");
+            } else {
+                feedbackEl.className = "text-xs p-3 rounded-lg bg-rose-950/40 border border-rose-800/50 text-rose-300";
+                feedbackEl.innerHTML = "<strong>Incorrect.</strong> Review the study unit material above and try the alternative selection.";
+            }
+        }
+    </script>
+</body>
+</html>
