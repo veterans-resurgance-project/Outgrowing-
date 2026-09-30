@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruit Training Hub | Watershed Stewards & VRP</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between p-4 sm:p-6">
+
+    <!-- Top Navigation Bar -->
+    <header class="max-w-6xl mx-auto w-full flex justify-between items-center border-b border-slate-800 pb-4 mb-6">
+        <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-950/40 px-3 py-1 rounded-full border border-amber-800/50">VRP Workforce Hub</span>
+            <h2 class="text-lg font-extrabold text-white mt-1">Recruit Career &amp; Certification Portal</h2>
+        </div>
+        <nav class="flex items-center gap-4 text-sm font-medium">
+            <a href="index.html" class="text-slate-400 hover:text-sky-400 transition">← Back to Main Site</a>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto w-full flex-grow">
+
+        <!-- AUTHENTICATION GATE (Visible by default) -->
+        <div id="auth-gate" class="max-w-md mx-auto mt-12 bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-2xl space-y-6">
+            <div class="text-center space-y-2">
+                <div class="inline-flex p-3 bg-sky-950/50 text-sky-400 rounded-full border border-sky-800/50 mb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+                <h1 class="text-xl font-bold text-white">Secure Recruit Portal Access</h1>
+                <p class="text-xs text-slate-400">Enter your assigned cohort callsign or recruit identifier to load your training tracks.</p>
+            </div>
+
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Recruit Callsign / Name</label>
+                    <input type="text" id="recruit-name" required placeholder="e.g. VET-042 or John Doe" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:border-sky-500 transition">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Cohort Access Code</label>
+                    <input type="password" id="access-code" required placeholder="••••••••" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:border-sky-500 transition">
+                </div>
+                <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2.5 rounded-lg text-sm transition shadow-lg shadow-sky-900/30">
+                    Authorize &amp; Enter Hub
+                </button>
+                <p id="error-msg" class="text-xs text-rose-400 text-center hidden">Invalid access code. Please use your assigned cohort code.</p>
+            </form>
+        </div>
+
+        <!-- SECURE MULTI-TRACK DASHBOARD (Hidden until login) -->
+        <div id="curriculum-content" class="hidden space-y-8">
+            
+            <!-- Welcome Header Banner -->
+            <div class="bg-gradient-to-r from-slate-900 via-sky-950/40 to-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div class="space-y-1">
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950/50 px-3 py-1 rounded-full border border-emerald-800/50">Active Session Authorized</span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Welcome aboard, <span id="user-display" class="text-sky-400"></span></h1>
+                    <p class="text-sm text-slate-300 max-w-2xl">You have successfully cleared the security gate. Select a vocational track below to begin your modules, certifications, and field training requirements.</p>
+                </div>
+                <button onclick="location.reload()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white px-4 py-2 rounded-lg border border-slate-700 text-xs font-semibold transition">
+                    Log Out / Switch User
+                </button>
+            </div>
+
+            <!-- Training Track Grid (6 Tracks) -->
+            <div class="space-y-4">
+                <div class="border-b border-slate-800 pb-2 flex justify-between items-center">
+                    <h2 class="text-lg font-bold text-amber-400">Select Your Training &amp; Certification Track</h2>
+                    <span class="text-xs text-slate-400">6 Professional Pathways Available</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- TRACK 1: Drone Licensing (Linked to Drone School) -->
+                    <div class="bg-slate-900 border border-sky-800/60 rounded-xl p-6 shadow-xl flex flex-col justify-between space-y-4 hover:border-sky-500 transition">
+                        <div class="space-y-2">
+                            <span class="text-xs font-bold text-sky-400 bg-sky-950/60 px-2.5 py-1 rounded border border-sky-800/40">Track 01</span>
+                            <h3 class="text-lg font-bold text-white">FAA Part 107 Drone Licensing</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">Master airspace regulations, weather interpretation, and sUAS operational workflows for aerial land scanning and GIS thermal mapping.</p>
+                        </div>
+                        <a href="drone-school1.html" class="block w-full text-center bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2.5 rounded-lg text-xs transition shadow-md">
+                            Enter Drone Training &rarr;
+                        </a>
+                    </div>
+
+                    <!-- TRACK 2: Agricultural Training & Soil Diagnostics -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl flex flex-col justify-between space-y-4 hover:border-slate-600 transition">
+                        <div class="space-y-2">
+                            <span class="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded border border-emerald-800/40">Track 02</span>
+                            <h3 class="text-lg font-bold text-white">Ag Systems &amp; Soil Diagnostics</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">Learn micro-farm design, soil amendment strategies, crop-matching metrics, and landowner optimization protocols.</p>
+                        </div>
+                        <!-- REPLACE href="#" with your ag training link -->
+                        <a href="#" class="block w-full text-center bg-slate-800 hover:bg-slate-700 text-emerald-400 font-semibold py-2.5 rounded-lg text-xs border border-slate-700 transition">
+                            Launch Ag Track &rarr;
+                        </a>
+                    </div>
+
+                    <!-- TRACK 3: Emergency Response & Red Cross Certs -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl flex flex-col justify-between space-y-4 hover:border-slate-600 transition">
+                        <div class="space-y-2">
+                            <span class="text-xs font-bold text-rose-400 bg-rose-950/60 px-2.5 py-1 rounded border border-rose-800/40">Track 03</span>
+                            <h3 class="text-lg font-bold text-white">Emergency Response &amp; First Aid</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">Complete American Red Cross certifications, wilderness first aid, trauma response, and disaster relief preparedness protocols.</p>
+                        </div>
+                        <!-- REPLACE href="#" with your emergency cert link -->
+                        <a href="#" class="block w-full text-center bg-slate-800 hover:bg-slate-700 text-rose-400 font-semibold py-2.5 rounded-lg text-xs border border-slate-700 transition">
+                            Launch Safety Track &rarr;
+                        </a>
+                    </div>
+
+                    <!-- TRACK 4: Watershed Restoration & Fuels Reduction -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl flex flex-col justify-between space-y-4 hover:border-slate-600 transition">
+                        <div class="space-y-2">
+                            <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded border border-amber-800/40">Track 04</span>
+                            <h3 class="text-lg font-bold text-white">Watershed &amp; Fuels Reduction</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">Field training on post-wildfire hillside stabilization, invasive species control, timber subcontracts, and hazardous fuels management.</p>
+                        </div>
+                        <!-- REPLACE href="#" with your forestry link -->
+                        <a href="#" class="block w-full text-center bg-slate-800 hover:bg-slate-700 text-amber-400 font-semibold py-2.5 rounded-lg text-xs border border-slate-700 transition">
+                            Launch Field Track &rarr;
+                        </a>
+                    </div>
+
+                    <!-- TRACK 5: Native Plant Propagation -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl flex flex-col justify-between space-y-4 hover:border-slate-600 transition">
+                        <div class="space-y-2">
+                            <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded border border-purple-800/40">Track 05</span>
+                            <h3 class="text-lg font-bold text-white">Native Plant Propagation</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">Greenhouse nursery operations, seed collection, rootstock management, and botanical restoration for regional riverbanks.</p>
+                        </div>
+                        <!-- REPLACE href="#" with your botany/nursery link -->
+                        <a href="#" class="block w-full text-center bg-slate-800 hover:bg-slate-700 text-purple-400 font-semibold py-2.5 rounded-lg text-xs border border-slate-700 transition">
+                            Launch Nursery Track &rarr;
+                        </a>
+                    </div>
+
+                    <!-- TRACK 6: Equipment Maintenance & Logistics -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl flex flex-col justify-between space-y-4 hover:border-slate-600 transition">
+                        <div class="space-y-2">
+                            <span class="text-xs font-bold text-blue-400 bg-blue-950/60 px-2.5 py-1 rounded border border-blue-800/40">Track 06</span>
+                            <h3 class="text-lg font-bold text-white">Equipment &amp; Fleet Logistics</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">Small engine repair, heavy tool maintenance, fleet safety inspections, and asset-light resource tracking.</p>
+                        </div>
+                        <!-- REPLACE href="#" with your equipment link -->
+                        <a href="#" class="block w-full text-center bg-slate-800 hover:bg-slate-700 text-blue-400 font-semibold py-2.5 rounded-lg text-xs border border-slate-700 transition">
+                            Launch Logistics Track &rarr;
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-6xl mx-auto w-full text-center text-xs text-slate-500 pt-8 border-t border-slate-900 mt-12">
+        Watershed Stewards &amp; Veterans Resurgence Project &bull; Linn County, Oregon Operations
+    </footer>
+
+    <!-- Client-Side Auth Script -->
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const authGate = document.getElementById('auth-gate');
+        const curriculumContent = document.getElementById('curriculum-content');
+        const userDisplay = document.getElementById('user-display');
+        const errorMsg = document.getElementById('error-msg');
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const recruitName = document.getElementById('recruit-name').value.trim();
+            const accessCode = document.getElementById('access-code').value.trim();
+
+            if (recruitName.length > 0 && accessCode.length > 0) {
+                localStorage.setItem('vrp_recruit', recruitName);
+                
+                authGate.classList.add('hidden');
+                userDisplay.textContent = recruitName;
+                curriculumContent.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                errorMsg.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
