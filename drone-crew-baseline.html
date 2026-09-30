@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI Portal | Ground Crew Baseline Training</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Simple frontend gatekeeper check to ensure they are signed in
+        if (!localStorage.getItem('afti_current_operator')) {
+            window.location.href = 'index-public.html';
+        }
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen p-6">
+
+<div class="max-w-4xl mx-auto space-y-6">
+    
+    <!-- Header -->
+    <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+            <h1 class="text-2xl font-extrabold text-emerald-400">Ground Crew & Visual Observer Baseline</h1>
+            <p class="text-sm text-slate-400 mt-1">Initial Safety Briefing, Protocols, and FAA Certification</p>
+        </div>
+        <div>
+            <a href="drone-lesson-intro.html" class="bg-slate-800 hover:bg-slate-700 text-sky-400 font-semibold px-4 py-2 rounded-lg text-xs border border-slate-700 transition shadow-lg">
+                &larr; Back to Main Hub
+            </a>
+        </div>
+    </div>
+
+    <!-- Step 1: Protocol Briefing -->
+    <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 shadow-xl space-y-4">
+        <h2 class="text-lg font-bold text-white border-b border-slate-800 pb-2">Step 1: Internal Standard Operating Protocols (SOP)</h2>
+        <p class="text-xs text-slate-300 leading-relaxed">
+            Before stepping onto a project site, all AFTI crew members must read and understand the following baseline protocols. As a Visual Observer or Ground Operator, you are the eyes and ears of the Pilot in Command (PIC).
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <div class="bg-slate-950 p-4 rounded-lg border border-slate-800">
+                <h3 class="text-sm font-bold text-sky-400 mb-2">Crew Resource Management (CRM)</h3>
+                <ul class="list-disc pl-4 text-xs text-slate-400 space-y-1">
+                    <li>Maintain unbroken visual line of sight (VLOS) with the drone.</li>
+                    <li>Use clear, concise radio callouts (e.g., "Traffic, 3 o'clock, high").</li>
+                    <li>Never distract the PIC during takeoff, landing, or complex maneuvers.</li>
+                </ul>
+            </div>
+            <div class="bg-slate-950 p-4 rounded-lg border border-slate-800">
+                <h3 class="text-sm font-bold text-amber-400 mb-2">LiPo Battery & Site Safety</h3>
+                <ul class="list-disc pl-4 text-xs text-slate-400 space-y-1">
+                    <li>Inspect all LiPo batteries for swelling or puncture before charging.</li>
+                    <li>Keep the primary landing zone (LZ) clear of unauthorized personnel.</li>
+                    <li>Always wear required PPE (high-vis vests, safety glasses) on active watershed/burn scar sites.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 2: The Certification -->
+    <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 shadow-xl space-y-4">
+        <h2 class="text-lg font-bold text-emerald-400 border-b border-slate-800 pb-2">Step 2: Obtain Your FAA TRUST Certificate</h2>
+        <p class="text-xs text-slate-300 leading-relaxed">
+            To legally participate in flight operations, you must pass The Recreational UAS Safety Test (TRUST). This is a <strong>free, online, unproctored test</strong> provided by the FAA. It takes about 15 minutes and you cannot fail (wrong answers let you try again).
+        </p>
+
+        <div class="bg-slate-950 p-4 rounded-lg border border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="text-xs text-slate-400">
+                <strong class="text-white block mb-1">FAA Official TRUST Test Portals</strong>
+                Click the button to view the FAA's list of approved test administrators (e.g., Boy Scouts of America, Embry-Riddle, UAV Coach). Choose any administrator to take the free test.
+            </div>
+            <a href="https://www.faa.gov/uas/recreational_flyers/knowledge_test_updates" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-lg text-xs transition shadow-lg shrink-0 whitespace-nowrap">
+                Open FAA Test Portal &rarr;
+            </a>
+        </div>
+    </div>
+
+    <!-- Step 3: Application Instructions -->
+    <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 shadow-xl space-y-4">
+        <h2 class="text-lg font-bold text-amber-400 border-b border-slate-800 pb-2">Step 3: How to Apply & Join the Active Roster</h2>
+        
+        <ol class="list-decimal pl-5 text-xs text-slate-300 space-y-3">
+            <li><strong>Save Your Certificate:</strong> Upon finishing the FAA TRUST test, you will be issued a completion certificate. <em>Save this as a PDF or take a clear screenshot. The FAA does not keep a record of it, so do not lose it!</em></li>
+            <li><strong>Acknowledge Protocols:</strong> Ensure you have read and understood the AFTI SOPs listed in Step 1.</li>
+            <li><strong>Submit Credentials:</strong> Email your TRUST Certificate PDF alongside your AFTI Call Sign/Name to your designated Team Lead or upload it to the AFTI Discord/Comms channel.</li>
+            <li><strong>Field Orientation:</strong> You will be scheduled for a 30-minute on-site physical briefing to verify PPE and radio checks. Once complete, you are officially cleared for active field deployments.</li>
+        </ol>
+
+        <div class="mt-6 pt-4 border-t border-slate-800 text-center">
+            <button onclick="alert('Document upload portal coming soon. For now, please email your certificate to the Team Lead.')" class="bg-slate-800 hover:bg-slate-700 text-sky-400 font-bold px-6 py-3 rounded-lg text-xs border border-slate-700 transition shadow-lg">
+                Upload TRUST Certificate & Request Clearance
+            </button>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
