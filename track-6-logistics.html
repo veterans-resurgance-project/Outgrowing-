@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track 06: Equipment & Fleet Logistics | VRP Training Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between p-4 sm:p-6">
+
+    <header class="max-w-4xl mx-auto w-full flex justify-between items-center border-b border-slate-800 pb-4 mb-6">
+        <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-blue-400 bg-blue-950/40 px-3 py-1 rounded-full border border-blue-800/50">Track 06 Curriculum</span>
+            <h2 class="text-lg font-extrabold text-white mt-1">Equipment &amp; Fleet Logistics Study Hub</h2>
+        </div>
+        <nav class="flex items-center gap-4 text-sm font-medium">
+            <a href="recruit-hub.html" class="text-slate-400 hover:text-sky-400 transition">← Back to Hub</a>
+        </nav>
+    </header>
+
+    <main class="max-w-4xl mx-auto w-full flex-grow space-y-8">
+        
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-4">
+            <h1 class="text-2xl font-extrabold text-white">Module Overview &amp; Fleet Protocols</h1>
+            <p class="text-sm text-slate-300 leading-relaxed">
+                Small engine troubleshooting, heavy tool maintenance, pre-trip vehicle and trailer safety inspections, asset-light inventory tracking, and field equipment deployment protocols.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-3">
+                <h3 class="text-base font-bold text-blue-400">Unit 1: Small Engine Maintenance</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Two-stroke and four-stroke fuel mixing, carburetor cleaning, spark plug inspection, air filter servicing, and trouble-starting diagnosis in field conditions.
+                </p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-3">
+                <h3 class="text-base font-bold text-blue-400">Unit 2: Fleet &amp; Trailer Safety</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Pre-trip DOT checklist inspections, hitch locking, safety chain cross-rigging, breakaway cable verification, and cargo tie-down load securement.
+                </p>
+            </div>
+        </div>
+
+        <div class="bg-slate-900 border border-blue-900/60 p-6 rounded-2xl shadow-xl space-y-6">
+            <div>
+                <span class="text-xs font-bold text-blue-400 bg-blue-950/60 px-2.5 py-1 rounded border border-blue-800/40">Diagnostic Checkpoint</span>
+                <h2 class="text-lg font-bold text-white mt-2">Logistics Knowledge Verification</h2>
+                <p class="text-xs text-slate-400">Select an answer to reveal detailed operational explanations.</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div class="space-y-3 border-t border-slate-800 pt-4">
+                <p class="text-sm font-semibold text-slate-200">1. Why must safety chains be crossed underneath a trailer tongue during hitching?</p>
+                <div class="space-y-2">
+                    <button onclick="checkAnswer('q1', 0, false)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">A) To improve overall fuel efficiency while towing.</button>
+                    <button onclick="checkAnswer('q1', 1, true)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">B) To form a cradle that catches the tongue if it disconnects from the ball.</button>
+                    <button onclick="checkAnswer('q1', 2, false)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">C) To prevent electrical cable tangling.</button>
+                </div>
+                <div id="q1-feedback" class="hidden text-xs p-3 rounded-lg bg-slate-950 border"></div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="max-w-4xl mx-auto w-full text-center text-xs text-slate-500 pt-8 border-t border-slate-900 mt-12">
+        Watershed Stewards &bull; Equipment &amp; Fleet Logistics Track
+    </footer>
+
+    <script>
+        function checkAnswer(questionId, selectedIdx, isCorrect) {
+            const feedbackEl = document.getElementById(questionId + '-feedback');
+            feedbackEl.classList.remove('hidden');
+            if (isCorrect) {
+                feedbackEl.className = "text-xs p-3 rounded-lg bg-emerald-950/40 border border-emerald-800/50 text-emerald-300";
+                feedbackEl.innerHTML = "<strong>Correct!</strong> Explanation: Crossing the chains creates a cradle or cradle-support that prevents the trailer tongue from dropping directly onto the pavement if the hitch decouples.";
+            } else {
+                feedbackEl.className = "text-xs p-3 rounded-lg bg-rose-950/40 border border-rose-800/50 text-rose-300";
+                feedbackEl.innerHTML = "<strong>Incorrect.</strong> Review trailer hitching and safety chain guidelines.";
+            }
+        }
+    </script>
+</body>
+</html>
