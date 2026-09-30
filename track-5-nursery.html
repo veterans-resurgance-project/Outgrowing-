@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track 05: Native Plant Propagation | VRP Training Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between p-4 sm:p-6">
+
+    <header class="max-w-4xl mx-auto w-full flex justify-between items-center border-b border-slate-800 pb-4 mb-6">
+        <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-purple-400 bg-purple-950/40 px-3 py-1 rounded-full border border-purple-800/50">Track 05 Curriculum</span>
+            <h2 class="text-lg font-extrabold text-white mt-1">Native Plant Propagation Study Hub</h2>
+        </div>
+        <nav class="flex items-center gap-4 text-sm font-medium">
+            <a href="recruit-hub.html" class="text-slate-400 hover:text-sky-400 transition">← Back to Hub</a>
+        </nav>
+    </header>
+
+    <main class="max-w-4xl mx-auto w-full flex-grow space-y-8">
+        
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-4">
+            <h1 class="text-2xl font-extrabold text-white">Module Overview &amp; Nursery Operations</h1>
+            <p class="text-sm text-slate-300 leading-relaxed">
+                Greenhouse nursery operations, ethical seed collection protocols, cold stratification methods, rootstock pruning, and botanical restoration techniques for riparian zones and burn scar revegetation.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-3">
+                <h3 class="text-base font-bold text-purple-400">Unit 1: Seed Collection &amp; Stratification</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Ethical harvesting guidelines from wild populations, seed cleaning, drying, and simulating winter dormancy conditions using cold stratification chambers.
+                </p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-3">
+                <h3 class="text-base font-bold text-purple-400">Unit 2: Container Stock &amp; Hardening Off</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Managing root development in plug trays, soil mix ratios for drainage, and gradual outdoor acclimation before field outplanting.
+                </p>
+            </div>
+        </div>
+
+        <div class="bg-slate-900 border border-purple-900/60 p-6 rounded-2xl shadow-xl space-y-6">
+            <div>
+                <span class="text-xs font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded border border-purple-800/40">Diagnostic Checkpoint</span>
+                <h2 class="text-lg font-bold text-white mt-2">Propagation Knowledge Verification</h2>
+                <p class="text-xs text-slate-400">Select an answer to reveal detailed operational explanations.</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div class="space-y-3 border-t border-slate-800 pt-4">
+                <p class="text-sm font-semibold text-slate-200">1. What is the primary purpose of cold stratification for many native Pacific Northwest tree and shrub seeds?</p>
+                <div class="space-y-2">
+                    <button onclick="checkAnswer('q1', 0, false)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">A) To sterilize the seed coat against fungal infection.</button>
+                    <button onclick="checkAnswer('q1', 1, true)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">B) To break internal seed dormancy by simulating natural winter conditions.</button>
+                    <button onclick="checkAnswer('q1', 2, false)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">C) To accelerate immediate germination within 48 hours.</button>
+                </div>
+                <div id="q1-feedback" class="hidden text-xs p-3 rounded-lg bg-slate-950 border"></div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="max-w-4xl mx-auto w-full text-center text-xs text-slate-500 pt-8 border-t border-slate-900 mt-12">
+        Watershed Stewards &bull; Native Plant Propagation Track
+    </footer>
+
+    <script>
+        function checkAnswer(questionId, selectedIdx, isCorrect) {
+            const feedbackEl = document.getElementById(questionId + '-feedback');
+            feedbackEl.classList.remove('hidden');
+            if (isCorrect) {
+                feedbackEl.className = "text-xs p-3 rounded-lg bg-emerald-950/40 border border-emerald-800/50 text-emerald-300";
+                feedbackEl.innerHTML = "<strong>Correct!</strong> Explanation: Cold stratification mimics natural winter chill, signaling chemical changes inside the seed that break embryo dormancy so it can germinate in spring.";
+            } else {
+                feedbackEl.className = "text-xs p-3 rounded-lg bg-rose-950/40 border border-rose-800/50 text-rose-300";
+                feedbackEl.innerHTML = "<strong>Incorrect.</strong> Review seed dormancy and stratification guidelines.";
+            }
+        }
+    </script>
+</body>
+</html>
