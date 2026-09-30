@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track 04: Watershed & Fuels Reduction | VRP Training Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between p-4 sm:p-6">
+
+    <header class="max-w-4xl mx-auto w-full flex justify-between items-center border-b border-slate-800 pb-4 mb-6">
+        <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-950/40 px-3 py-1 rounded-full border border-amber-800/50">Track 04 Curriculum</span>
+            <h2 class="text-lg font-extrabold text-white mt-1">Watershed &amp; Fuels Reduction Study Hub</h2>
+        </div>
+        <nav class="flex items-center gap-4 text-sm font-medium">
+            <a href="recruit-hub.html" class="text-slate-400 hover:text-sky-400 transition">← Back to Hub</a>
+        </nav>
+    </header>
+
+    <main class="max-w-4xl mx-auto w-full flex-grow space-y-8">
+        
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-4">
+            <h1 class="text-2xl font-extrabold text-white">Module Overview &amp; Forestry Operations</h1>
+            <p class="text-sm text-slate-300 leading-relaxed">
+                Field training focused on post-wildfire hillside stabilization, contour wattling, check dam installation, hazardous ladder fuel thinning, and invasive species suppression across public timberlands in Linn County.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-3">
+                <h3 class="text-base font-bold text-amber-400">Unit 1: Post-Wildfire Erosion Control</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Identifying hydrophobic soil crusts, constructing straw wattles along slope contours, and installing log check dams to trap sediment and prevent watershed mudslides.
+                </p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-3">
+                <h3 class="text-base font-bold text-amber-400">Unit 2: Hazardous Fuels Reduction</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Ladder fuel pruning, slash piling guidelines, and maintaining defensible space buffers around critical ecological and municipal infrastructure.
+                </p>
+            </div>
+        </div>
+
+        <div class="bg-slate-900 border border-amber-900/60 p-6 rounded-2xl shadow-xl space-y-6">
+            <div>
+                <span class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded border border-amber-800/40">Diagnostic Checkpoint</span>
+                <h2 class="text-lg font-bold text-white mt-2">Watershed &amp; Fuels Knowledge Verification</h2>
+                <p class="text-xs text-slate-400">Select an answer to reveal detailed operational explanations.</p>
+            </div>
+
+            <!-- Question 1 -->
+            <div class="space-y-3 border-t border-slate-800 pt-4">
+                <p class="text-sm font-semibold text-slate-200">1. What is the primary purpose of installing contour wattles on a post-wildfire slope?</p>
+                <div class="space-y-2">
+                    <button onclick="checkAnswer('q1', 0, false)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">A) To completely block all groundwater percolation.</button>
+                    <button onclick="checkAnswer('q1', 1, true)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">B) To slow surface water runoff velocity and trap migrating sediment.</button>
+                    <button onclick="checkAnswer('q1', 2, false)" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 px-4 py-2.5 rounded-lg text-xs transition">C) To serve as permanent boundary fences.</button>
+                </div>
+                <div id="q1-feedback" class="hidden text-xs p-3 rounded-lg bg-slate-950 border"></div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="max-w-4xl mx-auto w-full text-center text-xs text-slate-500 pt-8 border-t border-slate-900 mt-12">
+        Watershed Stewards &bull; Watershed &amp; Fuels Reduction Track
+    </footer>
+
+    <script>
+        function checkAnswer(questionId, selectedIdx, isCorrect) {
+            const feedbackEl = document.getElementById(questionId + '-feedback');
+            feedbackEl.classList.remove('hidden');
+            if (isCorrect) {
+                feedbackEl.className = "text-xs p-3 rounded-lg bg-emerald-950/40 border border-emerald-800/50 text-emerald-300";
+                feedbackEl.innerHTML = "<strong>Correct!</strong> Explanation: Contour wattles break up slope length, reducing the erosive energy of surface runoff and capturing sediment before it reaches waterways.";
+            } else {
+                feedbackEl.className = "text-xs p-3 rounded-lg bg-rose-950/40 border border-rose-800/50 text-rose-300";
+                feedbackEl.innerHTML = "<strong>Incorrect.</strong> Review erosion control specifications.";
+            }
+        }
+    </script>
+</body>
+</html>
