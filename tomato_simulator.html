@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomato Care &amp; Pest Management Simulator</title>
+    <style>
+        :root {
+            --bg: #0f172a; --card: #1e293b; --txt: #f8fafc; --primary: #27ae60; --primary-dark: #1e8449;
+            --accent: #38bdf8; --muted: #94a3b8; --border: rgba(255, 255, 255, 0.1);
+            --warn: #f59e0b; --danger: #ef4444;
+        }
+        body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 20px; line-height: 1.6; }
+        .container { max-width: 800px; margin: 20px auto; background: var(--card); border-radius: 14px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+        .hud-bar { background: #144d29; border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        h1 { color: #4ade80; font-size: 1.8rem; margin-top: 0; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+        h2 { color: var(--accent); font-size: 1.2rem; margin-top: 25px; }
+        p, label { color: var(--muted); } strong { color: var(--txt); }
+        .panel { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px; padding: 25px; margin-top: 20px; }
+        .btn { background: var(--primary); color: #fff; padding: 12px 24px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; margin-top: 15px; display: inline-block; }
+        .btn:hover { background: var(--primary-dark); }
+        .choice-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 15px; }
+        .choice-btn { background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--txt); padding: 15px; border-radius: 8px; text-align: left; cursor: pointer; transition: all 0.2s; font-size: 1rem; }
+        .choice-btn:hover { background: rgba(56, 189, 248, 0.15); border-color: var(--accent); }
+        .feedback-box { background: rgba(39, 174, 96, 0.1); border: 1px solid var(--primary); border-radius: 10px; padding: 20px; margin-top: 20px; }
+        .feedback-box.bad { background: rgba(239, 68, 68, 0.1); border-color: var(--danger); }
+        .checklist-item { margin: 12px 0; background: rgba(15, 23, 42, 0.8); padding: 12px; border-radius: 6px; border: 1px solid var(--border); }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hud-bar">
+        <span>Module: <span style="color:var(--accent);">Tomato Health &amp; Diagnostics</span></span>
+        <div>Stage: <strong id="hud-stage" style="color:#4ade80;">1</strong> / 3</div>
+    </div>
+
+    <!-- STAGE 1: SCENARIO & ACTION -->
+    <div id="stage-1" class="panel">
+        <h1>Stage 1: The Drooping Leaves &amp; Dry Spell</h1>
+        <p>It's mid-July in your garden. Your Cherokee Purple tomato plants have been growing vigorously, but after a stretch of erratic hot weather and inconsistent watering, you notice the lower leaves starting to curl and brown at the edges, and the soil is bone dry two inches down.</p>
+        
+        <h2>Choose Your Management Action:</h2>
+        <div class="choice-grid">
+            <button class="choice-btn" onclick="handleAction('wrong-heavy')">A. Give them a massive, heavy flood-watering once every 5 days to soak deep.</button>
+            <button class="choice-btn" onclick="handleAction('correct-consistent')">B. Establish a consistent, deep-watering schedule using drip irrigation and apply organic mulch to retain soil moisture.</button>
+            <button class="choice-btn" onclick="handleAction('wrong-foliar')">C. Skip watering at the roots and rely entirely on a daily evening overhead leaf misting.</button>
+        </div>
+
+        <div id="stage1-feedback" class="panel hidden"></div>
+    </div>
+
+    <!-- STAGE 2: THE REMEDY CHECK -->
+    <div id="stage-2" class="panel hidden">
+        <h1>Stage 2: Addressing Fruit Stress (Blossom End Rot)</h1>
+        <p>You stabilized your watering routine, but you notice a few young tomatoes developing flat, sunken, black leathery patches on their bottoms. This is classic <strong>Blossom End Rot</strong> caused by calcium uptake issues triggered by your earlier watering swings.</p>
+        
+        <h2>Choose Your Corrective Remedy:</h2>
+        <div class="choice-grid">
+            <button class="choice-btn" onclick="handleRemedy('wrong-spray')">A. Spray chemical pesticides over the entire foliage to kill potential bugs.</button>
+            <button class="choice-btn" onclick="handleRemedy('correct-calcium')">B. Maintain steady soil moisture (to keep calcium moving up the plant) and side-dress with organic compost or balanced bone meal if soil test dictates.</button>
+            <button class="choice-btn" onclick="handleRemedy('wrong-pull')">C. Immediately pull up and discard all tomato plants in the bed.</button>
+        </div>
+
+        <div id="stage2-feedback" class="panel hidden"></div>
+    </div>
+
+    <!-- STAGE 3: THE MASTERY CHECKLIST -->
+    <div id="stage-3" class="panel hidden">
+        <h1>Stage 3: Mastery Diagnostic Checklist</h1>
+        <p>Prove your diagnostic skills! Review the symptoms below from your learning experience and correctly identify the underlying causes to unlock full certification for this module.</p>
+        
+        <div class="checklist-item">
+            <label><strong>1. What primary factor caused the erratic leaf curl and stress in Stage 1?</strong></label>
+            <select id="check-1" style="width:1p00%; padding:8px; margin-top:5px; background:var(--bg); color:var(--txt); border:1px solid var(--border); border-radius:4px;">
+                <option value="">-- Select Cause --</option>
+                <option value="wrong">Too much afternoon shade</option>
+                <option value="correct">Inconsistent watering and moisture swings</option>
+                <option value="wrong">Too much nitrogen fertilizer</option>
+            </select>
+        </div>
+
+        <div class="checklist-item">
+            <label><strong>2. What caused the black, sunken bottoms on the fruit (Blossom End Rot)?</strong></label>
+            <select id="check-2" style="width:100%; padding:8px; margin-top:5px; background:var(--bg); color:var(--txt); border:1px solid var(--border); border-radius:4px;">
+                <option value="">-- Select Cause --</option>
+                <option value="correct">Disrupted calcium uptake due to irregular watering cycles</option>
+                <option value="wrong">A caterpillar eating holes in the fruit</option>
+                <option value="wrong">A fungal rust infection from overhead rain</option>
+            </select>
+        </div>
+
+        <button class="btn" onclick="submitMasteryExam()">Submit Diagnostic Exam 📋</button>
+        <div id="exam-feedback" style="margin-top:15px; font-weight:bold;"></div>
+    </div>
+
+    <!-- WIN SCREEN -->
+    <div id="stage-win" class="panel hidden" style="text-align:center;">
+        <h1 style="color:#4ade80;">🎉 Module Unlocked: Master Tomato Steward!</h1>
+        <p>You successfully diagnosed watering stress, resolved blossom end rot through proper moisture management, and passed the field diagnostic exam.</p>
+        <p style="color:var(--accent); font-weight:bold;">Ready to tackle Zucchini and Powdery Mildew next?</p>
+        <button class="btn" onclick="location.reload()">Restart Simulation 🔄</button>
+    </div>
+</div>
+
+<script>
+    function handleAction(choice) {
+        let box = document.getElementById('stage1-feedback');
+        box.classList.remove('hidden');
+        if (choice === 'correct-consistent') {
+            box.className = "feedback-box";
+            box.innerHTML = `
+                <h3 style="color:#4ade80; margin-top:0;">✅ Excellent Choice!</h3>
+                <p>Consistent deep-watering and organic mulch stabilize the root zone. Your tomato plants perk up, the leaves regain turgor pressure, and new growth is lush and green.</p>
+                <button class="btn" onclick="advanceStage(2)">Proceed to Stage 2 →</button>
+            `;
+        } else {
+            box.className = "feedback-box bad";
+            box.innerHTML = `
+                <h3 style="color:var(--danger); margin-top:0;">❌ Setback Encountered</h3>
+                <p>${choice === 'wrong-heavy' ? 'Flooding after extreme drought shocks the root system and splits fruit.' : 'Evening overhead misting leaves moisture on leaves overnight, inviting fungal diseases like blight.'} Try a different approach!</p>
+            `;
+        }
+    }
+
+    function handleRemedy(choice) {
+        let box = document.getElementById('stage2-feedback');
+        box.classList.remove('hidden');
+        if (choice === 'correct-calcium') {
+            box.className = "feedback-box";
+            box.innerHTML = `
+                <h3 style="color:#4ade80; margin-top:0;">✅ Perfect Remedy!</h3>
+                <p>Fixing the watering regularity allows the plant to properly transport calcium into developing fruit. Future tomatoes grow clean and healthy!</p>
+                <button class="btn" onclick="advanceStage(3)">Proceed to Mastery Exam →</button>
+            `;
+        } else {
+            box.className = "feedback-box bad";
+            box.innerHTML = `
+                <h3 style="color:var(--danger); margin-top:0;">❌ Incorrect Remedy</h3>
+                <p>Pesticides won't fix a nutritional uptake issue caused by watering stress. Review the lesson and try again!</p>
+            `;
+        }
+    }
+
+    function advanceStage(stageNum) {
+        document.getElementById('hud-stage').innerText = stageNum;
+        if (stageNum === 2) {
+            document.getElementById('stage-1').classList.add('hidden');
+            document.getElementById('stage-2').classList.remove('hidden');
+        } else if (stageNum === 3) {
+            document.getElementById('stage-2').classList.add('hidden');
+            document.getElementById('stage-3').classList.remove('hidden');
+        }
+    }
+
+    function submitMasteryExam() {
+        let ans1 = document.getElementById('check-1').value;
+        let ans2 = document.getElementById('check-2').value;
+        let feedback = document.getElementById('exam-feedback');
+
+        if (ans1 === 'correct' && ans2 === 'correct') {
+            document.getElementById('stage-3').classList.add('hidden');
+            document.getElementById('stage-win').classList.remove('hidden');
+            document.getElementById('hud-stage').innerText = 'Complete';
+        } else {
+            feedback.style.color = 'var(--danger)';
+            feedback.innerText = "❌ Not quite! Review your choices above—both answers must be correct to unlock the next stage.";
+        }
+    }
+</script>
+
+</body>
+</html>
