@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zucchini Care &amp; Pest Management Simulator</title>
+    <style>
+        :root {
+            --bg: #0f172a; --card: #1e293b; --txt: #f8fafc; --primary: #27ae60; --primary-dark: #1e8449;
+            --accent: #38bdf8; --muted: #94a3b8; --border: rgba(255, 255, 255, 0.1);
+            --warn: #f59e0b; --danger: #ef4444;
+        }
+        body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 20px; line-height: 1.6; }
+        .container { max-width: 800px; margin: 20px auto; background: var(--card); border-radius: 14px; padding: 35px; border: 1px solid var(--border); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+        
+        /* Navigation / Escape Button Style */
+        .nav-bar { margin-bottom: 20px; }
+        .back-link { background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--accent); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.9rem; font-weight: bold; display: inline-block; transition: background 0.2s; }
+        .back-link:hover { background: rgba(56, 189, 248, 0.2); }
+
+        .hud-bar { background: #144d29; border-radius: 8px; padding: 12px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        h1 { color: #4ade80; font-size: 1.8rem; margin-top: 0; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+        h2 { color: var(--accent); font-size: 1.2rem; margin-top: 25px; }
+        p, label { color: var(--muted); } strong { color: var(--txt); }
+        .panel { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px; padding: 25px; margin-top: 20px; }
+        .btn { background: var(--primary); color: #fff; padding: 12px 24px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; margin-top: 15px; display: inline-block; }
+        .btn:hover { background: var(--primary-dark); }
+        .choice-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 15px; }
+        .choice-btn { background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--txt); padding: 15px; border-radius: 8px; text-align: left; cursor: pointer; transition: all 0.2s; font-size: 1rem; }
+        .choice-btn:hover { background: rgba(56, 189, 248, 0.15); border-color: var(--accent); }
+        .feedback-box { background: rgba(39, 174, 96, 0.1); border: 1px solid var(--primary); border-radius: 10px; padding: 20px; margin-top: 20px; }
+        .feedback-box.bad { background: rgba(239, 68, 68, 0.1); border-color: var(--danger); }
+        .checklist-item { margin: 12px 0; background: rgba(15, 23, 42, 0.8); padding: 12px; border-radius: 6px; border: 1px solid var(--border); }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Escape / Navigation Bar -->
+    <div class="nav-bar">
+        <a href="pencil_to_presentation.html" class="back-link">← Back to Design Studio</a>
+    </div>
+
+    <div class="hud-bar">
+        <span>Module: <span style="color:var(--accent);">Zucchini Health &amp; Powdery Mildew</span></span>
+        <div>Stage: <strong id="hud-stage" style="color:#4ade80;">1</strong> / 3</div>
+    </div>
+
+    <!-- STAGE 1: SCENARIO & ACTION -->
+    <div id="stage-1" class="panel">
+        <h1>Stage 1: The White Powdery Patches</h1>
+        <p>It's late August. Your zucchini patch has been producing heavily, but during a stretch of humid weather with cool nights, you notice white, talcum-powder-like spots appearing across the upper surfaces of the large broad leaves.</p>
+        
+        <h2>Choose Your Management Action:</h2>
+        <div class="choice-grid">
+            <button class="choice-btn" onclick="handleAction('wrong-overhead')">A. Spray the leaves aggressively with cold water from an overhead sprinkler every evening.</button>
+            <button class="choice-btn" onclick="handleAction('correct-airflow')">B. Prune heavily crowded older leaves to improve airflow, water strictly at the base early in the day, and apply an organic bio-fungicide/neem oil spray.</button>
+            <button class="choice-btn" onclick="handleAction('wrong-nitrogen')">C. Feed the plants a heavy dose of high-nitrogen liquid fertilizer to push out fast recovery growth.</button>
+        </div>
+
+        <div id="stage1-feedback" class="panel hidden"></div>
+    </div>
+
+    <!-- STAGE 2: THE REMEDY CHECK -->
+    <div id="stage-2" class="panel hidden">
+        <h1>Stage 2: Managing Pollination &amp; Blossom Drop</h1>
+        <p>You got the mildew under control, but now you notice several young zucchini fruit turning yellow, shriveling up, and rotting at the end before they ever get a chance to grow large. This is often caused by poor pollination or moisture stress.</p>
+        
+        <h2>Choose Your Corrective Remedy:</h2>
+        <div class="choice-grid">
+            <button class="choice-btn" onclick="handleRemedy('wrong-chemical')">B. Spray synthetic insecticides all over open blossoms during peak morning bee activity.</button>
+            <button class="choice-btn" onclick="handleRemedy('correct-pollinators')">C. Plant companion flowers nearby to attract native pollinators, and hand-pollinate if necessary during extended overcast weather.</button>
+            <button class="choice-btn" onclick="handleRemedy('wrong-prune-all')">D. Cut off all remaining flowers and blossoms so the plant stops trying to fruit.</button>
+        </div>
+
+        <div id="stage2-feedback" class="panel hidden"></div>
+    </div>
+
+    <!-- STAGE 3: THE MASTERY CHECKLIST -->
+    <div id="stage-3" class="panel hidden">
+        <h1>Stage 3: Mastery Diagnostic Checklist</h1>
+        <p>Prove your diagnostic skills! Review the symptoms below from your learning experience and correctly identify the underlying causes to unlock full certification for this module.</p>
+        
+        <div class="checklist-item">
+            <label><strong>1. What environmental conditions and actions help control Powdery Mildew in Stage 1?</strong></label>
+            <select id="check-1" style="width:100%; padding:8px; margin-top:5px; background:var(--bg); color:var(--txt); border:1px solid var(--border); border-radius:4px;">
+                <option value="">-- Select Cause --</option>
+                <option value="wrong">Keeping foliage wet every night with overhead sprinklers</option>
+                <option value="correct">Improving air circulation through pruning and avoiding evening overhead wetness</option>
+                <option value="wrong">Adding extra shade cloth to block all sunlight</option>
+            </select>
+        </div>
+
+        <div class="checklist-item">
+            <label><strong>2. What is the primary solution for fruit shriveling due to poor fruit set?</strong></label>
+            <select id="check-2" style="width:100%; padding:8px; margin-top:5px; background:var(--bg); color:var(--txt); border:1px solid var(--border); border-radius:4px;">
+                <option value="">-- Select Cause --</option>
+                <option value="correct">Supporting pollinator habitat and assisting with hand-pollination during gloomy weather</option>
+                <option value="wrong">Applying heavy doses of chemical weedkiller</option>
+                <option value="wrong">Pulling up the plants immediately</option>
+            </select>
+        </div>
+
+        <button class="btn" onclick="submitMasteryExam()">Submit Diagnostic Exam 📋</button>
+        <div id="exam-feedback" style="margin-top:15px; font-weight:bold;"></div>
+    </div>
+
+    <!-- WIN SCREEN -->
+    <div id="stage-win" class="panel hidden" style="text-align:center;">
+        <h1 style="color:#4ade80;">🎉 Module Unlocked: Master Zucchini Steward!</h1>
+        <p>You successfully managed powdery mildew, supported pollinator health, and passed the field diagnostic exam.</p>
+        <p style="color:var(--accent); font-weight:bold;">Ready to link this right alongside your tomato simulator?</p>
+        <div style="margin-top: 20px;">
+            <a href="pencil_to_presentation.html" class="btn" style="text-decoration:none;">Return to Design Studio 🏠</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function handleAction(choice) {
+        let box = document.getElementById('stage1-feedback');
+        box.classList.remove('hidden');
+        if (choice === 'correct-airflow') {
+            box.className = "feedback-box";
+            box.innerHTML = `
+                <h3 style="color:#4ade80; margin-top:0;">✅ Excellent Choice!</h3>
+                <p>Pruning for airflow and using bio-fungicides stops the fungal spores from spreading. Your zucchini leaves stay healthy and green!</p>
+                <button class="btn" onclick="advanceStage(2)">Proceed to Stage 2 →</button>
+            `;
+        } else {
+            box.className = "feedback-box bad";
+            box.innerHTML = `
+                <h3 style="color:var(--danger); margin-top:0;">❌ Setback Encountered</h3>
+                <p>${choice === 'wrong-overhead' ? 'Wet leaves overnight supercharge fungal growth!' : 'Excess nitrogen pushes too much soft leaf growth, making the plant even more vulnerable.'} Try a different approach!</p>
+            `;
+        }
+    }
+
+    function handleRemedy(choice) {
+        let box = document.getElementById('stage2-feedback');
+        box.classList.remove('hidden');
+        if (choice === 'correct-pollinators') {
+            box.className = "feedback-box";
+            box.innerHTML = `
+                <h3 style="color:#4ade80; margin-top:0;">✅ Perfect Remedy!</h3>
+                <p>Supporting pollinators ensures proper fertilization of female blossoms, resulting in full, healthy zucchini fruit set!</p>
+                <button class="btn" onclick="advanceStage(3)">Proceed to Mastery Exam →</button>
+            `;
+        } else {
+            box.className = "feedback-box bad";
+            box.innerHTML = `
+                <h3 style="color:var(--danger); margin-top:0;">❌ Incorrect Remedy</h3>
+                <p>Spraying pesticides harms beneficial bees and worsens pollination failure. Review the lesson and try again!</p>
+            `;
+        }
+    }
+
+    function advanceStage(stageNum) {
+        document.getElementById('hud-stage').innerText = stageNum;
+        if (stageNum === 2) {
+            document.getElementById('stage-1').classList.add('hidden');
+            document.getElementById('stage-2').classList.remove('hidden');
+        } else if (stageNum === 3) {
+            document.getElementById('stage-2').classList.add('hidden');
+            document.getElementById('stage-3').classList.remove('hidden');
+        }
+    }
+
+    function submitMasteryExam() {
+        let ans1 = document.getElementById('check-1').value;
+        let ans2 = document.getElementById('check-2').value;
+        let feedback = document.getElementById('exam-feedback');
+
+        if (ans1 === 'correct' && ans2 === 'correct') {
+            document.getElementById('stage-3').classList.add('hidden');
+            document.getElementById('stage-win').classList.remove('hidden');
+            document.getElementById('hud-stage').innerText = 'Complete';
+        } else {
+            feedback.style.color = 'var(--danger)';
+            feedback.innerText = "❌ Not quite! Review your choices above—both answers must be correct to unlock completion.";
+        }
+    }
+</script>
+
+</body>
+</html>
