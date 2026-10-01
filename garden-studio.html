@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Garden Planning Dashboard | Watershed Stewards &amp; VRP</title>
+  <!-- Tailwind CSS CDN for consistent styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      margin: 0;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+  <!-- Sticky Escape / Return Navigation Bar -->
+  <nav class="sticky top-0 bg-[#144d29] px-6 py-3 flex justify-between items-center shadow-lg z-50 border-b border-emerald-900/50">
+    <div class="flex items-center gap-3">
+      <span class="text-xs font-bold uppercase tracking-wider bg-emerald-950/60 text-emerald-300 px-3 py-1 rounded-full border border-emerald-800/40">Module Resource Workspace</span>
+      <span class="text-sm font-semibold text-white hidden sm:inline">Interactive Garden Planning Dashboard</span>
+    </div>
+    <a href="index.html" class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-4 py-2 rounded-lg text-xs font-bold transition shadow-md flex items-center gap-1.5">
+      &larr; Return to Main Site
+    </a>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="max-w-5xl mx-auto w-full px-4 sm:px-6 py-12 flex-grow">
+
+    <!-- Header Section -->
+    <header class="text-center space-y-3 mb-12">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Classroom Garden &amp; Landscaping Design Lab</h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+        Select a specialized, ad-free workspace below to build your virtual garden blueprints, crop rotations, and soil layout maps. Your curriculum module remains active in the background.
+      </p>
+    </header>
+
+    <!-- Card Grid System -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- Card 1: Permapeople Planner -->
+      <div class="bg-[#1e293b] border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between hover:border-emerald-600/50 transition">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-800/40">Open-Source</span>
+            <span class="text-xs text-slate-500">Tool 01</span>
+          </div>
+          <h2 class="text-xl font-bold text-white">Permapeople Planner</h2>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            A completely free browser workspace utilizing crowdsourced, open-license plant data. Draft scaled landscape layouts, mapping custom rows, beds, and companion paths with zero account registration requirements.
+          </p>
+        </div>
+        <div class="mt-8">
+          <a href="https://permapeople.org" target="_blank" rel="noopener" class="block w-full text-center bg-emerald-700 hover:bg-emerald-600 text-white font-semibold py-3 rounded-xl text-sm transition shadow-lg shadow-emerald-950/50">
+            Launch Planner &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2: VegPlotter Schools -->
+      <div class="bg-[#1e293b] border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between hover:border-sky-600/50 transition">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-sky-400 bg-sky-950/60 px-3 py-1 rounded-full border border-sky-800/40">Ad-Free Education</span>
+            <span class="text-xs text-slate-500">Tool 02</span>
+          </div>
+          <h2 class="text-xl font-bold text-white">VegPlotter Schools</h2>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            A specialized, drag-and-drop educational simulation layout framework. Built specifically to combine fundamental mathematics, geography, and seasonal crop cycles while maintaining complete student privacy.
+          </p>
+        </div>
+        <div class="mt-8">
+          <a href="https://vegplotter.com" target="_blank" rel="noopener" class="block w-full text-center bg-sky-600 hover:bg-sky-500 text-white font-semibold py-3 rounded-xl text-sm transition shadow-lg shadow-sky-950/50">
+            Launch Portal &rarr;
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Verification / Return Center -->
+    <div class="mt-12 bg-[#162032] border border-slate-800/80 rounded-2xl p-6 text-center space-y-3 shadow-inner">
+      <p class="text-slate-300 text-sm font-medium">Finished with your blueprint or simulation assignment?</p>
+      <a href="index.html" class="inline-block text-emerald-400 hover:text-emerald-300 font-bold text-sm underline underline-offset-4 transition">
+        Click here to exit the design lab and complete your logging entry &rarr;
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#144d29] py-6 text-center text-slate-300 text-xs border-t border-emerald-900/50 mt-16">
+    <p>&copy; 2026 The Veterans Resurgence Project &amp; Watership Stewards Empowering. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
