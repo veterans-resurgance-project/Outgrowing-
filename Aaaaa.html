@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Garden Planning Dashboard</title>
+  <style>
+    :root {
+      --primary-green: #2c5e3b;
+      --accent-gold: #d4af37;
+      --light-bg: #f4f7f5;
+      --text-dark: #222222;
+      --card-bg: #ffffff;
+    }
+   
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Sticky Escape Navigation Bar */
+    .escape-banner {
+      position: sticky;
+      top: 0;
+      background-color: var(--primary-green);
+      color: #ffffff;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 1000;
+    }
+
+    .escape-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .btn-escape {
+      background-color: var(--accent-gold);
+      color: var(--text-dark);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      transition: background-color 0.2s;
+    }
+
+    .btn-escape:hover {
+      background-color: #e5be49;
+    }
+
+    /* Content Container */
+    .dashboard-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .header-section {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header-section h1 {
+      color: var(--primary-green);
+      margin-bottom: 10px;
+    }
+
+    /* Grid System for Resource Cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 25px;
+    }
+
+    @media (min-width: 600px) {
+      .card-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Layout Cards */
+    .tool-card {
+      background-color: var(--card-bg);
+      border-top: 4px solid var(--primary-green);
+      border-radius: 6px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .tool-card h2 {
+      margin-top: 0;
+      color: var(--primary-green);
+      font-size: 1.3rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background-color: #e1ede4;
+      color: var(--primary-green);
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 3px 8px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .tool-desc {
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    /* Primary Action Buttons */
+    .btn-launch {
+      display: block;
+      text-align: center;
+      background-color: var(--primary-green);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+
+    .btn-launch:hover {
+      background-color: #1e4229;
+    }
+
+    /* Inline Escape Option for Bottom of Framework */
+    .bottom-return-box {
+      margin-top: 40px;
+      text-align: center;
+      padding: 20px;
+      background-color: #eef2ef;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation (Always Visible While Scrolling) -->
+  <div class="escape-banner">
+    <div class="escape-title">Module Resource Workspace</div>
+    <a href="index.html" class="btn-escape">&larr; Return to Lesson</a>
+  </div>
+
+  <div class="dashboard-container">
+   
+    <div class="header-section">
+      <h1>Classroom Garden Design Lab</h1>
+      <p>Select an ad-free workspace below to build your virtual garden blueprints. Your curriculum module remains active in the background tab.</p>
+    </div>
+
+    <div class="card-grid">
+     
+      <!-- Card 1: Permapeople -->
+      <div class="tool-card">
+        <div>
+          <span class="tag">Open-Source</span>
+          <h2>Permapeople Planner</h2>
+          <p class="tool-desc">A completely free browser workspace utilizing crowdsourced, open-license plant data. Students can draft scaled landscape layouts, mapping custom rows, beds, and companion paths with zero account registration requirements.</p>
+        </div>
+        <a href="https://permapeople.org" target="_blank" rel="noopener" class="btn-launch">Launch Planner &rarr;</a>
+      </div>
+
+      <!-- Card 2: VegPlotter -->
+      <div class="tool-card">
+        <div>
+          <span class="tag">Ad-Free Education</span>
+          <h2>VegPlotter Schools</h2>
+          <p class="tool-desc">A specialized, drag-and-drop educational simulation layout framework. Built specifically to combine fundamental mathematics, geography, and seasonal crop cycles while maintaining complete student anonymity.</p>
+        </div>
+        <a href="https://vegplotter.com" target="_blank" rel="noopener" class="btn-launch">Launch Portal &rarr;</a>
+      </div>
+
+    </div>
+
+    <!-- Bottom Verification Center -->
+    <div class="bottom-return-box">
+      <p>Finished with your blueprint or simulation assignment?</p>
+      <a href="index.html" style="color: var(--primary-green); font-weight: bold; text-decoration: underline;">Click here to exit the design lab and complete your logging entry.</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
+ 
