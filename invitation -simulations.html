@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outgrowing Ag &amp; The Veteran Resurgence Project | Educational Simulations</title>
+    <style>
+        :root {
+            --bg: #0f172a; --card: #1e293b; --txt: #f8fafc; --primary: #27ae60; --primary-dark: #1e8449;
+            --accent: #38bdf8; --muted: #94a3b8; --border: rgba(255, 255, 255, 0.1);
+        }
+        body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding: 30px; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .hero { background: var(--card); border-radius: 14px; padding: 40px; border: 1px solid var(--border); box-shadow: 0 12px 32px rgba(0,0,0,0.5); text-align: center; margin-bottom: 30px; }
+        h1 { color: #4ade80; font-size: 2.2rem; margin-top: 0; }
+        p { color: var(--muted); font-size: 1.1rem; max-width: 700px; margin: 15px auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 25px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, border-color 0.2s; }
+        .card:hover { transform: translateY(-3px); border-color: var(--primary); }
+        .card h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; }
+        .btn { background: var(--primary); color: #fff; padding: 12px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; text-align: center; margin-top: 20px; transition: background 0.2s; }
+        .btn:hover { background: var(--primary-dark); }
+        footer { text-align: center; margin-top: 40px; color: var(--muted); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Hero / Intro Section -->
+    <div class="hero">
+        <h1>Agricultural Education &amp; Land Stewardship</h1>
+        <p>Welcome to our interactive simulation hub. Explore sustainable farming choices, test your strategy in farm business management, and experience the journey of agricultural resilience.</p>
+        <p style="font-size: 0.95rem; color: #4ade80; font-weight: bold;">Choose an experience below to get started:</p>
+    </div>
+
+    <!-- Simulation Cards Grid -->
+    <div class="grid">
+        <!-- Card 1 -->
+        <div class="card">
+            <div>
+                <h3>Pencil to Presentation Design Studio</h3>
+                <p>Map out layouts, experiment with farm design concepts, and bring agricultural visions from a simple sketch to a fully realized presentation plan.</p>
+            </div>
+            <a href="https://veterans-resurgance-project.github.io/Outgrowing-/pencil_to_presentation.html" class="btn">Launch Design Studio →</a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+            <div>
+                <h3>Be the Farmer, Buy the Farm</h3>
+                <p>Navigate the first 5 years of crop allocation, capital management, and weather hurdles on a 10-acre block in Linn County.</p>
+            </div>
+            <a href="https://outgrowing-ag.org/buy-the-farm.html" class="btn">Play Farm Simulator →</a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+            <div>
+                <h3>Battle to Save the Farm</h3>
+                <p>An immersive story-driven apprentice experience highlighting the real-world choices, challenges, and triumphs of modern land stewardship.</p>
+            </div>
+            <a href="https://outgrowing-ag.org/farmer-apprentice-story.html" class="btn">Read &amp; Play Story →</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 The Veteran Resurgence Project &amp; Outgrowing Ag Initiative.</p>
+    </footer>
+</div>
+
+</body>
+</html>
