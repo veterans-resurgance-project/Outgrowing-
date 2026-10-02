@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Four-Season Pathway & Learning Modules | AFTI Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Top Navigation / Header with Escape Button -->
+    <header class="w-full bg-slate-900 border-b border-slate-800 py-4 px-6 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <span class="text-2xl">🌱</span>
+            <h1 class="text-lg font-black tracking-wider text-amber-400">FOUR-SEASON PATHWAY</h1>
+        </div>
+        <div>
+            <a href="index.html" class="inline-flex items-center space-x-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-bold rounded-lg border border-slate-700 transition shadow">
+                <span>&larr;</span>
+                <span>Return to Home</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-5xl mx-auto px-6 py-12 flex-grow">
+
+        <!-- Hero / Concept Intro Section -->
+        <section class="text-center mb-16">
+            <div class="inline-block px-3 py-1 mb-4 rounded-full bg-emerald-950 border border-emerald-800 text-emerald-400 text-xs font-bold tracking-widest uppercase">
+                Cyclical Civic-Science Model
+            </div>
+            <h2 class="text-4xl md:text-5xl font-black mb-6 tracking-tight text-white">
+                Verifiable Learning & <span class="text-amber-400">Service Modules</span>
+            </h2>
+            <p class="text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
+                Our curriculum aligns ecological service events with professional skill-building. Select a season below to explore the specific hands-on projects that teach core competencies, generate grant-matching value, and build verifiable participant portfolios.
+            </p>
+        </section>
+
+        <!-- Seasonal Navigation Matrix -->
+        <section class="mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Winter Season Card -->
+                <a href="seasonal-module-detail.html?season=winter" class="group bg-slate-900 border border-slate-800 hover:border-sky-500 rounded-xl p-6 transition duration-300 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-3xl">❄️</span>
+                            <span class="text-xs font-mono uppercase bg-sky-950 text-sky-400 px-2 py-1 rounded border border-sky-800">Phase 1</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-sky-300 group-hover:text-sky-200 transition">Winter: Planning & Infrastructure</h4>
+                        <p class="text-sm text-slate-400 mt-2">
+                            Focuses on tool safety, chainsaw mechanics, hazard tree management, and community firewood distribution initiatives.
+                        </p>
+                    </div>
+                    <div class="mt-6 flex items-center text-xs font-bold text-sky-400 group-hover:translate-x-1 transition-transform">
+                        Explore Winter Modules &rarr;
+                    </div>
+                </a>
+
+                <!-- Spring Season Card -->
+                <a href="seasonal-module-detail.html?season=spring" class="group bg-slate-900 border border-slate-800 hover:border-emerald-500 rounded-xl p-6 transition duration-300 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-3xl">🌱</span>
+                            <span class="text-xs font-mono uppercase bg-emerald-950 text-emerald-400 px-2 py-1 rounded border border-emerald-800">Phase 2</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-emerald-300 group-hover:text-emerald-200 transition">Spring: Tending & Watershed Defense</h4>
+                        <p class="text-sm text-slate-400 mt-2">
+                            Invasive species extraction, native plant installation, riparian buffer protection, and baseline soil telemetry logging.
+                        </p>
+                    </div>
+                    <div class="mt-6 flex items-center text-xs font-bold text-emerald-400 group-hover:translate-x-1 transition-transform">
+                        Explore Spring Modules &rarr;
+                    </div>
+                </a>
+
+                <!-- Summer Season Card -->
+                <a href="seasonal-module-detail.html?season=summer" class="group bg-slate-900 border border-slate-800 hover:border-amber-500 rounded-xl p-6 transition duration-300 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-3xl">☀</span>
+                            <span class="text-xs font-mono uppercase bg-amber-950 text-amber-400 px-2 py-1 rounded border border-amber-800">Phase 3</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-amber-300 group-hover:text-amber-200 transition">Summer: Peak Production & Native Seed Harvest</h4>
+                        <p class="text-sm text-slate-400 mt-2">
+                            Botanical timing, hand-harvesting native grass/wildflower seeds, drone aerial surveys, and commercial harvest distribution.
+                        </p>
+                    </div>
+                    <div class="mt-6 flex items-center text-xs font-bold text-amber-400 group-hover:translate-x-1 transition-transform">
+                        Explore Summer Modules &rarr;
+                    </div>
+                </a>
+
+                <!-- Fall Season Card -->
+                <a href="seasonal-module-detail.html?season=fall" class="group bg-slate-900 border border-slate-800 hover:border-rose-500 rounded-xl p-6 transition duration-300 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-3xl">🍂</span>
+                            <span class="text-xs font-mono uppercase bg-rose-950 text-rose-400 px-2 py-1 rounded border border-rose-800">Phase 4</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-rose-300 group-hover:text-rose-200 transition">Fall: Basin Shield & Cohort Transition</h4>
+                        <p class="text-sm text-slate-400 mt-2">
+                            Broad-scale seed broadcasting, sheet mulching, erosion control engineering, and peer-to-peer leadership hand-off.
+                        </p>
+                    </div>
+                    <div class="mt-6 flex items-center text-xs font-bold text-rose-400 group-hover:translate-x-1 transition-transform">
+                        Explore Fall Modules &rarr;
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-slate-900 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        <p>AFTI Agricultural Training & Land-Linkage Portal &bull; Supporting Sustainable Ecosystems & Community Growers</p>
+    </footer>
+
+</body>
+</html>
