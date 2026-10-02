@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seasonal Learning Modules | AFTI Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="w-full bg-slate-900 border-b border-slate-800 py-4 px-6 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <span id="header-icon" class="text-2xl">🌱</span>
+            <h1 id="header-title" class="text-lg font-black tracking-wider text-amber-400">SEASONAL LEARNING MODULE</h1>
+        </div>
+        <a href="four-seasons.html" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-bold rounded-lg border border-slate-700 transition">&larr; Back to Seasons</a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-6 py-12 flex-grow">
+
+        <!-- Season Banner Info -->
+        <div class="mb-10 text-center">
+            <span id="badge-phase" class="text-xs font-mono uppercase px-3 py-1 rounded border font-bold">Phase</span>
+            <h2 id="main-heading" class="text-3xl md:text-4xl font-black text-white mt-3">Season Title</h2>
+            <p id="main-desc" class="text-slate-300 mt-2 max-w-2xl mx-auto">Description of the seasonal focus.</p>
+        </div>
+
+        <!-- Dynamic Content Area for Projects / Modules -->
+        <div id="modules-container" class="space-y-6">
+            <!-- Populated via JavaScript below -->
+        </div>
+
+        <!-- Return escape button at bottom -->
+        <div class="mt-12 text-center">
+            <a href="four-seasons.html" class="inline-block px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-lg border border-slate-700 transition shadow">
+                &larr; Return to Four-Season Overview
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-slate-900 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        <p>AFTI Agricultural Training & Land-Linkage Portal</p>
+    </footer>
+
+    <!-- JavaScript to Render Content Based on URL Parameter -->
+    <script>
+        const seasonData = {
+            winter: {
+                icon: "❄️",
+                title: "WINTER: PLANNING & INFRASTRUCTURE",
+                badgeClass: "bg-sky-950 text-sky-400 border-sky-800",
+                heading: "Winter Learning & Service Modules",
+                desc: "Focuses on tool safety, chainsaw mechanics, hazard tree management, and community firewood distribution initiatives.",
+                modules: [
+                    {
+                        name: "Module 1.1: Mechanical Safety & Tool Maintenance",
+                        xp: "+75 XP",
+                        desc: "Hands-on maintenance, repair, and sharpening of hand tools, loppers, and chainsaw mechanics.",
+                        skill: "Equipment handling safety, preventative maintenance logs, and mechanical problem-solving.",
+                        portfolio: "Verified equipment readiness certificates and hours logged in the Portal Maintenance Ledger.",
+                        grant: "Qualifies as high-tier technical labor for county park infrastructure maintenance match requirements."
+                    },
+                    {
+                        name: "Module 1.2: The Winter Heat & Infrastructure Initiative",
+                        xp: "+100 XP",
+                        desc: "Processing downed timber from public land cleanups and bundling firewood for vulnerable community households.",
+                        skill: "Woodlot management, safe rigging, load securement, and community service delivery logistics.",
+                        portfolio: "Certified community service hours and public commendation logs.",
+                        grant: "Generates high-value in-kind matching hours for emergency assistance and social welfare grants."
+                    }
+                ]
+            },
+            spring: {
+                icon: "🌱",
+                title: "SPRING: TENDING & WATERSHED DEFENSE",
+                badgeClass: "bg-emerald-950 text-emerald-400 border-emerald-800",
+                heading: "Spring Learning & Service Modules",
+                desc: "Invasive species extraction, native plant installation, riparian buffer protection, and baseline soil telemetry logging.",
+                modules: [
+                    {
+                        name: "Module 2.1: Invasive Species & Riparian Restoration",
+                        xp: "+100 XP",
+                        desc: "Targeted extraction of invasive weeds (e.g., Himalayan blackberry, garlic mustard) and planting native riparian shrubs.",
+                        skill: "Botanical identification (native vs. invasive), root-system preservation, and erosion prevention planting.",
+                        portfolio: "Species ID certification badge and square-footage restoration logs.",
+                        grant: "Direct partnership currency for Soil and Water Conservation Districts (SWCDs) and OWEB watershed grants."
+                    },
+                    {
+                        name: "Module 2.2: Soil Telemetry & Bed Establishment",
+                        xp: "+100 XP",
+                        desc: "Weekly logging of soil temperature, pH, and volumetric water content while prepping agricultural bed lines.",
+                        skill: "Scientific data collection, digital telemetry hygiene, and error-correction protocols.",
+                        portfolio: "Time-stamped database of soil health metrics and correct data entry compliance.",
+                        grant: "Provides verifiable ecological research data required by environmental conservation grants."
+                    }
+                ]
+            },
+            summer: {
+                icon: "☀",
+                title: "SUMMER: PEAK PRODUCTION & SEED HARVEST",
+                badgeClass: "bg-amber-950 text-amber-400 border-amber-800",
+                heading: "Summer Learning & Service Modules",
+                desc: "Botanical timing, hand-harvesting native grass/wildflower seeds, drone aerial surveys, and commercial harvest distribution.",
+                modules: [
+                    {
+                        name: "Module 3.1: Native Seed Harvesting & Processing",
+                        xp: "+150 XP",
+                        desc: "Locating, hand-harvesting, winnowing, and cleaning viable native grass and wildflower seeds across public lands.",
+                        skill: "Botanical timing, seed bank curation, purity testing, and moisture content management.",
+                        portfolio: "Certified pounds of viable native seed collected and GPS-mapped harvest logs.",
+                        grant: "Specialized technical labor matching; harvested native seed stock holds high monetary value for restoration grants."
+                    },
+                    {
+                        name: "Module 3.2: Commercial Field & Drone Telemetry Sorties",
+                        xp: "+150 XP (1.5x Multiplier)",
+                        desc: "Executing commercial harvest distributions and running drone pre-flight checks and NDVI crop stress evaluations.",
+                        skill: "Agricultural logistics, crop yield weighing, and FAA Part 107 flight operation basics.",
+                        portfolio: "Commercial harvest tonnage ledgers and archived aerial survey flight logs.",
+                        grant: "Directly satisfies regional agricultural partner labor needs and economic development metrics."
+                    }
+                ]
+            },
+            fall: {
+                icon: "🍂",
+                title: "FALL: BASIN SHIELD & COHORT TRANSITION",
+                badgeClass: "bg-rose-950 text-rose-400 border-rose-800",
+                heading: "Fall Learning & Service Modules",
+                desc: "Broad-scale seed broadcasting, sheet mulching, erosion control engineering, and peer-to-peer leadership hand-off.",
+                modules: [
+                    {
+                        name: "Module 4.1: Erosion Control & Basin Broadcasting",
+                        xp: "+100 XP",
+                        desc: "Broadcasting harvested native seeds across restoration zones, applying protective mulch, and engineering sediment barriers.",
+                        skill: "Large-area seed distribution, sheet mulching techniques, and winterization engineering.",
+                        portfolio: "Field closure inspection checklists and erosion control deployment maps.",
+                        grant: "Fulfills late-season watershed protection milestones required by municipal stormwater management agreements."
+                    },
+                    {
+                        name: "Module 4.2: Peer-to-Peer Cohort Leadership Hand-Off",
+                        xp: "+200 XP",
+                        desc: "Advanced participants mentor and onboard incoming waitlist recruits into winter planning and portal navigation.",
+                        skill: "Public speaking, instructional facilitation, team leadership, and peer management.",
+                        portfolio: "Mentorship hour logs and self-sustaining cycle verification records.",
+                        grant: "Proves program sustainability and institutional capacity building to foundation reviewers."
+                    }
+                ]
+            }
+        };
+
+        // Get season query parameter from URL (e.g. seasonal-module-detail.html?season=spring)
+        const urlParams = new URLSearchParams(window.location.search);
+        const seasonKey = urlParams.get('season') || 'spring';
+        const data = seasonData[seasonKey] || seasonData['spring'];
+
+        // Inject data into DOM
+        document.getElementById('header-icon').innerText = data.icon;
+        document.getElementById('header-title').innerText = data.title;
+        document.getElementById('badge-phase').className = `text-xs font-mono uppercase px-3 py-1 rounded border font-bold ${data.badgeClass}`;
+        document.getElementById('badge-phase').innerText = data.title.split(':')[0];
+        document.getElementById('main-heading').innerText = data.heading;
+        document.getElementById('main-desc').innerText = data.desc;
+
+        // Populate Modules
+        const container = document.getElementById('modules-container');
+        container.innerHTML = data.modules.map(mod => `
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl">
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="text-xl font-bold text-amber-300">${mod.name}</h3>
+                    <span class="text-xs font-mono bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">${mod.xp}</span>
+                </div>
+                <p class="text-sm text-slate-300 mb-4">${mod.desc}</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs font-mono">
+                    <div class="bg-slate-950 p-3 rounded border border-slate-800/80">
+                        <strong class="text-slate-200 block mb-1">🛠️ Skill Learned:</strong>
+                        <span class="text-slate-400">${mod.skill}</span>
+                    </div>
+                    <div class="bg-slate-950 p-3 rounded border border-slate-800/80">
+                        <strong class="text-slate-200 block mb-1">📁 Portfolio Proof:</strong>
+                        <span class="text-slate-400">${mod.portfolio}</span>
+                    </div>
+                    <div class="bg-slate-950 p-3 rounded border border-slate-800/80">
+                        <strong class="text-slate-200 block mb-1">💰 Grant Match Value:</strong>
+                        <span class="text-slate-400">${mod.grant}</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    </script>
+</body>
+</html>
