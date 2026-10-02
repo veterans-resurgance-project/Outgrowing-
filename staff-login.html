@@ -29,6 +29,74 @@
   <!-- Main Staff Dashboard (Hidden until unlocked) -->
   <div id="staffDashboard" style="display: none; max-width: 900px; margin: 3rem auto; padding: 0 2rem;">
     
+<div x-data="staffReviewPortal" class="max-w-6xl mx-auto p-6 bg-slate-900 text-white rounded-xl shadow-2xl border border-slate-800">
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <h2 class="text-2xl font-black text-amber-400">Staff Review & Quality Control Queue</h2>
+            <p class="text-sm text-slate-400">Review out-of-bounds telemetry entries and manage recruit training side-bars.</p>
+        </div>
+        <button @click="fetchFlaggedLogs()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-sm font-semibold rounded-lg border border-slate-700 transition">
+            🔄 Refresh Queue
+        </button>
+    </div>
+
+    <!-- Status Feedback Banner -->
+    <template x-if="statusMessage">
+        <div class="mb-4 p-3 bg-emerald-950/60 border border-emerald-800 text-emerald-300 rounded-lg text-sm font-medium" x-text="statusMessage"></div>
+    </template>
+
+    <!-- Loading State -->
+    <template x-if="isLoading">
+        <div class="text-center py-12 text-slate-500 italic">Loading flagged telemetry records...</div>
+    </template>
+
+    <!-- Empty State -->
+    <template x-if="!isLoading && flaggedLogs.length === 0">
+        <div class="text-center py-12 bg-slate-800/40 rounded-xl border border-dashed border-slate-700">
+            <p class="text-emerald-400 font-bold text-lg">✅ All Clear!</p>
+            <p class="text-slate-400 text-sm mt-1">No flagged entries require review at this time.</p>
+        </div>
+    </template>
+
+    <!-- Review Table -->
+    <template x-if="!isLoading && flaggedLogs.length > 0">
+        <div class="overflow-x-auto rounded-lg border border-slate-800">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-800 text-slate-300 text-xs uppercase tracking-wider">
+                        <th class="p-3">Recruit ID</th>
+                        <th class="p-3">Parameter</th>
+                        <th class="p-3">Logged Value</th>
+                        <th class="p-3">Flag Reason</th>
+                        <th class="p-3">Timestamp</th>
+                        <th class="p-3 text-right">Administrative Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-800 text-sm">
+                    <template x-for="log in flaggedLogs" :key="log.id">
+                        <tr class="hover:bg-slate-800/50 transition">
+                            <td class="p-3 font-mono font-bold text-sky-400" x-text="log.recruit_id || 'Anonymous'"></td>
+                            <td class="p-3 font-semibold text-slate-200" x-text="log.parameter_key"></td>
+                            <td class="p-3 text-amber-300 font-mono" x-text="log.logged_value + ' ' + log.unit"></td>
+                            <td class="p-3 text-rose-300 text-xs italic max-w-xs" x-text="log.flag_reason"></td>
+                            <td class="p-3 text-slate-400 text-xs" x-text="new Date(log.logged_at).toLocaleString()"></td>
+                            <td class="p-3 text-right space-x-2">
+                                <!-- Approve Data / Clear Flag -->
+                                <button @click="approveAnomaly(log.id)" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded shadow transition">
+                                    Approve Data
+                                </button>
+                                <!-- Restore User Training Sidebar Status -->
+                                <button @click="restoreUserAccess(log.recruit_id)" class="px-3 py-1 bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold rounded shadow transition" title="Clears training side-bar lock for this recruit">
+                                    Clear Training Lock
+                                </button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </template>
+</div>
     <!-- Administrative & Fiduciary Vault Card -->
     <div style="background: #1e293b; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); padding: 1.5rem; margin-bottom: 2rem;">
       <span style="background: rgba(34, 197, 94, 0.15); color: #22c55e; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; padding: 0.3rem 0.8rem; border-radius: 20px; display: inline-block; margin-bottom: 0.5rem;">Governance &amp; Compliance</span>
