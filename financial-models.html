@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blended Financial Ecosystem Models | AFTI Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Top Navigation / Header with Escape Button -->
+    <header class="w-full bg-slate-900 border-b border-slate-800 py-4 px-6 flex justify-between items-center shadow-md">
+        <div class="flex items-center space-x-3">
+            <span class="text-2xl">💡</span>
+            <h1 class="text-lg font-black tracking-wider text-amber-400">FINANCIAL ECOSYSTEM EXPOSÉ</h1>
+        </div>
+        <div>
+            <a href="index.html" class="inline-flex items-center space-x-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-bold rounded-lg border border-slate-700 transition shadow">
+                <span>&larr;</span>
+                <span>Return to Home</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-4xl mx-auto px-6 py-12 flex-grow">
+
+        <!-- Intro Header -->
+        <section class="text-center mb-12">
+            <div class="inline-block px-3 py-1 mb-4 rounded-full bg-amber-950 border border-amber-800 text-amber-400 text-xs font-bold tracking-widest uppercase">
+                Tri-Stream Financial Architecture
+            </div>
+            <h2 class="text-3xl md:text-5xl font-black mb-4 tracking-tight text-white">
+                How Our <span class="text-amber-400">Funding Model</span> Works
+            </h2>
+            <p class="text-slate-300 max-w-2xl mx-auto text-base leading-relaxed">
+                We combine direct grants, commercial revenue, and community sweat equity to exceed our $250,000 annual benchmark. Select a perspective below to see how different audiences view our model.
+            </p>
+        </section>
+
+        <!-- Audience View Switcher Tabs -->
+        <div class="flex justify-center space-x-2 mb-8">
+            <button onclick="switchView('layman')" id="btn-layman" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-amber-500 text-slate-950 transition shadow-lg">
+                Layman Overview
+            </button>
+            <button onclick="switchView('grant')" id="btn-grant" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800 transition">
+                Grant Reviewer Perspective
+            </button>
+            <button onclick="switchView('tech')" id="btn-tech" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800 transition">
+                Tech-Savvy Architecture
+            </button>
+        </div>
+
+        <!-- Dynamic Content Display Cards -->
+        <div id="content-display" class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl transition-all duration-300">
+            <!-- Populated via JavaScript -->
+        </div>
+
+        <!-- Bottom Return Escape Button -->
+        <div class="mt-12 text-center">
+            <a href="index.html" class="inline-flex items-center space-x-2 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold rounded-xl border border-slate-700 transition shadow">
+                <span>&larr;</span>
+                <span>Back to Portal Home</span>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-slate-900 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        <p>AFTI Agricultural Training & Land-Linkage Portal &bull; Blended Capital & Civic Enterprise Model</p>
+    </footer>
+
+    <!-- JavaScript Handling Dynamic View Switching -->
+    <script>
+        const views = {
+            layman: {
+                title: "The Layman Explanation: Neighbors Helping Neighbors & Building Self-Sufficiency",
+                subtitle: "Simple, human-centered terms for community members and general supporters.",
+                html: `
+                    <div class="space-y-4 text-slate-300 leading-relaxed">
+                        <p class="text-lg text-amber-300 font-medium">
+                            "Instead of relying purely on charity or endless government handouts, our program operates like a self-sustaining engine."
+                        </p>
+                        <p>
+                            Think of it in three simple buckets:
+                        </p>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-300">
+                            <li><strong>Sweat Equity & Service:</strong> When participants clear brush, harvest native seeds, or deliver firewood to families in need, their hard work translates into certified volunteer hours that unlock matching funds from major foundations.</li>
+                            <li><strong>Commercial Farming & Food Share:</strong> We grow high-quality crops. We donate 10% of our harvest directly to local food banks, and sell the remaining 90% to generate cash to pay our participants.</li>
+                            <li><strong>Environmental Jobs:</strong> We sub-contract out heavy land-clearing and remediation work, keeping a clean 20% management fee to fund our training stipends and equipment upkeep.</li>
+                        </ul>
+                        <p class="pt-2 text-sm text-slate-400 italic">
+                            Result: Direct grants act as the spark, but the program's own commercial activity and community service keep the engine running permanently.
+                        </p>
+                    </div>
+                `
+            },
+            grant: {
+                title: "The Grant Reviewer Perspective: High-Leverage Institutional ROI",
+                subtitle: "Optimized for foundations like OCF, OWEB, and regional economic development boards.",
+                html: `
+                    <div class="space-y-4 text-slate-300 leading-relaxed">
+                        <p class="text-lg text-amber-300 font-medium">
+                            "A blended-capital civic model engineered for maximum fiscal leverage and long-term sustainability."
+                        </p>
+                        <p>
+                            When institutional evaluators review our financial architecture, they look at three major pillars of risk mitigation and return:
+                        </p>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-300">
+                            <li><strong>Venture-Style Capital Injection:</strong> Direct grants are framed not as endless operational crutches, but as high-ROI capital inputs that instantly scale our waitlist surge pool and participant stipend capacities.</li>
+                            <li><strong>Built-In Non-Cash Matching:</strong> Through structured seasonal ecological service modules (Winter infrastructure, Spring watershed defense, Summer seed harvests), participants generate over $114,000 in certified in-kind match value.</li>
+                            <li><strong>Diversified Exit & Sustainability:</strong> Long-term fiscal health is secured independently via 20% Overhead & Profit (P&O) margins captured on heavy equipment remediation contracts and commercial agricultural yields, ensuring zero risk of post-grant collapse.</li>
+                        </ul>
+                        <p class="pt-2 text-sm text-slate-400 italic">
+                            Result: Evaluators see a low-risk, highly resilient program that turns every philanthropic dollar into a multi-layered community asset.
+                        </p>
+                    </div>
+                `
+            },
+            tech: {
+                title: "The Tech-Savvy Architecture: Tri-Stream Multi-Variable Financial Ledger",
+                subtitle: "Systematic data flow, automated threshold compliance, and scalable economic inputs.",
+                html: `
+                    <div class="space-y-4 text-slate-300 font-mono text-sm leading-relaxed">
+                        <p class="text-base text-amber-300 font-bold">
+                            // SYSTEM REVENUE ENGINE CONFIGURATION
+                        </p>
+                        <div class="bg-slate-950 p-4 rounded-lg border border-slate-800 space-y-2 text-slate-300">
+                            <p><span class="text-sky-400">STREAM_01</span> [In-Kind Match] = Headcount(25) * Seasonal_Hours(3,575) * Rate($32/hr) = <span class="text-emerald-400">$114,400</span></p>
+                            <p><span class="text-sky-400">STREAM_02</span> [Remediation P&O] = Contract_Volume($250k) * Margin_Capture(20%) = <span class="text-emerald-400">$50,000</span></p>
+                            <p><span class="text-sky-400">STREAM_03</span> [Commercial Ag] = Gross_Market($60k) * Liquid_Ratio(90%) = <span class="text-emerald-400">$54,000</span></p>
+                            <p><span class="text-sky-400">STREAM_04</span> [Direct Grants] = External Liquid Capital (Buffer & Expansion Multiplier)</p>
+                        </div>
+                        <p>
+                            <strong>Regulatory Boundary Constraints:</strong> Participant training hours are hard-capped via portal tracking logic within the BOLI-aligned 250–300 hour threshold to maintain compliance.
+                        </p>
+                        <p>
+                            <strong>Scalability Algorithm:</strong> Direct grant inputs act as variable capital multipliers. Scaling the waitlist surge pool dynamically increases in-kind match output without breaking core operational ratios.
+                        </p>
+                    </div>
+                `
+            }
+        };
+
+        function switchView(viewKey) {
+            // Update active states on buttons
+            ['layman', 'grant', 'tech'].forEach(key => {
+                const btn = document.getElementById(`btn-${key}`);
+                if (key === viewKey) {
+                    btn.className = "px-5 py-2.5 rounded-lg text-sm font-bold bg-amber-500 text-slate-950 transition shadow-lg";
+                } else {
+                    btn.className = "px-5 py-2.5 rounded-lg text-sm font-bold bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800 transition";
+                }
+            });
+
+            // Render content
+            const data = views[viewKey];
+            document.getElementById('content-display').innerHTML = `
+                <div class="mb-6">
+                    <h3 class="text-2xl font-black text-white">${data.title}</h3>
+                    <p class="text-sm text-slate-400 mt-1">${data.subtitle}</p>
+                </div>
+                <div>
+                    ${data.html}
+                </div>
+            `;
+        }
+
+        // Initialize with layman view on load
+        switchView('layman');
+    </script>
+
+</body>
+</html>
