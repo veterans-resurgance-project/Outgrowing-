@@ -1,0 +1,17 @@
+<div x-data="{ wishlist: [], points: 400 }" class="bg-slate-900 p-6 rounded-xl border border-slate-800 text-white">
+    <h3 class="text-xl font-bold text-amber-400 mb-2">My Educational & Gear Wish List</h3>
+    <p class="text-sm text-slate-400 mb-4">Redeem your accumulated field and community service points for sponsored items.</p>
+    
+    <div class="space-y-3">
+        <!-- Example Wish List Card -->
+        <div class="bg-slate-800 p-4 rounded-lg flex justify-between items-center border border-slate-700">
+            <div>
+                <h4 class="font-bold text-sky-300">FAA Part 107 Test Prep & Fee Voucher</h4>
+                <p class="text-xs text-slate-400 mt-1">Requires: 1,000 Points | Status: <span class="text-amber-300 font-semibold">Ready for Match</span></p>
+            </div>
+            <button class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-xs font-bold rounded-lg transition" disabled>
+                Match with Sponsor
+            </button>
+        </div>
+    </div>
+</div>
