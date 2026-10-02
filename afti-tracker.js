@@ -185,6 +185,85 @@ const AFTITracker = (() => {
         }
     }
 
+/**
+     * Evaluates a field log entry against standard ranges, flags anomalies,
+     * and tracks user reliability / training status.
+     * @param {string} recruitId - User / Recruit Identifier
+     * @param {string} parameterKey - Key matching parameterThresholds
+     * @param {number} value - Measured numeric value
+     */
+    async function submitFieldEntryWithValidation(recruitId, parameterKey, value) {
+        const rule = parameterThresholds[parameterKey];
+        if (!rule) return { success: false, message: "Unknown parameter key specified." };
+
+        const parsedVal = parseFloat(value);
+        let isFlagged = false;
+        let flagReason = null;
+
+        // Check against boundary conditions
+        if (parsedVal < rule.min || parsedVal > rule.max) {
+            isFlagged = true;
+            flagReason = `Value (${parsedVal} ${rule.unit}) is outside operational bounds (${rule.min}-${rule.max}).`;
+        }
+
+        if (!supabase) {
+            return { 
+                success: true, 
+                isFlagged: isFlagged, 
+                message: isFlagged ? `Saved locally (Flagged: ${flagReason})` : "Saved locally (Verified normal)." 
+            };
+        }
+
+        try {
+            // 1. Insert into field logs table (always saves so data isn't lost)
+            const { error: logError } = await supabase.from('afti_field_logs').insert([{
+                recruit_id: recruitId,
+                parameter_key: parameterKey,
+                logged_value: parsedVal,
+                unit: rule.unit,
+                is_flagged: isFlagged,
+                flag_reason: flagReason,
+                logged_at: new Date().toISOString()
+            }]);
+
+            if (logError) throw logError;
+
+            // 2. If flagged, handle user error count & training sidebar check
+            if (isFlagged && recruitId) {
+                // Fetch or update participant profile stats
+                // (Assumes a 'participants' or 'profiles' table exists from your matchEngine)
+                const { data: profile } = await supabase
+                    .from('participants')
+                    .select('flagged_entry_count, training_status')
+                    .eq('id', recruitId)
+                    .single();
+
+                const currentFlags = (profile && profile.flagged_entry_count) ? profile.flagged_entry_count + 1 : 1;
+                let updatePayload = { flagged_entry_count: currentFlags };
+
+                // Threshold Check: 3 flags triggers training sidebar requirement
+                if (currentFlags >= 3) {
+                    updatePayload.training_status = 'SIDEBAR_TRAINING_REQUIRED';
+                }
+
+                await supabase.from('participants').update(updatePayload).eq('id', recruitId);
+
+                return { 
+                    success: true, 
+                    isFlagged: true, 
+                    message: `⚠️ Entry flagged for review (${flagReason}). Routed to staff queue.` 
+                };
+            } else {
+                // Award XP for clean, verified data submissions
+                addXP(25);
+                return { success: true, isFlagged: false, message: "✅ Entry verified & synced! +25 XP awarded." };
+            }
+
+        } catch (err) {
+            return { success: false, message: err.message };
+        }
+    }
+    
     function getXP() {
         _initializeStorage();
         return parseInt(localStorage.getItem(CONFIG.keys.globalXp), 10) || CONFIG.defaults.baseXp;
