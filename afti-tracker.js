@@ -160,7 +160,15 @@ const AFTITracker = (() => {
         keys: { globalXp: 'afti_global_xp', trackName: 'afti_track_name' },
         defaults: { baseXp: 400, track: 'Foster-Alum Track' }
     };
-
+    // --- Real-World Baseline Dictionary & Validation Rules ---
+    const parameterThresholds = {
+        soil_moisture: { min: 0, max: 100, unit: "%", description: "Volumetric water content." },
+        soil_temperature: { min: 32, max: 105, unit: "°F", description: "Growing season soil temp." },
+        ph_level: { min: 3.5, max: 9.0, unit: "pH", description: "Agricultural soil pH bounds." },
+        drone_altitude: { min: 0, max: 400, unit: "ft", description: "FAA Part 107 max legal AGL ceiling." },
+        water_temperature: { min: 32, max: 90, unit: "°F", description: "Stream/watershed temperature." },
+        ndvi_score: { min: -1.0, max: 1.0, unit: "NDVI", description: "Normalized Difference Vegetation Index." }
+    };
     const TIERS = [
         { minXp: 0,    maxXp: 499,   title: 'Tier 1: Initial Field Placement', color: '#38bdf8' },
         { minXp: 500, maxXp: 699,   title: 'Tier 2: Active Practicum',        color: '#f59e0b' },
