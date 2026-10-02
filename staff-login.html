@@ -118,6 +118,73 @@
 
   <!-- Staff Portal Logic -->
   <script>
+ 
+    document.addEventListener('alpine:init', () => {
+    Alpine.data('staffReviewPortal', () => ({
+        flaggedLogs: [],
+        isLoading: false,
+        statusMessage: '',
+
+        async init() {
+            await this.fetchFlaggedLogs();
+        },
+
+        // Fetch all entries currently flagged for review
+        async fetchFlaggedLogs() {
+            if (!supabase) return;
+            this.isLoading = true;
+            try {
+                const { data, error } = await supabase
+                    .from('afti_field_logs')
+                    .select('*')
+                    .eq('is_flagged', true)
+                    .order('logged_at', { ascending: false });
+
+                if (error) throw error;
+                if (data) this.flaggedLogs = data;
+            } catch (err) {
+                console.error("Error fetching review queue:", err);
+            } finally {
+                this.isLoading = false;
+            }
+        },
+
+        // Staff Action 1: Dismiss flag (Approve as valid environmental anomaly)
+        async approveAnomaly(logId) {
+            if (!supabase) return;
+            const { error } = await supabase
+                .from('afti_field_logs')
+                .update({ is_flagged: false, flag_reason: 'Approved by staff as valid anomaly.' })
+                .eq('id', logId);
+
+            if (!error) {
+                this.statusMessage = "Log approved and cleared from review queue.";
+                await this.fetchFlaggedLogs();
+                setTimeout(() => { this.statusMessage = ''; }, 3000);
+            }
+        },
+
+        // Staff Action 2: Clear/Reset Participant Training Sidebar Status
+        async restoreUserAccess(recruitId) {
+            if (!supabase || !recruitId) return;
+            const { error } = await supabase
+                .from('participants')
+                .update({ 
+                    training_status: 'ACTIVE', 
+                    flagged_entry_count: 0 
+                })
+                .eq('id', recruitId);
+
+            if (!error) {
+                this.statusMessage = `Recruit ${recruitId} training status reset to ACTIVE. Full access restored.`;
+                await this.fetchFlaggedLogs();
+                setTimeout(() => { this.statusMessage = ''; }, 4000);
+            } else {
+                alert("Error updating participant: " + error.message);
+            }
+        }
+    }));
+});
     function verifyStaffPasscode(event) {
       event.preventDefault();
       const code = document.getElementById("passcodeInput").value.trim();
