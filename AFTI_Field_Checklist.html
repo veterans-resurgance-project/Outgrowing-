@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFTI Field Operations: Mobile Biochar Production</title>
+    <!-- Google Fonts: Fredoka and Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --accent-orange: #f97316;
+            --accent-blue: #38bdf8;
+            --accent-green: #22c55e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            margin: 0;
+            padding: 1.5rem 1rem;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9));
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+        .badge {
+            background: rgba(249, 115, 22, 0.15);
+            color: var(--accent-orange);
+            font-family: 'Fredoka', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-family: 'Fredoka', system-ui, sans-serif;
+            font-size: 1.8rem;
+            margin: 0 0 8px 0;
+            color: var(--text-main);
+        }
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        .progress-container {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            height: 12px;
+            width: 100%;
+            margin-top: 15px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-green));
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .progress-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            text-align: right;
+        }
+        .section-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+        .section-title {
+            font-family: 'Fredoka', system-ui, sans-serif;
+            font-size: 1.25rem;
+            color: var(--accent-blue);
+            margin-top: 0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        .checklist-item input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--text-muted);
+            border-radius: 6px;
+            background: rgba(15, 23, 42, 0.6);
+            cursor: pointer;
+            display: grid;
+            place-content: center;
+            margin-top: 2px;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+        .checklist-item input[type="checkbox"]::before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em var(--accent-green);
+            transform-origin: center;
+            clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        }
+        .checklist-item input[type="checkbox"]:checked {
+            background-color: rgba(34, 197, 94, 0.2);
+            border-color: var(--accent-green);
+        }
+        .checklist-item input[type="checkbox"]:checked::before {
+            transform: scale(1);
+        }
+        .checklist-item.completed label {
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+        .checklist-content {
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+        .checklist-content strong {
+            color: #f1f5f9;
+        }
+        .sub-list {
+            margin-top: 8px;
+            margin-left: 24px;
+            padding-left: 12px;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        .action-bar {
+            text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            background: #334155;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .btn:hover {
+            background: #475569;
+            border-color: var(--accent-orange);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">AFTI Field Operations</span>
+        <h1>Mobile Biochar Production Guide</h1>
+        <p class="subtitle">Interactive field checklist for crew deployment and burn execution.</p>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="progress-text" id="progressText">0% Completed</div>
+    </header>
+
+    <!-- Section 1 -->
+    <div class="section-card">
+        <h2 class="section-title">📋 Pre-Deployment & Site Setup</h2>
+        
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content"><strong>Trailer Inspection:</strong> Verify tire pressure, wheel chocks, hitch lock, and stabilizing jacks.</div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content"><strong>Leveling & Stability:</strong> Park on stable ground, drop jacks onto timber blocking, and ensure the trailer is level.</div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content"><strong>Fire Break & Perimeter:</strong> Clear a 15-foot radius of dry duff, leaves, and surface debris. Establish wind direction.</div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content">
+                <strong>Safety & Suppression Cache:</strong>
+                <div class="sub-list">
+                    <div style="margin-bottom: 4px;">• Water IBC tote / pressure tanks filled & pressurized</div>
+                    <div style="margin-bottom: 4px;">• Backpack water pumps & functional fire extinguishers staged</div>
+                    <div>• Hand tools (shovels, Pulaskis, metal rakes) ready</div>
+                </div>
+            </div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content"><strong>PPE Check:</strong> P100 respirators, eye protection, leather gloves, and natural-fiber clothing verified for all crew members.</div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content"><strong>Feedstock Staging:</strong> Sort and stack dry slash/wood within arm's reach of the kiln feed door (segregated by size).</div>
+        </div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section-card">
+        <h2 class="section-title">🔥 Burn & Processing Workflow</h2>
+        
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content"><strong>Ignition Phase:</strong> Establish kindling fire inside the kiln chamber to build an initial oxygen-starved draft.</div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content"><strong>Thermal Upscaling:</strong> Feed larger split wood or forest slash progressively at a steady, measured pace.</div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content"><strong>Draft Regulation:</strong> Monitor smoke output (transitioning from white/gray steam to translucent blue-gray pyrolysis gases).</div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content"><strong>Combustion Control:</strong> Prevent complete ash conversion by tightly managing primary air intakes.</div>
+        </div>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="section-card">
+        <h2 class="section-title">🌊 Quenching & Cooling</h2>
+        
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content"><strong>Oxygen Starvation:</strong> Seal all primary air intakes completely once the chamber reaches capacity.</div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content"><strong>Water Quenching:</strong> Apply metered water spray/mist directly into the chamber (wear respiratory PPE against steam).</div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content"><strong>Thermal Verification:</strong> Confirm internal core temperatures are completely cold to the touch to eliminate any risk of spontaneous combustion.</div>
+        </div>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="section-card">
+        <h2 class="section-title">📦 Bagging & Site Wrap-Up</h2>
+        
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content"><strong>Nutrient Charging (Optional):</strong> Blend biochar with compost tea, mycorrhizae, or mineral dusts as needed.</div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content"><strong>Super-Sack Loading:</strong> Secure the 1,000–1,500 lb agricultural super-sack beneath the discharge chute. Fill evenly.</div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content"><strong>Transport Staging:</strong> Cinch/tie off the super-sack and transfer to the transport vehicle using tractor forks or tailgate lifter.</div>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="checklist-content"><strong>Final Site Police:</strong> Sweep the footprint, secure trailer tie-downs, and verify zero active embers before leaving the landing.</div>
+        </div>
+    </div>
+
+    <div class="action-bar">
+        <button class="btn" onclick="resetChecklist()">Reset Deployment Checklist</button>
+    </div>
+</div>
+
+<script>
+    function toggleCheck(element) {
+        const checkbox = element.querySelector('input[type="checkbox"]');
+        // Prevent double toggle if clicking directly on checkbox input
+        if (event.target !== checkbox) {
+            checkbox.checked = !checkbox.checked;
+        }
+        
+        if (checkbox.checked) {
+            element.classList.add('completed');
+        } else {
+            element.classList.remove('completed');
+        }
+        
+        updateProgress();
+        saveState();
+    }
+
+    function updateProgress() {
+        const items = document.querySelectorAll('.checklist-item');
+        const checkedItems = document.querySelectorAll('.checklist-item input[type="checkbox"]:checked');
+        const percent = Math.round((checkedItems.length / items.length) * 100);
+        
+        document.getElementById('progressBar').style.width = percent + '%';
+        document.getElementById('progressText').innerText = percent + '% Completed (' + checkedItems.length + ' of ' + items.length + ')';
+    }
+
+    function saveState() {
+        const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+        const state = Array.from(checkboxes).map(cb => cb.checked);
+        localStorage.setItem('afti_biochar_checklist', JSON.stringify(state));
+    }
+
+    function loadState() {
+        const saved = localStorage.getItem('afti_biochar_checklist');
+        if (saved) {
+            const state = JSON.parse(saved);
+            const items = document.querySelectorAll('.checklist-item');
+            state.forEach((isChecked, index) => {
+                if (items[index]) {
+                    const cb = items[index].querySelector('input[type="checkbox"]');
+                    cb.checked = isChecked;
+                    if (isChecked) {
+                        items[index].classList.add('completed');
+                    } else {
+                        items[index].classList.remove('completed');
+                    }
+                }
+            });
+            updateProgress();
+        }
+    }
+
+    function resetChecklist() {
+        if (confirm("Are you sure you want to reset all checklist items for a new deployment?")) {
+            localStorage.removeItem('afti_biochar_checklist');
+            const items = document.querySelectorAll('.checklist-item');
+            items.forEach(item => {
+                item.querySelector('input[type="checkbox"]').checked = false;
+                item.classList.remove('completed');
+            });
+            updateProgress();
+        }
+    }
+
+    // Load state on startup
+    window.onload = loadState;
+</script>
+
+</body>
+</html>
