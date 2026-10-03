@@ -1,19 +1,302 @@
-# 🚨 Emergency Shutdown & Wildfire Mitigation Protocols
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Shutdown & Safety Protocols - Shared Harvest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-card: rgba(15, 23, 42, 0.85);
+            --border-color: rgba(239, 68, 68, 0.3);
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            margin: 0;
+            padding: 1.5rem 1rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(15, 23, 42, 0.9));
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        .header h1 {
+            font-family: 'Fredoka', system-ui, sans-serif;
+            font-size: 1.8rem;
+            color: #fca5a5;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+        .card.emergency {
+            border-left: 6px solid var(--accent-red);
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(239, 68, 68, 0.08));
+        }
+        .card.contacts {
+            border-left: 6px solid var(--accent-amber);
+        }
+        .card-title {
+            font-family: 'Fredoka', system-ui, sans-serif;
+            font-size: 1.25rem;
+            margin-top: 0;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .emergency-item {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 12px;
+        }
+        .emergency-item:last-child {
+            margin-bottom: 0;
+        }
+        .emergency-item strong {
+            color: #fca5a5;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 1.05rem;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        @media(min-width: 600px) {
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .form-group {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            padding: 10px 14px;
+        }
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        .form-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        .form-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            padding: 4px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+        .form-input:focus {
+            border-bottom-color: #38bdf8;
+        }
+        .action-bar {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .btn {
+            background: #ef4444;
+            color: white;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1rem;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+        .btn:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+        }
+        .btn-secondary {
+            background: #334155;
+            color: #f8fafc;
+            box-shadow: none;
+            margin-left: 10px;
+        }
+        .btn-secondary:hover {
+            background: #475569;
+        }
+        .status-alert {
+            display: none;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            color: #4ade80;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
 
-* **Immediate Wind Shift / Spot Fire:** If wind speeds exceed safe operational limits or embers ignite outside the 15-foot perimeter, immediately halt feeding, close all kiln air vents, and deploy the pressurized water tank to flood the burn chamber.
-* **Runaway Combustion (High Heat / Ash Run):** If the kiln begins flashing over into white ash conversion, choke air intake completely and apply a fine mist water injection to drop internal core temperatures instantly.
-* **Medical / Injury Response:** Shut down all active heavy equipment immediately. Administer first aid from the primary trailer cache.
+<div class="container">
+    <div class="header">
+        <h1>🚨 Emergency Shutdown & Site Protocols</h1>
+        <p>Shared Harvest Field Operations • Mobile Biochar Unit Safety & Incident Response</p>
+    </div>
 
----
+    <div id="statusAlert" class="status-alert">Emergency contacts and site log saved successfully!</div>
 
-### 📞 Emergency Contacts & Site Safety Log
+    <!-- Emergency Protocols Card -->
+    <div class="card emergency">
+        <h2 class="card-title" style="color: #fca5a5;">⚡ Immediate Action Protocols</h2>
+        
+        <div class="emergency-item">
+            <strong>Immediate Wind Shift / Spot Fire</strong>
+            If wind speeds exceed safe operational limits or embers ignite outside the 15-foot perimeter, immediately halt feeding, close all kiln air vents, and deploy the pressurized water tank to flood the burn chamber.
+        </div>
 
-* **Project Lead / Burn Master:** ___________________________  
-* **Phone:** ___________________
-* **Local Emergency / Fire Dispatch:** 911 (or local non-emergency dispatch)
-* **Local Oregon Department of Forestry (ODF) District Office:** ___________________________
-* **Nearest Hospital / Medical Facility:** _________________________________________________
-* **Address / Route:** __________________________________________________________________
-* **Current Coordinates / Landowner Contact:**
-  * **Location Name:** _________________________
-  * **GPS / Lat-Long:** _________________________
+        <div class="emergency-item">
+            <strong>Runaway Combustion (High Heat / Ash Run)</strong>
+            If the kiln begins flashing over into white ash conversion, choke air intake completely and apply a fine mist water injection to drop internal core temperatures instantly.
+        </div>
+
+        <div class="emergency-item">
+            <strong>Medical / Injury Response</strong>
+            Shut down all active heavy equipment immediately. Administer first aid from the primary trailer cache and prepare for rapid transport.
+        </div>
+    </div>
+
+    <!-- Emergency Contacts & Log Card -->
+    <div class="card contacts">
+        <h2 class="card-title" style="color: #fcd34d;">📞 Emergency Contacts & Site Safety Log</h2>
+        
+        <div class="contact-grid">
+            <div class="form-group">
+                <span class="form-label">Project Lead / Burn Master</span>
+                <input type="text" id="burnMaster" class="form-input" placeholder="Enter name...">
+            </div>
+            
+            <div class="form-group">
+                <span class="form-label">Phone Number</span>
+                <input type="text" id="burnPhone" class="form-input" placeholder="Enter phone...">
+            </div>
+
+            <div class="form-group">
+                <span class="form-label">Local Emergency / Dispatch</span>
+                <input type="text" id="dispatch" class="form-input" value="911 (Non-Emergency: Local Sheriff/Dispatch)">
+            </div>
+
+            <div class="form-group">
+                <span class="form-label">Local ODF District Office</span>
+                <input type="text" id="odfOffice" class="form-input" placeholder="Enter district office contact...">
+            </div>
+
+            <div class="form-group full-width">
+                <span class="form-label">Nearest Hospital / Medical Facility</span>
+                <input type="text" id="hospital" class="form-input" placeholder="Enter facility name...">
+            </div>
+
+            <div class="form-group full-width">
+                <span class="form-label">Address / Route Directions</span>
+                <input type="text" id="route" class="form-input" placeholder="Enter route/directions...">
+            </div>
+
+            <div class="form-group">
+                <span class="form-label">Location / Site Name</span>
+                <input type="text" id="siteName" class="form-input" placeholder="Enter site name...">
+            </div>
+
+            <div class="form-group">
+                <span class="form-label">GPS / Lat-Long Coordinates</span>
+                <input type="text" id="gps" class="form-input" placeholder="Enter coordinates...">
+            </div>
+        </div>
+    </div>
+
+    <div class="action-bar">
+        <button class="btn" onclick="saveEmergencyLog()">Save Site Log</button>
+        <button class="btn btn-secondary" onclick="window.print()">Print Protocol Sheet</button>
+    </div>
+</div>
+
+<script>
+    const STORAGE_KEY = 'shared_harvest_emergency_log';
+
+    function saveEmergencyLog() {
+        const data = {
+            burnMaster: document.getElementById('burnMaster').value,
+            burnPhone: document.getElementById('burnPhone').value,
+            dispatch: document.getElementById('dispatch').value,
+            odfOffice: document.getElementById('odfOffice').value,
+            hospital: document.getElementById('hospital').value,
+            route: document.getElementById('route').value,
+            siteName: document.getElementById('siteName').value,
+            gps: document.getElementById('gps').value,
+            timestamp: new Date().toISOString()
+        };
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        
+        const alertBox = document.getElementById('statusAlert');
+        alertBox.style.display = 'block';
+        setTimeout(() => {
+            alertBox.style.display = 'none';
+        }, 3000);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            try {
+                const data = JSON.parse(saved);
+                document.getElementById('burnMaster').value = data.burnMaster || '';
+                document.getElementById('burnPhone').value = data.burnPhone || '';
+                if(data.dispatch) document.getElementById('dispatch').value = data.dispatch;
+                document.getElementById('odfOffice').value = data.odfOffice || '';
+                document.getElementById('hospital').value = data.hospital || '';
+                document.getElementById('route').value = data.route || '';
+                document.getElementById('siteName').value = data.siteName || '';
+                document.getElementById('gps').value = data.gps || '';
+            } catch (e) {
+                console.error("Error loading saved emergency data", e);
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
