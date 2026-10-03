@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Biochar Unit Site Map - Shared Harvest Incubator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-card: rgba(15, 23, 42, 0.85);
+            --border-color: rgba(56, 189, 248, 0.2);
+            --accent-blue: #38bdf8;
+            --accent-amber: #f59e0b;
+            --accent-green: #22c55e;
+            --accent-fire: #ef4444;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            margin: 0;
+            padding: 1.5rem 1rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(15, 23, 42, 0.9));
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        .header h1 {
+            font-family: 'Fredoka', system-ui, sans-serif;
+            font-size: 1.8rem;
+            color: #fca5a5;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        
+        /* Map Layout Styling */
+        .map-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+            margin-bottom: 2rem;
+        }
+        
+        .map-zone {
+            text-align: center;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 12px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        
+        .map-zone.road {
+            background: rgba(56, 189, 248, 0.08);
+            border-color: rgba(56, 189, 248, 0.3);
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+        }
+
+        .map-zone.parking {
+            background: rgba(245, 158, 11, 0.08);
+            border-color: rgba(245, 158, 11, 0.3);
+            color: var(--accent-amber);
+            margin-top: 20px;
+        }
+
+        .flow-arrow {
+            text-align: center;
+            color: var(--accent-blue);
+            font-size: 1.25rem;
+            margin: 8px 0;
+        }
+
+        .grid-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        @media(min-width: 650px) {
+            .grid-row {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .map-card {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 18px;
+            position: relative;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .map-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .map-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+        }
+
+        .card-slash::before { background: var(--accent-amber); }
+        .card-product::before { background: var(--accent-green); }
+        .card-kiln::before { background: var(--accent-fire); grid-column: 1 / -1; }
+        .card-water::before { background: var(--accent-blue); }
+        .card-tools::before { background: #a855f7; }
+
+        .map-card-title {
+            font-family: 'Fredoka', system-ui, sans-serif;
+            font-size: 1.15rem;
+            margin-top: 0;
+            margin-bottom: 6px;
+            color: var(--text-main);
+        }
+
+        .map-card-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .kiln-row {
+            margin-bottom: 15px;
+        }
+
+        .action-bar {
+            text-align: center;
+        }
+
+        .btn {
+            background: var(--accent-blue);
+            color: #0f172a;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1rem;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+        }
+
+        .btn:hover {
+            background: #7dd3fc;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>🔥 Mobile Biochar Unit • Site Deployment Footprint</h1>
+        <p>Standardized Operational Layout & Spatial Staging Diagram</p>
+    </div>
+
+    <div class="map-container">
+        <!-- Top Access Road -->
+        <div class="map-zone road">
+            Logging Road / Access Route &nbsp;•&nbsp; Drive-Through / Pull-In Access ⬇️
+        </div>
+
+        <!-- Row 1: Feedstock & Finished Product -->
+        <div class="grid-row">
+            <div class="map-card card-slash">
+                <h3 class="map-card-title">Feedstock Staging</h3>
+                <p class="map-card-desc">Raw slash, forest debris, and chipped wood staged for immediate kiln feed.</p>
+            </div>
+            <div class="map-card card-product">
+                <h3 class="map-card-title">Finished Product</h3>
+                <p class="map-card-desc">Super-sacks staged securely for transport and subsequent inoculation.</p>
+            </div>
+        </div>
+
+        <div class="flow-arrow">⬇️ Material Flow & Feed Direction ⬇️</div>
+
+        <!-- Center: Mobile Kiln Unit -->
+        <div class="kiln-row">
+            <div class="map-card card-kiln" style="border-left: 5px solid var(--accent-fire); background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(239, 68, 68, 0.1));">
+                <h3 class="map-card-title" style="color: #fca5a5;">Mobile Biochar Trailer & Kiln Unit</h3>
+                <p class="map-card-desc">Central thermal processing station positioned safely between input staging and quenching infrastructure.</p>
+            </div>
+        </div>
+
+        <div class="flow-arrow">⬇️ Quenching & Post-Processing ⬇️</div>
+
+        <!-- Row 2: Water & Tool Crib -->
+        <div class="grid-row">
+            <div class="map-card card-water">
+                <h3 class="map-card-title">Water Tank / Quenching Station</h3>
+                <p class="map-card-desc">Pressurized IBC totes, fire suppression cache, and rapid cooling mist lines.</p>
+            </div>
+            <div class="map-card card-tools">
+                <h3 class="map-card-title">Tool Crib / PPE / Inoculation</h3>
+                <p class="map-card-desc">Safety gear, respirators, hand tools, and nutrient-charging supplies.</p>
+            </div>
+        </div>
+
+        <!-- Bottom Parking Zone -->
+        <div class="map-zone parking">
+            Vehicle / Truck & Trailer Parking Zone ⬆️ Staging & Loading Access
+        </div>
+    </div>
+
+    <div class="action-bar">
+        <button class="btn" onclick="window.print()">Print Site Map & Layout</button>
+    </div>
+</div>
+
+</body>
+</html>
