@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill of Materials & Live Inventory - Shared Harvest Incubator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-card: rgba(15, 23, 42, 0.85);
+            --border-color: rgba(56, 189, 248, 0.2);
+            --accent-blue: #38bdf8;
+            --accent-green: #22c55e;
+            --accent-amber: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            margin: 0;
+            padding: 1.5rem 1rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(15, 23, 42, 0.9));
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        .header h1 {
+            font-family: 'Fredoka', system-ui, sans-serif;
+            font-size: 1.8rem;
+            color: #86efac;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        .mode-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+        .toggle-btn {
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            font-family: 'Fredoka', sans-serif;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .toggle-btn.active {
+            background: var(--accent-blue);
+            color: #0f172a;
+            border-color: var(--accent-blue);
+            font-weight: 600;
+        }
+        .bom-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+            margin-bottom: 2rem;
+        }
+        .section-title {
+            font-family: 'Fredoka', system-ui, sans-serif;
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 8px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+        @media(min-width: 768px) {
+            .grid-2col {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .item-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .item-name {
+            color: #cbd5e1;
+        }
+        .item-qty {
+            font-family: 'Fredoka', sans-serif;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-blue);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .status-needed { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+        .status-acquired { background: rgba(34, 197, 94, 0.2); color: #86efac; }
+        
+        .action-bar {
+            text-align: center;
+        }
+        .btn {
+            background: var(--accent-blue);
+            color: #0f172a;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1rem;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+        }
+        .btn:hover {
+            background: #7dd3fc;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1 id="pageHeading">📋 Itemized System Bill of Materials (Needs List)</h1>
+        <p id="pageSubheading">Every line item below must be physically verified by the 5-person cell leader before field deployment.</p>
+    </div>
+
+    <div class="mode-toggle">
+        <button id="btnNeeds" class="toggle-btn active" onclick="switchMode('needs')">Needs List Mode</button>
+        <button id="btnInventory" class="toggle-btn" onclick="switchMode('inventory')">Live Inventory Tracking</button>
+    </div>
+
+    <div class="bom-card">
+        <div class="grid-2col">
+            <!-- LEFT COLUMN: PRODUCTION MATERIALS -->
+            <div>
+                <h3 class="section-title">🌲 Production &amp; Substrate Assets</h3>
+                <ul class="item-list">
+                    <li class="item-row">
+                        <span class="item-name">Hardwood Logs (4" x 4' Oak/Maple)</span>
+                        <div>
+                            <span class="item-qty">50 pcs</span>
+                            <span class="status-badge status-needed" data-status="needed">Needed</span>
+                        </div>
+                    </li>
+                    <li class="item-row">
+                        <span class="item-name">Gourmet Mushroom Plug Spawn</span>
+                        <div>
+                            <span class="item-qty">2,500 units</span>
+                            <span class="status-badge status-needed" data-status="needed">Needed</span>
+                        </div>
+                    </li>
+                    <li class="item-row">
+                        <span class="item-name">Raw Wood-Chips (Local Slash)</span>
+                        <div>
+                            <span class="item-qty">10 cu yds</span>
+                            <span class="status-badge status-needed" data-status="needed">Needed</span>
+                        </div>
+                    </li>
+                    <li class="item-row">
+                        <span class="item-name">Organic Planting Compost</span>
+                        <div>
+                            <span class="item-qty">15 cu yds</span>
+                            <span class="status-badge status-needed" data-status="needed">Needed</span>
+                        </div>
+                    </li>
+                    <li class="item-row">
+                        <span class="item-name">Premium Agricultural Lime</span>
+                        <div>
+                            <span class="item-qty">400 lbs</span>
+                            <span class="status-badge status-needed" data-status="needed">Needed</span>
+                        </div>
+                    </li>
+                    <li class="item-row">
+                        <span class="item-name">Native Bee Forage Root-Stock</span>
+                        <div>
+                            <span class="item-qty">120 plugs</span>
+                            <span class="status-badge status-needed" data-status="needed">Needed</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- RIGHT COLUMN: PLUMBING & HARDWARE -->
+            <div>
+                <h3 class="section-title">⚙️ Engineering, Water &amp; Infrastructure</h3>
+                <ul class="item-list">
+                    <li class="item-row">
+                        <span class="item-name">Low-Pressure Drip Irrigation Tape</span>
+                        <div>
+                            <span class="item-qty">2,000 lin ft</span>
+                            <span class="status-badge status-needed" data-status="needed">Needed</span>
+                        </div>
+                    </li>
+                    <li class="item-row">
+                        <span class="item-name">1-Inch Supply Line Pipe</span>
+                        <div>
+                            <span class="item-qty">250 lin ft</span>
+                            <span class="status-badge status-needed" data-status="needed">Needed</span>
+                        </div>
+                    </li>
+                    <li class="item-row">
+                        <span class="item-name">Quarter-Turn Brass Isolation Valves</span>
+                        <div>
+                            <span class="item-qty">6 units</span>
+                            <span class="status-badge status-needed" data-status="needed">Needed</span>
+                        </div>
+                    </li>
+                    <li class="item-row">
+                        <span class="item-name">Bulk 1,500 lb Commercial Super-Sacks</span>
+                        <div>
+                            <span class="item-qty">10 bags</span>
+                            <span class="status-badge status-needed" data-status="needed">Needed</span>
+                        </div>
+                    </li>
+                    <li class="item-row">
+                        <span class="item-name">Weatherproof Heavy Steel Tool Vault</span>
+                        <div>
+                            <span class="item-qty">1 unit</span>
+                            <span class="status-badge status-needed" data-status="needed">Needed</span>
+                        </div>
+                    </li>
+                    <li class="item-row">
+                        <span class="item-name">Digital Soil Testing Multimeters</span>
+                        <div>
+                            <span class="item-qty">2 units</span>
+                            <span class="status-badge status-needed" data-status="needed">Needed</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="action-bar">
+        <button class="btn" onclick="window.print()">Print Bill of Materials / Inventory</button>
+    </div>
+</div>
+
+<script>
+    function switchMode(mode) {
+        const btnNeeds = document.getElementById('btnNeeds');
+        const btnInventory = document.getElementById('btnInventory');
+        const heading = document.getElementById('pageHeading');
+        const subheading = document.getElementById('pageSubheading');
+        const badges = document.querySelectorAll('.status-badge');
+
+        if (mode === 'needs') {
+            btnNeeds.classList.add('active');
+            btnInventory.classList.remove('active');
+            heading.textContent = '📋 Itemized System Bill of Materials (Needs List)';
+            subheading.textContent = 'Every line item below must be physically verified by the 5-person cell leader before field deployment.';
+            badges.forEach(b => {
+                b.textContent = 'Needed';
+                b.className = 'status-badge status-needed';
+            });
+        } else {
+            btnInventory.classList.add('active');
+            btnNeeds.classList.remove('active');
+            heading.textContent = '📦 Shared Harvest Live Inventory Tracking';
+            subheading.textContent = 'Tracked inventory status across core 5-unit pod deployment and mobile workshop assets.';
+            badges.forEach(b => {
+                b.textContent = 'Acquired / Staged';
+                b.className = 'status-badge status-acquired';
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
