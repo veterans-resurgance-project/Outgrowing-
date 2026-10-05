@@ -1,0 +1,7 @@
+=IF(ISBLANK(A2), "", 
+  IFERROR(
+    IF(INDEX('Form Responses 1'!$C:$C, 
+       MAX(IF('Form Responses 1'!$B:$B=A2, ROW('Form Responses 1'!$B:$B), 0))) = "Checking Out", 
+       "🔴 Checked Out", "🟢 Available"), 
+    "🟢 Available")
+)
