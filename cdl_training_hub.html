@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDL Training & Practice Hub | Commercial Driver's License Prep</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#0b192c',
+                            900: '#070f1e',
+                            950: '#030712',
+                        },
+                        amber: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-amber-500 selection:text-slate-950">
+
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-gradient-to-tr from-amber-500 to-amber-600 rounded-xl flex items-center justify-center text-slate-950 text-2xl font-black shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-truck-front"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-tight text-white block leading-tight">CDL<span class="text-amber-500">PRO</span> HUB</span>
+                    <span class="text-xs text-slate-400 font-medium">Commercial Driver Training Portal</span>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold">
+                <a href="#roadmap" class="text-slate-300 hover:text-amber-400 transition-colors">6-Step Process</a>
+                <a href="#practice-tests" class="text-slate-300 hover:text-amber-400 transition-colors">Practice Tests</a>
+                <a href="#video-library" class="text-slate-300 hover:text-amber-400 transition-colors">Video Training</a>
+                <a href="#dashboard" class="text-slate-300 hover:text-amber-400 transition-colors">My Progress</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <a href="#practice-tests" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg text-sm transition-all shadow-md shadow-amber-500/10 flex items-center gap-2">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span>Start Practice</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="relative py-20 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 border-b border-slate-800">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold tracking-wide uppercase">
+                            <i class="fa-solid fa-shield-halved"></i> Updated 2026 ELDT Compliant Curriculum
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+                            Master Your CDL. <br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Drive Your Career Forward.</span>
+                        </h1>
+                        <p class="text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                            Your end-to-end preparation center for Class A & B Commercial Driver's Licenses. Access step-by-step process guides, state-standard practice exams with instant explanations, and high-definition maneuver video tutorials.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-4 justify-center lg:justify-start pt-2">
+                            <a href="#practice-tests" class="px-8 py-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold rounded-xl shadow-lg shadow-amber-500/20 text-base transition-all flex items-center gap-3">
+                                <span>Take Free Practice Test</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                            <a href="#roadmap" class="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl border border-slate-700 text-base transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-route text-amber-500"></i>
+                                <span>CDL Roadmap Narrative</span>
+                            </a>
+                        </div>
+
+                        <!-- Stats Bar -->
+                        <div class="pt-8 border-t border-slate-800 grid grid-cols-3 gap-4 text-center lg:text-left">
+                            <div>
+                                <div class="text-2xl sm:text-3xl font-black text-white">98.4%</div>
+                                <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">First-Time Pass Rate</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl sm:text-3xl font-black text-amber-400">6</div>
+                                <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Endorsement Modules</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl sm:text-3xl font-black text-white">100+</div>
+                                <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">HD Training Videos</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Visual / Dashboard Preview -->
+                    <div class="lg:col-span-5">
+                        <div class="glass-card rounded-2xl p-6 shadow-2xl relative border border-slate-700/60" id="dashboard">
+                            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-amber-400 font-bold border border-slate-700">
+                                        <i class="fa-solid fa-user-gear"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-white text-sm">Your CDL Tracker</h3>
+                                        <p class="text-xs text-slate-400">Preparation Progress</p>
+                                    </div>
+                                </div>
+                                <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-bold rounded-full">
+                                    Active Study Mode
+                                </span>
+                            </div>
+
+                            <div class="py-6 space-y-4">
+                                <div>
+                                    <div class="flex justify-between text-xs font-semibold mb-1.5">
+                                        <span class="text-slate-300">Overall Readiness Score</span>
+                                        <span class="text-amber-400 font-bold" id="readiness-percent">0%</span>
+                                    </div>
+                                    <div class="w-full h-3 bg-slate-800 rounded-full overflow-hidden border border-slate-700">
+                                        <div id="readiness-bar" class="h-full bg-gradient-to-r from-amber-500 to-amber-400 w-0 transition-all duration-1000"></div>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-3 text-xs">
+                                    <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800">
+                                        <div class="text-slate-400">Tests Completed</div>
+                                        <div class="text-lg font-bold text-white mt-0.5"><span id="tests-completed">0</span> / 6</div>
+                                    </div>
+                                    <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800">
+                                        <div class="text-slate-400">Avg. Practice Score</div>
+                                        <div class="text-lg font-bold text-emerald-400 mt-0.5" id="avg-score">-- %</div>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-2 pt-2">
+                                    <div class="text-xs font-semibold text-slate-400">Recommended Next Steps:</div>
+                                    <div class="flex items-center gap-3 p-2.5 bg-slate-800/50 rounded-lg text-xs border border-slate-700/50">
+                                        <i class="fa-solid fa-check-circle text-amber-400"></i>
+                                        <span class="text-slate-300">Complete General Knowledge Practice Test</span>
+                                    </div>
+                                    <div class="flex items-center gap-3 p-2.5 bg-slate-800/50 rounded-lg text-xs border border-slate-700/50">
+                                        <i class="fa-solid fa-circle text-slate-600"></i>
+                                        <span class="text-slate-400">Watch Air Brakes 7-Step Walkthrough</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button onclick="resetProgress()" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white rounded-lg text-xs font-semibold transition-colors">
+                                Reset Tracker Progress
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="py-20 bg-slate-950">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-amber-500 font-bold text-sm tracking-wider uppercase">Step-By-Step Journey</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">The Complete Path to Getting Your CDL</h2>
+                    <p class="text-slate-400 mt-4 leading-relaxed">
+                        Acquiring a Commercial Driver's License involves specific federal and state milestones. Follow this chronological blueprint from medical qualification to your final on-road driving exam.
+                    </p>
+                </div>
+
+                <div class="relative border-l-2 border-slate-800 ml-4 md:ml-32 space-y-12">
+
+                    <!-- Step 1 -->
+                    <div class="relative pl-8 md:pl-12 group">
+                        <div class="absolute -left-[25px] top-0 w-12 h-12 bg-slate-900 border-2 border-amber-500 rounded-full flex items-center justify-center text-amber-400 font-black text-lg group-hover:scale-110 transition-transform shadow-lg shadow-amber-500/10">
+                            1
+                        </div>
+                        <div class="glass-card p-6 rounded-xl border border-slate-800 hover:border-slate-700 transition-colors">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                                <h3 class="text-xl font-bold text-white flex items-center gap-3">
+                                    Self-Certification & DOT Medical Card
+                                </h3>
+                                <span class="px-3 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-full border border-amber-500/20">Prerequisite</span>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Before scheduling any DMV tests, you must self-certify your operating status (Interstate vs. Intrastate) and undergo a physical examination by a registered Federal Motor Carrier Safety Administration (FMCSA) Medical Examiner. 
+                            </p>
+                            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 text-xs text-slate-400 space-y-2">
+                                <div class="flex items-center gap-2 text-slate-200 font-semibold">
+                                    <i class="fa-solid fa-clipboard-check text-amber-400"></i> Key Requirements:
+                                </div>
+                                <ul class="list-disc list-inside space-y-1 pl-1">
+                                    <li>Vision check (20/40 in each eye with or without correction).</li>
+                                    <li>Blood pressure control and physical stamina assessment.</li>
+                                    <li>Filing Medical Examiner's Certificate (Form MCSA-5876) with your state licensing agency.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="relative pl-8 md:pl-12 group">
+                        <div class="absolute -left-[25px] top-0 w-12 h-12 bg-slate-900 border-2 border-amber-500 rounded-full flex items-center justify-center text-amber-400 font-black text-lg group-hover:scale-110 transition-transform shadow-lg shadow-amber-500/10">
+                            2
+                        </div>
+                        <div class="glass-card p-6 rounded-xl border border-slate-800 hover:border-slate-700 transition-colors">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                                <h3 class="text-xl font-bold text-white">
+                                    DMV Knowledge Tests & Commercial Learner's Permit (CLP)
+                                </h3>
+                                <span class="px-3 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-full border border-amber-500/20">Written Exam</span>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Pass the written general knowledge and specialized endorsement tests at your local DMV to earn your Commercial Learner’s Permit (CLP). You must hold this permit for a minimum of 14 days before attempting any skills testing.
+                            </p>
+                            <div class="grid sm:grid-cols-3 gap-3 text-xs">
+                                <div class="bg-slate-900/60 p-3 rounded-lg border border-slate-800">
+                                    <span class="font-bold text-amber-400 block mb-1">General Knowledge</span>
+                                    50 Questions (80% passing score required for all Class A/B candidates).
+                                </div>
+                                <div class="bg-slate-900/60 p-3 rounded-lg border border-slate-800">
+                                    <span class="font-bold text-amber-400 block mb-1">Air Brakes</span>
+                                    25 Questions (Mandatory if driving vehicles equipped with air brake systems).
+                                </div>
+                                <div class="bg-slate-900/60 p-3 rounded-lg border border-slate-800">
+                                    <span class="font-bold text-amber-400 block mb-1">Combination Vehicles</span>
+                                    20 Questions (Required for Class A tractor-trailer combinations).
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="relative pl-8 md:pl-12 group">
+                        <div class="absolute -left-[25px] top-0 w-12 h-12 bg-slate-900 border-2 border-amber-500 rounded-full flex items-center justify-center text-amber-400 font-black text-lg group-hover:scale-110 transition-transform shadow-lg shadow-amber-500/10">
+                            3
+                        </div>
+                        <div class="glass-card p-6 rounded-xl border border-slate-800 hover:border-slate-700 transition-colors">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                                <h3 class="text-xl font-bold text-white">
+                                    Entry-Level Driver Training (ELDT)
+                                </h3>
+                                <span class="px-3 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-full border border-amber-500/20">Federal Mandatory</span>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Under federal regulations, all first-time CDL applicants must complete theory and behind-the-wheel instruction through an FMCSA-registered training provider listed on the Training Provider Registry (TPR).
+                            </p>
+                            <p class="text-xs text-slate-400 italic">
+                                Note: Your training results must be submitted electronically by your certified instructor to the TPR before you can book your final road exam.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="relative pl-8 md:pl-12 group">
+                        <div class="absolute -left-[25px] top-0 w-12 h-12 bg-slate-900 border-2 border-amber-500 rounded-full flex items-center justify-center text-amber-400 font-black text-lg group-hover:scale-110 transition-transform shadow-lg shadow-amber-500/10">
+                            4
+                        </div>
+                        <div class="glass-card p-6 rounded-xl border border-slate-800 hover:border-slate-700 transition-colors">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                                <h3 class="text-xl font-bold text-white">
+                                    Pre-Trip Vehicle Inspection Test
+                                </h3>
+                                <span class="px-3 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-full border border-amber-500/20">Practical Phase 1</span>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                You must demonstrate to the examiner that your commercial vehicle is safe to operate. You will conduct a full walk-around inspection, pointing out key mechanical components, checking fluid levels, inspect brake lines, and execute the crucial 7-Step Air Brake Leakage Test.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="relative pl-8 md:pl-12 group">
+                        <div class="absolute -left-[25px] top-0 w-12 h-12 bg-slate-900 border-2 border-amber-500 rounded-full flex items-center justify-center text-amber-400 font-black text-lg group-hover:scale-110 transition-transform shadow-lg shadow-amber-500/10">
+                            5
+                        </div>
+                        <div class="glass-card p-6 rounded-xl border border-slate-800 hover:border-slate-700 transition-colors">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                                <h3 class="text-xl font-bold text-white">
+                                    Basic Vehicle Control Skills
+                                </h3>
+                                <span class="px-3 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-full border border-amber-500/20">Practical Phase 2</span>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Test your spatial awareness and vehicle control through a series of yard maneuvers around cones. Maneuvers typically include straight-line backing, offset backing, alley docking, and parallel parking.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="relative pl-8 md:pl-12 group">
+                        <div class="absolute -left-[25px] top-0 w-12 h-12 bg-slate-900 border-2 border-amber-500 rounded-full flex items-center justify-center text-amber-400 font-black text-lg group-hover:scale-110 transition-transform shadow-lg shadow-amber-500/10">
+                            6
+                        </div>
+                        <div class="glass-card p-6 rounded-xl border border-slate-800 hover:border-slate-700 transition-colors">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                                <h3 class="text-xl font-bold text-white">
+                                    On-Road Driving Examination
+                                </h3>
+                                <span class="px-3 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-full border border-amber-500/20">Final Phase</span>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Drive on public roadways with a state examiner evaluating your performance in real traffic conditions. You will be graded on turns, intersections, railroad crossings, gear shifting/clutch work, lane positioning, mirror checks, and overall safety etiquette.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="practice-tests" class="py-20 bg-slate-900/60 border-t border-b border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                    <div>
+                        <span class="text-amber-500 font-bold text-sm tracking-wider uppercase">Interactive Exam Simulator</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">CDL Knowledge Practice Tests</h2>
+                        <p class="text-slate-400 mt-2 max-w-xl">
+                            Select an endorsement module below to take a practice quiz with instant feedback and scoring.
+                        </p>
+                    </div>
+
+                    <!-- Filter buttons -->
+                    <div class="flex flex-wrap gap-2" id="quiz-filter-buttons">
+                        <button onclick="filterQuizzes('all')" class="filter-btn active px-4 py-2 bg-amber-500 text-slate-950 font-bold rounded-lg text-xs transition-all">All Tests</button>
+                        <button onclick="filterQuizzes('class-a')" class="filter-btn px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-lg text-xs transition-all">Class A</button>
+                        <button onclick="filterQuizzes('endorsements')" class="filter-btn px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-lg text-xs transition-all">Endorsements</button>
+                    </div>
+                </div>
+
+                <!-- Grid of Practice Modules -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="quiz-cards-grid">
+                    
+                    <!-- Card 1: General Knowledge -->
+                    <div class="quiz-card glass-card rounded-xl p-6 border border-slate-800 hover:border-amber-500/50 transition-all flex flex-col justify-between" data-category="class-a">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center font-bold text-lg">
+                                    <i class="fa-solid fa-book"></i>
+                                </div>
+                                <span class="px-2.5 py-1 bg-slate-800 text-slate-300 text-xs font-semibold rounded-md">5 Questions</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">General Knowledge</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-6">
+                                Essential rules of the road, vehicle inspection, speed management, and safe driving principles required for all CDL applicants.
+                            </p>
+                        </div>
+                        <button onclick="startQuiz('gk')" class="w-full py-3 bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-400 font-bold rounded-lg text-sm transition-all flex items-center justify-center gap-2">
+                            <span>Start Test</span>
+                            <i class="fa-solid fa-play text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card 2: Air Brakes -->
+                    <div class="quiz-card glass-card rounded-xl p-6 border border-slate-800 hover:border-amber-500/50 transition-all flex flex-col justify-between" data-category="class-a">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-10 h-10 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center font-bold text-lg">
+                                    <i class="fa-solid fa-wind"></i>
+                                </div>
+                                <span class="px-2.5 py-1 bg-slate-800 text-slate-300 text-xs font-semibold rounded-md">5 Questions</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">Air Brake Systems</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-6">
+                                Covers air compressor safety, dual air brake systems, emergency brakes, low pressure warnings, and leakage tests.
+                            </p>
+                        </div>
+                        <button onclick="startQuiz('airbrakes')" class="w-full py-3 bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-400 font-bold rounded-lg text-sm transition-all flex items-center justify-center gap-2">
+                            <span>Start Test</span>
+                            <i class="fa-solid fa-play text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card 3: Combination Vehicles -->
+                    <div class="quiz-card glass-card rounded-xl p-6 border border-slate-800 hover:border-amber-500/50 transition-all flex flex-col justify-between" data-category="class-a">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center font-bold text-lg">
+                                    <i class="fa-solid fa-link"></i>
+                                </div>
+                                <span class="px-2.5 py-1 bg-slate-800 text-slate-300 text-xs font-semibold rounded-md">5 Questions</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">Combination Vehicles</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-6">
+                                Essential knowledge for Class A tractor-trailers, including coupling/uncoupling procedures and rollover prevention.
+                            </p>
+                        </div>
+                        <button onclick="startQuiz('combo')" class="w-full py-3 bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-400 font-bold rounded-lg text-sm transition-all flex items-center justify-center gap-2">
+                            <span>Start Test</span>
+                            <i class="fa-solid fa-play text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card 4: Hazardous Materials (HazMat) -->
+                    <div class="quiz-card glass-card rounded-xl p-6 border border-slate-800 hover:border-amber-500/50 transition-all flex flex-col justify-between" data-category="endorsements">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-10 h-10 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20 flex items-center justify-center font-bold text-lg">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                </div>
+                                <span class="px-2.5 py-1 bg-slate-800 text-slate-300 text-xs font-semibold rounded-md">5 Questions</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">Hazardous Materials (H)</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-6">
+                                Regulations for transporting dangerous goods, shipping papers, placarding rules, and emergency response procedures.
+                            </p>
+                        </div>
+                        <button onclick="startQuiz('hazmat')" class="w-full py-3 bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-400 font-bold rounded-lg text-sm transition-all flex items-center justify-center gap-2">
+                            <span>Start Test</span>
+                            <i class="fa-solid fa-play text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card 5: Tanker Endorsement -->
+                    <div class="quiz-card glass-card rounded-xl p-6 border border-slate-800 hover:border-amber-500/50 transition-all flex flex-col justify-between" data-category="endorsements">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-10 h-10 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center font-bold text-lg">
+                                    <i class="fa-solid fa-oil-can"></i>
+                                </div>
+                                <span class="px-2.5 py-1 bg-slate-800 text-slate-300 text-xs font-semibold rounded-md">5 Questions</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">Tank Vehicles (N)</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-6">
+                                Liquid surge dynamics, baffled vs unbaffled tanks, outage considerations, and safe stopping distances for tankers.
+                            </p>
+                        </div>
+                        <button onclick="startQuiz('tanker')" class="w-full py-3 bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-400 font-bold rounded-lg text-sm transition-all flex items-center justify-center gap-2">
+                            <span>Start Test</span>
+                            <i class="fa-solid fa-play text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card 6: Passenger Endorsement -->
+                    <div class="quiz-card glass-card rounded-xl p-6 border border-slate-800 hover:border-amber-500/50 transition-all flex flex-col justify-between" data-category="endorsements">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-10 h-10 rounded-lg bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center font-bold text-lg">
+                                    <i class="fa-solid fa-bus"></i>
+                                </div>
+                                <span class="px-2.5 py-1 bg-slate-800 text-slate-300 text-xs font-semibold rounded-md">5 Questions</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">Passenger Transport (P)</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-6">
+                                Safe passenger loading/unloading rules, handling rowdy passengers, baggage regulations, and railroad crossing rules.
+                            </p>
+                        </div>
+                        <button onclick="startQuiz('passenger')" class="w-full py-3 bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-400 font-bold rounded-lg text-sm transition-all flex items-center justify-center gap-2">
+                            <span>Start Test</span>
+                            <i class="fa-solid fa-play text-xs"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div id="quiz-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+            <div class="glass-card max-w-2xl w-full rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+                <button onclick="closeQuizModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl w-8 h-8 flex items-center justify-center rounded-full bg-slate-800">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div id="quiz-content">
+                    <!-- Dynamic content injected via JS -->
+                </div>
+            </div>
+        </div>
+
+        <section id="video-library" class="py-20 bg-slate-950">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-amber-500 font-bold text-sm tracking-wider uppercase">Visual Learning Library</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Curated Video Training Hub</h2>
+                    <p class="text-slate-400 mt-4 leading-relaxed">
+                        Watch expert step-by-step demonstrations for the practical exam components.
+                    </p>
+                </div>
+
+                <!-- Video Cards Grid -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    
+                    <!-- Video 1 -->
+                    <div class="glass-card rounded-2xl overflow-hidden border border-slate-800 hover:border-slate-700 transition-all flex flex-col">
+                        <div class="relative pt-[56.25%] bg-slate-900">
+                            <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube-nocookie.com/embed/5aLlhPZ3v6g" title="Class A Pre-Trip Inspection Walkthrough" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="px-2.5 py-0.5 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-full border border-amber-500/20">Pre-Trip Inspection</span>
+                                    <span class="text-xs text-slate-400"><i class="fa-regular fa-clock"></i> 25 mins</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-2">Full Class A Tractor-Trailer Pre-Trip Inspection</h3>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    Comprehensive walk-around inspection covering engine compartment components, steering gear, suspension, coupling system (5th wheel), and tire safety checks.
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                                <span><i class="fa-solid fa-circle-check text-emerald-400"></i> Covers Federal Standards</span>
+                                <span class="text-amber-400 font-semibold">High Pass Priority</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video 2 -->
+                    <div class="glass-card rounded-2xl overflow-hidden border border-slate-800 hover:border-slate-700 transition-all flex flex-col">
+                        <div class="relative pt-[56.25%] bg-slate-900">
+                            <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube-nocookie.com/embed/mR54WygA5kE" title="Air Brake 7-Step Leakage Test" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="px-2.5 py-0.5 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-full border border-blue-500/20">Air Brakes</span>
+                                    <span class="text-xs text-slate-400"><i class="fa-regular fa-clock"></i> 12 mins</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-2">Mastering the Air Brake 7-Step Inspection</h3>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    Detailed step-by-step tutorial on executing the static leakage test, applied pressure test, low air warning signal check, and automatic tractor/trailer spring brake pop-out test.
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                                <span><i class="fa-solid fa-triangle-exclamation text-amber-400"></i> Automatic Fail Item</span>
+                                <span class="text-amber-400 font-semibold">Mandatory Knowledge</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video 3 -->
+                    <div class="glass-card rounded-2xl overflow-hidden border border-slate-800 hover:border-slate-700 transition-all flex flex-col">
+                        <div class="relative pt-[56.25%] bg-slate-900">
+                            <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube-nocookie.com/embed/S2R8I6X2_m8" title="Alley Docking Maneuver Tutorial" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="px-2.5 py-0.5 bg-emerald-500/10 text-emerald-400 text-xs font-semibold rounded-full border border-emerald-500/20">Yard Skills</span>
+                                    <span class="text-xs text-slate-400"><i class="fa-regular fa-clock"></i> 18 mins</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-2">90-Degree Alley Docking & Parallel Parking</h3>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    Learn key setup angles, reference points, steer turn timing, pull-ups, and look-outs for backing a 53-ft trailer accurately into tight dock spaces.
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                                <span><i class="fa-solid fa-compass text-amber-400"></i> Reference Point Method</span>
+                                <span class="text-amber-400 font-semibold">Yard Maneuvers</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video 4 -->
+                    <div class="glass-card rounded-2xl overflow-hidden border border-slate-800 hover:border-slate-700 transition-all flex flex-col">
+                        <div class="relative pt-[56.25%] bg-slate-900">
+                            <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube-nocookie.com/embed/5k33J_E8Z7k" title="On-Road Driving & Shifting Techniques" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="px-2.5 py-0.5 bg-purple-500/10 text-purple-400 text-xs font-semibold rounded-full border border-purple-500/20">On-Road Exam</span>
+                                    <span class="text-xs text-slate-400"><i class="fa-regular fa-clock"></i> 20 mins</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-2">On-Road Driving: Shifting, Turns & Hazard Awareness</h3>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    Master double-clutching techniques, progressive shifting, wide right-turn setups, railroad crossing protocols, and mirror scan timing during real-world traffic scenarios.
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                                <span><i class="fa-solid fa-road text-amber-400"></i> Examiner Grading Criteria</span>
+                                <span class="text-amber-400 font-semibold">Road Driving</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-950 border-t border-slate-800 py-12 text-slate-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <div class="flex items-center justify-center gap-3">
+                <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center text-slate-950 font-bold">
+                    <i class="fa-solid fa-truck-front"></i>
+                </div>
+                <span class="text-base font-bold text-white tracking-tight">CDL PRO HUB</span>
+            </div>
+            <p class="max-w-xl mx-auto text-slate-500">
+                Educational preparation software for Commercial Driver's License applicants. Practice tests follow federal FMCSA curriculum guidelines. Always consult your state's official DMV commercial driver handbook.
+            </p>
+            <div class="text-slate-600 pt-4">
+                &copy; 2026 CDL Training & Practice Hub. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* Quiz Questions Database */
+        const quizData = {
+            gk: {
+                title: "General Knowledge Practice Exam",
+                questions: [
+                    {
+                        q: "What is the minimum tread depth required for front (steer) tires on a commercial motor vehicle?",
+                        options: ["2/32 inch", "4/32 inch", "6/32 inch", "1/32 inch"],
+                        answer: 1,
+                        explanation: "Front steer tires require a minimum tread depth of 4/32 inch. All other tires require at least 2/32 inch."
+                    },
+                    {
+                        q: "When driving in fog, which light setting should you use?",
+                        options: ["High beams for maximum illumination", "Low beam headlights and fog lights", "Emergency flasher lights only", "Parking lights"],
+                        answer: 1,
+                        explanation: "Always use low beam headlights in fog. High beams reflect off moisture particles, causing blinding glare."
+                    },
+                    {
+                        q: "How far ahead should a commercial driver look while driving in city traffic?",
+                        options: ["1 to 2 blocks (12-15 seconds)", "100 yards", "3 car lengths", "5 seconds ahead"],
+                        answer: 0,
+                        explanation: "At city speeds, looking 12 to 15 seconds ahead corresponds to roughly 1 to 2 city blocks."
+                    },
+                    {
+                        q: "What is 'Hydroplaning'?",
+                        options: ["Brake failure in heavy rain", "Tires sliding on a thin film of water rather than gripping the road", "Engine stalling in deep water", "Air brake pressure loss"],
+                        answer: 1,
+                        explanation: "Hydroplaning occurs when water builds up under tires, causing them to lose contact with the road surface."
+                    },
+                    {
+                        q: "What should you do if your vehicle experiences a tire blowout?",
+                        options: ["Slam on the brakes immediately", "Hold the steering wheel firmly and stay off the brake until slowed down", "Quickly turn onto the shoulder", "Shift into neutral immediately"],
+                        answer: 1,
+                        explanation: "Stay off the brakes after a blowout. Hard braking can cause vehicle control loss. Keep a firm grip on the wheel and coast down."
+                    }
+                ]
+            },
+            airbrakes: {
+                title: "Air Brake Systems Practice Test",
+                questions: [
+                    {
+                        q: "At what air pressure must the low air pressure warning device activate on a truck?",
+                        options: ["Below 100 PSI", "Below 60 PSI (or 50% of governor cut-out)", "Below 30 PSI", "Below 80 PSI"],
+                        answer: 1,
+                        explanation: "Federal regulations require low pressure warnings to engage before reservoir pressure drops below 60 PSI."
+                    },
+                    {
+                        q: "What is the maximum acceptable air leakage rate for a single vehicle with applied service brakes?",
+                        options: ["1 PSI per minute", "3 PSI per minute", "5 PSI per minute", "10 PSI per minute"],
+                        answer: 1,
+                        explanation: "For single vehicles, air leakage should not exceed 3 PSI per minute with service brakes fully applied."
+                    },
+                    {
+                        q: "What does the brake pedal in an air brake system control?",
+                        options: ["Air pressure applied to the service brakes", "Physical mechanical cables", "Hydraulic fluid flow", "Engine RPM reduction"],
+                        answer: 0,
+                        explanation: "Pushing the pedal releases air pressure into service brake chambers to apply braking force."
+                    },
+                    {
+                        q: "Why must water and oil be drained regularly from air tanks?",
+                        options: ["To increase brake pressure", "Water and oil damage brake diaphragms and can freeze in cold weather", "To clean the air compressor", "To prevent brake fade"],
+                        answer: 1,
+                        explanation: "Moisture and compressor oil degrade rubber seals and can freeze, blocking air passages."
+                    },
+                    {
+                        q: "Emergency tractor spring brakes automatically apply when air pressure drops below what level?",
+                        options: ["80 - 90 PSI", "20 - 45 PSI", "5 - 10 PSI", "100 PSI"],
+                        answer: 1,
+                        explanation: "Spring brakes pop out automatically when air pressure degrades to between 20 and 45 PSI."
+                    }
+                ]
+            },
+            combo: {
+                title: "Combination Vehicles Exam",
+                questions: [
+                    {
+                        q: "When coupling a tractor to a semi-trailer, at what height should the trailer kingpin plate be?",
+                        options: ["Slightly lower than the center of the fifth wheel plate", "2 inches above the fifth wheel plate", "Slightly higher than the fifth wheel plate", "Exactly level"],
+                        answer: 0,
+                        explanation: "The trailer should be slightly lower so the tractor fifth wheel lifts the trailer slightly as it backs under."
+                    },
+                    {
+                        q: "What is 'off-tracking' or 'cheating' during a turn?",
+                        options: ["Rear wheels trailing a shorter path than front wheels", "Trailer sliding in wet weather", "Front wheels steering wider than necessary", "Engine losing power in turns"],
+                        answer: 0,
+                        explanation: "Off-tracking occurs because rear wheels follow a tighter arc than front steer wheels."
+                    },
+                    {
+                        q: "What prevents the rollover of a combination vehicle?",
+                        options: ["Keeping cargo low and centered", "Steering quickly around obstacles", "Braking hard in curves", "High tire pressure"],
+                        answer: 0,
+                        explanation: "Keeping cargo weight low and balanced reduces the center of gravity, mitigating rollover risks."
+                    },
+                    {
+                        q: "Which gladhand line supplies air to the trailer air tanks?",
+                        options: ["The emergency (supply) line - usually colored red", "The service line - usually colored blue", "The secondary electrical line", "The auxiliary hydraulic line"],
+                        answer: 0,
+                        explanation: "The emergency line (red) charges trailer air tanks and controls emergency braking."
+                    },
+                    {
+                        q: "Why should you never lock trailer brakes with the hand valve while moving?",
+                        options: ["It overcharges trailer air lines", "It can cause a trailer jackknife", "It damages the engine clutch", "It causes steer tire wear"],
+                        answer: 1,
+                        explanation: "Locking trailer wheels while moving can cause trailer tires to lose traction, leading to a jackknife."
+                    }
+                ]
+            },
+            hazmat: {
+                title: "Hazardous Materials Endorsement Test",
+                questions: [
+                    {
+                        q: "Where must placards be attached on a vehicle transporting hazardous materials?",
+                        options: ["On the rear only", "On both sides and front/rear (4 sides)", "Inside the cab door", "On the trailer roof"],
+                        answer: 1,
+                        explanation: "Placards must be positioned on all four sides of the vehicle to alert emergency responders."
+                    },
+                    {
+                        q: "Where must shipping papers be kept while driving a vehicle loaded with HazMat?",
+                        options: ["In a pouch on the driver's door or within clear reach while seatbelted", "In the trailer cargo area", "Glove box locked", "Under the sleeper berth"],
+                        answer: 0,
+                        explanation: "Shipping papers must be within immediate reach while driving or clearly visible on the driver's seat if leaving the cab."
+                    },
+                    {
+                        q: "When transporting Class 1 explosives, how far must you park from a bridge or tunnel?",
+                        options: ["At least 300 feet", "At least 100 feet", "At least 50 feet", "At least 500 feet"],
+                        answer: 0,
+                        explanation: "Vehicles carrying explosives must not park within 300 feet of bridges, tunnels, or open fires."
+                    },
+                    {
+                        q: "What shaped symbol identifies a hazardous material shipping container?",
+                        options: ["Diamond-shaped hazard label", "Circular badge", "Square warning tag", "Octagon sign"],
+                        answer: 0,
+                        explanation: "DOT regulations require diamond-shaped hazard labels on packages and matching placards on transport vehicles."
+                    },
+                    {
+                        q: "How often must a driver inspect tires on a vehicle placarded for HazMat?",
+                        options: ["At every fuel stop or every 2 hours/100 miles", "Once a day", "Every 500 miles", "Only before departure"],
+                        answer: 0,
+                        explanation: "Tires on placarded vehicles must be inspected at the beginning of a trip and each time the vehicle is parked."
+                    }
+                ]
+            },
+            tanker: {
+                title: "Tank Vehicles Endorsement Quiz",
+                questions: [
+                    {
+                        q: "What is 'liquid surge' in a tanker vehicle?",
+                        options: ["Liquid sloshing forward and backward during stopping or acceleration", "Tank valve leakage", "High engine oil pressure", "Air pressure build-up"],
+                        answer: 0,
+                        explanation: "Liquid surge occurs as liquid movement inside partially filled tanks transfers momentum against tank bulkheads."
+                    },
+                    {
+                        q: "How do bulkheads with baffles differ from smoothbore tanks?",
+                        options: ["Baffles contain holes that slow front-to-back surge but do not eliminate side-to-side surge", "Baffles completely seal sections", "Smoothbore tanks have internal dividers", "Baffled tanks hold more total volume"],
+                        answer: 0,
+                        explanation: "Baffles have openings that allow fluid flow while dampening front-to-back surge. They do not prevent side-to-side surge."
+                    },
+                    {
+                        q: "What is 'outage' when loading liquid tanks?",
+                        options: ["Space left empty to allow for liquid expansion", "Power failure at a loading rack", "Overfilled cargo volume", "Emergency valve opening"],
+                        answer: 0,
+                        explanation: "Liquids expand with temperature increases. Outage is the unfilled space left to accommodate expansion safely."
+                    },
+                    {
+                        q: "Why are smoothbore tanks particularly dangerous when stopping?",
+                        options: ["They have no internal baffles to restrict strong forward liquid surge", "They weigh twice as much", "They lack emergency cut-off valves", "Their brakes wear faster"],
+                        answer: 0,
+                        explanation: "Unbaffled (smoothbore) tanks allow the full weight of liquid to slam forward during braking."
+                    },
+                    {
+                        q: "How should you approach curves when driving a loaded tanker?",
+                        options: ["Slow down before entering the curve, then accelerate slightly through it", "Brake hard while turning", "Coasting in neutral", "Accelerate before entering"],
+                        answer: 0,
+                        explanation: "Slow down prior to the curve to stabilize liquid, then apply gentle throttle through the turn to maintain control."
+                    }
+                ]
+            },
+            passenger: {
+                title: "Passenger Transport Endorsement Quiz",
+                questions: [
+                    {
+                        q: "How far back from a railroad crossing must a passenger bus stop?",
+                        options: ["15 to 50 feet", "5 to 10 feet", "75 to 100 feet", "Stop only if a train is visible"],
+                        answer: 0,
+                        explanation: "Busses transporting passengers must stop between 15 and 50 feet before railroad tracks."
+                    },
+                    {
+                        q: "What is the 'standee line' on a passenger transit bus?",
+                        options: ["A line on the floor behind which all standing passengers must remain while driving", "The emergency exit line", "The entry step threshold", "The baggage area line"],
+                        answer: 0,
+                        explanation: "No passenger may stand forward of the standee line while the bus is in motion."
+                    },
+                    {
+                        q: "Where may a passenger carry hazardous materials onto a bus?",
+                        options: ["Never, except for small personal non-regulated items and medical oxygen", "In the overhead luggage rack", "Under any seat", "In the front aisle"],
+                        answer: 0,
+                        explanation: "Commercial buses cannot carry dangerous HazMat, with strict exemptions for personal medicines or approved emergency oxygen."
+                    },
+                    {
+                        q: "When should you inspect your bus for forgotten items or sleeping passengers?",
+                        options: ["At the end of every shift/trip", "Once a week", "Only if reported by dispatcher", "Before morning departure only"],
+                        answer: 0,
+                        explanation: "Always walk through the bus interior at the conclusion of every trip to check for lost property or remaining riders."
+                    },
+                    {
+                        q: "How should a driver deal with a disruptive passenger?",
+                        options: ["Discharge them only at a safe, well-lit public location or bus stop", "Drop them off on the highway immediately", "Ignore them completely", "Lock them in the restroom"],
+                        answer: 0,
+                        explanation: "Passenger safety is paramount. Eject unruly passengers only at safe, established stop locations."
+                    }
+                ]
+            }
+        };
+
+        /* State Tracking */
+        let currentQuizKey = null;
+        let currentQuestionIdx = 0;
+        let userAnswers = [];
+        let completedQuizzes = JSON.parse(localStorage.getItem('cdl_completed') || '{}');
+
+        function updateDashboard() {
+            const completedKeys = Object.keys(completedQuizzes);
+            const count = completedKeys.length;
+            document.getElementById('tests-completed').innerText = count;
+
+            if (count > 0) {
+                const totalScore = completedKeys.reduce((acc, k) => acc + completedQuizzes[k], 0);
+                const avg = Math.round(totalScore / count);
+                document.getElementById('avg-score').innerText = avg + '%';
+                
+                // Calculate overall readiness
+                const readiness = Math.round((count / 6) * 100);
+                document.getElementById('readiness-percent').innerText = readiness + '%';
+                document.getElementById('readiness-bar').style.width = readiness + '%';
+            } else {
+                document.getElementById('avg-score').innerText = '-- %';
+                document.getElementById('readiness-percent').innerText = '0%';
+                document.getElementById('readiness-bar').style.width = '0%';
+            }
+        }
+
+        function filterQuizzes(category) {
+            const buttons = document.querySelectorAll('#quiz-filter-buttons button');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-amber-500', 'text-slate-950');
+                btn.classList.add('bg-slate-800', 'text-slate-300');
+            });
+            event.target.classList.remove('bg-slate-800', 'text-slate-300');
+            event.target.classList.add('bg-amber-500', 'text-slate-950');
+
+            const cards = document.querySelectorAll('.quiz-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function startQuiz(key) {
+            currentQuizKey = key;
+            currentQuestionIdx = 0;
+            userAnswers = [];
+            
+            document.getElementById('quiz-modal').classList.remove('hidden');
+            renderQuestion();
+        }
+
+        function closeQuizModal() {
+            document.getElementById('quiz-modal').classList.add('hidden');
+        }
+
+        function renderQuestion() {
+            const data = quizData[currentQuizKey];
+            const q = data.questions[currentQuestionIdx];
+            const container = document.getElementById('quiz-content');
+
+            container.innerHTML = `
+                <div class="mb-6">
+                    <div class="flex items-center justify-between text-xs text-amber-400 font-bold mb-2">
+                        <span>${data.title}</span>
+                        <span>Question ${currentQuestionIdx + 1} of ${data.questions.length}</span>
+                    </div>
+                    <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                        <div class="h-full bg-amber-500" style="width: ${((currentQuestionIdx + 1) / data.questions.length) * 100}%"></div>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-bold text-white mb-6">${q.q}</h3>
+
+                <div class="space-y-3 mb-6" id="options-container">
+                    ${q.options.map((opt, idx) => `
+                        <button onclick="selectOption(${idx})" class="w-full text-left p-4 rounded-xl border border-slate-800 bg-slate-900/60 hover:bg-slate-800 hover:border-slate-700 text-sm font-medium text-slate-200 transition-all flex items-center justify-between group">
+                            <span>${opt}</span>
+                            <div class="w-5 h-5 rounded-full border border-slate-700 flex items-center justify-center text-xs group-hover:border-amber-400">
+                                <i class="fa-solid fa-check opacity-0 group-hover:opacity-100 text-amber-400"></i>
+                            </div>
+                        </button>
+                    `).join('')}
+                </div>
+
+                <div id="explanation-box" class="hidden p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 mb-6">
+                    <span class="font-bold text-amber-400 block mb-1">Explanation:</span>
+                    <span id="explanation-text">${q.explanation}</span>
+                </div>
+
+                <div class="flex justify-end">
+                    <button id="next-btn" onclick="nextQuestion()" disabled class="px-6 py-2.5 bg-slate-800 text-slate-500 font-bold rounded-lg text-sm transition-all flex items-center gap-2">
+                        <span>Next Question</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            `;
+        }
+
+        function selectOption(optIdx) {
+            const q = quizData[currentQuizKey].questions[currentQuestionIdx];
+            const buttons = document.querySelectorAll('#options-container button');
+            
+            buttons.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === q.answer) {
+                    btn.classList.remove('bg-slate-900/60', 'border-slate-800');
+                    btn.classList.add('bg-emerald-500/20', 'border-emerald-500/50', 'text-emerald-300');
+                } else if (idx === optIdx && optIdx !== q.answer) {
+                    btn.classList.remove('bg-slate-900/60', 'border-slate-800');
+                    btn.classList.add('bg-red-500/20', 'border-red-500/50', 'text-red-300');
+                }
+            });
+
+            userAnswers.push(optIdx === q.answer);
+            document.getElementById('explanation-box').classList.remove('hidden');
+
+            const nextBtn = document.getElementById('next-btn');
+            nextBtn.disabled = false;
+            nextBtn.classList.remove('bg-slate-800', 'text-slate-500');
+            nextBtn.classList.add('bg-amber-500', 'text-slate-950', 'hover:bg-amber-400');
+        }
+
+        function nextQuestion() {
+            const data = quizData[currentQuizKey];
+            if (currentQuestionIdx < data.questions.length - 1) {
+                currentQuestionIdx++;
+                renderQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            const data = quizData[currentQuizKey];
+            const correctCount = userAnswers.filter(Boolean).length;
+            const scorePercent = Math.round((correctCount / data.questions.length) * 100);
+
+            completedQuizzes[currentQuizKey] = scorePercent;
+            localStorage.setItem('cdl_completed', JSON.stringify(completedQuizzes));
+            updateDashboard();
+
+            const isPassed = scorePercent >= 80;
+
+            const container = document.getElementById('quiz-content');
+            container.innerHTML = `
+                <div class="text-center py-6 space-y-4">
+                    <div class="w-16 h-16 ${isPassed ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40' : 'bg-red-500/20 text-red-400 border-red-500/40'} border rounded-full flex items-center justify-center mx-auto text-3xl">
+                        <i class="fa-solid ${isPassed ? 'fa-award' : 'fa-triangle-exclamation'}"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-black text-white">${isPassed ? 'Congratulations! Passed' : 'Needs Review'}</h3>
+                    <p class="text-xs text-slate-400 max-w-sm mx-auto">
+                        You scored <span class="font-bold text-white">${scorePercent}%</span> (${correctCount} of ${data.questions.length} correct). ${isPassed ? 'You meet official DMV 80% passing standard!' : 'DMV standards require at least 80% to pass.'}
+                    </p>
+
+                    <div class="pt-4 flex justify-center gap-3">
+                        <button onclick="startQuiz('${currentQuizKey}')" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-lg text-xs transition-all">
+                            Retake Test
+                        </button>
+                        <button onclick="closeQuizModal()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg text-xs transition-all">
+                            Back to Hub
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function resetProgress() {
+            localStorage.removeItem('cdl_completed');
+            completedQuizzes = {};
+            updateDashboard();
+        }
+
+        // Initialize dashboard on load
+        window.onload = function() {
+            updateDashboard();
+        };
+    </script>
+</body>
+</html>
