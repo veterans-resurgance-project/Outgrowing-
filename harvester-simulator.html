@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro-Macro Market Simulation & Training Sandbox</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Fredoka', system-ui, sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen antialiased selection:bg-sky-500 selection:text-slate-950">
+
+    <!-- ECOSYSTEM NAVIGATION BAR -->
+    <nav class="bg-slate-900 border-b border-slate-800 px-4 py-3 shadow-md">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 text-xs">
+            <div class="flex items-center gap-2 font-bold text-slate-300">
+                <span class="text-emerald-400">🌐</span> Watershed Stewards Ecosystem
+            </div>
+            <div class="flex items-center gap-3 flex-wrap">
+                <a href="https://www.outgrowing-ag.org" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition font-medium">
+                    🌱 Visit Outgrowing-Ag &rarr;
+                </a>
+                <a href="https://www.watershipstewardsempowering.org" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition font-medium">
+                    🌲 Veteran Programs &amp; Mission &rarr;
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        
+        <!-- HEADER -->
+        <header class="text-center mb-10 bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur-md">
+            <h1 class="text-2xl md:text-3xl font-bold text-emerald-400 mb-2 tracking-wide">🎮 Gamified Harvest & Production Simulator</h1>
+            <p class="text-xs md:text-sm text-slate-400 max-w-2xl mx-auto">
+                Train workers and farm leads to identify production "sweet spots"—balancing harvester output per 8-hour shift with farm margins and crop value.
+            </p>
+        </header>
+
+        <!-- MAIN GRID LAYOUT -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- LEFT 2 COLS: TRAINING CONTROL & GAMIFIED DASHBOARD -->
+            <main class="lg:col-span-2 space-y-6">
+                
+                <!-- TRAINING LAB INPUT PANEL -->
+                <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-6">
+                    <div class="border-b border-slate-800 pb-3 flex justify-between items-center flex-wrap gap-2">
+                        <div>
+                            <h2 class="text-lg font-bold text-amber-400 flex items-center gap-2">
+                                <span>🎯</span> 8-Hour Shift Production Target
+                            </h2>
+                            <p class="text-xs text-slate-400 mt-1">Adjust worker speed and crop value to visualize mutual economic viability.</p>
+                        </div>
+                        <span class="bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-xs px-3 py-1 rounded-full font-semibold">
+                            Gamified Training Mode
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-sm">
+                        
+                        <!-- Sector Crop Selection -->
+                        <div class="space-y-1.5">
+                            <label for="crop-select" class="block text-xs font-semibold uppercase tracking-wider text-slate-300">Select Specialty Crop</label>
+                            <select id="crop-select" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-amber-400 transition">
+                                <option value="berries">🍓 Diversified Berries ($2.50 / lb market)</option>
+                                <option value="hazelnuts">🌰 Orchard Hazelnuts ($1.80 / lb market)</option>
+                                <option value="veggies">🥬 Market Greens & Produce ($3.10 / lb market)</option>
+                                <option value="mushrooms">🍄 Specialty Substrate / Mushrooms ($6.50 / lb market)</option>
+                            </select>
+                        </div>
+
+                        <!-- Base Hourly Pay -->
+                        <div class="space-y-1.5">
+                            <label for="base-pay" class="block text-xs font-semibold uppercase tracking-wider text-slate-300">Base Wage ($/hr)</label>
+                            <input type="number" id="base-pay" value="18.50" step="0.50" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-amber-400 transition">
+                        </div>
+
+                        <!-- Harvester Shift Output Slider -->
+                        <div class="space-y-1.5 md:col-span-2">
+                            <div class="flex justify-between items-center">
+                                <label for="shift-lbs" class="block text-xs font-semibold uppercase tracking-wider text-emerald-400">Harvester Production (lbs per 8-Hour Shift)</label>
+                                <span id="shift-lbs-val" class="font-mono text-sm text-emerald-300 font-bold">250 lbs / shift</span>
+                            </div>
+                            <input type="range" id="shift-lbs" value="250" min="50" max="600" step="10" class="w-full accent-emerald-400 bg-slate-950 h-2.5 rounded-lg cursor-pointer">
+                            <p class="text-[11px] text-slate-400">Drag to simulate different worker speed tiers and experience levels.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="pt-2">
+                        <button id="calc-btn" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-heading font-bold text-base py-3 px-6 rounded-xl shadow-lg shadow-amber-500/20 transition transform active:scale-[0.99] cursor-pointer">
+                            ⚡ Calculate Shift Matrix &amp; Sweet Spot
+                        </button>
+                    </div>
+                </section>
+
+                <!-- GAMIFIED RESULTS DISPLAY -->
+                <section id="results-panel" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-6">
+                    <div class="border-b border-slate-800 pb-3 flex justify-between items-center">
+                        <h2 class="text-lg font-bold text-emerald-400 flex items-center gap-2">
+                            <span>🏆</span> Shift Performance Breakdown
+                        </h2>
+                        <span id="tier-badge" class="px-3 py-1 rounded-full text-xs font-bold font-mono bg-sky-500/20 text-sky-300 border border-sky-500/30">
+                            Journeyman Harvester
+                        </span>
+                    </div>
+
+                    <!-- TWO COLUMN DUAL PERSPECTIVE CARDS -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        
+                        <!-- WORKER CARD -->
+                        <div class="bg-slate-950 border border-sky-500/30 rounded-xl p-4 space-y-3">
+                            <h3 class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center gap-1.5">
+                                👨‍🌾 Worker / Harvester View
+                            </h3>
+                            <div class="space-y-2 text-xs">
+                                <div class="flex justify-between border-b border-slate-800 pb-1.5">
+                                    <span class="text-slate-400">Shift Base Wage (8 hrs):</span>
+                                    <span id="worker-base" class="font-mono font-bold">$148.00</span>
+                                </div>
+                                <div class="flex justify-between border-b border-slate-800 pb-1.5">
+                                    <span class="text-slate-400">Yield Production Bonus:</span>
+                                    <span id="worker-bonus" class="font-mono font-bold text-emerald-400">+$25.00</span>
+                                </div>
+                                <div class="flex justify-between pt-1 text-sm font-bold">
+                                    <span class="text-slate-200">Total Shift Take-Home:</span>
+                                    <span id="worker-total" class="font-mono text-sky-300">$173.00 ($21.62/hr)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FARMER CARD -->
+                        <div class="bg-slate-950 border border-emerald-500/30 rounded-xl p-4 space-y-3">
+                            <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                                🚜 Farmer / Employer View
+                            </h3>
+                            <div class="space-y-2 text-xs">
+                                <div class="flex justify-between border-b border-slate-800 pb-1.5">
+                                    <span class="text-slate-400">Gross Crop Value Harvested:</span>
+                                    <span id="farm-gross" class="font-mono font-bold">$625.00</span>
+                                </div>
+                                <div class="flex justify-between border-b border-slate-800 pb-1.5">
+                                    <span class="text-slate-400">Labor & Overhead Cost:</span>
+                                    <span id="farm-cost" class="font-mono font-bold text-amber-400">-$248.00</span>
+                                </div>
+                                <div class="flex justify-between pt-1 text-sm font-bold">
+                                    <span class="text-slate-200">Net Farm Value Generated:</span>
+                                    <span id="farm-net" class="font-mono text-emerald-300">+$377.00 / shift</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- SWEET SPOT TRAINING EVALUATION -->
+                    <div id="eval-box" class="bg-amber-950/20 border border-amber-500/30 rounded-xl p-4 space-y-2 text-xs">
+                        <h4 class="font-bold text-amber-400 flex items-center gap-1.5">
+                            <span>💡</span> Training Assessment &amp; Sweet Spot Indicator
+                        </h4>
+                        <p id="eval-text" class="text-slate-300 leading-relaxed">
+                            Loading production calculations...
+                        </p>
+                    </div>
+
+                </section>
+
+                <!-- CROSS-SITE BRIDGE: OUTGROWING-AG INTEGRATION -->
+                <section style="max-width: 900px; margin: 2rem auto 0 auto; padding: 2rem; background: linear-gradient(135deg, #1e293b, #0f172a); border-radius: 16px; border: 1px solid #334155; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+                    <h3 style="color: #4ade80; font-size: 1.3rem; margin-top: 0; margin-bottom: 0.75rem;" class="font-heading">Agricultural Diagnostics &amp; Landowner Optimization</h3>
+                    <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; max-width: 700px; margin: 0 auto 1.25rem auto;">
+                        Looking for on-farm soil diagnostics, crop optimization, or landowner agreements? Explore our dedicated agricultural operations portal powered by our veteran field teams.
+                    </p>
+                    <a href="https://www.outgrowing-ag.org" target="_blank" style="display: inline-block; background-color: #22c55e; color: #0f172a; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 800; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);">
+                        Visit Outgrowing-Ag Portal &rarr;
+                    </a>
+                </section>
+
+            </main>
+
+            <!-- RIGHT 1 COL: LIVE NEWS & EVENT TICKER -->
+            <aside class="space-y-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-4">
+                    <div class="border-b border-slate-800 pb-3">
+                        <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wide flex items-center gap-2">
+                            <span>📰</span> Live Event Ticker & Media
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Real-time relevant articles &amp; situational clips.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <article class="bg-slate-950 border border-slate-800/80 rounded-xl p-3.5 space-y-2 hover:border-slate-700 transition">
+                            <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono">
+                                <span class="text-sky-400 font-semibold">VALLEY AGRICULTURE</span>
+                                <span>12m ago</span>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-200 leading-snug">Mid-Valley Specialty Crop Producers Navigate Input Cost Volatility</h4>
+                            <p class="text-[11px] text-slate-400 line-clamp-2">Grass seed and hazelnut growers weigh consolidation pressures against shifting export demands.</p>
+                        </article>
+
+                        <article class="bg-slate-950 border border-slate-800/80 rounded-xl p-3.5 space-y-2 hover:border-slate-700 transition">
+                            <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono">
+                                <span class="text-emerald-400 font-semibold">FOREST RESTORATION</span>
+                                <span>1h ago</span>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-200 leading-snug">Tillamook &amp; Santiam State Forest Volunteer Lane Cleanups Scheduled</h4>
+                            <p class="text-[11px] text-slate-400 line-clamp-2">Coordinated restoration efforts focus on target shooting lanes and watershed health recovery.</p>
+                        </article>
+
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden">
+                            <div class="bg-slate-900 px-3 py-2 border-b border-slate-800 flex items-center justify-between text-[11px] text-slate-300 font-semibold">
+                                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Live Stream Feed</span>
+                                <span class="font-mono text-[10px] text-slate-400">CH-04 RELAY</span>
+                            </div>
+                            <div class="aspect-video bg-slate-950 flex flex-col items-center justify-center p-4 text-center">
+                                <div class="w-12 h-12 rounded-full bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400 mb-2">
+                                    ▶
+                                </div>
+                                <span class="text-xs text-slate-300 font-medium">Regional Market Briefing Clip</span>
+                                <span class="text-[10px] text-slate-500 mt-1">Click to play embedded simulation broadcast</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <!-- Gamified Engine Script -->
+    <script>
+        const cropPrices = {
+            berries: { price: 2.50, breakEvenLbs: 120, targetLbs: 280, maxLbs: 450 },
+            hazelnuts: { price: 1.80, breakEvenLbs: 180, targetLbs: 380, maxLbs: 600 },
+            veggies: { price: 3.10, breakEvenLbs: 100, targetLbs: 240, maxLbs: 400 },
+            mushrooms: { price: 6.50, breakEvenLbs: 45, targetLbs: 120, maxLbs: 220 }
+        };
+
+        const slider = document.getElementById('shift-lbs');
+        const sliderVal = document.getElementById('shift-lbs-val');
+
+        slider.addEventListener('input', (e) => {
+            sliderVal.textContent = e.target.value + ' lbs / shift';
+        });
+
+        function calculateGamifiedShift() {
+            const cropKey = document.getElementById('crop-select').value;
+            const crop = cropPrices[cropKey];
+            const baseWage = parseFloat(document.getElementById('base-pay').value);
+            const shiftLbs = parseFloat(slider.value);
+
+            const shiftBasePay = baseWage * 8;
+            
+            // Gamified tiering logic
+            let tierName = "🌱 Trainee / Apprentice";
+            let bonusPerLb = 0.05;
+            if (shiftLbs >= crop.targetLbs * 1.2) {
+                tierName = "👑 Master Harvester";
+                bonusPerLb = 0.20;
+            } else if (shiftLbs >= crop.targetLbs) {
+                tierName = "⚡ Journeyman Harvester";
+                bonusPerLb = 0.12;
+            } else if (shiftLbs >= crop.breakEvenLbs) {
+                tierName = "🌾 Standard Field Harvester";
+                bonusPerLb = 0.08;
+            }
+
+            // Calculations
+            const productionBonus = Math.max(0, (shiftLbs - crop.breakEvenLbs) * bonusPerLb);
+            const totalWorkerPay = shiftBasePay + productionBonus;
+            const effectiveHourly = (totalWorkerPay / 8).toFixed(2);
+
+            const grossCropValue = shiftLbs * crop.price;
+            const overheadAndPackaging = grossCropValue * 0.20; // 20% estimated packaging/transport overhead
+            const totalFarmCost = shiftBasePay + productionBonus + overheadAndPackaging;
+            const netFarmValue = grossCropValue - totalFarmCost;
+
+            // UI Injections
+            document.getElementById('tier-badge').textContent = tierName;
+            document.getElementById('worker-base').textContent = `$${shiftBasePay.toFixed(2)}`;
+            document.getElementById('worker-bonus').textContent = `+$${productionBonus.toFixed(2)}`;
+            document.getElementById('worker-total').textContent = `$${totalWorkerPay.toFixed(2)} ($${effectiveHourly}/hr)`;
+
+            document.getElementById('farm-gross').textContent = `$${grossCropValue.toFixed(2)}`;
+            document.getElementById('farm-cost').textContent = `-$${totalFarmCost.toFixed(2)}`;
+            
+            const farmNetEl = document.getElementById('farm-net');
+            if (netFarmValue >= 0) {
+                farmNetEl.textContent = `+$${netFarmValue.toFixed(2)} / shift`;
+                farmNetEl.className = "font-mono text-emerald-300";
+            } else {
+                farmNetEl.textContent = `-$${Math.abs(netFarmValue).toFixed(2)} (Deficit)`;
+                farmNetEl.className = "font-mono text-red-400";
+            }
+
+            // Sweet Spot Evaluation Story
+            let evalMessage = "";
+            if (shiftLbs < crop.breakEvenLbs) {
+                evalMessage = `⚠️ <strong>Below Break-Even:</strong> At ${shiftLbs} lbs/shift, production does not cover base labor & overhead ($${totalFarmCost.toFixed(2)}), placing the farm in a net deficit of $${Math.abs(netFarmValue).toFixed(2)}. <em>Target: Aim for at least ${crop.breakEvenLbs} lbs to reach profitability.</em>`;
+            } else if (shiftLbs >= crop.breakEvenLbs && shiftLbs < crop.targetLbs) {
+                evalMessage = `✅ <strong>Viable Harvest:</strong> At ${shiftLbs} lbs/shift, the farm breaks even and yields a modest net margin of $${netFarmValue.toFixed(2)}. The harvester earned $${productionBonus.toFixed(2)} in yield bonuses.`;
+            } else {
+                evalMessage = `🔥 <strong>OPTIMAL SWEET SPOT:</strong> Exceptional shift efficiency! Producing ${shiftLbs} lbs generates $${grossCropValue.toFixed(2)} in crop value. The harvester unlocks the <strong>${tierName}</strong> bonus ($${totalWorkerPay.toFixed(2)} total pay), while the farm secures a robust $${netFarmValue.toFixed(2)} profit margin per shift.`;
+            }
+            document.getElementById('eval-text').innerHTML = evalMessage;
+        }
+
+        document.getElementById('calc-btn').addEventListener('click', calculateGamifiedShift);
+        // Initial run on load
+        calculateGamifiedShift();
+    </script>
+</body>
+</html>
