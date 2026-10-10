@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriSkill Academy | Workforce & Training Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for interactive state -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        amber: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="h-full bg-slate-900 text-slate-100 font-sans antialiased flex flex-col" x-data="agriApp()">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" @click="activeTab = 'dashboard'">
+                <div class="bg-emerald-600 p-2 rounded-xl text-white shadow-lg shadow-emerald-900/40">
+                    <i class="fa-solid fa-seedling text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-black tracking-wide bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">AgriSkill Academy</span>
+                    <span class="block text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Agricultural Workforce & Skills Hub</span>
+                </div>
+            </div>
+
+            <!-- GAMIFIED STATS BADGE -->
+            <div class="flex items-center space-x-4">
+                <div class="hidden sm:flex items-center space-x-2 bg-slate-900/80 px-3 py-1.5 rounded-full border border-slate-700">
+                    <i class="fa-solid fa-medal text-amber-400"></i>
+                    <span class="text-xs text-slate-300">Level: <strong class="text-emerald-400" x-text="userLevel"></strong></span>
+                </div>
+                <div class="flex items-center space-x-2 bg-slate-900/80 px-3 py-1.5 rounded-full border border-slate-700">
+                    <i class="fa-solid fa-bolt text-amber-400"></i>
+                    <span class="text-xs text-slate-300"><strong class="text-amber-400" x-text="totalXP"></strong> XP</span>
+                </div>
+                <div class="flex items-center space-x-2 bg-slate-900/80 px-3 py-1.5 rounded-full border border-slate-700">
+                    <i class="fa-solid fa-award text-teal-400"></i>
+                    <span class="text-xs text-slate-300"><strong class="text-teal-400" x-text="earnedBadges.length"></strong> Badges</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN APP CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col">
+
+        <!-- SUB-HEADER / TAB NAVIGATION -->
+        <nav class="flex space-x-2 border-b border-slate-700 pb-4 mb-6 overflow-x-auto">
+            <button @click="activeTab = 'dashboard'" :class="activeTab === 'dashboard' ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/30' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'" class="px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap flex items-center space-x-2">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Hub Dashboard & Tracks</span>
+            </button>
+            <button @click="activeTab = 'harvest'" :class="activeTab === 'harvest' ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/30' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'" class="px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap flex items-center space-x-2">
+                <i class="fa-solid fa-hand-holding-seedling"></i>
+                <span>1. Specialty Crop Harvest</span>
+            </button>
+            <button @click="activeTab = 'postharvest'" :class="activeTab === 'postharvest' ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/30' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'" class="px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap flex items-center space-x-2">
+                <i class="fa-solid fa-boxes-packing"></i>
+                <span>2. Post-Harvest & Processing</span>
+            </button>
+            <button @click="activeTab = 'livestock'" :class="activeTab === 'livestock' ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/30' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'" class="px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap flex items-center space-x-2">
+                <i class="fa-solid fa-cow"></i>
+                <span>3. Livestock & Dairy</span>
+            </button>
+            <button @click="activeTab = 'management'" :class="activeTab === 'management' ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/30' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'" class="px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap flex items-center space-x-2">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>4. Field Management</span>
+            </button>
+            <button @click="activeTab = 'simulator'" :class="activeTab === 'simulator' ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/30' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'" class="px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap flex items-center space-x-2">
+                <i class="fa-solid fa-stopwatch"></i>
+                <span>Time-Study Simulator</span>
+            </button>
+        </nav>
+
+        <!-- ================= TAB 1: HUB DASHBOARD ================= -->
+        <div x-show="activeTab === 'dashboard'" class="space-y-8">
+            <!-- WELCOME BANNER -->
+            <div class="bg-gradient-to-r from-emerald-900/80 via-teal-900/70 to-slate-800 p-6 sm:p-8 rounded-2xl border border-emerald-700/50 shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 text-emerald-800/20 text-9xl pointer-events-none">
+                    <i class="fa-solid fa-wheat-awn"></i>
+                </div>
+                <div class="max-w-3xl">
+                    <span class="bg-emerald-500/20 text-emerald-300 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-500/30 uppercase tracking-wider">Workforce Transformation & Upskilling Hub</span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-white mt-3 mb-2">Master Agricultural Skills & Boost Career Earning Power</h1>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                        Facing industry labor shifts requires expanding worker versatility. Complete interactive training modules across all four critical agricultural sectors, master industrial time-study motion efficiencies, and unlock professional tier wages.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <button @click="activeTab = 'harvest'" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold px-5 py-2.5 rounded-xl text-sm transition-all shadow-lg flex items-center space-x-2">
+                            <span>Start Training Tracks</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <button @click="activeTab = 'simulator'" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 font-semibold px-5 py-2.5 rounded-xl text-sm transition-all">
+                            Try Time-Study Sim
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THE FOUR TRACKS GRID -->
+            <div>
+                <h2 class="text-xl font-bold text-white mb-4 flex items-center space-x-2">
+                    <i class="fa-solid fa-layer-group text-emerald-400"></i>
+                    <span>Core Agricultural Training Tracks</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Track 1 Card -->
+                    <div @click="activeTab = 'harvest'" class="bg-slate-800 hover:bg-slate-755 border border-slate-700 hover:border-emerald-500/50 rounded-2xl p-6 cursor-pointer transition-all shadow-md group">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="bg-emerald-500/20 p-3 rounded-xl text-emerald-400 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-hand-holding-seedling text-2xl"></i>
+                            </div>
+                            <span class="text-xs bg-slate-900 text-emerald-300 px-2.5 py-1 rounded-full border border-slate-700">Perishable / Time-Sensitive</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">1. Specialty Crop Harvest</h3>
+                        <p class="text-slate-400 text-sm mb-4">Master professional hand-harvesting motion metrics for berries, beans, and soft fruit. Learn two-handed batching and ergonomic stamina.</p>
+                        <div class="flex items-center justify-between text-xs text-slate-300 pt-3 border-t border-slate-700">
+                            <span>Progress: <strong class="text-emerald-400" x-text="getTrackProgress('harvest') + '%'"></strong></span>
+                            <span class="text-emerald-400 font-semibold group-hover:translate-x-1 transition-transform">View Modules <i class="fa-solid fa-chevron-right ml-1"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- Track 2 Card -->
+                    <div @click="activeTab = 'postharvest'" class="bg-slate-800 hover:bg-slate-755 border border-slate-700 hover:border-teal-500/50 rounded-2xl p-6 cursor-pointer transition-all shadow-md group">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="bg-teal-500/20 p-3 rounded-xl text-teal-400 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-boxes-packing text-2xl"></i>
+                            </div>
+                            <span class="text-xs bg-slate-900 text-teal-300 px-2.5 py-1 rounded-full border border-slate-700">Quality & Safety</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2 group-hover:text-teal-400 transition-colors">2. Post-Harvest & Processing</h3>
+                        <p class="text-slate-400 text-sm mb-4">Sorting, grading, washing lines, cold-chain preservation protocols, and HACCP food safety standards for top-tier market pack-out.</p>
+                        <div class="flex items-center justify-between text-xs text-slate-300 pt-3 border-t border-slate-700">
+                            <span>Progress: <strong class="text-teal-400" x-text="getTrackProgress('postharvest') + '%'"></strong></span>
+                            <span class="text-teal-400 font-semibold group-hover:translate-x-1 transition-transform">View Modules <i class="fa-solid fa-chevron-right ml-1"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- Track 3 Card -->
+                    <div @click="activeTab = 'livestock'" class="bg-slate-800 hover:bg-slate-755 border border-slate-700 hover:border-amber-500/50 rounded-2xl p-6 cursor-pointer transition-all shadow-md group">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="bg-amber-500/20 p-3 rounded-xl text-amber-400 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-cow text-2xl"></i>
+                            </div>
+                            <span class="text-xs bg-slate-900 text-amber-300 px-2.5 py-1 rounded-full border border-slate-700">24/7 Operations</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">3. Livestock & Dairy Care</h3>
+                        <p class="text-slate-400 text-sm mb-4">Daily milking parlor hygiene, feeding automation, animal welfare standards, and preventative health monitoring protocols.</p>
+                        <div class="flex items-center justify-between text-xs text-slate-300 pt-3 border-t border-slate-700">
+                            <span>Progress: <strong class="text-amber-400" x-text="getTrackProgress('livestock') + '%'"></strong></span>
+                            <span class="text-amber-400 font-semibold group-hover:translate-x-1 transition-transform">View Modules <i class="fa-solid fa-chevron-right ml-1"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- Track 4 Card -->
+                    <div @click="activeTab = 'management'" class="bg-slate-800 hover:bg-slate-755 border border-slate-700 hover:border-sky-500/50 rounded-2xl p-6 cursor-pointer transition-all shadow-md group">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="bg-sky-500/20 p-3 rounded-xl text-sky-400 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-chart-line text-2xl"></i>
+                            </div>
+                            <span class="text-xs bg-slate-900 text-sky-300 px-2.5 py-1 rounded-full border border-slate-700">Technology & Yields</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2 group-hover:text-sky-400 transition-colors">4. Field Management & Tech</h3>
+                        <p class="text-slate-400 text-sm mb-4">Precision irrigation control, fertigation scheduling, integrated pest management (IPM), and crew time-study workflow leadership.</p>
+                        <div class="flex items-center justify-between text-xs text-slate-300 pt-3 border-t border-slate-700">
+                            <span>Progress: <strong class="text-sky-400" x-text="getTrackProgress('management') + '%'"></strong></span>
+                            <span class="text-sky-400 font-semibold group-hover:translate-x-1 transition-transform">View Modules <i class="fa-solid fa-chevron-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EARNED BADGES SHOWCASE -->
+            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center space-x-2">
+                    <i class="fa-solid fa-trophy text-amber-400"></i>
+                    <span>Your Skill Badge Showcase</span>
+                </h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <template x-for="badge in allBadges" :key="badge.id">
+                        <div :class="earnedBadges.includes(badge.id) ? 'bg-slate-900 border-emerald-500/50 text-white' : 'bg-slate-900/40 border-slate-800 text-slate-600'" class="p-4 rounded-xl border flex flex-col items-center text-center transition-all">
+                            <div :class="earnedBadges.includes(badge.id) ? 'text-amber-400 bg-amber-400/10' : 'text-slate-600 bg-slate-800'" class="w-12 h-12 rounded-full flex items-center justify-center mb-3 text-xl">
+                                <i :class="badge.icon"></i>
+                            </div>
+                            <h4 class="text-xs font-bold mb-1" x-text="badge.name"></h4>
+                            <p class="text-[10px]" :class="earnedBadges.includes(badge.id) ? 'text-slate-400' : 'text-slate-600'" x-text="badge.desc"></p>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ================= TAB 2: SPECIALTY CROP HARVEST ================= -->
+        <div x-show="activeTab === 'harvest'" class="space-y-6">
+            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <span class="text-xs font-semibold text-emerald-400 uppercase tracking-widest">Track 1</span>
+                    <h2 class="text-2xl font-bold text-white">Specialty Crop Harvest (Perishable & Time-Sensitive)</h2>
+                    <p class="text-slate-300 text-sm mt-1">Focuses on high-speed manual picking techniques, ergonomic stamina, motion waste reduction, and piece-rate maximization for berries, beans, and soft fruit.</p>
+                </div>
+                <button @click="completeModule('harvest_1')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md flex items-center space-x-2 whitespace-nowrap">
+                    <i class="fa-solid fa-check"></i>
+                    <span x-text="completedModules.includes('harvest_1') ? 'Module Completed (+100 XP)' : 'Mark Core Training Complete'"></span>
+                </button>
+            </div>
+
+            <!-- TRAINING MODULES GRID -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Module Card 1 -->
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded font-semibold">Motion Analysis</span>
+                            <span class="text-xs text-slate-400"><i class="fa-solid fa-clock mr-1"></i> 15 Mins</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-2">Two-Handed Palm Batching</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-4">Eliminates single-fruit transport waste. Teaches harvesters to hold 3-5 items in the palm before transferring to the waist bucket.</p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-700 flex items-center justify-between">
+                        <span class="text-xs text-amber-400"><i class="fa-solid fa-bolt mr-1"></i> +50 XP</span>
+                        <button @click="completeModule('harvest_m1')" :class="completedModules.includes('harvest_m1') ? 'bg-emerald-800 text-emerald-200' : 'bg-slate-700 hover:bg-slate-600 text-white'" class="px-3 py-1.5 rounded-lg text-xs font-medium transition-all" x-text="completedModules.includes('harvest_m1') ? 'Completed' : 'Complete Lesson'"></button>
+                    </div>
+                </div>
+
+                <!-- Module Card 2 -->
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-cent
