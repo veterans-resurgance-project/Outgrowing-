@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Military MOS Skills Translator & Fast-Track Placement Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Fredoka', system-ui, sans-serif; }
+        
+        /* Custom scrollbar for visual polish */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen antialiased selection:bg-emerald-500 selection:text-slate-950">
+
+    <!-- ECOSYSTEM NAVIGATION BAR -->
+    <nav class="bg-slate-900 border-b border-slate-800 px-4 py-3 shadow-md sticky top-0 z-50 backdrop-blur-md bg-opacity-90">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 text-xs">
+            <div class="flex items-center gap-2 font-bold text-slate-300">
+                <span class="text-emerald-400">🌐</span> Watershed Stewards Ecosystem
+            </div>
+            <div class="flex items-center gap-3 flex-wrap">
+                <a href="https://veterans-resurgance-project.github.io/Micro-Macro/" class="bg-slate-800 hover:bg-slate-700 text-sky-400 px-3 py-1.5 rounded-lg border border-slate-700 transition font-medium flex items-center gap-1.5">
+                    📈 Micro-Macro Simulator
+                </a>
+                <a href="https://www.outgrowing-ag.org" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition font-medium flex items-center gap-1.5">
+                    🌱 Outgrowing-Ag &rarr;
+                </a>
+                <a href="https://www.watershipstewardsempowering.org" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition font-medium flex items-center gap-1.5">
+                    🌲 Veteran Programs &amp; Mission &rarr;
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        
+        <!-- HEADER -->
+        <header class="text-center mb-8 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur-md">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold mb-3">
+                <span>🎖️ Willamette Valley Agricultural &amp; Forestry Veteran Pathway</span>
+            </div>
+            <h1 class="text-2xl md:text-4xl font-bold text-slate-100 mb-2 tracking-wide font-heading">
+                Military MOS Skills Translator <span class="text-emerald-400">&amp;</span> Fast-Track Placement Calculator
+            </h1>
+            <p class="text-xs md:text-sm text-slate-400 max-w-3xl mx-auto leading-relaxed">
+                Translate military operational experience, MOS codes, and leadership background directly into high-value agricultural, equipment operator, and disaster-response roles across the Lebanon &amp; Linn County regional markets.
+            </p>
+        </header>
+
+        <!-- MAIN LAYOUT GRID -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- LEFT PANEL: MOS INPUT FORM (5 COLS) -->
+            <section class="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-6 flex flex-col justify-between">
+                <div class="space-y-6">
+                    <div class="border-b border-slate-800 pb-3">
+                        <h2 class="text-lg font-bold text-amber-400 flex items-center gap-2 font-heading">
+                            <span>📋</span> Veteran Profile &amp; Service History
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-0.5">Input military background to extract transferable competencies.</p>
+                    </div>
+
+                    <form id="vet-translator-form" class="space-y-4 text-xs" onsubmit="event.preventDefault();">
+                        
+                        <!-- Branch of Service -->
+                        <div class="space-y-1.5">
+                            <label for="branch" class="block font-semibold uppercase tracking-wider text-slate-300">Branch of Service</label>
+                            <select id="branch" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-400 transition">
+                                <option value="Army">United States Army</option>
+                                <option value="USMC">United States Marine Corps</option>
+                                <option value="Navy">United States Navy</option>
+                                <option value="AirForce">United States Air Force</option>
+                                <option value="CoastGuard">United States Coast Guard</option>
+                            </select>
+                        </div>
+
+                        <!-- MOS Selection / Custom Code -->
+                        <div class="space-y-1.5">
+                            <label for="mos-preset" class="block font-semibold uppercase tracking-wider text-slate-300">Military Specialty / MOS / AFSC Preset</label>
+                            <select id="mos-preset" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-400 transition">
+                                <option value="88M">88M / Motor Transport / Vehicle Operator (Heavy Logistics)</option>
+                                <option value="12N">12N / Heavy Equipment / Seabee EO (Excavators, Dozers, Rigs)</option>
+                                <option value="15W">15W / UAS / Drone Flight Operator / Imagery Analyst</option>
+                                <option value="NCO">NCO Squad Leader / Platoon Sgt / Team Leader (E-5+ Combat/Ops)</option>
+                                <option value="91B">91B / Wheeled Vehicle Mechanic / Engine &amp; Hydraulics Tech</option>
+                                <option value="92Y">92Y / Logistics &amp; Supply Specialist / Asset Tracking</option>
+                                <option value="11B">11B / Combat Arms / Field Infantry / Tactical Ops</option>
+                                <option value="CUSTOM">-- Custom / Other Specialty --</option>
+                            </select>
+                        </div>
+
+                        <!-- Custom MOS Text Input (Hidden by default unless selected) -->
+                        <div id="custom-mos-box" class="space-y-1.5 hidden">
+                            <label for="custom-mos-text" class="block font-semibold uppercase tracking-wider text-amber-400">Specify Custom MOS / Code</label>
+                            <input type="text" id="custom-mos-text" placeholder="e.g., 2T1X1, HM, 13F, Machinist Mate" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-amber-400 transition">
+                        </div>
+
+                        <!-- Rank / Leadership Level -->
+                        <div class="space-y-1.5">
+                            <label for="rank-level" class="block font-semibold uppercase tracking-wider text-slate-300">Rank / Leadership Tier</label>
+                            <select id="rank-level" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-400 transition">
+                                <option value="JuniorEnlisted">Junior Enlisted (E-1 to E-4)</option>
+                                <option value="NCO" selected>Non-Commissioned Officer (E-5 to E-7 Team/Squad Lead)</option>
+                                <option value="SeniorNCO">Senior NCO / Officer (E-8+ / O-1+ Operations Lead)</option>
+                            </select>
+                        </div>
+
+                        <!-- Transferable Skills Checkboxes -->
+                        <div class="space-y-2 pt-1">
+                            <label class="block font-semibold uppercase tracking-wider text-slate-300">Select Demonstrated Skillsets</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+                                <label class="flex items-center gap-2 bg-slate-950 p-2 rounded-lg border border-slate-800 cursor-pointer hover:border-slate-700">
+                                    <input type="checkbox" id="skill-diesel" class="accent-emerald-400 rounded" checked>
+                                    <span class="text-slate-300">Heavy Diesel &amp; Hydraulics</span>
+                                </label>
+                                <label class="flex items-center gap-2 bg-slate-950 p-2 rounded-lg border border-slate-800 cursor-pointer hover:border-slate-700">
+                                    <input type="checkbox" id="skill-cargo" class="accent-emerald-400 rounded" checked>
+                                    <span class="text-slate-300">Cargo Securing &amp; Rigging</span>
+                                </label>
+                                <label class="flex items-center gap-2 bg-slate-950 p-2 rounded-lg border border-slate-800 cursor-pointer hover:border-slate-700">
+                                    <input type="checkbox" id="skill-uas" class="accent-emerald-400 rounded">
+                                    <span class="text-slate-300">UAS / Drone Flight Ops</span>
+                                </label>
+                                <label class="flex items-center gap-2 bg-slate-950 p-2 rounded-lg border border-slate-800 cursor-pointer hover:border-slate-700">
+                                    <input type="checkbox" id="skill-gis" class="accent-emerald-400 rounded">
+                                    <span class="text-slate-300">Map Reading &amp; GIS Grid</span>
+                                </label>
+                                <label class="flex items-center gap-2 bg-slate-950 p-2 rounded-lg border border-slate-800 cursor-pointer hover:border-slate-700">
+                                    <input type="checkbox" id="skill-lead" class="accent-emerald-400 rounded" checked>
+                                    <span class="text-slate-300">Crew Leadership &amp; Risk Mgmt</span>
+                                </label>
+                                <label class="flex items-center gap-2 bg-slate-950 p-2 rounded-lg border border-slate-800 cursor-pointer hover:border-slate-700">
+                                    <input type="checkbox" id="skill-cls" class="accent-emerald-400 rounded" checked>
+                                    <span class="text-slate-300">First Aid / Combat Life Saver</span>
+                                </label>
+                                <label class="flex items-center gap-2 bg-slate-950 p-2 rounded-lg border border-slate-800 cursor-pointer hover:border-slate-700 col-span-1 sm:col-span-2">
+                                    <input type="checkbox" id="skill-supply" class="accent-emerald-400 rounded">
+                                    <span class="text-slate-300">Supply, Logistics &amp; Hand Receipts</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Target Career Track -->
+                        <div class="space-y-1.5 pt-2">
+                            <label for="target-track" class="block font-semibold uppercase tracking-wider text-emerald-400">Target Ag/Forestry Track</label>
+                            <select id="target-track" class="w-full bg-slate-950 border border-emerald-500/40 rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-emerald-400 transition font-medium">
+                                <option value="MECHANIZATION">Mechanization &amp; Heavy Equipment Ops (Swather/Combine/Hauler)</option>
+                                <option value="PRECISION">Precision Field Management &amp; Tech (Drone/GIS/Irrigation)</option>
+                                <option value="CREW_LEAD">Crew Leadership &amp; Supervisory Management (Field Lead/WPS)</option>
+                                <option value="AGRO_FORESTRY">Agro-Forestry, Restoration &amp; Disaster Response</option>
+                            </select>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="pt-4">
+                    <button id="translate-btn" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-heading font-bold text-base py-3 px-6 rounded-xl shadow-lg shadow-emerald-500/20 transition transform active:scale-[0.99] cursor-pointer">
+                        ⚡ Calculate Fast-Track Match &amp; Wage Tier
+                    </button>
+                </div>
+            </section>
+
+            <!-- RIGHT PANEL: INSTANT FAST-TRACK RESULTS (7 COLS) -->
+            <main id="output-panel" class="lg:col-span-7 space-y-6">
+                
+                <!-- TOP PLACEMENT SCORE CARD -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                        <div>
+                            <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">Regional Benchmark: Linn County / Lebanon, OR</span>
+                            <h2 class="text-xl font-bold text-slate-100 font-heading flex items-center gap-2">
+                                🎯 Placement Readiness Engine
+                            </h2>
+                        </div>
+                        
+                        <div class="flex items-center gap-3">
+                            <div class="text-right">
+                                <span class="block text-[10px] text-slate-400 font-mono">MATCH SCORE</span>
+                                <span id="match-score-text" class="text-2xl font-bold font-mono text-emerald-400">85%</span>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border-4 border-emerald-500 flex items-center justify-center font-bold font-mono text-xs text-emerald-300 bg-slate-950" id="match-score-circle">
+                                85%
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KEY METRICS ROW -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3">
+                            <span class="block text-[10px] text-slate-400 uppercase font-semibold">Recommended Starting Wage</span>
+                            <span id="wage-tier-val" class="text-lg font-bold font-mono text-emerald-300">$22.00 – $26.00 / hr</span>
+                        </div>
+                        
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3">
+                            <span class="block text-[10px] text-slate-400 uppercase font-semibold">Fast-Track Onboarding</span>
+                            <span id="days-val" class="text-lg font-bold font-mono text-amber-300">1 – 2 Days</span>
+                        </div>
+
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3">
+                            <span class="block text-[10px] text-slate-400 uppercase font-semibold">Placement Status</span>
+                            <span id="status-badge" class="inline-block px-2 py-0.5 mt-1 rounded text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                Advanced Fast-Track
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DETAILED BREAKDOWN TABS / CARDS -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-5">
+                    
+                    <!-- Direct Carryover Competencies -->
+                    <div class="space-y-2">
+                        <h3 class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <span>✅</span> Direct Carryover Competencies (Possessed Day One)
+                        </h3>
+                        <div id="carryover-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                            <!-- Injected via JavaScript -->
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-800">
+
+                    <!-- Gap Training Needed -->
+                    <div class="space-y-2">
+                        <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <span>🛠️</span> Exact Gap Training &amp; Credentials Needed
+                        </h3>
+                        <div id="gap-list" class="space-y-2 text-xs">
+                            <!-- Injected via JavaScript -->
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-800">
+
+                    <!-- Employer Value Summary -->
+                    <div class="space-y-2">
+                        <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <span>💡</span> Day-One Value Pitch for Farm / Hiring Lead
+                        </h3>
+                        <p id="pitch-text" class="text-xs text-slate-300 leading-relaxed bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                            Loading value assessment...
+                        </p>
+                    </div>
+
+                    <!-- ACTION BUTTONS -->
+                    <div class="pt-2 flex flex-wrap gap-3">
+                        <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold px-4 py-2.5 rounded-xl border border-slate-700 transition flex items-center gap-1.5 cursor-pointer">
+                            <span>🖨️</span> Export / Print Summary
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- ECOSYSTEM BRIDGE & TOOL POOL CALLOUT -->
+                <section class="bg-gradient-to-r from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-3">
+                    <div class="flex items-center justify-between flex-wrap gap-2">
+                        <h3 class="text-sm font-bold text-emerald-400 font-heading">
+                            🌱 Need Machinery or Gear Support for Placement Projects?
+                        </h3>
+                        <span class="text-[10px] bg-slate-800 text-slate-300 px-2.5 py-1 rounded-full font-mono border border-slate-700">
+                            Community Tool Bank Active
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Access our shared borrowing pool for trailers, generator rigs, and specialized field equipment. Veterans can check out gear without capital expenditure to support local farm projects or disaster resilience deployments.
+                    </p>
+                    <div class="pt-1 flex flex-wrap gap-3 text-xs">
+                        <a href="https://www.outgrowing-ag.org" target="_blank" class="text-emerald-400 hover:underline font-semibold flex items-center gap-1">
+                            Visit Outgrowing-Ag Operations Portal &rarr;
+                        </a>
+                    </div>
+                </section>
+
+            </main>
+
+        </div>
+    </div>
+
+    <!-- TRANSLATOR CALCULATOR LOGIC -->
+    <script>
+        // Preset MOS Competency Database
+        const mosDatabase = {
+            "88M": {
+                name: "Motor Transport Operator (Heavy Logistics)",
+                skills: ["Heavy Diesel & Hydraulics", "Cargo Securing & Rigging", "Crew Leadership & Risk Mgmt"],
+                naturalTrack: "MECHANIZATION"
+            },
+            "12N": {
+                name: "Horizontal Construction / Seabee EO",
+                skills: ["Heavy Diesel & Hydraulics", "Cargo Securing & Rigging", "First Aid / Combat Life Saver"],
+                naturalTrack: "MECHANIZATION"
+            },
+            "15W": {
+                name: "UAS Drone Operator / Imagery Tech",
+                skills: ["UAS / Drone Flight Ops", "Map Reading & GIS Grid", "Supply, Logistics & Hand Receipts"],
+                naturalTrack: "PRECISION"
+            },
+            "NCO": {
+                name: "NCO Squad Leader / Team Leader",
+                skills: ["Crew Leadership & Risk Mgmt", "First Aid / Combat Life Saver", "Supply, Logistics & Hand Receipts"],
+                naturalTrack: "CREW_LEAD"
+            },
+            "91B": {
+                name: "Wheeled Vehicle Mechanic",
+                skills: ["Heavy Diesel & Hydraulics", "Supply, Logistics & Hand Receipts"],
+                naturalTrack: "MECHANIZATION"
+            },
+            "92Y": {
+                name: "Unit Supply & Logistical Specialist",
+                skills: ["Supply, Logistics & Hand Receipts", "Map Reading & GIS Grid"],
+                naturalTrack: "PRECISION"
+            },
+            "11B": {
+                name: "Combat Infantry / Operations",
+                skills: ["Crew Leadership & Risk Mgmt", "First Aid / Combat Life Saver", "Map Reading & GIS Grid"],
+                naturalTrack: "AGRO_FORESTRY"
+            },
+            "CUSTOM": {
+                name: "Custom Military Specialty",
+                skills: [],
+                naturalTrack: "MECHANIZATION"
+            }
+        };
+
+        // UI Element Selectors
+        const presetSelect = document.getElementById('mos-preset');
+        const customBox = document.getElementById('custom-mos-box');
+        const customText = document.getElementById('custom-mos-text');
+
+        // Checkbox handles
+        const skillCheckboxes = {
+            diesel: document.getElementById('skill-diesel'),
+            cargo: document.getElementById('skill-cargo'),
+            uas: document.getElementById('skill-uas'),
+            gis: document.getElementById('skill-gis'),
+            lead: document.getElementById('skill-lead'),
+            cls: document.getElementById('skill-cls'),
+            supply: document.getElementById('skill-supply')
+        };
+
+        // Handle preset switching to automatically check relevant skills
+        presetSelect.addEventListener('change', (e) => {
+            const code = e.target.value;
+            if (code === 'CUSTOM') {
+                customBox.classList.remove('hidden');
+            } else {
+                customBox.classList.add('hidden');
+                const preset = mosDatabase[code];
+                if (preset) {
+                    // Reset all
+                    Object.values(skillCheckboxes).forEach(cb => cb.checked = false);
+                    
+                    // Check preset skills
+                    if (preset.skills.includes("Heavy Diesel & Hydraulics")) skillCheckboxes.diesel.checked = true;
+                    if (preset.skills.includes("Cargo Securing & Rigging")) skillCheckboxes.cargo.checked = true;
+                    if (preset.skills.includes("UAS / Drone Flight Ops")) skillCheckboxes.uas.checked = true;
+                    if (preset.skills.includes("Map Reading & GIS Grid")) skillCheckboxes.gis.checked = true;
+                    if (preset.skills.includes("Crew Leadership & Risk Mgmt")) skillCheckboxes.lead.checked = true;
+                    if (preset.skills.includes("First Aid / Combat Life Saver")) skillCheckboxes.cls.checked = true;
+                    if (preset.skills.includes("Supply, Logistics & Hand Receipts")) skillCheckboxes.supply.checked = true;
+
+                    // Set target track
+                    document.getElementById('target-track').value = preset.naturalTrack;
+                }
+            }
+        });
+
+        // Calculate Fast-Track Matrix
+        function runTranslation() {
+            const branch = document.getElementById('branch').value;
+            const rank = document.getElementById('rank-level').value;
+            const mosCode = presetSelect.value;
+            const targetTrack = document.getElementById('target-track').value;
+
+            // Collect active skills
+            const activeSkills = [];
+            if (skillCheckboxes.diesel.checked) activeSkills.push("Heavy Diesel & Hydraulics");
+            if (skillCheckboxes.cargo.checked) activeSkills.push("Cargo Securing & Rigging");
+            if (skillCheckboxes.uas.checked) activeSkills.push("UAS / Drone Flight Ops");
+            if (skillCheckboxes.gis.checked) activeSkills.push("Map Reading & GIS Grid");
+            if (skillCheckboxes.lead.checked) activeSkills.push("Crew Leadership & Risk Mgmt");
+            if (skillCheckboxes.cls.checked) activeSkills.push("First Aid / Combat Life Saver");
+            if (skillCheckboxes.supply.checked) activeSkills.push("Supply & Asset Tracking");
+
+            // Base readiness calculation
+            let readinessScore = 40; // Base military discipline score
+            readinessScore += (activeSkills.length * 8);
+            if (rank === "NCO") readinessScore += 12;
+            if (rank === "SeniorNCO") readinessScore += 18;
+
+            readinessScore = Math.min(98, readinessScore);
+
+            // Determine Wage Tier and Fast-Track Days based on target track and skills
+            let wageRange = "$18.50 – $21.00 / hr";
+            let daysToPlace = "1 – 2 Days";
+            let statusText = "Ready for Placement";
+            let statusClass = "bg-emerald-500/20 text-emerald-300 border-emerald-500/30";
+
+            if (targetTrack === "MECHANIZATION") {
+                if (skillCheckboxes.diesel.checked && skillCheckboxes.cargo.checked) {
+                    wageRange = "$22.00 – $26.00 / hr";
+                    daysToPlace = "1 Day (Machinery Brief)";
+                    statusText = "Fast-Track Operator";
+                } else {
+                    wageRange = "$19.50 – $22.00 / hr";
+                    daysToPlace = "2 – 3 Days";
+                }
+            } else if (targetTrack === "PRECISION") {
+                if (skillCheckboxes.uas.checked || skillCheckboxes.gis.checked) {
+                    wageRange = "$21.00 – $27.00 / hr";
+                    daysToPlace = "1 – 3 Days (Part 107 / App)";
+                    statusText = "Precision Ag Specialist";
+                } else {
+                    wageRange = "$19.00 – $22.00 / hr";
+                    daysToPlace = "3 – 5 Days";
+                }
+            } else if (targetTrack === "CREW_LEAD") {
+                if (rank !== "JuniorEnlisted" || skillCheckboxes.lead.checked) {
+                    wageRange = "$23.00 – $30.00 / hr";
+                    daysToPlace = "1 – 2 Days (WPS Brief)";
+                    statusText = "Supervisor Fast-Track";
+                    statusClass = "bg-amber-500/20 text-amber-300 border-amber-500/30";
+                } else {
+                    wageRange = "$20.00 – $23.00 / hr";
+                    daysToPlace = "2 – 4 Days";
+                }
+            } else if (targetTrack === "AGRO_FORESTRY") {
+                wageRange = "$21.00 – $26.00 / hr";
+                daysToPlace = "1 – 2 Days";
+                statusText = "Restoration Crew Lead";
+            }
+
+            // Update Header Score Elements
+            document.getElementById('match-score-text').textContent = `${readinessScore}%`;
+            document.getElementById('match-score-circle').textContent = `${readinessScore}%`;
+            document.getElementById('wage-tier-val').textContent = wageRange;
+            document.getElementById('days-val').textContent = daysToPlace;
+            
+            const badgeEl = document.getElementById('status-badge');
+            badgeEl.textContent = statusText;
+            badgeEl.className = `inline-block px-2 py-0.5 mt-1 rounded text-[11px] font-bold border ${statusClass}`;
+
+            // Populate Carryover Competencies
+            const carryoverListEl = document.getElementById('carryover-list');
+            carryoverListEl.innerHTML = "";
+            if (activeSkills.length === 0) {
+                carryoverListEl.innerHTML = `<span class="text-slate-500">No specific skills checked. Core military discipline &amp; safety compliance apply.</span>`;
+            } else {
+                activeSkills.forEach(s => {
+                    carryoverListEl.innerHTML += `
+                        <div class="bg-slate-950 p-2 rounded-lg border border-slate-800 flex items-center gap-2">
+                            <span class="text-emerald-400">✔</span>
+                            <span class="text-slate-200">${s}</span>
+                        </div>
+                    `;
+                });
+            }
+
+            // Determine Gap Training Items
+            const gapListEl = document.getElementById('gap-list');
+            gapListEl.innerHTML = "";
+
+            let gapItems = [];
+            if (targetTrack === "MECHANIZATION") {
+                gapItems = [
+                    { title: "Crop-Specific PTO & Header Brief", time: "2 Hours", desc: "Orientation on combine/swather speed modulation and header height controls." },
+                    { title: "OSHA 10-Hour Agriculture / Machine Guarding", time: "1 Day", desc: "Standard lockout/tagout (LOTO) and agricultural tractor safety verification." }
+                ];
+            } else if (targetTrack === "PRECISION") {
+                gapItems = [
+                    { title: "FAA Part 107 Commercial Drone Prep", time: "1 - 2 Days", desc: "Commercial flight license verification for agricultural crop scouting." },
+                    { title: "Ag Software Crash Course (John Deere Ops / Climate)", time: "3 Hours", desc: "Navigating mobile crop stress maps and dropping field scouting pins." }
+                ];
+            } else if (targetTrack === "CREW_LEAD") {
+                gapItems = [
+                    { title: "EPA Worker Protection Standard (WPS) Train-the-Trainer", time: "1 Day", desc: "Authorizes lead to legally deliver mandatory field safety and pesticide briefings." },
+                    { title: "Field Ergonomics & Heat Stress Coaching", time: "2 Hours", desc: "Spotting repetitive posture strain and enforcing hydration schedules." }
+                ];
+            } else {
+                gapItems = [
+                    { title: "Riparian & Forest Lane Restoration Protocols", time: "1 Day", desc: "Chain saw safety refresher and stream-bank erosion control installation." }
+                ];
+            }
+
+            gapItems.forEach(g => {
+                gapListEl.innerHTML += `
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex justify-between items-start gap-3">
+                        <div>
+                            <span class="font-bold text-slate-200 block">${g.title}</span>
+                            <span class="text-[11px] text-slate-400">${g.desc}</span>
+                        </div>
+                        <span class="bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-[10px] px-2 py-0.5 rounded shrink-0">${g.time}</span>
+                    </div>
+                `;
+            });
+
+            // Pitch Summary Text
+            const pitchEl = document.getElementById('pitch-text');
+            let mosNameText = mosCode !== "CUSTOM" ? mosDatabase[mosCode].name : customText.value || "Specialized Military Operations";
+            pitchEl.innerHTML = `
+                This candidate brings proven <strong>${branch} (${mosNameText})</strong> experience. Possessing high-value carryover skills in <strong>${activeSkills.slice(0, 3).join(', ') || 'Operational Leadership'}</strong>, they require minimal gap orientation (${daysToPlace}) to become a day-one productive asset in the <strong>${targetTrack.replace('_', ' ')}</strong> track at a benchmark rate of <strong>${wageRange}</strong>.
+            `;
+        }
+
+        // Attach Button Listener
+        document.getElementById('translate-btn').addEventListener('click', runTranslation);
+
+        // Run initial translation on load
+        window.onload = function() {
+            runTranslation();
+        };
+    </script>
+</body>
+</html>
