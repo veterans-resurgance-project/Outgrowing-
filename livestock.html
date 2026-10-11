@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track 3: Livestock & Dairy Care | AgriSkill Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="h-full bg-slate-900 text-slate-100 font-sans flex flex-col" x-data="liveTrack()">
+
+    <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="bg-amber-600 p-2 rounded-xl text-white hover:bg-amber-500 transition-colors">
+                    <i class="fa-solid fa-cow text-xl"></i>
+                </a>
+                <div>
+                    <h1 class="text-lg font-bold text-white">Livestock & Dairy Track</h1>
+                    <span class="block text-[10px] uppercase tracking-widest text-amber-400 font-semibold">AgriSkill Academy Level 3</span>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <a href="index.html" class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-semibold transition-all">
+                    <i class="fa-solid fa-home mr-1"></i> Index
+                </a>
+                <a href="agra-skill-academy.html" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg text-xs transition-all">
+                    <i class="fa-solid fa-graduation-cap mr-1"></i> Hub Dashboard
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-8">
+
+        <section class="bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-700 space-y-6">
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">In-Depth Technical Module</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Parlor Hygiene & Herd Welfare Operations</h2>
+            
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Dairy and livestock operations run 24 hours a day, 365 days a year. Maintaining high milk quality (low somatic cell count) requires flawless milking parlor routine, consistent TMR feed pusher schedules, and early symptom detection.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+                    <h3 class="text-amber-400 font-bold text-sm mb-2"><i class="fa-solid fa-flask mr-2"></i> 1. Pre-Milking Prep Routine</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        The standard sequence: Strip teats to inspect for abnormal milk, pre-dip with germicidal solution, allow 30 seconds contact time, wipe completely dry with single-use towel, and attach clusters within 60–90 seconds to leverage natural oxytocin release.
+                    </p>
+                </div>
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+                    <h3 class="text-amber-400 font-bold text-sm mb-2"><i class="fa-solid fa-notes-medical mr-2"></i> 2. Early Health Scouting</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Observing cattle behavior during feed distribution. Animals hanging back, showing reduced rumination, or elevated respiratory rates are flagged for immediate health checks.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+            <h3 class="text-xl font-bold text-white mb-4 flex items-center space-x-2">
+                <i class="fa-solid fa-circle-play text-amber-400"></i>
+                <span>Curated Video Training Guides</span>
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="https://www.youtube.com/results?search_query=dairy+milking+parlor+prep+procedure" target="_blank" class="bg-slate-900 hover:bg-slate-950 p-4 rounded-xl border border-slate-700 flex items-center space-x-3 transition-all group">
+                    <div class="p-3 bg-amber-500/20 text-amber-400 rounded-lg group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-play text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition-colors">Proper Milking Parlor Prep Routine</h4>
+                        <span class="text-xs text-slate-400">Oxytocin timing & udder hygiene</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-700 space-y-6">
+            <h3 class="text-xl font-bold text-white flex items-center space-x-2">
+                <i class="fa-solid fa-graduation-cap text-amber-400"></i>
+                <span>Track 3 Knowledge Certification Test</span>
+            </h3>
+
+            <div class="space-y-6">
+                <div class="space-y-2">
+                    <p class="text-sm font-semibold text-slate-200">1. Within what timeframe after teat stimulation should milking clusters be attached to take advantage of oxytocin release?</p>
+                    <div class="space-y-2 text-xs">
+                        <label class="flex items-center space-x-2 bg-slate-900 p-3 rounded-lg cursor-pointer">
+                            <input type="radio" name="q1" value="a" x-model="q1" class="accent-amber-500">
+                            <span>A. 60 to 90 seconds</span>
+                        </label>
+                        <label class="flex items-center space-x-2 bg-slate-900 p-3 rounded-lg cursor-pointer">
+                            <input type="radio" name="q1" value="b" x-model="q1" class="accent-amber-500">
+                            <span>B. 5 to 10 minutes</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex items-center justify-between">
+                    <button @click="gradeQuiz()" class="px-6 py-2.5 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded-xl text-xs transition-all shadow-md">
+                        Submit & Grade Test
+                    </button>
+                    <span x-show="score !== null" class="text-sm font-bold" :class="score === 100 ? 'text-amber-400' : 'text-slate-400'" x-text="'Score: ' + score + '%'"></span>
+                </div>
+            </div>
+        </section>
+
+        <div class="flex justify-between items-center pt-4">
+            <a href="index.html" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold transition-all flex items-center space-x-2">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Return to Index</span>
+            </a>
+            <a href="agra-skill-academy.html" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded-xl text-xs transition-all flex items-center space-x-2">
+                <span>Go to Hub Dashboard</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+    </main>
+
+    <script>
+        function liveTrack() {
+            return {
+                q1: '',
+                score: null,
+                gradeQuiz() {
+                    this.score = (this.q1 === 'a') ? 100 : 0;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
