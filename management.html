@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track 4: Field Management & Tech | AgriSkill Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="h-full bg-slate-900 text-slate-100 font-sans flex flex-col" x-data="mgmtTrack()">
+
+    <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="bg-sky-600 p-2 rounded-xl text-white hover:bg-sky-500 transition-colors">
+                    <i class="fa-solid fa-chart-line text-xl"></i>
+                </a>
+                <div>
+                    <h1 class="text-lg font-bold text-white">Field Management & Tech Track</h1>
+                    <span class="block text-[10px] uppercase tracking-widest text-sky-400 font-semibold">AgriSkill Academy Level 4</span>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <a href="index.html" class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-semibold transition-all">
+                    <i class="fa-solid fa-home mr-1"></i> Index
+                </a>
+                <a href="agra-skill-academy.html" class="px-3 py-1.5 bg-sky-600 hover:bg-sky-500 text-white rounded-lg text-xs font-semibold transition-all">
+                    <i class="fa-solid fa-graduation-cap mr-1"></i> Hub Dashboard
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-8">
+
+        <section class="bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-700 space-y-6">
+            <span class="text-xs font-bold text-sky-400 uppercase tracking-widest">In-Depth Technical Module</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Precision Irrigation, Fertigation & IPM Scouting</h2>
+            
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Field management bridges field science with labor leadership. By utilizing soil moisture probe telemetry and integrated pest management (IPM) thresholds, field supervisors optimize yield uniformities while streamlining labor pacing.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+                    <h3 class="text-sky-400 font-bold text-sm mb-2"><i class="fa-solid fa-droplet mr-2"></i> 1. Smart Drip Fertigation</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Monitoring soil tension values (centibars) to calculate exact evapotranspiration (ETc) replacement. Managing EC (Electrical Conductivity) during bloom to optimize fruit firmness.
+                    </p>
+                </div>
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+                    <h3 class="text-sky-400 font-bold text-sm mb-2"><i class="fa-solid fa-bug mr-2"></i> 2. Economic Threshold Scouting</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Calculating pest populations per leaf/trap before executing pesticide applications. Utilizing biological controls to minimize crop re-entry delay intervals for field workers.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+            <h3 class="text-xl font-bold text-white mb-4 flex items-center space-x-2">
+                <i class="fa-solid fa-circle-play text-sky-400"></i>
+                <span>Curated Video Training Guides</span>
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="https://www.youtube.com/results?search_query=drip+irrigation+fertigation+management" target="_blank" class="bg-slate-900 hover:bg-slate-950 p-4 rounded-xl border border-slate-700 flex items-center space-x-3 transition-all group">
+                    <div class="p-3 bg-sky-500/20 text-sky-400 rounded-lg group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-play text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-white group-hover:text-sky-400 transition-colors">Drip Fertigation & Telemetry Controls</h4>
+                        <span class="text-xs text-slate-400">Soil probe telemetry & EC monitoring</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-700 space-y-6">
+            <h3 class="text-xl font-bold text-white flex items-center space-x-2">
+                <i class="fa-solid fa-graduation-cap text-amber-400"></i>
+                <span>Track 4 Knowledge Certification Test</span>
+            </h3>
+
+            <div class="space-y-6">
+                <div class="space-y-2">
+                    <p class="text-sm font-semibold text-slate-200">1. What is the primary purpose of calculating an "Economic Threshold" in IPM scouting?</p>
+                    <div class="space-y-2 text-xs">
+                        <label class="flex items-center space-x-2 bg-slate-900 p-3 rounded-lg cursor-pointer">
+                            <input type="radio" name="q1" value="a" x-model="q1" class="accent-sky-500">
+                            <span>A. To apply chemicals as early as possible regardless of insect counts.</span>
+                        </label>
+                        <label class="flex items-center space-x-2 bg-slate-900 p-3 rounded-lg cursor-pointer">
+                            <input type="radio" name="q1" value="b" x-model="q1" class="accent-sky-500">
+                            <span>B. To trigger treatments only when pest damage costs exceed treatment costs.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex items-center justify-between">
+                    <button @click="gradeQuiz()" class="px-6 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl text-xs transition-all shadow-md">
+                        Submit & Grade Test
+                    </button>
+                    <span x-show="score !== null" class="text-sm font-bold" :class="score === 100 ? 'text-sky-400' : 'text-amber-400'" x-text="'Score: ' + score + '%'"></span>
+                </div>
+            </div>
+        </section>
+
+        <div class="flex justify-between items-center pt-4">
+            <a href="index.html" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold transition-all flex items-center space-x-2">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Return to Index</span>
+            </a>
+            <a href="agra-skill-academy.html" class="px-5 py-2.5 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-semibold transition-all flex items-center space-x-2">
+                <span>Go to Hub Dashboard</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+    </main>
+
+    <script>
+        function mgmtTrack() {
+            return {
+                q1: '',
+                score: null,
+                gradeQuiz() {
+                    this.score = (this.q1 === 'b') ? 100 : 0;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
