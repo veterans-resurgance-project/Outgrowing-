@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advisory Board Intake - Veterans Resurgence Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+
+    <div class="max-w-4xl mx-auto">
+        
+        <!-- Header Banner -->
+        <header class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-10 mb-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-2 h-full bg-emerald-500"></div>
+            <div class="inline-block bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3">
+                🎖️ Industry Partner Outreach
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                Advisory Board &amp; Operational Needs Intake
+            </h1>
+            <p class="text-slate-400 text-base sm:text-lg mt-3 leading-relaxed">
+                The Veterans Resurgence Project, Watershed Stewards, and Outgrowing-Ag initiative invite Linn County agriculture and forestry operators to guide our veteran workforce training and job-matching matrix.
+            </p>
+        </header>
+
+        <!-- Form Card -->
+        <form id="advisoryForm" onsubmit="handleSubmit(event)" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-10 shadow-2xl space-y-8">
+            
+            <!-- Section 1: Enterprise Info -->
+            <div class="space-y-4">
+                <div class="border-b border-slate-800 pb-3">
+                    <h2 class="text-xl font-bold text-emerald-400 flex items-center gap-2">
+                        <span>1.</span> Enterprise &amp; Leadership Contact
+                    </h2>
+                    <p class="text-slate-400 text-sm">Tell us about your operational footprint in the Mid-Willamette Valley.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Farm / Company Name *</label>
+                        <input type="text" required placeholder="e.g. Miller Seed Inc. / Lewis Farms" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Primary Contact Name *</label>
+                        <input type="text" required placeholder="John Doe" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Email Address *</label>
+                        <input type="email" required placeholder="john@example.com" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Phone Number *</label>
+                        <input type="tel" required placeholder="(541) 555-0199" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">Core Industry Sector(s) [Select All That Apply]</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                        <label class="flex items-center space-x-3 bg-slate-950 p-3 rounded-lg border border-slate-800/80 hover:border-slate-700 cursor-pointer">
+                            <input type="checkbox" name="sector" value="grass_seed" class="w-4 h-4 text-emerald-500 rounded bg-slate-900 border-slate-700 focus:ring-emerald-500">
+                            <span class="text-slate-300">Grass Seed &amp; Grain Farming</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-slate-950 p-3 rounded-lg border border-slate-800/80 hover:border-slate-700 cursor-pointer">
+                            <input type="checkbox" name="sector" value="orchards" class="w-4 h-4 text-emerald-500 rounded bg-slate-900 border-slate-700 focus:ring-emerald-500">
+                            <span class="text-slate-300">Orchards, Berries &amp; Specialty Crops</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-slate-950 p-3 rounded-lg border border-slate-800/80 hover:border-slate-700 cursor-pointer">
+                            <input type="checkbox" name="sector" value="forestry" class="w-4 h-4 text-emerald-500 rounded bg-slate-900 border-slate-700 focus:ring-emerald-500">
+                            <span class="text-slate-300">Timber, Logging &amp; Hazardous Fuels</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-slate-950 p-3 rounded-lg border border-slate-800/80 hover:border-slate-700 cursor-pointer">
+                            <input type="checkbox" name="sector" value="contracting" class="w-4 h-4 text-emerald-500 rounded bg-slate-900 border-slate-700 focus:ring-emerald-500">
+                            <span class="text-slate-300">Ag Contracting &amp; Earthmoving</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Equipment & Competencies -->
+            <div class="space-y-4">
+                <div class="border-b border-slate-800 pb-3">
+                    <h2 class="text-xl font-bold text-sky-400 flex items-center gap-2">
+                        <span>2.</span> Equipment &amp; Operational Needs
+                    </h2>
+                    <p class="text-slate-400 text-sm">Help us train veterans directly on the tools and skills you use on the job.</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Hard-to-Fill Roles &amp; Peak Hiring Windows</label>
+                    <textarea rows="2" placeholder="e.g. Swather/Combine operators needed May-July; Diesel Mechanics year-round" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-slate-200 focus:outline-none focus:border-sky-500 transition-colors"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Specific Machinery, GPS, or Implements Used</label>
+                    <textarea rows="2" placeholder="e.g. John Deere 8R Series, Trimble Precision, Excavators, Chainsaws" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-slate-200 focus:outline-none focus:border-sky-500 transition-colors"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">High-Priority Day-One Certifications</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>CDL Class A or B</span></label>
+                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>OSHA 10/30 Ag Safety</span></label>
+                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>Forklift / Rigging Certification</span></label>
+                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>Private Pesticide Applicator</span></label>
+                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>Wildland Fire S-130/S-190</span></label>
+                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>First Aid / CPR</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Wages & Board Consent -->
+            <div class="space-y-4">
+                <div class="border-b border-slate-800 pb-3">
+                    <h2 class="text-xl font-bold text-amber-400 flex items-center gap-2">
+                        <span>3.</span> Wage Benchmarks &amp; Board Participation
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Entry Operator ($/hr)</label>
+                        <input type="text" placeholder="$20.00" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Precision / Tech ($/hr)</label>
+                        <input type="text" placeholder="$26.00" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Field Lead ($/hr)</label>
+                        <input type="text" placeholder="$30.00+" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200">
+                    </div>
+                </div>
+
+                <div class="space-y-2 pt-2">
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" required class="mt-1 w-4 h-4 text-emerald-500 rounded bg-slate-950 border-slate-800">
+                        <span class="text-sm text-slate-300">We agree to be listed as an Advisory Board Member supporting veteran agricultural workforce development in Linn County.</span>
+                    </label>
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" class="mt-1 w-4 h-4 text-emerald-500 rounded bg-slate-950 border-slate-800">
+                        <span class="text-sm text-slate-300">We would like to receive qualified veteran candidate referrals for open positions.</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="w-full bg-gradient-to-r from-emerald-500 to-sky-500 hover:from-emerald-600 hover:to-sky-600 text-slate-950 font-extrabold py-4 px-6 rounded-xl shadow-lg transition-all text-center text-lg">
+                Submit Advisory Intake &amp; Join Board &rarr;
+            </button>
+
+        </form>
+
+        <!-- Success Message Modal -->
+        <div id="successMsg" class="hidden mt-6 bg-emerald-950/80 border border-emerald-500/50 text-emerald-200 p-6 rounded-2xl text-center">
+            <h3 class="text-xl font-bold text-emerald-400 mb-2">Thank You for Joining Our Advisory Board!</h3>
+            <p class="text-sm text-emerald-200/80">Your operational requirements have been logged and will be used to calibrate our veteran skills translator and job matching engine.</p>
+        </div>
+
+    </div>
+
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            document.getElementById('advisoryForm').style.display = 'none';
+            document.getElementById('successMsg').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
