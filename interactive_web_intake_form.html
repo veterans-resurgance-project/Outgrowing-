@@ -165,7 +165,26 @@
     </div>
 
     <script>
-        function handleSubmit(e) {
+        function handleSubmit(e) {<script>
+  // Paste your copied Web App URL inside the quotes below:
+  const SCRIPT_URL = 'https://script.google.com/u/0/home/projects/1nY_40KHIRC8vLG8x3-PvxUJ_Qh9F3q6elGsitEM7QFUgbH-Tf7YYAL46/edit';
+
+  // Your form submit function uses that URL in a fetch request:
+  document.getElementById('advisoryForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert('Form submitted successfully!');
+    })
+    .catch(error => console.error('Error!', error.message));
+  });
+</script>
             e.preventDefault();
             document.getElementById('advisoryForm').style.display = 'none';
             document.getElementById('successMsg').classList.remove('hidden');
