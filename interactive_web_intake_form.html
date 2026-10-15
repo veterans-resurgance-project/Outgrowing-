@@ -29,7 +29,7 @@
         </header>
 
         <!-- Form Card -->
-        <form id="advisoryForm" onsubmit="handleSubmit(event)" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-10 shadow-2xl space-y-8">
+        <form id="advisoryForm" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-10 shadow-2xl space-y-8">
             
             <!-- Section 1: Enterprise Info -->
             <div class="space-y-4">
@@ -43,19 +43,19 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-slate-300 mb-1">Farm / Company Name *</label>
-                        <input type="text" required placeholder="e.g. Miller Seed Inc. / Lewis Farms" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
+                        <input type="text" name="company_name" required placeholder="e.g. Miller Seed Inc. / Lewis Farms" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-slate-300 mb-1">Primary Contact Name *</label>
-                        <input type="text" required placeholder="John Doe" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
+                        <input type="text" name="contact_name" required placeholder="John Doe" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-slate-300 mb-1">Email Address *</label>
-                        <input type="email" required placeholder="john@example.com" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
+                        <input type="email" name="email" required placeholder="john@example.com" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-slate-300 mb-1">Phone Number *</label>
-                        <input type="tel" required placeholder="(541) 555-0199" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
+                        <input type="tel" name="phone" required placeholder="(541) 555-0199" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
                     </div>
                 </div>
 
@@ -63,19 +63,19 @@
                     <label class="block text-sm font-medium text-slate-300 mb-2">Core Industry Sector(s) [Select All That Apply]</label>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                         <label class="flex items-center space-x-3 bg-slate-950 p-3 rounded-lg border border-slate-800/80 hover:border-slate-700 cursor-pointer">
-                            <input type="checkbox" name="sector" value="grass_seed" class="w-4 h-4 text-emerald-500 rounded bg-slate-900 border-slate-700 focus:ring-emerald-500">
+                            <input type="checkbox" name="sector" value="Grass Seed & Grain Farming" class="w-4 h-4 text-emerald-500 rounded bg-slate-900 border-slate-700 focus:ring-emerald-500">
                             <span class="text-slate-300">Grass Seed &amp; Grain Farming</span>
                         </label>
                         <label class="flex items-center space-x-3 bg-slate-950 p-3 rounded-lg border border-slate-800/80 hover:border-slate-700 cursor-pointer">
-                            <input type="checkbox" name="sector" value="orchards" class="w-4 h-4 text-emerald-500 rounded bg-slate-900 border-slate-700 focus:ring-emerald-500">
+                            <input type="checkbox" name="sector" value="Orchards, Berries & Specialty Crops" class="w-4 h-4 text-emerald-500 rounded bg-slate-900 border-slate-700 focus:ring-emerald-500">
                             <span class="text-slate-300">Orchards, Berries &amp; Specialty Crops</span>
                         </label>
                         <label class="flex items-center space-x-3 bg-slate-950 p-3 rounded-lg border border-slate-800/80 hover:border-slate-700 cursor-pointer">
-                            <input type="checkbox" name="sector" value="forestry" class="w-4 h-4 text-emerald-500 rounded bg-slate-900 border-slate-700 focus:ring-emerald-500">
+                            <input type="checkbox" name="sector" value="Timber, Logging & Hazardous Fuels" class="w-4 h-4 text-emerald-500 rounded bg-slate-900 border-slate-700 focus:ring-emerald-500">
                             <span class="text-slate-300">Timber, Logging &amp; Hazardous Fuels</span>
                         </label>
                         <label class="flex items-center space-x-3 bg-slate-950 p-3 rounded-lg border border-slate-800/80 hover:border-slate-700 cursor-pointer">
-                            <input type="checkbox" name="sector" value="contracting" class="w-4 h-4 text-emerald-500 rounded bg-slate-900 border-slate-700 focus:ring-emerald-500">
+                            <input type="checkbox" name="sector" value="Ag Contracting & Earthmoving" class="w-4 h-4 text-emerald-500 rounded bg-slate-900 border-slate-700 focus:ring-emerald-500">
                             <span class="text-slate-300">Ag Contracting &amp; Earthmoving</span>
                         </label>
                     </div>
@@ -93,23 +93,23 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-300 mb-1">Hard-to-Fill Roles &amp; Peak Hiring Windows</label>
-                    <textarea rows="2" placeholder="e.g. Swather/Combine operators needed May-July; Diesel Mechanics year-round" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-slate-200 focus:outline-none focus:border-sky-500 transition-colors"></textarea>
+                    <textarea name="hiring_needs" rows="2" placeholder="e.g. Swather/Combine operators needed May-July; Diesel Mechanics year-round" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-slate-200 focus:outline-none focus:border-sky-500 transition-colors"></textarea>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-slate-300 mb-1">Specific Machinery, GPS, or Implements Used</label>
-                    <textarea rows="2" placeholder="e.g. John Deere 8R Series, Trimble Precision, Excavators, Chainsaws" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-slate-200 focus:outline-none focus:border-sky-500 transition-colors"></textarea>
+                    <textarea name="machinery_used" rows="2" placeholder="e.g. John Deere 8R Series, Trimble Precision, Excavators, Chainsaws" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-slate-200 focus:outline-none focus:border-sky-500 transition-colors"></textarea>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-slate-300 mb-2">High-Priority Day-One Certifications</label>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>CDL Class A or B</span></label>
-                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>OSHA 10/30 Ag Safety</span></label>
-                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>Forklift / Rigging Certification</span></label>
-                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>Private Pesticide Applicator</span></label>
-                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>Wildland Fire S-130/S-190</span></label>
-                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>First Aid / CPR</span></label>
+                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" name="certs" value="CDL Class A or B" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>CDL Class A or B</span></label>
+                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" name="certs" value="OSHA 10/30 Ag Safety" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>OSHA 10/30 Ag Safety</span></label>
+                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" name="certs" value="Forklift / Rigging Certification" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>Forklift / Rigging Certification</span></label>
+                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" name="certs" value="Private Pesticide Applicator" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>Private Pesticide Applicator</span></label>
+                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" name="certs" value="Wildland Fire S-130/S-190" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>Wildland Fire S-130/S-190</span></label>
+                        <label class="flex items-center space-x-2 text-slate-300"><input type="checkbox" name="certs" value="First Aid / CPR" class="rounded bg-slate-950 border-slate-800 text-sky-500"> <span>First Aid / CPR</span></label>
                     </div>
                 </div>
             </div>
@@ -125,32 +125,32 @@
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
                         <label class="block text-xs font-medium text-slate-400 mb-1">Entry Operator ($/hr)</label>
-                        <input type="text" placeholder="$20.00" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200">
+                        <input type="text" name="wage_entry" placeholder="$20.00" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200">
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-slate-400 mb-1">Precision / Tech ($/hr)</label>
-                        <input type="text" placeholder="$26.00" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200">
+                        <input type="text" name="wage_tech" placeholder="$26.00" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200">
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-slate-400 mb-1">Field Lead ($/hr)</label>
-                        <input type="text" placeholder="$30.00+" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200">
+                        <input type="text" name="wage_lead" placeholder="$30.00+" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-slate-200">
                     </div>
                 </div>
 
                 <div class="space-y-2 pt-2">
                     <label class="flex items-start space-x-3 cursor-pointer">
-                        <input type="checkbox" required class="mt-1 w-4 h-4 text-emerald-500 rounded bg-slate-950 border-slate-800">
+                        <input type="checkbox" name="board_consent" required class="mt-1 w-4 h-4 text-emerald-500 rounded bg-slate-950 border-slate-800">
                         <span class="text-sm text-slate-300">We agree to be listed as an Advisory Board Member supporting veteran agricultural workforce development in Linn County.</span>
                     </label>
                     <label class="flex items-start space-x-3 cursor-pointer">
-                        <input type="checkbox" class="mt-1 w-4 h-4 text-emerald-500 rounded bg-slate-950 border-slate-800">
+                        <input type="checkbox" name="referral_consent" class="mt-1 w-4 h-4 text-emerald-500 rounded bg-slate-950 border-slate-800">
                         <span class="text-sm text-slate-300">We would like to receive qualified veteran candidate referrals for open positions.</span>
                     </label>
                 </div>
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="w-full bg-gradient-to-r from-emerald-500 to-sky-500 hover:from-emerald-600 hover:to-sky-600 text-slate-950 font-extrabold py-4 px-6 rounded-xl shadow-lg transition-all text-center text-lg">
+            <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-emerald-500 to-sky-500 hover:from-emerald-600 hover:to-sky-600 text-slate-950 font-extrabold py-4 px-6 rounded-xl shadow-lg transition-all text-center text-lg">
                 Submit Advisory Intake &amp; Join Board &rarr;
             </button>
 
@@ -164,31 +164,35 @@
 
     </div>
 
+    <!-- JavaScript Form Handler -->
     <script>
-        function handleSubmit(e) {<script>
-  // Paste your copied Web App URL inside the quotes below:
-  const SCRIPT_URL = 'https://script.google.com/u/0/home/projects/1nY_40KHIRC8vLG8x3-PvxUJ_Qh9F3q6elGsitEM7QFUgbH-Tf7YYAL46/edit';
+      // ⚠️ STEP 1: REPLACE THE URL BELOW WITH YOUR WEB APP EXEC URL (Ends in /exec)
+      const SCRIPT_URL = 'PASTE_YOUR_EXEC_URL_HERE';
 
-  // Your form submit function uses that URL in a fetch request:
-  document.getElementById('advisoryForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
+      document.getElementById('advisoryForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const btn = document.getElementById('submitBtn');
+        btn.innerText = 'Submitting...';
+        btn.disabled = true;
 
-    fetch(SCRIPT_URL, {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-      alert('Form submitted successfully!');
-    })
-    .catch(error => console.error('Error!', error.message));
-  });
-</script>
-            e.preventDefault();
-            document.getElementById('advisoryForm').style.display = 'none';
-            document.getElementById('successMsg').classList.remove('hidden');
-        }
+        const formData = new FormData(this);
+
+        fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => {
+          document.getElementById('advisoryForm').style.display = 'none';
+          document.getElementById('successMsg').classList.remove('hidden');
+        })
+        .catch(error => {
+          alert('Submission error. Please check your Script URL.');
+          console.error('Error!', error.message);
+          btn.innerText = 'Submit Advisory Intake & Join Board →';
+          btn.disabled = false;
+        });
+      });
     </script>
 </body>
 </html>
