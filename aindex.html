@@ -4,6 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forestry & Stewardship Data Collection</title>
+  // Add this script tag to your HTML header to pull the Supabase client library
+// <script src="https://jsdelivr.net"></script>
+
+// Initialize the client using your live dashboard credentials
+const supabaseUrl = 'https://supabase.co';
+const supabaseKey = 'YOUR_SUPABASE_ANON_KEY'; // Safe to expose publicly with RLS enabled
+const supabase = supabasejs.createClient(supabaseUrl, supabaseKey);
+
+// Submit form data directly to your table with a single function
+async function insertFieldData(payload) {
+    const { data, error } = await supabase
+        .from('forestry_metrics_registry')
+        .insert([ payload ]);
+        
+    if (error) console.error('Data drop failed:', error);
+    else console.log('Telemetry safely logged:', data);
+}
+    
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; color: #333; }
         .form-group { margin-bottom: 20px; }
