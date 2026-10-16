@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forestry & Stewardship Data Collection</title>
+    
+    <!-- Supabase CDN Client Library -->
+    <script src="https://jsdelivr.net"></script>
+    
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            max-width: 600px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+            color: #333; 
+            background-color: #f9f9f9;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background-color: #2e7d32; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%; }
+        button:hover { background-color: #1b5e20; }
+        .status-msg { margin-top: 20px; padding: 12px; border-radius: 4px; display: none; text-align: center; font-weight: bold; }
+        .success { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+        .error { background-color: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>🌲 Forestry Field Metrics Intake</h2>
+        <p>Submit land stewardship observations directly to your secure Supabase database.</p>
+
+        <form id="stewardshipForm">
+            <!-- Metadata Context -->
+            <input type="hidden" id="participantId" value="part-9942a">
+
+            <!-- Location Fields -->
+            <div class="form-group">
+                <label for="plotId">Plot Identifier</label>
+                <input type="text" id="plotId" placeholder="e.g., plot-OR-042" required>
+            </div>
+
+            <!-- Metric Fields -->
+            <div class="form-group">
+                <label for="canopyCover">Canopy Cover (%)</label>
+                <input type="number" id="canopyCover" min="0" max="100" step="0.1" placeholder="e.g., 68.5" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dominantSpecies">Dominant Tree Species</label>
+                <select id="dominantSpecies" required>
+                    <option value="">-- Select Species --</option>
+                    <option value="Pseudotsuga menziesii (Douglas-fir)">Douglas-fir</option>
+                    <option value="Acer macrophyllum (Bigleaf Maple)">Bigleaf Maple</option>
+                    <option value="Pinus ponderosa (Ponderosa Pine)">Ponderosa Pine</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Field Notes & Observations</label>
+                <textarea id="notes" rows="4" placeholder="Describe soil moisture, invasive species, or wildlife signs..."></textarea>
+            </div>
+
+            <button type="submit" id="submitBtn">Submit Field Data</button>
+        </form>
+
+        <div id="status" class="status-msg"></div>
+    </div>
+
+    <script>
+        // 1. CONFIGURATION: Replace these with your actual credentials from Settings > API in your Supabase Dashboard
+        const SUPABASE_URL = "https://supabase.co"; 
+        const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY"; 
+
+        // 2. INITIALIZE THE SUPABASE CLIENT
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // 3. CAPTURE & POST FORM INTERACTION
+        document.getElementById('stewardshipForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const statusDiv = document.getElementById('status');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // UI States
+            statusDiv.style.display = 'none';
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Transmitting securely...";
+
+            // Match payload layout to your Supabase PostgreSQL table columns
+            const payload = {
+                submission_id: crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2),
+                timestamp_utc: new Date().toISOString(),
+                app_version: "v1.2.0",
+                participant_id: document.getElementById('participantId').value,
+                plot_id: document.getElementById('plotId').value,
+                canopy_cover_percentage: parseFloat(document.getElementById('canopyCover').value),
+                dominant_tree_species: [document.getElementById('dominantSpecies').value],
+                participant_notes: document.getElementById('notes').value,
+                // Nested JSON fields match your JSONB database column structure
+                stewardship_observations: {
+                    soil_condition: { moisture_level: "Damp", compaction_risk: "Low" },
+                    invasive_species_present: [],
+                    wildlife_signs_observed: []
+                }
+            };
+
+            try {
+                // Post object directly into your table
+                const { error } = await _supabase
+                    .from('forestry_metrics_registry')
+                    .insert([payload]);
+
+                if (error) throw error;
+
+                // On complete success
+                statusDiv.textContent = "✅ Success! Research metrics securely transferred.";
+                statusDiv.className = "status-msg success";
+                statusDiv.style.display = "block";
+                document.getElementById('stewardshipForm').reset();
+
+            } catch (err) {
+                // On failure
+                statusDiv.textContent = `❌ Submission Error: ${err.message || 'Unable to reach data registry.'}`;
+                statusDiv.className = "status-msg error";
+                statusDiv.style.display = "block";
+                console.error("Database transmission failed:", err);
+            } finally {
+                // Restore button state
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Submit Field Data";
+            }
+        });
+    </script>
+</body>
+</html>
