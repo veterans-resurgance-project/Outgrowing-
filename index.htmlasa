@@ -65,8 +65,13 @@
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="notes">Field Notes & Observations</label>
+            // 1. CONFIGURATION: Linked directly to your veterans-resurgance-project
+const SUPABASE_URL = "https://vqkwxwfrchmrgmzchpqh.supabase.co"; 
+const SUPABASE_ANON_KEY = "sb_publishable_O62Ej6PJ8wAlGdoBT4-rFQ_pANhhjX8"; 
+
+// 2. INITIALIZE THE SUPABASE CLIENT
+const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
                 <textarea id="notes" rows="4" placeholder="Describe soil moisture, invasive species, or wildlife signs..."></textarea>
             </div>
 
