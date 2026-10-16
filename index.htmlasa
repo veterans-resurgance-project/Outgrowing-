@@ -146,5 +146,53 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
             }
         });
     </script>
+<!-- Put this script block at the bottom of your file near the other Supabase code -->
+<script>
+  // Initialize Supabase (Use your actual project credentials)
+  const SUPABASE_URL = "https://supabase.co"; 
+  const SUPABASE_ANON_KEY = "sb_publishable_O62Ej6PJ8wAlGdoBT4-rFQ_pANhhjX8"; 
+  const _supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  async function handleFormSubmit(event) {
+    event.preventDefault(); // Prevent page refresh
+    
+    const submitButton = event.target.querySelector('button[type="submit"]');
+    const originalText = submitButton.textContent;
+    
+    // Change button state during transmission
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending Inquiry...";
+
+    // 1. Package the form entries
+    const submissionPayload = {
+      full_name: document.getElementById('landowner-name').value,
+      phone_number: document.getElementById('landowner-phone').value,
+      email_address: document.getElementById('landowner-email').value,
+      property_location: document.getElementById('landowner-location').value
+    };
+
+    try {
+      // 2. Transmit straight to your new database table
+      const { error } = await _supabaseClient
+        .from('landowner_inquiries')
+        .insert([submissionPayload]);
+
+      if (error) throw error;
+
+      // On complete success
+      alert("✅ Thank you! Your land inquiry has been securely sent to our team.");
+      event.target.reset(); // Clear the form fields
+
+    } catch (err) {
+      alert("❌ Unable to submit inquiry: " + (err.message || "Connection issue."));
+      console.error("Submission error:", err);
+    } finally {
+      // Reset button state
+      submitButton.disabled = false;
+      submitButton.textContent = originalText;
+    }
+  }
+</script>
+
 </body>
 </html>
