@@ -206,6 +206,68 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
   }
 </script>
+  <!-- PLACE THIS AT THE ABSOLUTE BOTTOM OF INDEX.HTML RIGHT BEFORE </body> -->
+  <script>
+    // 1. Initialize Supabase Client with your Project Credentials
+    const SUPABASE_URL = "https://supabase.co"; 
+    const SUPABASE_ANON_KEY = "sb_publishable_O62Ej6PJ8wAlGdoBT4-rFQ_pANhhjX8"; 
+    const _supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // 2. Define the exact form submission action
+    async function handleFormSubmit(event) {
+      event.preventDefault(); // Stop the page from refreshing
+      
+      const submitButton = event.target.querySelector('button[type="submit"]');
+      const originalText = submitButton.textContent;
+      
+      submitButton.disabled = true;
+      submitButton.textContent = "Processing Submission...";
+
+      // Gather input data from your exact form field IDs
+      const formRecord = {
+        full_name: document.getElementById('landowner-name').value,
+        phone_number: document.getElementById('landowner-phone').value,
+        email_address: document.getElementById('landowner-email').value,
+        property_location: document.getElementById('landowner-location').value
+      };
+
+      try {
+        // Step A: Land the data inside your Supabase landowner_inquiries table
+        const { error: dbError } = await _supabaseClient
+          .from('landowner_inquiries')
+          .insert([formRecord]);
+
+        if (dbError) throw dbError;
+
+        // Step B: Fire your resend-email edge function immediately to notify your inbox
+        const emailResponse = await fetch(`${SUPABASE_URL}/functions/v1/resend-email`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          },
+          body: JSON.stringify({ record: formRecord })
+        });
+
+        if (!emailResponse.ok) {
+          console.warn("Data was saved to the database, but email routing failed.");
+        }
+
+        alert("✅ Success! Your land inquiry has been securely submitted and logged.");
+        event.target.reset(); // Clear the form input fields
+
+      } catch (err) {
+        alert("❌ Submission Error: " + (err.message || "Connection issue."));
+        console.error("Transmission failed:", err);
+      } finally {
+        // Restore button state
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+      }
+    }
+  </script>
+</body>
+</html>
 
 </body>
 </html>
