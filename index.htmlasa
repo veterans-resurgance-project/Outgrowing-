@@ -146,25 +146,24 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
             }
         });
     </script>
-<!-- Put this script block at the bottom of your file near the other Supabase code -->
+
 <script>
-  // Initialize Supabase (Use your actual project credentials)
+  // Configuration linked to your veterans-resurgance-project
   const SUPABASE_URL = "https://supabase.co"; 
   const SUPABASE_ANON_KEY = "sb_publishable_O62Ej6PJ8wAlGdoBT4-rFQ_pANhhjX8"; 
   const _supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   async function handleFormSubmit(event) {
-    event.preventDefault(); // Prevent page refresh
+    event.preventDefault(); // Stop page from reloading
     
     const submitButton = event.target.querySelector('button[type="submit"]');
     const originalText = submitButton.textContent;
     
-    // Change button state during transmission
     submitButton.disabled = true;
-    submitButton.textContent = "Sending Inquiry...";
+    submitButton.textContent = "Processing Submission...";
 
-    // 1. Package the form entries
-    const submissionPayload = {
+    // 1. Package the form data fields
+    const formRecord = {
       full_name: document.getElementById('landowner-name').value,
       phone_number: document.getElementById('landowner-phone').value,
       email_address: document.getElementById('landowner-email').value,
@@ -172,22 +171,36 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     };
 
     try {
-      // 2. Transmit straight to your new database table
-      const { error } = await _supabaseClient
+      // Step A: Save the data directly into your Supabase table
+      const { error: dbError } = await _supabaseClient
         .from('landowner_inquiries')
-        .insert([submissionPayload]);
+        .insert([formRecord]);
 
-      if (error) throw error;
+      if (dbError) throw dbError;
 
-      // On complete success
-      alert("✅ Thank you! Your land inquiry has been securely sent to our team.");
-      event.target.reset(); // Clear the form fields
+      // Step B: Trigger your resend-email function immediately right from the browser
+      const response = await fetch(`${SUPABASE_URL}/functions/v1/resend-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        },
+        body: JSON.stringify({ record: formRecord })
+      });
+
+      if (!response.ok) {
+        console.warn("Database saved successfully, but email alert failed to route.");
+      }
+
+      // Success Confirmation
+      alert("✅ Success! Your land inquiry has been securely submitted and logged.");
+      event.target.reset(); // Clear the form input blocks
 
     } catch (err) {
-      alert("❌ Unable to submit inquiry: " + (err.message || "Connection issue."));
-      console.error("Submission error:", err);
+      alert("❌ Submission Error: " + (err.message || "Connection issue."));
+      console.error("Submission failed:", err);
     } finally {
-      // Reset button state
+      // Restore form button interface
       submitButton.disabled = false;
       submitButton.textContent = originalText;
     }
