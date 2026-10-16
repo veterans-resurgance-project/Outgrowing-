@@ -1,0 +1,52 @@
+// AFTI CORE TRACKER ENGINE - LANDOWNER INTAKE MODULE
+// Place this entire block inside your 'afti-tracker.js' file
+
+const SUPABASE_URL = "https://supabase.co"; 
+const SUPABASE_ANON_KEY = "sb_publishable_O62Ej6PJ8wAlGdoBT4-rFQ_pANhhjX8"; 
+const _supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+async function handleFormSubmit(event) {
+  event.preventDefault();
+  
+  const submitButton = event.target.querySelector('button[type="submit"]');
+  const originalText = submitButton.textContent;
+  
+  submitButton.disabled = true;
+  submitButton.textContent = "Processing Submission...";
+
+  const formRecord = {
+    full_name: document.getElementById('landowner-name').value,
+    phone_number: document.getElementById('landowner-phone').value,
+    email_address: document.getElementById('landowner-email').value,
+    property_location: document.getElementById('landowner-location').value
+  };
+
+  try {
+    // Step 1: Save data to Supabase table
+    const { error: dbError } = await _supabaseClient
+      .from('landowner_inquiries')
+      .insert([formRecord]);
+
+    if (dbError) throw dbError;
+
+    // Step 2: Push email directly to truexfarm@gmail.com via Edge Function
+    const emailResponse = await fetch(`${SUPABASE_URL}/functions/v1/resend-email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      },
+      body: JSON.stringify({ record: formRecord })
+    });
+
+    alert("✅ Success! Your land inquiry has been securely submitted and logged.");
+    event.target.reset();
+
+  } catch (err) {
+    alert("❌ Submission Error: " + (err.message || "Connection issue."));
+    console.error("Transmission failed:", err);
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = originalText;
+  }
+}
