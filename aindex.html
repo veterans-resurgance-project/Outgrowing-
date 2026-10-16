@@ -137,5 +137,29 @@ async function insertFieldData(payload) {
             }
         });
     </script>
+    <!-- Your HTML Form ends here -->
+    </form>
+
+    <div id="status" class="status-msg"></div>
+
+    <!-- ⬇️ INSERT YOUR CUSTOM INTERACTION JAVASCRIPT RIGHT HERE ⬇️ -->
+    <script>
+        // 1. Initialize Supabase with your dashboard credentials
+        const supabaseUrl = 'https://supabase.co'; 
+        const supabaseKey = 'YOUR_SUPABASE_ANON_KEY'; 
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // 2. Add your form submission listener
+        document.getElementById('stewardshipForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Build payload and call: await _supabase.from('forestry_metrics_registry').insert([...])
+            // (This matches the complete submission script we mapped out earlier)
+        });
+    </script>
+
+</body>
+</html>
+
 </body>
 </html>
