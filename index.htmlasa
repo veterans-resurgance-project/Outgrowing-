@@ -78,7 +78,7 @@
 
     <script>
         // 1. CONFIGURATION: Replace these with your actual credentials from Settings > API in your Supabase Dashboard
-        const SUPABASE_URL = "https://supabase.co"; 
+        const SUPABASE_URL = "https://outgrowing-ag.org"; 
         const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY"; 
 
         // 2. INITIALIZE THE SUPABASE CLIENT
