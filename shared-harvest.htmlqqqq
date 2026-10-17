@@ -1,0 +1,256 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shared Harvest & Distribution Portal | Veterans Resurgence Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --panel-bg: #0f172a;
+            --border-color: rgba(56, 189, 248, 0.2);
+            --accent-green: #4ade80;
+            --accent-blue: #38bdf8;
+            --accent-gold: #fbbf24;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="w-full bg-slate-900 border-b border-slate-800 py-4 px-6 flex justify-between items-center shadow-md">
+        <div class="flex items-center space-x-3">
+            <span class="text-2xl">🍯</span>
+            <div>
+                <h1 class="text-lg font-black tracking-wider text-amber-400">SHARED HARVEST & DISTRIBUTION PORTAL</h1>
+                <p class="text-xs text-slate-400">30/30/30/10 Equitable Yield Model • Linn County Hub</p>
+            </div>
+        </div>
+        <div>
+            <a href="index.html" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-lg border border-slate-700 transition">
+                &larr; Return to Home
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-6 py-10 flex-grow w-full">
+
+        <!-- 30/30/30/10 Allocation Banner -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 mb-8 shadow-xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-2 h-full bg-amber-500"></div>
+            <div class="mb-4">
+                <h2 class="text-2xl font-black text-white mb-1">Equitable Shared Harvest Allocation Model</h2>
+                <p class="text-sm text-slate-300 max-w-3xl">
+                    Our harvest yield model incentivizes high-quality cultivation, material conservation, and community support through a balanced 4-way economic split:
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mt-4">
+                <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl">
+                    <span class="block text-2xl font-black text-sky-400">30%</span>
+                    <span class="text-xs text-slate-400 uppercase font-bold">Landowner Host</span>
+                </div>
+                <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl">
+                    <span class="block text-2xl font-black text-amber-400">30%</span>
+                    <span class="text-xs text-slate-400 uppercase font-bold">Program Reserve</span>
+                </div>
+                <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl">
+                    <span class="block text-2xl font-black text-emerald-400">30%</span>
+                    <span class="text-xs text-slate-400 uppercase font-bold">Community Match</span>
+                </div>
+                <div class="p-3 bg-slate-950 border border-amber-500/40 bg-amber-950/20 rounded-xl">
+                    <span class="block text-2xl font-black text-amber-300">10%</span>
+                    <span class="text-xs text-amber-400 uppercase font-bold">Participant Bonus</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Panel 1: Partner Request Form -->
+            <div class="lg:col-span-1 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl h-fit">
+                <h3 class="text-base font-bold text-amber-400 mb-4 pb-2 border-b border-slate-800 flex items-center space-x-2">
+                    <span>📋</span>
+                    <span>Submit Partner Crop Request</span>
+                </h3>
+
+                <form id="harvest-request-form" class="space-y-4" onsubmit="submitHarvestRequest(event)">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Partner Organization / Program</label>
+                        <input type="text" id="partner-name" required placeholder="e.g. Community Services Consortium" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Requested Crop Type</label>
+                        <select id="crop-type" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                            <option value="Oyster & Medicinal Mushrooms">Oyster & Medicinal Mushrooms</option>
+                            <option value="Raw Apiary Honey">Raw Apiary Honey</option>
+                            <option value="Microgreens & Fresh Salad Greens">Microgreens & Fresh Salad Greens</option>
+                            <option value="Root Vegetables & Squash">Root Vegetables & Squash</option>
+                            <option value="Native Berry / Fruit Starts">Native Berry / Fruit Starts</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Quantity (lbs or jars)</label>
+                            <input type="number" id="crop-qty" min="5" max="500" value="25" required class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Urgency / Schedule</label>
+                            <select id="request-urgency" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                                <option value="Immediate Harvest">Immediate Harvest</option>
+                                <option value="Next Batch Cycle">Next Batch Cycle</option>
+                                <option value="Standing Weekly">Standing Weekly</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Distribution Notes / Purpose</label>
+                        <textarea id="request-notes" rows="2" placeholder="e.g. Weekly veteran dinner prep..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-black py-3 rounded-xl transition shadow-lg flex justify-center items-center space-x-2">
+                        <span>🚀</span>
+                        <span>Submit Request to Hub</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Panel 2: Live Request Queue & Allocation Simulator -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Request Queue Table -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                    <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-800">
+                        <h3 class="text-base font-bold text-emerald-400 flex items-center space-x-2">
+                            <span>🚚</span>
+                            <span>Active Community Harvest Queue</span>
+                        </h3>
+                        <span class="text-xs text-slate-400 font-mono">Synced with CFO Ledger</span>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs text-slate-300">
+                            <thead class="bg-slate-950 text-slate-400 uppercase text-[10px] tracking-wider">
+                                <tr>
+                                    <th class="p-3">Partner Org</th>
+                                    <th class="p-3">Requested Crop</th>
+                                    <th class="p-3">Qty</th>
+                                    <th class="p-3">Schedule</th>
+                                    <th class="p-3">Fulfillment Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="queue-table-body" class="divide-y divide-slate-800">
+                                <tr>
+                                    <td class="p-3 font-bold text-white">Community Services Consortium</td>
+                                    <td class="p-3 text-amber-300">Oyster & Medicinal Mushrooms</td>
+                                    <td class="p-3 font-mono">40 lbs</td>
+                                    <td class="p-3 text-slate-400">Immediate Harvest</td>
+                                    <td class="p-3">
+                                        <span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded text-[10px] font-bold">In Processing</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Participant Bonus & Yield Calculator -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                    <h3 class="text-base font-bold text-amber-300 mb-3 flex items-center space-x-2">
+                        <span>⚡</span>
+                        <span>Harvest Batch Bonus Calculator (10% Participant Pool)</span>
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-4">Enter batch market value to see automatic 30/30/30/10 distribution across stakeholders:</p>
+                    
+                    <div class="flex gap-4 items-center mb-4">
+                        <input type="number" id="batch-value" value="1000" placeholder="Batch Value ($)" class="bg-slate-950 border border-slate-700 rounded-lg p-2 text-sm text-white w-40 focus:outline-none focus:border-amber-400">
+                        <button onclick="calculateBonus()" class="bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold px-4 py-2 rounded-lg border border-slate-700">Calculate Split</button>
+                    </div>
+
+                    <div class="grid grid-cols-4 gap-2 text-center text-xs">
+                        <div class="p-2 bg-slate-950 rounded border border-slate-800">
+                            <span class="block text-slate-400">Landowner</span>
+                            <span id="calc-landowner" class="font-bold text-sky-400">$300.00</span>
+                        </div>
+                        <div class="p-2 bg-slate-950 rounded border border-slate-800">
+                            <span class="block text-slate-400">Program</span>
+                            <span id="calc-program" class="font-bold text-amber-400">$300.00</span>
+                        </div>
+                        <div class="p-2 bg-slate-950 rounded border border-slate-800">
+                            <span class="block text-slate-400">Community</span>
+                            <span id="calc-community" class="font-bold text-emerald-400">$300.00</span>
+                        </div>
+                        <div class="p-2 bg-amber-950/30 rounded border border-amber-500/40">
+                            <span class="block text-amber-300 font-bold">Crew Bonus</span>
+                            <span id="calc-bonus" class="font-bold text-amber-300">$100.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-slate-900 border-t border-slate-800 py-4 text-center text-xs text-slate-500">
+        <p>AFTI Shared Harvest Exchange &bull; Veterans Resurgence Project &bull; Linn County Hub</p>
+    </footer>
+
+    <script>
+        const GOOGLE_SHEET_WEBHOOK_URL = ""; 
+
+        function calculateBonus() {
+            const val = parseFloat(document.getElementById('batch-value').value) || 0;
+            document.getElementById('calc-landowner').innerText = '$' + (val * 0.30).toFixed(2);
+            document.getElementById('calc-program').innerText = '$' + (val * 0.30).toFixed(2);
+            document.getElementById('calc-community').innerText = '$' + (val * 0.30).toFixed(2);
+            document.getElementById('calc-bonus').innerText = '$' + (val * 0.10).toFixed(2);
+        }
+
+        async function submitHarvestRequest(event) {
+            event.preventDefault();
+
+            const payload = {
+                partner: document.getElementById('partner-name').value,
+                crop: document.getElementById('crop-type').value,
+                qty: document.getElementById('crop-qty').value,
+                urgency: document.getElementById('request-urgency').value,
+                notes: document.getElementById('request-notes').value
+            };
+
+            const tableBody = document.getElementById('queue-table-body');
+            const newRow = document.createElement('tr');
+            newRow.className = "bg-slate-800/50 transition";
+            newRow.innerHTML = `
+                <td class="p-3 font-bold text-white">${payload.partner}</td>
+                <td class="p-3 text-amber-300">${payload.crop}</td>
+                <td class="p-3 font-mono">${payload.qty} units</td>
+                <td class="p-3 text-slate-400">${payload.urgency}</td>
+                <td class="p-3">
+                    <span class="px-2 py-0.5 bg-amber-950 text-amber-400 border border-amber-800 rounded text-[10px] font-bold">Synced to Sheet</span>
+                </td>
+            `;
+            tableBody.insertBefore(newRow, tableBody.firstChild);
+
+            if (GOOGLE_SHEET_WEBHOOK_URL) {
+                try {
+                    await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                } catch (err) {
+                    console.error('Google Sheet Sync Error:', err);
+                }
+            }
+
+            alert("Harvest Request successfully logged for " + payload.partner + "!");
+            document.getElementById('harvest-request-form').reset();
+        }
+    </script>
+</body>
+</html>
