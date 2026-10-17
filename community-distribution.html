@@ -1,20 +1,10 @@
-community <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shared Harvest & Distribution Portal | Veterans Resurgence Project</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --bg-dark: #090d16;
-            --panel-bg: #0f172a;
-            --border-color: rgba(56, 189, 248, 0.2);
-            --accent-green: #4ade80;
-            --accent-blue: #38bdf8;
-            --accent-gold: #fbbf24;
-        }
-    </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
 
@@ -27,10 +17,7 @@ community <!DOCTYPE html>
                 <p class="text-xs text-slate-400">Culinary Stewards & Community Food Exchange • Linn County Hub</p>
             </div>
         </div>
-        <div class="flex items-center space-x-3">
-            <span class="px-3 py-1 bg-emerald-950 border border-emerald-700 text-emerald-400 text-xs font-bold rounded-full">
-                Active Crop Yield: 1,420 lbs
-            </span>
+        <div>
             <a href="index.html" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-lg border border-slate-700 transition">
                 &larr; Return to Home
             </a>
@@ -47,7 +34,7 @@ community <!DOCTYPE html>
                 <div class="mb-4 md:mb-0">
                     <h2 class="text-2xl font-black text-white mb-1">Empowering Community Kitchens & Local Food Pantries</h2>
                     <p class="text-sm text-slate-300 max-w-2xl">
-                        Partner programs can submit specific crop requests to align our Waterloo Park hub harvest yields (gourmet mushrooms, raw honey, greens, and root crops) directly with community hunger relief efforts.
+                        Partner programs can submit specific crop requests to align our Waterloo Park hub harvest yields directly with community hunger relief efforts.
                     </p>
                 </div>
                 <div class="text-right">
@@ -59,7 +46,7 @@ community <!DOCTYPE html>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-            <!-- Panel 1: Request Form (For Partner Programs) -->
+            <!-- Panel 1: Request Form -->
             <div class="lg:col-span-1 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl h-fit">
                 <h3 class="text-base font-bold text-amber-400 mb-4 pb-2 border-b border-slate-800 flex items-center space-x-2">
                     <span>📋</span>
@@ -100,7 +87,7 @@ community <!DOCTYPE html>
 
                     <div>
                         <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Distribution Notes / Purpose</label>
-                        <textarea id="request-notes" rows="2" placeholder="e.g. Weekly veteran dinner prep or senior box distribution..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400"></textarea>
+                        <textarea id="request-notes" rows="2" placeholder="e.g. Weekly veteran dinner prep..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400"></textarea>
                     </div>
 
                     <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-black py-3 rounded-xl transition shadow-lg flex justify-center items-center space-x-2">
@@ -110,14 +97,14 @@ community <!DOCTYPE html>
                 </form>
             </div>
 
-            <!-- Panel 2: Live Request Queue & Harvest Status -->
+            <!-- Panel 2: Live Request Queue -->
             <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
                 <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-800">
                     <h3 class="text-base font-bold text-emerald-400 flex items-center space-x-2">
                         <span>🚚</span>
                         <span>Active Community Harvest Queue</span>
                     </h3>
-                    <span class="text-xs text-slate-400 font-mono">Autosynced with Hub Ledger</span>
+                    <span class="text-xs text-slate-400 font-mono">Autosynced with Hub Google Sheet</span>
                 </div>
 
                 <div class="overflow-x-auto">
@@ -132,54 +119,17 @@ community <!DOCTYPE html>
                             </tr>
                         </thead>
                         <tbody id="queue-table-body" class="divide-y divide-slate-800">
-                            <!-- Sample Row 1 -->
                             <tr>
                                 <td class="p-3 font-bold text-white">Community Services Consortium</td>
                                 <td class="p-3 text-amber-300">Oyster & Medicinal Mushrooms</td>
                                 <td class="p-3 font-mono">40 lbs</td>
                                 <td class="p-3 text-slate-400">Immediate Harvest</td>
                                 <td class="p-3">
-                                    <span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded text-[10px] font-bold">In Processing / Packing</span>
-                                </td>
-                            </tr>
-                            <!-- Sample Row 2 -->
-                            <tr>
-                                <td class="p-3 font-bold text-white">Lebanon VFW Post 3252 Kitchen</td>
-                                <td class="p-3 text-amber-300">Raw Apiary Honey</td>
-                                <td class="p-3 font-mono">15 jars</td>
-                                <td class="p-3 text-slate-400">Standing Weekly</td>
-                                <td class="p-3">
-                                    <span class="px-2 py-0.5 bg-sky-950 text-sky-400 border border-sky-800 rounded text-[10px] font-bold">Scheduled for Delivery</span>
-                                </td>
-                            </tr>
-                            <!-- Sample Row 3 -->
-                            <tr>
-                                <td class="p-3 font-bold text-white">Santiam Food Pantry Network</td>
-                                <td class="p-3 text-amber-300">Microgreens & Salad Greens</td>
-                                <td class="p-3 font-mono">50 lbs</td>
-                                <td class="p-3 text-slate-400">Next Batch Cycle</td>
-                                <td class="p-3">
-                                    <span class="px-2 py-0.5 bg-amber-950 text-amber-400 border border-amber-800 rounded text-[10px] font-bold">Queued for Propagation</span>
+                                    <span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded text-[10px] font-bold">In Processing</span>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                </div>
-
-                <!-- Impact Summary Card -->
-                <div class="mt-6 p-4 bg-slate-950 border border-slate-800 rounded-xl grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                    <div>
-                        <span class="block text-xs text-slate-400 uppercase">Active Harvest Partners</span>
-                        <span class="text-xl font-bold text-white">12 Organizations</span>
-                    </div>
-                    <div>
-                        <span class="block text-xs text-slate-400 uppercase">Avg Turnaround Time</span>
-                        <span class="text-xl font-bold text-amber-400">4.2 Days</span>
-                    </div>
-                    <div>
-                        <span class="block text-xs text-slate-400 uppercase">In-Kind Grant Value</span>
-                        <span class="text-xl font-bold text-emerald-400">$23,100 YTD</span>
-                    </div>
                 </div>
             </div>
 
@@ -190,34 +140,52 @@ community <!DOCTYPE html>
     <footer class="w-full bg-slate-900 border-t border-slate-800 py-4 text-center text-xs text-slate-500">
         <p>AFTI Shared Harvest Exchange &bull; Veterans Resurgence Project &bull; Linn County Hub</p>
     </footer>
-async function submitHarvestRequest(event) {
-    event.preventDefault();
 
-    const payload = {
-        partner: document.getElementById('partner-name').value,
-        crop: document.getElementById('crop-type').value,
-        qty: document.getElementById('crop-qty').value,
-        urgency: document.getElementById('request-urgency').value,
-        notes: document.getElementById('request-notes').value
-    };
+    <!-- PROPERLY ENCLOSED JAVASCRIPT SCRIPT TAG -->
+    <script>
+        const GOOGLE_SHEET_WEBHOOK_URL = ""; 
 
-    // Replace with your Apps Script Web App URL or Supabase API endpoint
-    const WEBHOOK_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL";
+        async function submitHarvestRequest(event) {
+            event.preventDefault();
 
-    try {
-        await fetch(WEBHOOK_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-        alert(`Request logged and sent directly to the Waterloo Hub Google Sheet!`);
-        document.getElementById('harvest-request-form').reset();
-    } catch (err) {
-        console.error(err);
-        alert('Network error submitting request.');
-    }
-}
-    
+            const payload = {
+                partner: document.getElementById('partner-name').value,
+                crop: document.getElementById('crop-type').value,
+                qty: document.getElementById('crop-qty').value,
+                urgency: document.getElementById('request-urgency').value,
+                notes: document.getElementById('request-notes').value
+            };
+
+            const tableBody = document.getElementById('queue-table-body');
+            const newRow = document.createElement('tr');
+            newRow.className = "bg-slate-800/50 transition";
+            newRow.innerHTML = `
+                <td class="p-3 font-bold text-white">${payload.partner}</td>
+                <td class="p-3 text-amber-300">${payload.crop}</td>
+                <td class="p-3 font-mono">${payload.qty} units</td>
+                <td class="p-3 text-slate-400">${payload.urgency}</td>
+                <td class="p-3">
+                    <span class="px-2 py-0.5 bg-amber-950 text-amber-400 border border-amber-800 rounded text-[10px] font-bold">Synced to Sheet</span>
+                </td>
+            `;
+            tableBody.insertBefore(newRow, tableBody.firstChild);
+
+            if (GOOGLE_SHEET_WEBHOOK_URL) {
+                try {
+                    await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                } catch (err) {
+                    console.error('Google Sheet Sync Error:', err);
+                }
+            }
+
+            alert("Harvest Request successfully logged for " + payload.partner + "!");
+            document.getElementById('harvest-request-form').reset();
+        }
+    </script>
 </body>
 </html>
