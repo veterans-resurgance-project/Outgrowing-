@@ -190,39 +190,34 @@ community <!DOCTYPE html>
     <footer class="w-full bg-slate-900 border-t border-slate-800 py-4 text-center text-xs text-slate-500">
         <p>AFTI Shared Harvest Exchange &bull; Veterans Resurgence Project &bull; Linn County Hub</p>
     </footer>
+async function submitHarvestRequest(event) {
+    event.preventDefault();
 
-    <script>
-        function submitHarvestRequest(event) {
-            event.preventDefault();
+    const payload = {
+        partner: document.getElementById('partner-name').value,
+        crop: document.getElementById('crop-type').value,
+        qty: document.getElementById('crop-qty').value,
+        urgency: document.getElementById('request-urgency').value,
+        notes: document.getElementById('request-notes').value
+    };
 
-            const partner = document.getElementById('partner-name').value;
-            const crop = document.getElementById('crop-type').value;
-            const qty = document.getElementById('crop-qty').value;
-            const urgency = document.getElementById('request-urgency').value;
+    // Replace with your Apps Script Web App URL or Supabase API endpoint
+    const WEBHOOK_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL";
 
-            const tableBody = document.getElementById('queue-table-body');
-            const newRow = document.createElement('tr');
-            newRow.className = "bg-slate-800/50 transition animate-pulse";
-
-            newRow.innerHTML = `
-                <td class="p-3 font-bold text-white">${partner}</td>
-                <td class="p-3 text-amber-300">${crop}</td>
-                <td class="p-3 font-mono">${qty} units</td>
-                <td class="p-3 text-slate-400">${urgency}</td>
-                <td class="p-3">
-                    <span class="px-2 py-0.5 bg-amber-950 text-amber-400 border border-amber-800 rounded text-[10px] font-bold">Received & Queued</span>
-                </td>
-            `;
-
-            tableBody.insertBefore(newRow, tableBody.firstChild);
-
-            setTimeout(() => {
-                newRow.classList.remove('animate-pulse');
-            }, 2000);
-
-            alert(`Harvest Request submitted! Thank you, ${partner}. The Hub team will process your call-out for ${crop}.`);
-            document.getElementById('harvest-request-form').reset();
-        }
-    </script>
+    try {
+        await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        alert(`Request logged and sent directly to the Waterloo Hub Google Sheet!`);
+        document.getElementById('harvest-request-form').reset();
+    } catch (err) {
+        console.error(err);
+        alert('Network error submitting request.');
+    }
+}
+    
 </body>
 </html>
