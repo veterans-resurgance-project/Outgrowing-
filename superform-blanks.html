@@ -1,0 +1,32 @@
+<div style="display: flex; gap: 10px; flex-wrap: wrap;">
+    <button type="button" onclick="window.print()" class="tab-btn" style="background: #047857; color: white; border: none;">🖨️ Print Report</button>
+    <button type="button" onclick="exportDataCSV()" class="tab-btn" style="background: #1e3a8a; color: white; border: none;">📥 Export CSV</button>
+    <button type="button" onclick="clearAllLogs()" class="btn-danger">🗑️ Clear All Logs</button>
+</div>
+
+@media print {
+    body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+    }
+    nav, .btn-primary, .btn-danger, .tab-btn, form, .form-group, #telemetryForm {
+        display: none !important;
+    }
+    .container, .panel {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: none !important;
+        box-shadow: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    th {
+        background: #e2e8f0 !important;
+        color: #000000 !important;
+    }
+    td, th {
+        border-bottom: 1px solid #cbd5e1 !important;
+        color: #000000 !important;
+    }
+}
