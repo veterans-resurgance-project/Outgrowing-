@@ -1,0 +1,12 @@
+// Function to submit test results or merit points
+async function submitMeritScore(participantId, moduleName, scoreValue) {
+  const payload = {
+    participant_id: participantId,
+    module_name: moduleName,
+    score: scoreValue,
+    timestamp_utc: new Date().toISOString()
+  };
+
+  // Targets your merit/scores table
+  await submitVrpForm('participant_merit_ledger', payload);
+}
