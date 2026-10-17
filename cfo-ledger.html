@@ -106,9 +106,12 @@
             font-weight: bold;
             width: 100%;
             margin-top: 10px;
+            transition: background 0.2s;
         }
         .btn:hover { background: #0369a1; }
-        
+        .btn-green { background: #059669; }
+        .btn-green:hover { background: #047857; }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -208,7 +211,12 @@
                 <input type="number" id="input-grant-match" value="1500" style="border-color: var(--accent-green);">
             </div>
         </div>
-        <button class="btn" style="max-width: 250px;" onclick="updateLedger()">Update Ledger Metrics</button>
+        
+        <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+            <button class="btn" style="flex: 1;" onclick="updateLedger()">Update Web Dashboard</button>
+            <button class="btn btn-green" style="flex: 1;" onclick="syncToGoogleSheets()">📊 Sync to Google Sheet</button>
+            <button class="btn" style="flex: 1; background: #475569;" onclick="exportCfoCSV()">📥 Export QuickBooks CSV</button>
+        </div>
     </div>
 
     <!-- Panel 4: Audit Summary Table -->
@@ -249,6 +257,9 @@
 </div>
 
 <script>
+    // Paste your Google Apps Script Web App URL here when deployed
+    const GOOGLE_SHEET_WEBHOOK_URL = ""; 
+
     function updateLedger() {
         let agri = parseFloat(document.getElementById('input-agri').value) || 0;
         let greens = parseFloat(document.getElementById('input-greens').value) || 0;
@@ -271,6 +282,8 @@
         } else {
             document.getElementById('display-net').style.color = "var(--accent-green)";
         }
+
+        return { agri, greens, clearingRevenue, stabilizationRevenue, grantMatch, totalInflow, netFlow };
     }
 
     function runSimulation() {
@@ -281,6 +294,47 @@
         document.getElementById('reserve-progress').style.width = percentage + "%";
         document.getElementById('progress-text').innerText = percentage.toFixed(1) + "% to Deferral Lifting Trigger";
         document.getElementById('display-reserves').innerText = "$" + currentReserves.toLocaleString();
+    }
+
+    async function syncToGoogleSheets() {
+        const metrics = updateLedger();
+        if (!GOOGLE_SHEET_WEBHOOK_URL) {
+            alert('To auto-sync directly to Google Sheets, paste your Google Apps Script Web App URL into the GOOGLE_SHEET_WEBHOOK_URL variable in this file.');
+            return;
+        }
+
+        try {
+            await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(metrics)
+            });
+            alert('Metrics successfully pushed to Master CFO Google Sheet!');
+        } catch (err) {
+            console.error('Google Sheet Sync Error:', err);
+            alert('Sync failed. Please check network connection.');
+        }
+    }
+
+    function exportCfoCSV() {
+        const metrics = updateLedger();
+        let csv = 'Category,Monthly Output ($ / mo)\n';
+        csv += `Mushroom & Apiary Output,${metrics.agri}\n`;
+        csv += `Flowers & Greens Output,${metrics.greens}\n`;
+        csv += `Forestry Clearing Service,${metrics.clearingRevenue}\n`;
+        csv += `Bank Stabilization,${metrics.stabilizationRevenue}\n`;
+        csv += `Partner Grant Match,${metrics.grantMatch}\n`;
+        csv += `Total Monthly Inflow,${metrics.totalInflow}\n`;
+        csv += `Fixed Monthly Overhead Burn,6500\n`;
+        csv += `Net Monthly Cash Flow,${metrics.netFlow}\n`;
+
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `VRP_CFO_Financial_Ledger_${new Date().toISOString().slice(0,10)}.csv`;
+        a.click();
     }
 
     // Initialize on load
