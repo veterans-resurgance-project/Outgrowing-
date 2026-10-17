@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Ecological Impact Ledger | AFTI & VRP Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar for table container */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-slate-950">
+
+    <!-- Header Navigation -->
+    <header class="w-full bg-slate-900 border-b border-slate-800 py-4 px-6 flex justify-between items-center shadow-md sticky top-0 z-50">
+        <div class="flex items-center space-x-3">
+            <span class="text-2xl animate-pulse">🌱</span>
+            <div>
+                <h1 class="text-base font-black tracking-wider text-emerald-400">ECO-PORTFOLIO & IMPACT LEDGER</h1>
+                <p class="text-xs text-slate-400">AFTI Land-Linkage & Veterans Resurgence Project</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-3">
+            <a href="index.html" class="inline-flex items-center space-x-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-lg border border-slate-700 transition shadow">
+                <span>&larr;</span>
+                <span>Return to Portal</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-5xl mx-auto px-4 md:px-6 py-8 flex-grow w-full">
+
+        <!-- Notification Banner -->
+        <div id="toast-banner" class="hidden mb-6 p-4 rounded-xl border bg-emerald-950/80 border-emerald-500/50 text-emerald-200 text-xs flex justify-between items-center shadow-lg transition-all">
+            <div class="flex items-center space-x-2">
+                <span>🎉</span>
+                <span id="toast-message">Transaction processed successfully!</span>
+            </div>
+            <button onclick="dismissToast()" class="text-slate-400 hover:text-white font-bold text-sm ml-4">&times;</button>
+        </div>
+
+        <!-- Member Profile Header -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="flex items-center space-x-4 z-10">
+                <div class="w-16 h-16 rounded-full bg-emerald-950 border-2 border-emerald-500 flex items-center justify-center text-3xl shadow-inner shrink-0">
+                    🌿
+                </div>
+                <div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <h2 class="text-xl md:text-2xl font-bold text-white">Sage Linwood</h2>
+                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-900/60 border border-emerald-500/40 text-emerald-300 text-xs font-semibold">Tier II Restoration Steward</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-1">Specialization: Native Seed Guilds, Riparian Live-Staking & Biochar Inoculation</p>
+                    <p class="text-[11px] font-mono text-slate-500 mt-0.5">UID: VRP-ECO-2026-0842 &bull; Hub: Waterloo Park Staging Site</p>
+                </div>
+            </div>
+
+            <!-- Portfolio Verification Badge -->
+            <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-4 text-right w-full md:w-auto flex flex-col items-start md:items-end z-10">
+                <span class="text-[10px] font-mono text-amber-400 uppercase tracking-widest font-semibold">Auditable Portfolio Status</span>
+                <span class="text-sm font-bold text-emerald-400 flex items-center space-x-1 mt-0.5">
+                    <svg class="w-4 h-4 fill-current text-emerald-400 shrink-0" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+                    <span>Verified Academic & Grant Credit</span>
+                </span>
+                <span class="text-[11px] text-slate-400 mt-1">Board Resolution 2026-04 Compliant</span>
+            </div>
+        </section>
+
+        <!-- Cumulative Metric Cards Grid -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center hover:border-slate-700 transition">
+                <span class="text-xs text-slate-400 block font-medium">Carbon Sequestered</span>
+                <span class="text-2xl md:text-3xl font-black text-emerald-400 mt-1 block"><span id="metric-carbon">1,840</span> <span class="text-xs font-normal text-slate-400">lbs</span></span>
+                <span class="text-[10px] font-mono text-emerald-500/80 mt-1 block">Biochar Conversion</span>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center hover:border-slate-700 transition">
+                <span class="text-xs text-slate-400 block font-medium">Riparian Restored</span>
+                <span class="text-2xl md:text-3xl font-black text-sky-400 mt-1 block"><span id="metric-riparian">450</span> <span class="text-xs font-normal text-slate-400">lin. ft</span></span>
+                <span class="text-[10px] font-mono text-sky-500/80 mt-1 block">Willow & Cottonwood</span>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center hover:border-slate-700 transition">
+                <span class="text-xs text-slate-400 block font-medium">Native Seed Harvested</span>
+                <span class="text-2xl md:text-3xl font-black text-amber-400 mt-1 block"><span id="metric-seed">38.5</span> <span class="text-xs font-normal text-slate-400">lbs</span></span>
+                <span class="text-[10px] font-mono text-amber-500/80 mt-1 block">Ethical Wild-Collect</span>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center hover:border-slate-700 transition">
+                <span class="text-xs text-slate-400 block font-medium">Earned Yield Shares</span>
+                <span class="text-2xl md:text-3xl font-black text-purple-400 mt-1 block"><span id="metric-shares">12</span> <span class="text-xs font-normal text-slate-400">Units</span></span>
+                <span class="text-[10px] font-mono text-purple-400/80 mt-1 block">Biochar & Plant Starts</span>
+            </div>
+        </section>
+
+        <!-- Earned Micro-Credentials & Portfolio Badges -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl mb-8">
+            <h3 class="text-base font-bold text-white mb-4 flex items-center space-x-2">
+                <span>🏅</span>
+                <span>Earned Ecological Credentials & Micro-Certifications</span>
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                
+                <div class="bg-slate-950 border border-emerald-900/50 rounded-xl p-4 flex flex-col justify-between hover:border-emerald-700/50 transition">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-emerald-400">Pyrolysis & Biochar Technician</span>
+                            <span class="px-2 py-0.5 bg-emerald-950 text-emerald-300 text-[10px] font-mono rounded border border-emerald-800">LEVEL 1</span>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">Demonstrated proficiency in flame-cap kiln operation, biochar quenching, compost tea inoculation, and mycorrhizal spore charging.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-900 text-[10px] font-mono text-slate-500 flex justify-between">
+                        <span>Issued: Sep 2026</span>
+                        <span class="text-emerald-400 font-semibold">Verified</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-950 border border-amber-900/50 rounded-xl p-4 flex flex-col justify-between hover:border-amber-700/50 transition">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-amber-400">Ethical Native Seed Collector</span>
+                            <span class="px-2 py-0.5 bg-amber-950 text-amber-300 text-[10px] font-mono rounded border border-amber-800">CERTIFIED</span>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">Trained in native seed collection zones (Zone 110), genetic diversity standards, clean drying protocol, and non-destructive harvesting practices.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-900 text-[10px] font-mono text-slate-500 flex justify-between">
+                        <span>Issued: Aug 2026</span>
+                        <span class="text-amber-400 font-semibold">Verified</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-950 border border-sky-900/50 rounded-xl p-4 flex flex-col justify-between hover:border-sky-700/50 transition">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-sky-400">GIS Field Telemetry & Bio-Mapping</span>
+                            <span class="px-2 py-0.5 bg-sky-950 text-sky-300 text-[10px] font-mono rounded border border-sky-800">COLLABORATOR</span>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">Certified in ground truth calibration, GPS plot flagging, and contributing plant survival telemetry data to BCRCC multispectral drone mapping layers.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-900 text-[10px] font-mono text-slate-500 flex justify-between">
+                        <span>Issued: Oct 2026</span>
+                        <span class="text-sky-400 font-semibold">Verified</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Interactive Logging Form Section -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl mb-8">
+            <h3 class="text-base font-bold text-white mb-2 flex items-center space-x-2">
+                <span>✍️</span>
+                <span>Log New Ecological Field Work</span>
+            </h3>
+            <p class="text-xs text-slate-400 mb-4">Record field activities to accumulate verified portfolio metrics and yield shares.</p>
+            
+            <form id="log-form" onsubmit="handleFormSubmit(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-[11px] font-mono text-slate-400 uppercase mb-1">Activity Type</label>
+                    <select id="input-activity" onchange="updateMetricLabels()" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-emerald-500">
+                        <option value="riparian">Riparian Live-Staking & Planting</option>
+                        <option value="biochar">Kiln Biochar Processing & Inoculation</option>
+                        <option value="seed">Ethical Native Seed Harvesting</option>
+                        <option value="gis">GIS Ground-Truthing & Telemetry</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[11px] font-mono text-slate-400 uppercase mb-1">Site Sector / Location</label>
+                    <input type="text" id="input-site" placeholder="e.g. Waterloo Sector 2" required class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-mono text-slate-400 uppercase mb-1">Supervisor / Verifier</label>
+                    <input type="text" id="input-verifier" placeholder="e.g. D. Truex (VRP Lead)" required class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+                </div>
+                <div class="md:col-span-2">
+                    <label id="label-output" class="block text-[11px] font-mono text-slate-400 uppercase mb-1">Ecological Output / Yield Detail</label>
+                    <input type="text" id="input-output" placeholder="e.g. 80 willow stakes planted; 100 lin. ft stabilized" required class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+                </div>
+                <div>
+                    <label id="label-amount" class="block text-[11px] font-mono text-slate-400 uppercase mb-1">Numeric Output Metric (Linear Ft)</label>
+                    <input type="number" step="0.1" id="input-amount" placeholder="100" required class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+                </div>
+                <div class="md:col-span-3 text-right">
+                    <button type="submit" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs rounded-lg transition shadow-md">
+                        Submit Activity to Ledger
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Detailed Logged Field Work Activity Table -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl mb-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
+                <h3 class="text-base font-bold text-white flex items-center space-x-2">
+                    <span>📋</span>
+                    <span>Verified Field Activity & Telemetry Log</span>
+                </h3>
+                <button onclick="exportCSV()" class="px-3 py-1.5 bg-emerald-900/50 hover:bg-emerald-800/50 text-emerald-300 border border-emerald-700/50 text-xs font-semibold rounded transition flex items-center space-x-1">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+                    <span>Export Ledger CSV</span>
+                </button>
+            </div>
+            
+            <div class="overflow-x-auto custom-scrollbar">
+                <table class="w-full text-left border-collapse text-xs min-w-[600px]">
+                    <thead>
+                        <tr class="border-b border-slate-800 text-slate-400 font-mono text-[11px] uppercase">
+                            <th class="py-2.5 px-3">Date</th>
+                            <th class="py-2.5 px-3">Activity & Site Sector</th>
+                            <th class="py-2.5 px-3">Ecological Yield / Output</th>
+                            <th class="py-2.5 px-3">Lead Supervisor / Verifier</th>
+                            <th class="py-2.5 px-3">Yield Credits</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ledger-table-body" class="divide-y divide-slate-800/60 text-slate-300">
+                        <!-- Table rows generated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Earned Tangible Yield Share Redemption Store -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
+                <div>
+                    <h3 class="text-base font-bold text-white flex items-center space-x-2">
+                        <span>🎁</span>
+                        <span>Tangible Yield-Share Rewards Store</span>
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Redeem your volunteer sweat equity for physical materials for your home garden or homestead.</p>
+                </div>
+                <div class="bg-purple-950/80 border border-purple-800 px-4 py-2 rounded-xl text-left sm:text-right shrink-0">
+                    <span class="text-[10px] text-slate-400 uppercase block font-mono">Available Balance</span>
+                    <span class="text-base font-bold text-purple-300"><span id="store-shares-balance">12</span> Yield Shares</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-2xl mb-2 block">🪨</span>
+                        <h4 class="text-xs font-bold text-white">50 lb Super-Sack Biochar</h4>
+                        <p class="text-[11px] text-slate-400 mt-1">Quenched & inoculated biochar ready for garden bed soil amendment.</p>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center pt-2 border-t border-slate-900">
+                        <span class="text-xs font-bold text-purple-400">3 Shares</span>
+                        <button onclick="redeemReward('50 lb Super-Sack Biochar', 3)" class="px-2.5 py-1 bg-purple-900/60 hover:bg-purple-800/60 text-purple-200 text-[11px] font-bold rounded border border-purple-700/50 transition">Redeem</button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-2xl mb-2 block">🌱</span>
+                        <h4 class="text-xs font-bold text-white">Native Plant Bundle</h4>
+                        <p class="text-[11px] text-slate-400 mt-1">10 rooted native shrub/forb starts propagated at Waterloo Hub.</p>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center pt-2 border-t border-slate-900">
+                        <span class="text-xs font-bold text-purple-400">2 Shares</span>
+                        <button onclick="redeemReward('Native Plant Bundle', 2)" class="px-2.5 py-1 bg-purple-900/60 hover:bg-purple-800/60 text-purple-200 text-[11px] font-bold rounded border border-purple-700/50 transition">Redeem</button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-2xl mb-2 block">🧪</span>
+                        <h4 class="text-xs font-bold text-white">5-Gal Aerated Compost Tea</h4>
+                        <p class="text-[11px] text-slate-400 mt-1">Live fungal/bacterial inoculum brewed with native forest soil biologicals.</p>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center pt-2 border-t border-slate-900">
+                        <span class="text-xs font-bold text-purple-400">1 Share</span>
+                        <button onclick="redeemReward('5-Gal Aerated Compost Tea', 1)" class="px-2.5 py-1 bg-purple-900/60 hover:bg-purple-800/60 text-purple-200 text-[11px] font-bold rounded border border-purple-700/50 transition">Redeem</button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-2xl mb-2 block">🎓</span>
+                        <h4 class="text-xs font-bold text-white">Masterclass Pass</h4>
+                        <p class="text-[11px] text-slate-400 mt-1">Priority enrollment in advanced GIS Mapping or Part 107 ground school.</p>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center pt-2 border-t border-slate-900">
+                        <span class="text-xs font-bold text-purple-400">5 Shares</span>
+                        <button onclick="redeemReward('Masterclass Pass', 5)" class="px-2.5 py-1 bg-purple-900/60 hover:bg-purple-800/60 text-purple-200 text-[11px] font-bold rounded border border-purple-700/50 transition">Redeem</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-slate-900 border-t border-slate-800 py-6 text-center text-xs text-slate-500 mt-10">
+        <p>AFTI & Veterans Resurgence Project &bull; Ecological Impact & Volunteer Portfolio Engine</p>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // State management
+        let state = {
+            carbon: 1840,
+            riparian: 450,
+            seed: 38.5,
+            shares: 12,
+            logs: [
+                {
+                    date: "Oct 12, 2026",
+                    title: "Riparian Live-Staking",
+                    site: "South Santiam Bank Stabilization (Waterloo Sector 3)",
+                    output: "120 willow stakes planted; 150 lin. ft stabilized",
+                    verifier: "D. Truex (VRP Lead)",
+                    shares: 2,
+                    type: "riparian",
+                    amount: 150
+                },
+                {
+                    date: "Sep 28, 2026",
+                    title: "Kiln Processing & Biochar Inoculation",
+                    site: "Hub Kiln Yard 2 & Compost Tea Station",
+                    output: "450 lbs biochar quenched & charged with fish hydrolysate",
+                    verifier: "Process Refiners Team",
+                    shares: 3,
+                    type: "biochar",
+                    amount: 450
+                },
+                {
+                    date: "Sep 14, 2026",
+                    title: "Ethical Wild Native Seed Harvest",
+                    site: "Linn County Upland Meadow Corridor",
+                    output: "14.2 lbs Blue Wildrye (Elymus glaucus) cleaned & cataloged",
+                    verifier: "OSU Extension Advisory",
+                    shares: 2,
+                    type: "seed",
+                    amount: 14.2
+                },
+                {
+                    date: "Aug 30, 2026",
+                    title: "Multispectral Drone Ground-Truthing",
+                    site: "Waterloo Park Riparian Plot A",
+                    output: "GPS geotagging of 45 test willow starts for BCRCC flight grid",
+                    verifier: "B. Kaufman (BCRCC)",
+                    shares: 1,
+                    type: "gis",
+                    amount: 1
+                }
+            ]
+        };
+
+        function render() {
+            document.getElementById('metric-carbon').innerText = state.carbon.toLocaleString();
+            document.getElementById('metric-riparian').innerText = state.riparian.toLocaleString();
+            document.getElementById('metric-seed').innerText = state.seed.toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1});
+            document.getElementById('metric-shares').innerText = state.shares;
+            document.getElementById('store-shares-balance').innerText = state.shares;
+
+            const tableBody = document.getElementById('ledger-table-body');
+            tableBody.innerHTML = '';
+
+            state.logs.forEach(log => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="py-3 px-3 font-mono text-slate-400 whitespace-nowrap">${log.date}</td>
+                    <td class="py-3 px-3">
+                        <span class="font-bold text-white">${log.title}</span>
+                        <span class="block text-[11px] text-slate-400">${log.site}</span>
+                    </td>
+                    <td class="py-3 px-3">${log.output}</td>
+                    <td class="py-3 px-3 text-slate-400">${log.verifier}</td>
+                    <td class="py-3 px-3 font-bold text-emerald-400 whitespace-nowrap">+${log.shares} Yield Share${log.shares > 1 ? 's' : ''}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function updateMetricLabels() {
+            const type = document.getElementById('input-activity').value;
+            const labelOutput = document.getElementById('label-output');
+            const labelAmount = document.getElementById('label-amount');
+            const inputAmount = document.getElementById('input-amount');
+
+            if (type === 'riparian') {
+                labelOutput.innerText = "Ecological Output / Yield Detail";
+                labelAmount.innerText = "Numeric Metric (Linear Feet Restored)";
+                inputAmount.placeholder = "100";
+            } else if (type === 'biochar') {
+                labelOutput.innerText = "Ecological Output / Yield Detail";
+                labelAmount.innerText = "Numeric Metric (Lbs Carbon Sequestered)";
+                inputAmount.placeholder = "200";
+            } else if (type === 'seed') {
+                labelOutput.innerText = "Ecological Output / Yield Detail";
+                labelAmount.innerText = "Numeric Metric (Lbs Native Seed)";
+                inputAmount.placeholder = "5.0";
+            } else if (type === 'gis') {
+                labelOutput.innerText = "Ecological Output / Yield Detail";
+                labelAmount.innerText = "Numeric Metric (Plots Ground-Truthed)";
+                inputAmount.placeholder = "1";
+            }
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const type = document.getElementById('input-activity').value;
+            const site = document.getElementById('input-site').value;
+            const verifier = document.getElementById('input-verifier').value;
+            const output = document.getElementById('input-output').value;
+            const amount = parseFloat(document.getElementById('input-amount').value) || 0;
+
+            let title = "";
+            let sharesEarned = 1;
+
+            if (type === 'riparian') {
+                title = "Riparian Live-Staking & Planting";
+                state.riparian += amount;
+                sharesEarned = Math.max(1, Math.floor(amount / 50));
+            } else if (type === 'biochar') {
+                title = "Kiln Biochar Processing";
+                state.carbon += amount;
+                sharesEarned = Math.max(1, Math.floor(amount / 150));
+            } else if (type === 'seed') {
+                title = "Ethical Native Seed Harvest";
+                state.seed += amount;
+                sharesEarned = Math.max(1, Math.floor(amount / 5));
+            } else if (type === 'gis') {
+                title = "GIS Telemetry & Bio-Mapping";
+                sharesEarned = 1;
+            }
+
+            state.shares += sharesEarned;
+
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+            state.logs.unshift({
+                date: dateStr,
+                title: title,
+                site: site,
+                output: output,
+                verifier: verifier,
+                shares: sharesEarned,
+                type: type,
+                amount: amount
+            });
+
+            render();
+            showToast(`Activity logged! Earned +${sharesEarned} Yield Share(s).`);
+
+            // Reset inputs
+            document.getElementById('input-site').value = '';
+            document.getElementById('input-output').value = '';
+            document.getElementById('input-amount').value = '';
+        }
+
+        function redeemReward(itemName, cost) {
+            if (state.shares >= cost) {
+                state.shares -= cost;
+                render();
+                showToast(`Successfully redeemed ${itemName} for ${cost} Yield Shares!`);
+            } else {
+                showToast(`Insufficient Yield Shares balance (${state.shares}/${cost} needed).`, true);
+            }
+        }
+
+        function showToast(msg, isError = false) {
+            const toast = document.getElementById('toast-banner');
+            const toastMsg = document.getElementById('toast-message');
+            
+            toastMsg.innerText = msg;
+            toast.classList.remove('hidden');
+            
+            if (isError) {
+                toast.classList.remove('bg-emerald-950/80', 'border-emerald-500/50', 'text-emerald-200');
+                toast.classList.add('bg-rose-950/80', 'border-rose-500/50', 'text-rose-200');
+            } else {
+                toast.classList.remove('bg-rose-950/80', 'border-rose-500/50', 'text-rose-200');
+                toast.classList.add('bg-emerald-950/80', 'border-emerald-500/50', 'text-emerald-200');
+            }
+
+            setTimeout(() => {
+                dismissToast();
+            }, 4000);
+        }
+
+        function dismissToast() {
+            document.getElementById('toast-banner').classList.add('hidden');
+        }
+
+        function exportCSV() {
+            let csv = 'Date,Activity Title,Site Sector,Ecological Output,Verifier,Yield Shares Earned\n';
+            state.logs.forEach(log => {
+                csv += `"${log.date}","${log.title}","${log.site}","${log.output}","${log.verifier}",${log.shares}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `VRP_Volunteer_Eco_Ledger_SageLinwood_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+        }
+
+        // Initialize App
+        window.onload = function() {
+            updateMetricLabels();
+            render();
+        };
+    </script>
+</body>
+</html>
