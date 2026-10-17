@@ -1,0 +1,228 @@
+community <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shared Harvest & Distribution Portal | Veterans Resurgence Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --panel-bg: #0f172a;
+            --border-color: rgba(56, 189, 248, 0.2);
+            --accent-green: #4ade80;
+            --accent-blue: #38bdf8;
+            --accent-gold: #fbbf24;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="w-full bg-slate-900 border-b border-slate-800 py-4 px-6 flex justify-between items-center shadow-md">
+        <div class="flex items-center space-x-3">
+            <span class="text-2xl">🍯</span>
+            <div>
+                <h1 class="text-lg font-black tracking-wider text-amber-400">SHARED HARVEST & DISTRIBUTION PORTAL</h1>
+                <p class="text-xs text-slate-400">Culinary Stewards & Community Food Exchange • Linn County Hub</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-3">
+            <span class="px-3 py-1 bg-emerald-950 border border-emerald-700 text-emerald-400 text-xs font-bold rounded-full">
+                Active Crop Yield: 1,420 lbs
+            </span>
+            <a href="index.html" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-lg border border-slate-700 transition">
+                &larr; Return to Home
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-6 py-10 flex-grow w-full">
+
+        <!-- Banner -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 mb-8 shadow-xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-2 h-full bg-amber-500"></div>
+            <div class="md:flex justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h2 class="text-2xl font-black text-white mb-1">Empowering Community Kitchens & Local Food Pantries</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">
+                        Partner programs can submit specific crop requests to align our Waterloo Park hub harvest yields (gourmet mushrooms, raw honey, greens, and root crops) directly with community hunger relief efforts.
+                    </p>
+                </div>
+                <div class="text-right">
+                    <span class="text-2xl font-black text-emerald-400 block">3,850 lbs</span>
+                    <span class="text-xs text-slate-400 uppercase tracking-wider">Total Donated YTD</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Panel 1: Request Form (For Partner Programs) -->
+            <div class="lg:col-span-1 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl h-fit">
+                <h3 class="text-base font-bold text-amber-400 mb-4 pb-2 border-b border-slate-800 flex items-center space-x-2">
+                    <span>📋</span>
+                    <span>Submit Partner Crop Request</span>
+                </h3>
+
+                <form id="harvest-request-form" class="space-y-4" onsubmit="submitHarvestRequest(event)">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Partner Organization / Program</label>
+                        <input type="text" id="partner-name" required placeholder="e.g. Community Services Consortium" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Requested Crop Type</label>
+                        <select id="crop-type" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                            <option value="Oyster & Medicinal Mushrooms">Oyster & Medicinal Mushrooms</option>
+                            <option value="Raw Apiary Honey">Raw Apiary Honey</option>
+                            <option value="Microgreens & Fresh Salad Greens">Microgreens & Fresh Salad Greens</option>
+                            <option value="Root Vegetables & Squash">Root Vegetables & Squash</option>
+                            <option value="Native Berry / Fruit Starts">Native Berry / Fruit Starts</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Quantity (lbs or jars)</label>
+                            <input type="number" id="crop-qty" min="5" max="500" value="25" required class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Urgency / Schedule</label>
+                            <select id="request-urgency" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                                <option value="Immediate Harvest">Immediate Harvest</option>
+                                <option value="Next Batch Cycle">Next Batch Cycle</option>
+                                <option value="Standing Weekly">Standing Weekly</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Distribution Notes / Purpose</label>
+                        <textarea id="request-notes" rows="2" placeholder="e.g. Weekly veteran dinner prep or senior box distribution..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-black py-3 rounded-xl transition shadow-lg flex justify-center items-center space-x-2">
+                        <span>🚀</span>
+                        <span>Submit Request to Hub</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Panel 2: Live Request Queue & Harvest Status -->
+            <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-800">
+                    <h3 class="text-base font-bold text-emerald-400 flex items-center space-x-2">
+                        <span>🚚</span>
+                        <span>Active Community Harvest Queue</span>
+                    </h3>
+                    <span class="text-xs text-slate-400 font-mono">Autosynced with Hub Ledger</span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-300">
+                        <thead class="bg-slate-950 text-slate-400 uppercase text-[10px] tracking-wider">
+                            <tr>
+                                <th class="p-3">Partner Org</th>
+                                <th class="p-3">Requested Crop</th>
+                                <th class="p-3">Qty</th>
+                                <th class="p-3">Schedule</th>
+                                <th class="p-3">Fulfillment Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="queue-table-body" class="divide-y divide-slate-800">
+                            <!-- Sample Row 1 -->
+                            <tr>
+                                <td class="p-3 font-bold text-white">Community Services Consortium</td>
+                                <td class="p-3 text-amber-300">Oyster & Medicinal Mushrooms</td>
+                                <td class="p-3 font-mono">40 lbs</td>
+                                <td class="p-3 text-slate-400">Immediate Harvest</td>
+                                <td class="p-3">
+                                    <span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded text-[10px] font-bold">In Processing / Packing</span>
+                                </td>
+                            </tr>
+                            <!-- Sample Row 2 -->
+                            <tr>
+                                <td class="p-3 font-bold text-white">Lebanon VFW Post 3252 Kitchen</td>
+                                <td class="p-3 text-amber-300">Raw Apiary Honey</td>
+                                <td class="p-3 font-mono">15 jars</td>
+                                <td class="p-3 text-slate-400">Standing Weekly</td>
+                                <td class="p-3">
+                                    <span class="px-2 py-0.5 bg-sky-950 text-sky-400 border border-sky-800 rounded text-[10px] font-bold">Scheduled for Delivery</span>
+                                </td>
+                            </tr>
+                            <!-- Sample Row 3 -->
+                            <tr>
+                                <td class="p-3 font-bold text-white">Santiam Food Pantry Network</td>
+                                <td class="p-3 text-amber-300">Microgreens & Salad Greens</td>
+                                <td class="p-3 font-mono">50 lbs</td>
+                                <td class="p-3 text-slate-400">Next Batch Cycle</td>
+                                <td class="p-3">
+                                    <span class="px-2 py-0.5 bg-amber-950 text-amber-400 border border-amber-800 rounded text-[10px] font-bold">Queued for Propagation</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Impact Summary Card -->
+                <div class="mt-6 p-4 bg-slate-950 border border-slate-800 rounded-xl grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <div>
+                        <span class="block text-xs text-slate-400 uppercase">Active Harvest Partners</span>
+                        <span class="text-xl font-bold text-white">12 Organizations</span>
+                    </div>
+                    <div>
+                        <span class="block text-xs text-slate-400 uppercase">Avg Turnaround Time</span>
+                        <span class="text-xl font-bold text-amber-400">4.2 Days</span>
+                    </div>
+                    <div>
+                        <span class="block text-xs text-slate-400 uppercase">In-Kind Grant Value</span>
+                        <span class="text-xl font-bold text-emerald-400">$23,100 YTD</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-slate-900 border-t border-slate-800 py-4 text-center text-xs text-slate-500">
+        <p>AFTI Shared Harvest Exchange &bull; Veterans Resurgence Project &bull; Linn County Hub</p>
+    </footer>
+
+    <script>
+        function submitHarvestRequest(event) {
+            event.preventDefault();
+
+            const partner = document.getElementById('partner-name').value;
+            const crop = document.getElementById('crop-type').value;
+            const qty = document.getElementById('crop-qty').value;
+            const urgency = document.getElementById('request-urgency').value;
+
+            const tableBody = document.getElementById('queue-table-body');
+            const newRow = document.createElement('tr');
+            newRow.className = "bg-slate-800/50 transition animate-pulse";
+
+            newRow.innerHTML = `
+                <td class="p-3 font-bold text-white">${partner}</td>
+                <td class="p-3 text-amber-300">${crop}</td>
+                <td class="p-3 font-mono">${qty} units</td>
+                <td class="p-3 text-slate-400">${urgency}</td>
+                <td class="p-3">
+                    <span class="px-2 py-0.5 bg-amber-950 text-amber-400 border border-amber-800 rounded text-[10px] font-bold">Received & Queued</span>
+                </td>
+            `;
+
+            tableBody.insertBefore(newRow, tableBody.firstChild);
+
+            setTimeout(() => {
+                newRow.classList.remove('animate-pulse');
+            }, 2000);
+
+            alert(`Harvest Request submitted! Thank you, ${partner}. The Hub team will process your call-out for ${crop}.`);
+            document.getElementById('harvest-request-form').reset();
+        }
+    </script>
+</body>
+</html>
