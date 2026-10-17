@@ -1,0 +1,20 @@
+// HTML Form Event Listener for Time Logs
+document.getElementById('time-log-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const payload = {
+    participant_id: document.getElementById('participant_id').value.trim(),
+    hours_logged: parseFloat(document.getElementById('hours_logged').value),
+    activity_type: document.getElementById('activity_type').value, // e.g., "Biochar Processing" or "SOP Seeding"
+    work_date: document.getElementById('work_date').value,
+    notes: document.getElementById('notes').value.trim()
+  };
+
+  // Calls the exact same universal function, targeting a time_logs table
+  const result = await submitVrpForm('time_logs', payload);
+
+  if (result.success) {
+    alert('Time log successfully recorded and synced!');
+    e.target.reset();
+  }
+});
