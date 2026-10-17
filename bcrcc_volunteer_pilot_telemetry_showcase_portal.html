@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCRCC Drone Telemetry & Volunteer Showcase Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Top Navigation Header -->
+    <header class="w-full bg-slate-900 border-b border-slate-800 py-4 px-6 flex flex-col md:flex-row justify-between items-center gap-4 shadow-xl sticky top-0 z-50">
+        <div class="flex items-center space-x-3">
+            <div class="bg-amber-500/10 p-2 rounded-xl border border-amber-500/30">
+                <i class="fa-solid fa-drone text-2xl text-amber-400"></i>
+            </div>
+            <div>
+                <span class="text-[10px] font-bold text-amber-400 tracking-widest uppercase block">Benton County Radio Control Club &bull; VRP Alliance</span>
+                <h1 class="text-xl font-black text-white tracking-tight">Drone Pilot Telemetry & Recognition Hub</h1>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="flex space-x-2 bg-slate-950 p-1.5 rounded-xl border border-slate-800 text-xs font-bold">
+            <button id="navDataBtn" onclick="switchTab('data')" class="px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <span>Log Flight Data</span>
+            </button>
+            <button id="navShowcaseBtn" onclick="switchTab('showcase')" class="px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2">
+                <i class="fa-solid fa-award text-amber-400"></i>
+                <span>Pilot Hall of Fame</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: FLIGHT TELEMETRY DATA ENTRY PORTAL   -->
+        <!-- ========================================== -->
+        <div id="dataTab" class="space-y-8">
+            <!-- Header Card -->
+            <section class="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 -mt-8 -mr-8 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-widest inline-block mb-2">
+                            <i class="fa-solid fa-circle-check mr-1"></i> Active Field Research Protocol
+                        </span>
+                        <h2 class="text-2xl md:text-3xl font-black text-white">Aerial Grid Flight & Spatial Telemetry Portal</h2>
+                        <p class="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
+                            Logging aerial orthomosaic mapping flights, invasive Himalayan blackberry canopy coverage, and watershed soil compaction vectors to provide OSU Extension & VRP researchers with empirical site data.
+                        </p>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-center min-w-[160px]">
+                        <span class="text-[10px] text-slate-400 block uppercase font-mono">Pilot Reward Rate</span>
+                        <span class="text-lg font-black text-amber-400 flex items-center justify-center gap-1 mt-1">
+                            <i class="fa-solid fa-bolt text-amber-400"></i> +150 XP / Hr
+                        </span>
+                        <span class="text-[9px] text-slate-400 block mt-1">In-Kind Credit Issued</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Data Entry Form (2 Columns) -->
+                <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+                    <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider flex items-center space-x-2 border-b border-slate-800 pb-3">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <span>Flight Log & Telemetry Entry</span>
+                    </h3>
+
+                    <form id="pilotTelemetryForm" onsubmit="handleFlightSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Pilot Name</label>
+                                <input type="text" id="pilotName" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="e.g. Bob Kaufman" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Contact Email / Phone</label>
+                                <input type="text" id="pilotContact" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="bob@bcrcc.org" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Flight Hours (Hrs)</label>
+                                <input type="number" step="0.5" id="flightHours" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="1.5" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Acreage Mapped</label>
+                                <input type="number" step="0.1" id="acreageMapped" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="12.5" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Aircraft Type / Model</label>
+                                <input type="text" id="aircraftModel" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="e.g. DJI Mavic 3 Enterprise / Custom Fixed-Wing" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Invasive Blackberry Canopy Density (%)</label>
+                                <input type="number" id="blackberryDensity" min="0" max="100" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="65" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Soil Compaction Index (0-10 Rating)</label>
+                                <input type="number" id="soilCompaction" min="0" max="10" step="0.5" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="4.5 (Moderate)" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-slate-300 font-semibold mb-1">Flight Notes & Spatial Hazards</label>
+                            <textarea id="flightNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note wind conditions, burnt root voids, erosion gullies, or heavy brush thickets observed..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Submit Flight Telemetry & Claim XP</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Recent Logs & CSV Export Sidebar (1 Column) -->
+                <div class="space-y-6">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                            <h3 class="text-sm font-bold text-white flex items-center space-x-2">
+                                <i class="fa-solid fa-list-check text-amber-400"></i>
+                                <span>Recent Flight Telemetry Logs</span>
+                            </h3>
+                            <button onclick="exportFlightCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 rounded-lg text-[10px] font-bold transition">
+                                <i class="fa-solid fa-file-csv mr-1"></i> Export CSV
+                            </button>
+                        </div>
+
+                        <div id="flightLogContainer" class="space-y-3 max-h-[380px] overflow-y-auto pr-1">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+
+                    <!-- In-Kind Match Resolution Card -->
+                    <div class="bg-gradient-to-br from-slate-900 to-amber-950/30 border border-amber-500/20 p-5 rounded-2xl space-y-2">
+                        <div class="flex items-center space-x-2 text-amber-400 text-xs font-bold uppercase tracking-wider">
+                            <i class="fa-solid fa-gavel"></i>
+                            <span>Board Resolution 2026-04</span>
+                        </div>
+                        <p class="text-[11px] text-slate-300 leading-relaxed">
+                            Every flight hour logged by BCRCC pilots is formally recognized as certified <strong>In-Kind Technical Match Value</strong> ($150/hr valuation) towards AFTI research grant matching requirements.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: PILOT RECOGNITION SHOWCASE (HALL OF FAME) -->
+        <!-- ========================================== -->
+        <div id="showcaseTab" class="hidden space-y-8">
+            <!-- Hero Spotlight -->
+            <section class="bg-gradient-to-r from-slate-900 via-amber-950/40 to-slate-900 border border-amber-500/30 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+                <div class="max-w-3xl space-y-3">
+                    <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-400 text-xs font-bold uppercase tracking-widest inline-block">
+                        <i class="fa-solid fa-trophy mr-1"></i> BCRCC Volunteer Leadership
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-black text-white">Honoring Our Aerial Telemetry Pioneers</h2>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        The Veteran Restoration Project (VRP) and AFTI extend our deep gratitude to Bob Kaufman and the members of the Benton County Radio Control Club. By converting hobbyist aviation passion into precision research telemetry, BCRCC pilots accelerate forest restoration and land-linkage science.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Leader / Feature Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Featured Card: Bob Kaufman -->
+                <div class="bg-slate-900 border-2 border-amber-500/60 rounded-2xl p-6 shadow-2xl relative overflow-hidden flex flex-col justify-between space-y-4">
+                    <div class="absolute -top-3 -right-3 bg-amber-500 text-slate-950 text-[10px] font-black uppercase px-4 py-1.5 rounded-bl-xl shadow-md tracking-wider">
+                        Alliance Lead & Founder
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 text-3xl font-black shadow-inner">
+                            BK
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-black text-white">Bob Kaufman</h3>
+                            <p class="text-xs text-amber-400 font-semibold">BCRCC Project Liaison & Chief Drone Pilot</p>
+                            <p class="text-[10px] text-slate-400">Benton County Radio Control Club</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+                        <div>
+                            <span class="text-[9px] text-slate-400 block uppercase">Total Hours</span>
+                            <span class="text-base font-black text-amber-400">42.5 Hrs</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] text-slate-400 block uppercase">XP Earned</span>
+                            <span class="text-base font-black text-emerald-400">6,375 XP</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] text-slate-400 block uppercase">Acreage</span>
+                            <span class="text-base font-black text-sky-400">310 Acres</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <span class="text-[10px] text-slate-400 font-mono uppercase tracking-wider block">Credentials & Badges Issued</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-300 rounded-lg text-[10px] font-bold">
+                                🛸 Master Flight Telemetry Specialist
+                            </span>
+                            <span class="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 rounded-lg text-[10px] font-bold">
+                                🗺️ Orthomosaic Grid Chief
+                            </span>
+                            <span class="px-2.5 py-1 bg-sky-500/10 border border-sky-500/30 text-sky-300 rounded-lg text-[10px] font-bold">
+                                🌲 Burn-Scar Mapping Lead
+                            </span>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-slate-300 italic bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+                        "Pioneering the alignment of RC aviation enthusiast hours with academic watershed recovery research in Oregon."
+                    </p>
+                </div>
+
+                <!-- Active Volunteer Roster Grid -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between space-y-4">
+                    <h3 class="text-base font-bold text-white flex items-center space-x-2 border-b border-slate-800 pb-3">
+                        <i class="fa-solid fa-users text-amber-400"></i>
+                        <span>BCRCC Volunteer Flight Roster</span>
+                    </h3>
+
+                    <div id="volunteerRosterContainer" class="space-y-3">
+                        <!-- Populated dynamically -->
+                    </div>
+
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+                        <span class="text-xs text-slate-400 block">Want to join the flight crew?</span>
+                        <span class="text-xs font-bold text-amber-400">Contact BCRCC Leadership or VRP Field Operations</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="w-full bg-slate-900 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        <p>BCRCC Drone Telemetry Portal &bull; Veteran Restoration Project & AFTI Land-Linkage Alliance</p>
+    </footer>
+
+    <!-- Application Scripting -->
+    <script>
+        // Configuration
+        const SUPABASE_URL = "https://vqkwxwfrchmrgmzchpqh.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_O62Ej6PJ8wAlGdoBT4-rFQ_pANhhjX8";
+
+        // Initial Seed Logs
+        let flightLogs = JSON.parse(localStorage.getItem('bcrcc_flight_logs')) || [
+            {
+                id: 1,
+                pilotName: "Bob Kaufman",
+                hours: 2.5,
+                acreage: 24.0,
+                aircraft: "DJI Mavic 3E",
+                blackberryDensity: 70,
+                soilCompaction: 5.5,
+                xp: 375,
+                timestamp: "10/17/2026, 8:30 AM",
+                notes: "Completed grid flight over riparian burn scar zone. High blackberry concentration along eastern creek bank."
+            },
+            {
+                id: 2,
+                pilotName: "Dave Miller",
+                hours: 1.5,
+                acreage: 14.2,
+                aircraft: "Custom Quadcopter",
+                blackberryDensity: 45,
+                soilCompaction: 3.0,
+                xp: 225,
+                timestamp: "10/16/2026, 2:15 PM",
+                notes: "Low-altitude survey of soil compaction vectors near tractor access trail."
+            }
+        ];
+
+        // Seed Roster
+        const pilotRoster = [
+            { name: "Bob Kaufman", title: "BCRCC Lead / Chief Pilot", hours: 42.5, xp: 6375, status: "Master Pilot" },
+            { name: "Dave Miller", title: "Spatial Grid Operator", hours: 18.0, xp: 2700, status: "Senior Pilot" },
+            { name: "Sarah Jenkins", title: "Thermal Mapping Pilot", hours: 12.5, xp: 1875, status: "Active Pilot" },
+            { name: "Jim Thorne", title: "Fixed-Wing Recon Pilot", hours: 9.0, xp: 1350, status: "Active Pilot" }
+        ];
+
+        // Tab Switcher
+        function switchTab(tab) {
+            const dataTab = document.getElementById('dataTab');
+            const showcaseTab = document.getElementById('showcaseTab');
+            const dataBtn = document.getElementById('navDataBtn');
+            const showcaseBtn = document.getElementById('navShowcaseBtn');
+
+            if (tab === 'data') {
+                dataTab.classList.remove('hidden');
+                showcaseTab.classList.add('hidden');
+                dataBtn.className = "px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
+                showcaseBtn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
+            } else {
+                dataTab.classList.add('hidden');
+                showcaseTab.classList.remove('hidden');
+                showcaseBtn.className = "px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
+                dataBtn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
+            }
+        }
+
+        // Supabase REST Helper
+        async function submitVrpForm(tableName, formData) {
+            try {
+                const dbResponse = await fetch(`${SUPABASE_URL}/rest/v1/${tableName}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Prefer': 'return=representation'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!dbResponse.ok) throw new Error(await dbResponse.text());
+                return { success: true };
+            } catch (error) {
+                console.warn('Supabase offline or table pending. Saved locally:', error);
+                return { success: false };
+            }
+        }
+
+        // Handle Flight Telemetry Submission
+        async function handleFlightSubmit(e) {
+            e.preventDefault();
+
+            const hours = parseFloat(document.getElementById('flightHours').value);
+            const xpEarned = Math.round(hours * 150);
+
+            const newLog = {
+                id: Date.now(),
+                pilotName: document.getElementById('pilotName').value.trim(),
+                contact: document.getElementById('pilotContact').value.trim(),
+                hours: hours,
+                acreage: parseFloat(document.getElementById('acreageMapped').value),
+                aircraft: document.getElementById('aircraftModel').value.trim(),
+                blackberryDensity: parseInt(document.getElementById('blackberryDensity').value),
+                soilCompaction: parseFloat(document.getElementById('soilCompaction').value),
+                notes: document.getElementById('flightNotes').value.trim() || 'No additional hazards noted.',
+                xp: xpEarned,
+                timestamp: new Date().toLocaleString()
+            };
+
+            // 1. Submit to Supabase
+            await submitVrpForm('bcrcc_flight_telemetry', newLog);
+
+            // 2. Local State Update
+            flightLogs.unshift(newLog);
+            localStorage.setItem('bcrcc_flight_logs', JSON.stringify(flightLogs));
+
+            renderFlightLogs();
+            alert(`Flight Telemetry Logged! ${newLog.pilotName} earned +${xpEarned} XP!`);
+            e.target.reset();
+        }
+
+        // Render Recent Logs
+        function renderFlightLogs() {
+            const container = document.getElementById('flightLogContainer');
+            if (flightLogs.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic">No flight logs recorded yet.</p>`;
+                return;
+            }
+
+            container.innerHTML = flightLogs.map(log => `
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
+                    <div class="flex justify-between items-start">
+                        <span class="text-xs font-bold text-amber-400">${log.pilotName}</span>
+                        <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">+${log.xp} XP</span>
+                    </div>
+                    <div class="flex justify-between text-[11px] text-slate-300">
+                        <span><i class="fa-solid fa-clock text-slate-500 mr-1"></i>${log.hours} hrs</span>
+                        <span><i class="fa-solid fa-map text-slate-500 mr-1"></i>${log.acreage} acres</span>
+                        <span><i class="fa-solid fa-plane text-slate-500 mr-1"></i>${log.aircraft}</span>
+                    </div>
+                    <p class="text-[10px] text-slate-400 italic line-clamp-2">${log.notes}</p>
+                </div>
+            `).join('');
+        }
+
+        // Render Volunteer Roster
+        function renderRoster() {
+            const container = document.getElementById('volunteerRosterContainer');
+            container.innerHTML = pilotRoster.map(p => `
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex justify-between items-center">
+                    <div>
+                        <span class="text-xs font-bold text-white block">${p.name}</span>
+                        <span class="text-[10px] text-slate-400 block">${p.title}</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-black text-amber-400 block">${p.hours} Hrs</span>
+                        <span class="text-[9px] text-emerald-400 font-mono">${p.xp} XP</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // CSV Export
+        function exportFlightCSV() {
+            let csv = 'Timestamp,Pilot Name,Flight Hours,Acreage Mapped,Aircraft Model,Blackberry Density (%),Soil Compaction Index,XP Earned,Notes\n';
+            flightLogs.forEach(l => {
+                csv += `"${l.timestamp}","${l.pilotName}",${l.hours},${l.acreage},"${l.aircraft}",${l.blackberryDensity},${l.soilCompaction},${l.xp},"${l.notes}"\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', `BCRCC_Flight_Telemetry_${new Date().toISOString().slice(0,10)}.csv`);
+            a.click();
+        }
+
+        // Initial Execution
+        renderFlightLogs();
+        renderRoster();
+    </script>
+</body>
+</html>
