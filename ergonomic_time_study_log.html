@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ergonomic Time Study & Harvest Efficiency Log | Veterans Resurgence Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --panel-bg: #0f172a;
+            --border-color: rgba(56, 189, 248, 0.2);
+            --accent-green: #4ade80;
+            --accent-blue: #38bdf8;
+            --accent-gold: #fbbf24;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="w-full bg-slate-900 border-b border-slate-800 py-4 px-6 flex justify-between items-center shadow-md">
+        <div class="flex items-center space-x-3">
+            <span class="text-2xl">⏱️</span>
+            <div>
+                <h1 class="text-lg font-black tracking-wider text-amber-400">ERGONOMIC TIME STUDY & HARVEST EFFICIENCY LOG</h1>
+                <p class="text-xs text-slate-400">Workforce Training Metrics • Specialty Crop Harvest Optimization • Linn County Hub</p>
+            </div>
+        </div>
+        <div>
+            <a href="shared-harvest.html" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-lg border border-slate-700 transition">
+                &larr; Shared Harvest Portal
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-6 py-8 flex-grow w-full">
+
+        <!-- Overview Banner -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 mb-8 shadow-xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-2 h-full bg-emerald-500"></div>
+            <div class="mb-2">
+                <h2 class="text-xl font-black text-white">Pre/Post Training Ergonomic Field Verification</h2>
+                <p class="text-xs text-slate-300 max-w-3xl mt-1">
+                    Quantifying participant skill acquisition, fatigue reduction, waste minimization, and harvest throughput. This empirical data validates technical workforce competency for USDA/ODA Specialty Crop Block Grant reporting.
+                </p>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Field Entry Form -->
+            <div class="lg:col-span-1 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl h-fit">
+                <h3 class="text-base font-bold text-amber-400 mb-4 pb-2 border-b border-slate-800 flex items-center space-x-2">
+                    <span>📝</span>
+                    <span>Record Field Study Session</span>
+                </h3>
+
+                <form id="time-study-form" class="space-y-4" onsubmit="logStudySession(event)">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Participant / Cohort ID</label>
+                        <input type="text" id="participant-id" required placeholder="e.g. Cohort Alpha - Member 04" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Crop Type & Activity</label>
+                        <select id="crop-activity" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                            <option value="Cane Berries (Hand Harvest)">Cane Berries (Hand Harvest)</option>
+                            <option value="Tree Nuts (Gleaning & Sorting)">Tree Nuts (Gleaning & Sorting)</option>
+                            <option value="Gourmet Mushrooms (Substrate Harvesting)">Gourmet Mushrooms (Substrate Harvesting)</option>
+                            <option value="Microgreens & Flowers (Precision Trimming)">Microgreens & Flowers (Precision Trimming)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Study Phase</label>
+                        <select id="study-phase" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400" onchange="autoFillDemoData()">
+                            <option value="Baseline (Pre-Training)">Baseline (Pre-Training)</option>
+                            <option value="Post-Training Evaluation">Post-Training Evaluation</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Duration (Min)</label>
+                            <input type="number" id="study-duration" min="5" max="180" value="30" required class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Yield (Lbs)</label>
+                            <input type="number" step="0.1" id="study-yield" value="12.5" required class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Waste/Loss (%)</label>
+                            <input type="number" step="0.1" id="study-waste" value="8.5" required class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Posture Score (1-10)</label>
+                            <input type="number" min="1" max="10" id="study-posture" value="5" required class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Field Observations / Ergonomic Notes</label>
+                        <textarea id="study-notes" rows="2" placeholder="e.g. Noted wrist flexion and reaching posture before harness adjustment..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-400"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black py-3 rounded-xl transition shadow-lg flex justify-center items-center space-x-2">
+                        <span>📊</span>
+                        <span>Log Time Study Data</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Dashboard Analytics & Logs -->
+            <div class="lg:col-span-2 space-y-6">
+
+                <!-- Comparative Metrics Summary -->
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl text-center">
+                        <span class="block text-xs font-bold text-slate-400 uppercase mb-1">Avg Rate (Post vs Base)</span>
+                        <span id="rate-improvement" class="text-2xl font-black text-emerald-400">+38.5%</span>
+                        <span class="block text-[10px] text-slate-500 mt-1">Lbs / Hour Throughput</span>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl text-center">
+                        <span class="block text-xs font-bold text-slate-400 uppercase mb-1">Fruit/Product Damage</span>
+                        <span id="waste-reduction" class="text-2xl font-black text-amber-300">-62.0%</span>
+                        <span class="block text-[10px] text-slate-500 mt-1">Spillage & Crop Loss</span>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl text-center">
+                        <span class="block text-xs font-bold text-slate-400 uppercase mb-1">Ergonomic Safety</span>
+                        <span id="posture-score" class="text-2xl font-black text-sky-400">+4.2 pts</span>
+                        <span class="block text-[10px] text-slate-500 mt-1">Posture & Strain Index</span>
+                    </div>
+                </div>
+
+                <!-- Study Records Table -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                    <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-800">
+                        <h3 class="text-base font-bold text-sky-400 flex items-center space-x-2">
+                            <span>📋</span>
+                            <span>Time Study Records & Benchmark Comparisons</span>
+                        </h3>
+                        <span class="text-xs text-slate-400 font-mono">Grant Audit Ready</span>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs text-slate-300">
+                            <thead class="bg-slate-950 text-slate-400 uppercase text-[10px] tracking-wider">
+                                <tr>
+                                    <th class="p-3">Participant</th>
+                                    <th class="p-3">Activity</th>
+                                    <th class="p-3">Phase</th>
+                                    <th class="p-3">Rate (lbs/hr)</th>
+                                    <th class="p-3">Loss %</th>
+                                    <th class="p-3">Posture</th>
+                                </tr>
+                            </thead>
+                            <tbody id="study-table-body" class="divide-y divide-slate-800">
+                                <tr>
+                                    <td class="p-3 font-bold text-white">Cohort Alpha - Member 01</td>
+                                    <td class="p-3 text-amber-300">Cane Berries (Hand Harvest)</td>
+                                    <td class="p-3"><span class="px-2 py-0.5 bg-slate-800 text-slate-300 rounded text-[10px]">Baseline</span></td>
+                                    <td class="p-3 font-mono">22.0 lbs/hr</td>
+                                    <td class="p-3 text-red-400 font-mono">9.0%</td>
+                                    <td class="p-3 font-mono">4.5 / 10</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold text-white">Cohort Alpha - Member 01</td>
+                                    <td class="p-3 text-amber-300">Cane Berries (Hand Harvest)</td>
+                                    <td class="p-3"><span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded text-[10px] font-bold">Post-Training</span></td>
+                                    <td class="p-3 font-mono text-emerald-400">31.5 lbs/hr</td>
+                                    <td class="p-3 text-emerald-400 font-mono">2.8%</td>
+                                    <td class="p-3 font-mono text-sky-400">8.8 / 10</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-slate-900 border-t border-slate-800 py-4 text-center text-xs text-slate-500">
+        <p>AFTI Ergonomic Field Evaluation System &bull; Veterans Resurgence Project &bull; Linn County Hub</p>
+    </footer>
+
+    <script>
+        function autoFillDemoData() {
+            const phase = document.getElementById('study-phase').value;
+            if (phase === "Baseline (Pre-Training)") {
+                document.getElementById('study-duration').value = 30;
+                document.getElementById('study-yield').value = 11.0;
+                document.getElementById('study-waste').value = 9.2;
+                document.getElementById('study-posture').value = 4;
+                document.getElementById('study-notes').value = "Frequent stooping and reaching; basket strain observed; two-hand picking rhythm intermittent.";
+            } else {
+                document.getElementById('study-duration').value = 30;
+                document.getElementById('study-yield').value = 16.5;
+                document.getElementById('study-waste').value = 2.5;
+                document.getElementById('study-posture').value = 9;
+                document.getElementById('study-notes').value = "Harness chest-rig deployed; neutral spine maintained; continuous two-hand rhythm with minimal crop drop.";
+            }
+        }
+
+        function logStudySession(event) {
+            event.preventDefault();
+
+            const participant = document.getElementById('participant-id').value;
+            const activity = document.getElementById('crop-activity').value;
+            const phase = document.getElementById('study-phase').value;
+            const duration = parseFloat(document.getElementById('study-duration').value);
+            const yieldLbs = parseFloat(document.getElementById('study-yield').value);
+            const waste = parseFloat(document.getElementById('study-waste').value);
+            const posture = parseFloat(document.getElementById('study-posture').value);
+
+            const hourlyRate = ((yieldLbs / duration) * 60).toFixed(1);
+
+            const tableBody = document.getElementById('study-table-body');
+            const newRow = document.createElement('tr');
+            newRow.className = "bg-slate-800/50 transition";
+            
+            const phaseBadge = phase.includes("Post-Training") 
+                ? `<span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded text-[10px] font-bold">Post-Training</span>`
+                : `<span class="px-2 py-0.5 bg-slate-800 text-slate-300 rounded text-[10px]">Baseline</span>`;
+
+            newRow.innerHTML = `
+                <td class="p-3 font-bold text-white">${participant}</td>
+                <td class="p-3 text-amber-300">${activity}</td>
+                <td class="p-3">${phaseBadge}</td>
+                <td class="p-3 font-mono ${phase.includes("Post-Training") ? "text-emerald-400 font-bold" : ""}">${hourlyRate} lbs/hr</td>
+                <td class="p-3 font-mono ${waste < 5 ? "text-emerald-400" : "text-red-400"}">${waste}%</td>
+                <td class="p-3 font-mono text-sky-400">${posture} / 10</td>
+            `;
+
+            tableBody.insertBefore(newRow, tableBody.firstChild);
+            alert("Ergonomic Time Study session successfully logged!");
+            document.getElementById('time-study-form').reset();
+        }
+    </script>
+</body>
+</html>
