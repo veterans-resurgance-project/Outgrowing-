@@ -57,7 +57,6 @@
         <!-- TAB 1: FLIGHT TELEMETRY DATA ENTRY PORTAL   -->
         <!-- ========================================== -->
         <div id="dataTab" class="space-y-8">
-            <!-- Header Card -->
             <section class="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl relative overflow-hidden shadow-2xl">
                 <div class="absolute top-0 right-0 -mt-8 -mr-8 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -81,7 +80,6 @@
             </section>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Data Entry Form (2 Columns) -->
                 <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
                     <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider flex items-center space-x-2 border-b border-slate-800 pb-3">
                         <i class="fa-solid fa-pen-to-square"></i>
@@ -138,7 +136,6 @@
                     </form>
                 </div>
 
-                <!-- Recent Logs Sidebar (1 Column) -->
                 <div class="space-y-6">
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
                         <div class="flex justify-between items-center border-b border-slate-800 pb-3">
@@ -167,7 +164,7 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 2: PILOT RECOGNITION SHOWCASE (HALL OF FAME) -->
+        <!-- TAB 2: PILOT RECOGNITION SHOWCASE          -->
         <!-- ========================================== -->
         <div id="showcaseTab" class="hidden space-y-8">
             <section class="bg-gradient-to-r from-slate-900 via-amber-950/40 to-slate-900 border border-amber-500/30 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
@@ -183,7 +180,6 @@
             </section>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Featured Card: Bob Kaufman -->
                 <div class="bg-slate-900 border-2 border-amber-500/60 rounded-2xl p-6 shadow-2xl relative overflow-hidden flex flex-col justify-between space-y-4">
                     <div class="absolute -top-3 -right-3 bg-amber-500 text-slate-950 text-[10px] font-black uppercase px-4 py-1.5 rounded-bl-xl shadow-md tracking-wider">
                         Alliance Lead & Founder
@@ -235,15 +231,12 @@
                     </p>
                 </div>
 
-                <!-- Active Volunteer Roster Card -->
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between space-y-4">
                     <h3 class="text-base font-bold text-white flex items-center space-x-2 border-b border-slate-800 pb-3">
                         <i class="fa-solid fa-users text-amber-400"></i>
                         <span>BCRCC Volunteer Flight Roster</span>
                     </h3>
-
                     <div id="volunteerRosterContainer" class="space-y-3"></div>
-
                     <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
                         <span class="text-xs text-slate-400 block">Want to join the flight crew?</span>
                         <span class="text-xs font-bold text-amber-400">Contact BCRCC Leadership or VRP Field Operations</span>
@@ -279,7 +272,6 @@
             </section>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Time Study Data Entry Form -->
                 <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
                     <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider flex items-center space-x-2 border-b border-slate-800 pb-3">
                         <i class="fa-solid fa-stopwatch"></i>
@@ -290,11 +282,11 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs text-slate-300 font-semibold mb-1">Participant / Crew Leader</label>
-                                <input type="text" id="tsParticipant" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="e.g. Donald Truex / Cell Lead" required>
+                                <input type="text" id="tsParticipant" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="e.g. Donald Truex" required>
                             </div>
                             <div>
                                 <label class="block text-xs text-slate-300 font-semibold mb-1">Partner Farm / Site Name</label>
-                                <input type="text" id="tsSite" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="e.g. Waterloo Park / Agrarian Gateway" required>
+                                <input type="text" id="tsSite" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="e.g. Waterloo Park" required>
                             </div>
                         </div>
 
@@ -320,7 +312,7 @@
 
                         <div>
                             <label class="block text-xs text-slate-300 font-semibold mb-1">Productivity Notes & Observations</label>
-                            <textarea id="tsNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note efficiency gains from new ergonomic tools..."></textarea>
+                            <textarea id="tsNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note efficiency gains..."></textarea>
                         </div>
 
                         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2">
@@ -330,7 +322,6 @@
                     </form>
                 </div>
 
-                <!-- Recent Time Studies Sidebar -->
                 <div class="space-y-6">
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
                         <div class="flex justify-between items-center border-b border-slate-800 pb-3">
@@ -342,7 +333,6 @@
                                 <i class="fa-solid fa-file-csv mr-1"></i> Export CSV
                             </button>
                         </div>
-
                         <div id="timeStudyLogContainer" class="space-y-3 max-h-[380px] overflow-y-auto pr-1"></div>
                     </div>
                 </div>
@@ -373,7 +363,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 
     <!-- Global Footer -->
@@ -420,28 +409,14 @@
                 soilCompaction: 5.5,
                 xp: 375,
                 timestamp: "10/17/2026, 8:30 AM",
-                notes: "Completed grid flight over riparian burn scar zone. High blackberry concentration along eastern creek bank."
-            },
-            {
-                id: 2,
-                pilotName: "Dave Miller",
-                hours: 1.5,
-                acreage: 14.2,
-                aircraft: "Custom Quadcopter",
-                blackberryDensity: 45,
-                soilCompaction: 3.0,
-                xp: 225,
-                timestamp: "10/16/2026, 2:15 PM",
-                notes: "Low-altitude survey of soil compaction vectors near tractor access trail."
+                notes: "Completed grid flight over riparian burn scar zone."
             }
         ];
 
         // Seed Roster
         const pilotRoster = [
             { name: "Bob Kaufman", title: "BCRCC Lead / Chief Pilot", hours: 42.5, xp: 6375, status: "Master Pilot" },
-            { name: "Dave Miller", title: "Spatial Grid Operator", hours: 18.0, xp: 2700, status: "Senior Pilot" },
-            { name: "Sarah Jenkins", title: "Thermal Mapping Pilot", hours: 12.5, xp: 1875, status: "Active Pilot" },
-            { name: "Jim Thorne", title: "Fixed-Wing Recon Pilot", hours: 9.0, xp: 1350, status: "Active Pilot" }
+            { name: "Dave Miller", title: "Spatial Grid Operator", hours: 18.0, xp: 2700, status: "Senior Pilot" }
         ];
 
         // Tab Switcher
@@ -454,17 +429,14 @@
             const showcaseBtn = document.getElementById('navShowcaseBtn');
             const timeStudyBtn = document.getElementById('navTimeStudyBtn');
 
-            // Hide all tabs first
             if(dataTab) dataTab.classList.add('hidden');
             if(showcaseTab) showcaseTab.classList.add('hidden');
             if(timeStudyTab) timeStudyTab.classList.add('hidden');
 
-            // Reset button styles
             if(dataBtn) dataBtn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
             if(showcaseBtn) showcaseBtn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
             if(timeStudyBtn) timeStudyBtn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
 
-            // Show selected tab
             if (tab === 'data') {
                 if(dataTab) dataTab.classList.remove('hidden');
                 if(dataBtn) dataBtn.className = "px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
@@ -490,7 +462,6 @@
                     },
                     body: JSON.stringify(formData)
                 });
-
                 if (!dbResponse.ok) throw new Error(await dbResponse.text());
                 return { success: true };
             } catch (error) {
@@ -502,7 +473,6 @@
         // Handle Flight Telemetry Submission
         async function handleFlightSubmit(e) {
             e.preventDefault();
-
             const hours = parseFloat(document.getElementById('flightHours').value);
             const xpEarned = Math.round(hours * 150);
 
@@ -512,4 +482,146 @@
                 contact: document.getElementById('pilotContact').value.trim(),
                 hours: hours,
                 acreage: parseFloat(document.getElementById('acreageMapped').value),
-                aircraft:
+                aircraft: document.getElementById('aircraftModel').value.trim(),
+                blackberryDensity: parseInt(document.getElementById('blackberryDensity').value),
+                soilCompaction: parseFloat(document.getElementById('soilCompaction').value),
+                notes: document.getElementById('flightNotes').value.trim() || 'No additional hazards noted.',
+                xp: xpEarned,
+                timestamp: new Date().toLocaleString()
+            };
+
+            await submitVrpForm('bcrcc_flight_telemetry', newLog);
+            flightLogs.unshift(newLog);
+            localStorage.setItem('bcrcc_flight_logs', JSON.stringify(flightLogs));
+            renderFlightLogs();
+            alert(`Flight Telemetry Logged! ${newLog.pilotName} earned +${xpEarned} XP!`);
+            e.target.reset();
+        }
+
+        // Render Recent Logs
+        function renderFlightLogs() {
+            const container = document.getElementById('flightLogContainer');
+            if (!container) return;
+            if (flightLogs.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic">No flight logs recorded yet.</p>`;
+                return;
+            }
+            container.innerHTML = flightLogs.map(log => `
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
+                    <div class="flex justify-between items-start">
+                        <span class="text-xs font-bold text-amber-400">${log.pilotName}</span>
+                        <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">+${log.xp} XP</span>
+                    </div>
+                    <div class="flex justify-between text-[11px] text-slate-300">
+                        <span><i class="fa-solid fa-clock text-slate-500 mr-1"></i>${log.hours} hrs</span>
+                        <span><i class="fa-solid fa-map text-slate-500 mr-1"></i>${log.acreage} acres</span>
+                        <span><i class="fa-solid fa-plane text-slate-500 mr-1"></i>${log.aircraft}</span>
+                    </div>
+                    <p class="text-[10px] text-slate-400 italic line-clamp-2">${log.notes}</p>
+                </div>
+            `).join('');
+        }
+
+        // Render Volunteer Roster
+        function renderRoster() {
+            const container = document.getElementById('volunteerRosterContainer');
+            if (!container) return;
+            container.innerHTML = pilotRoster.map(p => `
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex justify-between items-center">
+                    <div>
+                        <span class="text-xs font-bold text-white block">${p.name}</span>
+                        <span class="text-[10px] text-slate-400 block">${p.title}</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-black text-amber-400 block">${p.hours} Hrs</span>
+                        <span class="text-[9px] text-emerald-400 font-mono">${p.xp} XP</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // CSV Export for Flight Logs
+        function exportFlightCSV() {
+            let csv = 'Timestamp,Pilot Name,Flight Hours,Acreage Mapped,Aircraft Model,Blackberry Density (%),Soil Compaction Index,XP Earned,Notes\n';
+            flightLogs.forEach(l => {
+                csv += `"${l.timestamp}","${l.pilotName}",${l.hours},${l.acreage},"${l.aircraft}",${l.blackberryDensity},${l.soilCompaction},${l.xp},"${l.notes}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', `BCRCC_Flight_Telemetry_${new Date().toISOString().slice(0,10)}.csv`);
+            a.click();
+        }
+
+        // Time Study Logic & State
+        let timeStudies = JSON.parse(localStorage.getItem('vrp_time_studies')) || [];
+
+        async function handleTimeStudySubmit(e) {
+            e.preventDefault();
+            const hours = parseFloat(document.getElementById('tsHours').value);
+            const matchValue = hours * 60.00; // Board Resolution 2026-04 ($60/hr technical rate)
+
+            const newStudy = {
+                id: Date.now(),
+                participant: document.getElementById('tsParticipant').value.trim(),
+                site: document.getElementById('tsSite').value.trim(),
+                task: document.getElementById('tsTask').value,
+                hours: hours,
+                ergoScore: document.getElementById('tsErgoScore').value,
+                notes: document.getElementById('tsNotes').value.trim() || 'No additional notes.',
+                matchValue: matchValue,
+                timestamp: new Date().toLocaleString()
+            };
+
+            await submitVrpForm('vrp_time_studies', newStudy);
+            timeStudies.unshift(newStudy);
+            localStorage.setItem('vrp_time_studies', JSON.stringify(timeStudies));
+            renderTimeStudies();
+            alert(`Time Study Recorded! Certified Match Value: $${matchValue.toFixed(2)} ($60/hr rate)`);
+            e.target.reset();
+        }
+
+        function renderTimeStudies() {
+            const container = document.getElementById('timeStudyLogContainer');
+            if (!container) return;
+            if (timeStudies.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic">No time studies recorded yet.</p>`;
+                return;
+            }
+            container.innerHTML = timeStudies.map(ts => `
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
+                    <div class="flex justify-between items-start">
+                        <span class="text-xs font-bold text-amber-400">${ts.participant}</span>
+                        <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">+$${ts.matchValue.toFixed(2)} Match</span>
+                    </div>
+                    <div class="flex justify-between text-[11px] text-slate-300">
+                        <span><i class="fa-solid fa-clock text-slate-500 mr-1"></i>${ts.hours} hrs</span>
+                        <span><i class="fa-solid fa-map-pin text-slate-500 mr-1"></i>${ts.site}</span>
+                        <span><i class="fa-solid fa-shield-heart text-slate-500 mr-1"></i>Ergo: ${ts.ergoScore}/10</span>
+                    </div>
+                    <p class="text-[10px] text-slate-400 italic">${ts.task}</p>
+                </div>
+            `).join('');
+        }
+
+        function exportTimeStudyCSV() {
+            let csv = 'Timestamp,Participant,Site,Task Category,Hours,Ergonomic Score,Match Value ($60/hr),Notes\n';
+            timeStudies.forEach(s => {
+                csv += `"${s.timestamp}","${s.participant}","${s.site}","${s.task}",${s.hours},${s.ergoScore},${s.matchValue},"${s.notes}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', `VRP_Time_Studies_${new Date().toISOString().slice(0,10)}.csv`);
+            a.click();
+        }
+
+        // Initial Execution on Load
+        renderFlightLogs();
+        renderRoster();
+        renderTimeStudies();
+    </script>
+</body>
+</html>
