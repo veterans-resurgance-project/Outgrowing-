@@ -476,5 +476,36 @@
         renderFlightLogs();
         renderRoster();
     </script>
+function switchTab(tab) {
+    const dataTab = document.getElementById('dataTab');
+    const showcaseTab = document.getElementById('showcaseTab');
+    const timeStudyTab = document.getElementById('timeStudyTab'); // Add this
+
+    const dataBtn = document.getElementById('navDataBtn');
+    const showcaseBtn = document.getElementById('navShowcaseBtn');
+    const timeStudyBtn = document.getElementById('navTimeStudyBtn'); // Add this
+
+    // Hide all tabs first
+    dataTab.classList.add('hidden');
+    showcaseTab.classList.add('hidden');
+    if(timeStudyTab) timeStudyTab.classList.add('hidden');
+
+    // Reset button styles
+    dataBtn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
+    showcaseBtn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
+    if(timeStudyBtn) timeStudyBtn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
+
+    // Show selected tab
+    if (tab === 'data') {
+        dataTab.classList.remove('hidden');
+        dataBtn.className = "px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
+    } else if (tab === 'showcase') {
+        showcaseTab.classList.remove('hidden');
+        showcaseBtn.className = "px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
+    } else if (tab === 'timestudy') {
+        if(timeStudyTab) timeStudyTab.classList.remove('hidden');
+        if(timeStudyBtn) timeStudyBtn.className = "px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
+    }
+}
 </body>
 </html>
