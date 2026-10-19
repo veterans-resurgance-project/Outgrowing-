@@ -43,12 +43,13 @@
                 <i class="fa-solid fa-award text-amber-400"></i>
                 <span>Pilot Hall of Fame</span>
             </button>
+            <button id="navTimeStudyBtn" onclick="switchTab('timestudy')" class="px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2">
+                <i class="fa-solid fa-stopwatch text-amber-400"></i>
+                <span>Time Studies</span>
+            </button>
         </nav>
     </header>
-<button id="navTimeStudyBtn" onclick="switchTab('timestudy')" class="px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2">
-    <i class="fa-solid fa-stopwatch text-amber-400"></i>
-    <span>Time Studies</span>
-</button>
+
     <!-- Main Content Container (Hidden until unlocked) -->
     <main id="portalContent" style="display: none;" class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full space-y-8">
 
@@ -251,6 +252,103 @@
             </div>
         </div>
 
+        <!-- ========================================== -->
+        <!-- TAB 3: ERGONOMIC TIME STUDY & FIELD LOGS     -->
+        <!-- ========================================== -->
+        <div id="timeStudyTab" class="hidden space-y-8">
+            <section class="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 -mt-8 -mr-8 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] font-bold uppercase tracking-widest inline-block mb-2">
+                            <i class="fa-solid fa-clock-rotate-left mr-1"></i> Board Resolution 2026-04 Protocol
+                        </span>
+                        <h2 class="text-2xl md:text-3xl font-black text-white">Ergonomic Time Study & Field Trial Log</h2>
+                        <p class="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
+                            Tracking 4-hour partner farm field trials, baseline labor output, ergonomic posture scores, and certified technical match valuation ($60/hr) for USDA / ODA grant reporting.
+                        </p>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-center min-w-[160px]">
+                        <span class="text-[10px] text-slate-400 block uppercase font-mono">Technical Match Rate</span>
+                        <span class="text-lg font-black text-amber-400 flex items-center justify-center gap-1 mt-1">
+                            <i class="fa-solid fa-dollar-sign text-amber-400"></i> $60.00 / Hr
+                        </span>
+                        <span class="text-[9px] text-slate-400 block mt-1">Certified Match Value</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Time Study Data Entry Form -->
+                <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+                    <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider flex items-center space-x-2 border-b border-slate-800 pb-3">
+                        <i class="fa-solid fa-stopwatch"></i>
+                        <span>Log Field Trial & Time Study</span>
+                    </h3>
+
+                    <form id="timeStudyForm" onsubmit="handleTimeStudySubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Participant / Crew Leader</label>
+                                <input type="text" id="tsParticipant" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="e.g. Donald Truex / Cell Lead" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Partner Farm / Site Name</label>
+                                <input type="text" id="tsSite" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="e.g. Waterloo Park / Agrarian Gateway" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Task Category</label>
+                                <select id="tsTask" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none">
+                                    <option>Specialty Crop Harvest (Berry/Greens)</option>
+                                    <option>Canopy Remediation / Brush Clearing</option>
+                                    <option>Soil Sampling & Telemetry Setup</option>
+                                    <option>Ergonomic Tool Training Trial</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Duration (Hours)</label>
+                                <input type="number" step="0.5" id="tsHours" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="4.0" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Ergonomic Score (1-10)</label>
+                                <input type="number" min="1" max="10" id="tsErgoScore" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="8" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-slate-300 font-semibold mb-1">Productivity Notes & Observations</label>
+                            <textarea id="tsNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note efficiency gains from new ergonomic tools..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-file-arrow-down"></i>
+                            <span>Record Time Study & Calculate Match Value</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Recent Time Studies Sidebar -->
+                <div class="space-y-6">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                            <h3 class="text-sm font-bold text-white flex items-center space-x-2">
+                                <i class="fa-solid fa-list text-amber-400"></i>
+                                <span>Recent Time Studies</span>
+                            </h3>
+                            <button onclick="exportTimeStudyCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 rounded-lg text-[10px] font-bold transition">
+                                <i class="fa-solid fa-file-csv mr-1"></i> Export CSV
+                            </button>
+                        </div>
+
+                        <div id="timeStudyLogContainer" class="space-y-3 max-h-[380px] overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Certification Sponsorship Block -->
         <section class="bg-slate-900 border border-emerald-500/40 rounded-2xl p-6 shadow-xl my-8">
             <div class="flex items-center space-x-3 mb-3">
@@ -350,19 +448,32 @@
         function switchTab(tab) {
             const dataTab = document.getElementById('dataTab');
             const showcaseTab = document.getElementById('showcaseTab');
+            const timeStudyTab = document.getElementById('timeStudyTab');
+
             const dataBtn = document.getElementById('navDataBtn');
             const showcaseBtn = document.getElementById('navShowcaseBtn');
+            const timeStudyBtn = document.getElementById('navTimeStudyBtn');
 
+            // Hide all tabs first
+            if(dataTab) dataTab.classList.add('hidden');
+            if(showcaseTab) showcaseTab.classList.add('hidden');
+            if(timeStudyTab) timeStudyTab.classList.add('hidden');
+
+            // Reset button styles
+            if(dataBtn) dataBtn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
+            if(showcaseBtn) showcaseBtn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
+            if(timeStudyBtn) timeStudyBtn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
+
+            // Show selected tab
             if (tab === 'data') {
-                dataTab.classList.remove('hidden');
-                showcaseTab.classList.add('hidden');
-                dataBtn.className = "px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
-                showcaseBtn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
-            } else {
-                dataTab.classList.add('hidden');
-                showcaseTab.classList.remove('hidden');
-                showcaseBtn.className = "px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
-                dataBtn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
+                if(dataTab) dataTab.classList.remove('hidden');
+                if(dataBtn) dataBtn.className = "px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
+            } else if (tab === 'showcase') {
+                if(showcaseTab) showcaseTab.classList.remove('hidden');
+                if(showcaseBtn) showcaseBtn.className = "px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
+            } else if (tab === 'timestudy') {
+                if(timeStudyTab) timeStudyTab.classList.remove('hidden');
+                if(timeStudyBtn) timeStudyBtn.className = "px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
             }
         }
 
@@ -401,114 +512,4 @@
                 contact: document.getElementById('pilotContact').value.trim(),
                 hours: hours,
                 acreage: parseFloat(document.getElementById('acreageMapped').value),
-                aircraft: document.getElementById('aircraftModel').value.trim(),
-                blackberryDensity: parseInt(document.getElementById('blackberryDensity').value),
-                soilCompaction: parseFloat(document.getElementById('soilCompaction').value),
-                notes: document.getElementById('flightNotes').value.trim() || 'No additional hazards noted.',
-                xp: xpEarned,
-                timestamp: new Date().toLocaleString()
-            };
-
-            await submitVrpForm('bcrcc_flight_telemetry', newLog);
-
-            flightLogs.unshift(newLog);
-            localStorage.setItem('bcrcc_flight_logs', JSON.stringify(flightLogs));
-
-            renderFlightLogs();
-            alert(`Flight Telemetry Logged! ${newLog.pilotName} earned +${xpEarned} XP!`);
-            e.target.reset();
-        }
-
-        // Render Recent Logs
-        function renderFlightLogs() {
-            const container = document.getElementById('flightLogContainer');
-            if (flightLogs.length === 0) {
-                container.innerHTML = `<p class="text-xs text-slate-500 italic">No flight logs recorded yet.</p>`;
-                return;
-            }
-
-            container.innerHTML = flightLogs.map(log => `
-                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
-                    <div class="flex justify-between items-start">
-                        <span class="text-xs font-bold text-amber-400">${log.pilotName}</span>
-                        <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">+${log.xp} XP</span>
-                    </div>
-                    <div class="flex justify-between text-[11px] text-slate-300">
-                        <span><i class="fa-solid fa-clock text-slate-500 mr-1"></i>${log.hours} hrs</span>
-                        <span><i class="fa-solid fa-map text-slate-500 mr-1"></i>${log.acreage} acres</span>
-                        <span><i class="fa-solid fa-plane text-slate-500 mr-1"></i>${log.aircraft}</span>
-                    </div>
-                    <p class="text-[10px] text-slate-400 italic line-clamp-2">${log.notes}</p>
-                </div>
-            `).join('');
-        }
-
-        // Render Volunteer Roster
-        function renderRoster() {
-            const container = document.getElementById('volunteerRosterContainer');
-            container.innerHTML = pilotRoster.map(p => `
-                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex justify-between items-center">
-                    <div>
-                        <span class="text-xs font-bold text-white block">${p.name}</span>
-                        <span class="text-[10px] text-slate-400 block">${p.title}</span>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-xs font-black text-amber-400 block">${p.hours} Hrs</span>
-                        <span class="text-[9px] text-emerald-400 font-mono">${p.xp} XP</span>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // CSV Export
-        function exportFlightCSV() {
-            let csv = 'Timestamp,Pilot Name,Flight Hours,Acreage Mapped,Aircraft Model,Blackberry Density (%),Soil Compaction Index,XP Earned,Notes\n';
-            flightLogs.forEach(l => {
-                csv += `"${l.timestamp}","${l.pilotName}",${l.hours},${l.acreage},"${l.aircraft}",${l.blackberryDensity},${l.soilCompaction},${l.xp},"${l.notes}"\n`;
-            });
-
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.setAttribute('href', url);
-            a.setAttribute('download', `BCRCC_Flight_Telemetry_${new Date().toISOString().slice(0,10)}.csv`);
-            a.click();
-        }
-
-        // Initial Execution
-        renderFlightLogs();
-        renderRoster();
-    </script>
-function switchTab(tab) {
-    const dataTab = document.getElementById('dataTab');
-    const showcaseTab = document.getElementById('showcaseTab');
-    const timeStudyTab = document.getElementById('timeStudyTab'); // Add this
-
-    const dataBtn = document.getElementById('navDataBtn');
-    const showcaseBtn = document.getElementById('navShowcaseBtn');
-    const timeStudyBtn = document.getElementById('navTimeStudyBtn'); // Add this
-
-    // Hide all tabs first
-    dataTab.classList.add('hidden');
-    showcaseTab.classList.add('hidden');
-    if(timeStudyTab) timeStudyTab.classList.add('hidden');
-
-    // Reset button styles
-    dataBtn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
-    showcaseBtn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
-    if(timeStudyBtn) timeStudyBtn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
-
-    // Show selected tab
-    if (tab === 'data') {
-        dataTab.classList.remove('hidden');
-        dataBtn.className = "px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
-    } else if (tab === 'showcase') {
-        showcaseTab.classList.remove('hidden');
-        showcaseBtn.className = "px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
-    } else if (tab === 'timestudy') {
-        if(timeStudyTab) timeStudyTab.classList.remove('hidden');
-        if(timeStudyBtn) timeStudyBtn.className = "px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
-    }
-}
-</body>
-</html>
+                aircraft:
