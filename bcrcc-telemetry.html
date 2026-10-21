@@ -66,7 +66,7 @@
                         </span>
                         <h2 class="text-2xl md:text-3xl font-black text-white">Aerial Grid Flight & Spatial Telemetry Portal</h2>
                         <p class="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
-                            Logging aerial orthomosaic mapping flights, invasive Himalayan blackberry canopy coverage, and watershed soil compaction vectors to provide OSU Extension & VRP researchers with empirical site data.
+                            Logging aerial orthomosaic mapping flights, invasive blackberry canopy coverage, watershed soil compaction, and bee pollinator thermal refugia zones for OSU Extension & VRP research.
                         </p>
                     </div>
                     <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-center min-w-[160px]">
@@ -113,20 +113,29 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
-                                <label class="block text-xs text-slate-300 font-semibold mb-1">Invasive Blackberry Canopy Density (%)</label>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Blackberry Density (%)</label>
                                 <input type="number" id="blackberryDensity" min="0" max="100" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="65" required>
                             </div>
                             <div>
-                                <label class="block text-xs text-slate-300 font-semibold mb-1">Soil Compaction Index (0-10 Rating)</label>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Soil Compaction (0-10)</label>
                                 <input type="number" id="soilCompaction" min="0" max="10" step="0.5" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="4.5" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-amber-400 font-bold mb-1">🐝 Pollinator Habitat Indicator</label>
+                                <select id="pollinatorIndicator" class="w-full bg-slate-950 border border-amber-500/40 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none">
+                                    <option value="High (Abundant Blooms & Thermal Refugia)">High (Abundant Blooms & Thermal Refugia)</option>
+                                    <option value="Moderate (Partial Canopy / CWD Present)" selected>Moderate (Partial Canopy / CWD Present)</option>
+                                    <option value="Low (Exposed Scorch / Sparse Forage)">Low (Exposed Scorch / Sparse Forage)</option>
+                                    <option value="Critical Need (Severe Temperature Shock Risk)">Critical Need (Severe Temperature Shock Risk)</option>
+                                </select>
                             </div>
                         </div>
 
                         <div>
-                            <label class="block text-xs text-slate-300 font-semibold mb-1">Flight Notes & Spatial Hazards</label>
-                            <textarea id="flightNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note wind conditions, burnt root voids, erosion gullies..."></textarea>
+                            <label class="block text-xs text-slate-300 font-semibold mb-1">Flight Notes, Thermal Refugia & Spatial Hazards</label>
+                            <textarea id="flightNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note downed log arrays, floral bloom patches, burnt root voids, erosion gullies..."></textarea>
                         </div>
 
                         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2">
@@ -258,7 +267,7 @@
                         </span>
                         <h2 class="text-2xl md:text-3xl font-black text-white">Ergonomic Time Study & Field Trial Log</h2>
                         <p class="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
-                            Tracking 4-hour partner farm field trials, baseline labor output, ergonomic posture scores, and certified technical match valuation ($60/hr) for USDA / ODA grant reporting.
+                            Tracking field trials, baseline labor output, pollinator thermal refugia creation, and certified technical match valuation ($60/hr) for USDA / ODA grant reporting.
                         </p>
                     </div>
                     <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-center min-w-[160px]">
@@ -296,6 +305,7 @@
                                 <select id="tsTask" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none">
                                     <option>Specialty Crop Harvest (Berry/Greens)</option>
                                     <option>Canopy Remediation / Brush Clearing</option>
+                                    <option>Pollinator Refugia & CWD Placement</option>
                                     <option>Soil Sampling & Telemetry Setup</option>
                                     <option>Ergonomic Tool Training Trial</option>
                                 </select>
@@ -311,8 +321,19 @@
                         </div>
 
                         <div>
-                            <label class="block text-xs text-slate-300 font-semibold mb-1">Productivity Notes & Observations</label>
-                            <textarea id="tsNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note efficiency gains..."></textarea>
+                            <label class="block text-xs text-amber-400 font-bold mb-1">🐝 Thermal Refugia & Habitat Action</label>
+                            <select id="tsHabitatAction" class="w-full bg-slate-950 border border-amber-500/40 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none">
+                                <option value="Coarse Woody Debris (CWD) Placement (Insulation Logs)">Coarse Woody Debris (CWD) Placement (Insulation Logs)</option>
+                                <option value="Micro-Topography Shaping (Pits & Solar Shelters)">Micro-Topography Shaping (Pits & Solar Shelters)</option>
+                                <option value="Native Seed/Floral Corridor Establishment">Native Seed/Floral Corridor Establishment</option>
+                                <option value="Brush Windrow / Canopy Shade Construction">Brush Windrow / Canopy Shade Construction</option>
+                                <option value="General Farm Field Trial (No Refugia Intervention)" selected>General Farm Field Trial (No Refugia Intervention)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-slate-300 font-semibold mb-1">Productivity & Refugia Notes</label>
+                            <textarea id="tsNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note efficiency gains, log placement density, bee activity observations..."></textarea>
                         </div>
 
                         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2">
@@ -407,9 +428,10 @@
                 aircraft: "DJI Mavic 3E",
                 blackberryDensity: 70,
                 soilCompaction: 5.5,
+                pollinatorIndicator: "Moderate (Partial Canopy / CWD Present)",
                 xp: 375,
                 timestamp: "10/17/2026, 8:30 AM",
-                notes: "Completed grid flight over riparian burn scar zone."
+                notes: "Completed grid flight over riparian burn scar zone. Mapped log refugia."
             }
         ];
 
@@ -485,6 +507,7 @@
                 aircraft: document.getElementById('aircraftModel').value.trim(),
                 blackberryDensity: parseInt(document.getElementById('blackberryDensity').value),
                 soilCompaction: parseFloat(document.getElementById('soilCompaction').value),
+                pollinatorIndicator: document.getElementById('pollinatorIndicator').value,
                 notes: document.getElementById('flightNotes').value.trim() || 'No additional hazards noted.',
                 xp: xpEarned,
                 timestamp: new Date().toLocaleString()
@@ -517,6 +540,9 @@
                         <span><i class="fa-solid fa-map text-slate-500 mr-1"></i>${log.acreage} acres</span>
                         <span><i class="fa-solid fa-plane text-slate-500 mr-1"></i>${log.aircraft}</span>
                     </div>
+                    <div class="text-[10px] text-amber-300/80 font-mono">
+                        🐝 ${log.pollinatorIndicator || 'Habitat: Not specified'}
+                    </div>
                     <p class="text-[10px] text-slate-400 italic line-clamp-2">${log.notes}</p>
                 </div>
             `).join('');
@@ -542,9 +568,9 @@
 
         // CSV Export for Flight Logs
         function exportFlightCSV() {
-            let csv = 'Timestamp,Pilot Name,Flight Hours,Acreage Mapped,Aircraft Model,Blackberry Density (%),Soil Compaction Index,XP Earned,Notes\n';
+            let csv = 'Timestamp,Pilot Name,Flight Hours,Acreage Mapped,Aircraft Model,Blackberry Density (%),Soil Compaction Index,Pollinator Habitat Indicator,XP Earned,Notes\n';
             flightLogs.forEach(l => {
-                csv += `"${l.timestamp}","${l.pilotName}",${l.hours},${l.acreage},"${l.aircraft}",${l.blackberryDensity},${l.soilCompaction},${l.xp},"${l.notes}"\n`;
+                csv += `"${l.timestamp}","${l.pilotName}",${l.hours},${l.acreage},"${l.aircraft}",${l.blackberryDensity},${l.soilCompaction},"${l.pollinatorIndicator || 'N/A'}",${l.xp},"${l.notes}"\n`;
             });
             const blob = new Blob([csv], { type: 'text/csv' });
             const url = window.URL.createObjectURL(blob);
@@ -569,6 +595,7 @@
                 task: document.getElementById('tsTask').value,
                 hours: hours,
                 ergoScore: document.getElementById('tsErgoScore').value,
+                habitatAction: document.getElementById('tsHabitatAction').value,
                 notes: document.getElementById('tsNotes').value.trim() || 'No additional notes.',
                 matchValue: matchValue,
                 timestamp: new Date().toLocaleString()
@@ -600,15 +627,18 @@
                         <span><i class="fa-solid fa-map-pin text-slate-500 mr-1"></i>${ts.site}</span>
                         <span><i class="fa-solid fa-shield-heart text-slate-500 mr-1"></i>Ergo: ${ts.ergoScore}/10</span>
                     </div>
+                    <div class="text-[10px] text-emerald-400 font-mono">
+                        🐝 ${ts.habitatAction || 'Action: General Field Work'}
+                    </div>
                     <p class="text-[10px] text-slate-400 italic">${ts.task}</p>
                 </div>
             `).join('');
         }
 
         function exportTimeStudyCSV() {
-            let csv = 'Timestamp,Participant,Site,Task Category,Hours,Ergonomic Score,Match Value ($60/hr),Notes\n';
+            let csv = 'Timestamp,Participant,Site,Task Category,Hours,Ergonomic Score,Thermal Refugia / Habitat Action,Match Value ($60/hr),Notes\n';
             timeStudies.forEach(s => {
-                csv += `"${s.timestamp}","${s.participant}","${s.site}","${s.task}",${s.hours},${s.ergoScore},${s.matchValue},"${s.notes}"\n`;
+                csv += `"${s.timestamp}","${s.participant}","${s.site}","${s.task}",${s.hours},${s.ergoScore},"${s.habitatAction || 'N/A'}",${s.matchValue},"${s.notes}"\n`;
             });
             const blob = new Blob([csv], { type: 'text/csv' });
             const url = window.URL.createObjectURL(blob);
