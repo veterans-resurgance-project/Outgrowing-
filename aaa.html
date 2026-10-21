@@ -1,0 +1,61 @@
+import pandas as pd
+import os
+import json
+
+def process_field_data(master_upload_csv, secure_output_dir, public_output_dir):
+    """
+    SOP-VRP-08.14: Enforces the Data Separation Firewall.
+    Splits field data into a secure staff file and a public open-source repository map ledger.
+    """
+    # 1. Load the raw unified data bundle from the mobile tablet field sync
+    df = pd.read_csv(master_upload_csv)
+    
+    # 2. ISOLATE SECURE PERSONNEL DATA (Strictly Offline Staff File)
+    # Extracting sensitive participant IDs, names, hours, and medical/case flags
+    secure_columns = [
+        'site_id', 'assessment_date', 'crew_leader_id', 'scout_lead_name',
+        'hours_logged', 'participant_names', 'med_flags_noted', 'case_notes_summary'
+    ]
+    # Filter only columns that exist in the upload sheet
+    existing_secure = [col for col in secure_columns if col in df.columns]
+    secure_df = df[existing_secure]
+    
+    # Save to encrypted/secure offline vault directory
+    secure_file_path = os.path.join(secure_output_dir, 'SECURE_STAFF_PERSONNEL_LEDGER.csv')
+    secure_df.to_csv(secure_file_path, index=False)
+    print(f"[FIREWALL] Secure Staff File successfully written to: {secure_file_path}")
+    
+    # 3. ISOLATE PUBLIC ECOLOGICAL DATA (Cleaned for GitHub Mapping Repository)
+    # Removes identity anchors; preserves geographic, botanical, and drone imagery telemetry
+    public_columns = [
+        'site_id', 'assessment_date', 'county_location', 'slope_gradient_score',
+        'riparian_proximity_score', 'soil_severity_score', 'solar_aspect_score',
+        'soil_texture_score', 'canopy_anchor_score', 'culvert_hazard_score',
+        'total_merit_score', 'priority_tier', 'observed_invasives', 
+        'required_materials_manifest', 'drone_telemetry_ref_id', 'map_link_url'
+    ]
+    existing_public = [col for col in public_columns if col in df.columns]
+    public_df = df[existing_public]
+    
+    # Save to public directory for deployment to GitHub open-source repositories
+    public_file_path = os.path.join(public_output_dir, 'PUBLIC_ECO_RESTORATION_LEDGER.csv')
+    public_df.to_csv(public_file_path, index=False)
+    print(f"[FIREWALL] Public Ecological Data cleaned and exported to: {public_file_path}")
+    
+    # 4. GENERATE LIGHTWEIGHT JSON TILE FOR GITHUB PAGES FRONTEND MAPS
+    # Converts the public data frame into structured JSON markers for the interactive map interface
+    geo_json_data = public_df.to_json(orient='records')
+    json_path = os.path.join(public_output_dir, 'map_markers.json')
+    with open(json_path, 'w') as f:
+        f.write(geo_json_data)
+    print(f"[IT WORKFLOW] Frontend map web-markers generated at: {json_path}")
+
+# Example Implementation for IT Student Setup:
+if __name__ == "__main__":
+    # Create theoretical local directories for test execution
+    os.makedirs('SECURE_OFFLINE_STORAGE', exist_ok=True)
+    os.makedirs('PUBLIC_GITHUB_REPO', exist_ok=True)
+    
+    # Running the segregation process
+    print("[EXECUTION] Initiating SOP-VRP-08.14 Data Split...")
+    # process_field_data('field_upload_master.csv', 'SECURE_OFFLINE_STORAGE', 'PUBLIC_GITHUB_REPO')
