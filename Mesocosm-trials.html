@@ -15,7 +15,7 @@
             <h2 class="text-xl font-bold text-amber-400">🔒 Restricted VRP Operational Portal</h2>
             <p class="text-xs text-slate-400">Enter authorized passkey to access research telemetry and logs.</p>
             <input type="password" id="passcodeBox" placeholder="enter code here" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-xs text-white text-center outline-none focus:border-amber-400">
-            <button onclick="checkPasscode()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition">
+            <button type="button" onclick="checkPasscode()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition cursor-pointer">
                 Unlock Portal
             </button>
         </div>
@@ -35,19 +35,19 @@
 
         <!-- Navigation Tabs -->
         <nav class="flex flex-wrap gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800 text-xs font-bold">
-            <button id="navDataBtn" onclick="switchTab('data')" class="px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2">
+            <button id="navDataBtn" onclick="switchTab('data')" class="px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2 cursor-pointer">
                 <i class="fa-solid fa-satellite-dish"></i>
                 <span>Flight Data</span>
             </button>
-            <button id="navShowcaseBtn" onclick="switchTab('showcase')" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2">
+            <button id="navShowcaseBtn" onclick="switchTab('showcase')" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer">
                 <i class="fa-solid fa-award text-amber-400"></i>
                 <span>Pilot Showcase</span>
             </button>
-            <button id="navTimeStudyBtn" onclick="switchTab('timestudy')" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2">
+            <button id="navTimeStudyBtn" onclick="switchTab('timestudy')" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer">
                 <i class="fa-solid fa-stopwatch text-amber-400"></i>
                 <span>Time Studies</span>
             </button>
-            <button id="navMesocosmBtn" onclick="switchTab('mesocosm')" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2">
+            <button id="navMesocosmBtn" onclick="switchTab('mesocosm')" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer">
                 <i class="fa-solid fa-flask text-amber-400"></i>
                 <span>Mesocosm Trials</span>
             </button>
@@ -142,7 +142,7 @@
                             <textarea id="flightNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note downed log arrays, floral bloom patches, burnt root voids, erosion gullies..."></textarea>
                         </div>
 
-                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2">
+                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2 cursor-pointer">
                             <i class="fa-solid fa-paper-plane"></i>
                             <span>Submit Flight Telemetry & Claim XP</span>
                         </button>
@@ -156,7 +156,7 @@
                                 <i class="fa-solid fa-list-check text-amber-400"></i>
                                 <span>Recent Flight Telemetry Logs</span>
                             </h3>
-                            <button onclick="exportFlightCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 rounded-lg text-[10px] font-bold transition">
+                            <button onclick="exportFlightCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 rounded-lg text-[10px] font-bold transition cursor-pointer">
                                 <i class="fa-solid fa-file-csv mr-1"></i> Export CSV
                             </button>
                         </div>
@@ -330,7 +330,7 @@
                             <textarea id="tsNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note efficiency gains, bio-stint assembly output, bee activity observations..."></textarea>
                         </div>
 
-                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2">
+                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2 cursor-pointer">
                             <i class="fa-solid fa-file-arrow-down"></i>
                             <span>Record Time Study & Calculate Match Value</span>
                         </button>
@@ -344,7 +344,7 @@
                                 <i class="fa-solid fa-list text-amber-400"></i>
                                 <span>Recent Time Studies</span>
                             </h3>
-                            <button onclick="exportTimeStudyCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 rounded-lg text-[10px] font-bold transition">
+                            <button onclick="exportTimeStudyCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 rounded-lg text-[10px] font-bold transition cursor-pointer">
                                 <i class="fa-solid fa-file-csv mr-1"></i> Export CSV
                             </button>
                         </div>
@@ -448,7 +448,7 @@
                             <textarea id="mesoNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note bottom-lit macro photo results, sleeve pulp softening, wall sloughing resistance..."></textarea>
                         </div>
 
-                        <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2">
+                        <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2 cursor-pointer">
                             <i class="fa-solid fa-flask"></i>
                             <span>Record Mesocosm & Bio-Stint Trial</span>
                         </button>
@@ -462,7 +462,7 @@
                                 <i class="fa-solid fa-list text-cyan-400"></i>
                                 <span>Recent Bio-Stint Trials</span>
                             </h3>
-                            <button onclick="exportMesocosmCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 rounded-lg text-[10px] font-bold transition">
+                            <button onclick="exportMesocosmCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 rounded-lg text-[10px] font-bold transition cursor-pointer">
                                 <i class="fa-solid fa-file-csv mr-1"></i> Export CSV
                             </button>
                         </div>
@@ -507,4 +507,179 @@
     <script>
         // Passcode Gate Logic
         function checkPasscode() {
-            const correctPass = "VRP-2026";
+            const correctPass = "VRP-2026"; 
+            const inputField = document.getElementById('passcodeBox');
+            const entered = inputField ? inputField.value.trim() : "";
+            
+            if (entered === correctPass) {
+                document.getElementById('authGate').style.display = 'none';
+                document.getElementById('portalContent').style.display = 'block';
+                sessionStorage.setItem('vrp_unlocked', 'true');
+            } else {
+                alert('Incorrect passkey. Access denied.');
+            }
+        }
+
+        // Allow pressing "Enter" key on the password box to unlock
+        document.addEventListener("DOMContentLoaded", function() {
+            if (sessionStorage.getItem('vrp_unlocked') === 'true') {
+                document.getElementById('authGate').style.display = 'none';
+                document.getElementById('portalContent').style.display = 'block';
+            }
+            
+            const passcodeBox = document.getElementById('passcodeBox');
+            if (passcodeBox) {
+                passcodeBox.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        checkPasscode();
+                    }
+                });
+            }
+        });
+
+        // Configuration
+        const SUPABASE_URL = "https://vqkwxwfrchmrgmzchpqh.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_O62Ej6PJ8wAlGdoBT4-rFQ_pANhhjX8";
+
+        // Initial Seed Logs
+        let flightLogs = JSON.parse(localStorage.getItem('bcrcc_flight_logs')) || [
+            {
+                id: 1,
+                pilotName: "Bob Kaufman",
+                hours: 2.5,
+                acreage: 24.0,
+                aircraft: "DJI Mavic 3E",
+                blackberryDensity: 70,
+                soilCompaction: 5.5,
+                pollinatorIndicator: "Moderate (Partial Canopy / CWD Present)",
+                xp: 375,
+                timestamp: "10/17/2026, 8:30 AM",
+                notes: "Completed grid flight over riparian burn scar zone. Mapped log refugia."
+            }
+        ];
+
+        const pilotRoster = [
+            { name: "Bob Kaufman", title: "BCRCC Lead / Chief Pilot", hours: 42.5, xp: 6375, status: "Master Pilot" },
+            { name: "Dave Miller", title: "Spatial Grid Operator", hours: 18.0, xp: 2700, status: "Senior Pilot" }
+        ];
+
+        // Tab Switcher
+        function switchTab(tab) {
+            const dataTab = document.getElementById('dataTab');
+            const showcaseTab = document.getElementById('showcaseTab');
+            const timeStudyTab = document.getElementById('timeStudyTab');
+            const mesocosmTab = document.getElementById('mesocosmTab');
+
+            const dataBtn = document.getElementById('navDataBtn');
+            const showcaseBtn = document.getElementById('navShowcaseBtn');
+            const timeStudyBtn = document.getElementById('navTimeStudyBtn');
+            const mesocosmBtn = document.getElementById('navMesocosmBtn');
+
+            if(dataTab) dataTab.classList.add('hidden');
+            if(showcaseTab) showcaseTab.classList.add('hidden');
+            if(timeStudyTab) timeStudyTab.classList.add('hidden');
+            if(mesocosmTab) mesocosmTab.classList.add('hidden');
+
+            if(dataBtn) dataBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer";
+            if(showcaseBtn) showcaseBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer";
+            if(timeStudyBtn) timeStudyBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer";
+            if(mesocosmBtn) mesocosmBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer";
+
+            if (tab === 'data') {
+                if(dataTab) dataTab.classList.remove('hidden');
+                if(dataBtn) dataBtn.className = "px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2 cursor-pointer";
+            } else if (tab === 'showcase') {
+                if(showcaseTab) showcaseTab.classList.remove('hidden');
+                if(showcaseBtn) showcaseBtn.className = "px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2 cursor-pointer";
+            } else if (tab === 'timestudy') {
+                if(timeStudyTab) timeStudyTab.classList.remove('hidden');
+                if(timeStudyBtn) dataBtn.className = "px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2 cursor-pointer";
+                if(timeStudyBtn) timeStudyBtn.className = "px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2 cursor-pointer";
+            } else if (tab === 'mesocosm') {
+                if(mesocosmTab) mesocosmTab.classList.remove('hidden');
+                if(mesocosmBtn) mesocosmBtn.className = "px-3 py-2 rounded-lg bg-cyan-500 text-slate-950 font-black shadow transition flex items-center space-x-2 cursor-pointer";
+            }
+        }
+
+        async function submitVrpForm(tableName, formData) {
+            try {
+                const dbResponse = await fetch(`${SUPABASE_URL}/rest/v1/${tableName}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Prefer': 'return=representation'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                if (!dbResponse.ok) throw new Error(await dbResponse.text());
+                return { success: true };
+            } catch (error) {
+                console.warn('Supabase offline or table pending. Saved locally:', error);
+                return { success: false };
+            }
+        }
+
+        async function handleFlightSubmit(e) {
+            e.preventDefault();
+            const hours = parseFloat(document.getElementById('flightHours').value);
+            const xpEarned = Math.round(hours * 150);
+
+            const newLog = {
+                id: Date.now(),
+                pilotName: document.getElementById('pilotName').value.trim(),
+                contact: document.getElementById('pilotContact').value.trim(),
+                hours: hours,
+                acreage: parseFloat(document.getElementById('acreageMapped').value),
+                aircraft: document.getElementById('aircraftModel').value.trim(),
+                blackberryDensity: parseInt(document.getElementById('blackberryDensity').value),
+                soilCompaction: parseFloat(document.getElementById('soilCompaction').value),
+                pollinatorIndicator: document.getElementById('pollinatorIndicator').value,
+                notes: document.getElementById('flightNotes').value.trim() || 'No additional hazards noted.',
+                xp: xpEarned,
+                timestamp: new Date().toLocaleString()
+            };
+
+            await submitVrpForm('bcrcc_flight_telemetry', newLog);
+            flightLogs.unshift(newLog);
+            localStorage.setItem('bcrcc_flight_logs', JSON.stringify(flightLogs));
+            renderFlightLogs();
+            alert(`Flight Telemetry Logged! ${newLog.pilotName} earned +${xpEarned} XP!`);
+            e.target.reset();
+        }
+
+        function renderFlightLogs() {
+            const container = document.getElementById('flightLogContainer');
+            if (!container) return;
+            if (flightLogs.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic">No flight logs recorded yet.</p>`;
+                return;
+            }
+            container.innerHTML = flightLogs.map(log => `
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
+                    <div class="flex justify-between items-start">
+                        <span class="text-xs font-bold text-amber-400">${log.pilotName}</span>
+                        <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">+${log.xp} XP</span>
+                    </div>
+                    <div class="flex justify-between text-[11px] text-slate-300">
+                        <span><i class="fa-solid fa-clock text-slate-500 mr-1"></i>${log.hours} hrs</span>
+                        <span><i class="fa-solid fa-map text-slate-500 mr-1"></i>${log.acreage} acres</span>
+                        <span><i class="fa-solid fa-plane text-slate-500 mr-1"></i>${log.aircraft}</span>
+                    </div>
+                    <div class="text-[10px] text-amber-300/80 font-mono">
+                        🐝 ${log.pollinatorIndicator || 'Habitat: Not specified'}
+                    </div>
+                    <p class="text-[10px] text-slate-400 italic line-clamp-2">${log.notes}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderRoster() {
+            const container = document.getElementById('volunteerRosterContainer');
+            if (!container) return;
+            container.innerHTML = pilotRoster.map(p => `
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex justify-between items-center">
+                    <div>
+                        <span class="text-xs font-bold text-white block">${p.name}</span>
+                        <span
