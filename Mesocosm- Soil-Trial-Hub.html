@@ -15,7 +15,7 @@
             <h2 class="text-xl font-bold text-amber-400">🔒 Restricted VRP Operational Portal</h2>
             <p class="text-xs text-slate-400">Enter authorized passkey to access research telemetry and logs.</p>
             <input type="password" id="passcodeBox" placeholder="enter code here" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-xs text-white text-center outline-none focus:border-amber-400">
-            <button onclick="checkPasscode()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition">
+            <button type="button" onclick="checkPasscode()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition cursor-pointer">
                 Unlock Portal
             </button>
         </div>
@@ -35,19 +35,19 @@
 
         <!-- Navigation Tabs -->
         <nav class="flex flex-wrap gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800 text-xs font-bold">
-            <button id="navDataBtn" onclick="switchTab('data')" class="px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2">
+            <button id="navDataBtn" onclick="switchTab('data')" class="px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2 cursor-pointer">
                 <i class="fa-solid fa-satellite-dish"></i>
                 <span>Flight Data</span>
             </button>
-            <button id="navShowcaseBtn" onclick="switchTab('showcase')" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2">
+            <button id="navShowcaseBtn" onclick="switchTab('showcase')" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer">
                 <i class="fa-solid fa-award text-amber-400"></i>
                 <span>Pilot Showcase</span>
             </button>
-            <button id="navTimeStudyBtn" onclick="switchTab('timestudy')" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2">
+            <button id="navTimeStudyBtn" onclick="switchTab('timestudy')" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer">
                 <i class="fa-solid fa-stopwatch text-amber-400"></i>
                 <span>Time Studies</span>
             </button>
-            <button id="navMesocosmBtn" onclick="switchTab('mesocosm')" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2">
+            <button id="navMesocosmBtn" onclick="switchTab('mesocosm')" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer">
                 <i class="fa-solid fa-flask text-amber-400"></i>
                 <span>Mesocosm Trials</span>
             </button>
@@ -142,7 +142,7 @@
                             <textarea id="flightNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note downed log arrays, floral bloom patches, burnt root voids, erosion gullies..."></textarea>
                         </div>
 
-                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2">
+                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2 cursor-pointer">
                             <i class="fa-solid fa-paper-plane"></i>
                             <span>Submit Flight Telemetry & Claim XP</span>
                         </button>
@@ -156,7 +156,7 @@
                                 <i class="fa-solid fa-list-check text-amber-400"></i>
                                 <span>Recent Flight Telemetry Logs</span>
                             </h3>
-                            <button onclick="exportFlightCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 rounded-lg text-[10px] font-bold transition">
+                            <button onclick="exportFlightCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 rounded-lg text-[10px] font-bold transition cursor-pointer">
                                 <i class="fa-solid fa-file-csv mr-1"></i> Export CSV
                             </button>
                         </div>
@@ -299,7 +299,7 @@
                                 <select id="tsTask" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none">
                                     <option>Specialty Crop Harvest (Berry/Greens)</option>
                                     <option>Canopy Remediation / Brush Clearing</option>
-                                    <option>Pollinator Refugia & CWD Placement</option>
+                                    <option>Pollinator Refugia & Bio-Stint Production</option>
                                     <option>Soil Sampling & Telemetry Setup</option>
                                     <option>Ergonomic Tool Training Trial</option>
                                 </select>
@@ -317,20 +317,20 @@
                         <div>
                             <label class="block text-xs text-amber-400 font-bold mb-1">🐝 Thermal Refugia & Habitat Action</label>
                             <select id="tsHabitatAction" class="w-full bg-slate-950 border border-amber-500/40 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none">
+                                <option value="Bio-Stint Sleeve Assembly & Deployment">Bio-Stint Sleeve Assembly & Deployment</option>
                                 <option value="Coarse Woody Debris (CWD) Placement (Insulation Logs)">Coarse Woody Debris (CWD) Placement (Insulation Logs)</option>
                                 <option value="Micro-Topography Shaping (Pits & Solar Shelters)">Micro-Topography Shaping (Pits & Solar Shelters)</option>
                                 <option value="Native Seed/Floral Corridor Establishment">Native Seed/Floral Corridor Establishment</option>
-                                <option value="Brush Windrow / Canopy Shade Construction">Brush Windrow / Canopy Shade Construction</option>
                                 <option value="General Farm Field Trial (No Refugia Intervention)" selected>General Farm Field Trial (No Refugia Intervention)</option>
                             </select>
                         </div>
 
                         <div>
                             <label class="block text-xs text-slate-300 font-semibold mb-1">Productivity & Refugia Notes</label>
-                            <textarea id="tsNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note efficiency gains, log placement density, bee activity observations..."></textarea>
+                            <textarea id="tsNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note efficiency gains, bio-stint assembly output, bee activity observations..."></textarea>
                         </div>
 
-                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2">
+                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2 cursor-pointer">
                             <i class="fa-solid fa-file-arrow-down"></i>
                             <span>Record Time Study & Calculate Match Value</span>
                         </button>
@@ -344,7 +344,7 @@
                                 <i class="fa-solid fa-list text-amber-400"></i>
                                 <span>Recent Time Studies</span>
                             </h3>
-                            <button onclick="exportTimeStudyCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 rounded-lg text-[10px] font-bold transition">
+                            <button onclick="exportTimeStudyCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 rounded-lg text-[10px] font-bold transition cursor-pointer">
                                 <i class="fa-solid fa-file-csv mr-1"></i> Export CSV
                             </button>
                         </div>
@@ -355,7 +355,7 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 4: MESOCOSM & SOIL TRIAL HUB           -->
+        <!-- TAB 4: MESOCOSM & BIO-STINT TRIAL HUB      -->
         <!-- ========================================== -->
         <div id="mesocosmTab" class="hidden space-y-8">
             <section class="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl relative overflow-hidden shadow-2xl">
@@ -363,19 +363,19 @@
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div>
                         <span class="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[10px] font-bold uppercase tracking-widest inline-block mb-2">
-                            <i class="fa-solid fa-flask mr-1"></i> Closed-Container Research Protocol (Nov-Dec Timeline)
+                            <i class="fa-solid fa-flask mr-1"></i> Closed-Container Research & Bio-Stint Prototype Testing
                         </span>
-                        <h2 class="text-2xl md:text-3xl font-black text-white">Mesocosm Soil Blend & Thermal Trial Hub</h2>
+                        <h2 class="text-2xl md:text-3xl font-black text-white">Mesocosm Soil Blend & Bio-Stint Trial Hub</h2>
                         <p class="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
-                            Comparing 100% Biochar vs. 75% Biochar / 25% Clinoptilolite and 50% / 50% Blends for compaction resistance, tunnel stability, multi-depth thermal buffering, and bee winter survival metrics.
+                            Comparing 100% Biochar vs. 75/25 and 50/50 Zeolite blends across Bare Drilled Holes, Cardboard Paper Sleeves, and Advanced Infused Organic Sleeves.
                         </p>
                     </div>
                     <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-center min-w-[160px]">
-                        <span class="text-[10px] text-slate-400 block uppercase font-mono">Trial Setup</span>
+                        <span class="text-[10px] text-slate-400 block uppercase font-mono">Prototype Tier</span>
                         <span class="text-sm font-black text-cyan-400 flex items-center justify-center gap-1 mt-1">
-                            <i class="fa-solid fa-temperature-arrow-down text-cyan-400"></i> Multi-Depth Log
+                            <i class="fa-solid fa-scroll text-cyan-400"></i> Bio-Stint Active
                         </span>
-                        <span class="text-[9px] text-slate-400 block mt-1">Active Winter Testing</span>
+                        <span class="text-[9px] text-slate-400 block mt-1">Winter Thermal Testing</span>
                     </div>
                 </div>
             </section>
@@ -384,14 +384,14 @@
                 <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
                     <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider flex items-center space-x-2 border-b border-slate-800 pb-3">
                         <i class="fa-solid fa-pen-to-square"></i>
-                        <span>Log Mesocosm Observation Data</span>
+                        <span>Log Mesocosm & Bio-Stint Data</span>
                     </h3>
 
                     <form id="mesocosmForm" onsubmit="handleMesocosmSubmit(event)" class="space-y-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs text-slate-300 font-semibold mb-1">Researcher / Observer Name</label>
-                                <input type="text" id=" mesoResearcher" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="e.g. Donald Truex" required>
+                                <input type="text" id="mesoResearcher" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="e.g. Donald Truex" required>
                             </div>
                             <div>
                                 <label class="block text-xs text-slate-300 font-semibold mb-1">Soil Blend Ratio</label>
@@ -399,6 +399,26 @@
                                     <option value="100% Biochar Baseline">100% Biochar Baseline</option>
                                     <option value="75% Biochar / 25% Clinoptilolite Zeolite" selected>75% Biochar / 25% Clinoptilolite Zeolite</option>
                                     <option value="50% Biochar / 50% Clinoptilolite Zeolite">50% Biochar / 50% Clinoptilolite Zeolite</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-amber-400 font-bold mb-1">🧪 Bio-Stint Prototype Tier</label>
+                                <select id="mesoPrototype" class="w-full bg-slate-950 border border-cyan-500/40 rounded-lg p-2.5 text-xs text-cyan-300 font-bold outline-none">
+                                    <option value="Cardboard / Paper Pulp Sleeve (Baseline Prototype)" selected>Cardboard / Paper Pulp Sleeve (Baseline Prototype)</option>
+                                    <option value="Advanced Infused Organic Sleeve (Botanical Antifungal)">Advanced Infused Organic Sleeve (Botanical Antifungal)</option>
+                                    <option value="Standard Drilled Hole (No Sleeve Control)">Standard Drilled Hole (No Sleeve Control)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Moisture State</label>
+                                <select id="mesoMoisture" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none">
+                                    <option value="Saturated / Wet Winter Baseline">Saturated / Wet Winter Baseline</option>
+                                    <option value="Field Capacity (Optimal)">Field Capacity (Optimal)</option>
+                                    <option value="Dry-Down Phase">Dry-Down Phase</option>
+                                    <option value="Freeze-Thaw Condition">Freeze-Thaw Condition</option>
                                 </select>
                             </div>
                         </div>
@@ -418,30 +438,19 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs text-slate-300 font-semibold mb-1">Moisture State</label>
-                                <select id="mesoMoisture" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none">
-                                    <option value="Saturated / Wet Winter Baseline">Saturated / Wet Winter Baseline</option>
-                                    <option value="Field Capacity (Optimal)">Field Capacity (Optimal)</option>
-                                    <option value="Dry-Down Phase">Dry-Down Phase</option>
-                                    <option value="Freeze-Thaw Condition">Freeze-Thaw Condition</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs text-slate-300 font-semibold mb-1">Tunnel Stability / Compaction Score (1-10)</label>
-                                <input type="number" min="1" max="10" id="mesoStability" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="8" required>
-                            </div>
+                        <div>
+                            <label class="block text-xs text-slate-300 font-semibold mb-1">Tunnel Wall Integrity Score (1-10)</label>
+                            <input type="number" min="1" max="10" id="mesoStability" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="9" required>
                         </div>
 
                         <div>
-                            <label class="block text-xs text-slate-300 font-semibold mb-1">Observations & Structural Notes</label>
-                            <textarea id="mesoNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note wall integrity against glass, settling behavior, moisture holding, frost response..."></textarea>
+                            <label class="block text-xs text-slate-300 font-semibold mb-1">Observations & Transillumination Notes</label>
+                            <textarea id="mesoNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note bottom-lit macro photo results, sleeve pulp softening, wall sloughing resistance..."></textarea>
                         </div>
 
-                        <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2">
+                        <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2 cursor-pointer">
                             <i class="fa-solid fa-flask"></i>
-                            <span>Record Mesocosm Observation Data</span>
+                            <span>Record Mesocosm & Bio-Stint Trial</span>
                         </button>
                     </form>
                 </div>
@@ -451,9 +460,9 @@
                         <div class="flex justify-between items-center border-b border-slate-800 pb-3">
                             <h3 class="text-sm font-bold text-white flex items-center space-x-2">
                                 <i class="fa-solid fa-list text-cyan-400"></i>
-                                <span>Recent Mesocosm Trials</span>
+                                <span>Recent Bio-Stint Trials</span>
                             </h3>
-                            <button onclick="exportMesocosmCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 rounded-lg text-[10px] font-bold transition">
+                            <button onclick="exportMesocosmCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 rounded-lg text-[10px] font-bold transition cursor-pointer">
                                 <i class="fa-solid fa-file-csv mr-1"></i> Export CSV
                             </button>
                         </div>
@@ -499,7 +508,8 @@
         // Passcode Gate Logic
         function checkPasscode() {
             const correctPass = "VRP-2026"; 
-            const entered = document.getElementById('passcodeBox').value;
+            const inputField = document.getElementById('passcodeBox');
+            const entered = inputField ? inputField.value.trim() : "";
             
             if (entered === correctPass) {
                 document.getElementById('authGate').style.display = 'none';
@@ -510,12 +520,21 @@
             }
         }
 
-        window.onload = function() {
+        document.addEventListener("DOMContentLoaded", function() {
             if (sessionStorage.getItem('vrp_unlocked') === 'true') {
                 document.getElementById('authGate').style.display = 'none';
                 document.getElementById('portalContent').style.display = 'block';
             }
-        };
+            
+            const passcodeBox = document.getElementById('passcodeBox');
+            if (passcodeBox) {
+                passcodeBox.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        checkPasscode();
+                    }
+                });
+            }
+        });
 
         // Configuration
         const SUPABASE_URL = "https://vqkwxwfrchmrgmzchpqh.supabase.co";
@@ -538,7 +557,6 @@
             }
         ];
 
-        // Seed Roster
         const pilotRoster = [
             { name: "Bob Kaufman", title: "BCRCC Lead / Chief Pilot", hours: 42.5, xp: 6375, status: "Master Pilot" },
             { name: "Dave Miller", title: "Spatial Grid Operator", hours: 18.0, xp: 2700, status: "Senior Pilot" }
@@ -561,27 +579,26 @@
             if(timeStudyTab) timeStudyTab.classList.add('hidden');
             if(mesocosmTab) mesocosmTab.classList.add('hidden');
 
-            if(dataBtn) dataBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
-            if(showcaseBtn) showcaseBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
-            if(timeStudyBtn) timeStudyBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
-            if(mesocosmBtn) mesocosmBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
+            if(dataBtn) dataBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer";
+            if(showcaseBtn) showcaseBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer";
+            if(timeStudyBtn) timeStudyBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer";
+            if(mesocosmBtn) mesocosmBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer";
 
             if (tab === 'data') {
                 if(dataTab) dataTab.classList.remove('hidden');
-                if(dataBtn) dataBtn.className = "px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
+                if(dataBtn) dataBtn.className = "px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2 cursor-pointer";
             } else if (tab === 'showcase') {
                 if(showcaseTab) showcaseTab.classList.remove('hidden');
-                if(showcaseBtn) showcaseBtn.className = "px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
+                if(showcaseBtn) showcaseBtn.className = "px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2 cursor-pointer";
             } else if (tab === 'timestudy') {
                 if(timeStudyTab) timeStudyTab.classList.remove('hidden');
-                if(timeStudyBtn) timeStudyBtn.className = "px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
+                if(timeStudyBtn) timeStudyBtn.className = "px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2 cursor-pointer";
             } else if (tab === 'mesocosm') {
                 if(mesocosmTab) mesocosmTab.classList.remove('hidden');
-                if(mesocosmBtn) mesocosmBtn.className = "px-3 py-2 rounded-lg bg-cyan-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
+                if(mesocosmBtn) mesocosmBtn.className = "px-3 py-2 rounded-lg bg-cyan-500 text-slate-950 font-black shadow transition flex items-center space-x-2 cursor-pointer";
             }
         }
 
-        // Supabase REST Helper
         async function submitVrpForm(tableName, formData) {
             try {
                 const dbResponse = await fetch(`${SUPABASE_URL}/rest/v1/${tableName}`, {
@@ -602,7 +619,6 @@
             }
         }
 
-        // Handle Flight Telemetry Submission
         async function handleFlightSubmit(e) {
             e.preventDefault();
             const hours = parseFloat(document.getElementById('flightHours').value);
@@ -657,7 +673,6 @@
             `).join('');
         }
 
-        // Render Volunteer Roster
         function renderRoster() {
             const container = document.getElementById('volunteerRosterContainer');
             if (!container) return;
@@ -688,13 +703,12 @@
             a.click();
         }
 
-        // Time Study Logic & State
         let timeStudies = JSON.parse(localStorage.getItem('vrp_time_studies')) || [];
 
         async function handleTimeStudySubmit(e) {
             e.preventDefault();
             const hours = parseFloat(document.getElementById('tsHours').value);
-            const matchValue = hours * 60.00; // Board Resolution 2026-04 ($60/hr technical rate)
+            const matchValue = hours * 60.00;
 
             const newStudy = {
                 id: Date.now(),
@@ -756,18 +770,18 @@
             a.click();
         }
 
-        // Mesocosm Logic & State
         let mesocosmLogs = JSON.parse(localStorage.getItem('vrp_mesocosm_logs')) || [
             {
                 id: 1,
                 researcher: "Donald Truex",
                 blend: "75% Biochar / 25% Clinoptilolite Zeolite",
+                prototype: "Cardboard / Paper Pulp Sleeve (Baseline Prototype)",
                 tempSurface: 41.0,
                 tempBrood: 47.5,
                 tempDeep: 50.8,
                 moisture: "Saturated / Wet Winter Baseline",
                 stability: 9,
-                notes: "Initial column set up. Excellent wall cohesion against glass during packing.",
+                notes: "Initial bio-stint sleeve test. Excellent transillumination wall clarity.",
                 timestamp: "10/21/2026, 9:00 AM"
             }
         ];
@@ -778,6 +792,7 @@
                 id: Date.now(),
                 researcher: document.getElementById('mesoResearcher').value.trim(),
                 blend: document.getElementById('mesoBlend').value,
+                prototype: document.getElementById('mesoPrototype').value,
                 tempSurface: parseFloat(document.getElementById('tempSurface').value),
                 tempBrood: parseFloat(document.getElementById('tempBrood').value),
                 tempDeep: parseFloat(document.getElementById('tempDeep').value),
@@ -791,7 +806,7 @@
             mesocosmLogs.unshift(newLog);
             localStorage.setItem('vrp_mesocosm_logs', JSON.stringify(mesocosmLogs));
             renderMesocosmLogs();
-            alert(`Mesocosm Trial Logged Successfully for ${newLog.blend}!`);
+            alert(`Bio-Stint Mesocosm Trial Logged Successfully!`);
             e.target.reset();
         }
 
@@ -799,7 +814,7 @@
             const container = document.getElementById('mesocosmLogContainer');
             if (!container) return;
             if (mesocosmLogs.length === 0) {
-                container.innerHTML = `<p class="text-xs text-slate-500 italic">No mesocosm trials recorded yet.</p>`;
+                container.innerHTML = `<p class="text-xs text-slate-500 italic">No bio-stint trials recorded yet.</p>`;
                 return;
             }
             container.innerHTML = mesocosmLogs.map(m => `
@@ -808,7 +823,10 @@
                         <span class="text-xs font-bold text-cyan-400">${m.blend}</span>
                         <span class="text-[10px] font-mono text-slate-400">${m.timestamp}</span>
                     </div>
-                    <div class="grid grid-cols-3 gap-1 text-[11px] text-amber-300 font-mono bg-slate-900 p-1.5 rounded border border-slate-800 text-center">
+                    <div class="text-[10px] text-amber-300 font-mono bg-slate-900 px-2 py-1 rounded border border-slate-800">
+                        🧪 ${m.prototype}
+                    </div>
+                    <div class="grid grid-cols-3 gap-1 text-[11px] text-cyan-300 font-mono bg-slate-900 p-1.5 rounded border border-slate-800 text-center">
                         <div>Surf: ${m.tempSurface}°F</div>
                         <div>Brood: ${m.tempBrood}°F</div>
                         <div>Deep: ${m.tempDeep}°F</div>
@@ -823,15 +841,15 @@
         }
 
         function exportMesocosmCSV() {
-            let csv = 'Timestamp,Researcher,Blend Ratio,Surface Temp (2cm),Brood Temp (10cm),Deep Temp (20cm),Moisture State,Stability Score (1-10),Notes\n';
+            let csv = 'Timestamp,Researcher,Blend Ratio,Prototype Tier,Surface Temp (2cm),Brood Temp (10cm),Deep Temp (20cm),Moisture State,Stability Score (1-10),Notes\n';
             mesocosmLogs.forEach(m => {
-                csv += `"${m.timestamp}","${m.researcher}","${m.blend}",${m.tempSurface},${m.tempBrood},${m.tempDeep},"${m.moisture}",${m.stability},"${m.notes}"\n`;
+                csv += `"${m.timestamp}","${m.researcher}","${m.blend}","${m.prototype}",${m.tempSurface},${m.tempBrood},${m.tempDeep},"${m.moisture}",${m.stability},"${m.notes}"\n`;
             });
             const blob = new Blob([csv], { type: 'text/csv' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.setAttribute('href', url);
-            a.setAttribute('download', `VRP_Mesocosm_Trials_${new Date().toISOString().slice(0,10)}.csv`);
+            a.setAttribute('download', `VRP_BioStint_Mesocosm_Trials_${new Date().toISOString().slice(0,10)}.csv`);
             a.click();
         }
 
