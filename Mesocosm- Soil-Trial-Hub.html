@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRP & BCRCC Operational & Research Telemetry Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- PASSCODE GATE CONTAINER -->
+    <div id="authGate" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px;">
+        <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl shadow-2xl max-w-md w-full text-center space-y-4">
+            <h2 class="text-xl font-bold text-amber-400">🔒 Restricted VRP Operational Portal</h2>
+            <p class="text-xs text-slate-400">Enter authorized passkey to access research telemetry and logs.</p>
+            <input type="password" id="passcodeBox" placeholder="enter code here" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-xs text-white text-center outline-none focus:border-amber-400">
+            <button onclick="checkPasscode()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition">
+                Unlock Portal
+            </button>
+        </div>
+    </div>
+
+    <!-- Top Navigation Header -->
+    <header class="w-full bg-slate-900 border-b border-slate-800 py-4 px-6 flex flex-col md:flex-row justify-between items-center gap-4 shadow-xl sticky top-0 z-50">
+        <div class="flex items-center space-x-3">
+            <div class="bg-amber-500/10 p-2 rounded-xl border border-amber-500/30">
+                <i class="fa-solid fa-seedling text-2xl text-amber-400"></i>
+            </div>
+            <div>
+                <span class="text-[10px] font-bold text-amber-400 tracking-widest uppercase block">VRP & BCRCC Alliance &bull; Research & Operations</span>
+                <h1 class="text-xl font-black text-white tracking-tight">Environmental Telemetry & Soil Trial Hub</h1>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="flex flex-wrap gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800 text-xs font-bold">
+            <button id="navDataBtn" onclick="switchTab('data')" class="px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <span>Flight Data</span>
+            </button>
+            <button id="navShowcaseBtn" onclick="switchTab('showcase')" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2">
+                <i class="fa-solid fa-award text-amber-400"></i>
+                <span>Pilot Showcase</span>
+            </button>
+            <button id="navTimeStudyBtn" onclick="switchTab('timestudy')" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2">
+                <i class="fa-solid fa-stopwatch text-amber-400"></i>
+                <span>Time Studies</span>
+            </button>
+            <button id="navMesocosmBtn" onclick="switchTab('mesocosm')" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2">
+                <i class="fa-solid fa-flask text-amber-400"></i>
+                <span>Mesocosm Trials</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content Container (Hidden until unlocked) -->
+    <main id="portalContent" style="display: none;" class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full space-y-8">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: FLIGHT TELEMETRY DATA ENTRY PORTAL   -->
+        <!-- ========================================== -->
+        <div id="dataTab" class="space-y-8">
+            <section class="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 -mt-8 -mr-8 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-widest inline-block mb-2">
+                            <i class="fa-solid fa-circle-check mr-1"></i> Active Field Research Protocol
+                        </span>
+                        <h2 class="text-2xl md:text-3xl font-black text-white">Aerial Grid Flight & Spatial Telemetry Portal</h2>
+                        <p class="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
+                            Logging aerial orthomosaic mapping flights, blackberry canopy coverage, soil compaction, and bee pollinator thermal refugia zones for OSU Extension & VRP research.
+                        </p>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-center min-w-[160px]">
+                        <span class="text-[10px] text-slate-400 block uppercase font-mono">Pilot Reward Rate</span>
+                        <span class="text-lg font-black text-amber-400 flex items-center justify-center gap-1 mt-1">
+                            <i class="fa-solid fa-bolt text-amber-400"></i> +150 XP / Hr
+                        </span>
+                        <span class="text-[9px] text-slate-400 block mt-1">In-Kind Credit Issued</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+                    <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider flex items-center space-x-2 border-b border-slate-800 pb-3">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <span>Flight Log & Telemetry Entry</span>
+                    </h3>
+
+                    <form id="pilotTelemetryForm" onsubmit="handleFlightSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Pilot Name</label>
+                                <input type="text" id="pilotName" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="e.g. Bob Kaufman" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Contact Email / Phone</label>
+                                <input type="text" id="pilotContact" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="bob@bcrcc.org" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Flight Hours (Hrs)</label>
+                                <input type="number" step="0.5" id="flightHours" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="1.5" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Acreage Mapped</label>
+                                <input type="number" step="0.1" id="acreageMapped" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="12.5" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Aircraft Type / Model</label>
+                                <input type="text" id="aircraftModel" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="e.g. DJI Mavic 3 Enterprise" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Blackberry Density (%)</label>
+                                <input type="number" id="blackberryDensity" min="0" max="100" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="65" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Soil Compaction (0-10)</label>
+                                <input type="number" id="soilCompaction" min="0" max="10" step="0.5" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="4.5" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-amber-400 font-bold mb-1">🐝 Pollinator Habitat Indicator</label>
+                                <select id="pollinatorIndicator" class="w-full bg-slate-950 border border-amber-500/40 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none">
+                                    <option value="High (Abundant Blooms & Thermal Refugia)">High (Abundant Blooms & Thermal Refugia)</option>
+                                    <option value="Moderate (Partial Canopy / CWD Present)" selected>Moderate (Partial Canopy / CWD Present)</option>
+                                    <option value="Low (Exposed Scorch / Sparse Forage)">Low (Exposed Scorch / Sparse Forage)</option>
+                                    <option value="Critical Need (Severe Temperature Shock Risk)">Critical Need (Severe Temperature Shock Risk)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-slate-300 font-semibold mb-1">Flight Notes, Thermal Refugia & Spatial Hazards</label>
+                            <textarea id="flightNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note downed log arrays, floral bloom patches, burnt root voids, erosion gullies..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Submit Flight Telemetry & Claim XP</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                            <h3 class="text-sm font-bold text-white flex items-center space-x-2">
+                                <i class="fa-solid fa-list-check text-amber-400"></i>
+                                <span>Recent Flight Telemetry Logs</span>
+                            </h3>
+                            <button onclick="exportFlightCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 rounded-lg text-[10px] font-bold transition">
+                                <i class="fa-solid fa-file-csv mr-1"></i> Export CSV
+                            </button>
+                        </div>
+                        <div id="flightLogContainer" class="space-y-3 max-h-[380px] overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: PILOT RECOGNITION SHOWCASE          -->
+        <!-- ========================================== -->
+        <div id="showcaseTab" class="hidden space-y-8">
+            <section class="bg-gradient-to-r from-slate-900 via-amber-950/40 to-slate-900 border border-amber-500/30 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+                <div class="max-w-3xl space-y-3">
+                    <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-400 text-xs font-bold uppercase tracking-widest inline-block">
+                        <i class="fa-solid fa-trophy mr-1"></i> BCRCC Volunteer Leadership
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-black text-white">Honoring Our Aerial Telemetry Pioneers</h2>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        The Veteran Restoration Project (VRP) and AFTI extend our deep gratitude to Bob Kaufman and the members of the Benton County Radio Control Club. By converting hobbyist aviation passion into precision research telemetry, BCRCC pilots accelerate forest restoration and land-linkage science.
+                    </p>
+                </div>
+            </section>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-slate-900 border-2 border-amber-500/60 rounded-2xl p-6 shadow-2xl relative overflow-hidden flex flex-col justify-between space-y-4">
+                    <div class="absolute -top-3 -right-3 bg-amber-500 text-slate-950 text-[10px] font-black uppercase px-4 py-1.5 rounded-bl-xl shadow-md tracking-wider">
+                        Alliance Lead & Founder
+                    </div>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 text-3xl font-black shadow-inner">
+                            BK
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-black text-white">Bob Kaufman</h3>
+                            <p class="text-xs text-amber-400 font-semibold">BCRCC Project Liaison & Chief Drone Pilot</p>
+                            <p class="text-[10px] text-slate-400">Benton County Radio Control Club</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+                        <div>
+                            <span class="text-[9px] text-slate-400 block uppercase">Total Hours</span>
+                            <span class="text-base font-black text-amber-400">42.5 Hrs</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] text-slate-400 block uppercase">XP Earned</span>
+                            <span class="text-base font-black text-emerald-400">6,375 XP</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] text-slate-400 block uppercase">Acreage</span>
+                            <span class="text-base font-black text-sky-400">310 Acres</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <span class="text-[10px] text-slate-400 font-mono uppercase tracking-wider block">Credentials & Badges Issued</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-300 rounded-lg text-[10px] font-bold">
+                                🛸 Master Flight Telemetry Specialist
+                            </span>
+                            <span class="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 rounded-lg text-[10px] font-bold">
+                                🗺️ Orthomosaic Grid Chief
+                            </span>
+                            <span class="px-2.5 py-1 bg-sky-500/10 border border-sky-500/30 text-sky-300 rounded-lg text-[10px] font-bold">
+                                🌲 Burn-Scar Mapping Lead
+                            </span>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-slate-300 italic bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+                        "Pioneering the alignment of RC aviation enthusiast hours with academic watershed recovery research in Oregon."
+                    </p>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between space-y-4">
+                    <h3 class="text-base font-bold text-white flex items-center space-x-2 border-b border-slate-800 pb-3">
+                        <i class="fa-solid fa-users text-amber-400"></i>
+                        <span>BCRCC Volunteer Flight Roster</span>
+                    </h3>
+                    <div id="volunteerRosterContainer" class="space-y-3"></div>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+                        <span class="text-xs text-slate-400 block">Want to join the flight crew?</span>
+                        <span class="text-xs font-bold text-amber-400">Contact BCRCC Leadership or VRP Field Operations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB 3: ERGONOMIC TIME STUDY & FIELD LOGS     -->
+        <!-- ========================================== -->
+        <div id="timeStudyTab" class="hidden space-y-8">
+            <section class="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 -mt-8 -mr-8 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] font-bold uppercase tracking-widest inline-block mb-2">
+                            <i class="fa-solid fa-clock-rotate-left mr-1"></i> Board Resolution 2026-04 Protocol
+                        </span>
+                        <h2 class="text-2xl md:text-3xl font-black text-white">Ergonomic Time Study & Field Trial Log</h2>
+                        <p class="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
+                            Tracking field trials, baseline labor output, pollinator thermal refugia creation, and certified technical match valuation ($60/hr) for USDA / ODA grant reporting.
+                        </p>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-center min-w-[160px]">
+                        <span class="text-[10px] text-slate-400 block uppercase font-mono">Technical Match Rate</span>
+                        <span class="text-lg font-black text-amber-400 flex items-center justify-center gap-1 mt-1">
+                            <i class="fa-solid fa-dollar-sign text-amber-400"></i> $60.00 / Hr
+                        </span>
+                        <span class="text-[9px] text-slate-400 block mt-1">Certified Match Value</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+                    <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider flex items-center space-x-2 border-b border-slate-800 pb-3">
+                        <i class="fa-solid fa-stopwatch"></i>
+                        <span>Log Field Trial & Time Study</span>
+                    </h3>
+
+                    <form id="timeStudyForm" onsubmit="handleTimeStudySubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Participant / Crew Leader</label>
+                                <input type="text" id="tsParticipant" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="e.g. Donald Truex" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Partner Farm / Site Name</label>
+                                <input type="text" id="tsSite" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="e.g. Waterloo Park" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Task Category</label>
+                                <select id="tsTask" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none">
+                                    <option>Specialty Crop Harvest (Berry/Greens)</option>
+                                    <option>Canopy Remediation / Brush Clearing</option>
+                                    <option>Pollinator Refugia & CWD Placement</option>
+                                    <option>Soil Sampling & Telemetry Setup</option>
+                                    <option>Ergonomic Tool Training Trial</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Duration (Hours)</label>
+                                <input type="number" step="0.5" id="tsHours" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="4.0" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Ergonomic Score (1-10)</label>
+                                <input type="number" min="1" max="10" id="tsErgoScore" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="8" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-amber-400 font-bold mb-1">🐝 Thermal Refugia & Habitat Action</label>
+                            <select id="tsHabitatAction" class="w-full bg-slate-950 border border-amber-500/40 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none">
+                                <option value="Coarse Woody Debris (CWD) Placement (Insulation Logs)">Coarse Woody Debris (CWD) Placement (Insulation Logs)</option>
+                                <option value="Micro-Topography Shaping (Pits & Solar Shelters)">Micro-Topography Shaping (Pits & Solar Shelters)</option>
+                                <option value="Native Seed/Floral Corridor Establishment">Native Seed/Floral Corridor Establishment</option>
+                                <option value="Brush Windrow / Canopy Shade Construction">Brush Windrow / Canopy Shade Construction</option>
+                                <option value="General Farm Field Trial (No Refugia Intervention)" selected>General Farm Field Trial (No Refugia Intervention)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-slate-300 font-semibold mb-1">Productivity & Refugia Notes</label>
+                            <textarea id="tsNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note efficiency gains, log placement density, bee activity observations..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-file-arrow-down"></i>
+                            <span>Record Time Study & Calculate Match Value</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                            <h3 class="text-sm font-bold text-white flex items-center space-x-2">
+                                <i class="fa-solid fa-list text-amber-400"></i>
+                                <span>Recent Time Studies</span>
+                            </h3>
+                            <button onclick="exportTimeStudyCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 rounded-lg text-[10px] font-bold transition">
+                                <i class="fa-solid fa-file-csv mr-1"></i> Export CSV
+                            </button>
+                        </div>
+                        <div id="timeStudyLogContainer" class="space-y-3 max-h-[380px] overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB 4: MESOCOSM & SOIL TRIAL HUB           -->
+        <!-- ========================================== -->
+        <div id="mesocosmTab" class="hidden space-y-8">
+            <section class="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 -mt-8 -mr-8 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[10px] font-bold uppercase tracking-widest inline-block mb-2">
+                            <i class="fa-solid fa-flask mr-1"></i> Closed-Container Research Protocol (Nov-Dec Timeline)
+                        </span>
+                        <h2 class="text-2xl md:text-3xl font-black text-white">Mesocosm Soil Blend & Thermal Trial Hub</h2>
+                        <p class="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
+                            Comparing 100% Biochar vs. 75% Biochar / 25% Clinoptilolite and 50% / 50% Blends for compaction resistance, tunnel stability, multi-depth thermal buffering, and bee winter survival metrics.
+                        </p>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-center min-w-[160px]">
+                        <span class="text-[10px] text-slate-400 block uppercase font-mono">Trial Setup</span>
+                        <span class="text-sm font-black text-cyan-400 flex items-center justify-center gap-1 mt-1">
+                            <i class="fa-solid fa-temperature-arrow-down text-cyan-400"></i> Multi-Depth Log
+                        </span>
+                        <span class="text-[9px] text-slate-400 block mt-1">Active Winter Testing</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+                    <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider flex items-center space-x-2 border-b border-slate-800 pb-3">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <span>Log Mesocosm Observation Data</span>
+                    </h3>
+
+                    <form id="mesocosmForm" onsubmit="handleMesocosmSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Researcher / Observer Name</label>
+                                <input type="text" id=" mesoResearcher" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="e.g. Donald Truex" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Soil Blend Ratio</label>
+                                <select id="mesoBlend" class="w-full bg-slate-950 border border-amber-500/40 rounded-lg p-2.5 text-xs text-amber-400 font-bold outline-none">
+                                    <option value="100% Biochar Baseline">100% Biochar Baseline</option>
+                                    <option value="75% Biochar / 25% Clinoptilolite Zeolite" selected>75% Biochar / 25% Clinoptilolite Zeolite</option>
+                                    <option value="50% Biochar / 50% Clinoptilolite Zeolite">50% Biochar / 50% Clinoptilolite Zeolite</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Surface Temp (2cm) (°F)</label>
+                                <input type="number" step="0.5" id="tempSurface" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="42.5" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Brood Zone Temp (10cm) (°F)</label>
+                                <input type="number" step="0.5" id="tempBrood" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="48.0" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Deep Base Temp (20cm) (°F)</label>
+                                <input type="number" step="0.5" id="tempDeep" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="51.2" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Moisture State</label>
+                                <select id="mesoMoisture" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none">
+                                    <option value="Saturated / Wet Winter Baseline">Saturated / Wet Winter Baseline</option>
+                                    <option value="Field Capacity (Optimal)">Field Capacity (Optimal)</option>
+                                    <option value="Dry-Down Phase">Dry-Down Phase</option>
+                                    <option value="Freeze-Thaw Condition">Freeze-Thaw Condition</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-300 font-semibold mb-1">Tunnel Stability / Compaction Score (1-10)</label>
+                                <input type="number" min="1" max="10" id="mesoStability" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="8" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-slate-300 font-semibold mb-1">Observations & Structural Notes</label>
+                            <textarea id="mesoNotes" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:border-amber-400 outline-none" placeholder="Note wall integrity against glass, settling behavior, moisture holding, frost response..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-flask"></i>
+                            <span>Record Mesocosm Observation Data</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                            <h3 class="text-sm font-bold text-white flex items-center space-x-2">
+                                <i class="fa-solid fa-list text-cyan-400"></i>
+                                <span>Recent Mesocosm Trials</span>
+                            </h3>
+                            <button onclick="exportMesocosmCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 rounded-lg text-[10px] font-bold transition">
+                                <i class="fa-solid fa-file-csv mr-1"></i> Export CSV
+                            </button>
+                        </div>
+                        <div id="mesocosmLogContainer" class="space-y-3 max-h-[380px] overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certification Sponsorship Block -->
+        <section class="bg-slate-900 border border-emerald-500/40 rounded-2xl p-6 shadow-xl my-8">
+            <div class="flex items-center space-x-3 mb-3">
+                <span class="text-2xl">🎓</span>
+                <h3 class="text-base font-bold text-emerald-400">Pilot Career Path: Advanced Certification Sponsorship</h3>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                We believe volunteer hours should translate directly into real-world career growth. Once a pilot logs milestone flight hours mapping VRP project grids, VRP sponsors advanced professional certifications—including <strong>ODA Commercial Pesticide Applicator Licenses, Specialized Fertilizer Handlers Endorsements, and Advanced Agricultural Mapping Endorsements</strong>.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                    <span class="text-amber-400 font-bold block mb-1">Bronze Tier (25 Hours)</span>
+                    <span class="text-slate-400">Official VRP Drone Field Specialist Badge & Priority Equipment Access.</span>
+                </div>
+                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                    <span class="text-amber-400 font-bold block mb-1">Silver Tier (50 Hours)</span>
+                    <span class="text-slate-400">Advanced GIS / Orthomosaic Processing Credential & Letters of Recommendation.</span>
+                </div>
+                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                    <span class="text-emerald-400 font-bold block mb-1">Gold Tier (100 Hours)</span>
+                    <span class="text-slate-400"><strong>Full ODA Pesticide / Specialty Certification Sponsorship</strong> (in exchange for targeted project mapping).</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="w-full bg-slate-900 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        <p>VRP & BCRCC Operational & Research Telemetry Portal &bull; Veteran Restoration Project & AFTI Land-Linkage Alliance</p>
+    </footer>
+
+    <!-- Application Scripting -->
+    <script>
+        // Passcode Gate Logic
+        function checkPasscode() {
+            const correctPass = "VRP-2026"; 
+            const entered = document.getElementById('passcodeBox').value;
+            
+            if (entered === correctPass) {
+                document.getElementById('authGate').style.display = 'none';
+                document.getElementById('portalContent').style.display = 'block';
+                sessionStorage.setItem('vrp_unlocked', 'true');
+            } else {
+                alert('Incorrect passkey. Access denied.');
+            }
+        }
+
+        window.onload = function() {
+            if (sessionStorage.getItem('vrp_unlocked') === 'true') {
+                document.getElementById('authGate').style.display = 'none';
+                document.getElementById('portalContent').style.display = 'block';
+            }
+        };
+
+        // Configuration
+        const SUPABASE_URL = "https://vqkwxwfrchmrgmzchpqh.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_O62Ej6PJ8wAlGdoBT4-rFQ_pANhhjX8";
+
+        // Initial Seed Logs
+        let flightLogs = JSON.parse(localStorage.getItem('bcrcc_flight_logs')) || [
+            {
+                id: 1,
+                pilotName: "Bob Kaufman",
+                hours: 2.5,
+                acreage: 24.0,
+                aircraft: "DJI Mavic 3E",
+                blackberryDensity: 70,
+                soilCompaction: 5.5,
+                pollinatorIndicator: "Moderate (Partial Canopy / CWD Present)",
+                xp: 375,
+                timestamp: "10/17/2026, 8:30 AM",
+                notes: "Completed grid flight over riparian burn scar zone. Mapped log refugia."
+            }
+        ];
+
+        // Seed Roster
+        const pilotRoster = [
+            { name: "Bob Kaufman", title: "BCRCC Lead / Chief Pilot", hours: 42.5, xp: 6375, status: "Master Pilot" },
+            { name: "Dave Miller", title: "Spatial Grid Operator", hours: 18.0, xp: 2700, status: "Senior Pilot" }
+        ];
+
+        // Tab Switcher
+        function switchTab(tab) {
+            const dataTab = document.getElementById('dataTab');
+            const showcaseTab = document.getElementById('showcaseTab');
+            const timeStudyTab = document.getElementById('timeStudyTab');
+            const mesocosmTab = document.getElementById('mesocosmTab');
+
+            const dataBtn = document.getElementById('navDataBtn');
+            const showcaseBtn = document.getElementById('navShowcaseBtn');
+            const timeStudyBtn = document.getElementById('navTimeStudyBtn');
+            const mesocosmBtn = document.getElementById('navMesocosmBtn');
+
+            if(dataTab) dataTab.classList.add('hidden');
+            if(showcaseTab) showcaseTab.classList.add('hidden');
+            if(timeStudyTab) timeStudyTab.classList.add('hidden');
+            if(mesocosmTab) mesocosmTab.classList.add('hidden');
+
+            if(dataBtn) dataBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
+            if(showcaseBtn) showcaseBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
+            if(timeStudyBtn) timeStudyBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
+            if(mesocosmBtn) mesocosmBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2";
+
+            if (tab === 'data') {
+                if(dataTab) dataTab.classList.remove('hidden');
+                if(dataBtn) dataBtn.className = "px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
+            } else if (tab === 'showcase') {
+                if(showcaseTab) showcaseTab.classList.remove('hidden');
+                if(showcaseBtn) showcaseBtn.className = "px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
+            } else if (tab === 'timestudy') {
+                if(timeStudyTab) timeStudyTab.classList.remove('hidden');
+                if(timeStudyBtn) timeStudyBtn.className = "px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
+            } else if (tab === 'mesocosm') {
+                if(mesocosmTab) mesocosmTab.classList.remove('hidden');
+                if(mesocosmBtn) mesocosmBtn.className = "px-3 py-2 rounded-lg bg-cyan-500 text-slate-950 font-black shadow transition flex items-center space-x-2";
+            }
+        }
+
+        // Supabase REST Helper
+        async function submitVrpForm(tableName, formData) {
+            try {
+                const dbResponse = await fetch(`${SUPABASE_URL}/rest/v1/${tableName}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Prefer': 'return=representation'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                if (!dbResponse.ok) throw new Error(await dbResponse.text());
+                return { success: true };
+            } catch (error) {
+                console.warn('Supabase offline or table pending. Saved locally:', error);
+                return { success: false };
+            }
+        }
+
+        // Handle Flight Telemetry Submission
+        async function handleFlightSubmit(e) {
+            e.preventDefault();
+            const hours = parseFloat(document.getElementById('flightHours').value);
+            const xpEarned = Math.round(hours * 150);
+
+            const newLog = {
+                id: Date.now(),
+                pilotName: document.getElementById('pilotName').value.trim(),
+                contact: document.getElementById('pilotContact').value.trim(),
+                hours: hours,
+                acreage: parseFloat(document.getElementById('acreageMapped').value),
+                aircraft: document.getElementById('aircraftModel').value.trim(),
+                blackberryDensity: parseInt(document.getElementById('blackberryDensity').value),
+                soilCompaction: parseFloat(document.getElementById('soilCompaction').value),
+                pollinatorIndicator: document.getElementById('pollinatorIndicator').value,
+                notes: document.getElementById('flightNotes').value.trim() || 'No additional hazards noted.',
+                xp: xpEarned,
+                timestamp: new Date().toLocaleString()
+            };
+
+            await submitVrpForm('bcrcc_flight_telemetry', newLog);
+            flightLogs.unshift(newLog);
+            localStorage.setItem('bcrcc_flight_logs', JSON.stringify(flightLogs));
+            renderFlightLogs();
+            alert(`Flight Telemetry Logged! ${newLog.pilotName} earned +${xpEarned} XP!`);
+            e.target.reset();
+        }
+
+        function renderFlightLogs() {
+            const container = document.getElementById('flightLogContainer');
+            if (!container) return;
+            if (flightLogs.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic">No flight logs recorded yet.</p>`;
+                return;
+            }
+            container.innerHTML = flightLogs.map(log => `
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
+                    <div class="flex justify-between items-start">
+                        <span class="text-xs font-bold text-amber-400">${log.pilotName}</span>
+                        <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">+${log.xp} XP</span>
+                    </div>
+                    <div class="flex justify-between text-[11px] text-slate-300">
+                        <span><i class="fa-solid fa-clock text-slate-500 mr-1"></i>${log.hours} hrs</span>
+                        <span><i class="fa-solid fa-map text-slate-500 mr-1"></i>${log.acreage} acres</span>
+                        <span><i class="fa-solid fa-plane text-slate-500 mr-1"></i>${log.aircraft}</span>
+                    </div>
+                    <div class="text-[10px] text-amber-300/80 font-mono">
+                        🐝 ${log.pollinatorIndicator || 'Habitat: Not specified'}
+                    </div>
+                    <p class="text-[10px] text-slate-400 italic line-clamp-2">${log.notes}</p>
+                </div>
+            `).join('');
+        }
+
+        // Render Volunteer Roster
+        function renderRoster() {
+            const container = document.getElementById('volunteerRosterContainer');
+            if (!container) return;
+            container.innerHTML = pilotRoster.map(p => `
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex justify-between items-center">
+                    <div>
+                        <span class="text-xs font-bold text-white block">${p.name}</span>
+                        <span class="text-[10px] text-slate-400 block">${p.title}</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-black text-amber-400 block">${p.hours} Hrs</span>
+                        <span class="text-[9px] text-emerald-400 font-mono">${p.xp} XP</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function exportFlightCSV() {
+            let csv = 'Timestamp,Pilot Name,Flight Hours,Acreage Mapped,Aircraft Model,Blackberry Density (%),Soil Compaction Index,Pollinator Habitat Indicator,XP Earned,Notes\n';
+            flightLogs.forEach(l => {
+                csv += `"${l.timestamp}","${l.pilotName}",${l.hours},${l.acreage},"${l.aircraft}",${l.blackberryDensity},${l.soilCompaction},"${l.pollinatorIndicator || 'N/A'}",${l.xp},"${l.notes}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', `BCRCC_Flight_Telemetry_${new Date().toISOString().slice(0,10)}.csv`);
+            a.click();
+        }
+
+        // Time Study Logic & State
+        let timeStudies = JSON.parse(localStorage.getItem('vrp_time_studies')) || [];
+
+        async function handleTimeStudySubmit(e) {
+            e.preventDefault();
+            const hours = parseFloat(document.getElementById('tsHours').value);
+            const matchValue = hours * 60.00; // Board Resolution 2026-04 ($60/hr technical rate)
+
+            const newStudy = {
+                id: Date.now(),
+                participant: document.getElementById('tsParticipant').value.trim(),
+                site: document.getElementById('tsSite').value.trim(),
+                task: document.getElementById('tsTask').value,
+                hours: hours,
+                ergoScore: document.getElementById('tsErgoScore').value,
+                habitatAction: document.getElementById('tsHabitatAction').value,
+                notes: document.getElementById('tsNotes').value.trim() || 'No additional notes.',
+                matchValue: matchValue,
+                timestamp: new Date().toLocaleString()
+            };
+
+            await submitVrpForm('vrp_time_studies', newStudy);
+            timeStudies.unshift(newStudy);
+            localStorage.setItem('vrp_time_studies', JSON.stringify(timeStudies));
+            renderTimeStudies();
+            alert(`Time Study Recorded! Certified Match Value: $${matchValue.toFixed(2)} ($60/hr rate)`);
+            e.target.reset();
+        }
+
+        function renderTimeStudies() {
+            const container = document.getElementById('timeStudyLogContainer');
+            if (!container) return;
+            if (timeStudies.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic">No time studies recorded yet.</p>`;
+                return;
+            }
+            container.innerHTML = timeStudies.map(ts => `
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
+                    <div class="flex justify-between items-start">
+                        <span class="text-xs font-bold text-amber-400">${ts.participant}</span>
+                        <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">+$${ts.matchValue.toFixed(2)} Match</span>
+                    </div>
+                    <div class="flex justify-between text-[11px] text-slate-300">
+                        <span><i class="fa-solid fa-clock text-slate-500 mr-1"></i>${ts.hours} hrs</span>
+                        <span><i class="fa-solid fa-map-pin text-slate-500 mr-1"></i>${ts.site}</span>
+                        <span><i class="fa-solid fa-shield-heart text-slate-500 mr-1"></i>Ergo: ${ts.ergoScore}/10</span>
+                    </div>
+                    <div class="text-[10px] text-emerald-400 font-mono">
+                        🐝 ${ts.habitatAction || 'Action: General Field Work'}
+                    </div>
+                    <p class="text-[10px] text-slate-400 italic">${ts.task}</p>
+                </div>
+            `).join('');
+        }
+
+        function exportTimeStudyCSV() {
+            let csv = 'Timestamp,Participant,Site,Task Category,Hours,Ergonomic Score,Thermal Refugia / Habitat Action,Match Value ($60/hr),Notes\n';
+            timeStudies.forEach(s => {
+                csv += `"${s.timestamp}","${s.participant}","${s.site}","${s.task}",${s.hours},${s.ergoScore},"${s.habitatAction || 'N/A'}",${s.matchValue},"${s.notes}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', `VRP_Time_Studies_${new Date().toISOString().slice(0,10)}.csv`);
+            a.click();
+        }
+
+        // Mesocosm Logic & State
+        let mesocosmLogs = JSON.parse(localStorage.getItem('vrp_mesocosm_logs')) || [
+            {
+                id: 1,
+                researcher: "Donald Truex",
+                blend: "75% Biochar / 25% Clinoptilolite Zeolite",
+                tempSurface: 41.0,
+                tempBrood: 47.5,
+                tempDeep: 50.8,
+                moisture: "Saturated / Wet Winter Baseline",
+                stability: 9,
+                notes: "Initial column set up. Excellent wall cohesion against glass during packing.",
+                timestamp: "10/21/2026, 9:00 AM"
+            }
+        ];
+
+        async function handleMesocosmSubmit(e) {
+            e.preventDefault();
+            const newLog = {
+                id: Date.now(),
+                researcher: document.getElementById('mesoResearcher').value.trim(),
+                blend: document.getElementById('mesoBlend').value,
+                tempSurface: parseFloat(document.getElementById('tempSurface').value),
+                tempBrood: parseFloat(document.getElementById('tempBrood').value),
+                tempDeep: parseFloat(document.getElementById('tempDeep').value),
+                moisture: document.getElementById('mesoMoisture').value,
+                stability: parseInt(document.getElementById('mesoStability').value),
+                notes: document.getElementById('mesoNotes').value.trim() || 'No additional notes.',
+                timestamp: new Date().toLocaleString()
+            };
+
+            await submitVrpForm('vrp_mesocosm_trials', newLog);
+            mesocosmLogs.unshift(newLog);
+            localStorage.setItem('vrp_mesocosm_logs', JSON.stringify(mesocosmLogs));
+            renderMesocosmLogs();
+            alert(`Mesocosm Trial Logged Successfully for ${newLog.blend}!`);
+            e.target.reset();
+        }
+
+        function renderMesocosmLogs() {
+            const container = document.getElementById('mesocosmLogContainer');
+            if (!container) return;
+            if (mesocosmLogs.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic">No mesocosm trials recorded yet.</p>`;
+                return;
+            }
+            container.innerHTML = mesocosmLogs.map(m => `
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
+                    <div class="flex justify-between items-start">
+                        <span class="text-xs font-bold text-cyan-400">${m.blend}</span>
+                        <span class="text-[10px] font-mono text-slate-400">${m.timestamp}</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-1 text-[11px] text-amber-300 font-mono bg-slate-900 p-1.5 rounded border border-slate-800 text-center">
+                        <div>Surf: ${m.tempSurface}°F</div>
+                        <div>Brood: ${m.tempBrood}°F</div>
+                        <div>Deep: ${m.tempDeep}°F</div>
+                    </div>
+                    <div class="flex justify-between text-[10px] text-slate-300">
+                        <span><i class="fa-solid fa-droplet text-cyan-500 mr-1"></i>${m.moisture}</span>
+                        <span><i class="fa-solid fa-shield text-amber-500 mr-1"></i>Stability: ${m.stability}/10</span>
+                    </div>
+                    <p class="text-[10px] text-slate-400 italic">${m.notes}</p>
+                </div>
+            `).join('');
+        }
+
+        function exportMesocosmCSV() {
+            let csv = 'Timestamp,Researcher,Blend Ratio,Surface Temp (2cm),Brood Temp (10cm),Deep Temp (20cm),Moisture State,Stability Score (1-10),Notes\n';
+            mesocosmLogs.forEach(m => {
+                csv += `"${m.timestamp}","${m.researcher}","${m.blend}",${m.tempSurface},${m.tempBrood},${m.tempDeep},"${m.moisture}",${m.stability},"${m.notes}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', `VRP_Mesocosm_Trials_${new Date().toISOString().slice(0,10)}.csv`);
+            a.click();
+        }
+
+        // Initial Execution on Load
+        renderFlightLogs();
+        renderRoster();
+        renderTimeStudies();
+        renderMesocosmLogs();
+    </script>
+</body>
+</html>
