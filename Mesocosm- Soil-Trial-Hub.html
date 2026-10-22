@@ -1038,99 +1038,103 @@ the Bio-Stint™ or VRP Telemetry Portal are bound by the following covenant:
         renderTimeStudies();
         renderMesocosmLogs();
     </script>
-// Add Watershed Tab Switcher Logic inside switchTab(tab)
-// (Make sure to include 'watershed' in your switchTab function check)
-
-// Watershed Sensa-Trap Logs
+<!-- MESOCOSM & EXISTING SCRIPTS -->
+    <script>
+        renderFlightLogs();
+        renderRoster();
+        renderTimeStudies();
+        renderMesocosmLogs();
     </script>
-let watershedLogs = JSON.parse(localStorage.getItem('vrp_watershed_logs')) || [
-    {
-        id: 1,
-        stationId: "GULLY-01",
-        researcher: "Donald Truex",
-        severity: "High",
-        inflowPh: 9.1,
-        outflowPh: 7.2,
-        inflowEc: 480,
-        outflowEc: 210,
-        inflowTds: 310,
-        outflowTds: 135,
-        turbidity: 18,
-        flowRate: 25,
-        reclamation: "Category A: Bio-Stint Soil Amendment",
-        notes: "First-flush post-fire storm event. Excellent pH neutralization and TDS drop.",
-        timestamp: "10/21/2026, 4:30 PM"
-    }
-];
 
-async function handleWatershedSubmit(e) {
-    e.preventDefault();
-    const newLog = {
-        id: Date.now(),
-        stationId: document.getElementById('wsStationId').value.trim(),
-        researcher: document.getElementById('wsResearcher').value.trim(),
-        severity: document.getElementById('wsSeverity').value,
-        inflowPh: parseFloat(document.getElementById('wsInflowPh').value),
-        outflowPh: parseFloat(document.getElementById('wsOutflowPh').value),
-        inflowEc: parseFloat(document.getElementById('wsInflowEc').value),
-        outflowEc: parseFloat(document.getElementById('wsOutflowEc').value),
-        inflowTds: parseFloat(document.getElementById('wsInflowTds').value),
-        outflowTds: parseFloat(document.getElementById('wsOutflowTds').value),
-        turbidity: parseFloat(document.getElementById('wsTurbidity').value),
-        flowRate: parseFloat(document.getElementById('wsFlowRate').value),
-        reclamation: document.getElementById('wsReclamation').value,
-        notes: document.getElementById('wsNotes').value.trim() || 'No additional observations.',
-        timestamp: new Date().toLocaleString()
-    };
+    <!-- WATERSHED SENSA-TRAP SCRIPT LOGIC -->
+    <script>
+        let watershedLogs = JSON.parse(localStorage.getItem('vrp_watershed_logs')) || [
+            {
+                id: 1,
+                stationId: "GULLY-01",
+                researcher: "Donald Truex",
+                severity: "High",
+                inflowPh: 9.1,
+                outflowPh: 7.2,
+                inflowEc: 480,
+                outflowEc: 210,
+                inflowTds: 310,
+                outflowTds: 135,
+                turbidity: 18,
+                flowRate: 25,
+                reclamation: "Category A: Bio-Stint Soil Amendment",
+                notes: "First-flush post-fire storm event. Excellent pH neutralization and TDS drop.",
+                timestamp: "10/21/2026, 4:30 PM"
+            }
+        ];
 
-    await submitVrpForm('vrp_watershed_trials', newLog);
-    watershedLogs.unshift(newLog);
-    localStorage.setItem('vrp_watershed_logs', JSON.stringify(watershedLogs));
-    renderWatershedLogs();
-    alert(`Culvert Sensa-Trap Data Logged Successfully! Inflow vs. Outflow differential recorded.`);
-    e.target.reset();
-}
+        async function handleWatershedSubmit(e) {
+            e.preventDefault();
+            const newLog = {
+                id: Date.now(),
+                stationId: document.getElementById('wsStationId').value.trim(),
+                researcher: document.getElementById('wsResearcher').value.trim(),
+                severity: document.getElementById('wsSeverity').value,
+                inflowPh: parseFloat(document.getElementById('wsInflowPh').value),
+                outflowPh: parseFloat(document.getElementById('wsOutflowPh').value),
+                inflowEc: parseFloat(document.getElementById('wsInflowEc').value),
+                outflowEc: parseFloat(document.getElementById('wsOutflowEc').value),
+                inflowTds: parseFloat(document.getElementById('wsInflowTds').value),
+                outflowTds: parseFloat(document.getElementById('wsOutflowTds').value),
+                turbidity: parseFloat(document.getElementById('wsTurbidity').value),
+                flowRate: parseFloat(document.getElementById('wsFlowRate').value),
+                reclamation: document.getElementById('wsReclamation').value,
+                notes: document.getElementById('wsNotes').value.trim() || 'No additional observations.',
+                timestamp: new Date().toLocaleString()
+            };
 
-function renderWatershedLogs() {
-    const container = document.getElementById('watershedLogContainer');
-    if (!container) return;
-    if (watershedLogs.length === 0) {
-        container.innerHTML = `<p class="text-xs text-slate-500 italic">No watershed trials recorded yet.</p>`;
-        return;
-    }
-    container.innerHTML = watershedLogs.map(w => `
-        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
-            <div class="flex justify-between items-start">
-                <span class="text-xs font-bold text-cyan-400">${w.stationId} (${w.severity} Burn)</span>
-                <span class="text-[10px] font-mono text-slate-400">${w.timestamp}</span>
-            </div>
-            <div class="grid grid-cols-2 gap-1 text-[11px] text-slate-300 font-mono bg-slate-900 p-1.5 rounded border border-slate-800 text-center">
-                <div>In pH: ${w.inflowPh} | TDS: ${w.inflowTds}</div>
-                <div>Out pH: ${w.outflowPh} | TDS: ${w.outflowTds}</div>
-            </div>
-            <div class="text-[10px] text-amber-300 font-mono">
-                ♻️ ${w.reclamation}
-            </div>
-            <p class="text-[10px] text-slate-400 italic">${w.notes}</p>
-        </div>
-    `).join('');
-}
+            await submitVrpForm('vrp_watershed_trials', newLog);
+            watershedLogs.unshift(newLog);
+            localStorage.setItem('vrp_watershed_logs', JSON.stringify(watershedLogs));
+            renderWatershedLogs();
+            alert(`Culvert Sensa-Trap Data Logged Successfully! Inflow vs. Outflow differential recorded.`);
+            e.target.reset();
+        }
 
-function exportWatershedCSV() {
-    let csv = 'Timestamp,Station_ID,Researcher,Burn_Severity,Inflow_pH,Outflow_pH,Inflow_EC_uS,Outflow_EC_uS,Inflow_TDS_ppm,Outflow_TDS_ppm,Turbidity_NTU,Flow_GPM,Reclamation_Path,Notes\n';
-    watershedLogs.forEach(w => {
-        csv += `"${w.timestamp}","${w.stationId}","${w.researcher}","${w.severity}",${w.inflowPh},${w.outflowPh},${w.inflowEc},${w.outflowEc},${w.inflowTds},${w.outflowTds},${w.turbidity},${w.flowRate},"${w.reclamation}","${w.notes}"\n`;
-    });
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.setAttribute('href', url);
-    a.setAttribute('download', `VRP_Culvert_SensaTrap_Trials_${new Date().toISOString().slice(0,10)}.csv`);
-    a.click();
-}
+        function renderWatershedLogs() {
+            const container = document.getElementById('watershedLogContainer');
+            if (!container) return;
+            if (watershedLogs.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic">No watershed trials recorded yet.</p>`;
+                return;
+            }
+            container.innerHTML = watershedLogs.map(w => `
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
+                    <div class="flex justify-between items-start">
+                        <span class="text-xs font-bold text-cyan-400">${w.stationId} (${w.severity} Burn)</span>
+                        <span class="text-[10px] font-mono text-slate-400">${w.timestamp}</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-1 text-[11px] text-slate-300 font-mono bg-slate-900 p-1.5 rounded border border-slate-800 text-center">
+                        <div>In pH: ${w.inflowPh} | TDS: ${w.inflowTds}</div>
+                        <div>Out pH: ${w.outflowPh} | TDS: ${w.outflowTds}</div>
+                    </div>
+                    <div class="text-[10px] text-amber-300 font-mono">
+                        ♻️ ${w.reclamation}
+                    </div>
+                    <p class="text-[10px] text-slate-400 italic">${w.notes}</p>
+                </div>
+            `).join('');
+        }
 
-// Ensure renderWatershedLogs() is called in your initial load block at the bottom.
-renderWatershedLogs();
-</script> 
+        function exportWatershedCSV() {
+            let csv = 'Timestamp,Station_ID,Researcher,Burn_Severity,Inflow_pH,Outflow_pH,Inflow_EC_uS,Outflow_EC_uS,Inflow_TDS_ppm,Inflow_TDS_ppm,Turbidity_NTU,Flow_GPM,Reclamation_Path,Notes\n';
+            watershedLogs.forEach(w => {
+                csv += `"${w.timestamp}","${w.stationId}","${w.researcher}","${w.severity}",${w.inflowPh},${w.outflowPh},${w.inflowEc},${w.outflowEc},${w.inflowTds},${w.outflowTds},${w.turbidity},${w.flowRate},"${w.reclamation}","${w.notes}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', `VRP_Culvert_SensaTrap_Trials_${new Date().toISOString().slice(0,10)}.csv`);
+            a.click();
+        }
+
+        renderWatershedLogs();
+    </script>
 </body>
 </html>
