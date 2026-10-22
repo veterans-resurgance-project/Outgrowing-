@@ -758,42 +758,39 @@
             { name: "Dave Miller", title: "Spatial Grid Operator", hours: 18.0, xp: 2700, status: "Senior Pilot" }
         ];
 
-        // Tab Switcher
-        function switchTab(tab) {
-            const dataTab = document.getElementById('dataTab');
-            const showcaseTab = document.getElementById('showcaseTab');
-            const timeStudyTab = document.getElementById('timeStudyTab');
-            const mesocosmTab = document.getElementById('mesocosmTab');
+function switchTab(tab) {
+    // Hide all tabs
+    document.getElementById('dataTab')?.classList.add('hidden');
+    document.getElementById('showcaseTab')?.classList.add('hidden');
+    document.getElementById('timeStudyTab')?.classList.add('hidden');
+    document.getElementById('mesocosmTab')?.classList.add('hidden');
+    document.getElementById('watershedTab')?.classList.add('hidden');
 
-            const dataBtn = document.getElementById('navDataBtn');
-            const showcaseBtn = document.getElementById('navShowcaseBtn');
-            const timeStudyBtn = document.getElementById('navTimeStudyBtn');
-            const mesocosmBtn = document.getElementById('navMesocosmBtn');
+    // Remove active styles from all buttons
+    document.getElementById('navDataBtn')?.classList.replace('bg-amber-500', 'text-slate-400');
+    document.getElementById('navShowcaseBtn')?.classList.replace('bg-amber-500', 'text-slate-400');
+    document.getElementById('navTimeStudyBtn')?.classList.replace('bg-amber-500', 'text-slate-400');
+    document.getElementById('navMesocosmBtn')?.classList.replace('bg-amber-500', 'text-slate-400');
+    document.getElementById('navWatershedBtn')?.classList.replace('bg-cyan-500', 'text-slate-400');
 
-            if(dataTab) dataTab.classList.add('hidden');
-            if(showcaseTab) showcaseTab.classList.add('hidden');
-            if(timeStudyTab) timeStudyTab.classList.add('hidden');
-            if(mesocosmTab) mesocosmTab.classList.add('hidden');
-
-            if(dataBtn) dataBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer";
-            if(showcaseBtn) showcaseBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer";
-            if(timeStudyBtn) timeStudyBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer";
-            if(mesocosmBtn) mesocosmBtn.className = "px-3 py-2 rounded-lg text-slate-400 hover:text-white transition flex items-center space-x-2 cursor-pointer";
-
-            if (tab === 'data') {
-                if(dataTab) dataTab.classList.remove('hidden');
-                if(dataBtn) dataBtn.className = "px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2 cursor-pointer";
-            } else if (tab === 'showcase') {
-                if(showcaseTab) showcaseTab.classList.remove('hidden');
-                if(showcaseBtn) showcaseBtn.className = "px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2 cursor-pointer";
-            } else if (tab === 'timestudy') {
-                if(timeStudyTab) timeStudyTab.classList.remove('hidden');
-                if(timeStudyBtn) timeStudyBtn.className = "px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition flex items-center space-x-2 cursor-pointer";
-            } else if (tab === 'mesocosm') {
-                if(mesocosmTab) mesocosmTab.classList.remove('hidden');
-                if(mesocosmBtn) mesocosmBtn.className = "px-3 py-2 rounded-lg bg-cyan-500 text-slate-950 font-black shadow transition flex items-center space-x-2 cursor-pointer";
-            }
-        }
+    // Show the selected tab and highlight button
+    if (tab === 'data') {
+        document.getElementById('dataTab')?.classList.remove('hidden');
+        document.getElementById('navDataBtn')?.classList.add('bg-amber-500', 'text-slate-950');
+    } else if (tab === 'showcase') {
+        document.getElementById('showcaseTab')?.classList.remove('hidden');
+        document.getElementById('navShowcaseBtn')?.classList.add('bg-amber-500', 'text-slate-950');
+    } else if (tab === 'timestudy') {
+        document.getElementById('timeStudyTab')?.classList.remove('hidden');
+        document.getElementById('navTimeStudyBtn')?.classList.add('bg-amber-500', 'text-slate-950');
+    } else if (tab === 'mesocosm') {
+        document.getElementById('mesocosmTab')?.classList.remove('hidden');
+        document.getElementById('navMesocosmBtn')?.classList.add('bg-amber-500', 'text-slate-950');
+    } else if (tab === 'watershed') {
+        document.getElementById('watershedTab')?.classList.remove('hidden');
+        document.getElementById('navWatershedBtn')?.classList.add('bg-cyan-500', 'text-slate-950');
+    }
+}
 
         async function submitVrpForm(tableName, formData) {
             try {
