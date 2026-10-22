@@ -613,32 +613,25 @@
         </div>
     </div>
 </div>
-        <!-- Certification Sponsorship Block -->
-        <section class="bg-slate-900 border border-emerald-500/40 rounded-2xl p-6 shadow-xl my-8">
-            <div class="flex items-center space-x-3 mb-3">
-                <span class="text-2xl">🎓</span>
-                <h3 class="text-base font-bold text-emerald-400">Pilot Career Path: Advanced Certification Sponsorship</h3>
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed mb-4">
-                We believe volunteer hours should translate directly into real-world career growth. Once a pilot logs milestone flight hours mapping VRP project grids, VRP sponsors advanced professional certifications—including <strong>ODA Commercial Pesticide Applicator Licenses, Specialized Fertilizer Handlers Endorsements, and Advanced Agricultural Mapping Endorsements</strong>.
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                    <span class="text-amber-400 font-bold block mb-1">Bronze Tier (25 Hours)</span>
-                    <span class="text-slate-400">Official VRP Drone Field Specialist Badge & Priority Equipment Access.</span>
-                </div>
-                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                    <span class="text-amber-400 font-bold block mb-1">Silver Tier (50 Hours)</span>
-                    <span class="text-slate-400">Advanced GIS / Orthomosaic Processing Credential & Letters of Recommendation.</span>
-                </div>
-                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                    <span class="text-emerald-400 font-bold block mb-1">Gold Tier (100 Hours)</span>
-                    <span class="text-slate-400"><strong>Full ODA Pesticide / Specialty Certification Sponsorship</strong> (in exchange for targeted project mapping).</span>
+        <!-- Recent Logs Display & CSV Export -->
+                <div class="space-y-6">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                            <h3 class="text-sm font-bold text-white flex items-center space-x-2">
+                                <i class="fa-solid fa-list text-cyan-400"></i>
+                                <span>Recent Sensa-Trap Logs</span>
+                            </h3>
+                            <button onclick="exportWatershedCSV()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 rounded-lg text-[10px] font-bold transition cursor-pointer">
+                                <i class="fa-solid fa-file-csv mr-1"></i> Export CSV
+                            </button>
+                        </div>
+                        <div id="watershedLogContainer" class="space-y-3 max-h-[380px] overflow-y-auto pr-1"></div>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
-<!-- Certification Sponsorship Block -->
+        </div>
+
+        <!-- Certification Sponsorship Block (Single Clean Instance) -->
         <section class="bg-slate-900 border border-emerald-500/40 rounded-2xl p-6 shadow-xl my-8">
             <div class="flex items-center space-x-3 mb-3">
                 <span class="text-2xl">🎓</span>
@@ -682,6 +675,9 @@
             </p>
         </div>
     </footer>
+</body>
+</html>
+    
 
     <!-- Application Scripting -->
     <script>
