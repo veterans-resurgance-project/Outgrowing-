@@ -1042,6 +1042,7 @@ the Bio-Stint™ or VRP Telemetry Portal are bound by the following covenant:
 // (Make sure to include 'watershed' in your switchTab function check)
 
 // Watershed Sensa-Trap Logs
+    </script>
 let watershedLogs = JSON.parse(localStorage.getItem('vrp_watershed_logs')) || [
     {
         id: 1,
@@ -1130,5 +1131,6 @@ function exportWatershedCSV() {
 
 // Ensure renderWatershedLogs() is called in your initial load block at the bottom.
 renderWatershedLogs();
+</script> 
 </body>
 </html>
